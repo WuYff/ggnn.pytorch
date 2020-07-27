@@ -4,7 +4,7 @@ def load_graphs_from_file(file_name):
     data_list = []
     edge_list = []
     target_list = []
-    with open(file_name,'r') as f:
+    with open(file_name ,'r') as f:
         for line in f:
             if len(line.strip()) == 0:
                 data_list.append([edge_list,target_list])
