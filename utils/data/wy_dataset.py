@@ -1,17 +1,20 @@
 import os
 import numpy as np
 
-
+# Can we assign -1 ? maybe it is better than 0.
+# data structure index starts from zero but node id value should start from one.
 # output a whole matrix
 def load_graphs_from_file(path: str) -> (list, int):
     data_list = []
     max_node_id = 0
-    for i in range(0, 1):
+    for i in range(0, 4):
         file = path + "e" + str(i)
+        print("file: "+"e" + str(i))
         if os.path.exists(file + "_graph.txt"):
             edge_list = []
             label_list = []
             target_list = []
+            # [source node, target node]
             with open(file + "_graph.txt", 'r') as f:
                 for line in f:
 
@@ -26,6 +29,7 @@ def load_graphs_from_file(path: str) -> (list, int):
                             max_node_id = node_id
                         edge_list.append(digits)
 
+            # [node, rd1, rd2,....]
             with open(file + "_target.txt", 'r') as f:
                 for line in f:
                     digits = []
@@ -35,7 +39,7 @@ def load_graphs_from_file(path: str) -> (list, int):
                             continue
                         digits.append(int(line_tokens[i]))
                     target_list.append(digits)  # [[,,,][,,][,,]]
-
+            # [node,variable]
             with open(file + "node_variable.txt", 'r') as f:
                 for line in f:
                     digits = [0, 0]
@@ -50,8 +54,8 @@ def load_graphs_from_file(path: str) -> (list, int):
 def split_set(data_list):
     n_examples = len(data_list)
     idx = range(n_examples)
-    train = idx[:50]
-    val = idx[-50:]
+    train = idx[:1]
+    val = idx[-1:]
     return np.array(data_list)[train], np.array(data_list)[val]
 
 
@@ -72,33 +76,33 @@ def data_convert(data_list: list, n_annotation_dim: int, n_nodes: int):
         task_data_list[task_type - 1].append([edge_list, annotation, task_output])
     return task_data_list
 
-
-def create_task_output(target_list: list, n_nodes: int) -> list:
+# Notice that the rd_id >= 1. Because zero means the corresponding node does not reach the current node 
+# return target[ r0_1,r0_2,.....rn_1, ..., rn_n] with length = V*V
+def create_task_output(target_list: list, n_nodes: int) -> np.array:
     a = np.zeros((n_nodes, n_nodes))
     for each_node_rd in target_list:
         for rd_id in each_node_rd[1:]:
             a[each_node_rd[0] - 1][rd_id - 1] = 1
 
-    b = []
+    b = np.zeros(n_nodes*n_nodes)
     for i in range(n_nodes):
         for j in range(n_nodes):
-            b.append(a[i][j])
+            b[i*n_nodes+j] = a[i][j]
     return b
 
-
+# return annotation matrix [V,  1] (current annotation dim =1)
 def create_annotation_output(label_list: list, annotation):
     for each_node_varible in label_list:
         annotation[each_node_varible[0] - 1][0] = each_node_varible[1]
     return annotation
 
-
+# return adjacency matrix[V,V]
 def create_adjacency_matrix(edges, n_nodes, n_edge_types):  # 我感觉应该就是一个点的in边 和 out边都记录了
     a = np.zeros([n_nodes, n_nodes * n_edge_types * 2])
     for edge in edges:
         src_idx = edge[0]
         e_type = edge[1]
         tgt_idx = edge[2]
-        print(" edge from {} to {} ".format(edge[0], edge[2]))
         a[tgt_idx - 1][(e_type - 1) * n_nodes + src_idx - 1] = 1
         a[src_idx - 1][(e_type - 1 + n_edge_types) * n_nodes + tgt_idx - 1] = 1
     return a
@@ -135,6 +139,8 @@ class bAbIDataset():
 if __name__ == "__main__":
     train_dataset = bAbIDataset("", 0, True)
     am, annotation, target = train_dataset.__getitem__(0);
-    print("am", am)
-    print("annotation", annotation)
-    print("target", target)
+    print("am", am) # [v,v]
+    print("annotation", annotation) # [v,1]
+    print("target", target) #[v*v]
+
+## 写文档！

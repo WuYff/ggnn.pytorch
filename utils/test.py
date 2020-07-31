@@ -20,11 +20,18 @@ def test(dataloader, net, criterion, optimizer, opt):
         target = Variable(target)
 
         output = net(init_input, annotation, adj_matrix)
+        print("test output",output)
+        print("test output.shape",output.shape)
 
-        test_loss += criterion(output, target).data[0]
+        # test_loss += criterion(output, target).data[0]
+        test_loss += criterion(output, target).data
         pred = output.data.max(1, keepdim=True)[1]
-
-        correct += pred.eq(target.data.view_as(pred)).cpu().sum()
+        print("test pred.shape",pred.shape)
+        print("test pred",output.data.max(1, keepdim=True))
+        print("test pred",pred)
+  
+        correct = 0
+        # correct += pred.eq(target.data.view_as(pred)).cpu().sum() #### this has bug
 
     test_loss /= len(dataloader.dataset)
     print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(

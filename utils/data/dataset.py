@@ -61,6 +61,7 @@ def split_set(data_list):
 
 def data_convert(data_list, n_annotation_dim):
     n_nodes = find_max_node_id(data_list)
+    print("&&&&&&&&&&&&&&&&&&& n_nodes  ",n_nodes )
     n_tasks = find_max_task_id(data_list)
     task_data_list = []
     for i in range(n_tasks):

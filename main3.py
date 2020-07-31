@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from model import GGNN
+from model3 import GGNN
 from utils.train import train
 from utils.test import test
 from utils.data.dataset import bAbIDataset
@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task_id', type=int, default=4, help='bAbI task id')
 parser.add_argument('--question_id', type=int, default=0, help='question types')
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=2)
-parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
+parser.add_argument('--batchSize', type=int, default=10, help='input batch size')
 parser.add_argument('--state_dim', type=int, default=4, help='GGNN hidden state size')
 parser.add_argument('--n_steps', type=int, default=5, help='propogation steps number of GGNN')
 parser.add_argument('--niter', type=int, default=10, help='number of epochs to train for')
@@ -40,8 +40,21 @@ if opt.cuda:
 
 def main(opt):
     train_dataset = bAbIDataset(opt.dataroot, opt.question_id, True)
+    print("len(train_dataset)",len(train_dataset))
+    for i, (adj_matrix, annotation, target) in enumerate(train_dataset, 0):
+        print("annotation size",annotation.shape)
+        print("adj_matrix size",adj_matrix.shape)
+        print("target int",target)
+        break
     train_dataloader = bAbIDataloader(train_dataset, batch_size=opt.batchSize, \
                                       shuffle=True, num_workers=2)
+    print("len(train_dataloader)",len(train_dataloader))
+    for i, (adj_matrix, annotation, target) in enumerate(train_dataloader, 0):
+        print("@annotation size",annotation.shape)
+        print("@adj_matrix size",adj_matrix.shape)
+        print("@target size",target.shape)
+        break
+    
 
 
     test_dataset = bAbIDataset(opt.dataroot, opt.question_id, False)
