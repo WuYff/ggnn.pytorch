@@ -5,14 +5,14 @@ def train(epoch, dataloader, net, criterion, optimizer, opt):
     net.train()
     for i, (adj_matrix, annotation, target) in enumerate(dataloader, 0):
         net.zero_grad()
-        print("annotation.shape",annotation.shape)
-        print("annotation[0]",annotation[0])
-        print("opt.n_node",opt.n_node)
-        print("opt.state_dim - opt.annotation_dim",opt.state_dim - opt.annotation_dim)
+        # print("annotation.shape",annotation.shape)
+        # print("annotation[0]",annotation[0])
+        # print("opt.n_node",opt.n_node)
+        # print("opt.state_dim - opt.annotation_dim",opt.state_dim - opt.annotation_dim)
         padding = torch.zeros(len(annotation), opt.n_node, opt.state_dim - opt.annotation_dim).double()
-        print("padding.shape",padding.shape)
+        # print("padding.shape",padding.shape)
         init_input = torch.cat((annotation, padding), 2)
-        print("init_input.shape",init_input.shape)
+        # print("init_input.shape",init_input.shape)
         if opt.cuda:
             init_input = init_input.cuda()
             adj_matrix = adj_matrix.cuda()
@@ -23,13 +23,13 @@ def train(epoch, dataloader, net, criterion, optimizer, opt):
         adj_matrix = Variable(adj_matrix)
         annotation = Variable(annotation)
         target = Variable(target)
-        print("target size",target.shape)
+        # print("target size",target.shape)
 
 
         output = net(init_input, annotation, adj_matrix)
-        print("output size",output.shape)
-        print(">!target",target)
-        print(">!output",output)
+        # print("output size",output.shape)
+        # print(">!target",target)
+        # print(">!output",output)
         
 
         loss = criterion(output, target)

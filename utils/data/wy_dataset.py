@@ -7,55 +7,60 @@ import numpy as np
 def load_graphs_from_file(path: str) -> (list, int):
     data_list = []
     max_node_id = 0
-    for i in range(0, 4):
-        file = path + "e" + str(i)
-        print("file: "+"e" + str(i))
-        if os.path.exists(file + "_graph.txt"):
-            edge_list = []
-            label_list = []
-            target_list = []
-            # [source node, target node]
-            with open(file + "_graph.txt", 'r') as f:
-                for line in f:
+    path_list=os.listdir(path)
+    key="graph"
+    for filename in path_list:
+        if key in filename:
+            file = path + filename[:-10]
+            # print("file: "+filename[:-10])
+            if os.path.exists(file + "_graph.txt"):
+                edge_list = []
+                label_list = []
+                target_list = []
+                # [source node, target node]
+                with open(file + "_graph.txt", 'r') as f:
+                    for line in f:
 
-                    line_tokens = line.split(" ")
-                    for i in range(1, len(line_tokens)):
-                        digits = [int(line_tokens[0]), 1, 0]
-                        if line_tokens[i] == "\n":
-                            continue
-                        node_id = int(line_tokens[i])
-                        digits[2] = node_id
-                        if node_id > max_node_id:
-                            max_node_id = node_id
-                        edge_list.append(digits)
+                        line_tokens = line.split(" ")
+                        for i in range(1, len(line_tokens)):
+                            digits = [int(line_tokens[0]), 1, 0]
+                            if line_tokens[i] == "\n":
+                                continue
+                            node_id = int(line_tokens[i])
+                            digits[2] = node_id
+                            if node_id > max_node_id:
+                                max_node_id = node_id
+                            edge_list.append(digits)
 
-            # [node, rd1, rd2,....]
-            with open(file + "_target.txt", 'r') as f:
-                for line in f:
-                    digits = []
-                    line_tokens = line.split(" ")
-                    for i in range(0, len(line_tokens)):
-                        if line_tokens[i] == "\n":
-                            continue
-                        digits.append(int(line_tokens[i]))
-                    target_list.append(digits)  # [[,,,][,,][,,]]
-            # [node,variable]
-            with open(file + "node_variable.txt", 'r') as f:
-                for line in f:
-                    digits = [0, 0]
-                    line_tokens = line.split(" ")
-                    digits[0] = int(line_tokens[0])
-                    digits[1] = int(line_tokens[1])
-                    label_list.append(digits)
-            data_list.append([edge_list, label_list, target_list])
+                # [node, rd1, rd2,....]
+                with open(file + "_target.txt", 'r') as f:
+                    for line in f:
+                        digits = []
+                        line_tokens = line.split(" ")
+                        for i in range(0, len(line_tokens)):
+                            if line_tokens[i] == "\n":
+                                continue
+                            digits.append(int(line_tokens[i]))
+                        target_list.append(digits)  # [[,,,][,,][,,]]
+                # [node,variable]
+                with open(file + "_node_variable.txt", 'r') as f:
+                    for line in f:
+                        digits = [0, 0]
+                        line_tokens = line.split(" ")
+                        digits[0] = int(line_tokens[0])
+                        digits[1] = int(line_tokens[1])
+                        label_list.append(digits)
+                data_list.append([edge_list, label_list, target_list])
+    print("totoal data : ", len(data_list))
     return (data_list, max_node_id)
 
 
 def split_set(data_list):
     n_examples = len(data_list)
     idx = range(n_examples)
-    train = idx[:1]
-    val = idx[-1:]
+    num = round(n_examples*0.8)
+    train = idx[:num]
+    val = idx[num:]
     return np.array(data_list)[train], np.array(data_list)[val]
 
 
@@ -113,7 +118,7 @@ class bAbIDataset():
     Load bAbI tasks for GGNN
     """
 
-    def __init__(self, path, task_id, is_train):
+    def __init__(self, path, task_id, is_train,node_number):
         self.n_edge_types = 1
         self.n_tasks = 1
         all_data, self.n_node = load_graphs_from_file(path)
@@ -122,9 +127,12 @@ class bAbIDataset():
         if is_train:
             all_task_train_data = data_convert(all_task_train_data, 1, self.n_node)
             self.data = all_task_train_data[task_id]
+        
         else:
-            all_task_val_data = data_convert(all_task_val_data, 1, self.n_node)
+            self.n_node = node_number
+            all_task_val_data = data_convert(all_data, 1, self.n_node)
             self.data = all_task_val_data[task_id]
+        
 
     def __getitem__(self, index):
         am = create_adjacency_matrix(self.data[index][0], self.n_node, self.n_edge_types)
