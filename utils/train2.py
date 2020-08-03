@@ -36,6 +36,7 @@ def train(epoch, dataloader, net, criterion, optimizer, opt):
 
         loss.backward()
         optimizer.step()
-
+        print("I am here")
         if i % int(len(dataloader) / 10 + 1) == 0 and opt.verbal:
+            print("Now here")
             print('[%d/%d][%d/%d] Loss: %.4f' % (epoch, opt.niter, i, len(dataloader), loss.data[0]))

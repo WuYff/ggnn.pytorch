@@ -8,6 +8,7 @@ import torch.optim as optim
 from model2 import GGNN
 from utils.train2 import train
 from utils.test import test
+from utils.validation import validation
 from utils.data.wy_dataset import bAbIDataset
 from utils.data.dataloader import bAbIDataloader
 
@@ -36,14 +37,14 @@ print("Random Seed: ", opt.manualSeed)
 random.seed(opt.manualSeed)
 torch.manual_seed(opt.manualSeed)
 
-opt.dataroot = '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/all_txt_i_train/'
+opt.dataroot = '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/all_txt_i/'
 test_path= '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/all_txt_i_test/'
 
 if opt.cuda:
     torch.cuda.manual_seed_all(opt.manualSeed)
 
 def main(opt):
-    train_dataset = bAbIDataset(opt.dataroot, opt.question_id, True,0)
+    train_dataset = bAbIDataset(opt.dataroot, opt.question_id, "t",0)
     print("len(train_dataset)",len(train_dataset))
     # for i, (adj_matrix, annotation, target) in enumerate(train_dataset, 0):
         # print("annotation size",annotation.shape)
@@ -60,8 +61,12 @@ def main(opt):
     #     break
     
 
+    validation_dataset = bAbIDataset(opt.dataroot, opt.question_id, "v", train_dataset.n_node)
+    validation_dataloader = bAbIDataloader(validation_dataset, batch_size=opt.batchSize, \
+                                     shuffle=False, num_workers=2)
+    print("len(validation_dataset)",len(validation_dataset))
 
-    test_dataset = bAbIDataset(test_path, opt.question_id, False, train_dataset.n_node)
+    test_dataset = bAbIDataset(opt.dataroot, opt.question_id, "est", train_dataset.n_node)
     test_dataloader = bAbIDataloader(test_dataset, batch_size=opt.batchSize, \
                                      shuffle=False, num_workers=2)
     print("len(test_dataset)",len(test_dataset))
@@ -87,6 +92,7 @@ def main(opt):
     print(net)
     for epoch in range(0, opt.niter):
         train(epoch, train_dataloader, net, criterion, optimizer, opt)
+        validation(validation_dataloader, net, criterion, optimizer, opt)
         test(test_dataloader, net, criterion, optimizer, opt)
 
 

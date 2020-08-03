@@ -9,6 +9,8 @@ def load_graphs_from_file(path: str) -> (list, int):
     max_node_id = 0
     path_list=os.listdir(path)
     key="graph"
+    skip_init = True
+    count_ini =0 
     for filename in path_list:
         if key in filename:
             file = path + filename[:-10]
@@ -19,8 +21,14 @@ def load_graphs_from_file(path: str) -> (list, int):
                 target_list = []
                 # [source node, target node]
                 with open(file + "_graph.txt", 'r') as f:
-                    for line in f:
-
+                    lines = f.readlines()  # 读取所有行
+                    last_line = lines[-1]  # 取最后一行
+                    n = last_line.split(" ")
+                    node = int(n[0])
+                    if skip_init  and ((len(lines) == 3 and node == 3) or node > 40 ):
+                        count_ini += 1
+                        continue
+                    for line in lines:
                         line_tokens = line.split(" ")
                         for i in range(1, len(line_tokens)):
                             digits = [int(line_tokens[0]), 1, 0]
@@ -55,13 +63,15 @@ def load_graphs_from_file(path: str) -> (list, int):
     return (data_list, max_node_id)
 
 
-def split_set(data_list):
+def split_set(data_list:list):
     n_examples = len(data_list)
     idx = range(n_examples)
-    num = round(n_examples*0.8)
+    num = round(n_examples*0.6)
+    t=  round(n_examples*0.2)
     train = idx[:num]
-    val = idx[num:]
-    return np.array(data_list)[train], np.array(data_list)[val]
+    test = idx[num: num+t]
+    val =  idx[num+t:]
+    return np.array(data_list)[train], np.array(data_list)[val], np.array(data_list)[test]
 
 
 def data_convert(data_list: list, n_annotation_dim: int, n_nodes: int):
@@ -85,7 +95,10 @@ def data_convert(data_list: list, n_annotation_dim: int, n_nodes: int):
 # return target[ r0_1,r0_2,.....rn_1, ..., rn_n] with length = V*V
 def create_task_output(target_list: list, n_nodes: int) -> np.array:
     a = np.zeros((n_nodes, n_nodes))
+    # print("n_nodes",n_nodes)
+    # print("target_list",target_list)
     for each_node_rd in target_list:
+        # print("each_node_rd",each_node_rd)
         for rd_id in each_node_rd[1:]:
             a[each_node_rd[0] - 1][rd_id - 1] = 1
 
@@ -122,16 +135,24 @@ class bAbIDataset():
         self.n_edge_types = 1
         self.n_tasks = 1
         all_data, self.n_node = load_graphs_from_file(path)
-        all_task_train_data, all_task_val_data = split_set(all_data)
+        all_task_train_data, all_task_val_data, all_task_test_data = split_set(all_data)
 
-        if is_train:
+        if is_train == "t":
+            print("prepare train data")
             all_task_train_data = data_convert(all_task_train_data, 1, self.n_node)
             self.data = all_task_train_data[task_id]
         
-        else:
+        elif is_train == "v":
+            print("prepare validation data")
             self.n_node = node_number
-            all_task_val_data = data_convert(all_data, 1, self.n_node)
+            all_task_val_data = data_convert(all_task_val_data, 1, self.n_node)
             self.data = all_task_val_data[task_id]
+        else:
+            print("prepare test data")
+            self.n_node = node_number
+            all_task_test_data = data_convert(all_task_test_data, 1, self.n_node)
+            self.data = all_task_test_data[task_id]
+            
         
 
     def __getitem__(self, index):
