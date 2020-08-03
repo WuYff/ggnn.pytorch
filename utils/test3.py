@@ -7,7 +7,7 @@ def test(dataloader, net, criterion, optimizer, opt):
     total_one =0 
     net.eval()
     each_accurary=0
-    for i, (adj_matrix, annotation, target) in enumerate(dataloader, 0):
+    for i, (adj_matrix, annotation, target,max_node_of_one_graph) in enumerate(dataloader, 0):
         padding = torch.zeros(len(annotation), opt.n_node, opt.state_dim - opt.annotation_dim).double()
         init_input = torch.cat((annotation, padding), 2)
         if opt.cuda:
@@ -41,19 +41,22 @@ def test(dataloader, net, criterion, optimizer, opt):
         for b in range(len(target)):
             one_correct =0 
             zero_correct =0 
+            the_max_node = max_node_of_one_graph[b]
             print("@Test output ",output[b])
             print("@Test target ",target[b])
-            for n in range(len(target[b])):              
+            for n in range(the_max_node):              
                 if  target[b][n]==1 and output[b][n] >= 0.5 :
                     correct +=1
                     one_correct +=1
                 if ( target[b][n]==0 and output[b][n] < 0.5 ) :
                     correct +=1
                     zero_correct +=1
+            print("Test the_max_node",the_max_node)
             print("Test one_correct",one_correct)
             print("Test zero_correct",zero_correct)
-            each_accurary += (zero_correct+one_correct)/len(target[b])
+            each_accurary += (zero_correct+one_correct)/the_max_node
     test_loss /= len(dataloader.dataset)
-    print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.4f}%)'.format(test_loss, correct, total_one, 1.0* 100* correct / total_one))
+    # print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.4f}%)'.format(test_loss, correct, total_one, 1.0* 100* correct / total_one))
+    print('Test set: Average loss: {:.4f}'.format(test_loss))
     print("Test (len(dataloader.dataset)", (len(dataloader.dataset)))
     print("Test Average Accuracy :({:.4f}%):".format( 100*each_accurary/len(dataloader.dataset)))

@@ -3,7 +3,7 @@ from torch.autograd import Variable
 
 def train(epoch, dataloader, net, criterion, optimizer, opt):
     net.train()
-    for i, (adj_matrix, annotation, target) in enumerate(dataloader, 0):
+    for i, (adj_matrix, annotation, target,max_node_of_one_graph) in enumerate(dataloader, 0):
         net.zero_grad()
         # print("annotation.shape",annotation.shape)
         # print("annotation[0]",annotation[0])
@@ -31,6 +31,7 @@ def train(epoch, dataloader, net, criterion, optimizer, opt):
         # print(">!target",target)
         # print(">!output",output)
         
+        print("Train max_node_of_one_graph.shape",max_node_of_one_graph.shape)
 
         loss = criterion(output, target)
 

@@ -21,7 +21,7 @@ parser.add_argument('--batchSize', type=int, default=10, help='input batch size'
 parser.add_argument('--state_dim', type=int, default=4, help='GGNN hidden state size')
 parser.add_argument('--n_steps', type=int, default=1, help='propogation steps number of GGNN')
 # parser.add_argument('--niter', type=int, default=10, help='number of epochs to train for')
-parser.add_argument('--niter', type=int, default=7, help='number of epochs to train for')
+parser.add_argument('--niter', type=int, default=5, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--verbal', action='store_true', help='print training info or not')
@@ -74,7 +74,7 @@ def main(opt):
     opt.n_edge_types = train_dataset.n_edge_types
     opt.n_node = train_dataset.n_node
     opt.state_dim = opt.n_node
-    opt.n_steps = opt.n_node
+    opt.n_steps = opt.n_node * opt.n_node
 
     net = GGNN(opt)
     net.double()

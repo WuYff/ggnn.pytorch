@@ -51,7 +51,7 @@ def validation(dataloader, net, criterion, optimizer, opt):
                     correct +=1
                     zero_correct +=1
             print("one_correct",one_correct)
-            print("one_correct",zero_correct)
+            print("zero_correct",zero_correct)
             each_accurary += (zero_correct+one_correct)/len(target[b])
     test_loss /= len(dataloader.dataset)
     print('Validation set: Average loss: {:.4f}, Accuracy: {}/{} ({:.4f}%)'.format(test_loss, correct, total_one, 1.0* 100* correct / total_one))
