@@ -4,7 +4,7 @@ import numpy as np
 # Can we assign -1 ? maybe it is better than 0.
 # data structure index starts from zero but node id value should start from one.
 # output a whole matrix
-def load_graphs_from_file(path: str) -> (list, int):
+def load_graphs_from_file(path: str,how_many:int) -> (list, int):
     data_list = []
     max_node_id = 0
     path_list=os.listdir(path)
@@ -26,7 +26,7 @@ def load_graphs_from_file(path: str) -> (list, int):
                     last_line = lines[-1]  # 取最后一行
                     n = last_line.split(" ")
                     node = int(n[0])
-                    if skip_init  and ((len(lines) == 3 and node == 3) or node > 40 ):
+                    if skip_init  and ((len(lines) == 3 and node == 3) or node > how_many ):
                         count_ini += 1
                         continue
                     for line in lines:
@@ -135,10 +135,10 @@ class bAbIDataset():
     Load bAbI tasks for GGNN
     """
 
-    def __init__(self, path, task_id, is_train,node_number):
+    def __init__(self, path, task_id, is_train,node_number,how_many:int):
         self.n_edge_types = 1
         self.n_tasks = 1
-        all_data, self.n_node = load_graphs_from_file(path)
+        all_data, self.n_node = load_graphs_from_file(path,how_many)
         all_task_train_data, all_task_val_data, all_task_test_data = split_set(all_data)
 
         if is_train == "t":

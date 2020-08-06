@@ -22,8 +22,8 @@ def validation(dataloader, net, criterion, optimizer, opt):
         target = Variable(target)
 
         output = net(init_input, annotation, adj_matrix)
-        print("Validation max_node_of_one_graph.shape",max_node_of_one_graph.shape)
-        print("Validation max_node_of_one_graph",max_node_of_one_graph)
+        # print("Validation max_node_of_one_graph.shape",max_node_of_one_graph.shape)
+        # print("Validation max_node_of_one_graph",max_node_of_one_graph)
         
       
         # test_loss += criterion(output, target).data[0]
@@ -45,8 +45,8 @@ def validation(dataloader, net, criterion, optimizer, opt):
             the_max_node = max_node_of_one_graph[b]
             v_one = 0 
             t_one=0
-            print("@output.shape ",output[b].shape)
-            print("@target.shape ",target[b].shape)
+            # print("@output.shape ",output[b].shape)
+            # print("@target.shape ",target[b].shape)
             total_number+=1
             for x in range(the_max_node ): 
                 for m in range (the_max_node ):    
@@ -67,13 +67,13 @@ def validation(dataloader, net, criterion, optimizer, opt):
             # for n in range(the_max_node,len(target[b])):
             #     if  target[b][n] != 0:
             #         print("Somthing Wrong")    
-            print("Validation v_one",v_one )
-            print("Validation t_one",t_one )
-            print("Validation the_max_node",the_max_node )
-            print("Validation one_correct",one_correct)
-            print("Validation zero_correct",zero_correct)
-            print("the_max_node*the_max_node",the_max_node.item()*the_max_node.item())
-            print("Validation each_correct",(zero_correct+one_correct)/ (the_max_node.item()*the_max_node.item()) )
+            # print("Validation v_one",v_one )
+            # print("Validation t_one",t_one )
+            # print("Validation the_max_node",the_max_node )
+            # print("Validation one_correct",one_correct)
+            # print("Validation zero_correct",zero_correct)
+            # print("the_max_node*the_max_node",the_max_node.item()*the_max_node.item())
+            # print("Validation each_correct",(zero_correct+one_correct)/ (the_max_node.item()*the_max_node.item()) )
             each_accurary += (zero_correct+one_correct)/ (the_max_node.item()*the_max_node.item())
     test_loss /= len(dataloader.dataset)
     # print('Validation set: Average loss: {:.4f}, Accuracy: {}/{} ({:.4f}%)'.format(test_loss, correct, total_one, 1.0* 100* correct / total_one))

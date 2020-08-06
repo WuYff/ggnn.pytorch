@@ -105,7 +105,8 @@ class GGNN(nn.Module):
             nn.Linear(self.state_dim + self.annotation_dim, self.state_dim),
             nn.Tanh(),
             #nn.Linear(self.state_dim, 1) !!!!!!!!
-            nn.Linear(self.state_dim, self.state_dim)
+            nn.Linear(self.state_dim, self.state_dim),
+            nn.Tanh()
         )
 
         self._initialization()

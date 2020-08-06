@@ -28,10 +28,10 @@ def train(epoch, dataloader, net, criterion, optimizer, opt):
 
         output = net(init_input, annotation, adj_matrix)
         # print("output size",output.shape)
-        # print(">!target",target)
-        # print(">!output",output)
+        print(">!target",target)
+        print(">!output",output)
         
-        print("Train max_node_of_one_graph.shape",max_node_of_one_graph.shape)
+        # print("Train max_node_of_one_graph.shape",max_node_of_one_graph.shape)
 
         loss = criterion(output, target)
 
