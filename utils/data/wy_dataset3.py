@@ -26,7 +26,7 @@ def load_graphs_from_file(path: str,how_many:int) -> (list, int):
                     last_line = lines[-1]  # 取最后一行
                     n = last_line.split(" ")
                     node = int(n[0])
-                    if skip_init  and ((len(lines) == 3 and node == 3) or node > how_many ):
+                    if skip_init  and ((len(lines) <= 3) or node > how_many ):
                         count_ini += 1
                         continue
                     for line in lines:
@@ -74,6 +74,11 @@ def split_set(data_list:list):
     train = idx[:num]
     test = idx[num: num+t]
     val =  idx[num+t:]
+    f = open("/home/yiwu/ggnn/wy/ggnn.pytorch/utils/data/vali_40.log", 'wt')
+    print("################################################", file=f)
+    for i in np.array(data_list)[val]:
+        print(i, file=f)
+    print("################################################", file=f)
     return np.array(data_list)[train], np.array(data_list)[val], np.array(data_list)[test]
 
 

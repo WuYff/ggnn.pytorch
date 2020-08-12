@@ -40,8 +40,7 @@ print("Random Seed: ", opt.manualSeed)
 random.seed(opt.manualSeed)
 torch.manual_seed(opt.manualSeed)
 
-opt.dataroot = '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/all_txt_i/'
-test_path= '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/all_txt_i_test/'
+opt.dataroot = '/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/jfree/'
 
 if opt.cuda:
     torch.cuda.manual_seed_all(opt.manualSeed)
