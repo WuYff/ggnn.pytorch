@@ -1,0 +1,269 @@
+public class org.jsoup.examples.ListLinks extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jsoup.examples.ListLinks this;
+
+        this := @this: org.jsoup.examples.ListLinks;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void main(java.lang.String[]) throws java.io.IOException
+    {
+        java.lang.String[] args;
+        int $stack8, $stack18, $stack25, $stack32;
+        java.lang.String url, $stack40, $stack42, $stack43, $stack49, $stack51, $stack53, $stack56, $stack61, $stack63, $stack68, $stack70, $stack72, $stack74, $stack76, $stack77;
+        java.lang.Object[] $stack9, $stack15, $stack22, $stack29, $stack37, $stack46, $stack58, $stack65;
+        org.jsoup.Connection $stack10;
+        org.jsoup.nodes.Document doc;
+        org.jsoup.select.Elements links, media, imports;
+        java.lang.Integer $stack19, $stack26, $stack33;
+        boolean $stack28, $stack35, $stack57, $stack78, $stack21;
+        java.lang.Object $stack36, $stack45, $stack55;
+        java.util.Iterator l6;
+        org.jsoup.nodes.Element src;
+
+        args := @parameter0: java.lang.String[];
+
+        $stack8 = lengthof args;
+
+        if $stack8 != 1 goto label01;
+
+        $stack78 = 1;
+
+        goto label02;
+
+     label01:
+        $stack78 = 0;
+
+     label02:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack78, "usage: supply url to fetch");
+
+        url = args[0];
+
+        $stack9 = newarray (java.lang.Object)[1];
+
+        $stack9[0] = url;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>("Fetching %s...", $stack9);
+
+        $stack10 = staticinvoke <org.jsoup.Jsoup: org.jsoup.Connection connect(java.lang.String)>(url);
+
+        doc = interfaceinvoke $stack10.<org.jsoup.Connection: org.jsoup.nodes.Document get()>();
+
+        links = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("a[href]");
+
+        media = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("[src]");
+
+        imports = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("link[href]");
+
+        $stack15 = newarray (java.lang.Object)[1];
+
+        $stack18 = virtualinvoke media.<org.jsoup.select.Elements: int size()>();
+
+        $stack19 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack18);
+
+        $stack15[0] = $stack19;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>("\nMedia: (%d)", $stack15);
+
+        l6 = virtualinvoke media.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label03:
+        $stack21 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack21 == 0 goto label06;
+
+        $stack55 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        src = (org.jsoup.nodes.Element) $stack55;
+
+        $stack56 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String normalName()>();
+
+        $stack57 = virtualinvoke $stack56.<java.lang.String: boolean equals(java.lang.Object)>("img");
+
+        if $stack57 == 0 goto label04;
+
+        $stack65 = newarray (java.lang.Object)[5];
+
+        $stack68 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack65[0] = $stack68;
+
+        $stack70 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("abs:src");
+
+        $stack65[1] = $stack70;
+
+        $stack72 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("width");
+
+        $stack65[2] = $stack72;
+
+        $stack74 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("height");
+
+        $stack65[3] = $stack74;
+
+        $stack76 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("alt");
+
+        $stack77 = staticinvoke <org.jsoup.examples.ListLinks: java.lang.String trim(java.lang.String,int)>($stack76, 20);
+
+        $stack65[4] = $stack77;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>(" * %s: <%s> %sx%s (%s)", $stack65);
+
+        goto label05;
+
+     label04:
+        $stack58 = newarray (java.lang.Object)[2];
+
+        $stack61 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack58[0] = $stack61;
+
+        $stack63 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("abs:src");
+
+        $stack58[1] = $stack63;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>(" * %s: <%s>", $stack58);
+
+     label05:
+        goto label03;
+
+     label06:
+        $stack22 = newarray (java.lang.Object)[1];
+
+        $stack25 = virtualinvoke imports.<org.jsoup.select.Elements: int size()>();
+
+        $stack26 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack25);
+
+        $stack22[0] = $stack26;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>("\nImports: (%d)", $stack22);
+
+        l6 = virtualinvoke imports.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label07:
+        $stack28 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack28 == 0 goto label08;
+
+        $stack45 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        src = (org.jsoup.nodes.Element) $stack45;
+
+        $stack46 = newarray (java.lang.Object)[3];
+
+        $stack49 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack46[0] = $stack49;
+
+        $stack51 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("abs:href");
+
+        $stack46[1] = $stack51;
+
+        $stack53 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("rel");
+
+        $stack46[2] = $stack53;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>(" * %s <%s> (%s)", $stack46);
+
+        goto label07;
+
+     label08:
+        $stack29 = newarray (java.lang.Object)[1];
+
+        $stack32 = virtualinvoke links.<org.jsoup.select.Elements: int size()>();
+
+        $stack33 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack32);
+
+        $stack29[0] = $stack33;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>("\nLinks: (%d)", $stack29);
+
+        l6 = virtualinvoke links.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label09:
+        $stack35 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack35 == 0 goto label10;
+
+        $stack36 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        src = (org.jsoup.nodes.Element) $stack36;
+
+        $stack37 = newarray (java.lang.Object)[2];
+
+        $stack40 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("abs:href");
+
+        $stack37[0] = $stack40;
+
+        $stack42 = virtualinvoke src.<org.jsoup.nodes.Element: java.lang.String text()>();
+
+        $stack43 = staticinvoke <org.jsoup.examples.ListLinks: java.lang.String trim(java.lang.String,int)>($stack42, 35);
+
+        $stack37[1] = $stack43;
+
+        staticinvoke <org.jsoup.examples.ListLinks: void print(java.lang.String,java.lang.Object[])>(" * a: <%s>  (%s)", $stack37);
+
+        goto label09;
+
+     label10:
+        return;
+    }
+
+    private static transient void print(java.lang.String, java.lang.Object[])
+    {
+        java.lang.String msg, $stack3;
+        java.lang.Object[] args;
+        java.io.PrintStream $stack2;
+
+        msg := @parameter0: java.lang.String;
+
+        args := @parameter1: java.lang.Object[];
+
+        $stack2 = <java.lang.System: java.io.PrintStream out>;
+
+        $stack3 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(msg, args);
+
+        virtualinvoke $stack2.<java.io.PrintStream: void println(java.lang.String)>($stack3);
+
+        return;
+    }
+
+    private static java.lang.String trim(java.lang.String, int)
+    {
+        java.lang.String s, $stack5, $stack8;
+        int $stack2, width, $stack4;
+        java.lang.StringBuilder $stack3, $stack6, $stack7;
+
+        s := @parameter0: java.lang.String;
+
+        width := @parameter1: int;
+
+        $stack2 = virtualinvoke s.<java.lang.String: int length()>();
+
+        if $stack2 <= width goto label1;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = width - 1;
+
+        $stack5 = virtualinvoke s.<java.lang.String: java.lang.String substring(int,int)>(0, $stack4);
+
+        $stack6 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack5);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack8;
+
+     label1:
+        return s;
+    }
+}

@@ -1,0 +1,354 @@
+public final class org.jsoup.internal.ConstrainableInputStream extends java.io.BufferedInputStream
+{
+    private static final int DefaultSize;
+    private final boolean capped;
+    private final int maxSize;
+    private long startTime;
+    private long timeout;
+    private int remaining;
+    private boolean interrupted;
+
+    private void <init>(java.io.InputStream, int, int)
+    {
+        org.jsoup.internal.ConstrainableInputStream this;
+        java.io.InputStream in;
+        int bufferSize, maxSize;
+        long $stack4;
+        boolean $stack8, $stack5;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        in := @parameter0: java.io.InputStream;
+
+        bufferSize := @parameter1: int;
+
+        maxSize := @parameter2: int;
+
+        specialinvoke this.<java.io.BufferedInputStream: void <init>(java.io.InputStream,int)>(in, bufferSize);
+
+        this.<org.jsoup.internal.ConstrainableInputStream: long timeout> = 0L;
+
+        if maxSize < 0 goto label1;
+
+        $stack8 = 1;
+
+        goto label2;
+
+     label1:
+        $stack8 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean)>($stack8);
+
+        this.<org.jsoup.internal.ConstrainableInputStream: int maxSize> = maxSize;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: int remaining> = maxSize;
+
+        if maxSize == 0 goto label3;
+
+        $stack5 = 1;
+
+        goto label4;
+
+     label3:
+        $stack5 = 0;
+
+     label4:
+        this.<org.jsoup.internal.ConstrainableInputStream: boolean capped> = $stack5;
+
+        $stack4 = staticinvoke <java.lang.System: long nanoTime()>();
+
+        this.<org.jsoup.internal.ConstrainableInputStream: long startTime> = $stack4;
+
+        return;
+    }
+
+    public static org.jsoup.internal.ConstrainableInputStream wrap(java.io.InputStream, int, int)
+    {
+        java.io.InputStream in;
+        boolean $stack3;
+        int bufferSize, maxSize;
+        org.jsoup.internal.ConstrainableInputStream $stack4;
+
+        in := @parameter0: java.io.InputStream;
+
+        bufferSize := @parameter1: int;
+
+        maxSize := @parameter2: int;
+
+        $stack3 = in instanceof org.jsoup.internal.ConstrainableInputStream;
+
+        if $stack3 == 0 goto label1;
+
+        $stack4 = (org.jsoup.internal.ConstrainableInputStream) in;
+
+        goto label2;
+
+     label1:
+        $stack4 = new org.jsoup.internal.ConstrainableInputStream;
+
+        specialinvoke $stack4.<org.jsoup.internal.ConstrainableInputStream: void <init>(java.io.InputStream,int,int)>(in, bufferSize, maxSize);
+
+     label2:
+        return $stack4;
+    }
+
+    public int read(byte[], int, int) throws java.io.IOException
+    {
+        org.jsoup.internal.ConstrainableInputStream this;
+        boolean $stack5, $stack6, $stack7, $stack8, $stack9;
+        byte[] b;
+        int off, $stack13, $stack22, len, read, $stack11, $stack12;
+        java.net.SocketTimeoutException $stack21, $stack24;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        b := @parameter0: byte[];
+
+        off := @parameter1: int;
+
+        len := @parameter2: int;
+
+        $stack5 = this.<org.jsoup.internal.ConstrainableInputStream: boolean interrupted>;
+
+        if $stack5 != 0 goto label1;
+
+        $stack6 = this.<org.jsoup.internal.ConstrainableInputStream: boolean capped>;
+
+        if $stack6 == 0 goto label2;
+
+        $stack22 = this.<org.jsoup.internal.ConstrainableInputStream: int remaining>;
+
+        if $stack22 > 0 goto label2;
+
+     label1:
+        return -1;
+
+     label2:
+        $stack7 = staticinvoke <java.lang.Thread: boolean interrupted()>();
+
+        if $stack7 == 0 goto label3;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: boolean interrupted> = 1;
+
+        return -1;
+
+     label3:
+        $stack8 = specialinvoke this.<org.jsoup.internal.ConstrainableInputStream: boolean expired()>();
+
+        if $stack8 == 0 goto label4;
+
+        $stack21 = new java.net.SocketTimeoutException;
+
+        specialinvoke $stack21.<java.net.SocketTimeoutException: void <init>(java.lang.String)>("Read timeout");
+
+        throw $stack21;
+
+     label4:
+        $stack9 = this.<org.jsoup.internal.ConstrainableInputStream: boolean capped>;
+
+        if $stack9 == 0 goto label5;
+
+        $stack13 = this.<org.jsoup.internal.ConstrainableInputStream: int remaining>;
+
+        if len <= $stack13 goto label5;
+
+        len = this.<org.jsoup.internal.ConstrainableInputStream: int remaining>;
+
+     label5:
+        read = specialinvoke this.<java.io.BufferedInputStream: int read(byte[],int,int)>(b, off, len);
+
+        $stack11 = this.<org.jsoup.internal.ConstrainableInputStream: int remaining>;
+
+        $stack12 = $stack11 - read;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: int remaining> = $stack12;
+
+     label6:
+        return read;
+
+     label7:
+        $stack24 := @caughtexception;
+
+        return 0;
+
+        catch java.net.SocketTimeoutException from label5 to label6 with label7;
+    }
+
+    public java.nio.ByteBuffer readToByteBuffer(int) throws java.io.IOException
+    {
+        int max, read, $stack21, remaining;
+        boolean localCapped, $stack28, $stack26;
+        byte[] readBuffer, $stack18;
+        org.jsoup.internal.ConstrainableInputStream this;
+        java.nio.ByteBuffer $stack19;
+        java.io.ByteArrayOutputStream $stack8;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        max := @parameter0: int;
+
+        if max < 0 goto label01;
+
+        $stack28 = 1;
+
+        goto label02;
+
+     label01:
+        $stack28 = 0;
+
+     label02:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack28, "maxSize must be 0 (unlimited) or larger");
+
+        if max <= 0 goto label03;
+
+        $stack26 = 1;
+
+        goto label04;
+
+     label03:
+        $stack26 = 0;
+
+     label04:
+        localCapped = $stack26;
+
+        if $stack26 == 0 goto label05;
+
+        if max >= 32768 goto label05;
+
+        $stack21 = max;
+
+        goto label06;
+
+     label05:
+        $stack21 = 32768;
+
+     label06:
+        readBuffer = newarray (byte)[$stack21];
+
+        $stack8 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $stack8.<java.io.ByteArrayOutputStream: void <init>(int)>($stack21);
+
+        remaining = max;
+
+     label07:
+        read = virtualinvoke this.<org.jsoup.internal.ConstrainableInputStream: int read(byte[])>(readBuffer);
+
+        if read != -1 goto label08;
+
+        goto label11;
+
+     label08:
+        if localCapped == 0 goto label10;
+
+        if read < remaining goto label09;
+
+        virtualinvoke $stack8.<java.io.ByteArrayOutputStream: void write(byte[],int,int)>(readBuffer, 0, remaining);
+
+        goto label11;
+
+     label09:
+        remaining = remaining - read;
+
+     label10:
+        virtualinvoke $stack8.<java.io.ByteArrayOutputStream: void write(byte[],int,int)>(readBuffer, 0, read);
+
+        goto label07;
+
+     label11:
+        $stack18 = virtualinvoke $stack8.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        $stack19 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer wrap(byte[])>($stack18);
+
+        return $stack19;
+    }
+
+    public void reset() throws java.io.IOException
+    {
+        org.jsoup.internal.ConstrainableInputStream this;
+        int $stack1, $stack2, $stack3;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        specialinvoke this.<java.io.BufferedInputStream: void reset()>();
+
+        $stack2 = this.<org.jsoup.internal.ConstrainableInputStream: int maxSize>;
+
+        $stack1 = this.<org.jsoup.internal.ConstrainableInputStream: int markpos>;
+
+        $stack3 = $stack2 - $stack1;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: int remaining> = $stack3;
+
+        return;
+    }
+
+    public org.jsoup.internal.ConstrainableInputStream timeout(long, long)
+    {
+        org.jsoup.internal.ConstrainableInputStream this;
+        long startTimeNanos, timeoutMillis, $stack5;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        startTimeNanos := @parameter0: long;
+
+        timeoutMillis := @parameter1: long;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: long startTime> = startTimeNanos;
+
+        $stack5 = timeoutMillis * 1000000L;
+
+        this.<org.jsoup.internal.ConstrainableInputStream: long timeout> = $stack5;
+
+        return this;
+    }
+
+    private boolean expired()
+    {
+        org.jsoup.internal.ConstrainableInputStream this;
+        long $stack5, now, $stack8, dur, $stack9;
+        byte $stack6, $stack10;
+        boolean $stack11;
+
+        this := @this: org.jsoup.internal.ConstrainableInputStream;
+
+        $stack5 = this.<org.jsoup.internal.ConstrainableInputStream: long timeout>;
+
+        $stack6 = $stack5 cmp 0L;
+
+        if $stack6 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        now = staticinvoke <java.lang.System: long nanoTime()>();
+
+        $stack8 = this.<org.jsoup.internal.ConstrainableInputStream: long startTime>;
+
+        dur = now - $stack8;
+
+        $stack9 = this.<org.jsoup.internal.ConstrainableInputStream: long timeout>;
+
+        $stack10 = dur cmp $stack9;
+
+        if $stack10 <= 0 goto label2;
+
+        $stack11 = 1;
+
+        goto label3;
+
+     label2:
+        $stack11 = 0;
+
+     label3:
+        return $stack11;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.internal.ConstrainableInputStream: int DefaultSize> = 32768;
+
+        return;
+    }
+}

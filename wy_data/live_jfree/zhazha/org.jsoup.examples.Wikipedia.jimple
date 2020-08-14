@@ -1,0 +1,88 @@
+public class org.jsoup.examples.Wikipedia extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jsoup.examples.Wikipedia this;
+
+        this := @this: org.jsoup.examples.Wikipedia;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void main(java.lang.String[]) throws java.io.IOException
+    {
+        org.jsoup.Connection $stack5;
+        org.jsoup.nodes.Document doc;
+        java.lang.String $stack7, $stack16, $stack18;
+        java.lang.String[] $stack8, $stack13, args;
+        org.jsoup.select.Elements newsHeadlines;
+        java.util.Iterator l3;
+        boolean $stack11;
+        java.lang.Object $stack12;
+        org.jsoup.nodes.Element headline;
+
+        args := @parameter0: java.lang.String[];
+
+        $stack5 = staticinvoke <org.jsoup.Jsoup: org.jsoup.Connection connect(java.lang.String)>("http://en.wikipedia.org/");
+
+        doc = interfaceinvoke $stack5.<org.jsoup.Connection: org.jsoup.nodes.Document get()>();
+
+        $stack7 = virtualinvoke doc.<org.jsoup.nodes.Document: java.lang.String title()>();
+
+        $stack8 = newarray (java.lang.String)[0];
+
+        staticinvoke <org.jsoup.examples.Wikipedia: void log(java.lang.String,java.lang.String[])>($stack7, $stack8);
+
+        newsHeadlines = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("#mp-itn b a");
+
+        l3 = virtualinvoke newsHeadlines.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack12 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        headline = (org.jsoup.nodes.Element) $stack12;
+
+        $stack13 = newarray (java.lang.String)[2];
+
+        $stack16 = virtualinvoke headline.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("title");
+
+        $stack13[0] = $stack16;
+
+        $stack18 = virtualinvoke headline.<org.jsoup.nodes.Element: java.lang.String absUrl(java.lang.String)>("href");
+
+        $stack13[1] = $stack18;
+
+        staticinvoke <org.jsoup.examples.Wikipedia: void log(java.lang.String,java.lang.String[])>("%s\n\t%s", $stack13);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private static transient void log(java.lang.String, java.lang.String[])
+    {
+        java.lang.String msg, $stack3;
+        java.lang.String[] vals;
+        java.io.PrintStream $stack2;
+
+        msg := @parameter0: java.lang.String;
+
+        vals := @parameter1: java.lang.String[];
+
+        $stack2 = <java.lang.System: java.io.PrintStream out>;
+
+        $stack3 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(msg, vals);
+
+        virtualinvoke $stack2.<java.io.PrintStream: void println(java.lang.String)>($stack3);
+
+        return;
+    }
+}

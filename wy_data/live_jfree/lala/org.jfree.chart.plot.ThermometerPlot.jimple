@@ -1,0 +1,3044 @@
+public class org.jfree.chart.plot.ThermometerPlot extends org.jfree.chart.plot.Plot implements org.jfree.chart.plot.ValueAxisPlot, org.jfree.chart.plot.Zoomable, java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final int UNITS_NONE;
+    public static final int UNITS_FAHRENHEIT;
+    public static final int UNITS_CELCIUS;
+    public static final int UNITS_KELVIN;
+    public static final int NONE;
+    public static final int RIGHT;
+    public static final int LEFT;
+    public static final int BULB;
+    public static final int NORMAL;
+    public static final int WARNING;
+    public static final int CRITICAL;
+    protected static final int AXIS_GAP;
+    protected static final java.lang.String[] UNITS;
+    protected static final int RANGE_LOW;
+    protected static final int RANGE_HIGH;
+    protected static final int DISPLAY_LOW;
+    protected static final int DISPLAY_HIGH;
+    protected static final double DEFAULT_LOWER_BOUND;
+    protected static final double DEFAULT_UPPER_BOUND;
+    protected static final int DEFAULT_BULB_RADIUS;
+    protected static final int DEFAULT_COLUMN_RADIUS;
+    protected static final int DEFAULT_GAP;
+    private org.jfree.data.general.ValueDataset dataset;
+    private org.jfree.chart.axis.ValueAxis rangeAxis;
+    private double lowerBound;
+    private double upperBound;
+    private int bulbRadius;
+    private int columnRadius;
+    private int gap;
+    private org.jfree.chart.ui.RectangleInsets padding;
+    private transient java.awt.Stroke thermometerStroke;
+    private transient java.awt.Paint thermometerPaint;
+    private int units;
+    private int valueLocation;
+    private int axisLocation;
+    private java.awt.Font valueFont;
+    private transient java.awt.Paint valuePaint;
+    private java.text.NumberFormat valueFormat;
+    private transient java.awt.Paint mercuryPaint;
+    private boolean showValueLines;
+    private int subrange;
+    private double[][] subrangeInfo;
+    private boolean followDataInSubranges;
+    private boolean useSubrangePaint;
+    private transient java.awt.Paint[] subrangePaint;
+    private boolean subrangeIndicatorsVisible;
+    private transient java.awt.Stroke subrangeIndicatorStroke;
+    private transient java.awt.Stroke rangeIndicatorStroke;
+    protected static java.util.ResourceBundle localizationResources;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.data.general.DefaultValueDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = new org.jfree.data.general.DefaultValueDataset;
+
+        specialinvoke $stack1.<org.jfree.data.general.DefaultValueDataset: void <init>()>();
+
+        specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: void <init>(org.jfree.data.general.ValueDataset)>($stack1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.general.ValueDataset)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.BasicStroke $stack3, $stack17, $stack18;
+        java.awt.Color $stack4, $stack6, $stack8, $stack14, $stack15, $stack16;
+        java.awt.Font $stack5;
+        java.text.DecimalFormat $stack7;
+        double[][] $stack9;
+        double[] $stack10, $stack11, $stack12;
+        java.awt.Paint[] $stack13;
+        org.jfree.chart.ui.RectangleInsets $stack19;
+        org.jfree.chart.util.UnitType $stack20;
+        org.jfree.data.general.ValueDataset dataset;
+        org.jfree.chart.axis.NumberAxis $stack21;
+        org.jfree.chart.axis.TickUnitSource $stack22;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        dataset := @parameter0: org.jfree.data.general.ValueDataset;
+
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound> = 0.0;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double upperBound> = 100.0;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int bulbRadius> = 40;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int columnRadius> = 20;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int gap> = 5;
+
+        $stack3 = new java.awt.BasicStroke;
+
+        specialinvoke $stack3.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke> = $stack3;
+
+        $stack4 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint> = $stack4;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int units> = 2;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int valueLocation> = 3;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation> = 2;
+
+        $stack5 = new java.awt.Font;
+
+        specialinvoke $stack5.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 1, 16);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont> = $stack5;
+
+        $stack6 = <java.awt.Color: java.awt.Color WHITE>;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint> = $stack6;
+
+        $stack7 = new java.text.DecimalFormat;
+
+        specialinvoke $stack7.<java.text.DecimalFormat: void <init>()>();
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat> = $stack7;
+
+        $stack8 = <java.awt.Color: java.awt.Color LIGHT_GRAY>;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint> = $stack8;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean showValueLines> = 0;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int subrange> = -1;
+
+        $stack9 = newarray (double[])[3];
+
+        $stack10 = newarray (double)[4];
+
+        $stack10[0] = 0.0;
+
+        $stack10[1] = 50.0;
+
+        $stack10[2] = 0.0;
+
+        $stack10[3] = 50.0;
+
+        $stack9[0] = $stack10;
+
+        $stack11 = newarray (double)[4];
+
+        $stack11[0] = 50.0;
+
+        $stack11[1] = 75.0;
+
+        $stack11[2] = 50.0;
+
+        $stack11[3] = 75.0;
+
+        $stack9[1] = $stack11;
+
+        $stack12 = newarray (double)[4];
+
+        $stack12[0] = 75.0;
+
+        $stack12[1] = 100.0;
+
+        $stack12[2] = 75.0;
+
+        $stack12[3] = 100.0;
+
+        $stack9[2] = $stack12;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo> = $stack9;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges> = 0;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint> = 1;
+
+        $stack13 = newarray (java.awt.Paint)[3];
+
+        $stack14 = <java.awt.Color: java.awt.Color GREEN>;
+
+        $stack13[0] = $stack14;
+
+        $stack15 = <java.awt.Color: java.awt.Color ORANGE>;
+
+        $stack13[1] = $stack15;
+
+        $stack16 = <java.awt.Color: java.awt.Color RED>;
+
+        $stack13[2] = $stack16;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint> = $stack13;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean subrangeIndicatorsVisible> = 1;
+
+        $stack17 = new java.awt.BasicStroke;
+
+        specialinvoke $stack17.<java.awt.BasicStroke: void <init>(float)>(2.0F);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke subrangeIndicatorStroke> = $stack17;
+
+        $stack18 = new java.awt.BasicStroke;
+
+        specialinvoke $stack18.<java.awt.BasicStroke: void <init>(float)>(3.0F);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke rangeIndicatorStroke> = $stack18;
+
+        $stack19 = new org.jfree.chart.ui.RectangleInsets;
+
+        $stack20 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+
+        specialinvoke $stack19.<org.jfree.chart.ui.RectangleInsets: void <init>(org.jfree.chart.util.UnitType,double,double,double,double)>($stack20, 0.05, 0.05, 0.05, 0.05);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding> = $stack19;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset> = dataset;
+
+        if dataset == null goto label1;
+
+        interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        $stack21 = new org.jfree.chart.axis.NumberAxis;
+
+        specialinvoke $stack21.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(null);
+
+        $stack22 = staticinvoke <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createIntegerTickUnits()>();
+
+        virtualinvoke $stack21.<org.jfree.chart.axis.NumberAxis: void setStandardTickUnits(org.jfree.chart.axis.TickUnitSource)>($stack22);
+
+        virtualinvoke $stack21.<org.jfree.chart.axis.NumberAxis: void setAxisLineVisible(boolean)>(0);
+
+        virtualinvoke $stack21.<org.jfree.chart.axis.NumberAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke $stack21.<org.jfree.chart.axis.NumberAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = $stack21;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+        return;
+    }
+
+    public org.jfree.data.general.ValueDataset getDataset()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.data.general.ValueDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        return $stack1;
+    }
+
+    public void setDataset(org.jfree.data.general.ValueDataset)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.data.general.ValueDataset existing, dataset;
+        org.jfree.data.general.DatasetChangeEvent $stack4;
+        org.jfree.data.general.DatasetGroup $stack5;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        dataset := @parameter0: org.jfree.data.general.ValueDataset;
+
+        existing = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if existing == null goto label1;
+
+        interfaceinvoke existing.<org.jfree.data.general.ValueDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset> = dataset;
+
+        if dataset == null goto label2;
+
+        $stack5 = interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: org.jfree.data.general.DatasetGroup getGroup()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setDatasetGroup(org.jfree.data.general.DatasetGroup)>($stack5);
+
+        interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label2:
+        $stack4 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack4.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack4);
+
+        return;
+    }
+
+    public org.jfree.chart.axis.ValueAxis getRangeAxis()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.chart.axis.ValueAxis $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        return $stack1;
+    }
+
+    public void setRangeAxis(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.axis.ValueAxis axis, $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(axis, "axis");
+
+        $stack2 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack2.<org.jfree.chart.axis.ValueAxis: void removeChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = axis;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getLowerBound()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound>;
+
+        return $stack1;
+    }
+
+    public void setLowerBound(double)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double lower;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        lower := @parameter0: double;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound> = lower;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+        return;
+    }
+
+    public double getUpperBound()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: double upperBound>;
+
+        return $stack1;
+    }
+
+    public void setUpperBound(double)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double upper;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        upper := @parameter0: double;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double upperBound> = upper;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+        return;
+    }
+
+    public void setRange(double, double)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double lower, upper;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        lower := @parameter0: double;
+
+        upper := @parameter1: double;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound> = lower;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: double upperBound> = upper;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+        return;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getPadding()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.chart.ui.RectangleInsets $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding>;
+
+        return $stack1;
+    }
+
+    public void setPadding(org.jfree.chart.ui.RectangleInsets)
+    {
+        org.jfree.chart.ui.RectangleInsets padding;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        padding := @parameter0: org.jfree.chart.ui.RectangleInsets;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(padding, "padding");
+
+        this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding> = padding;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getThermometerStroke()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke>;
+
+        return $stack1;
+    }
+
+    public void setThermometerStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke s;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        s := @parameter0: java.awt.Stroke;
+
+        if s == null goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke> = s;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Paint getThermometerPaint()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint>;
+
+        return $stack1;
+    }
+
+    public void setThermometerPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        if paint == null goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public int getUnits()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        return $stack1;
+    }
+
+    public void setUnits(int)
+    {
+        int u, $stack3, $stack4;
+        java.lang.String[] $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        u := @parameter0: int;
+
+        if u < 0 goto label1;
+
+        $stack2 = <org.jfree.chart.plot.ThermometerPlot: java.lang.String[] UNITS>;
+
+        $stack3 = lengthof $stack2;
+
+        if u >= $stack3 goto label1;
+
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        if $stack4 == u goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int units> = u;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public int getValueLocation()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int valueLocation>;
+
+        return $stack1;
+    }
+
+    public void setValueLocation(int)
+    {
+        int location;
+        java.lang.IllegalArgumentException $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        location := @parameter0: int;
+
+        if location < 0 goto label1;
+
+        if location >= 4 goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int valueLocation> = location;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        goto label2;
+
+     label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Location not recognised.");
+
+        throw $stack2;
+
+     label2:
+        return;
+    }
+
+    public int getAxisLocation()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation>;
+
+        return $stack1;
+    }
+
+    public void setAxisLocation(int)
+    {
+        int location;
+        java.lang.IllegalArgumentException $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        location := @parameter0: int;
+
+        if location < 0 goto label1;
+
+        if location >= 3 goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation> = location;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        goto label2;
+
+     label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Location not recognised.");
+
+        throw $stack2;
+
+     label2:
+        return;
+    }
+
+    public java.awt.Font getValueFont()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        return $stack1;
+    }
+
+    public void setValueFont(java.awt.Font)
+    {
+        java.awt.Font f, $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        f := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(f, "f");
+
+        $stack2 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        $stack3 = virtualinvoke $stack2.<java.awt.Font: boolean equals(java.lang.Object)>(f);
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont> = f;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Paint getValuePaint()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        return $stack1;
+    }
+
+    public void setValuePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint, $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        $stack2 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: boolean equals(java.lang.Object)>(paint);
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public void setValueFormat(java.text.NumberFormat)
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat> = formatter;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getMercuryPaint()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        return $stack1;
+    }
+
+    public void setMercuryPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void setSubrangeInfo(int, double, double)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int range;
+        double low, hi;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        low := @parameter1: double;
+
+        hi := @parameter2: double;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setSubrangeInfo(int,double,double,double,double)>(range, low, hi, low, hi);
+
+        return;
+    }
+
+    public void setSubrangeInfo(int, double, double, double, double)
+    {
+        int range;
+        org.jfree.chart.plot.ThermometerPlot this;
+        double rangeLow, rangeHigh, displayLow, displayHigh;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        rangeLow := @parameter1: double;
+
+        rangeHigh := @parameter2: double;
+
+        displayLow := @parameter3: double;
+
+        displayHigh := @parameter4: double;
+
+        if range < 0 goto label1;
+
+        if range >= 3 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setSubrange(int,double,double)>(range, rangeLow, rangeHigh);
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setDisplayRange(int,double,double)>(range, displayLow, displayHigh);
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public void setSubrange(int, double, double)
+    {
+        int range;
+        org.jfree.chart.plot.ThermometerPlot this;
+        double[][] $stack6, $stack8;
+        double high, low;
+        double[] $stack7, $stack9;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        low := @parameter1: double;
+
+        high := @parameter2: double;
+
+        if range < 0 goto label1;
+
+        if range >= 3 goto label1;
+
+        $stack6 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack7 = $stack6[range];
+
+        $stack7[1] = high;
+
+        $stack8 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack9 = $stack8[range];
+
+        $stack9[0] = low;
+
+     label1:
+        return;
+    }
+
+    public void setDisplayRange(int, double, double)
+    {
+        int range, $stack7;
+        org.jfree.chart.plot.ThermometerPlot this;
+        double[][] $stack6, $stack11, $stack13, $stack15, $stack17;
+        double high, low;
+        boolean $stack8, $stack9;
+        byte $stack10;
+        double[] $stack12, $stack14, $stack16, $stack18;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        low := @parameter1: double;
+
+        high := @parameter2: double;
+
+        if range < 0 goto label2;
+
+        $stack6 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack7 = lengthof $stack6;
+
+        if range >= $stack7 goto label2;
+
+        $stack8 = staticinvoke <org.jfree.chart.plot.ThermometerPlot: boolean isValidNumber(double)>(high);
+
+        if $stack8 == 0 goto label2;
+
+        $stack9 = staticinvoke <org.jfree.chart.plot.ThermometerPlot: boolean isValidNumber(double)>(low);
+
+        if $stack9 == 0 goto label2;
+
+        $stack10 = high cmpl low;
+
+        if $stack10 <= 0 goto label1;
+
+        $stack15 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack16 = $stack15[range];
+
+        $stack16[3] = high;
+
+        $stack17 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack18 = $stack17[range];
+
+        $stack18[2] = low;
+
+        goto label2;
+
+     label1:
+        $stack11 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack12 = $stack11[range];
+
+        $stack12[3] = low;
+
+        $stack13 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack14 = $stack13[range];
+
+        $stack14[2] = high;
+
+     label2:
+        return;
+    }
+
+    public java.awt.Paint getSubrangePaint(int)
+    {
+        int range, $stack4;
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Paint $stack2, $stack7;
+        java.awt.Paint[] $stack3, $stack6;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        if range < 0 goto label1;
+
+        $stack3 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack4 = lengthof $stack3;
+
+        if range >= $stack4 goto label1;
+
+        $stack6 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack7 = $stack6[range];
+
+        return $stack7;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        return $stack2;
+    }
+
+    public void setSubrangePaint(int, java.awt.Paint)
+    {
+        int range, $stack4;
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Paint[] $stack3, $stack5;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        range := @parameter0: int;
+
+        paint := @parameter1: java.awt.Paint;
+
+        if range < 0 goto label1;
+
+        $stack3 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack4 = lengthof $stack3;
+
+        if range >= $stack4 goto label1;
+
+        if paint == null goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack5[range] = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public boolean getFollowDataInSubranges()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges>;
+
+        return $stack1;
+    }
+
+    public void setFollowDataInSubranges(boolean)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean flag;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges> = flag;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean getUseSubrangePaint()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint>;
+
+        return $stack1;
+    }
+
+    public void setUseSubrangePaint(boolean)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean flag;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint> = flag;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public int getBulbRadius()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int bulbRadius>;
+
+        return $stack1;
+    }
+
+    public void setBulbRadius(int)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int r;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        r := @parameter0: int;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int bulbRadius> = r;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public int getBulbDiameter()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1, $stack2;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack2 = $stack1 * 2;
+
+        return $stack2;
+    }
+
+    public int getColumnRadius()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int columnRadius>;
+
+        return $stack1;
+    }
+
+    public void setColumnRadius(int)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int r;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        r := @parameter0: int;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int columnRadius> = r;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public int getColumnDiameter()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1, $stack2;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack2 = $stack1 * 2;
+
+        return $stack2;
+    }
+
+    public int getGap()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int gap>;
+
+        return $stack1;
+    }
+
+    public void setGap(int)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int gap;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        gap := @parameter0: int;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int gap> = gap;
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        java.awt.geom.RoundRectangle2D$Double $stack40, $stack41, $stack42;
+        java.awt.geom.Ellipse2D$Double $stack43, $stack44;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.chart.ui.RectangleInsets insets, $stack47;
+        java.awt.geom.Rectangle2D area, interior;
+        java.awt.Graphics2D g2;
+        java.lang.Object $stack46;
+        double $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack58, $stack59, $stack60, $stack62, $stack63, $stack67, $stack68, $stack71, $stack72, $stack75, $stack76, $stack78, $stack80, $stack83, $stack84, $stack86, $stack90, $stack92, $stack94, $stack101, $stack104, $stack109, $stack114, $stack119, $stack120, $stack122, $stack123, $stack128, $stack135, $stack140, $stack145, $stack168, $stack169, ds, $stack208, $stack210, $stack211, $stack212, $stack260, $stack261, $stack262, $stack271, $stack272, $stack273, $stack299, $stack309, $stack325, $stack335, $stack336, $stack337, $stack341, $stack342, $stack343, $stack351, $stack352, $stack353, current, value, x, y, cursor, $stack161, $stack162;
+        int midX, midY, $stack57, stemTop, $stack61, stemBottom, $stack65, $stack66, $stack69, $stack70, $stack73, $stack74, $stack77, $stack79, $stack81, $stack82, $stack85, $stack87, $stack88, $stack89, $stack91, $stack93, $stack97, $stack98, $stack99, $stack100, $stack102, $stack103, $stack105, $stack106, $stack107, $stack108, $stack110, $stack111, $stack112, $stack113, $stack115, $stack116, $stack117, $stack118, $stack121, $stack124, $stack125, $stack126, $stack127, $stack129, $stack130, $stack131, $stack132, $stack133, $stack134, $stack136, $stack137, $stack138, $stack139, $stack141, $stack142, $stack143, $stack144, $stack165, $stack170, $stack202, $stack203, $stack204, $stack205, $stack206, j, $stack209, $stack215, $stack216, $stack226, $stack227, $stack228, $stack229, $stack230, $stack231, $stack235, $stack236, $stack237, $stack238, $stack239, $stack242, $stack243, $stack244, $stack245, $stack246, $stack254, $stack255, $stack256, $stack258, $stack259, $stack266, $stack267, $stack269, $stack270, $stack277, $stack292, $stack293, $stack294, $stack302, $stack303, $stack304, $stack318, $stack319, $stack320, $stack334, $stack338, $stack339, $stack340, $stack350, i, l, k, range#25, $stack223, value#62, $stack152, $stack153, $stack154, $stack155, $stack159, $stack156, $stack160, current#185;
+        java.awt.geom.Rectangle2D$Double $stack64, $stack257, $stack268;
+        java.awt.geom.Area $stack95, $stack96, $stack146, $stack147, $stack214, $stack344;
+        org.jfree.data.general.ValueDataset $stack148, $stack180, $stack196;
+        java.awt.Stroke $stack164, $stack279;
+        java.lang.String[] $stack166, $stack157;
+        java.lang.String $stack167, temp, $stack241, range#61, $stack158;
+        java.lang.Number $stack181, $stack197;
+        org.jfree.chart.ui.RectangleEdge $stack199, $stack263, $stack274, $stack295, $stack305, $stack321;
+        org.jfree.chart.axis.ValueAxis $stack200, $stack264, $stack275, $stack280, $stack296, $stack306, $stack322, $stack219;
+        long $stack207;
+        byte $stack213, $stack163;
+        java.awt.Paint $stack217, $stack301, $stack311, $stack327, $stack221, $stack149;
+        boolean $stack218, $stack253, $stack284, $stack287, $stack290;
+        java.text.NumberFormat $stack224, $stack232, $stack240;
+        double[][] $stack282, $stack285, $stack288;
+        double[] $stack283, $stack286, $stack289;
+        java.awt.geom.Line2D$Double $stack298, $stack308, $stack324;
+        java.awt.Paint[] $stack300, $stack310, $stack326;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotState parentState;
+        org.jfree.data.Range range;
+        java.awt.Font $stack220, $stack150;
+        java.awt.FontMetrics metrics;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack40 = new java.awt.geom.RoundRectangle2D$Double;
+
+        specialinvoke $stack40.<java.awt.geom.RoundRectangle2D$Double: void <init>()>();
+
+        $stack41 = new java.awt.geom.RoundRectangle2D$Double;
+
+        specialinvoke $stack41.<java.awt.geom.RoundRectangle2D$Double: void <init>()>();
+
+        $stack42 = new java.awt.geom.RoundRectangle2D$Double;
+
+        specialinvoke $stack42.<java.awt.geom.RoundRectangle2D$Double: void <init>()>();
+
+        $stack43 = new java.awt.geom.Ellipse2D$Double;
+
+        specialinvoke $stack43.<java.awt.geom.Ellipse2D$Double: void <init>()>();
+
+        $stack44 = new java.awt.geom.Ellipse2D$Double;
+
+        specialinvoke $stack44.<java.awt.geom.Ellipse2D$Double: void <init>()>();
+
+        if info == null goto label01;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label01:
+        insets = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        $stack46 = virtualinvoke area.<java.awt.geom.Rectangle2D: java.lang.Object clone()>();
+
+        interior = (java.awt.geom.Rectangle2D) $stack46;
+
+        $stack47 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding>;
+
+        virtualinvoke $stack47.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(interior);
+
+        $stack48 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack49 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack50 = $stack49 / 2.0;
+
+        $stack51 = $stack48 + $stack50;
+
+        midX = (int) $stack51;
+
+        $stack52 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack53 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack54 = $stack53 / 2.0;
+
+        $stack55 = $stack52 + $stack54;
+
+        midY = (int) $stack55;
+
+        $stack56 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack57 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack58 = (double) $stack57;
+
+        $stack59 = $stack56 + $stack58;
+
+        stemTop = (int) $stack59;
+
+        $stack60 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack61 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack62 = (double) $stack61;
+
+        $stack63 = $stack60 - $stack62;
+
+        stemBottom = (int) $stack63;
+
+        $stack64 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack65 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack66 = midX - $stack65;
+
+        $stack67 = (double) $stack66;
+
+        $stack68 = (double) stemTop;
+
+        $stack69 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack72 = (double) $stack69;
+
+        $stack70 = stemBottom - stemTop;
+
+        $stack71 = (double) $stack70;
+
+        specialinvoke $stack64.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack67, $stack68, $stack72, $stack71);
+
+        $stack73 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack74 = midX - $stack73;
+
+        $stack75 = (double) $stack74;
+
+        $stack76 = (double) stemBottom;
+
+        $stack77 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack78 = (double) $stack77;
+
+        $stack79 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack80 = (double) $stack79;
+
+        virtualinvoke $stack43.<java.awt.geom.Ellipse2D: void setFrame(double,double,double,double)>($stack75, $stack76, $stack78, $stack80);
+
+        $stack81 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack82 = midX - $stack81;
+
+        $stack83 = (double) $stack82;
+
+        $stack84 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack85 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack86 = (double) $stack85;
+
+        $stack87 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack88 = stemBottom + $stack87;
+
+        $stack89 = $stack88 - stemTop;
+
+        $stack90 = (double) $stack89;
+
+        $stack91 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack92 = (double) $stack91;
+
+        $stack93 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack94 = (double) $stack93;
+
+        virtualinvoke $stack40.<java.awt.geom.RoundRectangle2D: void setRoundRect(double,double,double,double,double,double)>($stack83, $stack84, $stack86, $stack90, $stack92, $stack94);
+
+        $stack95 = new java.awt.geom.Area;
+
+        specialinvoke $stack95.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack43);
+
+        $stack96 = new java.awt.geom.Area;
+
+        specialinvoke $stack96.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack40);
+
+        virtualinvoke $stack95.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack96);
+
+        $stack97 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack98 = midX - $stack97;
+
+        $stack99 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack100 = $stack98 + $stack99;
+
+        $stack101 = (double) $stack100;
+
+        $stack102 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack103 = stemBottom + $stack102;
+
+        $stack104 = (double) $stack103;
+
+        $stack105 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack106 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack107 = $stack106 * 2;
+
+        $stack108 = $stack105 - $stack107;
+
+        $stack109 = (double) $stack108;
+
+        $stack110 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack111 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack112 = $stack111 * 2;
+
+        $stack113 = $stack110 - $stack112;
+
+        $stack114 = (double) $stack113;
+
+        virtualinvoke $stack44.<java.awt.geom.Ellipse2D: void setFrame(double,double,double,double)>($stack101, $stack104, $stack109, $stack114);
+
+        $stack115 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack116 = midX - $stack115;
+
+        $stack117 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack118 = $stack116 + $stack117;
+
+        $stack119 = (double) $stack118;
+
+        $stack120 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack121 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack122 = (double) $stack121;
+
+        $stack123 = $stack120 + $stack122;
+
+        $stack124 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack125 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack126 = $stack125 * 2;
+
+        $stack127 = $stack124 - $stack126;
+
+        $stack128 = (double) $stack127;
+
+        $stack129 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbDiameter()>();
+
+        $stack130 = stemBottom + $stack129;
+
+        $stack131 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack132 = $stack131 * 2;
+
+        $stack133 = $stack130 - $stack132;
+
+        $stack134 = $stack133 - stemTop;
+
+        $stack135 = (double) $stack134;
+
+        $stack136 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack137 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack138 = $stack137 * 2;
+
+        $stack139 = $stack136 - $stack138;
+
+        $stack140 = (double) $stack139;
+
+        $stack141 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack142 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack143 = $stack142 * 2;
+
+        $stack144 = $stack141 - $stack143;
+
+        $stack145 = (double) $stack144;
+
+        virtualinvoke $stack41.<java.awt.geom.RoundRectangle2D: void setRoundRect(double,double,double,double,double,double)>($stack119, $stack123, $stack128, $stack135, $stack140, $stack145);
+
+        $stack146 = new java.awt.geom.Area;
+
+        specialinvoke $stack146.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack44);
+
+        $stack147 = new java.awt.geom.Area;
+
+        specialinvoke $stack147.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack41);
+
+        virtualinvoke $stack146.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack147);
+
+        $stack148 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack148 == null goto label14;
+
+        $stack180 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        $stack181 = interfaceinvoke $stack180.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        if $stack181 == null goto label14;
+
+        $stack196 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        $stack197 = interfaceinvoke $stack196.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        current = virtualinvoke $stack197.<java.lang.Number: double doubleValue()>();
+
+        $stack200 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack199 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        ds = virtualinvoke $stack200.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(current, $stack64, $stack199);
+
+        $stack202 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        $stack203 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack204 = $stack203 * 2;
+
+        i = $stack202 - $stack204;
+
+        $stack205 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack206 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        j = $stack205 - $stack206;
+
+        l = i / 2;
+
+        $stack207 = staticinvoke <java.lang.Math: long round(double)>(ds);
+
+        k = (int) $stack207;
+
+        $stack208 = (double) k;
+
+        $stack209 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack210 = (double) $stack209;
+
+        $stack211 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack212 = $stack210 + $stack211;
+
+        $stack213 = $stack208 cmpg $stack212;
+
+        if $stack213 >= 0 goto label02;
+
+        $stack350 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack351 = (double) $stack350;
+
+        $stack352 = virtualinvoke interior.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack353 = $stack351 + $stack352;
+
+        k = (int) $stack353;
+
+        l = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+     label02:
+        $stack214 = new java.awt.geom.Area;
+
+        specialinvoke $stack214.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack44);
+
+        $stack215 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack216 = stemBottom + $stack215;
+
+        if k >= $stack216 goto label03;
+
+        $stack334 = midX - j;
+
+        $stack335 = (double) $stack334;
+
+        $stack336 = (double) k;
+
+        $stack337 = (double) i;
+
+        $stack338 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack339 = stemBottom + $stack338;
+
+        $stack340 = $stack339 - k;
+
+        $stack343 = (double) $stack340;
+
+        $stack342 = (double) l;
+
+        $stack341 = (double) l;
+
+        virtualinvoke $stack42.<java.awt.geom.RoundRectangle2D: void setRoundRect(double,double,double,double,double,double)>($stack335, $stack336, $stack337, $stack343, $stack342, $stack341);
+
+        $stack344 = new java.awt.geom.Area;
+
+        specialinvoke $stack344.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack42);
+
+        virtualinvoke $stack214.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack344);
+
+     label03:
+        $stack217 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint getCurrentPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack217);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack214);
+
+        $stack218 = this.<org.jfree.chart.plot.ThermometerPlot: boolean subrangeIndicatorsVisible>;
+
+        if $stack218 == 0 goto label06;
+
+        $stack279 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke subrangeIndicatorStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack279);
+
+        $stack280 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        range = virtualinvoke $stack280.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()>();
+
+        $stack282 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack283 = $stack282[0];
+
+        value = $stack283[0];
+
+        $stack284 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(value);
+
+        if $stack284 == 0 goto label04;
+
+        $stack318 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack319 = midX + $stack318;
+
+        $stack320 = $stack319 + 2;
+
+        x = (double) $stack320;
+
+        $stack322 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack321 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        y = virtualinvoke $stack322.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(value, $stack64, $stack321);
+
+        $stack324 = new java.awt.geom.Line2D$Double;
+
+        $stack325 = x + 10.0;
+
+        specialinvoke $stack324.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x, y, $stack325, y);
+
+        $stack326 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack327 = $stack326[0];
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack327);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack324);
+
+     label04:
+        $stack285 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack286 = $stack285[1];
+
+        value = $stack286[0];
+
+        $stack287 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(value);
+
+        if $stack287 == 0 goto label05;
+
+        $stack302 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack303 = midX + $stack302;
+
+        $stack304 = $stack303 + 2;
+
+        x = (double) $stack304;
+
+        $stack306 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack305 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        y = virtualinvoke $stack306.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(value, $stack64, $stack305);
+
+        $stack308 = new java.awt.geom.Line2D$Double;
+
+        $stack309 = x + 10.0;
+
+        specialinvoke $stack308.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x, y, $stack309, y);
+
+        $stack310 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack311 = $stack310[1];
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack311);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack308);
+
+     label05:
+        $stack288 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack289 = $stack288[2];
+
+        value = $stack289[0];
+
+        $stack290 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(value);
+
+        if $stack290 == 0 goto label06;
+
+        $stack292 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack293 = midX + $stack292;
+
+        $stack294 = $stack293 + 2;
+
+        x = (double) $stack294;
+
+        $stack296 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack295 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        y = virtualinvoke $stack296.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(value, $stack64, $stack295);
+
+        $stack298 = new java.awt.geom.Line2D$Double;
+
+        $stack299 = x + 10.0;
+
+        specialinvoke $stack298.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x, y, $stack299, y);
+
+        $stack300 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack301 = $stack300[2];
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack301);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack298);
+
+     label06:
+        $stack219 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        if $stack219 == null goto label10;
+
+        $stack246 = this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation>;
+
+        if $stack246 == 0 goto label10;
+
+        range#25 = 10;
+
+        $stack253 = this.<org.jfree.chart.plot.ThermometerPlot: boolean showValueLines>;
+
+        if $stack253 == 0 goto label07;
+
+        $stack277 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnDiameter()>();
+
+        range#25 = 10 + $stack277;
+
+     label07:
+        $stack254 = this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation>;
+
+        lookupswitch($stack254)
+        {
+            case 1: goto label08;
+            case 2: goto label09;
+            default: goto label09;
+        };
+
+     label08:
+        $stack255 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack256 = midX + $stack255;
+
+        cursor = (double) $stack256;
+
+        $stack257 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack262 = (double) stemTop;
+
+        $stack261 = (double) range#25;
+
+        $stack258 = stemBottom - stemTop;
+
+        $stack259 = $stack258 + 1;
+
+        $stack260 = (double) $stack259;
+
+        specialinvoke $stack257.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(cursor, $stack262, $stack261, $stack260);
+
+        $stack264 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack263 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        virtualinvoke $stack264.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, area, $stack257, $stack263, null);
+
+        goto label10;
+
+     label09:
+        $stack266 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack267 = midX - $stack266;
+
+        cursor = (double) $stack267;
+
+        $stack268 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack273 = (double) stemTop;
+
+        $stack272 = (double) range#25;
+
+        $stack269 = stemBottom - stemTop;
+
+        $stack270 = $stack269 + 1;
+
+        $stack271 = (double) $stack270;
+
+        specialinvoke $stack268.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(cursor, $stack273, $stack272, $stack271);
+
+        $stack275 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack274 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        virtualinvoke $stack275.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, area, $stack268, $stack274, null);
+
+     label10:
+        $stack220 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack220);
+
+        $stack221 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack221);
+
+        metrics = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        $stack223 = this.<org.jfree.chart.plot.ThermometerPlot: int valueLocation>;
+
+        tableswitch($stack223)
+        {
+            case 1: goto label11;
+            case 2: goto label12;
+            case 3: goto label13;
+            default: goto label14;
+        };
+
+     label11:
+        $stack240 = this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        $stack241 = virtualinvoke $stack240.<java.text.NumberFormat: java.lang.String format(double)>(current);
+
+        $stack242 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack243 = midX + $stack242;
+
+        $stack244 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack245 = $stack243 + $stack244;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>($stack241, $stack245, midY);
+
+        goto label14;
+
+     label12:
+        $stack232 = this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        range#61 = virtualinvoke $stack232.<java.text.NumberFormat: java.lang.String format(double)>(current);
+
+        value#62 = virtualinvoke metrics.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(range#61);
+
+        $stack235 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack236 = midX - $stack235;
+
+        $stack237 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack238 = $stack236 - $stack237;
+
+        $stack239 = $stack238 - value#62;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>(range#61, $stack239, midY);
+
+        goto label14;
+
+     label13:
+        $stack224 = this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        temp = virtualinvoke $stack224.<java.text.NumberFormat: java.lang.String format(double)>(current);
+
+        $stack226 = virtualinvoke metrics.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(temp);
+
+        i = $stack226 / 2;
+
+        $stack227 = midX - i;
+
+        $stack228 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getBulbRadius()>();
+
+        $stack229 = stemBottom + $stack228;
+
+        $stack230 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack231 = $stack229 + $stack230;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>(temp, $stack227, $stack231);
+
+        goto label14;
+
+     label14:
+        $stack149 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack149);
+
+        $stack150 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack150);
+
+        metrics = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        $stack152 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getColumnRadius()>();
+
+        $stack153 = midX - $stack152;
+
+        $stack154 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: int getGap()>();
+
+        $stack155 = $stack154 * 2;
+
+        $stack159 = $stack153 - $stack155;
+
+        $stack157 = <org.jfree.chart.plot.ThermometerPlot: java.lang.String[] UNITS>;
+
+        $stack156 = this.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        $stack158 = $stack157[$stack156];
+
+        $stack160 = virtualinvoke metrics.<java.awt.FontMetrics: int stringWidth(java.lang.String)>($stack158);
+
+        current#185 = $stack159 - $stack160;
+
+        $stack161 = (double) current#185;
+
+        $stack162 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack163 = $stack161 cmpl $stack162;
+
+        if $stack163 <= 0 goto label15;
+
+        $stack166 = <org.jfree.chart.plot.ThermometerPlot: java.lang.String[] UNITS>;
+
+        $stack165 = this.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        $stack167 = $stack166[$stack165];
+
+        $stack168 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack169 = $stack168 + 20.0;
+
+        $stack170 = (int) $stack169;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>($stack167, current#185, $stack170);
+
+     label15:
+        $stack164 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack164);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack95);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack146);
+
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        return;
+    }
+
+    public void zoom(double)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double percent;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        percent := @parameter0: double;
+
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        java.util.ResourceBundle $stack1;
+        java.lang.String $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = <org.jfree.chart.plot.ThermometerPlot: java.util.ResourceBundle localizationResources>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Thermometer_Plot");
+
+        return $stack2;
+    }
+
+    public void datasetChanged(org.jfree.data.general.DatasetChangeEvent)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.data.general.ValueDataset $stack5, $stack6;
+        org.jfree.data.general.DatasetChangeEvent event;
+        java.lang.Number vn;
+        double value;
+        boolean $stack11, $stack12, $stack13;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack5 == null goto label5;
+
+        $stack6 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        vn = interfaceinvoke $stack6.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        if vn == null goto label5;
+
+        value = virtualinvoke vn.<java.lang.Number: double doubleValue()>();
+
+        $stack11 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(0, value);
+
+        if $stack11 == 0 goto label1;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int subrange> = 0;
+
+        goto label4;
+
+     label1:
+        $stack12 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(1, value);
+
+        if $stack12 == 0 goto label2;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int subrange> = 1;
+
+        goto label4;
+
+     label2:
+        $stack13 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(2, value);
+
+        if $stack13 == 0 goto label3;
+
+        this.<org.jfree.chart.plot.ThermometerPlot: int subrange> = 2;
+
+        goto label4;
+
+     label3:
+        this.<org.jfree.chart.plot.ThermometerPlot: int subrange> = -1;
+
+     label4:
+        virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: void setAxisRange()>();
+
+     label5:
+        specialinvoke this.<org.jfree.chart.plot.Plot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>(event);
+
+        return;
+    }
+
+    public org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.data.Range $stack2;
+        org.jfree.chart.plot.ThermometerPlot this;
+        double $stack3, $stack4;
+        org.jfree.chart.axis.ValueAxis axis;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        $stack2 = new org.jfree.data.Range;
+
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound>;
+
+        $stack3 = this.<org.jfree.chart.plot.ThermometerPlot: double upperBound>;
+
+        specialinvoke $stack2.<org.jfree.data.Range: void <init>(double,double)>($stack4, $stack3);
+
+        return $stack2;
+    }
+
+    protected void setAxisRange()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        int $stack1, $stack10, $stack13;
+        double $stack2, $stack3, $stack16, $stack17;
+        org.jfree.chart.axis.ValueAxis $stack4, $stack18;
+        boolean $stack5;
+        org.jfree.data.Range $stack9;
+        double[][] $stack11, $stack14;
+        double[] $stack12, $stack15;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.ThermometerPlot: int subrange>;
+
+        if $stack1 < 0 goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges>;
+
+        if $stack5 == 0 goto label1;
+
+        $stack18 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack9 = new org.jfree.data.Range;
+
+        $stack11 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack10 = this.<org.jfree.chart.plot.ThermometerPlot: int subrange>;
+
+        $stack12 = $stack11[$stack10];
+
+        $stack17 = $stack12[2];
+
+        $stack14 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack13 = this.<org.jfree.chart.plot.ThermometerPlot: int subrange>;
+
+        $stack15 = $stack14[$stack13];
+
+        $stack16 = $stack15[3];
+
+        specialinvoke $stack9.<org.jfree.data.Range: void <init>(double,double)>($stack17, $stack16);
+
+        virtualinvoke $stack18.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack9);
+
+        goto label2;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack3 = this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound>;
+
+        $stack2 = this.<org.jfree.chart.plot.ThermometerPlot: double upperBound>;
+
+        virtualinvoke $stack4.<org.jfree.chart.axis.ValueAxis: void setRange(double,double)>($stack3, $stack2);
+
+     label2:
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        return null;
+    }
+
+    public org.jfree.chart.plot.PlotOrientation getOrientation()
+    {
+        org.jfree.chart.plot.PlotOrientation $stack1;
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack1 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        return $stack1;
+    }
+
+    protected static boolean isValidNumber(double)
+    {
+        double d;
+        boolean $stack2, $stack3, $stack4;
+
+        d := @parameter0: double;
+
+        $stack2 = staticinvoke <java.lang.Double: boolean isNaN(double)>(d);
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = staticinvoke <java.lang.Double: boolean isInfinite(double)>(d);
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    private boolean inSubrange(int, double)
+    {
+        double value, $stack6, $stack10;
+        org.jfree.chart.plot.ThermometerPlot this;
+        int subrange;
+        double[][] $stack4, $stack8;
+        double[] $stack5, $stack9;
+        byte $stack7, $stack11;
+        boolean $stack12;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        subrange := @parameter0: int;
+
+        value := @parameter1: double;
+
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack5 = $stack4[subrange];
+
+        $stack6 = $stack5[0];
+
+        $stack7 = value cmpl $stack6;
+
+        if $stack7 <= 0 goto label1;
+
+        $stack8 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack9 = $stack8[subrange];
+
+        $stack10 = $stack9[1];
+
+        $stack11 = value cmpg $stack10;
+
+        if $stack11 > 0 goto label1;
+
+        $stack12 = 1;
+
+        goto label2;
+
+     label1:
+        $stack12 = 0;
+
+     label2:
+        return $stack12;
+    }
+
+    private java.awt.Paint getCurrentPaint()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        boolean $stack4, $stack8, $stack9, $stack10;
+        org.jfree.data.general.ValueDataset $stack5;
+        java.lang.Number $stack6;
+        double value;
+        java.awt.Paint[] $stack12, $stack13, $stack14;
+        java.awt.Paint result;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        result = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint>;
+
+        if $stack4 == 0 goto label3;
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        value = virtualinvoke $stack6.<java.lang.Number: double doubleValue()>();
+
+        $stack8 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(0, value);
+
+        if $stack8 == 0 goto label1;
+
+        $stack14 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        result = $stack14[0];
+
+        goto label3;
+
+     label1:
+        $stack9 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(1, value);
+
+        if $stack9 == 0 goto label2;
+
+        $stack13 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        result = $stack13[1];
+
+        goto label3;
+
+     label2:
+        $stack10 = specialinvoke this.<org.jfree.chart.plot.ThermometerPlot: boolean inSubrange(int,double)>(2, value);
+
+        if $stack10 == 0 goto label3;
+
+        $stack12 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        result = $stack12[2];
+
+     label3:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.ThermometerPlot this, that;
+        boolean $stack4, $stack5, $stack8, $stack19, $stack22, $stack25, $stack32, $stack35, $stack38, $stack41, $stack42, $stack43, $stack46, $stack47, $stack50, $stack51, $stack52, $stack65;
+        org.jfree.chart.axis.ValueAxis $stack6, $stack7;
+        int $stack9, $stack10, $stack26, $stack27, $stack28, $stack29, $stack44, $stack45, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack60, i;
+        double $stack11, $stack12, $stack14, $stack15;
+        byte $stack13, $stack16;
+        org.jfree.chart.ui.RectangleInsets $stack17, $stack18;
+        java.awt.Stroke $stack20, $stack21;
+        java.awt.Paint $stack23, $stack24, $stack33, $stack34, $stack39, $stack40, $stack63, $stack64;
+        java.awt.Font $stack30, $stack31;
+        java.text.NumberFormat $stack36, $stack37;
+        double[][] $stack48, $stack49;
+        java.awt.Paint[] $stack59, $stack61, $stack62;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack4 = obj instanceof org.jfree.chart.plot.ThermometerPlot;
+
+        if $stack4 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.plot.ThermometerPlot) obj;
+
+        $stack5 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+
+        if $stack5 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack7 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack6 = that.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack8 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack7, $stack6);
+
+        if $stack8 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack10 = this.<org.jfree.chart.plot.ThermometerPlot: int axisLocation>;
+
+        $stack9 = that.<org.jfree.chart.plot.ThermometerPlot: int axisLocation>;
+
+        if $stack10 == $stack9 goto label05;
+
+        return 0;
+
+     label05:
+        $stack12 = this.<org.jfree.chart.plot.ThermometerPlot: double lowerBound>;
+
+        $stack11 = that.<org.jfree.chart.plot.ThermometerPlot: double lowerBound>;
+
+        $stack13 = $stack12 cmpl $stack11;
+
+        if $stack13 == 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack15 = this.<org.jfree.chart.plot.ThermometerPlot: double upperBound>;
+
+        $stack14 = that.<org.jfree.chart.plot.ThermometerPlot: double upperBound>;
+
+        $stack16 = $stack15 cmpl $stack14;
+
+        if $stack16 == 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack18 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding>;
+
+        $stack17 = that.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.ui.RectangleInsets padding>;
+
+        $stack19 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack18, $stack17);
+
+        if $stack19 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack21 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke>;
+
+        $stack20 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke>;
+
+        $stack22 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack21, $stack20);
+
+        if $stack22 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack24 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint>;
+
+        $stack23 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint>;
+
+        $stack25 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack24, $stack23);
+
+        if $stack25 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack27 = this.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        $stack26 = that.<org.jfree.chart.plot.ThermometerPlot: int units>;
+
+        if $stack27 == $stack26 goto label11;
+
+        return 0;
+
+     label11:
+        $stack29 = this.<org.jfree.chart.plot.ThermometerPlot: int valueLocation>;
+
+        $stack28 = that.<org.jfree.chart.plot.ThermometerPlot: int valueLocation>;
+
+        if $stack29 == $stack28 goto label12;
+
+        return 0;
+
+     label12:
+        $stack31 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        $stack30 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Font valueFont>;
+
+        $stack32 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack31, $stack30);
+
+        if $stack32 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack34 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        $stack33 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        $stack35 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack34, $stack33);
+
+        if $stack35 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack37 = this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        $stack36 = that.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        $stack38 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack37, $stack36);
+
+        if $stack38 != 0 goto label15;
+
+        return 0;
+
+     label15:
+        $stack40 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        $stack39 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        $stack41 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack40, $stack39);
+
+        if $stack41 != 0 goto label16;
+
+        return 0;
+
+     label16:
+        $stack43 = this.<org.jfree.chart.plot.ThermometerPlot: boolean showValueLines>;
+
+        $stack42 = that.<org.jfree.chart.plot.ThermometerPlot: boolean showValueLines>;
+
+        if $stack43 == $stack42 goto label17;
+
+        return 0;
+
+     label17:
+        $stack45 = this.<org.jfree.chart.plot.ThermometerPlot: int subrange>;
+
+        $stack44 = that.<org.jfree.chart.plot.ThermometerPlot: int subrange>;
+
+        if $stack45 == $stack44 goto label18;
+
+        return 0;
+
+     label18:
+        $stack47 = this.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges>;
+
+        $stack46 = that.<org.jfree.chart.plot.ThermometerPlot: boolean followDataInSubranges>;
+
+        if $stack47 == $stack46 goto label19;
+
+        return 0;
+
+     label19:
+        $stack49 = this.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack48 = that.<org.jfree.chart.plot.ThermometerPlot: double[][] subrangeInfo>;
+
+        $stack50 = staticinvoke <org.jfree.chart.plot.ThermometerPlot: boolean equal(double[][],double[][])>($stack49, $stack48);
+
+        if $stack50 != 0 goto label20;
+
+        return 0;
+
+     label20:
+        $stack52 = this.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint>;
+
+        $stack51 = that.<org.jfree.chart.plot.ThermometerPlot: boolean useSubrangePaint>;
+
+        if $stack52 == $stack51 goto label21;
+
+        return 0;
+
+     label21:
+        $stack54 = this.<org.jfree.chart.plot.ThermometerPlot: int bulbRadius>;
+
+        $stack53 = that.<org.jfree.chart.plot.ThermometerPlot: int bulbRadius>;
+
+        if $stack54 == $stack53 goto label22;
+
+        return 0;
+
+     label22:
+        $stack56 = this.<org.jfree.chart.plot.ThermometerPlot: int columnRadius>;
+
+        $stack55 = that.<org.jfree.chart.plot.ThermometerPlot: int columnRadius>;
+
+        if $stack56 == $stack55 goto label23;
+
+        return 0;
+
+     label23:
+        $stack58 = this.<org.jfree.chart.plot.ThermometerPlot: int gap>;
+
+        $stack57 = that.<org.jfree.chart.plot.ThermometerPlot: int gap>;
+
+        if $stack58 == $stack57 goto label24;
+
+        return 0;
+
+     label24:
+        i = 0;
+
+     label25:
+        $stack59 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack60 = lengthof $stack59;
+
+        if i >= $stack60 goto label27;
+
+        $stack61 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack64 = $stack61[i];
+
+        $stack62 = that.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack63 = $stack62[i];
+
+        $stack65 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack64, $stack63);
+
+        if $stack65 != 0 goto label26;
+
+        return 0;
+
+     label26:
+        i = i + 1;
+
+        goto label25;
+
+     label27:
+        return 1;
+    }
+
+    private static boolean equal(double[][], double[][])
+    {
+        double[][] array1, array2;
+        int $stack3, $stack4, $stack5, i;
+        double[] $stack6, $stack7;
+        boolean $stack8, $stack11;
+
+        array1 := @parameter0: double[][];
+
+        array2 := @parameter1: double[][];
+
+        if array1 != null goto label3;
+
+        if array2 != null goto label1;
+
+        $stack11 = 1;
+
+        goto label2;
+
+     label1:
+        $stack11 = 0;
+
+     label2:
+        return $stack11;
+
+     label3:
+        if array2 != null goto label4;
+
+        return 0;
+
+     label4:
+        $stack4 = lengthof array1;
+
+        $stack3 = lengthof array2;
+
+        if $stack4 == $stack3 goto label5;
+
+        return 0;
+
+     label5:
+        i = 0;
+
+     label6:
+        $stack5 = lengthof array1;
+
+        if i >= $stack5 goto label8;
+
+        $stack7 = array1[i];
+
+        $stack6 = array2[i];
+
+        $stack8 = staticinvoke <java.util.Arrays: boolean equals(double[],double[])>($stack7, $stack6);
+
+        if $stack8 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        i = i + 1;
+
+        goto label6;
+
+     label8:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.ThermometerPlot this, clone;
+        java.lang.Object $stack2, $stack5, $stack9, $stack12;
+        org.jfree.data.general.ValueDataset $stack3, $stack22;
+        org.jfree.chart.axis.ValueAxis $stack4, $stack6, $stack7, $stack15, $stack16;
+        java.text.NumberFormat $stack8, $stack10;
+        java.awt.Paint[] $stack11, $stack13, $stack14;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.plot.Plot: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.plot.ThermometerPlot) $stack2;
+
+        $stack3 = clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack3 == null goto label1;
+
+        $stack22 = clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        interfaceinvoke $stack22.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(clone);
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>($stack4);
+
+        $stack6 = (org.jfree.chart.axis.ValueAxis) $stack5;
+
+        clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = $stack6;
+
+        $stack7 = clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        if $stack7 == null goto label2;
+
+        $stack15 = clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack15.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(clone);
+
+        $stack16 = clone.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack16.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(clone);
+
+     label2:
+        $stack8 = this.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat>;
+
+        $stack9 = virtualinvoke $stack8.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack10 = (java.text.NumberFormat) $stack9;
+
+        clone.<org.jfree.chart.plot.ThermometerPlot: java.text.NumberFormat valueFormat> = $stack10;
+
+        $stack11 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack13 = (java.awt.Paint[]) $stack12;
+
+        $stack14 = (java.awt.Paint[]) $stack13;
+
+        clone.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint> = $stack14;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Stroke $stack3, $stack7, $stack8;
+        java.awt.Paint $stack4, $stack5, $stack6, $stack10;
+        java.awt.Paint[] $stack9;
+        int i;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack3 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+
+        $stack7 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke subrangeIndicatorStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack7, stream);
+
+        $stack8 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke rangeIndicatorStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack8, stream);
+
+        i = 0;
+
+     label1:
+        if i >= 3 goto label2;
+
+        $stack9 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack10 = $stack9[i];
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack10, stream);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.ThermometerPlot this;
+        java.awt.Stroke $stack3, $stack7, $stack8;
+        java.awt.Paint $stack4, $stack5, $stack6, $stack13;
+        java.awt.Paint[] $stack9, $stack12;
+        org.jfree.chart.axis.ValueAxis $stack10, $stack11;
+        int i;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke thermometerStroke> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint thermometerPaint> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint valuePaint> = $stack5;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint mercuryPaint> = $stack6;
+
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke subrangeIndicatorStroke> = $stack7;
+
+        $stack8 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Stroke rangeIndicatorStroke> = $stack8;
+
+        $stack9 = newarray (java.awt.Paint)[3];
+
+        this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint> = $stack9;
+
+        i = 0;
+
+     label1:
+        if i >= 3 goto label2;
+
+        $stack12 = this.<org.jfree.chart.plot.ThermometerPlot: java.awt.Paint[] subrangePaint>;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        $stack12[i] = $stack13;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack10 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        if $stack10 == null goto label3;
+
+        $stack11 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+     label3:
+        return;
+    }
+
+    public void zoomDomainAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        return;
+    }
+
+    public void zoomDomainAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D, boolean)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+        boolean useAnchor;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        useAnchor := @parameter3: boolean;
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double factor;
+        org.jfree.chart.axis.ValueAxis $stack5;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        $stack5 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack5.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D, boolean)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        org.jfree.chart.axis.ValueAxis $stack8, $stack13;
+        java.awt.geom.Point2D source;
+        double $stack9, anchorY, factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Rectangle2D $stack10;
+        org.jfree.chart.ui.RectangleEdge $stack11;
+        boolean useAnchor;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        useAnchor := @parameter3: boolean;
+
+        $stack8 = virtualinvoke this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        $stack9 = virtualinvoke source.<java.awt.geom.Point2D: double getY()>();
+
+        $stack10 = virtualinvoke state.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+
+        $stack11 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        anchorY = virtualinvoke $stack8.<org.jfree.chart.axis.ValueAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack9, $stack10, $stack11);
+
+        $stack13 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack13.<org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)>(factor, anchorY);
+
+        return;
+    }
+
+    public void zoomDomainAxes(double, double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double lowerPercent, upperPercent;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        state := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter3: java.awt.geom.Point2D;
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+        double lowerPercent, upperPercent;
+        org.jfree.chart.axis.ValueAxis $stack7;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        state := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter3: java.awt.geom.Point2D;
+
+        $stack7 = this.<org.jfree.chart.plot.ThermometerPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+
+        virtualinvoke $stack7.<org.jfree.chart.axis.ValueAxis: void zoomRange(double,double)>(lowerPercent, upperPercent);
+
+        return;
+    }
+
+    public boolean isDomainZoomable()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        return 0;
+    }
+
+    public boolean isRangeZoomable()
+    {
+        org.jfree.chart.plot.ThermometerPlot this;
+
+        this := @this: org.jfree.chart.plot.ThermometerPlot;
+
+        return 1;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $stack0;
+        java.util.ResourceBundle $stack1;
+
+        <org.jfree.chart.plot.ThermometerPlot: int DEFAULT_GAP> = 5;
+
+        <org.jfree.chart.plot.ThermometerPlot: int DEFAULT_COLUMN_RADIUS> = 20;
+
+        <org.jfree.chart.plot.ThermometerPlot: int DEFAULT_BULB_RADIUS> = 40;
+
+        <org.jfree.chart.plot.ThermometerPlot: double DEFAULT_UPPER_BOUND> = 100.0;
+
+        <org.jfree.chart.plot.ThermometerPlot: double DEFAULT_LOWER_BOUND> = 0.0;
+
+        <org.jfree.chart.plot.ThermometerPlot: int DISPLAY_HIGH> = 3;
+
+        <org.jfree.chart.plot.ThermometerPlot: int DISPLAY_LOW> = 2;
+
+        <org.jfree.chart.plot.ThermometerPlot: int RANGE_HIGH> = 1;
+
+        <org.jfree.chart.plot.ThermometerPlot: int RANGE_LOW> = 0;
+
+        <org.jfree.chart.plot.ThermometerPlot: int AXIS_GAP> = 10;
+
+        <org.jfree.chart.plot.ThermometerPlot: int CRITICAL> = 2;
+
+        <org.jfree.chart.plot.ThermometerPlot: int WARNING> = 1;
+
+        <org.jfree.chart.plot.ThermometerPlot: int NORMAL> = 0;
+
+        <org.jfree.chart.plot.ThermometerPlot: int BULB> = 3;
+
+        <org.jfree.chart.plot.ThermometerPlot: int LEFT> = 2;
+
+        <org.jfree.chart.plot.ThermometerPlot: int RIGHT> = 1;
+
+        <org.jfree.chart.plot.ThermometerPlot: int NONE> = 0;
+
+        <org.jfree.chart.plot.ThermometerPlot: int UNITS_KELVIN> = 3;
+
+        <org.jfree.chart.plot.ThermometerPlot: int UNITS_CELCIUS> = 2;
+
+        <org.jfree.chart.plot.ThermometerPlot: int UNITS_FAHRENHEIT> = 1;
+
+        <org.jfree.chart.plot.ThermometerPlot: int UNITS_NONE> = 0;
+
+        <org.jfree.chart.plot.ThermometerPlot: long serialVersionUID> = 4087093313147984390L;
+
+        $stack0 = newarray (java.lang.String)[4];
+
+        $stack0[0] = "";
+
+        $stack0[1] = "\u00b0F";
+
+        $stack0[2] = "\u00b0C";
+
+        $stack0[3] = "\u00b0K";
+
+        <org.jfree.chart.plot.ThermometerPlot: java.lang.String[] UNITS> = $stack0;
+
+        $stack1 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.plot.LocalizationBundle");
+
+        <org.jfree.chart.plot.ThermometerPlot: java.util.ResourceBundle localizationResources> = $stack1;
+
+        return;
+    }
+}

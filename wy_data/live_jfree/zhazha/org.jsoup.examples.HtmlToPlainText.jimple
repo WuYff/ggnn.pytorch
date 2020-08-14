@@ -1,0 +1,146 @@
+public class org.jsoup.examples.HtmlToPlainText extends java.lang.Object
+{
+    private static final java.lang.String userAgent;
+    private static final int timeout;
+
+    public void <init>()
+    {
+        org.jsoup.examples.HtmlToPlainText this;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static transient void main(java.lang.String[]) throws java.io.IOException
+    {
+        java.lang.String[] args;
+        int $stack9, $stack10, $stack30;
+        java.lang.String url, plainText, $stack25, elements#4;
+        org.jsoup.Connection $stack11, $stack12, $stack13;
+        org.jsoup.nodes.Document doc;
+        org.jsoup.examples.HtmlToPlainText $stack15;
+        java.io.PrintStream $stack17, $stack23;
+        java.util.Iterator l6;
+        boolean $stack20, $stack31;
+        java.lang.Object $stack21;
+        org.jsoup.nodes.Element element;
+        org.jsoup.select.Elements elements;
+
+        args := @parameter0: java.lang.String[];
+
+        $stack9 = lengthof args;
+
+        if $stack9 == 1 goto label1;
+
+        $stack30 = lengthof args;
+
+        if $stack30 != 2 goto label2;
+
+     label1:
+        $stack31 = 1;
+
+        goto label3;
+
+     label2:
+        $stack31 = 0;
+
+     label3:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack31, "usage: java -cp jsoup.jar org.jsoup.examples.HtmlToPlainText url [selector]");
+
+        url = args[0];
+
+        $stack10 = lengthof args;
+
+        if $stack10 != 2 goto label4;
+
+        $stack25 = args[1];
+
+        goto label5;
+
+     label4:
+        $stack25 = null;
+
+     label5:
+        $stack11 = staticinvoke <org.jsoup.Jsoup: org.jsoup.Connection connect(java.lang.String)>(url);
+
+        $stack12 = interfaceinvoke $stack11.<org.jsoup.Connection: org.jsoup.Connection userAgent(java.lang.String)>("Mozilla/5.0 (jsoup)");
+
+        $stack13 = interfaceinvoke $stack12.<org.jsoup.Connection: org.jsoup.Connection timeout(int)>(5000);
+
+        doc = interfaceinvoke $stack13.<org.jsoup.Connection: org.jsoup.nodes.Document get()>();
+
+        $stack15 = new org.jsoup.examples.HtmlToPlainText;
+
+        specialinvoke $stack15.<org.jsoup.examples.HtmlToPlainText: void <init>()>();
+
+        if $stack25 == null goto label8;
+
+        elements = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>($stack25);
+
+        l6 = virtualinvoke elements.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label6:
+        $stack20 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack20 == 0 goto label7;
+
+        $stack21 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        element = (org.jsoup.nodes.Element) $stack21;
+
+        plainText = virtualinvoke $stack15.<org.jsoup.examples.HtmlToPlainText: java.lang.String getPlainText(org.jsoup.nodes.Element)>(element);
+
+        $stack23 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke $stack23.<java.io.PrintStream: void println(java.lang.String)>(plainText);
+
+        goto label6;
+
+     label7:
+        goto label9;
+
+     label8:
+        elements#4 = virtualinvoke $stack15.<org.jsoup.examples.HtmlToPlainText: java.lang.String getPlainText(org.jsoup.nodes.Element)>(doc);
+
+        $stack17 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke $stack17.<java.io.PrintStream: void println(java.lang.String)>(elements#4);
+
+     label9:
+        return;
+    }
+
+    public java.lang.String getPlainText(org.jsoup.nodes.Element)
+    {
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor $stack3;
+        org.jsoup.nodes.Element element;
+        java.lang.String $stack4;
+        org.jsoup.examples.HtmlToPlainText this;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText;
+
+        element := @parameter0: org.jsoup.nodes.Element;
+
+        $stack3 = new org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        specialinvoke $stack3.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void <init>(org.jsoup.examples.HtmlToPlainText$1)>(null);
+
+        staticinvoke <org.jsoup.select.NodeTraversor: void traverse(org.jsoup.select.NodeVisitor,org.jsoup.nodes.Node)>($stack3, element);
+
+        $stack4 = virtualinvoke $stack3.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.String toString()>();
+
+        return $stack4;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.examples.HtmlToPlainText: int timeout> = 5000;
+
+        <org.jsoup.examples.HtmlToPlainText: java.lang.String userAgent> = "Mozilla/5.0 (jsoup)";
+
+        return;
+    }
+}

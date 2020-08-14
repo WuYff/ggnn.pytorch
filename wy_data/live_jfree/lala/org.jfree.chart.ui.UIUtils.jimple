@@ -1,0 +1,318 @@
+public class org.jfree.chart.ui.UIUtils extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        org.jfree.chart.ui.UIUtils this;
+
+        this := @this: org.jfree.chart.ui.UIUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void centerFrameOnScreen(java.awt.Window)
+    {
+        java.awt.Window frame;
+
+        frame := @parameter0: java.awt.Window;
+
+        staticinvoke <org.jfree.chart.ui.UIUtils: void positionFrameOnScreen(java.awt.Window,double,double)>(frame, 0.5, 0.5);
+
+        return;
+    }
+
+    public static void positionFrameOnScreen(java.awt.Window, double, double)
+    {
+        java.awt.Window frame;
+        java.awt.GraphicsConfiguration $stack11;
+        java.awt.Rectangle s;
+        java.awt.Dimension f;
+        int $stack14, $stack15, $stack16, w, $stack18, $stack19, $stack20, h, $stack24, $stack25, x, $stack28, $stack29, y, $stack30, $stack31;
+        double horizontalPercent, $stack22, $stack23, verticalPercent, $stack26, $stack27;
+
+        frame := @parameter0: java.awt.Window;
+
+        horizontalPercent := @parameter1: double;
+
+        verticalPercent := @parameter2: double;
+
+        $stack11 = virtualinvoke frame.<java.awt.Window: java.awt.GraphicsConfiguration getGraphicsConfiguration()>();
+
+        s = virtualinvoke $stack11.<java.awt.GraphicsConfiguration: java.awt.Rectangle getBounds()>();
+
+        f = virtualinvoke frame.<java.awt.Window: java.awt.Dimension getSize()>();
+
+        $stack15 = s.<java.awt.Rectangle: int width>;
+
+        $stack14 = f.<java.awt.Dimension: int width>;
+
+        $stack16 = $stack15 - $stack14;
+
+        w = staticinvoke <java.lang.Math: int max(int,int)>($stack16, 0);
+
+        $stack19 = s.<java.awt.Rectangle: int height>;
+
+        $stack18 = f.<java.awt.Dimension: int height>;
+
+        $stack20 = $stack19 - $stack18;
+
+        h = staticinvoke <java.lang.Math: int max(int,int)>($stack20, 0);
+
+        $stack22 = (double) w;
+
+        $stack23 = horizontalPercent * $stack22;
+
+        $stack25 = (int) $stack23;
+
+        $stack24 = s.<java.awt.Rectangle: int x>;
+
+        x = $stack25 + $stack24;
+
+        $stack26 = (double) h;
+
+        $stack27 = verticalPercent * $stack26;
+
+        $stack29 = (int) $stack27;
+
+        $stack28 = s.<java.awt.Rectangle: int y>;
+
+        y = $stack29 + $stack28;
+
+        $stack31 = f.<java.awt.Dimension: int width>;
+
+        $stack30 = f.<java.awt.Dimension: int height>;
+
+        virtualinvoke frame.<java.awt.Window: void setBounds(int,int,int,int)>(x, y, $stack31, $stack30);
+
+        return;
+    }
+
+    public static void positionFrameRandomly(java.awt.Window)
+    {
+        java.awt.Window frame;
+        double $stack1, $stack2;
+
+        frame := @parameter0: java.awt.Window;
+
+        $stack1 = staticinvoke <java.lang.Math: double random()>();
+
+        $stack2 = staticinvoke <java.lang.Math: double random()>();
+
+        staticinvoke <org.jfree.chart.ui.UIUtils: void positionFrameOnScreen(java.awt.Window,double,double)>(frame, $stack1, $stack2);
+
+        return;
+    }
+
+    public static void centerDialogInParent(java.awt.Dialog)
+    {
+        java.awt.Dialog dialog;
+
+        dialog := @parameter0: java.awt.Dialog;
+
+        staticinvoke <org.jfree.chart.ui.UIUtils: void positionDialogRelativeToParent(java.awt.Dialog,double,double)>(dialog, 0.5, 0.5);
+
+        return;
+    }
+
+    public static void positionDialogRelativeToParent(java.awt.Dialog, double, double)
+    {
+        java.awt.Dialog dialog;
+        java.awt.Container parent;
+        java.awt.Dimension d, p;
+        int baseX, baseY, $stack19, $stack22, x, $stack23, $stack26, y, $stack30, $stack31;
+        double horizontalPercent, $stack20, $stack21, verticalPercent, $stack24, $stack25;
+        java.awt.GraphicsConfiguration $stack27;
+        java.awt.Rectangle s, $stack29, $stack32;
+
+        dialog := @parameter0: java.awt.Dialog;
+
+        horizontalPercent := @parameter1: double;
+
+        verticalPercent := @parameter2: double;
+
+        parent = virtualinvoke dialog.<java.awt.Dialog: java.awt.Container getParent()>();
+
+        if parent != null goto label1;
+
+        staticinvoke <org.jfree.chart.ui.UIUtils: void centerFrameOnScreen(java.awt.Window)>(dialog);
+
+        return;
+
+     label1:
+        d = virtualinvoke dialog.<java.awt.Dialog: java.awt.Dimension getSize()>();
+
+        p = virtualinvoke parent.<java.awt.Container: java.awt.Dimension getSize()>();
+
+        baseX = virtualinvoke parent.<java.awt.Container: int getX()>();
+
+        baseY = virtualinvoke parent.<java.awt.Container: int getY()>();
+
+        $stack19 = p.<java.awt.Dimension: int width>;
+
+        $stack20 = (double) $stack19;
+
+        $stack21 = horizontalPercent * $stack20;
+
+        $stack22 = (int) $stack21;
+
+        x = baseX + $stack22;
+
+        $stack23 = p.<java.awt.Dimension: int height>;
+
+        $stack24 = (double) $stack23;
+
+        $stack25 = verticalPercent * $stack24;
+
+        $stack26 = (int) $stack25;
+
+        y = baseY + $stack26;
+
+        $stack27 = virtualinvoke parent.<java.awt.Container: java.awt.GraphicsConfiguration getGraphicsConfiguration()>();
+
+        s = virtualinvoke $stack27.<java.awt.GraphicsConfiguration: java.awt.Rectangle getBounds()>();
+
+        $stack29 = new java.awt.Rectangle;
+
+        $stack31 = d.<java.awt.Dimension: int width>;
+
+        $stack30 = d.<java.awt.Dimension: int height>;
+
+        specialinvoke $stack29.<java.awt.Rectangle: void <init>(int,int,int,int)>(x, y, $stack31, $stack30);
+
+        $stack32 = virtualinvoke $stack29.<java.awt.Rectangle: java.awt.Rectangle intersection(java.awt.Rectangle)>(s);
+
+        virtualinvoke dialog.<java.awt.Dialog: void setBounds(java.awt.Rectangle)>($stack32);
+
+        return;
+    }
+
+    public static javax.swing.JPanel createTablePanel(javax.swing.table.TableModel)
+    {
+        javax.swing.JPanel $stack6;
+        java.awt.BorderLayout $stack7;
+        javax.swing.JTable $stack8;
+        javax.swing.table.TableModel model;
+        int $stack9, columnIndex;
+        javax.swing.JScrollPane $stack10;
+        javax.swing.table.TableColumnModel $stack12;
+        javax.swing.table.TableColumn column;
+        java.lang.Class c;
+        boolean $stack15;
+        org.jfree.chart.ui.NumberCellRenderer $stack18;
+
+        model := @parameter0: javax.swing.table.TableModel;
+
+        $stack6 = new javax.swing.JPanel;
+
+        $stack7 = new java.awt.BorderLayout;
+
+        specialinvoke $stack7.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack6.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack7);
+
+        $stack8 = new javax.swing.JTable;
+
+        specialinvoke $stack8.<javax.swing.JTable: void <init>(javax.swing.table.TableModel)>(model);
+
+        columnIndex = 0;
+
+     label1:
+        $stack9 = interfaceinvoke model.<javax.swing.table.TableModel: int getColumnCount()>();
+
+        if columnIndex >= $stack9 goto label3;
+
+        $stack12 = virtualinvoke $stack8.<javax.swing.JTable: javax.swing.table.TableColumnModel getColumnModel()>();
+
+        column = interfaceinvoke $stack12.<javax.swing.table.TableColumnModel: javax.swing.table.TableColumn getColumn(int)>(columnIndex);
+
+        c = interfaceinvoke model.<javax.swing.table.TableModel: java.lang.Class getColumnClass(int)>(columnIndex);
+
+        $stack15 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Ljava/lang/Number;");
+
+        if $stack15 == 0 goto label2;
+
+        $stack18 = new org.jfree.chart.ui.NumberCellRenderer;
+
+        specialinvoke $stack18.<org.jfree.chart.ui.NumberCellRenderer: void <init>()>();
+
+        virtualinvoke column.<javax.swing.table.TableColumn: void setCellRenderer(javax.swing.table.TableCellRenderer)>($stack18);
+
+     label2:
+        columnIndex = columnIndex + 1;
+
+        goto label1;
+
+     label3:
+        $stack10 = new javax.swing.JScrollPane;
+
+        specialinvoke $stack10.<javax.swing.JScrollPane: void <init>(java.awt.Component)>($stack8);
+
+        virtualinvoke $stack6.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack10);
+
+        return $stack6;
+    }
+
+    public static javax.swing.JLabel createJLabel(java.lang.String, java.awt.Font)
+    {
+        javax.swing.JLabel $stack3;
+        java.lang.String text;
+        java.awt.Font font;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        $stack3 = new javax.swing.JLabel;
+
+        specialinvoke $stack3.<javax.swing.JLabel: void <init>(java.lang.String)>(text);
+
+        virtualinvoke $stack3.<javax.swing.JLabel: void setFont(java.awt.Font)>(font);
+
+        return $stack3;
+    }
+
+    public static javax.swing.JLabel createJLabel(java.lang.String, java.awt.Font, java.awt.Color)
+    {
+        javax.swing.JLabel $stack4;
+        java.lang.String text;
+        java.awt.Font font;
+        java.awt.Color color;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        color := @parameter2: java.awt.Color;
+
+        $stack4 = new javax.swing.JLabel;
+
+        specialinvoke $stack4.<javax.swing.JLabel: void <init>(java.lang.String)>(text);
+
+        virtualinvoke $stack4.<javax.swing.JLabel: void setFont(java.awt.Font)>(font);
+
+        virtualinvoke $stack4.<javax.swing.JLabel: void setForeground(java.awt.Color)>(color);
+
+        return $stack4;
+    }
+
+    public static javax.swing.JButton createJButton(java.lang.String, java.awt.Font)
+    {
+        javax.swing.JButton $stack3;
+        java.lang.String label;
+        java.awt.Font font;
+
+        label := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        $stack3 = new javax.swing.JButton;
+
+        specialinvoke $stack3.<javax.swing.JButton: void <init>(java.lang.String)>(label);
+
+        virtualinvoke $stack3.<javax.swing.JButton: void setFont(java.awt.Font)>(font);
+
+        return $stack3;
+    }
+}

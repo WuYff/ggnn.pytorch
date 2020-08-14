@@ -1,0 +1,395 @@
+public class org.jsoup.nodes.DocumentType extends org.jsoup.nodes.LeafNode
+{
+    public static final java.lang.String PUBLIC_KEY;
+    public static final java.lang.String SYSTEM_KEY;
+    private static final java.lang.String NAME;
+    private static final java.lang.String PUB_SYS_KEY;
+    private static final java.lang.String PUBLIC_ID;
+    private static final java.lang.String SYSTEM_ID;
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String name, publicId, systemId;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        name := @parameter0: java.lang.String;
+
+        publicId := @parameter1: java.lang.String;
+
+        systemId := @parameter2: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void <init>()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(name);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(publicId);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(systemId);
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("name", name);
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("publicId", publicId);
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("systemId", systemId);
+
+        specialinvoke this.<org.jsoup.nodes.DocumentType: void updatePubSyskey()>();
+
+        return;
+    }
+
+    public void setPubSysKey(java.lang.String)
+    {
+        java.lang.String value;
+        org.jsoup.nodes.DocumentType this;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        value := @parameter0: java.lang.String;
+
+        if value == null goto label1;
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("pubSysKey", value);
+
+     label1:
+        return;
+    }
+
+    private void updatePubSyskey()
+    {
+        org.jsoup.nodes.DocumentType this;
+        boolean $stack1, $stack2;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("publicId");
+
+        if $stack1 == 0 goto label1;
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("pubSysKey", "PUBLIC");
+
+        goto label2;
+
+     label1:
+        $stack2 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("systemId");
+
+        if $stack2 == 0 goto label2;
+
+        virtualinvoke this.<org.jsoup.nodes.DocumentType: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("pubSysKey", "SYSTEM");
+
+     label2:
+        return;
+    }
+
+    public java.lang.String name()
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("name");
+
+        return $stack1;
+    }
+
+    public java.lang.String publicId()
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("publicId");
+
+        return $stack1;
+    }
+
+    public java.lang.String systemId()
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("systemId");
+
+        return $stack1;
+    }
+
+    public java.lang.String nodeName()
+    {
+        org.jsoup.nodes.DocumentType this;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        return "#doctype";
+    }
+
+    void outerHtmlHead(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings) throws java.io.IOException
+    {
+        org.jsoup.nodes.Document$OutputSettings out;
+        org.jsoup.nodes.Document$OutputSettings$Syntax $stack4, $stack5;
+        java.lang.Appendable accum, $stack12, $stack14, $stack18, $stack20, $stack24, $stack29;
+        org.jsoup.nodes.DocumentType this;
+        boolean $stack8, $stack9, $stack10, $stack34, $stack39, $stack7;
+        java.lang.String $stack13, $stack19, $stack25, $stack30;
+        int depth;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack4 = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings$Syntax syntax()>();
+
+        $stack5 = <org.jsoup.nodes.Document$OutputSettings$Syntax: org.jsoup.nodes.Document$OutputSettings$Syntax html>;
+
+        if $stack4 != $stack5 goto label1;
+
+        $stack34 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("publicId");
+
+        if $stack34 != 0 goto label1;
+
+        $stack39 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("systemId");
+
+        if $stack39 != 0 goto label1;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("<!doctype");
+
+        goto label2;
+
+     label1:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("<!DOCTYPE");
+
+     label2:
+        $stack7 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("name");
+
+        if $stack7 == 0 goto label3;
+
+        $stack29 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(" ");
+
+        $stack30 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("name");
+
+        interfaceinvoke $stack29.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack30);
+
+     label3:
+        $stack8 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("pubSysKey");
+
+        if $stack8 == 0 goto label4;
+
+        $stack24 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(" ");
+
+        $stack25 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("pubSysKey");
+
+        interfaceinvoke $stack24.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack25);
+
+     label4:
+        $stack9 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("publicId");
+
+        if $stack9 == 0 goto label5;
+
+        $stack18 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(" \"");
+
+        $stack19 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("publicId");
+
+        $stack20 = interfaceinvoke $stack18.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack19);
+
+        interfaceinvoke $stack20.<java.lang.Appendable: java.lang.Appendable append(char)>(34);
+
+     label5:
+        $stack10 = specialinvoke this.<org.jsoup.nodes.DocumentType: boolean has(java.lang.String)>("systemId");
+
+        if $stack10 == 0 goto label6;
+
+        $stack12 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(" \"");
+
+        $stack13 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>("systemId");
+
+        $stack14 = interfaceinvoke $stack12.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack13);
+
+        interfaceinvoke $stack14.<java.lang.Appendable: java.lang.Appendable append(char)>(34);
+
+     label6:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(62);
+
+        return;
+    }
+
+    void outerHtmlTail(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.Appendable accum;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        return;
+    }
+
+    private boolean has(java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String attribute, $stack2;
+        boolean $stack3, $stack4;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        attribute := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.DocumentType: java.lang.String attr(java.lang.String)>(attribute);
+
+        $stack3 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack2);
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public volatile org.jsoup.nodes.Node empty()
+    {
+        org.jsoup.nodes.DocumentType this;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node empty()>();
+
+        return $stack1;
+    }
+
+    public volatile int childNodeSize()
+    {
+        org.jsoup.nodes.DocumentType this;
+        int $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: int childNodeSize()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String baseUri()
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String baseUri()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String absUrl(java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String absUrl(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node removeAttr(java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String l1;
+        org.jsoup.nodes.Node $stack2;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node removeAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile boolean hasAttr(java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node attr(java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String l1, l2;
+        org.jsoup.nodes.Node $stack3;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile java.lang.String attr(java.lang.String)
+    {
+        org.jsoup.nodes.DocumentType this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.DocumentType;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String attr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.nodes.DocumentType: java.lang.String SYSTEM_ID> = "systemId";
+
+        <org.jsoup.nodes.DocumentType: java.lang.String PUBLIC_ID> = "publicId";
+
+        <org.jsoup.nodes.DocumentType: java.lang.String PUB_SYS_KEY> = "pubSysKey";
+
+        <org.jsoup.nodes.DocumentType: java.lang.String NAME> = "name";
+
+        <org.jsoup.nodes.DocumentType: java.lang.String SYSTEM_KEY> = "SYSTEM";
+
+        <org.jsoup.nodes.DocumentType: java.lang.String PUBLIC_KEY> = "PUBLIC";
+
+        return;
+    }
+}

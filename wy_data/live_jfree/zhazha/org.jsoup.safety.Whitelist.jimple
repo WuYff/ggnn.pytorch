@@ -1,0 +1,1474 @@
+public class org.jsoup.safety.Whitelist extends java.lang.Object
+{
+    private java.util.Set tagNames;
+    private java.util.Map attributes;
+    private java.util.Map enforcedAttributes;
+    private java.util.Map protocols;
+    private boolean preserveRelativeLinks;
+
+    public static org.jsoup.safety.Whitelist none()
+    {
+        org.jsoup.safety.Whitelist $stack0;
+
+        $stack0 = new org.jsoup.safety.Whitelist;
+
+        specialinvoke $stack0.<org.jsoup.safety.Whitelist: void <init>()>();
+
+        return $stack0;
+    }
+
+    public static org.jsoup.safety.Whitelist simpleText()
+    {
+        org.jsoup.safety.Whitelist $stack0, $stack2;
+        java.lang.String[] $stack1;
+
+        $stack0 = new org.jsoup.safety.Whitelist;
+
+        specialinvoke $stack0.<org.jsoup.safety.Whitelist: void <init>()>();
+
+        $stack1 = newarray (java.lang.String)[5];
+
+        $stack1[0] = "b";
+
+        $stack1[1] = "em";
+
+        $stack1[2] = "i";
+
+        $stack1[3] = "strong";
+
+        $stack1[4] = "u";
+
+        $stack2 = virtualinvoke $stack0.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addTags(java.lang.String[])>($stack1);
+
+        return $stack2;
+    }
+
+    public static org.jsoup.safety.Whitelist basic()
+    {
+        org.jsoup.safety.Whitelist $stack0, $stack2, $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack15;
+        java.lang.String[] $stack1, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13;
+
+        $stack0 = new org.jsoup.safety.Whitelist;
+
+        specialinvoke $stack0.<org.jsoup.safety.Whitelist: void <init>()>();
+
+        $stack1 = newarray (java.lang.String)[24];
+
+        $stack1[0] = "a";
+
+        $stack1[1] = "b";
+
+        $stack1[2] = "blockquote";
+
+        $stack1[3] = "br";
+
+        $stack1[4] = "cite";
+
+        $stack1[5] = "code";
+
+        $stack1[6] = "dd";
+
+        $stack1[7] = "dl";
+
+        $stack1[8] = "dt";
+
+        $stack1[9] = "em";
+
+        $stack1[10] = "i";
+
+        $stack1[11] = "li";
+
+        $stack1[12] = "ol";
+
+        $stack1[13] = "p";
+
+        $stack1[14] = "pre";
+
+        $stack1[15] = "q";
+
+        $stack1[16] = "small";
+
+        $stack1[17] = "span";
+
+        $stack1[18] = "strike";
+
+        $stack1[19] = "strong";
+
+        $stack1[20] = "sub";
+
+        $stack1[21] = "sup";
+
+        $stack1[22] = "u";
+
+        $stack1[23] = "ul";
+
+        $stack2 = virtualinvoke $stack0.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addTags(java.lang.String[])>($stack1);
+
+        $stack3 = newarray (java.lang.String)[1];
+
+        $stack3[0] = "href";
+
+        $stack4 = virtualinvoke $stack2.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("a", $stack3);
+
+        $stack5 = newarray (java.lang.String)[1];
+
+        $stack5[0] = "cite";
+
+        $stack6 = virtualinvoke $stack4.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("blockquote", $stack5);
+
+        $stack7 = newarray (java.lang.String)[1];
+
+        $stack7[0] = "cite";
+
+        $stack8 = virtualinvoke $stack6.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("q", $stack7);
+
+        $stack9 = newarray (java.lang.String)[4];
+
+        $stack9[0] = "ftp";
+
+        $stack9[1] = "http";
+
+        $stack9[2] = "https";
+
+        $stack9[3] = "mailto";
+
+        $stack10 = virtualinvoke $stack8.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("a", "href", $stack9);
+
+        $stack11 = newarray (java.lang.String)[2];
+
+        $stack11[0] = "http";
+
+        $stack11[1] = "https";
+
+        $stack12 = virtualinvoke $stack10.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("blockquote", "cite", $stack11);
+
+        $stack13 = newarray (java.lang.String)[2];
+
+        $stack13[0] = "http";
+
+        $stack13[1] = "https";
+
+        $stack14 = virtualinvoke $stack12.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("cite", "cite", $stack13);
+
+        $stack15 = virtualinvoke $stack14.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addEnforcedAttribute(java.lang.String,java.lang.String,java.lang.String)>("a", "rel", "nofollow");
+
+        return $stack15;
+    }
+
+    public static org.jsoup.safety.Whitelist basicWithImages()
+    {
+        org.jsoup.safety.Whitelist $stack0, $stack2, $stack4, $stack6;
+        java.lang.String[] $stack1, $stack3, $stack5;
+
+        $stack0 = staticinvoke <org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist basic()>();
+
+        $stack1 = newarray (java.lang.String)[1];
+
+        $stack1[0] = "img";
+
+        $stack2 = virtualinvoke $stack0.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addTags(java.lang.String[])>($stack1);
+
+        $stack3 = newarray (java.lang.String)[6];
+
+        $stack3[0] = "align";
+
+        $stack3[1] = "alt";
+
+        $stack3[2] = "height";
+
+        $stack3[3] = "src";
+
+        $stack3[4] = "title";
+
+        $stack3[5] = "width";
+
+        $stack4 = virtualinvoke $stack2.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("img", $stack3);
+
+        $stack5 = newarray (java.lang.String)[2];
+
+        $stack5[0] = "http";
+
+        $stack5[1] = "https";
+
+        $stack6 = virtualinvoke $stack4.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("img", "src", $stack5);
+
+        return $stack6;
+    }
+
+    public static org.jsoup.safety.Whitelist relaxed()
+    {
+        org.jsoup.safety.Whitelist $stack0, $stack2, $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack16, $stack18, $stack20, $stack22, $stack24, $stack26, $stack28, $stack30, $stack32, $stack34;
+        java.lang.String[] $stack1, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, $stack15, $stack17, $stack19, $stack21, $stack23, $stack25, $stack27, $stack29, $stack31, $stack33;
+
+        $stack0 = new org.jsoup.safety.Whitelist;
+
+        specialinvoke $stack0.<org.jsoup.safety.Whitelist: void <init>()>();
+
+        $stack1 = newarray (java.lang.String)[42];
+
+        $stack1[0] = "a";
+
+        $stack1[1] = "b";
+
+        $stack1[2] = "blockquote";
+
+        $stack1[3] = "br";
+
+        $stack1[4] = "caption";
+
+        $stack1[5] = "cite";
+
+        $stack1[6] = "code";
+
+        $stack1[7] = "col";
+
+        $stack1[8] = "colgroup";
+
+        $stack1[9] = "dd";
+
+        $stack1[10] = "div";
+
+        $stack1[11] = "dl";
+
+        $stack1[12] = "dt";
+
+        $stack1[13] = "em";
+
+        $stack1[14] = "h1";
+
+        $stack1[15] = "h2";
+
+        $stack1[16] = "h3";
+
+        $stack1[17] = "h4";
+
+        $stack1[18] = "h5";
+
+        $stack1[19] = "h6";
+
+        $stack1[20] = "i";
+
+        $stack1[21] = "img";
+
+        $stack1[22] = "li";
+
+        $stack1[23] = "ol";
+
+        $stack1[24] = "p";
+
+        $stack1[25] = "pre";
+
+        $stack1[26] = "q";
+
+        $stack1[27] = "small";
+
+        $stack1[28] = "span";
+
+        $stack1[29] = "strike";
+
+        $stack1[30] = "strong";
+
+        $stack1[31] = "sub";
+
+        $stack1[32] = "sup";
+
+        $stack1[33] = "table";
+
+        $stack1[34] = "tbody";
+
+        $stack1[35] = "td";
+
+        $stack1[36] = "tfoot";
+
+        $stack1[37] = "th";
+
+        $stack1[38] = "thead";
+
+        $stack1[39] = "tr";
+
+        $stack1[40] = "u";
+
+        $stack1[41] = "ul";
+
+        $stack2 = virtualinvoke $stack0.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addTags(java.lang.String[])>($stack1);
+
+        $stack3 = newarray (java.lang.String)[2];
+
+        $stack3[0] = "href";
+
+        $stack3[1] = "title";
+
+        $stack4 = virtualinvoke $stack2.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("a", $stack3);
+
+        $stack5 = newarray (java.lang.String)[1];
+
+        $stack5[0] = "cite";
+
+        $stack6 = virtualinvoke $stack4.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("blockquote", $stack5);
+
+        $stack7 = newarray (java.lang.String)[2];
+
+        $stack7[0] = "span";
+
+        $stack7[1] = "width";
+
+        $stack8 = virtualinvoke $stack6.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("col", $stack7);
+
+        $stack9 = newarray (java.lang.String)[2];
+
+        $stack9[0] = "span";
+
+        $stack9[1] = "width";
+
+        $stack10 = virtualinvoke $stack8.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("colgroup", $stack9);
+
+        $stack11 = newarray (java.lang.String)[6];
+
+        $stack11[0] = "align";
+
+        $stack11[1] = "alt";
+
+        $stack11[2] = "height";
+
+        $stack11[3] = "src";
+
+        $stack11[4] = "title";
+
+        $stack11[5] = "width";
+
+        $stack12 = virtualinvoke $stack10.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("img", $stack11);
+
+        $stack13 = newarray (java.lang.String)[2];
+
+        $stack13[0] = "start";
+
+        $stack13[1] = "type";
+
+        $stack14 = virtualinvoke $stack12.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("ol", $stack13);
+
+        $stack15 = newarray (java.lang.String)[1];
+
+        $stack15[0] = "cite";
+
+        $stack16 = virtualinvoke $stack14.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("q", $stack15);
+
+        $stack17 = newarray (java.lang.String)[2];
+
+        $stack17[0] = "summary";
+
+        $stack17[1] = "width";
+
+        $stack18 = virtualinvoke $stack16.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("table", $stack17);
+
+        $stack19 = newarray (java.lang.String)[5];
+
+        $stack19[0] = "abbr";
+
+        $stack19[1] = "axis";
+
+        $stack19[2] = "colspan";
+
+        $stack19[3] = "rowspan";
+
+        $stack19[4] = "width";
+
+        $stack20 = virtualinvoke $stack18.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("td", $stack19);
+
+        $stack21 = newarray (java.lang.String)[6];
+
+        $stack21[0] = "abbr";
+
+        $stack21[1] = "axis";
+
+        $stack21[2] = "colspan";
+
+        $stack21[3] = "rowspan";
+
+        $stack21[4] = "scope";
+
+        $stack21[5] = "width";
+
+        $stack22 = virtualinvoke $stack20.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("th", $stack21);
+
+        $stack23 = newarray (java.lang.String)[1];
+
+        $stack23[0] = "type";
+
+        $stack24 = virtualinvoke $stack22.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addAttributes(java.lang.String,java.lang.String[])>("ul", $stack23);
+
+        $stack25 = newarray (java.lang.String)[4];
+
+        $stack25[0] = "ftp";
+
+        $stack25[1] = "http";
+
+        $stack25[2] = "https";
+
+        $stack25[3] = "mailto";
+
+        $stack26 = virtualinvoke $stack24.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("a", "href", $stack25);
+
+        $stack27 = newarray (java.lang.String)[2];
+
+        $stack27[0] = "http";
+
+        $stack27[1] = "https";
+
+        $stack28 = virtualinvoke $stack26.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("blockquote", "cite", $stack27);
+
+        $stack29 = newarray (java.lang.String)[2];
+
+        $stack29[0] = "http";
+
+        $stack29[1] = "https";
+
+        $stack30 = virtualinvoke $stack28.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("cite", "cite", $stack29);
+
+        $stack31 = newarray (java.lang.String)[2];
+
+        $stack31[0] = "http";
+
+        $stack31[1] = "https";
+
+        $stack32 = virtualinvoke $stack30.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("img", "src", $stack31);
+
+        $stack33 = newarray (java.lang.String)[2];
+
+        $stack33[0] = "http";
+
+        $stack33[1] = "https";
+
+        $stack34 = virtualinvoke $stack32.<org.jsoup.safety.Whitelist: org.jsoup.safety.Whitelist addProtocols(java.lang.String,java.lang.String,java.lang.String[])>("q", "cite", $stack33);
+
+        return $stack34;
+    }
+
+    public void <init>()
+    {
+        org.jsoup.safety.Whitelist this;
+        java.util.HashSet $stack1;
+        java.util.HashMap $stack2, $stack3, $stack4;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.HashSet;
+
+        specialinvoke $stack1.<java.util.HashSet: void <init>()>();
+
+        this.<org.jsoup.safety.Whitelist: java.util.Set tagNames> = $stack1;
+
+        $stack2 = new java.util.HashMap;
+
+        specialinvoke $stack2.<java.util.HashMap: void <init>()>();
+
+        this.<org.jsoup.safety.Whitelist: java.util.Map attributes> = $stack2;
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>()>();
+
+        this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes> = $stack3;
+
+        $stack4 = new java.util.HashMap;
+
+        specialinvoke $stack4.<java.util.HashMap: void <init>()>();
+
+        this.<org.jsoup.safety.Whitelist: java.util.Map protocols> = $stack4;
+
+        this.<org.jsoup.safety.Whitelist: boolean preserveRelativeLinks> = 0;
+
+        return;
+    }
+
+    public transient org.jsoup.safety.Whitelist addTags(java.lang.String[])
+    {
+        java.lang.String[] tags;
+        int l3, l4;
+        org.jsoup.safety.Whitelist this;
+        java.lang.String tagName;
+        java.util.Set $stack6;
+        org.jsoup.safety.Whitelist$TagName $stack7;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tags := @parameter0: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tags);
+
+        l3 = lengthof tags;
+
+        l4 = 0;
+
+     label1:
+        if l4 >= l3 goto label2;
+
+        tagName = tags[l4];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tagName);
+
+        $stack6 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        $stack7 = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tagName);
+
+        interfaceinvoke $stack6.<java.util.Set: boolean add(java.lang.Object)>($stack7);
+
+        l4 = l4 + 1;
+
+        goto label1;
+
+     label2:
+        return this;
+    }
+
+    public transient org.jsoup.safety.Whitelist removeTags(java.lang.String[])
+    {
+        java.lang.String[] tags;
+        int l3, l4;
+        org.jsoup.safety.Whitelist this;
+        java.lang.String tag;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        java.util.Set $stack8;
+        boolean $stack9;
+        java.util.Map $stack12, $stack14, $stack16;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tags := @parameter0: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tags);
+
+        l3 = lengthof tags;
+
+        l4 = 0;
+
+     label1:
+        if l4 >= l3 goto label3;
+
+        tag = tags[l4];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack8 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.Set: boolean remove(java.lang.Object)>(tagName);
+
+        if $stack9 == 0 goto label2;
+
+        $stack12 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        interfaceinvoke $stack12.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+        $stack14 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        interfaceinvoke $stack14.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+        $stack16 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        interfaceinvoke $stack16.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+     label2:
+        l4 = l4 + 1;
+
+        goto label1;
+
+     label3:
+        return this;
+    }
+
+    public transient org.jsoup.safety.Whitelist addAttributes(java.lang.String, java.lang.String[])
+    {
+        java.lang.String tag, key;
+        java.lang.String[] attributes;
+        int $stack9, l6, l7;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        org.jsoup.safety.Whitelist this;
+        java.util.Set $stack11, currentSet#8;
+        java.util.HashSet $stack13;
+        java.util.Map $stack14, $stack16, $stack18;
+        boolean $stack15, $stack26;
+        java.lang.Object $stack19;
+        org.jsoup.safety.Whitelist$AttributeKey $stack22;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attributes := @parameter1: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(attributes);
+
+        $stack9 = lengthof attributes;
+
+        if $stack9 <= 0 goto label1;
+
+        $stack26 = 1;
+
+        goto label2;
+
+     label1:
+        $stack26 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack26, "No attribute names supplied.");
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack11 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        interfaceinvoke $stack11.<java.util.Set: boolean add(java.lang.Object)>(tagName);
+
+        $stack13 = new java.util.HashSet;
+
+        specialinvoke $stack13.<java.util.HashSet: void <init>()>();
+
+        l6 = lengthof attributes;
+
+        l7 = 0;
+
+     label3:
+        if l7 >= l6 goto label4;
+
+        key = attributes[l7];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(key);
+
+        $stack22 = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(key);
+
+        interfaceinvoke $stack13.<java.util.Set: boolean add(java.lang.Object)>($stack22);
+
+        l7 = l7 + 1;
+
+        goto label3;
+
+     label4:
+        $stack14 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack15 = interfaceinvoke $stack14.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        if $stack15 == 0 goto label5;
+
+        $stack18 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack19 = interfaceinvoke $stack18.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        currentSet#8 = (java.util.Set) $stack19;
+
+        interfaceinvoke currentSet#8.<java.util.Set: boolean addAll(java.util.Collection)>($stack13);
+
+        goto label6;
+
+     label5:
+        $stack16 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        interfaceinvoke $stack16.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(tagName, $stack13);
+
+     label6:
+        return this;
+    }
+
+    public transient org.jsoup.safety.Whitelist removeAttributes(java.lang.String, java.lang.String[])
+    {
+        java.lang.String tag, key;
+        java.lang.String[] attributes;
+        int $stack9, name, currentSet#4;
+        org.jsoup.safety.Whitelist$TagName tagName, name#20;
+        java.util.HashSet $stack11;
+        org.jsoup.safety.Whitelist this;
+        java.util.Set $stack12, $stack16, currentSet#9;
+        boolean $stack13, $stack18, $stack24, $stack29, $stack35, $stack42, $stack14;
+        java.util.Map $stack15, $stack21, $stack26, $stack28, $stack32, $stack36;
+        java.lang.Object $stack20, $stack22, $stack33;
+        org.jsoup.safety.Whitelist$AttributeKey $stack38;
+        java.util.Iterator currentSet#19;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attributes := @parameter1: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(attributes);
+
+        $stack9 = lengthof attributes;
+
+        if $stack9 <= 0 goto label1;
+
+        $stack42 = 1;
+
+        goto label2;
+
+     label1:
+        $stack42 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack42, "No attribute names supplied.");
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack11 = new java.util.HashSet;
+
+        specialinvoke $stack11.<java.util.HashSet: void <init>()>();
+
+        name = lengthof attributes;
+
+        currentSet#4 = 0;
+
+     label3:
+        if currentSet#4 >= name goto label4;
+
+        key = attributes[currentSet#4];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(key);
+
+        $stack38 = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(key);
+
+        interfaceinvoke $stack11.<java.util.Set: boolean add(java.lang.Object)>($stack38);
+
+        currentSet#4 = currentSet#4 + 1;
+
+        goto label3;
+
+     label4:
+        $stack12 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        $stack13 = interfaceinvoke $stack12.<java.util.Set: boolean contains(java.lang.Object)>(tagName);
+
+        if $stack13 == 0 goto label5;
+
+        $stack28 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack29 = interfaceinvoke $stack28.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        if $stack29 == 0 goto label5;
+
+        $stack32 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack33 = interfaceinvoke $stack32.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        currentSet#9 = (java.util.Set) $stack33;
+
+        interfaceinvoke currentSet#9.<java.util.Set: boolean removeAll(java.util.Collection)>($stack11);
+
+        $stack35 = interfaceinvoke currentSet#9.<java.util.Set: boolean isEmpty()>();
+
+        if $stack35 == 0 goto label5;
+
+        $stack36 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        interfaceinvoke $stack36.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+     label5:
+        $stack14 = virtualinvoke tag.<java.lang.String: boolean equals(java.lang.Object)>(":all");
+
+        if $stack14 == 0 goto label8;
+
+        $stack15 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack16 = interfaceinvoke $stack15.<java.util.Map: java.util.Set keySet()>();
+
+        currentSet#19 = interfaceinvoke $stack16.<java.util.Set: java.util.Iterator iterator()>();
+
+     label6:
+        $stack18 = interfaceinvoke currentSet#19.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack18 == 0 goto label8;
+
+        $stack20 = interfaceinvoke currentSet#19.<java.util.Iterator: java.lang.Object next()>();
+
+        name#20 = (org.jsoup.safety.Whitelist$TagName) $stack20;
+
+        $stack21 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack22 = interfaceinvoke $stack21.<java.util.Map: java.lang.Object get(java.lang.Object)>(name#20);
+
+        currentSet#9 = (java.util.Set) $stack22;
+
+        interfaceinvoke currentSet#9.<java.util.Set: boolean removeAll(java.util.Collection)>($stack11);
+
+        $stack24 = interfaceinvoke currentSet#9.<java.util.Set: boolean isEmpty()>();
+
+        if $stack24 == 0 goto label7;
+
+        $stack26 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        interfaceinvoke $stack26.<java.util.Map: java.lang.Object remove(java.lang.Object)>(name#20);
+
+     label7:
+        goto label6;
+
+     label8:
+        return this;
+    }
+
+    public org.jsoup.safety.Whitelist addEnforcedAttribute(java.lang.String, java.lang.String, java.lang.String)
+    {
+        java.lang.String tag, attribute, value;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        org.jsoup.safety.Whitelist this;
+        java.util.Set $stack9;
+        org.jsoup.safety.Whitelist$AttributeKey attrKey;
+        org.jsoup.safety.Whitelist$AttributeValue attrVal;
+        java.util.Map $stack13, $stack17, $stack19, $stack21;
+        boolean $stack14;
+        java.util.HashMap $stack15;
+        java.lang.Object $stack20;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attribute := @parameter1: java.lang.String;
+
+        value := @parameter2: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(attribute);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(value);
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack9 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        interfaceinvoke $stack9.<java.util.Set: boolean add(java.lang.Object)>(tagName);
+
+        attrKey = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(attribute);
+
+        attrVal = staticinvoke <org.jsoup.safety.Whitelist$AttributeValue: org.jsoup.safety.Whitelist$AttributeValue valueOf(java.lang.String)>(value);
+
+        $stack13 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        if $stack14 == 0 goto label1;
+
+        $stack19 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack20 = interfaceinvoke $stack19.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        $stack21 = (java.util.Map) $stack20;
+
+        interfaceinvoke $stack21.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(attrKey, attrVal);
+
+        goto label2;
+
+     label1:
+        $stack15 = new java.util.HashMap;
+
+        specialinvoke $stack15.<java.util.HashMap: void <init>()>();
+
+        interfaceinvoke $stack15.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(attrKey, attrVal);
+
+        $stack17 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        interfaceinvoke $stack17.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(tagName, $stack15);
+
+     label2:
+        return this;
+    }
+
+    public org.jsoup.safety.Whitelist removeEnforcedAttribute(java.lang.String, java.lang.String)
+    {
+        java.lang.String tag, attribute;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        org.jsoup.safety.Whitelist this;
+        java.util.Set $stack7;
+        boolean $stack8, $stack10, $stack16;
+        java.util.Map $stack9, $stack13, attrMap, $stack17;
+        org.jsoup.safety.Whitelist$AttributeKey attrKey;
+        java.lang.Object $stack14;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attribute := @parameter1: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(attribute);
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack7 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Set: boolean contains(java.lang.Object)>(tagName);
+
+        if $stack8 == 0 goto label1;
+
+        $stack9 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        if $stack10 == 0 goto label1;
+
+        attrKey = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(attribute);
+
+        $stack13 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        attrMap = (java.util.Map) $stack14;
+
+        interfaceinvoke attrMap.<java.util.Map: java.lang.Object remove(java.lang.Object)>(attrKey);
+
+        $stack16 = interfaceinvoke attrMap.<java.util.Map: boolean isEmpty()>();
+
+        if $stack16 == 0 goto label1;
+
+        $stack17 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        interfaceinvoke $stack17.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+     label1:
+        return this;
+    }
+
+    public org.jsoup.safety.Whitelist preserveRelativeLinks(boolean)
+    {
+        org.jsoup.safety.Whitelist this;
+        boolean preserve;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        preserve := @parameter0: boolean;
+
+        this.<org.jsoup.safety.Whitelist: boolean preserveRelativeLinks> = preserve;
+
+        return this;
+    }
+
+    public transient org.jsoup.safety.Whitelist addProtocols(java.lang.String, java.lang.String, java.lang.String[])
+    {
+        java.lang.String tag, attribute, protocol;
+        java.lang.String[] protocols;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        org.jsoup.safety.Whitelist$AttributeKey attrKey;
+        org.jsoup.safety.Whitelist this;
+        java.util.Map $stack15, $stack18, $stack32, attrMap;
+        boolean $stack16, $stack20;
+        java.util.HashMap $stack17;
+        java.util.HashSet $stack21;
+        int l9, l10;
+        org.jsoup.safety.Whitelist$Protocol prot;
+        java.lang.Object $stack27, $stack33;
+        java.util.Set protSet;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attribute := @parameter1: java.lang.String;
+
+        protocols := @parameter2: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(attribute);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(protocols);
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        attrKey = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(attribute);
+
+        $stack15 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack16 = interfaceinvoke $stack15.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        if $stack16 == 0 goto label1;
+
+        $stack32 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack33 = interfaceinvoke $stack32.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        attrMap = (java.util.Map) $stack33;
+
+        goto label2;
+
+     label1:
+        $stack17 = new java.util.HashMap;
+
+        specialinvoke $stack17.<java.util.HashMap: void <init>()>();
+
+        attrMap = $stack17;
+
+        $stack18 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        interfaceinvoke $stack18.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(tagName, $stack17);
+
+     label2:
+        $stack20 = interfaceinvoke attrMap.<java.util.Map: boolean containsKey(java.lang.Object)>(attrKey);
+
+        if $stack20 == 0 goto label3;
+
+        $stack27 = interfaceinvoke attrMap.<java.util.Map: java.lang.Object get(java.lang.Object)>(attrKey);
+
+        protSet = (java.util.Set) $stack27;
+
+        goto label4;
+
+     label3:
+        $stack21 = new java.util.HashSet;
+
+        specialinvoke $stack21.<java.util.HashSet: void <init>()>();
+
+        protSet = $stack21;
+
+        interfaceinvoke attrMap.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(attrKey, $stack21);
+
+     label4:
+        l9 = lengthof protocols;
+
+        l10 = 0;
+
+     label5:
+        if l10 >= l9 goto label6;
+
+        protocol = protocols[l10];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(protocol);
+
+        prot = staticinvoke <org.jsoup.safety.Whitelist$Protocol: org.jsoup.safety.Whitelist$Protocol valueOf(java.lang.String)>(protocol);
+
+        interfaceinvoke protSet.<java.util.Set: boolean add(java.lang.Object)>(prot);
+
+        l10 = l10 + 1;
+
+        goto label5;
+
+     label6:
+        return this;
+    }
+
+    public transient org.jsoup.safety.Whitelist removeProtocols(java.lang.String, java.lang.String, java.lang.String[])
+    {
+        java.lang.String tag, attribute, protocol;
+        java.lang.String[] removeProtocols;
+        org.jsoup.safety.Whitelist$TagName tagName;
+        org.jsoup.safety.Whitelist$AttributeKey attr;
+        org.jsoup.safety.Whitelist this;
+        java.util.Map $stack14, $stack16, tagProtocols, $stack24;
+        boolean $stack15, $stack18, $stack20, $stack22;
+        java.lang.Object $stack17, $stack19;
+        java.util.Set attrProtocols;
+        int l9, l10;
+        org.jsoup.safety.Whitelist$Protocol $stack26;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        attribute := @parameter1: java.lang.String;
+
+        removeProtocols := @parameter2: java.lang.String[];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tag);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(attribute);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(removeProtocols);
+
+        tagName = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        attr = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>(attribute);
+
+        $stack14 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack15 = interfaceinvoke $stack14.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack15, "Cannot remove a protocol that is not set.");
+
+        $stack16 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack17 = interfaceinvoke $stack16.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tagProtocols = (java.util.Map) $stack17;
+
+        $stack18 = interfaceinvoke tagProtocols.<java.util.Map: boolean containsKey(java.lang.Object)>(attr);
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack18, "Cannot remove a protocol that is not set.");
+
+        $stack19 = interfaceinvoke tagProtocols.<java.util.Map: java.lang.Object get(java.lang.Object)>(attr);
+
+        attrProtocols = (java.util.Set) $stack19;
+
+        l9 = lengthof removeProtocols;
+
+        l10 = 0;
+
+     label1:
+        if l10 >= l9 goto label2;
+
+        protocol = removeProtocols[l10];
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(protocol);
+
+        $stack26 = staticinvoke <org.jsoup.safety.Whitelist$Protocol: org.jsoup.safety.Whitelist$Protocol valueOf(java.lang.String)>(protocol);
+
+        interfaceinvoke attrProtocols.<java.util.Set: boolean remove(java.lang.Object)>($stack26);
+
+        l10 = l10 + 1;
+
+        goto label1;
+
+     label2:
+        $stack20 = interfaceinvoke attrProtocols.<java.util.Set: boolean isEmpty()>();
+
+        if $stack20 == 0 goto label3;
+
+        interfaceinvoke tagProtocols.<java.util.Map: java.lang.Object remove(java.lang.Object)>(attr);
+
+        $stack22 = interfaceinvoke tagProtocols.<java.util.Map: boolean isEmpty()>();
+
+        if $stack22 == 0 goto label3;
+
+        $stack24 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        interfaceinvoke $stack24.<java.util.Map: java.lang.Object remove(java.lang.Object)>(tagName);
+
+     label3:
+        return this;
+    }
+
+    protected boolean isSafeTag(java.lang.String)
+    {
+        org.jsoup.safety.Whitelist this;
+        java.lang.String tag;
+        java.util.Set $stack2;
+        org.jsoup.safety.Whitelist$TagName $stack3;
+        boolean $stack4;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tag := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.safety.Whitelist: java.util.Set tagNames>;
+
+        $stack3 = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tag);
+
+        $stack4 = interfaceinvoke $stack2.<java.util.Set: boolean contains(java.lang.Object)>($stack3);
+
+        return $stack4;
+    }
+
+    protected boolean isSafeAttribute(java.lang.String, org.jsoup.nodes.Element, org.jsoup.nodes.Attribute)
+    {
+        java.lang.String tagName, $stack11, attrKey, $stack25, $stack26;
+        org.jsoup.safety.Whitelist$TagName tag;
+        org.jsoup.nodes.Attribute attr;
+        org.jsoup.safety.Whitelist$AttributeKey key;
+        org.jsoup.safety.Whitelist this;
+        java.util.Map $stack13, $stack15, $stack33, $stack35, attrProts;
+        java.lang.Object $stack14, $stack16, $stack36, $stack38;
+        java.util.Set okSet, $stack39;
+        boolean $stack17, $stack18, $stack22, $stack27, $stack28, $stack34, $stack37, $stack40, $stack41, $stack19;
+        org.jsoup.nodes.Element el;
+        org.jsoup.nodes.Attributes expect;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tagName := @parameter0: java.lang.String;
+
+        el := @parameter1: org.jsoup.nodes.Element;
+
+        attr := @parameter2: org.jsoup.nodes.Attribute;
+
+        tag = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tagName);
+
+        $stack11 = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        key = staticinvoke <org.jsoup.safety.Whitelist$AttributeKey: org.jsoup.safety.Whitelist$AttributeKey valueOf(java.lang.String)>($stack11);
+
+        $stack13 = this.<org.jsoup.safety.Whitelist: java.util.Map attributes>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: java.lang.Object get(java.lang.Object)>(tag);
+
+        okSet = (java.util.Set) $stack14;
+
+        if okSet == null goto label5;
+
+        $stack28 = interfaceinvoke okSet.<java.util.Set: boolean contains(java.lang.Object)>(key);
+
+        if $stack28 == 0 goto label5;
+
+        $stack33 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack34 = interfaceinvoke $stack33.<java.util.Map: boolean containsKey(java.lang.Object)>(tag);
+
+        if $stack34 == 0 goto label4;
+
+        $stack35 = this.<org.jsoup.safety.Whitelist: java.util.Map protocols>;
+
+        $stack36 = interfaceinvoke $stack35.<java.util.Map: java.lang.Object get(java.lang.Object)>(tag);
+
+        attrProts = (java.util.Map) $stack36;
+
+        $stack37 = interfaceinvoke attrProts.<java.util.Map: boolean containsKey(java.lang.Object)>(key);
+
+        if $stack37 == 0 goto label1;
+
+        $stack38 = interfaceinvoke attrProts.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        $stack39 = (java.util.Set) $stack38;
+
+        $stack40 = specialinvoke this.<org.jsoup.safety.Whitelist: boolean testValidProtocol(org.jsoup.nodes.Element,org.jsoup.nodes.Attribute,java.util.Set)>(el, attr, $stack39);
+
+        if $stack40 == 0 goto label2;
+
+     label1:
+        $stack41 = 1;
+
+        goto label3;
+
+     label2:
+        $stack41 = 0;
+
+     label3:
+        return $stack41;
+
+     label4:
+        return 1;
+
+     label5:
+        $stack15 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack16 = interfaceinvoke $stack15.<java.util.Map: java.lang.Object get(java.lang.Object)>(tag);
+
+        attrProts = (java.util.Map) $stack16;
+
+        if attrProts == null goto label6;
+
+        expect = virtualinvoke this.<org.jsoup.safety.Whitelist: org.jsoup.nodes.Attributes getEnforcedAttributes(java.lang.String)>(tagName);
+
+        attrKey = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        $stack22 = virtualinvoke expect.<org.jsoup.nodes.Attributes: boolean hasKeyIgnoreCase(java.lang.String)>(attrKey);
+
+        if $stack22 == 0 goto label6;
+
+        $stack25 = virtualinvoke expect.<org.jsoup.nodes.Attributes: java.lang.String getIgnoreCase(java.lang.String)>(attrKey);
+
+        $stack26 = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getValue()>();
+
+        $stack27 = virtualinvoke $stack25.<java.lang.String: boolean equals(java.lang.Object)>($stack26);
+
+        return $stack27;
+
+     label6:
+        $stack17 = virtualinvoke tagName.<java.lang.String: boolean equals(java.lang.Object)>(":all");
+
+        if $stack17 != 0 goto label7;
+
+        $stack18 = virtualinvoke this.<org.jsoup.safety.Whitelist: boolean isSafeAttribute(java.lang.String,org.jsoup.nodes.Element,org.jsoup.nodes.Attribute)>(":all", el, attr);
+
+        if $stack18 == 0 goto label7;
+
+        $stack19 = 1;
+
+        goto label8;
+
+     label7:
+        $stack19 = 0;
+
+     label8:
+        return $stack19;
+    }
+
+    private boolean testValidProtocol(org.jsoup.nodes.Element, org.jsoup.nodes.Attribute, java.util.Set)
+    {
+        org.jsoup.nodes.Element el;
+        org.jsoup.nodes.Attribute attr;
+        java.lang.String $stack8, $stack21, value, prot;
+        int $stack10;
+        org.jsoup.safety.Whitelist this;
+        boolean $stack11, $stack16, $stack22, $stack24, $stack13;
+        java.util.Set protocols;
+        java.util.Iterator l5;
+        java.lang.Object $stack14;
+        org.jsoup.safety.Whitelist$Protocol protocol;
+        java.lang.StringBuilder $stack17, $stack18, $stack19;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        el := @parameter0: org.jsoup.nodes.Element;
+
+        attr := @parameter1: org.jsoup.nodes.Attribute;
+
+        protocols := @parameter2: java.util.Set;
+
+        $stack8 = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        value = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String absUrl(java.lang.String)>($stack8);
+
+        $stack10 = virtualinvoke value.<java.lang.String: int length()>();
+
+        if $stack10 != 0 goto label1;
+
+        value = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getValue()>();
+
+     label1:
+        $stack11 = this.<org.jsoup.safety.Whitelist: boolean preserveRelativeLinks>;
+
+        if $stack11 != 0 goto label2;
+
+        virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String setValue(java.lang.String)>(value);
+
+     label2:
+        l5 = interfaceinvoke protocols.<java.util.Set: java.util.Iterator iterator()>();
+
+     label3:
+        $stack13 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label6;
+
+        $stack14 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        protocol = (org.jsoup.safety.Whitelist$Protocol) $stack14;
+
+        prot = virtualinvoke protocol.<org.jsoup.safety.Whitelist$Protocol: java.lang.String toString()>();
+
+        $stack16 = virtualinvoke prot.<java.lang.String: boolean equals(java.lang.Object)>("#");
+
+        if $stack16 == 0 goto label4;
+
+        $stack24 = specialinvoke this.<org.jsoup.safety.Whitelist: boolean isValidAnchor(java.lang.String)>(value);
+
+        if $stack24 == 0 goto label3;
+
+        return 1;
+
+     label4:
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(prot);
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(":");
+
+        prot = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack21 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(value);
+
+        $stack22 = virtualinvoke $stack21.<java.lang.String: boolean startsWith(java.lang.String)>(prot);
+
+        if $stack22 == 0 goto label5;
+
+        return 1;
+
+     label5:
+        goto label3;
+
+     label6:
+        return 0;
+    }
+
+    private boolean isValidAnchor(java.lang.String)
+    {
+        java.lang.String value;
+        boolean $stack2, $stack3, $stack4;
+        org.jsoup.safety.Whitelist this;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        value := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke value.<java.lang.String: boolean startsWith(java.lang.String)>("#");
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = virtualinvoke value.<java.lang.String: boolean matches(java.lang.String)>(".*\\s.*");
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    org.jsoup.nodes.Attributes getEnforcedAttributes(java.lang.String)
+    {
+        org.jsoup.nodes.Attributes $stack7;
+        java.lang.String tagName, $stack20, $stack23;
+        org.jsoup.safety.Whitelist$TagName tag;
+        org.jsoup.safety.Whitelist this;
+        java.util.Map $stack9, $stack11, keyVals;
+        boolean $stack10, $stack15;
+        java.lang.Object $stack12, $stack17, $stack18, $stack21;
+        java.util.Set $stack13;
+        java.util.Iterator l5;
+        java.util.Map$Entry entry;
+        org.jsoup.safety.Whitelist$AttributeKey $stack19;
+        org.jsoup.safety.Whitelist$AttributeValue $stack22;
+
+        this := @this: org.jsoup.safety.Whitelist;
+
+        tagName := @parameter0: java.lang.String;
+
+        $stack7 = new org.jsoup.nodes.Attributes;
+
+        specialinvoke $stack7.<org.jsoup.nodes.Attributes: void <init>()>();
+
+        tag = staticinvoke <org.jsoup.safety.Whitelist$TagName: org.jsoup.safety.Whitelist$TagName valueOf(java.lang.String)>(tagName);
+
+        $stack9 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.Map: boolean containsKey(java.lang.Object)>(tag);
+
+        if $stack10 == 0 goto label2;
+
+        $stack11 = this.<org.jsoup.safety.Whitelist: java.util.Map enforcedAttributes>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: java.lang.Object get(java.lang.Object)>(tag);
+
+        keyVals = (java.util.Map) $stack12;
+
+        $stack13 = interfaceinvoke keyVals.<java.util.Map: java.util.Set entrySet()>();
+
+        l5 = interfaceinvoke $stack13.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack15 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack15 == 0 goto label2;
+
+        $stack17 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack17;
+
+        $stack18 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack19 = (org.jsoup.safety.Whitelist$AttributeKey) $stack18;
+
+        $stack20 = virtualinvoke $stack19.<org.jsoup.safety.Whitelist$AttributeKey: java.lang.String toString()>();
+
+        $stack21 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack22 = (org.jsoup.safety.Whitelist$AttributeValue) $stack21;
+
+        $stack23 = virtualinvoke $stack22.<org.jsoup.safety.Whitelist$AttributeValue: java.lang.String toString()>();
+
+        virtualinvoke $stack7.<org.jsoup.nodes.Attributes: org.jsoup.nodes.Attributes put(java.lang.String,java.lang.String)>($stack20, $stack23);
+
+        goto label1;
+
+     label2:
+        return $stack7;
+    }
+}

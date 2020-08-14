@@ -1,0 +1,289 @@
+public abstract class org.jfree.data.statistics.BoxAndWhiskerCalculator extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.data.statistics.BoxAndWhiskerCalculator this;
+
+        this := @this: org.jfree.data.statistics.BoxAndWhiskerCalculator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jfree.data.statistics.BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(java.util.List)
+    {
+        java.util.List values;
+        org.jfree.data.statistics.BoxAndWhiskerItem $stack1;
+
+        values := @parameter0: java.util.List;
+
+        $stack1 = staticinvoke <org.jfree.data.statistics.BoxAndWhiskerCalculator: org.jfree.data.statistics.BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(java.util.List,boolean)>(values, 1);
+
+        return $stack1;
+    }
+
+    public static org.jfree.data.statistics.BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(java.util.List, boolean)
+    {
+        java.util.List values, vlist;
+        boolean stripNullAndNaNItems, $stack68, $stack101, $stack104, $stack44;
+        double q1, q3, interQuartileRange, $stack38, upperOutlierThreshold, $stack39, lowerOutlierThreshold, $stack40, upperFaroutThreshold, $stack41, lowerFaroutThreshold, value, v, iterator#4, n#5, minRegularValue, maxRegularValue, minOutlier, maxOutlier;
+        java.util.ArrayList $stack42, $stack65;
+        java.util.Iterator iterator;
+        org.jfree.data.statistics.BoxAndWhiskerItem $stack45;
+        java.lang.Object $stack46, obj;
+        java.lang.Number number, n;
+        byte $stack48, $stack49, $stack56, $stack61, $stack63, $stack64;
+        int $stack66;
+        java.util.ListIterator iterator;
+
+        values := @parameter0: java.util.List;
+
+        stripNullAndNaNItems := @parameter1: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(values, "values");
+
+        if stripNullAndNaNItems == 0 goto label04;
+
+        $stack65 = new java.util.ArrayList;
+
+        $stack66 = interfaceinvoke values.<java.util.List: int size()>();
+
+        specialinvoke $stack65.<java.util.ArrayList: void <init>(int)>($stack66);
+
+        vlist = $stack65;
+
+        iterator = interfaceinvoke values.<java.util.List: java.util.ListIterator listIterator()>();
+
+     label01:
+        $stack68 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack68 == 0 goto label03;
+
+        obj = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack101 = obj instanceof java.lang.Number;
+
+        if $stack101 == 0 goto label02;
+
+        n = (java.lang.Number) obj;
+
+        v = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+
+        $stack104 = staticinvoke <java.lang.Double: boolean isNaN(double)>(v);
+
+        if $stack104 != 0 goto label02;
+
+        interfaceinvoke $stack65.<java.util.List: boolean add(java.lang.Object)>(n);
+
+     label02:
+        goto label01;
+
+     label03:
+        goto label05;
+
+     label04:
+        vlist = values;
+
+     label05:
+        staticinvoke <java.util.Collections: void sort(java.util.List)>(vlist);
+
+        iterator#4 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.util.Collection,boolean)>(vlist, 0);
+
+        n#5 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,boolean)>(vlist, 0);
+
+        q1 = staticinvoke <org.jfree.data.statistics.BoxAndWhiskerCalculator: double calculateQ1(java.util.List)>(vlist);
+
+        q3 = staticinvoke <org.jfree.data.statistics.BoxAndWhiskerCalculator: double calculateQ3(java.util.List)>(vlist);
+
+        interQuartileRange = q3 - q1;
+
+        $stack38 = interQuartileRange * 1.5;
+
+        upperOutlierThreshold = q3 + $stack38;
+
+        $stack39 = interQuartileRange * 1.5;
+
+        lowerOutlierThreshold = q1 - $stack39;
+
+        $stack40 = interQuartileRange * 2.0;
+
+        upperFaroutThreshold = q3 + $stack40;
+
+        $stack41 = interQuartileRange * 2.0;
+
+        lowerFaroutThreshold = q1 - $stack41;
+
+        minRegularValue = #Infinity;
+
+        maxRegularValue = #-Infinity;
+
+        minOutlier = #Infinity;
+
+        maxOutlier = #-Infinity;
+
+        $stack42 = new java.util.ArrayList;
+
+        specialinvoke $stack42.<java.util.ArrayList: void <init>()>();
+
+        iterator = interfaceinvoke vlist.<java.util.List: java.util.Iterator iterator()>();
+
+     label06:
+        $stack44 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack44 == 0 goto label10;
+
+        $stack46 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        number = (java.lang.Number) $stack46;
+
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+
+        $stack48 = value cmpl upperOutlierThreshold;
+
+        if $stack48 <= 0 goto label07;
+
+        interfaceinvoke $stack42.<java.util.List: boolean add(java.lang.Object)>(number);
+
+        $stack63 = value cmpl maxOutlier;
+
+        if $stack63 <= 0 goto label09;
+
+        $stack64 = value cmpg upperFaroutThreshold;
+
+        if $stack64 > 0 goto label09;
+
+        maxOutlier = value;
+
+        goto label09;
+
+     label07:
+        $stack49 = value cmpg lowerOutlierThreshold;
+
+        if $stack49 >= 0 goto label08;
+
+        interfaceinvoke $stack42.<java.util.List: boolean add(java.lang.Object)>(number);
+
+        $stack56 = value cmpg minOutlier;
+
+        if $stack56 >= 0 goto label09;
+
+        $stack61 = value cmpl lowerFaroutThreshold;
+
+        if $stack61 < 0 goto label09;
+
+        minOutlier = value;
+
+        goto label09;
+
+     label08:
+        minRegularValue = staticinvoke <java.lang.Math: double min(double,double)>(minRegularValue, value);
+
+        maxRegularValue = staticinvoke <java.lang.Math: double max(double,double)>(maxRegularValue, value);
+
+     label09:
+        minOutlier = staticinvoke <java.lang.Math: double min(double,double)>(minOutlier, minRegularValue);
+
+        maxOutlier = staticinvoke <java.lang.Math: double max(double,double)>(maxOutlier, maxRegularValue);
+
+        goto label06;
+
+     label10:
+        $stack45 = new org.jfree.data.statistics.BoxAndWhiskerItem;
+
+        specialinvoke $stack45.<org.jfree.data.statistics.BoxAndWhiskerItem: void <init>(double,double,double,double,double,double,double,double,java.util.List)>(iterator#4, n#5, q1, q3, minRegularValue, maxRegularValue, minOutlier, maxOutlier, $stack42);
+
+        return $stack45;
+    }
+
+    public static double calculateQ1(java.util.List)
+    {
+        java.util.List values;
+        int count, $stack5, $stack6, $stack7, $stack11;
+        double result;
+
+        values := @parameter0: java.util.List;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(values, "values");
+
+        result = #NaN;
+
+        count = interfaceinvoke values.<java.util.List: int size()>();
+
+        if count <= 0 goto label3;
+
+        $stack5 = count % 2;
+
+        if $stack5 != 1 goto label2;
+
+        if count <= 1 goto label1;
+
+        $stack11 = count / 2;
+
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, 0, $stack11);
+
+        goto label3;
+
+     label1:
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, 0, 0);
+
+        goto label3;
+
+     label2:
+        $stack6 = count / 2;
+
+        $stack7 = $stack6 - 1;
+
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, 0, $stack7);
+
+     label3:
+        return result;
+    }
+
+    public static double calculateQ3(java.util.List)
+    {
+        java.util.List values;
+        int count, $stack5, $stack6, $stack7, $stack11, $stack12;
+        double result;
+
+        values := @parameter0: java.util.List;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(values, "values");
+
+        result = #NaN;
+
+        count = interfaceinvoke values.<java.util.List: int size()>();
+
+        if count <= 0 goto label3;
+
+        $stack5 = count % 2;
+
+        if $stack5 != 1 goto label2;
+
+        if count <= 1 goto label1;
+
+        $stack12 = count / 2;
+
+        $stack11 = count - 1;
+
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, $stack12, $stack11);
+
+        goto label3;
+
+     label1:
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, 0, 0);
+
+        goto label3;
+
+     label2:
+        $stack7 = count / 2;
+
+        $stack6 = count - 1;
+
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int)>(values, $stack7, $stack6);
+
+     label3:
+        return result;
+    }
+}

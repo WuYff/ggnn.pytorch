@@ -1,0 +1,1372 @@
+public class org.jfree.chart.panel.CrosshairOverlay extends org.jfree.chart.panel.AbstractOverlay implements org.jfree.chart.panel.Overlay, java.beans.PropertyChangeListener, org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable
+{
+    protected java.util.List xCrosshairs;
+    protected java.util.List yCrosshairs;
+
+    public void <init>()
+    {
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.ArrayList $stack1, $stack2;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        specialinvoke this.<org.jfree.chart.panel.AbstractOverlay: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs> = $stack1;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs> = $stack2;
+
+        return;
+    }
+
+    public void addDomainCrosshair(org.jfree.chart.plot.Crosshair)
+    {
+        org.jfree.chart.plot.Crosshair crosshair;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        crosshair := @parameter0: org.jfree.chart.plot.Crosshair;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(crosshair, "crosshair");
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(crosshair);
+
+        virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: void addPropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+        return;
+    }
+
+    public void removeDomainCrosshair(org.jfree.chart.plot.Crosshair)
+    {
+        org.jfree.chart.plot.Crosshair crosshair;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        crosshair := @parameter0: org.jfree.chart.plot.Crosshair;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(crosshair, "crosshair");
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean remove(java.lang.Object)>(crosshair);
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+     label1:
+        return;
+    }
+
+    public void clearDomainCrosshairs()
+    {
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack3, $stack5, $stack9;
+        boolean $stack4, $stack7;
+        java.util.Iterator l1;
+        java.lang.Object $stack8;
+        org.jfree.chart.plot.Crosshair c;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        $stack3 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: boolean isEmpty()>();
+
+        if $stack4 == 0 goto label1;
+
+        return;
+
+     label1:
+        $stack5 = virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List getDomainCrosshairs()>();
+
+        l1 = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack7 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label3;
+
+        $stack8 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        c = (org.jfree.chart.plot.Crosshair) $stack8;
+
+        $stack9 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        interfaceinvoke $stack9.<java.util.List: boolean remove(java.lang.Object)>(c);
+
+        virtualinvoke c.<org.jfree.chart.plot.Crosshair: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        goto label2;
+
+     label3:
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+        return;
+    }
+
+    public java.util.List getDomainCrosshairs()
+    {
+        java.util.ArrayList $stack1;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        $stack1 = new java.util.ArrayList;
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>(java.util.Collection)>($stack2);
+
+        return $stack1;
+    }
+
+    public void addRangeCrosshair(org.jfree.chart.plot.Crosshair)
+    {
+        org.jfree.chart.plot.Crosshair crosshair;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        crosshair := @parameter0: org.jfree.chart.plot.Crosshair;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(crosshair, "crosshair");
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(crosshair);
+
+        virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: void addPropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+        return;
+    }
+
+    public void removeRangeCrosshair(org.jfree.chart.plot.Crosshair)
+    {
+        org.jfree.chart.plot.Crosshair crosshair;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        crosshair := @parameter0: org.jfree.chart.plot.Crosshair;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(crosshair, "crosshair");
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean remove(java.lang.Object)>(crosshair);
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+     label1:
+        return;
+    }
+
+    public void clearRangeCrosshairs()
+    {
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack3, $stack5, $stack9;
+        boolean $stack4, $stack7;
+        java.util.Iterator l1;
+        java.lang.Object $stack8;
+        org.jfree.chart.plot.Crosshair c;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        $stack3 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: boolean isEmpty()>();
+
+        if $stack4 == 0 goto label1;
+
+        return;
+
+     label1:
+        $stack5 = virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List getRangeCrosshairs()>();
+
+        l1 = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack7 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label3;
+
+        $stack8 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        c = (org.jfree.chart.plot.Crosshair) $stack8;
+
+        $stack9 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        interfaceinvoke $stack9.<java.util.List: boolean remove(java.lang.Object)>(c);
+
+        virtualinvoke c.<org.jfree.chart.plot.Crosshair: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(this);
+
+        goto label2;
+
+     label3:
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+        return;
+    }
+
+    public java.util.List getRangeCrosshairs()
+    {
+        java.util.ArrayList $stack1;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        $stack1 = new java.util.ArrayList;
+
+        $stack2 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>(java.util.Collection)>($stack2);
+
+        return $stack1;
+    }
+
+    public void propertyChange(java.beans.PropertyChangeEvent)
+    {
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.beans.PropertyChangeEvent e;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        e := @parameter0: java.beans.PropertyChangeEvent;
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void fireOverlayChanged()>();
+
+        return;
+    }
+
+    public void paintOverlay(java.awt.Graphics2D, org.jfree.chart.ChartPanel)
+    {
+        java.awt.Graphics2D g2;
+        java.awt.Shape savedClip;
+        org.jfree.chart.ChartPanel chartPanel;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.plot.Plot $stack20;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.axis.ValueAxis xAxis, yAxis#5;
+        org.jfree.chart.ui.RectangleEdge xAxisEdge, ch;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.util.List $stack23, $stack28;
+        boolean $stack25, $stack30, $stack32, $stack39;
+        java.lang.Object $stack31, $stack38;
+        org.jfree.chart.plot.Crosshair ch;
+        double yy, x, xx;
+        org.jfree.chart.plot.PlotOrientation $stack36, $stack37, $stack43, $stack44;
+        java.util.Iterator yAxis, x#7;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        chartPanel := @parameter1: org.jfree.chart.ChartPanel;
+
+        savedClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+
+        dataArea = virtualinvoke chartPanel.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>(dataArea);
+
+        chart = virtualinvoke chartPanel.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart getChart()>();
+
+        $stack20 = virtualinvoke chart.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+
+        plot = (org.jfree.chart.plot.XYPlot) $stack20;
+
+        xAxis = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        xAxisEdge = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List getDomainCrosshairs()>();
+
+        yAxis = interfaceinvoke $stack23.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack25 = interfaceinvoke yAxis.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack25 == 0 goto label4;
+
+        $stack38 = interfaceinvoke yAxis.<java.util.Iterator: java.lang.Object next()>();
+
+        ch = (org.jfree.chart.plot.Crosshair) $stack38;
+
+        $stack39 = virtualinvoke ch.<org.jfree.chart.plot.Crosshair: boolean isVisible()>();
+
+        if $stack39 == 0 goto label3;
+
+        x = virtualinvoke ch.<org.jfree.chart.plot.Crosshair: double getValue()>();
+
+        xx = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(x, dataArea, xAxisEdge);
+
+        $stack43 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack44 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if $stack43 != $stack44 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void drawVerticalCrosshair(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,org.jfree.chart.plot.Crosshair)>(g2, dataArea, xx, ch);
+
+        goto label3;
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void drawHorizontalCrosshair(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,org.jfree.chart.plot.Crosshair)>(g2, dataArea, xx, ch);
+
+     label3:
+        goto label1;
+
+     label4:
+        yAxis#5 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        ch = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List getRangeCrosshairs()>();
+
+        x#7 = interfaceinvoke $stack28.<java.util.List: java.util.Iterator iterator()>();
+
+     label5:
+        $stack30 = interfaceinvoke x#7.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack30 == 0 goto label8;
+
+        $stack31 = interfaceinvoke x#7.<java.util.Iterator: java.lang.Object next()>();
+
+        ch = (org.jfree.chart.plot.Crosshair) $stack31;
+
+        $stack32 = virtualinvoke ch.<org.jfree.chart.plot.Crosshair: boolean isVisible()>();
+
+        if $stack32 == 0 goto label7;
+
+        xx = virtualinvoke ch.<org.jfree.chart.plot.Crosshair: double getValue()>();
+
+        yy = virtualinvoke yAxis#5.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(xx, dataArea, ch);
+
+        $stack36 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack37 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if $stack36 != $stack37 goto label6;
+
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void drawHorizontalCrosshair(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,org.jfree.chart.plot.Crosshair)>(g2, dataArea, yy, ch);
+
+        goto label7;
+
+     label6:
+        virtualinvoke this.<org.jfree.chart.panel.CrosshairOverlay: void drawVerticalCrosshair(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,org.jfree.chart.plot.Crosshair)>(g2, dataArea, yy, ch);
+
+     label7:
+        goto label5;
+
+     label8:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+
+        return;
+    }
+
+    protected void drawHorizontalCrosshair(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, org.jfree.chart.plot.Crosshair)
+    {
+        double y, $stack17, $stack19, $stack22, $stack23, $stack35, $stack36, $stack65, $stack66;
+        java.awt.geom.Rectangle2D dataArea, $stack40;
+        byte $stack18, $stack20;
+        java.awt.geom.Line2D$Double $stack21;
+        java.awt.Graphics2D g2;
+        java.awt.Paint savedPaint, $stack26, $stack42, $stack44, $stack50;
+        java.awt.Stroke savedStroke, $stack27, $stack51;
+        org.jfree.chart.plot.Crosshair crosshair;
+        boolean $stack28, $stack41, $stack43;
+        java.awt.Font savedFont, $stack30;
+        org.jfree.chart.labels.CrosshairLabelGenerator $stack31;
+        java.lang.String label;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        org.jfree.chart.ui.TextAnchor $stack38, $stack68, alignPt;
+        org.jfree.chart.ui.RectangleAnchor anchor;
+        java.awt.geom.Point2D pt;
+        float xx, yy;
+        java.awt.Shape hotspot;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        y := @parameter2: double;
+
+        crosshair := @parameter3: org.jfree.chart.plot.Crosshair;
+
+        $stack17 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack18 = y cmpl $stack17;
+
+        if $stack18 < 0 goto label4;
+
+        $stack19 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack20 = y cmpg $stack19;
+
+        if $stack20 > 0 goto label4;
+
+        $stack21 = new java.awt.geom.Line2D$Double;
+
+        $stack22 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack23 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        specialinvoke $stack21.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack22, y, $stack23, y);
+
+        savedPaint = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Paint getPaint()>();
+
+        savedStroke = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Stroke getStroke()>();
+
+        $stack26 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack26);
+
+        $stack27 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Stroke getStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack27);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack21);
+
+        $stack28 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: boolean isLabelVisible()>();
+
+        if $stack28 == 0 goto label3;
+
+        savedFont = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        $stack30 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Font getLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack30);
+
+        $stack31 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator getLabelGenerator()>();
+
+        label = interfaceinvoke $stack31.<org.jfree.chart.labels.CrosshairLabelGenerator: java.lang.String generateLabel(org.jfree.chart.plot.Crosshair)>(crosshair);
+
+        anchor = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor getLabelAnchor()>();
+
+        pt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.awt.geom.Point2D calculateLabelPoint(java.awt.geom.Line2D,org.jfree.chart.ui.RectangleAnchor,double,double)>($stack21, anchor, 5.0, 5.0);
+
+        $stack35 = virtualinvoke pt.<java.awt.geom.Point2D: double getX()>();
+
+        xx = (float) $stack35;
+
+        $stack36 = virtualinvoke pt.<java.awt.geom.Point2D: double getY()>();
+
+        yy = (float) $stack36;
+
+        alignPt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorH(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        $stack38 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        hotspot = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.Shape calculateRotatedStringBounds(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,double,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt, 0.0, $stack38);
+
+        $stack40 = interfaceinvoke hotspot.<java.awt.Shape: java.awt.geom.Rectangle2D getBounds2D()>();
+
+        $stack41 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: boolean contains(java.awt.geom.Rectangle2D)>($stack40);
+
+        if $stack41 != 0 goto label1;
+
+        anchor = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.RectangleAnchor flipAnchorV(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        pt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.awt.geom.Point2D calculateLabelPoint(java.awt.geom.Line2D,org.jfree.chart.ui.RectangleAnchor,double,double)>($stack21, anchor, 5.0, 5.0);
+
+        $stack65 = virtualinvoke pt.<java.awt.geom.Point2D: double getX()>();
+
+        xx = (float) $stack65;
+
+        $stack66 = virtualinvoke pt.<java.awt.geom.Point2D: double getY()>();
+
+        yy = (float) $stack66;
+
+        alignPt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorH(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        $stack68 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        hotspot = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.Shape calculateRotatedStringBounds(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,double,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt, 0.0, $stack68);
+
+     label1:
+        $stack42 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelBackgroundPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack42);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(hotspot);
+
+        $stack43 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: boolean isLabelOutlineVisible()>();
+
+        if $stack43 == 0 goto label2;
+
+        $stack50 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelOutlinePaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack50);
+
+        $stack51 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Stroke getLabelOutlineStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack51);
+
+     label2:
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(hotspot);
+
+        $stack44 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack44);
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(savedFont);
+
+     label3:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(savedPaint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(savedStroke);
+
+     label4:
+        return;
+    }
+
+    protected void drawVerticalCrosshair(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, org.jfree.chart.plot.Crosshair)
+    {
+        double x, $stack17, $stack19, $stack22, $stack23, $stack35, $stack36, $stack63, $stack64;
+        java.awt.geom.Rectangle2D dataArea, $stack40;
+        byte $stack18, $stack20;
+        java.awt.geom.Line2D$Double $stack21;
+        java.awt.Graphics2D g2;
+        java.awt.Paint savedPaint, $stack26, $stack42, $stack44, $stack50;
+        java.awt.Stroke savedStroke, $stack27, $stack51;
+        org.jfree.chart.plot.Crosshair crosshair;
+        boolean $stack28, $stack41, $stack43;
+        java.awt.Font savedFont, $stack30;
+        org.jfree.chart.labels.CrosshairLabelGenerator $stack31;
+        java.lang.String label;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        org.jfree.chart.ui.TextAnchor $stack38, $stack66, alignPt;
+        org.jfree.chart.ui.RectangleAnchor anchor;
+        java.awt.geom.Point2D pt;
+        float xx, yy;
+        java.awt.Shape hotspot;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        x := @parameter2: double;
+
+        crosshair := @parameter3: org.jfree.chart.plot.Crosshair;
+
+        $stack17 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack18 = x cmpl $stack17;
+
+        if $stack18 < 0 goto label4;
+
+        $stack19 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack20 = x cmpg $stack19;
+
+        if $stack20 > 0 goto label4;
+
+        $stack21 = new java.awt.geom.Line2D$Double;
+
+        $stack22 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack23 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        specialinvoke $stack21.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x, $stack22, x, $stack23);
+
+        savedPaint = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Paint getPaint()>();
+
+        savedStroke = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Stroke getStroke()>();
+
+        $stack26 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack26);
+
+        $stack27 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Stroke getStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack27);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack21);
+
+        $stack28 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: boolean isLabelVisible()>();
+
+        if $stack28 == 0 goto label3;
+
+        savedFont = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        $stack30 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Font getLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack30);
+
+        $stack31 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator getLabelGenerator()>();
+
+        label = interfaceinvoke $stack31.<org.jfree.chart.labels.CrosshairLabelGenerator: java.lang.String generateLabel(org.jfree.chart.plot.Crosshair)>(crosshair);
+
+        anchor = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor getLabelAnchor()>();
+
+        pt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.awt.geom.Point2D calculateLabelPoint(java.awt.geom.Line2D,org.jfree.chart.ui.RectangleAnchor,double,double)>($stack21, anchor, 5.0, 5.0);
+
+        $stack35 = virtualinvoke pt.<java.awt.geom.Point2D: double getX()>();
+
+        xx = (float) $stack35;
+
+        $stack36 = virtualinvoke pt.<java.awt.geom.Point2D: double getY()>();
+
+        yy = (float) $stack36;
+
+        alignPt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorV(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        $stack38 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        hotspot = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.Shape calculateRotatedStringBounds(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,double,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt, 0.0, $stack38);
+
+        $stack40 = interfaceinvoke hotspot.<java.awt.Shape: java.awt.geom.Rectangle2D getBounds2D()>();
+
+        $stack41 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: boolean contains(java.awt.geom.Rectangle2D)>($stack40);
+
+        if $stack41 != 0 goto label1;
+
+        anchor = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.RectangleAnchor flipAnchorH(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        pt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: java.awt.geom.Point2D calculateLabelPoint(java.awt.geom.Line2D,org.jfree.chart.ui.RectangleAnchor,double,double)>($stack21, anchor, 5.0, 5.0);
+
+        $stack63 = virtualinvoke pt.<java.awt.geom.Point2D: double getX()>();
+
+        xx = (float) $stack63;
+
+        $stack64 = virtualinvoke pt.<java.awt.geom.Point2D: double getY()>();
+
+        yy = (float) $stack64;
+
+        alignPt = specialinvoke this.<org.jfree.chart.panel.CrosshairOverlay: org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorV(org.jfree.chart.ui.RectangleAnchor)>(anchor);
+
+        $stack66 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        hotspot = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.Shape calculateRotatedStringBounds(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,double,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt, 0.0, $stack66);
+
+     label1:
+        $stack42 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelBackgroundPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack42);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(hotspot);
+
+        $stack43 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: boolean isLabelOutlineVisible()>();
+
+        if $stack43 == 0 goto label2;
+
+        $stack50 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelOutlinePaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack50);
+
+        $stack51 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Stroke getLabelOutlineStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack51);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(hotspot);
+
+     label2:
+        $stack44 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack44);
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(label, g2, xx, yy, alignPt);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(savedFont);
+
+     label3:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(savedPaint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(savedStroke);
+
+     label4:
+        return;
+    }
+
+    private java.awt.geom.Point2D calculateLabelPoint(java.awt.geom.Line2D, org.jfree.chart.ui.RectangleAnchor, double, double)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor, $stack16, $stack17, $stack18, $stack19, $stack53, $stack54, $stack59, $stack60, $stack63, $stack64, $stack67, $stack68;
+        boolean left, right, top, bottom, $stack69, $stack65, $stack61, $stack55;
+        java.awt.geom.Line2D line;
+        double $stack21, $stack22, $stack24, $stack25, $stack26, deltaY, $stack32, $stack33, $stack34, deltaX, $stack36, $stack37, $stack38, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, x, y;
+        byte $stack23;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        java.awt.geom.Point2D$Double $stack28;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        line := @parameter0: java.awt.geom.Line2D;
+
+        anchor := @parameter1: org.jfree.chart.ui.RectangleAnchor;
+
+        deltaX := @parameter2: double;
+
+        deltaY := @parameter3: double;
+
+        $stack16 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        if anchor == $stack16 goto label01;
+
+        $stack67 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor LEFT>;
+
+        if anchor == $stack67 goto label01;
+
+        $stack68 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        if anchor != $stack68 goto label02;
+
+     label01:
+        $stack69 = 1;
+
+        goto label03;
+
+     label02:
+        $stack69 = 0;
+
+     label03:
+        left = $stack69;
+
+        $stack17 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        if anchor == $stack17 goto label04;
+
+        $stack63 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor RIGHT>;
+
+        if anchor == $stack63 goto label04;
+
+        $stack64 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        if anchor != $stack64 goto label05;
+
+     label04:
+        $stack65 = 1;
+
+        goto label06;
+
+     label05:
+        $stack65 = 0;
+
+     label06:
+        right = $stack65;
+
+        $stack18 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        if anchor == $stack18 goto label07;
+
+        $stack59 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP>;
+
+        if anchor == $stack59 goto label07;
+
+        $stack60 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        if anchor != $stack60 goto label08;
+
+     label07:
+        $stack61 = 1;
+
+        goto label09;
+
+     label08:
+        $stack61 = 0;
+
+     label09:
+        top = $stack61;
+
+        $stack19 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        if anchor == $stack19 goto label10;
+
+        $stack53 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM>;
+
+        if anchor == $stack53 goto label10;
+
+        $stack54 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        if anchor != $stack54 goto label11;
+
+     label10:
+        $stack55 = 1;
+
+        goto label12;
+
+     label11:
+        $stack55 = 0;
+
+     label12:
+        bottom = $stack55;
+
+        virtualinvoke line.<java.awt.geom.Line2D: java.awt.Rectangle getBounds()>();
+
+        $stack21 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        $stack22 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        $stack23 = $stack21 cmpl $stack22;
+
+        if $stack23 != 0 goto label16;
+
+        x = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        $stack41 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        $stack42 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        $stack43 = $stack41 + $stack42;
+
+        y = $stack43 / 2.0;
+
+        if left == 0 goto label13;
+
+        x = x - deltaX;
+
+     label13:
+        if right == 0 goto label14;
+
+        x = x + deltaX;
+
+     label14:
+        if top == 0 goto label15;
+
+        $stack47 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        $stack48 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        $stack49 = staticinvoke <java.lang.Math: double min(double,double)>($stack47, $stack48);
+
+        y = $stack49 + deltaY;
+
+     label15:
+        if bottom == 0 goto label20;
+
+        $stack44 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        $stack45 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        $stack46 = staticinvoke <java.lang.Math: double max(double,double)>($stack44, $stack45);
+
+        y = $stack46 - deltaY;
+
+        goto label20;
+
+     label16:
+        $stack24 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        $stack25 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        $stack26 = $stack24 + $stack25;
+
+        x = $stack26 / 2.0;
+
+        y = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        if left == 0 goto label17;
+
+        $stack36 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        $stack37 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        $stack38 = staticinvoke <java.lang.Math: double min(double,double)>($stack36, $stack37);
+
+        x = $stack38 + deltaX;
+
+     label17:
+        if right == 0 goto label18;
+
+        $stack32 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        $stack33 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        $stack34 = staticinvoke <java.lang.Math: double max(double,double)>($stack32, $stack33);
+
+        x = $stack34 - deltaX;
+
+     label18:
+        if top == 0 goto label19;
+
+        y = y - deltaY;
+
+     label19:
+        if bottom == 0 goto label20;
+
+        y = y + deltaY;
+
+     label20:
+        $stack28 = new java.awt.geom.Point2D$Double;
+
+        specialinvoke $stack28.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, y);
+
+        return $stack28;
+    }
+
+    private org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorV(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, $stack15, $stack17;
+        boolean $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack16, $stack18;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        org.jfree.chart.ui.TextAnchor result;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        $stack3 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        $stack4 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+        goto label8;
+
+     label1:
+        $stack5 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP>;
+
+        $stack6 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label2;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        goto label8;
+
+     label2:
+        $stack7 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        $stack8 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack8 == 0 goto label3;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        goto label8;
+
+     label3:
+        $stack9 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor LEFT>;
+
+        $stack10 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 == 0 goto label4;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor HALF_ASCENT_RIGHT>;
+
+        goto label8;
+
+     label4:
+        $stack11 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor RIGHT>;
+
+        $stack12 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack11);
+
+        if $stack12 == 0 goto label5;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor HALF_ASCENT_LEFT>;
+
+        goto label8;
+
+     label5:
+        $stack13 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        $stack14 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label6;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label8;
+
+     label6:
+        $stack15 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM>;
+
+        $stack16 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack15);
+
+        if $stack16 == 0 goto label7;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        goto label8;
+
+     label7:
+        $stack17 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        $stack18 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack17);
+
+        if $stack18 == 0 goto label8;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label8:
+        return result;
+    }
+
+    private org.jfree.chart.ui.TextAnchor textAlignPtForLabelAnchorH(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, $stack15, $stack17;
+        boolean $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack16, $stack18;
+        org.jfree.chart.panel.CrosshairOverlay this;
+        org.jfree.chart.ui.TextAnchor result;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        $stack3 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        $stack4 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+        goto label8;
+
+     label1:
+        $stack5 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP>;
+
+        $stack6 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label2;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        goto label8;
+
+     label2:
+        $stack7 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        $stack8 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack8 == 0 goto label3;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label8;
+
+     label3:
+        $stack9 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor LEFT>;
+
+        $stack10 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 == 0 goto label4;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor HALF_ASCENT_LEFT>;
+
+        goto label8;
+
+     label4:
+        $stack11 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor RIGHT>;
+
+        $stack12 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack11);
+
+        if $stack12 == 0 goto label5;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor HALF_ASCENT_RIGHT>;
+
+        goto label8;
+
+     label5:
+        $stack13 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        $stack14 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label6;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        goto label8;
+
+     label6:
+        $stack15 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM>;
+
+        $stack16 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack15);
+
+        if $stack16 == 0 goto label7;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        goto label8;
+
+     label7:
+        $stack17 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        $stack18 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack17);
+
+        if $stack18 == 0 goto label8;
+
+        result = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+     label8:
+        return result;
+    }
+
+    private org.jfree.chart.ui.RectangleAnchor flipAnchorH(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, result;
+        boolean $stack4, $stack6, $stack8, $stack10, $stack12, $stack14;
+        org.jfree.chart.panel.CrosshairOverlay this;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        result = anchor;
+
+        $stack3 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        $stack4 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        goto label6;
+
+     label1:
+        $stack5 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        $stack6 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label2;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        goto label6;
+
+     label2:
+        $stack7 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor LEFT>;
+
+        $stack8 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack8 == 0 goto label3;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor RIGHT>;
+
+        goto label6;
+
+     label3:
+        $stack9 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor RIGHT>;
+
+        $stack10 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 == 0 goto label4;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor LEFT>;
+
+        goto label6;
+
+     label4:
+        $stack11 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        $stack12 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack11);
+
+        if $stack12 == 0 goto label5;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        goto label6;
+
+     label5:
+        $stack13 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        $stack14 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label6;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+     label6:
+        return result;
+    }
+
+    private org.jfree.chart.ui.RectangleAnchor flipAnchorV(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor, $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, result;
+        boolean $stack4, $stack6, $stack8, $stack10, $stack12, $stack14;
+        org.jfree.chart.panel.CrosshairOverlay this;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        result = anchor;
+
+        $stack3 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        $stack4 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        goto label6;
+
+     label1:
+        $stack5 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+        $stack6 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label2;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        goto label6;
+
+     label2:
+        $stack7 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP>;
+
+        $stack8 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack8 == 0 goto label3;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM>;
+
+        goto label6;
+
+     label3:
+        $stack9 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM>;
+
+        $stack10 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 == 0 goto label4;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP>;
+
+        goto label6;
+
+     label4:
+        $stack11 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        $stack12 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack11);
+
+        if $stack12 == 0 goto label5;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        goto label6;
+
+     label5:
+        $stack13 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_RIGHT>;
+
+        $stack14 = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label6;
+
+        result = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_RIGHT>;
+
+     label6:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.panel.CrosshairOverlay this, that;
+        boolean $stack3, $stack6, $stack9;
+        java.util.List $stack4, $stack5, $stack7, $stack8;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.panel.CrosshairOverlay;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.panel.CrosshairOverlay) obj;
+
+        $stack5 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        $stack4 = that.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        $stack7 = that.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.panel.CrosshairOverlay this, clone;
+        java.lang.Object $stack2;
+        java.util.List $stack3, $stack4, $stack5, $stack6;
+
+        this := @this: org.jfree.chart.panel.CrosshairOverlay;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.panel.CrosshairOverlay) $stack2;
+
+        $stack3 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack3);
+
+        clone.<org.jfree.chart.panel.CrosshairOverlay: java.util.List xCrosshairs> = $stack4;
+
+        $stack5 = this.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs>;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack5);
+
+        clone.<org.jfree.chart.panel.CrosshairOverlay: java.util.List yCrosshairs> = $stack6;
+
+        return clone;
+    }
+}

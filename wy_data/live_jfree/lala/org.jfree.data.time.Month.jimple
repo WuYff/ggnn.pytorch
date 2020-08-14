@@ -1,0 +1,750 @@
+public class org.jfree.data.time.Month extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private int month;
+    private int year;
+    private long firstMillisecond;
+    private long lastMillisecond;
+
+    public void <init>()
+    {
+        org.jfree.data.time.Month this;
+        java.util.Date $stack1;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = new java.util.Date;
+
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+
+        specialinvoke this.<org.jfree.data.time.Month: void <init>(java.util.Date)>($stack1);
+
+        return;
+    }
+
+    public void <init>(int, int)
+    {
+        org.jfree.data.time.Month this;
+        int month, year;
+        java.lang.IllegalArgumentException $stack3;
+        java.util.Calendar $stack4;
+
+        this := @this: org.jfree.data.time.Month;
+
+        month := @parameter0: int;
+
+        year := @parameter1: int;
+
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+
+        if month < 1 goto label1;
+
+        if month <= 12 goto label2;
+
+     label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Month outside valid range.");
+
+        throw $stack3;
+
+     label2:
+        this.<org.jfree.data.time.Month: int month> = month;
+
+        this.<org.jfree.data.time.Month: int year> = year;
+
+        $stack4 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+
+        virtualinvoke this.<org.jfree.data.time.Month: void peg(java.util.Calendar)>($stack4);
+
+        return;
+    }
+
+    public void <init>(int, org.jfree.data.time.Year)
+    {
+        org.jfree.data.time.Month this;
+        int month, $stack4;
+        java.lang.IllegalArgumentException $stack3;
+        org.jfree.data.time.Year year;
+        java.util.Calendar $stack5;
+
+        this := @this: org.jfree.data.time.Month;
+
+        month := @parameter0: int;
+
+        year := @parameter1: org.jfree.data.time.Year;
+
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+
+        if month < 1 goto label1;
+
+        if month <= 12 goto label2;
+
+     label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Month outside valid range.");
+
+        throw $stack3;
+
+     label2:
+        this.<org.jfree.data.time.Month: int month> = month;
+
+        $stack4 = virtualinvoke year.<org.jfree.data.time.Year: int getYear()>();
+
+        this.<org.jfree.data.time.Month: int year> = $stack4;
+
+        $stack5 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+
+        virtualinvoke this.<org.jfree.data.time.Month: void peg(java.util.Calendar)>($stack5);
+
+        return;
+    }
+
+    public void <init>(java.util.Date)
+    {
+        org.jfree.data.time.Month this;
+        java.util.Date time;
+        java.util.TimeZone $stack2;
+        java.util.Locale $stack3;
+
+        this := @this: org.jfree.data.time.Month;
+
+        time := @parameter0: java.util.Date;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        specialinvoke this.<org.jfree.data.time.Month: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>(time, $stack2, $stack3);
+
+        return;
+    }
+
+    public void <init>(java.util.Date, java.util.TimeZone, java.util.Locale)
+    {
+        org.jfree.data.time.Month this;
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        java.util.Calendar calendar;
+        java.util.Date time;
+        int $stack6, $stack7, $stack8;
+
+        this := @this: org.jfree.data.time.Month;
+
+        time := @parameter0: java.util.Date;
+
+        zone := @parameter1: java.util.TimeZone;
+
+        locale := @parameter2: java.util.Locale;
+
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>(zone, locale);
+
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(time);
+
+        $stack6 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        $stack7 = $stack6 + 1;
+
+        this.<org.jfree.data.time.Month: int month> = $stack7;
+
+        $stack8 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        this.<org.jfree.data.time.Month: int year> = $stack8;
+
+        virtualinvoke this.<org.jfree.data.time.Month: void peg(java.util.Calendar)>(calendar);
+
+        return;
+    }
+
+    public org.jfree.data.time.Year getYear()
+    {
+        org.jfree.data.time.Year $stack1;
+        org.jfree.data.time.Month this;
+        int $stack2;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = new org.jfree.data.time.Year;
+
+        $stack2 = this.<org.jfree.data.time.Month: int year>;
+
+        specialinvoke $stack1.<org.jfree.data.time.Year: void <init>(int)>($stack2);
+
+        return $stack1;
+    }
+
+    public int getYearValue()
+    {
+        org.jfree.data.time.Month this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = this.<org.jfree.data.time.Month: int year>;
+
+        return $stack1;
+    }
+
+    public int getMonth()
+    {
+        org.jfree.data.time.Month this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = this.<org.jfree.data.time.Month: int month>;
+
+        return $stack1;
+    }
+
+    public long getFirstMillisecond()
+    {
+        org.jfree.data.time.Month this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = this.<org.jfree.data.time.Month: long firstMillisecond>;
+
+        return $stack1;
+    }
+
+    public long getLastMillisecond()
+    {
+        org.jfree.data.time.Month this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = this.<org.jfree.data.time.Month: long lastMillisecond>;
+
+        return $stack1;
+    }
+
+    public void peg(java.util.Calendar)
+    {
+        org.jfree.data.time.Month this;
+        java.util.Calendar calendar;
+        long $stack2, $stack3;
+
+        this := @this: org.jfree.data.time.Month;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.time.Month: long getFirstMillisecond(java.util.Calendar)>(calendar);
+
+        this.<org.jfree.data.time.Month: long firstMillisecond> = $stack2;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.time.Month: long getLastMillisecond(java.util.Calendar)>(calendar);
+
+        this.<org.jfree.data.time.Month: long lastMillisecond> = $stack3;
+
+        return;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod previous()
+    {
+        org.jfree.data.time.Month this, $stack4, $stack8, result;
+        int $stack2, $stack3, $stack5, $stack6, $stack9, $stack10, $stack11;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack2 = this.<org.jfree.data.time.Month: int month>;
+
+        if $stack2 == 1 goto label1;
+
+        $stack8 = new org.jfree.data.time.Month;
+
+        $stack9 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack11 = $stack9 - 1;
+
+        $stack10 = this.<org.jfree.data.time.Month: int year>;
+
+        specialinvoke $stack8.<org.jfree.data.time.Month: void <init>(int,int)>($stack11, $stack10);
+
+        result = $stack8;
+
+        goto label3;
+
+     label1:
+        $stack3 = this.<org.jfree.data.time.Month: int year>;
+
+        if $stack3 <= 1900 goto label2;
+
+        $stack4 = new org.jfree.data.time.Month;
+
+        $stack5 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack6 = $stack5 - 1;
+
+        specialinvoke $stack4.<org.jfree.data.time.Month: void <init>(int,int)>(12, $stack6);
+
+        result = $stack4;
+
+        goto label3;
+
+     label2:
+        result = null;
+
+     label3:
+        return result;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod next()
+    {
+        org.jfree.data.time.Month this, $stack4, $stack8, result;
+        int $stack2, $stack3, $stack5, $stack6, $stack9, $stack10, $stack11;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack2 = this.<org.jfree.data.time.Month: int month>;
+
+        if $stack2 == 12 goto label1;
+
+        $stack8 = new org.jfree.data.time.Month;
+
+        $stack9 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack11 = $stack9 + 1;
+
+        $stack10 = this.<org.jfree.data.time.Month: int year>;
+
+        specialinvoke $stack8.<org.jfree.data.time.Month: void <init>(int,int)>($stack11, $stack10);
+
+        result = $stack8;
+
+        goto label3;
+
+     label1:
+        $stack3 = this.<org.jfree.data.time.Month: int year>;
+
+        if $stack3 >= 9999 goto label2;
+
+        $stack4 = new org.jfree.data.time.Month;
+
+        $stack5 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack6 = $stack5 + 1;
+
+        specialinvoke $stack4.<org.jfree.data.time.Month: void <init>(int,int)>(1, $stack6);
+
+        result = $stack4;
+
+        goto label3;
+
+     label2:
+        result = null;
+
+     label3:
+        return result;
+    }
+
+    public long getSerialIndex()
+    {
+        org.jfree.data.time.Month this;
+        int $stack1, $stack3;
+        long $stack2, $stack4, $stack5, $stack6;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack2 = (long) $stack1;
+
+        $stack5 = $stack2 * 12L;
+
+        $stack3 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack4 = (long) $stack3;
+
+        $stack6 = $stack5 + $stack4;
+
+        return $stack6;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.StringBuilder $stack1, $stack4, $stack5, $stack7;
+        org.jfree.data.time.Month this;
+        int $stack2, $stack6;
+        java.lang.String $stack3, $stack8;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack3 = staticinvoke <org.jfree.chart.date.SerialDate: java.lang.String monthCodeToString(int)>($stack2);
+
+        $stack4 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack3);
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack6 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack7 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack6);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack8;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.time.Month this, that;
+        boolean $stack3;
+        int $stack4, $stack5, $stack6, $stack7;
+
+        this := @this: org.jfree.data.time.Month;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.time.Month;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.time.Month) obj;
+
+        $stack5 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack4 = that.<org.jfree.data.time.Month: int month>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack6 = that.<org.jfree.data.time.Month: int year>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.time.Month this;
+        int $stack2, $stack3, $stack4, $stack5, result#2;
+
+        this := @this: org.jfree.data.time.Month;
+
+        $stack3 = 37 * 17;
+
+        $stack2 = this.<org.jfree.data.time.Month: int month>;
+
+        result#2 = $stack3 + $stack2;
+
+        $stack5 = 37 * result#2;
+
+        $stack4 = this.<org.jfree.data.time.Month: int year>;
+
+        result#2 = $stack5 + $stack4;
+
+        return result#2;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        java.lang.Object o1;
+        boolean $stack4, $stack5;
+        org.jfree.data.time.Month m, this;
+        int $stack7, $stack8, $stack9, $stack10, result;
+
+        this := @this: org.jfree.data.time.Month;
+
+        o1 := @parameter0: java.lang.Object;
+
+        $stack4 = o1 instanceof org.jfree.data.time.Month;
+
+        if $stack4 == 0 goto label2;
+
+        m = (org.jfree.data.time.Month) o1;
+
+        $stack7 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack8 = virtualinvoke m.<org.jfree.data.time.Month: int getYearValue()>();
+
+        result = $stack7 - $stack8;
+
+        if result != 0 goto label1;
+
+        $stack9 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack10 = virtualinvoke m.<org.jfree.data.time.Month: int getMonth()>();
+
+        result = $stack9 - $stack10;
+
+     label1:
+        goto label4;
+
+     label2:
+        $stack5 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+
+        if $stack5 == 0 goto label3;
+
+        result = 0;
+
+        goto label4;
+
+     label3:
+        result = 1;
+
+     label4:
+        return result;
+    }
+
+    public long getFirstMillisecond(java.util.Calendar)
+    {
+        java.util.Calendar calendar;
+        org.jfree.data.time.Month this;
+        int $stack2, $stack3, $stack4;
+        long $stack5;
+
+        this := @this: org.jfree.data.time.Month;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack4 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack2 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack3 = $stack2 - 1;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack4, $stack3, 1, 0, 0, 0);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 0);
+
+        $stack5 = virtualinvoke calendar.<java.util.Calendar: long getTimeInMillis()>();
+
+        return $stack5;
+    }
+
+    public long getLastMillisecond(java.util.Calendar)
+    {
+        org.jfree.data.time.Month this;
+        int $stack3, $stack4, eom, $stack6, $stack7, $stack8;
+        java.util.Calendar calendar;
+        long $stack9;
+
+        this := @this: org.jfree.data.time.Month;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack4 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack3 = this.<org.jfree.data.time.Month: int year>;
+
+        eom = staticinvoke <org.jfree.chart.date.SerialDate: int lastDayOfMonth(int,int)>($stack4, $stack3);
+
+        $stack8 = this.<org.jfree.data.time.Month: int year>;
+
+        $stack6 = this.<org.jfree.data.time.Month: int month>;
+
+        $stack7 = $stack6 - 1;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack8, $stack7, eom, 23, 59, 59);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 999);
+
+        $stack9 = virtualinvoke calendar.<java.util.Calendar: long getTimeInMillis()>();
+
+        return $stack9;
+    }
+
+    public static org.jfree.data.time.Month parseMonth(java.lang.String)
+    {
+        int i, $stack12, $stack13, $stack18, $stack19, y2#15;
+        java.lang.String $stack10, $stack14, s, s#3, s1, s2;
+        org.jfree.data.time.Month $stack22;
+        org.jfree.data.time.TimePeriodFormatException $stack23, $stack24;
+        boolean yearIsFirst, $stack29;
+        org.jfree.data.time.Year y1, y2;
+
+        s := @parameter0: java.lang.String;
+
+        if s != null goto label01;
+
+        return null;
+
+     label01:
+        s#3 = virtualinvoke s.<java.lang.String: java.lang.String trim()>();
+
+        i = staticinvoke <org.jfree.data.time.Month: int findSeparator(java.lang.String)>(s#3);
+
+        if i != -1 goto label02;
+
+        yearIsFirst = 1;
+
+        s1 = virtualinvoke s#3.<java.lang.String: java.lang.String substring(int,int)>(0, 5);
+
+        s2 = virtualinvoke s#3.<java.lang.String: java.lang.String substring(int)>(5);
+
+        goto label07;
+
+     label02:
+        $stack10 = virtualinvoke s#3.<java.lang.String: java.lang.String substring(int,int)>(0, i);
+
+        s1 = virtualinvoke $stack10.<java.lang.String: java.lang.String trim()>();
+
+        $stack12 = i + 1;
+
+        $stack13 = virtualinvoke s#3.<java.lang.String: int length()>();
+
+        $stack14 = virtualinvoke s#3.<java.lang.String: java.lang.String substring(int,int)>($stack12, $stack13);
+
+        s2 = virtualinvoke $stack14.<java.lang.String: java.lang.String trim()>();
+
+        y1 = staticinvoke <org.jfree.data.time.Month: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s1);
+
+        if y1 != null goto label03;
+
+        yearIsFirst = 0;
+
+        goto label07;
+
+     label03:
+        y2 = staticinvoke <org.jfree.data.time.Month: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s2);
+
+        if y2 != null goto label04;
+
+        yearIsFirst = 1;
+
+        goto label07;
+
+     label04:
+        $stack18 = virtualinvoke s1.<java.lang.String: int length()>();
+
+        $stack19 = virtualinvoke s2.<java.lang.String: int length()>();
+
+        if $stack18 <= $stack19 goto label05;
+
+        $stack29 = 1;
+
+        goto label06;
+
+     label05:
+        $stack29 = 0;
+
+     label06:
+        yearIsFirst = $stack29;
+
+     label07:
+        if yearIsFirst == 0 goto label08;
+
+        y1 = staticinvoke <org.jfree.data.time.Month: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s1);
+
+        y2#15 = staticinvoke <org.jfree.chart.date.SerialDate: int stringToMonthCode(java.lang.String)>(s2);
+
+        goto label09;
+
+     label08:
+        y1 = staticinvoke <org.jfree.data.time.Month: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s2);
+
+        y2#15 = staticinvoke <org.jfree.chart.date.SerialDate: int stringToMonthCode(java.lang.String)>(s1);
+
+     label09:
+        if y2#15 != -1 goto label10;
+
+        $stack24 = new org.jfree.data.time.TimePeriodFormatException;
+
+        specialinvoke $stack24.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Can\'t evaluate the month.");
+
+        throw $stack24;
+
+     label10:
+        if y1 != null goto label11;
+
+        $stack23 = new org.jfree.data.time.TimePeriodFormatException;
+
+        specialinvoke $stack23.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Can\'t evaluate the year.");
+
+        throw $stack23;
+
+     label11:
+        $stack22 = new org.jfree.data.time.Month;
+
+        specialinvoke $stack22.<org.jfree.data.time.Month: void <init>(int,org.jfree.data.time.Year)>(y2#15, y1);
+
+        return $stack22;
+    }
+
+    private static int findSeparator(java.lang.String)
+    {
+        java.lang.String s;
+        int result;
+
+        s := @parameter0: java.lang.String;
+
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(45);
+
+        if result != -1 goto label1;
+
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(44);
+
+     label1:
+        if result != -1 goto label2;
+
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(32);
+
+     label2:
+        if result != -1 goto label3;
+
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(46);
+
+     label3:
+        return result;
+    }
+
+    private static org.jfree.data.time.Year evaluateAsYear(java.lang.String)
+    {
+        java.lang.String s;
+        org.jfree.data.time.TimePeriodFormatException $stack4;
+        org.jfree.data.time.Year result;
+
+        s := @parameter0: java.lang.String;
+
+        result = null;
+
+     label1:
+        result = staticinvoke <org.jfree.data.time.Year: org.jfree.data.time.Year parseYear(java.lang.String)>(s);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack4 := @caughtexception;
+
+     label4:
+        return result;
+
+        catch org.jfree.data.time.TimePeriodFormatException from label1 to label2 with label3;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.time.Month: long serialVersionUID> = -5090216912548722570L;
+
+        return;
+    }
+}

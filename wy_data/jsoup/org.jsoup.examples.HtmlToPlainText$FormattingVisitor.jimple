@@ -1,0 +1,360 @@
+class org.jsoup.examples.HtmlToPlainText$FormattingVisitor extends java.lang.Object implements org.jsoup.select.NodeVisitor
+{
+    private static final int maxWidth;
+    private int width;
+    private java.lang.StringBuilder accum;
+
+    private void <init>()
+    {
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        java.lang.StringBuilder $stack1;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width> = 0;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum> = $stack1;
+
+        return;
+    }
+
+    public void head(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node node;
+        java.lang.String name, $stack11;
+        boolean $stack5, $stack6, $stack7, $stack9;
+        java.lang.String[] $stack8;
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        org.jsoup.nodes.TextNode $stack10;
+        int depth;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        node := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        name = virtualinvoke node.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack5 = node instanceof org.jsoup.nodes.TextNode;
+
+        if $stack5 == 0 goto label1;
+
+        $stack10 = (org.jsoup.nodes.TextNode) node;
+
+        $stack11 = virtualinvoke $stack10.<org.jsoup.nodes.TextNode: java.lang.String text()>();
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>($stack11);
+
+        goto label4;
+
+     label1:
+        $stack6 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("li");
+
+        if $stack6 == 0 goto label2;
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>("\n * ");
+
+        goto label4;
+
+     label2:
+        $stack7 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("dt");
+
+        if $stack7 == 0 goto label3;
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>("  ");
+
+        goto label4;
+
+     label3:
+        $stack8 = newarray (java.lang.String)[7];
+
+        $stack8[0] = "p";
+
+        $stack8[1] = "h1";
+
+        $stack8[2] = "h2";
+
+        $stack8[3] = "h3";
+
+        $stack8[4] = "h4";
+
+        $stack8[5] = "h5";
+
+        $stack8[6] = "tr";
+
+        $stack9 = staticinvoke <org.jsoup.internal.StringUtil: boolean in(java.lang.String,java.lang.String[])>(name, $stack8);
+
+        if $stack9 == 0 goto label4;
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>("\n");
+
+     label4:
+        return;
+    }
+
+    public void tail(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node node;
+        java.lang.String name, $stack11, $stack12;
+        java.lang.String[] $stack5;
+        boolean $stack6, $stack7;
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        java.lang.Object[] $stack8;
+        int depth;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        node := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        name = virtualinvoke node.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack5 = newarray (java.lang.String)[9];
+
+        $stack5[0] = "br";
+
+        $stack5[1] = "dd";
+
+        $stack5[2] = "dt";
+
+        $stack5[3] = "p";
+
+        $stack5[4] = "h1";
+
+        $stack5[5] = "h2";
+
+        $stack5[6] = "h3";
+
+        $stack5[7] = "h4";
+
+        $stack5[8] = "h5";
+
+        $stack6 = staticinvoke <org.jsoup.internal.StringUtil: boolean in(java.lang.String,java.lang.String[])>(name, $stack5);
+
+        if $stack6 == 0 goto label1;
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>("\n");
+
+        goto label2;
+
+     label1:
+        $stack7 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("a");
+
+        if $stack7 == 0 goto label2;
+
+        $stack8 = newarray (java.lang.Object)[1];
+
+        $stack11 = virtualinvoke node.<org.jsoup.nodes.Node: java.lang.String absUrl(java.lang.String)>("href");
+
+        $stack8[0] = $stack11;
+
+        $stack12 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(" <%s>", $stack8);
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void append(java.lang.String)>($stack12);
+
+     label2:
+        return;
+    }
+
+    private void append(java.lang.String)
+    {
+        java.lang.String text, $stack49, word;
+        boolean $stack6, $stack7, $stack51, $stack41;
+        int $stack8, $stack9, $stack10, $stack13, $stack14, $stack15, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack25, $stack26, $stack27, $stack33, $stack44, $stack47, $stack48, i;
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        java.lang.StringBuilder $stack11, $stack23, $stack30, $stack31, $stack34, $stack35, $stack36, $stack43, $stack45, $stack46;
+        java.lang.String[] words, $stack50;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        text := @parameter0: java.lang.String;
+
+        $stack6 = virtualinvoke text.<java.lang.String: boolean startsWith(java.lang.String)>("\n");
+
+        if $stack6 == 0 goto label01;
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width> = 0;
+
+     label01:
+        $stack7 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>(" ");
+
+        if $stack7 == 0 goto label03;
+
+        $stack43 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        $stack44 = virtualinvoke $stack43.<java.lang.StringBuilder: int length()>();
+
+        if $stack44 == 0 goto label02;
+
+        $stack46 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        $stack45 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        $stack47 = virtualinvoke $stack45.<java.lang.StringBuilder: int length()>();
+
+        $stack48 = $stack47 - 1;
+
+        $stack49 = virtualinvoke $stack46.<java.lang.StringBuilder: java.lang.String substring(int)>($stack48);
+
+        $stack50 = newarray (java.lang.String)[2];
+
+        $stack50[0] = " ";
+
+        $stack50[1] = "\n";
+
+        $stack51 = staticinvoke <org.jsoup.internal.StringUtil: boolean in(java.lang.String,java.lang.String[])>($stack49, $stack50);
+
+        if $stack51 == 0 goto label03;
+
+     label02:
+        return;
+
+     label03:
+        $stack8 = virtualinvoke text.<java.lang.String: int length()>();
+
+        $stack9 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width>;
+
+        $stack10 = $stack8 + $stack9;
+
+        if $stack10 <= 80 goto label11;
+
+        words = virtualinvoke text.<java.lang.String: java.lang.String[] split(java.lang.String)>("\\s+");
+
+        i = 0;
+
+     label04:
+        $stack17 = lengthof words;
+
+        if i >= $stack17 goto label10;
+
+        word = words[i];
+
+        $stack18 = lengthof words;
+
+        $stack19 = $stack18 - 1;
+
+        if i != $stack19 goto label05;
+
+        $stack41 = 1;
+
+        goto label06;
+
+     label05:
+        $stack41 = 0;
+
+     label06:
+        if $stack41 != 0 goto label07;
+
+        $stack34 = new java.lang.StringBuilder;
+
+        specialinvoke $stack34.<java.lang.StringBuilder: void <init>()>();
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(word);
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        word = virtualinvoke $stack36.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label07:
+        $stack20 = virtualinvoke word.<java.lang.String: int length()>();
+
+        $stack21 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width>;
+
+        $stack22 = $stack20 + $stack21;
+
+        if $stack22 <= 80 goto label08;
+
+        $stack30 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\n");
+
+        virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(word);
+
+        $stack33 = virtualinvoke word.<java.lang.String: int length()>();
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width> = $stack33;
+
+        goto label09;
+
+     label08:
+        $stack23 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(word);
+
+        $stack25 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width>;
+
+        $stack26 = virtualinvoke word.<java.lang.String: int length()>();
+
+        $stack27 = $stack25 + $stack26;
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width> = $stack27;
+
+     label09:
+        i = i + 1;
+
+        goto label04;
+
+     label10:
+        goto label12;
+
+     label11:
+        $stack11 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(text);
+
+        $stack13 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width>;
+
+        $stack14 = virtualinvoke text.<java.lang.String: int length()>();
+
+        $stack15 = $stack13 + $stack14;
+
+        this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int width> = $stack15;
+
+     label12:
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        java.lang.StringBuilder $stack1;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        $stack1 = this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: java.lang.StringBuilder accum>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack2;
+    }
+
+    void <init>(org.jsoup.examples.HtmlToPlainText$1)
+    {
+        org.jsoup.examples.HtmlToPlainText$FormattingVisitor this;
+        org.jsoup.examples.HtmlToPlainText$1 x0;
+
+        this := @this: org.jsoup.examples.HtmlToPlainText$FormattingVisitor;
+
+        x0 := @parameter0: org.jsoup.examples.HtmlToPlainText$1;
+
+        specialinvoke this.<org.jsoup.examples.HtmlToPlainText$FormattingVisitor: void <init>()>();
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.examples.HtmlToPlainText$FormattingVisitor: int maxWidth> = 80;
+
+        return;
+    }
+}

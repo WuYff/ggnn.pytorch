@@ -1,0 +1,118 @@
+abstract class org.jsoup.select.CombiningEvaluator extends org.jsoup.select.Evaluator
+{
+    final java.util.ArrayList evaluators;
+    int num;
+
+    void <init>()
+    {
+        org.jsoup.select.CombiningEvaluator this;
+        java.util.ArrayList $stack1;
+
+        this := @this: org.jsoup.select.CombiningEvaluator;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        this.<org.jsoup.select.CombiningEvaluator: int num> = 0;
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jsoup.select.CombiningEvaluator: java.util.ArrayList evaluators> = $stack1;
+
+        return;
+    }
+
+    void <init>(java.util.Collection)
+    {
+        org.jsoup.select.CombiningEvaluator this;
+        java.util.Collection evaluators;
+        java.util.ArrayList $stack2;
+
+        this := @this: org.jsoup.select.CombiningEvaluator;
+
+        evaluators := @parameter0: java.util.Collection;
+
+        specialinvoke this.<org.jsoup.select.CombiningEvaluator: void <init>()>();
+
+        $stack2 = this.<org.jsoup.select.CombiningEvaluator: java.util.ArrayList evaluators>;
+
+        virtualinvoke $stack2.<java.util.ArrayList: boolean addAll(java.util.Collection)>(evaluators);
+
+        virtualinvoke this.<org.jsoup.select.CombiningEvaluator: void updateNumEvaluators()>();
+
+        return;
+    }
+
+    org.jsoup.select.Evaluator rightMostEvaluator()
+    {
+        org.jsoup.select.CombiningEvaluator this;
+        int $stack1, $stack2, $stack3;
+        java.util.ArrayList $stack4;
+        java.lang.Object $stack5;
+        org.jsoup.select.Evaluator $stack6;
+
+        this := @this: org.jsoup.select.CombiningEvaluator;
+
+        $stack1 = this.<org.jsoup.select.CombiningEvaluator: int num>;
+
+        if $stack1 <= 0 goto label1;
+
+        $stack4 = this.<org.jsoup.select.CombiningEvaluator: java.util.ArrayList evaluators>;
+
+        $stack2 = this.<org.jsoup.select.CombiningEvaluator: int num>;
+
+        $stack3 = $stack2 - 1;
+
+        $stack5 = virtualinvoke $stack4.<java.util.ArrayList: java.lang.Object get(int)>($stack3);
+
+        $stack6 = (org.jsoup.select.Evaluator) $stack5;
+
+        goto label2;
+
+     label1:
+        $stack6 = null;
+
+     label2:
+        return $stack6;
+    }
+
+    void replaceRightMostEvaluator(org.jsoup.select.Evaluator)
+    {
+        org.jsoup.select.CombiningEvaluator this;
+        int $stack2, $stack3;
+        org.jsoup.select.Evaluator replacement;
+        java.util.ArrayList $stack4;
+
+        this := @this: org.jsoup.select.CombiningEvaluator;
+
+        replacement := @parameter0: org.jsoup.select.Evaluator;
+
+        $stack4 = this.<org.jsoup.select.CombiningEvaluator: java.util.ArrayList evaluators>;
+
+        $stack2 = this.<org.jsoup.select.CombiningEvaluator: int num>;
+
+        $stack3 = $stack2 - 1;
+
+        virtualinvoke $stack4.<java.util.ArrayList: java.lang.Object set(int,java.lang.Object)>($stack3, replacement);
+
+        return;
+    }
+
+    void updateNumEvaluators()
+    {
+        org.jsoup.select.CombiningEvaluator this;
+        java.util.ArrayList $stack1;
+        int $stack2;
+
+        this := @this: org.jsoup.select.CombiningEvaluator;
+
+        $stack1 = this.<org.jsoup.select.CombiningEvaluator: java.util.ArrayList evaluators>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.ArrayList: int size()>();
+
+        this.<org.jsoup.select.CombiningEvaluator: int num> = $stack2;
+
+        return;
+    }
+}

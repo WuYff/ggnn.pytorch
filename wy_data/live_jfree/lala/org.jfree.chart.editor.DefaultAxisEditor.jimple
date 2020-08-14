@@ -1,0 +1,854 @@
+class org.jfree.chart.editor.DefaultAxisEditor extends javax.swing.JPanel implements java.awt.event.ActionListener
+{
+    private javax.swing.JTextField label;
+    private java.awt.Font labelFont;
+    private org.jfree.chart.ui.PaintSample labelPaintSample;
+    private javax.swing.JTextField labelFontField;
+    private java.awt.Font tickLabelFont;
+    private javax.swing.JTextField tickLabelFontField;
+    private org.jfree.chart.ui.PaintSample tickLabelPaintSample;
+    private javax.swing.JPanel slot1;
+    private javax.swing.JPanel slot2;
+    private javax.swing.JCheckBox showTickLabelsCheckBox;
+    private javax.swing.JCheckBox showTickMarksCheckBox;
+    private org.jfree.chart.ui.RectangleInsets tickLabelInsets;
+    private org.jfree.chart.ui.RectangleInsets labelInsets;
+    private javax.swing.JTabbedPane otherTabs;
+    protected static java.util.ResourceBundle localizationResources;
+
+    public static org.jfree.chart.editor.DefaultAxisEditor getInstance(org.jfree.chart.axis.Axis)
+    {
+        org.jfree.chart.axis.Axis axis;
+        boolean $stack1, $stack2;
+        org.jfree.chart.editor.DefaultAxisEditor $stack3;
+        org.jfree.chart.editor.DefaultLogAxisEditor $stack4;
+        org.jfree.chart.axis.LogAxis $stack5;
+        org.jfree.chart.editor.DefaultNumberAxisEditor $stack6;
+        org.jfree.chart.axis.NumberAxis $stack7;
+
+        axis := @parameter0: org.jfree.chart.axis.Axis;
+
+        if axis == null goto label3;
+
+        $stack1 = axis instanceof org.jfree.chart.axis.NumberAxis;
+
+        if $stack1 == 0 goto label1;
+
+        $stack6 = new org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        $stack7 = (org.jfree.chart.axis.NumberAxis) axis;
+
+        specialinvoke $stack6.<org.jfree.chart.editor.DefaultNumberAxisEditor: void <init>(org.jfree.chart.axis.NumberAxis)>($stack7);
+
+        return $stack6;
+
+     label1:
+        $stack2 = axis instanceof org.jfree.chart.axis.LogAxis;
+
+        if $stack2 == 0 goto label2;
+
+        $stack4 = new org.jfree.chart.editor.DefaultLogAxisEditor;
+
+        $stack5 = (org.jfree.chart.axis.LogAxis) axis;
+
+        specialinvoke $stack4.<org.jfree.chart.editor.DefaultLogAxisEditor: void <init>(org.jfree.chart.axis.LogAxis)>($stack5);
+
+        return $stack4;
+
+     label2:
+        $stack3 = new org.jfree.chart.editor.DefaultAxisEditor;
+
+        specialinvoke $stack3.<org.jfree.chart.editor.DefaultAxisEditor: void <init>(org.jfree.chart.axis.Axis)>(axis);
+
+        return $stack3;
+
+     label3:
+        return null;
+    }
+
+    public void <init>(org.jfree.chart.axis.Axis)
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        org.jfree.chart.axis.Axis axis;
+        java.awt.Font $stack7, $stack10, $stack40, $stack87;
+        org.jfree.chart.ui.PaintSample $stack8, $stack11, $stack51;
+        java.awt.Paint $stack9, $stack12;
+        org.jfree.chart.ui.RectangleInsets $stack13, $stack14;
+        java.awt.BorderLayout $stack15, $stack17, $stack59, $stack61, $stack113;
+        javax.swing.JPanel $stack16, $stack22, $stack33, $stack58, $stack60, $stack69, $stack78, $stack80, $stack100, $stack102, $stack110, $stack112, $stack114, $stack115, $stack116;
+        javax.swing.border.Border $stack18, $stack24, $stack62, $stack68, $stack71;
+        java.util.ResourceBundle $stack19, $stack26, $stack36, $stack44, $stack48, $stack54, $stack63, $stack73, $stack83, $stack91, $stack95, $stack104;
+        java.lang.String $stack20, $stack27, $stack30, $stack37, $stack45, $stack49, $stack55, $stack64, $stack74, $stack84, $stack92, $stack96, $stack106;
+        javax.swing.border.TitledBorder $stack21, $stack65;
+        org.jfree.chart.ui.LCBLayout $stack23, $stack70;
+        javax.swing.JLabel $stack25, $stack35, $stack47, $stack82;
+        javax.swing.JTextField $stack29, $stack31, $stack41, $stack88;
+        org.jfree.chart.ui.FontDisplayField $stack39, $stack86;
+        javax.swing.JButton $stack43, $stack53, $stack90;
+        javax.swing.JTabbedPane $stack66, $stack67, $stack105, $stack108;
+        javax.swing.JCheckBox $stack72, $stack76, $stack94, $stack98;
+        boolean $stack75, $stack97;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        axis := @parameter0: org.jfree.chart.axis.Axis;
+
+        specialinvoke this.<javax.swing.JPanel: void <init>()>();
+
+        $stack7 = virtualinvoke axis.<org.jfree.chart.axis.Axis: java.awt.Font getLabelFont()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont> = $stack7;
+
+        $stack8 = new org.jfree.chart.ui.PaintSample;
+
+        $stack9 = virtualinvoke axis.<org.jfree.chart.axis.Axis: java.awt.Paint getLabelPaint()>();
+
+        specialinvoke $stack8.<org.jfree.chart.ui.PaintSample: void <init>(java.awt.Paint)>($stack9);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample labelPaintSample> = $stack8;
+
+        $stack10 = virtualinvoke axis.<org.jfree.chart.axis.Axis: java.awt.Font getTickLabelFont()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont> = $stack10;
+
+        $stack11 = new org.jfree.chart.ui.PaintSample;
+
+        $stack12 = virtualinvoke axis.<org.jfree.chart.axis.Axis: java.awt.Paint getTickLabelPaint()>();
+
+        specialinvoke $stack11.<org.jfree.chart.ui.PaintSample: void <init>(java.awt.Paint)>($stack12);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample tickLabelPaintSample> = $stack11;
+
+        $stack13 = virtualinvoke axis.<org.jfree.chart.axis.Axis: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets tickLabelInsets> = $stack13;
+
+        $stack14 = virtualinvoke axis.<org.jfree.chart.axis.Axis: org.jfree.chart.ui.RectangleInsets getLabelInsets()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets labelInsets> = $stack14;
+
+        $stack15 = new java.awt.BorderLayout;
+
+        specialinvoke $stack15.<java.awt.BorderLayout: void <init>()>();
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void setLayout(java.awt.LayoutManager)>($stack15);
+
+        $stack16 = new javax.swing.JPanel;
+
+        $stack17 = new java.awt.BorderLayout;
+
+        specialinvoke $stack17.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack16.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack17);
+
+        $stack18 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+
+        $stack19 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack20 = virtualinvoke $stack19.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("General");
+
+        $stack21 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack18, $stack20);
+
+        virtualinvoke $stack16.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack21);
+
+        $stack22 = new javax.swing.JPanel;
+
+        $stack23 = new org.jfree.chart.ui.LCBLayout;
+
+        specialinvoke $stack23.<org.jfree.chart.ui.LCBLayout: void <init>(int)>(5);
+
+        specialinvoke $stack22.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack23);
+
+        $stack24 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(0, 5, 0, 5);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack24);
+
+        $stack25 = new javax.swing.JLabel;
+
+        $stack26 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack27 = virtualinvoke $stack26.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Label");
+
+        specialinvoke $stack25.<javax.swing.JLabel: void <init>(java.lang.String)>($stack27);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack25);
+
+        $stack29 = new javax.swing.JTextField;
+
+        $stack30 = virtualinvoke axis.<org.jfree.chart.axis.Axis: java.lang.String getLabel()>();
+
+        specialinvoke $stack29.<javax.swing.JTextField: void <init>(java.lang.String)>($stack30);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField label> = $stack29;
+
+        $stack31 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField label>;
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack31);
+
+        $stack33 = new javax.swing.JPanel;
+
+        specialinvoke $stack33.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack33);
+
+        $stack35 = new javax.swing.JLabel;
+
+        $stack36 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack37 = virtualinvoke $stack36.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Font");
+
+        specialinvoke $stack35.<javax.swing.JLabel: void <init>(java.lang.String)>($stack37);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack35);
+
+        $stack39 = new org.jfree.chart.ui.FontDisplayField;
+
+        $stack40 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont>;
+
+        specialinvoke $stack39.<org.jfree.chart.ui.FontDisplayField: void <init>(java.awt.Font)>($stack40);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField labelFontField> = $stack39;
+
+        $stack41 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField labelFontField>;
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack41);
+
+        $stack43 = new javax.swing.JButton;
+
+        $stack44 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack45 = virtualinvoke $stack44.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack43.<javax.swing.JButton: void <init>(java.lang.String)>($stack45);
+
+        virtualinvoke $stack43.<javax.swing.JButton: void setActionCommand(java.lang.String)>("SelectLabelFont");
+
+        virtualinvoke $stack43.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack43);
+
+        $stack47 = new javax.swing.JLabel;
+
+        $stack48 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack49 = virtualinvoke $stack48.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Paint");
+
+        specialinvoke $stack47.<javax.swing.JLabel: void <init>(java.lang.String)>($stack49);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack47);
+
+        $stack51 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample labelPaintSample>;
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack51);
+
+        $stack53 = new javax.swing.JButton;
+
+        $stack54 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack55 = virtualinvoke $stack54.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack53.<javax.swing.JButton: void <init>(java.lang.String)>($stack55);
+
+        virtualinvoke $stack53.<javax.swing.JButton: void setActionCommand(java.lang.String)>("SelectLabelPaint");
+
+        virtualinvoke $stack53.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        virtualinvoke $stack22.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack53);
+
+        virtualinvoke $stack16.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack22);
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void add(java.awt.Component,java.lang.Object)>($stack16, "North");
+
+        $stack58 = new javax.swing.JPanel;
+
+        $stack59 = new java.awt.BorderLayout;
+
+        specialinvoke $stack59.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack58.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack59);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot1> = $stack58;
+
+        $stack60 = new javax.swing.JPanel;
+
+        $stack61 = new java.awt.BorderLayout;
+
+        specialinvoke $stack61.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack60.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack61);
+
+        $stack62 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+
+        $stack63 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack64 = virtualinvoke $stack63.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Other");
+
+        $stack65 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack62, $stack64);
+
+        virtualinvoke $stack60.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack65);
+
+        $stack66 = new javax.swing.JTabbedPane;
+
+        specialinvoke $stack66.<javax.swing.JTabbedPane: void <init>()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTabbedPane otherTabs> = $stack66;
+
+        $stack67 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTabbedPane otherTabs>;
+
+        $stack68 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(0, 5, 0, 5);
+
+        virtualinvoke $stack67.<javax.swing.JTabbedPane: void setBorder(javax.swing.border.Border)>($stack68);
+
+        $stack69 = new javax.swing.JPanel;
+
+        $stack70 = new org.jfree.chart.ui.LCBLayout;
+
+        specialinvoke $stack70.<org.jfree.chart.ui.LCBLayout: void <init>(int)>(3);
+
+        specialinvoke $stack69.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack70);
+
+        $stack71 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(4, 4, 4, 4);
+
+        virtualinvoke $stack69.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack71);
+
+        $stack72 = new javax.swing.JCheckBox;
+
+        $stack73 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack74 = virtualinvoke $stack73.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Show_tick_labels");
+
+        $stack75 = virtualinvoke axis.<org.jfree.chart.axis.Axis: boolean isTickLabelsVisible()>();
+
+        specialinvoke $stack72.<javax.swing.JCheckBox: void <init>(java.lang.String,boolean)>($stack74, $stack75);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickLabelsCheckBox> = $stack72;
+
+        $stack76 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickLabelsCheckBox>;
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack76);
+
+        $stack78 = new javax.swing.JPanel;
+
+        specialinvoke $stack78.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack78);
+
+        $stack80 = new javax.swing.JPanel;
+
+        specialinvoke $stack80.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack80);
+
+        $stack82 = new javax.swing.JLabel;
+
+        $stack83 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack84 = virtualinvoke $stack83.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Tick_label_font");
+
+        specialinvoke $stack82.<javax.swing.JLabel: void <init>(java.lang.String)>($stack84);
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack82);
+
+        $stack86 = new org.jfree.chart.ui.FontDisplayField;
+
+        $stack87 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont>;
+
+        specialinvoke $stack86.<org.jfree.chart.ui.FontDisplayField: void <init>(java.awt.Font)>($stack87);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField tickLabelFontField> = $stack86;
+
+        $stack88 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField tickLabelFontField>;
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack88);
+
+        $stack90 = new javax.swing.JButton;
+
+        $stack91 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack92 = virtualinvoke $stack91.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack90.<javax.swing.JButton: void <init>(java.lang.String)>($stack92);
+
+        virtualinvoke $stack90.<javax.swing.JButton: void setActionCommand(java.lang.String)>("SelectTickLabelFont");
+
+        virtualinvoke $stack90.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack90);
+
+        $stack94 = new javax.swing.JCheckBox;
+
+        $stack95 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack96 = virtualinvoke $stack95.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Show_tick_marks");
+
+        $stack97 = virtualinvoke axis.<org.jfree.chart.axis.Axis: boolean isTickMarksVisible()>();
+
+        specialinvoke $stack94.<javax.swing.JCheckBox: void <init>(java.lang.String,boolean)>($stack96, $stack97);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickMarksCheckBox> = $stack94;
+
+        $stack98 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickMarksCheckBox>;
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack98);
+
+        $stack100 = new javax.swing.JPanel;
+
+        specialinvoke $stack100.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack100);
+
+        $stack102 = new javax.swing.JPanel;
+
+        specialinvoke $stack102.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack69.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack102);
+
+        $stack105 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTabbedPane otherTabs>;
+
+        $stack104 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack106 = virtualinvoke $stack104.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Ticks");
+
+        virtualinvoke $stack105.<javax.swing.JTabbedPane: java.awt.Component add(java.lang.String,java.awt.Component)>($stack106, $stack69);
+
+        $stack108 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTabbedPane otherTabs>;
+
+        virtualinvoke $stack60.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack108);
+
+        $stack110 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot1>;
+
+        virtualinvoke $stack110.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack60);
+
+        $stack112 = new javax.swing.JPanel;
+
+        $stack113 = new java.awt.BorderLayout;
+
+        specialinvoke $stack113.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack112.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack113);
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot2> = $stack112;
+
+        $stack115 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot2>;
+
+        $stack114 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot1>;
+
+        virtualinvoke $stack115.<javax.swing.JPanel: void add(java.awt.Component,java.lang.Object)>($stack114, "North");
+
+        $stack116 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JPanel slot2>;
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Component add(java.awt.Component)>($stack116);
+
+        return;
+    }
+
+    public java.lang.String getLabel()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        javax.swing.JTextField $stack1;
+        java.lang.String $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField label>;
+
+        $stack2 = virtualinvoke $stack1.<javax.swing.JTextField: java.lang.String getText()>();
+
+        return $stack2;
+    }
+
+    public java.awt.Font getLabelFont()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont>;
+
+        return $stack1;
+    }
+
+    public java.awt.Paint getLabelPaint()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        org.jfree.chart.ui.PaintSample $stack1;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample labelPaintSample>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.ui.PaintSample: java.awt.Paint getPaint()>();
+
+        return $stack2;
+    }
+
+    public boolean isTickLabelsVisible()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        javax.swing.JCheckBox $stack1;
+        boolean $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickLabelsCheckBox>;
+
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+
+        return $stack2;
+    }
+
+    public java.awt.Font getTickLabelFont()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont>;
+
+        return $stack1;
+    }
+
+    public java.awt.Paint getTickLabelPaint()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        org.jfree.chart.ui.PaintSample $stack1;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample tickLabelPaintSample>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.ui.PaintSample: java.awt.Paint getPaint()>();
+
+        return $stack2;
+    }
+
+    public boolean isTickMarksVisible()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        javax.swing.JCheckBox $stack1;
+        boolean $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JCheckBox showTickMarksCheckBox>;
+
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getTickLabelInsets()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        org.jfree.chart.ui.RectangleInsets $stack1, $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets tickLabelInsets>;
+
+        if $stack1 != null goto label1;
+
+        $stack2 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack2.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(0.0, 0.0, 0.0, 0.0);
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets tickLabelInsets>;
+
+     label2:
+        return $stack2;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getLabelInsets()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        org.jfree.chart.ui.RectangleInsets $stack1, $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets labelInsets>;
+
+        if $stack1 != null goto label1;
+
+        $stack2 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack2.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(0.0, 0.0, 0.0, 0.0);
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets labelInsets>;
+
+     label2:
+        return $stack2;
+    }
+
+    public javax.swing.JTabbedPane getOtherTabs()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        javax.swing.JTabbedPane $stack1;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTabbedPane otherTabs>;
+
+        return $stack1;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        java.awt.event.ActionEvent event;
+        java.lang.String command;
+        boolean $stack4, $stack5, $stack6;
+        org.jfree.chart.editor.DefaultAxisEditor this;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        event := @parameter0: java.awt.event.ActionEvent;
+
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+
+        $stack4 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("SelectLabelFont");
+
+        if $stack4 == 0 goto label1;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void attemptLabelFontSelection()>();
+
+        goto label3;
+
+     label1:
+        $stack5 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("SelectLabelPaint");
+
+        if $stack5 == 0 goto label2;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void attemptModifyLabelPaint()>();
+
+        goto label3;
+
+     label2:
+        $stack6 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("SelectTickLabelFont");
+
+        if $stack6 == 0 goto label3;
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void attemptTickLabelFontSelection()>();
+
+     label3:
+        return;
+    }
+
+    private void attemptLabelFontSelection()
+    {
+        org.jfree.chart.ui.FontChooserPanel $stack3;
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.awt.Font $stack4, $stack8, $stack11, $stack15;
+        java.util.ResourceBundle $stack5;
+        java.lang.String $stack6, $stack12, $stack18;
+        int result, $stack16;
+        java.lang.StringBuilder $stack9, $stack13, $stack14, $stack17;
+        javax.swing.JTextField $stack10;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack3 = new org.jfree.chart.ui.FontChooserPanel;
+
+        $stack4 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont>;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.FontChooserPanel: void <init>(java.awt.Font)>($stack4);
+
+        $stack5 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Font_Selection");
+
+        result = staticinvoke <javax.swing.JOptionPane: int showConfirmDialog(java.awt.Component,java.lang.Object,java.lang.String,int,int)>(this, $stack3, $stack6, 2, -1);
+
+        if result != 0 goto label1;
+
+        $stack8 = virtualinvoke $stack3.<org.jfree.chart.ui.FontChooserPanel: java.awt.Font getSelectedFont()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont> = $stack8;
+
+        $stack10 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField labelFontField>;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont>;
+
+        $stack12 = virtualinvoke $stack11.<java.awt.Font: java.lang.String getFontName()>();
+
+        $stack13 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack12);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack15 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font labelFont>;
+
+        $stack16 = virtualinvoke $stack15.<java.awt.Font: int getSize()>();
+
+        $stack17 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack16);
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack10.<javax.swing.JTextField: void setText(java.lang.String)>($stack18);
+
+     label1:
+        return;
+    }
+
+    private void attemptModifyLabelPaint()
+    {
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.util.ResourceBundle $stack2;
+        java.lang.String $stack3;
+        java.awt.Color $stack4, c;
+        org.jfree.chart.ui.PaintSample $stack6;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack2 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Label_Color");
+
+        $stack4 = <java.awt.Color: java.awt.Color BLUE>;
+
+        c = staticinvoke <javax.swing.JColorChooser: java.awt.Color showDialog(java.awt.Component,java.lang.String,java.awt.Color)>(this, $stack3, $stack4);
+
+        if c == null goto label1;
+
+        $stack6 = this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.PaintSample labelPaintSample>;
+
+        virtualinvoke $stack6.<org.jfree.chart.ui.PaintSample: void setPaint(java.awt.Paint)>(c);
+
+     label1:
+        return;
+    }
+
+    public void attemptTickLabelFontSelection()
+    {
+        org.jfree.chart.ui.FontChooserPanel $stack3;
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.awt.Font $stack4, $stack8, $stack11, $stack15;
+        java.util.ResourceBundle $stack5;
+        java.lang.String $stack6, $stack12, $stack18;
+        int result, $stack16;
+        java.lang.StringBuilder $stack9, $stack13, $stack14, $stack17;
+        javax.swing.JTextField $stack10;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        $stack3 = new org.jfree.chart.ui.FontChooserPanel;
+
+        $stack4 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont>;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.FontChooserPanel: void <init>(java.awt.Font)>($stack4);
+
+        $stack5 = <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Font_Selection");
+
+        result = staticinvoke <javax.swing.JOptionPane: int showConfirmDialog(java.awt.Component,java.lang.Object,java.lang.String,int,int)>(this, $stack3, $stack6, 2, -1);
+
+        if result != 0 goto label1;
+
+        $stack8 = virtualinvoke $stack3.<org.jfree.chart.ui.FontChooserPanel: java.awt.Font getSelectedFont()>();
+
+        this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont> = $stack8;
+
+        $stack10 = this.<org.jfree.chart.editor.DefaultAxisEditor: javax.swing.JTextField tickLabelFontField>;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont>;
+
+        $stack12 = virtualinvoke $stack11.<java.awt.Font: java.lang.String getFontName()>();
+
+        $stack13 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack12);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack15 = this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font tickLabelFont>;
+
+        $stack16 = virtualinvoke $stack15.<java.awt.Font: int getSize()>();
+
+        $stack17 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack16);
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack10.<javax.swing.JTextField: void setText(java.lang.String)>($stack18);
+
+     label1:
+        return;
+    }
+
+    public void setAxisProperties(org.jfree.chart.axis.Axis)
+    {
+        org.jfree.chart.axis.Axis axis;
+        org.jfree.chart.editor.DefaultAxisEditor this;
+        java.lang.String $stack2;
+        java.awt.Font $stack3, $stack7;
+        java.awt.Paint $stack4, $stack8;
+        boolean $stack5, $stack6;
+        org.jfree.chart.ui.RectangleInsets $stack9, $stack10;
+
+        this := @this: org.jfree.chart.editor.DefaultAxisEditor;
+
+        axis := @parameter0: org.jfree.chart.axis.Axis;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.lang.String getLabel()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setLabel(java.lang.String)>($stack2);
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font getLabelFont()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setLabelFont(java.awt.Font)>($stack3);
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setLabelPaint(java.awt.Paint)>($stack4);
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: boolean isTickMarksVisible()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setTickMarksVisible(boolean)>($stack5);
+
+        $stack6 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: boolean isTickLabelsVisible()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setTickLabelsVisible(boolean)>($stack6);
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setTickLabelFont(java.awt.Font)>($stack7);
+
+        $stack8 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: java.awt.Paint getTickLabelPaint()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setTickLabelPaint(java.awt.Paint)>($stack8);
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setTickLabelInsets(org.jfree.chart.ui.RectangleInsets)>($stack9);
+
+        $stack10 = virtualinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.ui.RectangleInsets getLabelInsets()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setLabelInsets(org.jfree.chart.ui.RectangleInsets)>($stack10);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.ResourceBundle $stack0;
+
+        $stack0 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.editor.LocalizationBundle");
+
+        <org.jfree.chart.editor.DefaultAxisEditor: java.util.ResourceBundle localizationResources> = $stack0;
+
+        return;
+    }
+}

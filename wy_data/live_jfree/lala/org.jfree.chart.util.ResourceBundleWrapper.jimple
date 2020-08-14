@@ -1,0 +1,145 @@
+public class org.jfree.chart.util.ResourceBundleWrapper extends java.lang.Object
+{
+    private static java.net.URLClassLoader noCodeBaseClassLoader;
+
+    private void <init>()
+    {
+        org.jfree.chart.util.ResourceBundleWrapper this;
+
+        this := @this: org.jfree.chart.util.ResourceBundleWrapper;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void removeCodeBase(java.net.URL, java.net.URLClassLoader)
+    {
+        java.util.ArrayList $stack5;
+        java.net.URLClassLoader urlClassLoader, $stack11;
+        java.net.URL[] urls, $stack8, $stack10, i#2;
+        int $stack7, i;
+        java.lang.Object[] $stack9;
+        java.net.URL codeBase, $stack12, $stack16;
+        boolean $stack13;
+
+        codeBase := @parameter0: java.net.URL;
+
+        urlClassLoader := @parameter1: java.net.URLClassLoader;
+
+        $stack5 = new java.util.ArrayList;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>()>();
+
+        urls = virtualinvoke urlClassLoader.<java.net.URLClassLoader: java.net.URL[] getURLs()>();
+
+        i = 0;
+
+     label1:
+        $stack7 = lengthof urls;
+
+        if i >= $stack7 goto label3;
+
+        $stack12 = urls[i];
+
+        $stack13 = virtualinvoke $stack12.<java.net.URL: boolean sameFile(java.net.URL)>(codeBase);
+
+        if $stack13 != 0 goto label2;
+
+        $stack16 = urls[i];
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>($stack16);
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        $stack8 = newarray (java.net.URL)[0];
+
+        $stack9 = interfaceinvoke $stack5.<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>($stack8);
+
+        $stack10 = (java.net.URL[]) $stack9;
+
+        i#2 = (java.net.URL[]) $stack10;
+
+        $stack11 = staticinvoke <java.net.URLClassLoader: java.net.URLClassLoader newInstance(java.net.URL[])>(i#2);
+
+        <org.jfree.chart.util.ResourceBundleWrapper: java.net.URLClassLoader noCodeBaseClassLoader> = $stack11;
+
+        return;
+    }
+
+    public static java.util.ResourceBundle getBundle(java.lang.String)
+    {
+        java.net.URLClassLoader $stack1, $stack4;
+        java.lang.String baseName;
+        java.util.ResourceBundle $stack2, $stack5;
+        java.util.Locale $stack3;
+
+        baseName := @parameter0: java.lang.String;
+
+        $stack1 = <org.jfree.chart.util.ResourceBundleWrapper: java.net.URLClassLoader noCodeBaseClassLoader>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        $stack4 = <org.jfree.chart.util.ResourceBundleWrapper: java.net.URLClassLoader noCodeBaseClassLoader>;
+
+        $stack5 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale,java.lang.ClassLoader)>(baseName, $stack3, $stack4);
+
+        return $stack5;
+
+     label1:
+        $stack2 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String)>(baseName);
+
+        return $stack2;
+    }
+
+    public static java.util.ResourceBundle getBundle(java.lang.String, java.util.Locale)
+    {
+        java.net.URLClassLoader $stack2, $stack4;
+        java.lang.String baseName;
+        java.util.Locale locale;
+        java.util.ResourceBundle $stack3, $stack5;
+
+        baseName := @parameter0: java.lang.String;
+
+        locale := @parameter1: java.util.Locale;
+
+        $stack2 = <org.jfree.chart.util.ResourceBundleWrapper: java.net.URLClassLoader noCodeBaseClassLoader>;
+
+        if $stack2 == null goto label1;
+
+        $stack4 = <org.jfree.chart.util.ResourceBundleWrapper: java.net.URLClassLoader noCodeBaseClassLoader>;
+
+        $stack5 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale,java.lang.ClassLoader)>(baseName, locale, $stack4);
+
+        return $stack5;
+
+     label1:
+        $stack3 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale)>(baseName, locale);
+
+        return $stack3;
+    }
+
+    public static java.util.ResourceBundle getBundle(java.lang.String, java.util.Locale, java.lang.ClassLoader)
+    {
+        java.lang.String baseName;
+        java.util.Locale locale;
+        java.lang.ClassLoader loader;
+        java.util.ResourceBundle $stack3;
+
+        baseName := @parameter0: java.lang.String;
+
+        locale := @parameter1: java.util.Locale;
+
+        loader := @parameter2: java.lang.ClassLoader;
+
+        $stack3 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale,java.lang.ClassLoader)>(baseName, locale, loader);
+
+        return $stack3;
+    }
+}

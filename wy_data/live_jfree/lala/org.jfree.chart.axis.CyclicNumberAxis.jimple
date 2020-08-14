@@ -1,0 +1,2247 @@
+public class org.jfree.chart.axis.CyclicNumberAxis extends org.jfree.chart.axis.NumberAxis
+{
+    static final long serialVersionUID;
+    public static java.awt.Stroke DEFAULT_ADVANCE_LINE_STROKE;
+    public static final java.awt.Paint DEFAULT_ADVANCE_LINE_PAINT;
+    protected double offset;
+    protected double period;
+    protected boolean boundMappedToLastCycle;
+    protected boolean advanceLineVisible;
+    protected transient java.awt.Stroke advanceLineStroke;
+    protected transient java.awt.Paint advanceLinePaint;
+    private transient boolean internalMarkerWhenTicksOverlap;
+    private transient org.jfree.chart.axis.Tick internalMarkerCycleBoundTick;
+
+    public void <init>(double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double period;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        period := @parameter0: double;
+
+        specialinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void <init>(double,double)>(period, 0.0);
+
+        return;
+    }
+
+    public void <init>(double, double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double period, offset;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        period := @parameter0: double;
+
+        offset := @parameter1: double;
+
+        specialinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void <init>(double,double,java.lang.String)>(period, offset, null);
+
+        return;
+    }
+
+    public void <init>(double, java.lang.String)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double period;
+        java.lang.String label;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        period := @parameter0: double;
+
+        label := @parameter1: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void <init>(double,double,java.lang.String)>(0.0, period, label);
+
+        return;
+    }
+
+    public void <init>(double, double, java.lang.String)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.lang.String label;
+        java.awt.Stroke $stack6;
+        double period, offset;
+        java.awt.Paint $stack7;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        period := @parameter0: double;
+
+        offset := @parameter1: double;
+
+        label := @parameter2: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(label);
+
+        $stack6 = <org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke DEFAULT_ADVANCE_LINE_STROKE>;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke> = $stack6;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double period> = period;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double offset> = offset;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void setFixedAutoRange(double)>(period);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean advanceLineVisible> = 1;
+
+        $stack7 = <org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint DEFAULT_ADVANCE_LINE_PAINT>;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint> = $stack7;
+
+        return;
+    }
+
+    public boolean isAdvanceLineVisible()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean advanceLineVisible>;
+
+        return $stack1;
+    }
+
+    public void setAdvanceLineVisible(boolean)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        boolean visible;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        visible := @parameter0: boolean;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean advanceLineVisible> = visible;
+
+        return;
+    }
+
+    public java.awt.Paint getAdvanceLinePaint()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint>;
+
+        return $stack1;
+    }
+
+    public void setAdvanceLinePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint> = paint;
+
+        return;
+    }
+
+    public java.awt.Stroke getAdvanceLineStroke()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke>;
+
+        return $stack1;
+    }
+
+    public void setAdvanceLineStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke> = stroke;
+
+        return;
+    }
+
+    public boolean isBoundMappedToLastCycle()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        return $stack1;
+    }
+
+    public void setBoundMappedToLastCycle(boolean)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        boolean boundMappedToLastCycle;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        boundMappedToLastCycle := @parameter0: boolean;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = boundMappedToLastCycle;
+
+        return;
+    }
+
+    protected void selectHorizontalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.NumberTickUnit $stack9, $stack17;
+        double tickLabelWidth, $stack12, $stack13, $stack14, n;
+        org.jfree.data.Range $stack11;
+        java.awt.geom.Rectangle2D dataArea, drawArea;
+        org.jfree.chart.axis.TickUnitSource $stack15;
+        org.jfree.chart.axis.TickUnit $stack16;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        drawArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        tickLabelWidth = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)>(g2, $stack9);
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.data.Range: double getLength()>();
+
+        $stack13 = $stack12 * tickLabelWidth;
+
+        $stack14 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        n = $stack13 / $stack14;
+
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        $stack16 = interfaceinvoke $stack15.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(n);
+
+        $stack17 = (org.jfree.chart.axis.NumberTickUnit) $stack16;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>($stack17, 0, 0);
+
+        return;
+    }
+
+    protected void selectVerticalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.NumberTickUnit $stack9, $stack17;
+        double tickLabelWidth, $stack12, $stack13, $stack14, n;
+        org.jfree.data.Range $stack11;
+        java.awt.geom.Rectangle2D dataArea, drawArea;
+        org.jfree.chart.axis.TickUnitSource $stack15;
+        org.jfree.chart.axis.TickUnit $stack16;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        drawArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        tickLabelWidth = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)>(g2, $stack9);
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.data.Range: double getLength()>();
+
+        $stack13 = $stack12 * tickLabelWidth;
+
+        $stack14 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        n = $stack13 / $stack14;
+
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        $stack16 = interfaceinvoke $stack15.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(n);
+
+        $stack17 = (org.jfree.chart.axis.NumberTickUnit) $stack16;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>($stack17, 0, 0);
+
+        return;
+    }
+
+    protected float[] calculateAnchorPoint(org.jfree.chart.axis.ValueTick, double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.ValueTick tick;
+        boolean $stack8, mapsav, $stack11;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double cursor;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        float[] $stack9, 'ret';
+        org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick $stack10;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        tick := @parameter0: org.jfree.chart.axis.ValueTick;
+
+        cursor := @parameter1: double;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack8 = tick instanceof org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        if $stack8 == 0 goto label1;
+
+        mapsav = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack10 = (org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick) tick;
+
+        $stack11 = $stack10.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: boolean mapToLastCycle>;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = $stack11;
+
+        'ret' = specialinvoke this.<org.jfree.chart.axis.NumberAxis: float[] calculateAnchorPoint(org.jfree.chart.axis.ValueTick,double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(tick, cursor, dataArea, edge);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = mapsav;
+
+        return 'ret';
+
+     label1:
+        $stack9 = specialinvoke this.<org.jfree.chart.axis.NumberAxis: float[] calculateAnchorPoint(org.jfree.chart.axis.ValueTick,double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(tick, cursor, dataArea, edge);
+
+        return $stack9;
+    }
+
+    protected java.util.List refreshTicksHorizontal(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack29;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        boolean $stack31, boundMapping, $stack47, $stack76, $stack81, $stack86, $stack105, $stack110, $stack115, $stack135, $stack140, $stack145, cycled, cyclenow, $stack50;
+        org.jfree.chart.axis.NumberTickUnit $stack32, $stack45;
+        double unit, cycleBound, $stack35, $stack36, $stack41, xx, $stack84, $stack113, $stack143, currentTickValue, upperValue, angle;
+        org.jfree.data.Range $stack37;
+        byte $stack39, $stack42, $stack65, $stack75, $stack102, $stack104, $stack132, $stack134, $stack40, $stack52;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge, $stack48, $stack131;
+        java.text.NumberFormat formatter;
+        float x, lastX;
+        int $stack77, $stack78, $stack106, $stack107, $stack136, $stack137;
+        org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick $stack80, $stack109, $stack139, lastTick, $stack49;
+        java.lang.Number $stack82, $stack111, $stack141;
+        java.lang.String $stack83, $stack112, $stack142, tickLabel;
+        org.jfree.chart.ui.TextAnchor anchor, $stack147, $stack146, rotationAnchor, $stack117, $stack116, $stack88, $stack87;
+        java.lang.Double $stack51;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack29 = new java.util.ArrayList;
+
+        specialinvoke $stack29.<java.util.ArrayList: void <init>()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label01;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label01:
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        unit = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        cycleBound = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+
+        $stack35 = cycleBound / unit;
+
+        $stack36 = staticinvoke <java.lang.Math: double ceil(double)>($stack35);
+
+        currentTickValue = $stack36 * unit;
+
+        $stack37 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        upperValue = virtualinvoke $stack37.<org.jfree.data.Range: double getUpperBound()>();
+
+        cycled = 0;
+
+        boundMapping = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 0;
+
+        lastTick = null;
+
+        lastX = 0.0F;
+
+        $stack39 = upperValue cmpl cycleBound;
+
+        if $stack39 != 0 goto label02;
+
+        currentTickValue = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double calculateLowestVisibleTickValue()>();
+
+        cycled = 1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 1;
+
+     label02:
+        $stack40 = currentTickValue cmpg upperValue;
+
+        if $stack40 > 0 goto label28;
+
+        cyclenow = 0;
+
+        $stack41 = currentTickValue + unit;
+
+        $stack42 = $stack41 cmpl upperValue;
+
+        if $stack42 <= 0 goto label03;
+
+        if cycled != 0 goto label03;
+
+        cyclenow = 1;
+
+     label03:
+        xx = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(currentTickValue, dataArea, edge);
+
+        formatter = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.text.NumberFormat getNumberFormatOverride()>();
+
+        if formatter == null goto label04;
+
+        tickLabel = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(currentTickValue);
+
+        goto label05;
+
+     label04:
+        $stack45 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        tickLabel = virtualinvoke $stack45.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>(currentTickValue);
+
+     label05:
+        x = (float) xx;
+
+        angle = 0.0;
+
+        $stack47 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isVerticalTickLabels()>();
+
+        if $stack47 == 0 goto label13;
+
+        $stack131 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack131 goto label06;
+
+        angle = 1.5707963267948966;
+
+        goto label07;
+
+     label06:
+        angle = -1.5707963267948966;
+
+     label07:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        if lastTick == null goto label12;
+
+        $stack132 = lastX cmpl x;
+
+        if $stack132 != 0 goto label12;
+
+        $stack134 = currentTickValue cmpl cycleBound;
+
+        if $stack134 == 0 goto label12;
+
+        $stack135 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack135 == 0 goto label08;
+
+        $stack147 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+        goto label09;
+
+     label08:
+        $stack147 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+     label09:
+        $stack136 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack137 = $stack136 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack137);
+
+        $stack139 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack140 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack141 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.Number getNumber()>();
+
+        $stack142 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.String getText()>();
+
+        $stack143 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: double getAngle()>();
+
+        specialinvoke $stack139.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack140, $stack141, $stack142, $stack147, $stack147, $stack143);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack139);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack145 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack145 == 0 goto label10;
+
+        $stack146 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label11;
+
+     label10:
+        $stack146 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+     label11:
+        anchor = $stack146;
+
+     label12:
+        rotationAnchor = anchor;
+
+        goto label25;
+
+     label13:
+        $stack48 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack48 goto label19;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        if lastTick == null goto label18;
+
+        $stack102 = lastX cmpl x;
+
+        if $stack102 != 0 goto label18;
+
+        $stack104 = currentTickValue cmpl cycleBound;
+
+        if $stack104 == 0 goto label18;
+
+        $stack105 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack105 == 0 goto label14;
+
+        $stack117 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+        goto label15;
+
+     label14:
+        $stack117 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+     label15:
+        $stack106 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack107 = $stack106 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack107);
+
+        $stack109 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack110 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack111 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.Number getNumber()>();
+
+        $stack112 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.String getText()>();
+
+        $stack113 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: double getAngle()>();
+
+        specialinvoke $stack109.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack110, $stack111, $stack112, $stack117, $stack117, $stack113);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack109);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack115 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack115 == 0 goto label16;
+
+        $stack116 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label17;
+
+     label16:
+        $stack116 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label17:
+        anchor = $stack116;
+
+     label18:
+        rotationAnchor = anchor;
+
+        goto label25;
+
+     label19:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        if lastTick == null goto label24;
+
+        $stack65 = lastX cmpl x;
+
+        if $stack65 != 0 goto label24;
+
+        $stack75 = currentTickValue cmpl cycleBound;
+
+        if $stack75 == 0 goto label24;
+
+        $stack76 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack76 == 0 goto label20;
+
+        $stack88 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        goto label21;
+
+     label20:
+        $stack88 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+     label21:
+        $stack77 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack78 = $stack77 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack78);
+
+        $stack80 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack81 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack82 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.Number getNumber()>();
+
+        $stack83 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: java.lang.String getText()>();
+
+        $stack84 = virtualinvoke lastTick.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: double getAngle()>();
+
+        specialinvoke $stack80.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack81, $stack82, $stack83, $stack88, $stack88, $stack84);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack80);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack86 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack86 == 0 goto label22;
+
+        $stack87 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+        goto label23;
+
+     label22:
+        $stack87 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+     label23:
+        anchor = $stack87;
+
+     label24:
+        rotationAnchor = anchor;
+
+     label25:
+        $stack49 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack50 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack51 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(currentTickValue);
+
+        specialinvoke $stack49.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack50, $stack51, tickLabel, anchor, rotationAnchor, angle);
+
+        $stack52 = currentTickValue cmpl cycleBound;
+
+        if $stack52 != 0 goto label26;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick> = $stack49;
+
+     label26:
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack49);
+
+        lastTick = $stack49;
+
+        lastX = x;
+
+        currentTickValue = currentTickValue + unit;
+
+        if cyclenow == 0 goto label27;
+
+        currentTickValue = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double calculateLowestVisibleTickValue()>();
+
+        upperValue = cycleBound;
+
+        cycled = 1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 1;
+
+     label27:
+        goto label02;
+
+     label28:
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = boundMapping;
+
+        return $stack29;
+    }
+
+    protected java.util.List refreshVerticalTicks(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack29;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        boolean $stack31, boundMapping, $stack47, $stack79, $stack84, $stack89, $stack108, $stack113, $stack118, $stack139, $stack144, $stack149, $stack169, $stack174, $stack179, cycled, cyclenow, $stack50;
+        org.jfree.chart.axis.NumberTickUnit $stack32, $stack45;
+        double unit, cycleBound, $stack35, $stack36, $stack41, yy, $stack87, $stack116, $stack147, $stack177, currentTickValue, upperValue, angle;
+        org.jfree.data.Range $stack37;
+        byte $stack39, $stack42, $stack54, $stack68, $stack78, $stack105, $stack107, $stack135, $stack138, $stack165, $stack168, $stack40, $stack52;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge, $stack48, $stack134;
+        java.text.NumberFormat formatter;
+        float y, lastY;
+        int $stack80, $stack81, $stack109, $stack110, $stack140, $stack141, $stack170, $stack171;
+        org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick $stack83, $stack112, $stack143, $stack173, lastTick, $stack49;
+        java.lang.Number $stack85, $stack114, $stack145, $stack175;
+        java.lang.String $stack86, $stack115, $stack146, $stack176, tickLabel;
+        org.jfree.chart.ui.TextAnchor anchor, $stack181, $stack180, rotationAnchor, $stack151, $stack150, $stack120, $stack119, $stack91, $stack90;
+        java.lang.Double $stack51;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack29 = new java.util.ArrayList;
+
+        specialinvoke $stack29.<java.util.ArrayList: void <init>()>();
+
+        interfaceinvoke $stack29.<java.util.List: void clear()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label01;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label01:
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        unit = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        cycleBound = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+
+        $stack35 = cycleBound / unit;
+
+        $stack36 = staticinvoke <java.lang.Math: double ceil(double)>($stack35);
+
+        currentTickValue = $stack36 * unit;
+
+        $stack37 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        upperValue = virtualinvoke $stack37.<org.jfree.data.Range: double getUpperBound()>();
+
+        cycled = 0;
+
+        boundMapping = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 1;
+
+        lastTick = null;
+
+        lastY = 0.0F;
+
+        $stack39 = upperValue cmpl cycleBound;
+
+        if $stack39 != 0 goto label02;
+
+        currentTickValue = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double calculateLowestVisibleTickValue()>();
+
+        cycled = 1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 1;
+
+     label02:
+        $stack40 = currentTickValue cmpg upperValue;
+
+        if $stack40 > 0 goto label33;
+
+        cyclenow = 0;
+
+        $stack41 = currentTickValue + unit;
+
+        $stack42 = $stack41 cmpl upperValue;
+
+        if $stack42 <= 0 goto label03;
+
+        if cycled != 0 goto label03;
+
+        cyclenow = 1;
+
+     label03:
+        yy = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(currentTickValue, dataArea, edge);
+
+        formatter = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.text.NumberFormat getNumberFormatOverride()>();
+
+        if formatter == null goto label04;
+
+        tickLabel = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(currentTickValue);
+
+        goto label05;
+
+     label04:
+        $stack45 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        tickLabel = virtualinvoke $stack45.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>(currentTickValue);
+
+     label05:
+        y = (float) yy;
+
+        angle = 0.0;
+
+        $stack47 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isVerticalTickLabels()>();
+
+        if $stack47 == 0 goto label17;
+
+        $stack134 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack134 goto label11;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        if lastTick == null goto label10;
+
+        $stack165 = lastY cmpl y;
+
+        if $stack165 != 0 goto label10;
+
+        $stack168 = currentTickValue cmpl cycleBound;
+
+        if $stack168 == 0 goto label10;
+
+        $stack169 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack169 == 0 goto label06;
+
+        $stack181 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+        goto label07;
+
+     label06:
+        $stack181 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+     label07:
+        $stack170 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack171 = $stack170 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack171);
+
+        $stack173 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack174 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack175 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+
+        $stack176 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.String getText()>();
+
+        $stack177 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: double getAngle()>();
+
+        specialinvoke $stack173.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack174, $stack175, $stack176, $stack181, $stack181, $stack177);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack173);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack179 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack179 == 0 goto label08;
+
+        $stack180 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label09;
+
+     label08:
+        $stack180 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label09:
+        anchor = $stack180;
+
+     label10:
+        rotationAnchor = anchor;
+
+        angle = -1.5707963267948966;
+
+        goto label29;
+
+     label11:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        if lastTick == null goto label16;
+
+        $stack135 = lastY cmpl y;
+
+        if $stack135 != 0 goto label16;
+
+        $stack138 = currentTickValue cmpl cycleBound;
+
+        if $stack138 == 0 goto label16;
+
+        $stack139 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack139 == 0 goto label12;
+
+        $stack151 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label13;
+
+     label12:
+        $stack151 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label13:
+        $stack140 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack141 = $stack140 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack141);
+
+        $stack143 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack144 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack145 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+
+        $stack146 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.String getText()>();
+
+        $stack147 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: double getAngle()>();
+
+        specialinvoke $stack143.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack144, $stack145, $stack146, $stack151, $stack151, $stack147);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack143);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack149 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack149 == 0 goto label14;
+
+        $stack150 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+        goto label15;
+
+     label14:
+        $stack150 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+     label15:
+        anchor = $stack150;
+
+     label16:
+        rotationAnchor = anchor;
+
+        angle = 1.5707963267948966;
+
+        goto label29;
+
+     label17:
+        $stack48 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack48 goto label23;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        if lastTick == null goto label22;
+
+        $stack105 = lastY cmpl y;
+
+        if $stack105 != 0 goto label22;
+
+        $stack107 = currentTickValue cmpl cycleBound;
+
+        if $stack107 == 0 goto label22;
+
+        $stack108 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack108 == 0 goto label18;
+
+        $stack120 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label19;
+
+     label18:
+        $stack120 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+     label19:
+        $stack109 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack110 = $stack109 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack110);
+
+        $stack112 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack113 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack114 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+
+        $stack115 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.String getText()>();
+
+        $stack116 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: double getAngle()>();
+
+        specialinvoke $stack112.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack113, $stack114, $stack115, $stack120, $stack120, $stack116);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack112);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack118 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack118 == 0 goto label20;
+
+        $stack119 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+        goto label21;
+
+     label20:
+        $stack119 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+     label21:
+        anchor = $stack119;
+
+     label22:
+        rotationAnchor = anchor;
+
+        goto label29;
+
+     label23:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_LEFT>;
+
+        if lastTick == null goto label28;
+
+        $stack68 = lastY cmpl y;
+
+        if $stack68 != 0 goto label28;
+
+        $stack78 = currentTickValue cmpl cycleBound;
+
+        if $stack78 == 0 goto label28;
+
+        $stack79 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack79 == 0 goto label24;
+
+        $stack91 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+        goto label25;
+
+     label24:
+        $stack91 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+     label25:
+        $stack80 = interfaceinvoke $stack29.<java.util.List: int size()>();
+
+        $stack81 = $stack80 - 1;
+
+        interfaceinvoke $stack29.<java.util.List: java.lang.Object remove(int)>($stack81);
+
+        $stack83 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack84 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack85 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+
+        $stack86 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: java.lang.String getText()>();
+
+        $stack87 = virtualinvoke lastTick.<org.jfree.chart.axis.NumberTick: double getAngle()>();
+
+        specialinvoke $stack83.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack84, $stack85, $stack86, $stack91, $stack91, $stack87);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack83);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 1;
+
+        $stack89 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack89 == 0 goto label26;
+
+        $stack90 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        goto label27;
+
+     label26:
+        $stack90 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label27:
+        anchor = $stack90;
+
+     label28:
+        rotationAnchor = anchor;
+
+     label29:
+        $stack49 = new org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick;
+
+        $stack50 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack51 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(currentTickValue);
+
+        specialinvoke $stack49.<org.jfree.chart.axis.CyclicNumberAxis$CycleBoundTick: void <init>(boolean,java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack50, $stack51, tickLabel, anchor, rotationAnchor, angle);
+
+        $stack52 = currentTickValue cmpl cycleBound;
+
+        if $stack52 != 0 goto label30;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick> = $stack49;
+
+     label30:
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack49);
+
+        lastTick = $stack49;
+
+        lastY = y;
+
+        $stack54 = currentTickValue cmpl cycleBound;
+
+        if $stack54 != 0 goto label31;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick> = $stack49;
+
+     label31:
+        currentTickValue = currentTickValue + unit;
+
+        if cyclenow == 0 goto label32;
+
+        currentTickValue = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double calculateLowestVisibleTickValue()>();
+
+        upperValue = cycleBound;
+
+        cycled = 1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = 0;
+
+     label32:
+        goto label02;
+
+     label33:
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle> = boundMapping;
+
+        return $stack29;
+    }
+
+    public double java2DToValue(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        org.jfree.data.Range range;
+        double vmax, vp, $stack22, $stack23, $stack24, $stack25, $stack26, java2DValue, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, jmin, jmax, jbreak;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack19, $stack20, $stack21;
+        byte $stack27, $stack45;
+        java.awt.geom.Rectangle2D dataArea;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        java2DValue := @parameter0: double;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        vmax = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        vp = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+
+        jmin = 0.0;
+
+        jmax = 0.0;
+
+        $stack19 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack19 == 0 goto label1;
+
+        jmin = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        jmax = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label2;
+
+     label1:
+        $stack20 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack20 == 0 goto label2;
+
+        jmin = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        jmax = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+     label2:
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack21 == 0 goto label4;
+
+        $stack41 = vmax - vp;
+
+        $stack40 = jmax - jmin;
+
+        $stack43 = $stack41 * $stack40;
+
+        $stack42 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack44 = $stack43 / $stack42;
+
+        jbreak = jmax - $stack44;
+
+        $stack45 = java2DValue cmpl jbreak;
+
+        if $stack45 < 0 goto label3;
+
+        $stack53 = jmax - java2DValue;
+
+        $stack52 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack55 = $stack53 * $stack52;
+
+        $stack54 = jmax - jmin;
+
+        $stack56 = $stack55 / $stack54;
+
+        $stack57 = vp + $stack56;
+
+        return $stack57;
+
+     label3:
+        $stack47 = java2DValue - jmin;
+
+        $stack46 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack49 = $stack47 * $stack46;
+
+        $stack48 = jmax - jmin;
+
+        $stack50 = $stack49 / $stack48;
+
+        $stack51 = vp - $stack50;
+
+        return $stack51;
+
+     label4:
+        $stack23 = vmax - vp;
+
+        $stack22 = jmax - jmin;
+
+        $stack25 = $stack23 * $stack22;
+
+        $stack24 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack26 = $stack25 / $stack24;
+
+        jbreak = $stack26 + jmin;
+
+        $stack27 = java2DValue cmpg jbreak;
+
+        if $stack27 > 0 goto label5;
+
+        $stack35 = java2DValue - jmin;
+
+        $stack34 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack37 = $stack35 * $stack34;
+
+        $stack36 = jmax - jmin;
+
+        $stack38 = $stack37 / $stack36;
+
+        $stack39 = vp + $stack38;
+
+        return $stack39;
+
+     label5:
+        $stack29 = jmax - java2DValue;
+
+        $stack28 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack31 = $stack29 * $stack28;
+
+        $stack30 = jmax - jmin;
+
+        $stack32 = $stack31 / $stack30;
+
+        $stack33 = vp - $stack32;
+
+        return $stack33;
+    }
+
+    public double valueToJava2D(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        org.jfree.data.Range range;
+        double vmin, vmax, vp, value, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, jmin, jmax, $stack56, $stack40;
+        byte $stack20, $stack21, $stack25, $stack26, $stack41, $stack42;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack22, $stack23, $stack39, $stack55, $stack24;
+        java.awt.geom.Rectangle2D dataArea;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        value := @parameter0: double;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        vmin = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        vmax = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        vp = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+
+        $stack20 = value cmpg vmin;
+
+        if $stack20 < 0 goto label01;
+
+        $stack21 = value cmpl vmax;
+
+        if $stack21 <= 0 goto label02;
+
+     label01:
+        return #NaN;
+
+     label02:
+        jmin = 0.0;
+
+        jmax = 0.0;
+
+        $stack22 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack22 == 0 goto label03;
+
+        jmin = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        jmax = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label04;
+
+     label03:
+        $stack23 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack23 == 0 goto label04;
+
+        jmax = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        jmin = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+     label04:
+        $stack24 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isInverted()>();
+
+        if $stack24 == 0 goto label09;
+
+        $stack41 = value cmpl vp;
+
+        if $stack41 != 0 goto label07;
+
+        $stack55 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        if $stack55 == 0 goto label05;
+
+        $stack56 = jmin;
+
+        goto label06;
+
+     label05:
+        $stack56 = jmax;
+
+     label06:
+        return $stack56;
+
+     label07:
+        $stack42 = value cmpl vp;
+
+        if $stack42 <= 0 goto label08;
+
+        $stack50 = value - vp;
+
+        $stack49 = jmax - jmin;
+
+        $stack52 = $stack50 * $stack49;
+
+        $stack51 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack53 = $stack52 / $stack51;
+
+        $stack54 = jmax - $stack53;
+
+        return $stack54;
+
+     label08:
+        $stack44 = vp - value;
+
+        $stack43 = jmax - jmin;
+
+        $stack46 = $stack44 * $stack43;
+
+        $stack45 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack47 = $stack46 / $stack45;
+
+        $stack48 = jmin + $stack47;
+
+        return $stack48;
+
+     label09:
+        $stack25 = value cmpl vp;
+
+        if $stack25 != 0 goto label12;
+
+        $stack39 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        if $stack39 == 0 goto label10;
+
+        $stack40 = jmax;
+
+        goto label11;
+
+     label10:
+        $stack40 = jmin;
+
+     label11:
+        return $stack40;
+
+     label12:
+        $stack26 = value cmpl vp;
+
+        if $stack26 < 0 goto label13;
+
+        $stack34 = value - vp;
+
+        $stack33 = jmax - jmin;
+
+        $stack36 = $stack34 * $stack33;
+
+        $stack35 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack37 = $stack36 / $stack35;
+
+        $stack38 = jmin + $stack37;
+
+        return $stack38;
+
+     label13:
+        $stack28 = vp - value;
+
+        $stack27 = jmax - jmin;
+
+        $stack30 = $stack28 * $stack27;
+
+        $stack29 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack31 = $stack30 / $stack29;
+
+        $stack32 = jmax - $stack31;
+
+        return $stack32;
+    }
+
+    public void centerRange(double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double value, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        value := @parameter0: double;
+
+        $stack3 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack4 = $stack3 / 2.0;
+
+        $stack8 = value - $stack4;
+
+        $stack5 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack6 = $stack5 / 2.0;
+
+        $stack7 = value + $stack6;
+
+        virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: void setRange(double,double)>($stack8, $stack7);
+
+        return;
+    }
+
+    public void setAutoRangeMinimumSize(double, boolean)
+    {
+        double size, $stack4;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        byte $stack5;
+        boolean notify;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        size := @parameter0: double;
+
+        notify := @parameter1: boolean;
+
+        $stack4 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack5 = size cmpl $stack4;
+
+        if $stack5 <= 0 goto label1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double period> = size;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void setAutoRangeMinimumSize(double,boolean)>(size, notify);
+
+        return;
+    }
+
+    public void setFixedAutoRange(double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double length;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        length := @parameter0: double;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double period> = length;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void setFixedAutoRange(double)>(length);
+
+        return;
+    }
+
+    public void setRange(org.jfree.data.Range, boolean, boolean)
+    {
+        org.jfree.data.Range range;
+        double $stack6, $stack7, size, $stack8;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        byte $stack9;
+        boolean turnOffAutoRange, notify;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        range := @parameter0: org.jfree.data.Range;
+
+        turnOffAutoRange := @parameter1: boolean;
+
+        notify := @parameter2: boolean;
+
+        $stack6 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack7 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        size = $stack6 - $stack7;
+
+        $stack8 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack9 = size cmpl $stack8;
+
+        if $stack9 <= 0 goto label1;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double period> = size;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void setRange(org.jfree.data.Range,boolean,boolean)>(range, turnOffAutoRange, notify);
+
+        return;
+    }
+
+    public double getCycleBound()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        org.jfree.data.Range $stack1;
+        double $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack3 = this.<org.jfree.chart.axis.CyclicNumberAxis: double offset>;
+
+        $stack5 = $stack2 - $stack3;
+
+        $stack4 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack6 = $stack5 / $stack4;
+
+        $stack7 = staticinvoke <java.lang.Math: double floor(double)>($stack6);
+
+        $stack8 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack10 = $stack7 * $stack8;
+
+        $stack9 = this.<org.jfree.chart.axis.CyclicNumberAxis: double offset>;
+
+        $stack11 = $stack10 + $stack9;
+
+        return $stack11;
+    }
+
+    public double getOffset()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: double offset>;
+
+        return $stack1;
+    }
+
+    public void setOffset(double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double offset;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        offset := @parameter0: double;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double offset> = offset;
+
+        return;
+    }
+
+    public double getPeriod()
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        return $stack1;
+    }
+
+    public void setPeriod(double)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        double period;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        period := @parameter0: double;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: double period> = period;
+
+        return;
+    }
+
+    protected org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D, double, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Graphics2D g2;
+        double cursor, $stack23, $stack24, $stack33, $stack34, $stack35, $stack36, $stack40, $stack41, $stack42, $stack43, $stack45, $stack46, $stack47, $stack48, $stack50, $stack51, $stack52, $stack53, ol;
+        java.awt.geom.Rectangle2D plotArea, dataArea;
+        org.jfree.chart.ui.RectangleEdge edge, $stack27, $stack28, $stack29, $stack30;
+        org.jfree.chart.axis.AxisState 'ret';
+        boolean $stack16, $stack19, $stack21;
+        java.awt.Font $stack17;
+        java.awt.FontMetrics fm;
+        int $stack20, $stack54;
+        org.jfree.data.Range $stack22;
+        float xx;
+        java.awt.Stroke $stack25;
+        java.awt.Paint $stack26;
+        java.awt.geom.Line2D$Double $stack32, $stack39, $stack44, $stack49, mark;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        cursor := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap> = 0;
+
+        'ret' = specialinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, cursor, plotArea, dataArea, edge);
+
+        $stack16 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean internalMarkerWhenTicksOverlap>;
+
+        if $stack16 != 0 goto label1;
+
+        return 'ret';
+
+     label1:
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Font getTickLabelFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack17);
+
+        $stack19 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isVerticalTickLabels()>();
+
+        if $stack19 == 0 goto label2;
+
+        $stack54 = virtualinvoke fm.<java.awt.FontMetrics: int getMaxAdvance()>();
+
+        ol = (double) $stack54;
+
+        goto label3;
+
+     label2:
+        $stack20 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        ol = (double) $stack20;
+
+     label3:
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isTickMarksVisible()>();
+
+        if $stack21 == 0 goto label8;
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        $stack23 = virtualinvoke $stack22.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack24 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack23, dataArea, edge);
+
+        xx = (float) $stack24;
+
+        mark = null;
+
+        $stack25 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke getTickMarkStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack25);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint getTickMarkPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack26);
+
+        $stack27 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack27 goto label4;
+
+        $stack49 = new java.awt.geom.Line2D$Double;
+
+        $stack53 = cursor - ol;
+
+        $stack52 = (double) xx;
+
+        $stack51 = cursor + 0.0;
+
+        $stack50 = (double) xx;
+
+        specialinvoke $stack49.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack53, $stack52, $stack51, $stack50);
+
+        mark = $stack49;
+
+        goto label7;
+
+     label4:
+        $stack28 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if edge != $stack28 goto label5;
+
+        $stack44 = new java.awt.geom.Line2D$Double;
+
+        $stack48 = cursor + ol;
+
+        $stack47 = (double) xx;
+
+        $stack46 = cursor - 0.0;
+
+        $stack45 = (double) xx;
+
+        specialinvoke $stack44.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack48, $stack47, $stack46, $stack45);
+
+        mark = $stack44;
+
+        goto label7;
+
+     label5:
+        $stack29 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack29 goto label6;
+
+        $stack39 = new java.awt.geom.Line2D$Double;
+
+        $stack43 = (double) xx;
+
+        $stack42 = cursor - ol;
+
+        $stack41 = (double) xx;
+
+        $stack40 = cursor + 0.0;
+
+        specialinvoke $stack39.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack43, $stack42, $stack41, $stack40);
+
+        mark = $stack39;
+
+        goto label7;
+
+     label6:
+        $stack30 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack30 goto label7;
+
+        $stack32 = new java.awt.geom.Line2D$Double;
+
+        $stack36 = (double) xx;
+
+        $stack35 = cursor + ol;
+
+        $stack34 = (double) xx;
+
+        $stack33 = cursor - 0.0;
+
+        specialinvoke $stack32.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack36, $stack35, $stack34, $stack33);
+
+        mark = $stack32;
+
+     label7:
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(mark);
+
+     label8:
+        return 'ret';
+    }
+
+    public org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D, double, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Graphics2D g2;
+        double cursor, $stack15, xx, $stack25, $stack26, $stack30, $stack31, $stack33, $stack34, $stack36, $stack37;
+        java.awt.geom.Rectangle2D plotArea, dataArea;
+        org.jfree.chart.ui.RectangleEdge edge, $stack19, $stack20, $stack21, $stack22;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.axis.AxisState 'ret';
+        boolean $stack13;
+        org.jfree.data.Range $stack14;
+        java.awt.Stroke $stack17;
+        java.awt.Paint $stack18;
+        java.awt.geom.Line2D$Double $stack24, $stack29, $stack32, $stack35, mark;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        cursor := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+
+        'ret' = specialinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, plotArea, dataArea, edge, plotState);
+
+        $stack13 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isAdvanceLineVisible()>();
+
+        if $stack13 == 0 goto label5;
+
+        $stack14 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.data.Range getRange()>();
+
+        $stack15 = virtualinvoke $stack14.<org.jfree.data.Range: double getUpperBound()>();
+
+        xx = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack15, dataArea, edge);
+
+        mark = null;
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke getAdvanceLineStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack17);
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint getAdvanceLinePaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack18);
+
+        $stack19 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack19 goto label1;
+
+        $stack35 = new java.awt.geom.Line2D$Double;
+
+        $stack36 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack37 = cursor + $stack36;
+
+        specialinvoke $stack35.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(cursor, xx, $stack37, xx);
+
+        mark = $stack35;
+
+        goto label4;
+
+     label1:
+        $stack20 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if edge != $stack20 goto label2;
+
+        $stack32 = new java.awt.geom.Line2D$Double;
+
+        $stack33 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack34 = cursor - $stack33;
+
+        specialinvoke $stack32.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack34, xx, cursor, xx);
+
+        mark = $stack32;
+
+        goto label4;
+
+     label2:
+        $stack21 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack21 goto label3;
+
+        $stack29 = new java.awt.geom.Line2D$Double;
+
+        $stack30 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack31 = cursor + $stack30;
+
+        specialinvoke $stack29.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, $stack31, xx, cursor);
+
+        mark = $stack29;
+
+        goto label4;
+
+     label3:
+        $stack22 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack22 goto label4;
+
+        $stack24 = new java.awt.geom.Line2D$Double;
+
+        $stack25 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack26 = cursor - $stack25;
+
+        specialinvoke $stack24.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, cursor, xx, $stack26);
+
+        mark = $stack24;
+
+     label4:
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(mark);
+
+     label5:
+        return 'ret';
+    }
+
+    public org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D, org.jfree.chart.plot.Plot, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.axis.AxisSpace)
+    {
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.plot.Plot plot;
+        java.awt.geom.Rectangle2D plotArea, r;
+        org.jfree.chart.ui.RectangleEdge edge, $stack20, $stack24, $stack28, $stack31;
+        org.jfree.chart.axis.AxisSpace space, 'ret';
+        org.jfree.chart.axis.Tick $stack10, $stack13;
+        java.awt.Font $stack11;
+        java.awt.FontMetrics fm;
+        java.lang.String $stack14;
+        boolean $stack16, $stack17, $stack18, $stack26;
+        double $stack19, $stack21, $stack23, $stack25, $stack27, $stack29, $stack30, $stack32;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plot := @parameter1: org.jfree.chart.plot.Plot;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        space := @parameter4: org.jfree.chart.axis.AxisSpace;
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick> = null;
+
+        'ret' = specialinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, plot, plotArea, edge, space);
+
+        $stack10 = this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick>;
+
+        if $stack10 != null goto label1;
+
+        return 'ret';
+
+     label1:
+        $stack11 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Font getTickLabelFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack11);
+
+        $stack13 = this.<org.jfree.chart.axis.CyclicNumberAxis: org.jfree.chart.axis.Tick internalMarkerCycleBoundTick>;
+
+        $stack14 = virtualinvoke $stack13.<org.jfree.chart.axis.Tick: java.lang.String getText()>();
+
+        r = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>($stack14, g2, fm);
+
+        $stack16 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack16 == 0 goto label3;
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isVerticalTickLabels()>();
+
+        if $stack26 == 0 goto label2;
+
+        $stack30 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack32 = $stack30 / 2.0;
+
+        $stack31 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack32, $stack31);
+
+        goto label5;
+
+     label2:
+        $stack27 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack29 = $stack27 / 2.0;
+
+        $stack28 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack29, $stack28);
+
+        goto label5;
+
+     label3:
+        $stack17 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack17 == 0 goto label5;
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.axis.CyclicNumberAxis: boolean isVerticalTickLabels()>();
+
+        if $stack18 == 0 goto label4;
+
+        $stack23 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack25 = $stack23 / 2.0;
+
+        $stack24 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack25, $stack24);
+
+        goto label5;
+
+     label4:
+        $stack19 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack21 = $stack19 / 2.0;
+
+        $stack20 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack21, $stack20);
+
+     label5:
+        return 'ret';
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.CyclicNumberAxis this;
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke> = $stack3;
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.CyclicNumberAxis this, that;
+        boolean $stack3, $stack4, $stack13, $stack16, $stack17, $stack18, $stack19, $stack20;
+        double $stack5, $stack6, $stack8, $stack9;
+        byte $stack7, $stack10;
+        java.awt.Paint $stack11, $stack12;
+        java.awt.Stroke $stack14, $stack15;
+
+        this := @this: org.jfree.chart.axis.CyclicNumberAxis;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.CyclicNumberAxis;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.axis.NumberAxis: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.axis.CyclicNumberAxis) obj;
+
+        $stack6 = this.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack5 = that.<org.jfree.chart.axis.CyclicNumberAxis: double period>;
+
+        $stack7 = $stack6 cmpl $stack5;
+
+        if $stack7 == 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.axis.CyclicNumberAxis: double offset>;
+
+        $stack8 = that.<org.jfree.chart.axis.CyclicNumberAxis: double offset>;
+
+        $stack10 = $stack9 cmpl $stack8;
+
+        if $stack10 == 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint>;
+
+        $stack11 = that.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint advanceLinePaint>;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack12, $stack11);
+
+        if $stack13 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack15 = this.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke>;
+
+        $stack14 = that.<org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke advanceLineStroke>;
+
+        $stack16 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack15, $stack14);
+
+        if $stack16 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack18 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean advanceLineVisible>;
+
+        $stack17 = that.<org.jfree.chart.axis.CyclicNumberAxis: boolean advanceLineVisible>;
+
+        if $stack18 == $stack17 goto label8;
+
+        return 0;
+
+     label8:
+        $stack20 = this.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        $stack19 = that.<org.jfree.chart.axis.CyclicNumberAxis: boolean boundMappedToLastCycle>;
+
+        if $stack20 == $stack19 goto label9;
+
+        return 0;
+
+     label9:
+        return 1;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.BasicStroke $stack0;
+        java.awt.Color $stack1;
+
+        <org.jfree.chart.axis.CyclicNumberAxis: long serialVersionUID> = -7514160997164582554L;
+
+        $stack0 = new java.awt.BasicStroke;
+
+        specialinvoke $stack0.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        <org.jfree.chart.axis.CyclicNumberAxis: java.awt.Stroke DEFAULT_ADVANCE_LINE_STROKE> = $stack0;
+
+        $stack1 = <java.awt.Color: java.awt.Color GRAY>;
+
+        <org.jfree.chart.axis.CyclicNumberAxis: java.awt.Paint DEFAULT_ADVANCE_LINE_PAINT> = $stack1;
+
+        return;
+    }
+}

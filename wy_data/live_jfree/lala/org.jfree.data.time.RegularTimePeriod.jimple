@@ -1,0 +1,306 @@
+public abstract class org.jfree.data.time.RegularTimePeriod extends java.lang.Object implements org.jfree.data.time.TimePeriod, java.lang.Comparable, org.jfree.chart.date.MonthConstants
+{
+
+    public void <init>()
+    {
+        org.jfree.data.time.RegularTimePeriod this;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class, java.util.Date, java.util.TimeZone, java.util.Locale)
+    {
+        java.lang.Class c;
+        java.lang.Class[] $stack6;
+        java.lang.Object[] $stack8;
+        java.util.Date millisecond;
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        java.lang.Object $stack9;
+        java.lang.Exception $stack10;
+        org.jfree.data.time.RegularTimePeriod result;
+        java.lang.reflect.Constructor constructor;
+
+        c := @parameter0: java.lang.Class;
+
+        millisecond := @parameter1: java.util.Date;
+
+        zone := @parameter2: java.util.TimeZone;
+
+        locale := @parameter3: java.util.Locale;
+
+        result = null;
+
+     label1:
+        $stack6 = newarray (java.lang.Class)[3];
+
+        $stack6[0] = class "Ljava/util/Date;";
+
+        $stack6[1] = class "Ljava/util/TimeZone;";
+
+        $stack6[2] = class "Ljava/util/Locale;";
+
+        constructor = virtualinvoke c.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack6);
+
+        $stack8 = newarray (java.lang.Object)[3];
+
+        $stack8[0] = millisecond;
+
+        $stack8[1] = zone;
+
+        $stack8[2] = locale;
+
+        $stack9 = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack8);
+
+        result = (org.jfree.data.time.RegularTimePeriod) $stack9;
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack10 := @caughtexception;
+
+     label4:
+        return result;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public static java.lang.Class downsize(java.lang.Class)
+    {
+        java.lang.Class c;
+        boolean $stack1, $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+
+        c := @parameter0: java.lang.Class;
+
+        $stack1 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Year;");
+
+        if $stack1 == 0 goto label1;
+
+        return class "Lorg/jfree/data/time/Quarter;";
+
+     label1:
+        $stack2 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Quarter;");
+
+        if $stack2 == 0 goto label2;
+
+        return class "Lorg/jfree/data/time/Month;";
+
+     label2:
+        $stack3 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Month;");
+
+        if $stack3 == 0 goto label3;
+
+        return class "Lorg/jfree/data/time/Day;";
+
+     label3:
+        $stack4 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Day;");
+
+        if $stack4 == 0 goto label4;
+
+        return class "Lorg/jfree/data/time/Hour;";
+
+     label4:
+        $stack5 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Hour;");
+
+        if $stack5 == 0 goto label5;
+
+        return class "Lorg/jfree/data/time/Minute;";
+
+     label5:
+        $stack6 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Minute;");
+
+        if $stack6 == 0 goto label6;
+
+        return class "Lorg/jfree/data/time/Second;";
+
+     label6:
+        $stack7 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/jfree/data/time/Second;");
+
+        if $stack7 == 0 goto label7;
+
+        return class "Lorg/jfree/data/time/Millisecond;";
+
+     label7:
+        return class "Lorg/jfree/data/time/Millisecond;";
+    }
+
+    public abstract org.jfree.data.time.RegularTimePeriod previous();
+
+    public abstract org.jfree.data.time.RegularTimePeriod next();
+
+    public abstract long getSerialIndex();
+
+    public abstract void peg(java.util.Calendar);
+
+    public java.util.Date getStart()
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.RegularTimePeriod this;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        $stack1 = new java.util.Date;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        specialinvoke $stack1.<java.util.Date: void <init>(long)>($stack2);
+
+        return $stack1;
+    }
+
+    public java.util.Date getEnd()
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.RegularTimePeriod this;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        $stack1 = new java.util.Date;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        specialinvoke $stack1.<java.util.Date: void <init>(long)>($stack2);
+
+        return $stack1;
+    }
+
+    public abstract long getFirstMillisecond();
+
+    public abstract long getFirstMillisecond(java.util.Calendar);
+
+    public abstract long getLastMillisecond();
+
+    public abstract long getLastMillisecond(java.util.Calendar);
+
+    public long getMiddleMillisecond()
+    {
+        org.jfree.data.time.RegularTimePeriod this;
+        long m1, m2, $stack7, $stack8, $stack9;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        m1 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        m2 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack7 = m2 - m1;
+
+        $stack8 = $stack7 / 2L;
+
+        $stack9 = m1 + $stack8;
+
+        return $stack9;
+    }
+
+    public long getMiddleMillisecond(java.util.Calendar)
+    {
+        org.jfree.data.time.RegularTimePeriod this;
+        java.util.Calendar calendar;
+        long m1, m2, $stack8, $stack9, $stack10;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        m1 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>(calendar);
+
+        m2 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>(calendar);
+
+        $stack8 = m2 - m1;
+
+        $stack9 = $stack8 / 2L;
+
+        $stack10 = m1 + $stack9;
+
+        return $stack10;
+    }
+
+    public long getMillisecond(org.jfree.data.time.TimePeriodAnchor, java.util.Calendar)
+    {
+        org.jfree.data.time.TimePeriodAnchor anchor, $stack3, $stack5, $stack7;
+        boolean $stack4, $stack6, $stack8;
+        java.lang.IllegalStateException $stack9;
+        java.lang.StringBuilder $stack10, $stack11, $stack12;
+        java.lang.String $stack13;
+        org.jfree.data.time.RegularTimePeriod this;
+        java.util.Calendar calendar;
+        long $stack14, $stack15, $stack16;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        anchor := @parameter0: org.jfree.data.time.TimePeriodAnchor;
+
+        calendar := @parameter1: java.util.Calendar;
+
+        $stack3 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor START>;
+
+        $stack4 = virtualinvoke anchor.<org.jfree.data.time.TimePeriodAnchor: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        $stack16 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>(calendar);
+
+        return $stack16;
+
+     label1:
+        $stack5 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor MIDDLE>;
+
+        $stack6 = virtualinvoke anchor.<org.jfree.data.time.TimePeriodAnchor: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label2;
+
+        $stack15 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond(java.util.Calendar)>(calendar);
+
+        return $stack15;
+
+     label2:
+        $stack7 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor END>;
+
+        $stack8 = virtualinvoke anchor.<org.jfree.data.time.TimePeriodAnchor: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack8 == 0 goto label3;
+
+        $stack14 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>(calendar);
+
+        return $stack14;
+
+     label3:
+        $stack9 = new java.lang.IllegalStateException;
+
+        $stack10 = new java.lang.StringBuilder;
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unrecognised anchor: ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(anchor);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack9.<java.lang.IllegalStateException: void <init>(java.lang.String)>($stack13);
+
+        throw $stack9;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jfree.data.time.RegularTimePeriod this;
+        java.util.Date $stack1;
+        java.lang.String $stack2;
+
+        this := @this: org.jfree.data.time.RegularTimePeriod;
+
+        $stack1 = virtualinvoke this.<org.jfree.data.time.RegularTimePeriod: java.util.Date getStart()>();
+
+        $stack2 = staticinvoke <java.lang.String: java.lang.String valueOf(java.lang.Object)>($stack1);
+
+        return $stack2;
+    }
+}

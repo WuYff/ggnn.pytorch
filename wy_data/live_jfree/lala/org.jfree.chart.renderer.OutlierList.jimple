@@ -1,0 +1,204 @@
+public class org.jfree.chart.renderer.OutlierList extends java.lang.Object
+{
+    private final java.util.List outliers;
+    private org.jfree.chart.renderer.Outlier averagedOutlier;
+    private boolean multiple;
+
+    public void <init>(org.jfree.chart.renderer.Outlier)
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        java.util.ArrayList $stack2;
+        org.jfree.chart.renderer.Outlier outlier;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        outlier := @parameter0: org.jfree.chart.renderer.Outlier;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.renderer.OutlierList: boolean multiple> = 0;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.renderer.OutlierList: java.util.List outliers> = $stack2;
+
+        virtualinvoke this.<org.jfree.chart.renderer.OutlierList: void setAveragedOutlier(org.jfree.chart.renderer.Outlier)>(outlier);
+
+        return;
+    }
+
+    public boolean add(org.jfree.chart.renderer.Outlier)
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        org.jfree.chart.renderer.Outlier outlier;
+        java.util.List $stack2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        outlier := @parameter0: org.jfree.chart.renderer.Outlier;
+
+        $stack2 = this.<org.jfree.chart.renderer.OutlierList: java.util.List outliers>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(outlier);
+
+        return $stack3;
+    }
+
+    public int getItemCount()
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        $stack1 = this.<org.jfree.chart.renderer.OutlierList: java.util.List outliers>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.renderer.Outlier getAveragedOutlier()
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        org.jfree.chart.renderer.Outlier $stack1;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        $stack1 = this.<org.jfree.chart.renderer.OutlierList: org.jfree.chart.renderer.Outlier averagedOutlier>;
+
+        return $stack1;
+    }
+
+    public void setAveragedOutlier(org.jfree.chart.renderer.Outlier)
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        org.jfree.chart.renderer.Outlier averagedOutlier;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        averagedOutlier := @parameter0: org.jfree.chart.renderer.Outlier;
+
+        this.<org.jfree.chart.renderer.OutlierList: org.jfree.chart.renderer.Outlier averagedOutlier> = averagedOutlier;
+
+        return;
+    }
+
+    public boolean isMultiple()
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        $stack1 = this.<org.jfree.chart.renderer.OutlierList: boolean multiple>;
+
+        return $stack1;
+    }
+
+    public void setMultiple(boolean)
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        boolean multiple;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        multiple := @parameter0: boolean;
+
+        this.<org.jfree.chart.renderer.OutlierList: boolean multiple> = multiple;
+
+        return;
+    }
+
+    public boolean isOverlapped(org.jfree.chart.renderer.Outlier)
+    {
+        org.jfree.chart.renderer.Outlier other, $stack3;
+        org.jfree.chart.renderer.OutlierList this;
+        boolean result;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        other := @parameter0: org.jfree.chart.renderer.Outlier;
+
+        if other != null goto label1;
+
+        return 0;
+
+     label1:
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.OutlierList: org.jfree.chart.renderer.Outlier getAveragedOutlier()>();
+
+        result = virtualinvoke other.<org.jfree.chart.renderer.Outlier: boolean overlaps(org.jfree.chart.renderer.Outlier)>($stack3);
+
+        return result;
+    }
+
+    public void updateAveragedOutlier()
+    {
+        org.jfree.chart.renderer.OutlierList this;
+        int size;
+        java.util.List $stack9;
+        java.util.Iterator l6;
+        boolean $stack11;
+        org.jfree.chart.renderer.Outlier $stack12, o;
+        java.awt.geom.Point2D $stack13;
+        java.awt.geom.Point2D$Double $stack14;
+        double $stack15, $stack16, $stack17, $stack18, $stack20, $stack21, totalXCoords, totalYCoords;
+        java.lang.Object $stack19;
+
+        this := @this: org.jfree.chart.renderer.OutlierList;
+
+        totalXCoords = 0.0;
+
+        totalYCoords = 0.0;
+
+        size = virtualinvoke this.<org.jfree.chart.renderer.OutlierList: int getItemCount()>();
+
+        $stack9 = this.<org.jfree.chart.renderer.OutlierList: java.util.List outliers>;
+
+        l6 = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack19 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        o = (org.jfree.chart.renderer.Outlier) $stack19;
+
+        $stack20 = virtualinvoke o.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        totalXCoords = totalXCoords + $stack20;
+
+        $stack21 = virtualinvoke o.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        totalYCoords = totalYCoords + $stack21;
+
+        goto label1;
+
+     label2:
+        $stack12 = virtualinvoke this.<org.jfree.chart.renderer.OutlierList: org.jfree.chart.renderer.Outlier getAveragedOutlier()>();
+
+        $stack13 = virtualinvoke $stack12.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+
+        $stack14 = new java.awt.geom.Point2D$Double;
+
+        $stack15 = (double) size;
+
+        $stack18 = totalXCoords / $stack15;
+
+        $stack16 = (double) size;
+
+        $stack17 = totalYCoords / $stack16;
+
+        specialinvoke $stack14.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack18, $stack17);
+
+        virtualinvoke $stack13.<java.awt.geom.Point2D: void setLocation(java.awt.geom.Point2D)>($stack14);
+
+        return;
+    }
+}

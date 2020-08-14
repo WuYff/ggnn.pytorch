@@ -1,0 +1,357 @@
+public class org.jfree.chart.util.LogFormat extends java.text.NumberFormat
+{
+    private double base;
+    private double baseLog;
+    private java.lang.String baseLabel;
+    private java.lang.String powerLabel;
+    private boolean showBase;
+    private java.text.NumberFormat formatter;
+
+    public void <init>()
+    {
+        org.jfree.chart.util.LogFormat this;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        specialinvoke this.<org.jfree.chart.util.LogFormat: void <init>(double,java.lang.String,boolean)>(10.0, "10", 1);
+
+        return;
+    }
+
+    public void <init>(double, java.lang.String, boolean)
+    {
+        org.jfree.chart.util.LogFormat this;
+        double base;
+        java.lang.String baseLabel;
+        boolean showBase;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        base := @parameter0: double;
+
+        baseLabel := @parameter1: java.lang.String;
+
+        showBase := @parameter2: boolean;
+
+        specialinvoke this.<org.jfree.chart.util.LogFormat: void <init>(double,java.lang.String,java.lang.String,boolean)>(base, baseLabel, "^", showBase);
+
+        return;
+    }
+
+    public void <init>(double, java.lang.String, java.lang.String, boolean)
+    {
+        org.jfree.chart.util.LogFormat this;
+        java.text.DecimalFormat $stack6;
+        java.lang.String baseLabel, powerLabel;
+        double base, $stack7, $stack8;
+        boolean showBase;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        base := @parameter0: double;
+
+        baseLabel := @parameter1: java.lang.String;
+
+        powerLabel := @parameter2: java.lang.String;
+
+        showBase := @parameter3: boolean;
+
+        specialinvoke this.<java.text.NumberFormat: void <init>()>();
+
+        $stack6 = new java.text.DecimalFormat;
+
+        specialinvoke $stack6.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0#");
+
+        this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter> = $stack6;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(baseLabel, "baseLabel");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(powerLabel, "powerLabel");
+
+        this.<org.jfree.chart.util.LogFormat: double base> = base;
+
+        $stack7 = this.<org.jfree.chart.util.LogFormat: double base>;
+
+        $stack8 = staticinvoke <java.lang.Math: double log(double)>($stack7);
+
+        this.<org.jfree.chart.util.LogFormat: double baseLog> = $stack8;
+
+        this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel> = baseLabel;
+
+        this.<org.jfree.chart.util.LogFormat: boolean showBase> = showBase;
+
+        this.<org.jfree.chart.util.LogFormat: java.lang.String powerLabel> = powerLabel;
+
+        return;
+    }
+
+    public java.text.NumberFormat getExponentFormat()
+    {
+        org.jfree.chart.util.LogFormat this;
+        java.text.NumberFormat $stack1, $stack3;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        $stack1 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack2 = virtualinvoke $stack1.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack3 = (java.text.NumberFormat) $stack2;
+
+        return $stack3;
+    }
+
+    public void setExponentFormat(java.text.NumberFormat)
+    {
+        java.text.NumberFormat format;
+        org.jfree.chart.util.LogFormat this;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        format := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(format, "format");
+
+        this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter> = format;
+
+        return;
+    }
+
+    private double calculateLog(double)
+    {
+        double value, $stack3, $stack4, $stack5;
+        org.jfree.chart.util.LogFormat this;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        value := @parameter0: double;
+
+        $stack3 = staticinvoke <java.lang.Math: double log(double)>(value);
+
+        $stack4 = this.<org.jfree.chart.util.LogFormat: double baseLog>;
+
+        $stack5 = $stack3 / $stack4;
+
+        return $stack5;
+    }
+
+    public java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        java.lang.StringBuffer $stack6, toAppendTo;
+        org.jfree.chart.util.LogFormat this;
+        boolean $stack7;
+        double number, $stack9;
+        java.text.NumberFormat $stack8;
+        java.lang.String $stack10, $stack12, $stack14;
+        java.text.FieldPosition pos;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        number := @parameter0: double;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        pos := @parameter2: java.text.FieldPosition;
+
+        $stack6 = new java.lang.StringBuffer;
+
+        specialinvoke $stack6.<java.lang.StringBuffer: void <init>()>();
+
+        $stack7 = this.<org.jfree.chart.util.LogFormat: boolean showBase>;
+
+        if $stack7 == 0 goto label1;
+
+        $stack12 = this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack12);
+
+        $stack14 = this.<org.jfree.chart.util.LogFormat: java.lang.String powerLabel>;
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack14);
+
+     label1:
+        $stack8 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack9 = specialinvoke this.<org.jfree.chart.util.LogFormat: double calculateLog(double)>(number);
+
+        $stack10 = virtualinvoke $stack8.<java.text.NumberFormat: java.lang.String format(double)>($stack9);
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack10);
+
+        return $stack6;
+    }
+
+    public java.lang.StringBuffer format(long, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        java.lang.StringBuffer $stack6, toAppendTo;
+        org.jfree.chart.util.LogFormat this;
+        boolean $stack7;
+        long number;
+        double $stack8, $stack10;
+        java.text.NumberFormat $stack9;
+        java.lang.String $stack11, $stack13, $stack15;
+        java.text.FieldPosition pos;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        number := @parameter0: long;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        pos := @parameter2: java.text.FieldPosition;
+
+        $stack6 = new java.lang.StringBuffer;
+
+        specialinvoke $stack6.<java.lang.StringBuffer: void <init>()>();
+
+        $stack7 = this.<org.jfree.chart.util.LogFormat: boolean showBase>;
+
+        if $stack7 == 0 goto label1;
+
+        $stack13 = this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack13);
+
+        $stack15 = this.<org.jfree.chart.util.LogFormat: java.lang.String powerLabel>;
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack15);
+
+     label1:
+        $stack9 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack8 = (double) number;
+
+        $stack10 = specialinvoke this.<org.jfree.chart.util.LogFormat: double calculateLog(double)>($stack8);
+
+        $stack11 = virtualinvoke $stack9.<java.text.NumberFormat: java.lang.String format(double)>($stack10);
+
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack11);
+
+        return $stack6;
+    }
+
+    public java.lang.Number parse(java.lang.String, java.text.ParsePosition)
+    {
+        org.jfree.chart.util.LogFormat this;
+        java.lang.String source;
+        java.text.ParsePosition parsePosition;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        source := @parameter0: java.lang.String;
+
+        parsePosition := @parameter1: java.text.ParsePosition;
+
+        return null;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.util.LogFormat this, that;
+        boolean $stack3, $stack9, $stack13, $stack14, $stack17, $stack18;
+        double $stack4, $stack5, $stack10, $stack11;
+        byte $stack6, $stack12;
+        java.lang.String $stack7, $stack8;
+        java.text.NumberFormat $stack15, $stack16;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.util.LogFormat;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.util.LogFormat) obj;
+
+        $stack5 = this.<org.jfree.chart.util.LogFormat: double base>;
+
+        $stack4 = that.<org.jfree.chart.util.LogFormat: double base>;
+
+        $stack6 = $stack5 cmpl $stack4;
+
+        if $stack6 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+
+        $stack7 = that.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.util.LogFormat: double baseLog>;
+
+        $stack10 = that.<org.jfree.chart.util.LogFormat: double baseLog>;
+
+        $stack12 = $stack11 cmpl $stack10;
+
+        if $stack12 == 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack14 = this.<org.jfree.chart.util.LogFormat: boolean showBase>;
+
+        $stack13 = that.<org.jfree.chart.util.LogFormat: boolean showBase>;
+
+        if $stack14 == $stack13 goto label6;
+
+        return 0;
+
+     label6:
+        $stack16 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack15 = that.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack17 = virtualinvoke $stack16.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack15);
+
+        if $stack17 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack18 = specialinvoke this.<java.text.NumberFormat: boolean equals(java.lang.Object)>(obj);
+
+        return $stack18;
+    }
+
+    public java.lang.Object clone()
+    {
+        org.jfree.chart.util.LogFormat this, clone;
+        java.lang.Object $stack2, $stack4;
+        java.text.NumberFormat $stack3, $stack5;
+
+        this := @this: org.jfree.chart.util.LogFormat;
+
+        $stack2 = specialinvoke this.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.util.LogFormat) $stack2;
+
+        $stack3 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+
+        $stack4 = virtualinvoke $stack3.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack5 = (java.text.NumberFormat) $stack4;
+
+        clone.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter> = $stack5;
+
+        return clone;
+    }
+}

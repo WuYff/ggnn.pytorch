@@ -1,0 +1,550 @@
+public class org.jfree.chart.axis.DateTickUnit extends org.jfree.chart.axis.TickUnit implements java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private org.jfree.chart.axis.DateTickUnitType unitType;
+    private int count;
+    private org.jfree.chart.axis.DateTickUnitType rollUnitType;
+    private int rollCount;
+    private java.text.DateFormat formatter;
+
+    public void <init>(org.jfree.chart.axis.DateTickUnitType, int)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType unitType;
+        int multiple;
+        java.text.DateFormat $stack3;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        unitType := @parameter0: org.jfree.chart.axis.DateTickUnitType;
+
+        multiple := @parameter1: int;
+
+        $stack3 = staticinvoke <java.text.DateFormat: java.text.DateFormat getDateInstance(int)>(3);
+
+        specialinvoke this.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>(unitType, multiple, $stack3);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.axis.DateTickUnitType, int, java.text.DateFormat)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType unitType;
+        int multiple;
+        java.text.DateFormat formatter;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        unitType := @parameter0: org.jfree.chart.axis.DateTickUnitType;
+
+        multiple := @parameter1: int;
+
+        formatter := @parameter2: java.text.DateFormat;
+
+        specialinvoke this.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>(unitType, multiple, unitType, multiple, formatter);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.axis.DateTickUnitType, int, org.jfree.chart.axis.DateTickUnitType, int, java.text.DateFormat)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType unitType, rollUnitType;
+        int multiple, rollMultiple;
+        long $stack6;
+        double $stack7;
+        java.text.DateFormat formatter;
+        java.lang.IllegalArgumentException $stack8, $stack9;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        unitType := @parameter0: org.jfree.chart.axis.DateTickUnitType;
+
+        multiple := @parameter1: int;
+
+        rollUnitType := @parameter2: org.jfree.chart.axis.DateTickUnitType;
+
+        rollMultiple := @parameter3: int;
+
+        formatter := @parameter4: java.text.DateFormat;
+
+        $stack6 = staticinvoke <org.jfree.chart.axis.DateTickUnit: long getMillisecondCount(org.jfree.chart.axis.DateTickUnitType,int)>(unitType, multiple);
+
+        $stack7 = (double) $stack6;
+
+        specialinvoke this.<org.jfree.chart.axis.TickUnit: void <init>(double)>($stack7);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        if multiple > 0 goto label1;
+
+        $stack9 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack9.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'multiple\' > 0.");
+
+        throw $stack9;
+
+     label1:
+        if rollMultiple > 0 goto label2;
+
+        $stack8 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'rollMultiple\' > 0.");
+
+        throw $stack8;
+
+     label2:
+        this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType> = unitType;
+
+        this.<org.jfree.chart.axis.DateTickUnit: int count> = multiple;
+
+        this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType rollUnitType> = rollUnitType;
+
+        this.<org.jfree.chart.axis.DateTickUnit: int rollCount> = rollMultiple;
+
+        this.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter> = formatter;
+
+        return;
+    }
+
+    public org.jfree.chart.axis.DateTickUnitType getUnitType()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack1;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        return $stack1;
+    }
+
+    public int getMultiple()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = this.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.axis.DateTickUnitType getRollUnitType()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack1;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType rollUnitType>;
+
+        return $stack1;
+    }
+
+    public int getRollMultiple()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = this.<org.jfree.chart.axis.DateTickUnit: int rollCount>;
+
+        return $stack1;
+    }
+
+    public java.lang.String valueToString(double)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        java.util.Date $stack3;
+        double milliseconds;
+        long $stack4;
+        java.text.DateFormat $stack5;
+        java.lang.String $stack6;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        milliseconds := @parameter0: double;
+
+        $stack5 = this.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter>;
+
+        $stack3 = new java.util.Date;
+
+        $stack4 = (long) milliseconds;
+
+        specialinvoke $stack3.<java.util.Date: void <init>(long)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack3);
+
+        return $stack6;
+    }
+
+    public java.lang.String dateToString(java.util.Date)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        java.util.Date date;
+        java.text.DateFormat $stack2;
+        java.lang.String $stack3;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        date := @parameter0: java.util.Date;
+
+        $stack2 = this.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter>;
+
+        $stack3 = virtualinvoke $stack2.<java.text.DateFormat: java.lang.String format(java.util.Date)>(date);
+
+        return $stack3;
+    }
+
+    public java.util.Date addToDate(java.util.Date, java.util.TimeZone)
+    {
+        java.util.TimeZone zone;
+        java.util.Calendar calendar;
+        java.util.Date base, $stack8;
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack5;
+        int $stack6, $stack7;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        base := @parameter0: java.util.Date;
+
+        zone := @parameter1: java.util.TimeZone;
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(base);
+
+        $stack5 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.axis.DateTickUnitType: int getCalendarField()>();
+
+        $stack7 = this.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        virtualinvoke calendar.<java.util.Calendar: void add(int,int)>($stack6, $stack7);
+
+        $stack8 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        return $stack8;
+    }
+
+    public java.util.Date rollDate(java.util.Date)
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        java.util.Date base, $stack3;
+        java.util.TimeZone $stack2;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        base := @parameter0: java.util.Date;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.DateTickUnit: java.util.Date rollDate(java.util.Date,java.util.TimeZone)>(base, $stack2);
+
+        return $stack3;
+    }
+
+    public java.util.Date rollDate(java.util.Date, java.util.TimeZone)
+    {
+        java.util.TimeZone zone;
+        java.util.Calendar calendar;
+        java.util.Date base, $stack8;
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack5;
+        int $stack6, $stack7;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        base := @parameter0: java.util.Date;
+
+        zone := @parameter1: java.util.TimeZone;
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(base);
+
+        $stack5 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType rollUnitType>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.axis.DateTickUnitType: int getCalendarField()>();
+
+        $stack7 = this.<org.jfree.chart.axis.DateTickUnit: int rollCount>;
+
+        virtualinvoke calendar.<java.util.Calendar: void add(int,int)>($stack6, $stack7);
+
+        $stack8 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        return $stack8;
+    }
+
+    public int getCalendarField()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.axis.DateTickUnitType: int getCalendarField()>();
+
+        return $stack2;
+    }
+
+    private static long getMillisecondCount(org.jfree.chart.axis.DateTickUnitType, int)
+    {
+        org.jfree.chart.axis.DateTickUnitType unit, $stack2, $stack4, $stack6, $stack8, $stack10, $stack12, $stack14;
+        boolean $stack3, $stack5, $stack7, $stack9, $stack11, $stack13, $stack15;
+        java.lang.IllegalArgumentException $stack16;
+        int count;
+        long $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29;
+
+        unit := @parameter0: org.jfree.chart.axis.DateTickUnitType;
+
+        count := @parameter1: int;
+
+        $stack2 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack3 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack2);
+
+        if $stack3 == 0 goto label1;
+
+        $stack28 = (long) count;
+
+        $stack29 = 31536000000L * $stack28;
+
+        return $stack29;
+
+     label1:
+        $stack4 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack5 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack5 == 0 goto label2;
+
+        $stack26 = (long) count;
+
+        $stack27 = 2678400000L * $stack26;
+
+        return $stack27;
+
+     label2:
+        $stack6 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack7 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack6);
+
+        if $stack7 == 0 goto label3;
+
+        $stack24 = (long) count;
+
+        $stack25 = 86400000L * $stack24;
+
+        return $stack25;
+
+     label3:
+        $stack8 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack9 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack9 == 0 goto label4;
+
+        $stack22 = (long) count;
+
+        $stack23 = 3600000L * $stack22;
+
+        return $stack23;
+
+     label4:
+        $stack10 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack11 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack11 == 0 goto label5;
+
+        $stack20 = (long) count;
+
+        $stack21 = 60000L * $stack20;
+
+        return $stack21;
+
+     label5:
+        $stack12 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack13 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack12);
+
+        if $stack13 == 0 goto label6;
+
+        $stack18 = (long) count;
+
+        $stack19 = 1000L * $stack18;
+
+        return $stack19;
+
+     label6:
+        $stack14 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack15 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack14);
+
+        if $stack15 == 0 goto label7;
+
+        $stack17 = (long) count;
+
+        return $stack17;
+
+     label7:
+        $stack16 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack16.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'unit\' argument has a value that is not recognised.");
+
+        throw $stack16;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.DateTickUnit this, that;
+        boolean $stack3, $stack4, $stack7, $stack12;
+        org.jfree.chart.axis.DateTickUnitType $stack5, $stack6;
+        int $stack8, $stack9;
+        java.text.DateFormat $stack10, $stack11;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.DateTickUnit;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.axis.DateTickUnit) obj;
+
+        $stack6 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack5 = that.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        $stack8 = that.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        if $stack9 == $stack8 goto label5;
+
+        return 0;
+
+     label5:
+        $stack11 = this.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter>;
+
+        $stack10 = that.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack2;
+        int $stack3, $stack4, $stack5, $stack6, $stack8, $stack9, result#2;
+        java.text.DateFormat $stack7;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack3 = 37 * 19;
+
+        $stack2 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack4 = virtualinvoke $stack2.<org.jfree.chart.axis.DateTickUnitType: int hashCode()>();
+
+        result#2 = $stack3 + $stack4;
+
+        $stack6 = 37 * result#2;
+
+        $stack5 = this.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        result#2 = $stack6 + $stack5;
+
+        $stack8 = 37 * result#2;
+
+        $stack7 = this.<org.jfree.chart.axis.DateTickUnit: java.text.DateFormat formatter>;
+
+        $stack9 = virtualinvoke $stack7.<java.text.DateFormat: int hashCode()>();
+
+        result#2 = $stack8 + $stack9;
+
+        return result#2;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.StringBuilder $stack1, $stack2, $stack5, $stack6, $stack8, $stack9;
+        org.jfree.chart.axis.DateTickUnit this;
+        org.jfree.chart.axis.DateTickUnitType $stack3;
+        java.lang.String $stack4, $stack10;
+        int $stack7;
+
+        this := @this: org.jfree.chart.axis.DateTickUnit;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("DateTickUnit[");
+
+        $stack3 = this.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType unitType>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.axis.DateTickUnitType: java.lang.String toString()>();
+
+        $stack5 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(", ");
+
+        $stack7 = this.<org.jfree.chart.axis.DateTickUnit: int count>;
+
+        $stack8 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack7);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack10;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.axis.DateTickUnit: long serialVersionUID> = -7289292157229621901L;
+
+        return;
+    }
+}

@@ -1,0 +1,1132 @@
+public class org.jfree.data.statistics.DefaultStatisticalCategoryDataset extends org.jfree.data.general.AbstractDataset implements org.jfree.data.statistics.StatisticalCategoryDataset, org.jfree.data.RangeInfo, org.jfree.chart.util.PublicCloneable
+{
+    private org.jfree.data.KeyedObjects2D data;
+    private double minimumRangeValue;
+    private int minimumRangeValueRow;
+    private int minimumRangeValueColumn;
+    private double minimumRangeValueIncStdDev;
+    private int minimumRangeValueIncStdDevRow;
+    private int minimumRangeValueIncStdDevColumn;
+    private double maximumRangeValue;
+    private int maximumRangeValueRow;
+    private int maximumRangeValueColumn;
+    private double maximumRangeValueIncStdDev;
+    private int maximumRangeValueIncStdDevRow;
+    private int maximumRangeValueIncStdDevColumn;
+
+    public void <init>()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        specialinvoke this.<org.jfree.data.general.AbstractDataset: void <init>()>();
+
+        $stack1 = new org.jfree.data.KeyedObjects2D;
+
+        specialinvoke $stack1.<org.jfree.data.KeyedObjects2D: void <init>()>();
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn> = -1;
+
+        return;
+    }
+
+    public java.lang.Number getMeanValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.MeanAndStandardDeviation masd;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        masd = (org.jfree.data.statistics.MeanAndStandardDeviation) $stack6;
+
+        if masd == null goto label1;
+
+        result = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: java.lang.Number getMean()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int row, column;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: java.lang.Number getMeanValue(int,int)>(row, column);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: java.lang.Number getMeanValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getMeanValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.MeanAndStandardDeviation masd;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        masd = (org.jfree.data.statistics.MeanAndStandardDeviation) $stack6;
+
+        if masd == null goto label1;
+
+        result = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: java.lang.Number getMean()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getStdDevValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.MeanAndStandardDeviation masd;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        masd = (org.jfree.data.statistics.MeanAndStandardDeviation) $stack6;
+
+        if masd == null goto label1;
+
+        result = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: java.lang.Number getStandardDeviation()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getStdDevValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.MeanAndStandardDeviation masd;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        masd = (org.jfree.data.statistics.MeanAndStandardDeviation) $stack6;
+
+        if masd == null goto label1;
+
+        result = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: java.lang.Number getStandardDeviation()>();
+
+     label1:
+        return result;
+    }
+
+    public int getColumnIndex(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)>(key);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getColumnKey(int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int column;
+        org.jfree.data.KeyedObjects2D $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        column := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getColumnKey(int)>(column);
+
+        return $stack3;
+    }
+
+    public java.util.List getColumnKeys()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()>();
+
+        return $stack2;
+    }
+
+    public int getRowIndex(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(key);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getRowKey(int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int row;
+        org.jfree.data.KeyedObjects2D $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        row := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getRowKey(int)>(row);
+
+        return $stack3;
+    }
+
+    public java.util.List getRowKeys()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()>();
+
+        return $stack2;
+    }
+
+    public int getRowCount()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+
+        return $stack2;
+    }
+
+    public int getColumnCount()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+
+        return $stack2;
+    }
+
+    public void add(double, double, java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        double mean, standardDeviation;
+        java.lang.Double $stack7, $stack8;
+        java.lang.Comparable rowKey, columnKey;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        mean := @parameter0: double;
+
+        standardDeviation := @parameter1: double;
+
+        rowKey := @parameter2: java.lang.Comparable;
+
+        columnKey := @parameter3: java.lang.Comparable;
+
+        $stack7 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(mean);
+
+        $stack8 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(standardDeviation);
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void add(java.lang.Number,java.lang.Number,java.lang.Comparable,java.lang.Comparable)>($stack7, $stack8, rowKey, columnKey);
+
+        return;
+    }
+
+    public void add(java.lang.Number, java.lang.Number, java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.MeanAndStandardDeviation $stack12;
+        java.lang.Number mean, standardDeviation;
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack13, $stack14, $stack16;
+        int r, c, $stack18, $stack19, $stack20, $stack21, $stack80, $stack82, $stack86, $stack89;
+        boolean $stack22, $stack29, $stack43, $stack55, $stack69, $stack24, $stack25, $stack27;
+        double $stack28, $stack30, $stack32, $stack33, $stack42, $stack46, $stack54, $stack56, $stack58, $stack59, $stack68, $stack72, m, sd, $stack23, $stack26;
+        byte $stack34, $stack47, $stack60, $stack73;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        mean := @parameter0: java.lang.Number;
+
+        standardDeviation := @parameter1: java.lang.Number;
+
+        rowKey := @parameter2: java.lang.Comparable;
+
+        columnKey := @parameter3: java.lang.Comparable;
+
+        $stack12 = new org.jfree.data.statistics.MeanAndStandardDeviation;
+
+        specialinvoke $stack12.<org.jfree.data.statistics.MeanAndStandardDeviation: void <init>(java.lang.Number,java.lang.Number)>(mean, standardDeviation);
+
+        $stack13 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack13.<org.jfree.data.KeyedObjects2D: void addObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>($stack12, rowKey, columnKey);
+
+        m = #NaN;
+
+        sd = #NaN;
+
+        if mean == null goto label01;
+
+        m = virtualinvoke mean.<java.lang.Number: double doubleValue()>();
+
+     label01:
+        if standardDeviation == null goto label02;
+
+        sd = virtualinvoke standardDeviation.<java.lang.Number: double doubleValue()>();
+
+     label02:
+        $stack14 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        r = virtualinvoke $stack14.<org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        $stack16 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        c = virtualinvoke $stack16.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack18 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow>;
+
+        if r != $stack18 goto label03;
+
+        $stack89 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn>;
+
+        if c == $stack89 goto label06;
+
+     label03:
+        $stack19 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow>;
+
+        if r != $stack19 goto label04;
+
+        $stack86 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn>;
+
+        if c == $stack86 goto label06;
+
+     label04:
+        $stack20 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow>;
+
+        if r != $stack20 goto label05;
+
+        $stack82 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn>;
+
+        if c == $stack82 goto label06;
+
+     label05:
+        $stack21 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow>;
+
+        if r != $stack21 goto label07;
+
+        $stack80 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn>;
+
+        if c != $stack80 goto label07;
+
+     label06:
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        goto label15;
+
+     label07:
+        $stack22 = staticinvoke <java.lang.Double: boolean isNaN(double)>(m);
+
+        if $stack22 != 0 goto label09;
+
+        $stack68 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue>;
+
+        $stack69 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack68);
+
+        if $stack69 != 0 goto label08;
+
+        $stack72 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue>;
+
+        $stack73 = m cmpl $stack72;
+
+        if $stack73 <= 0 goto label09;
+
+     label08:
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn> = c;
+
+     label09:
+        $stack23 = m + sd;
+
+        $stack24 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack23);
+
+        if $stack24 != 0 goto label11;
+
+        $stack54 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        $stack55 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack54);
+
+        if $stack55 != 0 goto label10;
+
+        $stack59 = m + sd;
+
+        $stack58 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        $stack60 = $stack59 cmpl $stack58;
+
+        if $stack60 <= 0 goto label11;
+
+     label10:
+        $stack56 = m + sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev> = $stack56;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn> = c;
+
+     label11:
+        $stack25 = staticinvoke <java.lang.Double: boolean isNaN(double)>(m);
+
+        if $stack25 != 0 goto label13;
+
+        $stack42 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue>;
+
+        $stack43 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack42);
+
+        if $stack43 != 0 goto label12;
+
+        $stack46 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue>;
+
+        $stack47 = m cmpg $stack46;
+
+        if $stack47 >= 0 goto label13;
+
+     label12:
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn> = c;
+
+     label13:
+        $stack26 = m - sd;
+
+        $stack27 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack26);
+
+        if $stack27 != 0 goto label15;
+
+        $stack28 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        $stack29 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack28);
+
+        if $stack29 != 0 goto label14;
+
+        $stack33 = m - sd;
+
+        $stack32 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        $stack34 = $stack33 cmpg $stack32;
+
+        if $stack34 >= 0 goto label15;
+
+     label14:
+        $stack30 = m - sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev> = $stack30;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn> = c;
+
+     label15:
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void remove(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack8, $stack9, $stack10, $stack11, $stack12, $stack14, $stack18, $stack21;
+        org.jfree.data.KeyedObjects2D $stack7;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        $stack7 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack7.<org.jfree.data.KeyedObjects2D: void removeObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        $stack8 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow>;
+
+        if r != $stack8 goto label1;
+
+        $stack21 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn>;
+
+        if c == $stack21 goto label4;
+
+     label1:
+        $stack9 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow>;
+
+        if r != $stack9 goto label2;
+
+        $stack18 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn>;
+
+        if c == $stack18 goto label4;
+
+     label2:
+        $stack10 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow>;
+
+        if r != $stack10 goto label3;
+
+        $stack14 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn>;
+
+        if c == $stack14 goto label4;
+
+     label3:
+        $stack11 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow>;
+
+        if r != $stack11 goto label5;
+
+        $stack12 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn>;
+
+        if c != $stack12 goto label5;
+
+     label4:
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+     label5:
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeRow(int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int rowIndex;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowIndex := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(int)>(rowIndex);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeRow(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable rowKey;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(java.lang.Comparable)>(rowKey);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeColumn(int)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        int columnIndex;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        columnIndex := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(int)>(columnIndex);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeColumn(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        java.lang.Comparable columnKey;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        columnKey := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(java.lang.Comparable)>(columnKey);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: void clear()>();
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    private void updateBounds()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack10, $stack12, $stack16;
+        int rowCount, columnCount, r, c;
+        java.lang.Object $stack17;
+        org.jfree.data.statistics.MeanAndStandardDeviation masd;
+        double m, sd, $stack23, $stack25, $stack29, $stack32, $stack34, $stack35, $stack39, $stack40, $stack42, $stack43, $stack44, $stack46, $stack27, $stack37;
+        boolean $stack20, $stack24, $stack33, $stack28, $stack31, $stack38;
+        byte $stack26, $stack30, $stack36, $stack41;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn> = -1;
+
+        $stack10 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        rowCount = virtualinvoke $stack10.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+
+        $stack12 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        columnCount = virtualinvoke $stack12.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+
+        r = 0;
+
+     label01:
+        if r >= rowCount goto label13;
+
+        c = 0;
+
+     label02:
+        if c >= columnCount goto label12;
+
+        $stack16 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack17 = virtualinvoke $stack16.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(r, c);
+
+        masd = (org.jfree.data.statistics.MeanAndStandardDeviation) $stack17;
+
+        if masd != null goto label03;
+
+        goto label11;
+
+     label03:
+        m = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: double getMeanValue()>();
+
+        sd = virtualinvoke masd.<org.jfree.data.statistics.MeanAndStandardDeviation: double getStandardDeviationValue()>();
+
+        $stack20 = staticinvoke <java.lang.Double: boolean isNaN(double)>(m);
+
+        if $stack20 != 0 goto label11;
+
+        $stack23 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue>;
+
+        $stack24 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack23);
+
+        if $stack24 == 0 goto label04;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn> = c;
+
+        goto label05;
+
+     label04:
+        $stack25 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue>;
+
+        $stack26 = m cmpl $stack25;
+
+        if $stack26 <= 0 goto label05;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueColumn> = c;
+
+     label05:
+        $stack27 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue>;
+
+        $stack28 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack27);
+
+        if $stack28 == 0 goto label06;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn> = c;
+
+        goto label07;
+
+     label06:
+        $stack29 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue>;
+
+        $stack30 = m cmpg $stack29;
+
+        if $stack30 >= 0 goto label07;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue> = m;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueColumn> = c;
+
+     label07:
+        $stack31 = staticinvoke <java.lang.Double: boolean isNaN(double)>(sd);
+
+        if $stack31 != 0 goto label11;
+
+        $stack32 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        $stack33 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack32);
+
+        if $stack33 == 0 goto label08;
+
+        $stack46 = m + sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev> = $stack46;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn> = c;
+
+        goto label09;
+
+     label08:
+        $stack35 = m + sd;
+
+        $stack34 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        $stack36 = $stack35 cmpl $stack34;
+
+        if $stack36 <= 0 goto label09;
+
+        $stack44 = m + sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev> = $stack44;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int maximumRangeValueIncStdDevColumn> = c;
+
+     label09:
+        $stack37 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        $stack38 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack37);
+
+        if $stack38 == 0 goto label10;
+
+        $stack43 = m - sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev> = $stack43;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn> = c;
+
+        goto label11;
+
+     label10:
+        $stack40 = m - sd;
+
+        $stack39 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        $stack41 = $stack40 cmpg $stack39;
+
+        if $stack41 >= 0 goto label11;
+
+        $stack42 = m - sd;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev> = $stack42;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: int minimumRangeValueIncStdDevColumn> = c;
+
+     label11:
+        c = c + 1;
+
+        goto label02;
+
+     label12:
+        r = r + 1;
+
+        goto label01;
+
+     label13:
+        return;
+    }
+
+    public double getRangeLowerBound(boolean)
+    {
+        boolean includeInterval, $stack4;
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        double $stack2, $stack3, $stack6;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        if includeInterval == 0 goto label1;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        $stack4 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack3);
+
+        if $stack4 != 0 goto label1;
+
+        $stack6 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValueIncStdDev>;
+
+        return $stack6;
+
+     label1:
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double minimumRangeValue>;
+
+        return $stack2;
+    }
+
+    public double getRangeUpperBound(boolean)
+    {
+        boolean includeInterval, $stack4;
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        double $stack2, $stack3, $stack6;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        if includeInterval == 0 goto label1;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        $stack4 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack3);
+
+        if $stack4 != 0 goto label1;
+
+        $stack6 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValueIncStdDev>;
+
+        return $stack6;
+
+     label1:
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double maximumRangeValue>;
+
+        return $stack2;
+    }
+
+    public org.jfree.data.Range getRangeBounds(boolean)
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        boolean includeInterval, $stack8, $stack10;
+        double lower, upper;
+        org.jfree.data.Range $stack9;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        lower = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double getRangeLowerBound(boolean)>(includeInterval);
+
+        upper = virtualinvoke this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: double getRangeUpperBound(boolean)>(includeInterval);
+
+        $stack8 = staticinvoke <java.lang.Double: boolean isNaN(double)>(lower);
+
+        if $stack8 == 0 goto label1;
+
+        $stack10 = staticinvoke <java.lang.Double: boolean isNaN(double)>(upper);
+
+        if $stack10 == 0 goto label1;
+
+        return null;
+
+     label1:
+        $stack9 = new org.jfree.data.Range;
+
+        specialinvoke $stack9.<org.jfree.data.Range: void <init>(double,double)>(lower, upper);
+
+        return $stack9;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this, that;
+        boolean $stack3, $stack6;
+        org.jfree.data.KeyedObjects2D $stack4, $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.statistics.DefaultStatisticalCategoryDataset) obj;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = that.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3, $stack4, hash#2;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack3 = 47 * 7;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack2);
+
+        hash#2 = $stack3 + $stack4;
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.statistics.DefaultStatisticalCategoryDataset this, clone;
+        java.lang.Object $stack2, $stack4;
+        org.jfree.data.KeyedObjects2D $stack3, $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+
+        $stack2 = specialinvoke this.<org.jfree.data.general.AbstractDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.statistics.DefaultStatisticalCategoryDataset) $stack2;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>($stack3);
+
+        $stack5 = (org.jfree.data.KeyedObjects2D) $stack4;
+
+        clone.<org.jfree.data.statistics.DefaultStatisticalCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack5;
+
+        return clone;
+    }
+}

@@ -1,0 +1,91 @@
+public class org.jfree.chart.util.StringUtils extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        org.jfree.chart.util.StringUtils this;
+
+        this := @this: org.jfree.chart.util.StringUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean startsWithIgnoreCase(java.lang.String, java.lang.String)
+    {
+        java.lang.String base, start;
+        int $stack2, $stack3, $stack7;
+        boolean $stack8;
+
+        base := @parameter0: java.lang.String;
+
+        start := @parameter1: java.lang.String;
+
+        $stack2 = virtualinvoke base.<java.lang.String: int length()>();
+
+        $stack3 = virtualinvoke start.<java.lang.String: int length()>();
+
+        if $stack2 >= $stack3 goto label1;
+
+        return 0;
+
+     label1:
+        $stack7 = virtualinvoke start.<java.lang.String: int length()>();
+
+        $stack8 = virtualinvoke base.<java.lang.String: boolean regionMatches(boolean,int,java.lang.String,int,int)>(1, 0, start, 0, $stack7);
+
+        return $stack8;
+    }
+
+    public static boolean endsWithIgnoreCase(java.lang.String, java.lang.String)
+    {
+        java.lang.String base, end;
+        int $stack2, $stack3, $stack5, $stack6, $stack7, $stack9;
+        boolean $stack10;
+
+        base := @parameter0: java.lang.String;
+
+        end := @parameter1: java.lang.String;
+
+        $stack2 = virtualinvoke base.<java.lang.String: int length()>();
+
+        $stack3 = virtualinvoke end.<java.lang.String: int length()>();
+
+        if $stack2 >= $stack3 goto label1;
+
+        return 0;
+
+     label1:
+        $stack5 = virtualinvoke base.<java.lang.String: int length()>();
+
+        $stack6 = virtualinvoke end.<java.lang.String: int length()>();
+
+        $stack7 = $stack5 - $stack6;
+
+        $stack9 = virtualinvoke end.<java.lang.String: int length()>();
+
+        $stack10 = virtualinvoke base.<java.lang.String: boolean regionMatches(boolean,int,java.lang.String,int,int)>(1, $stack7, end, 0, $stack9);
+
+        return $stack10;
+    }
+
+    public static java.lang.String getLineSeparator()
+    {
+        java.lang.String $stack1;
+        java.lang.Exception $stack2;
+
+     label1:
+        $stack1 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String,java.lang.String)>("line.separator", "\n");
+
+     label2:
+        return $stack1;
+
+     label3:
+        $stack2 := @caughtexception;
+
+        return "\n";
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+}

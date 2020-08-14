@@ -1,0 +1,790 @@
+public class org.jfree.chart.renderer.WaferMapRenderer extends org.jfree.chart.renderer.AbstractRenderer
+{
+    private java.util.Map paintIndex;
+    private org.jfree.chart.plot.WaferMapPlot plot;
+    private int paintLimit;
+    private static final int DEFAULT_PAINT_LIMIT;
+    public static final int POSITION_INDEX;
+    public static final int VALUE_INDEX;
+    private int paintIndexMethod;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: void <init>(java.lang.Integer,java.lang.Integer)>(null, null);
+
+        return;
+    }
+
+    public void <init>(int, int)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.lang.Integer $stack3, $stack4;
+        int paintLimit, paintIndexMethod;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        paintLimit := @parameter0: int;
+
+        paintIndexMethod := @parameter1: int;
+
+        $stack3 = new java.lang.Integer;
+
+        specialinvoke $stack3.<java.lang.Integer: void <init>(int)>(paintLimit);
+
+        $stack4 = new java.lang.Integer;
+
+        specialinvoke $stack4.<java.lang.Integer: void <init>(int)>(paintIndexMethod);
+
+        specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: void <init>(java.lang.Integer,java.lang.Integer)>($stack3, $stack4);
+
+        return;
+    }
+
+    public void <init>(java.lang.Integer, java.lang.Integer)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.util.HashMap $stack3;
+        java.lang.Integer paintLimit, paintIndexMethod;
+        int $stack4, $stack5, $stack7;
+        boolean $stack6;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        paintLimit := @parameter0: java.lang.Integer;
+
+        paintIndexMethod := @parameter1: java.lang.Integer;
+
+        specialinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void <init>()>();
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>()>();
+
+        this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex> = $stack3;
+
+        if paintLimit != null goto label1;
+
+        this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit> = 35;
+
+        goto label2;
+
+     label1:
+        $stack4 = virtualinvoke paintLimit.<java.lang.Integer: int intValue()>();
+
+        this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit> = $stack4;
+
+     label2:
+        this.<org.jfree.chart.renderer.WaferMapRenderer: int paintIndexMethod> = 1;
+
+        if paintIndexMethod == null goto label3;
+
+        $stack5 = virtualinvoke paintIndexMethod.<java.lang.Integer: int intValue()>();
+
+        $stack6 = specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: boolean isMethodValid(int)>($stack5);
+
+        if $stack6 == 0 goto label3;
+
+        $stack7 = virtualinvoke paintIndexMethod.<java.lang.Integer: int intValue()>();
+
+        this.<org.jfree.chart.renderer.WaferMapRenderer: int paintIndexMethod> = $stack7;
+
+     label3:
+        return;
+    }
+
+    private boolean isMethodValid(int)
+    {
+        int method;
+        org.jfree.chart.renderer.WaferMapRenderer this;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        method := @parameter0: int;
+
+        lookupswitch(method)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        return 1;
+
+     label2:
+        return 1;
+
+     label3:
+        return 0;
+    }
+
+    public org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        org.jfree.chart.plot.WaferMapPlot p;
+        org.jfree.chart.plot.DrawingSupplier result;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        result = null;
+
+        p = virtualinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.plot.WaferMapPlot getPlot()>();
+
+        if p == null goto label1;
+
+        result = virtualinvoke p.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.chart.plot.WaferMapPlot getPlot()
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        org.jfree.chart.plot.WaferMapPlot $stack1;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.plot.WaferMapPlot plot>;
+
+        return $stack1;
+    }
+
+    public void setPlot(org.jfree.chart.plot.WaferMapPlot)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        org.jfree.chart.plot.WaferMapPlot plot;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        plot := @parameter0: org.jfree.chart.plot.WaferMapPlot;
+
+        this.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.plot.WaferMapPlot plot> = plot;
+
+        specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: void makePaintIndex()>();
+
+        return;
+    }
+
+    public java.awt.Paint getChipColor(java.lang.Number)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.lang.Number value;
+        int $stack2;
+        java.awt.Paint $stack3;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        value := @parameter0: java.lang.Number;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: int getPaintIndex(java.lang.Number)>(value);
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: java.awt.Paint getSeriesPaint(int)>($stack2);
+
+        return $stack3;
+    }
+
+    private int getPaintIndex(java.lang.Number)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.lang.Number value;
+        java.util.Map $stack2;
+        java.lang.Object $stack3;
+        java.lang.Integer $stack4;
+        int $stack5;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        value := @parameter0: java.lang.Number;
+
+        $stack2 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object get(java.lang.Object)>(value);
+
+        $stack4 = (java.lang.Integer) $stack3;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.Integer: int intValue()>();
+
+        return $stack5;
+    }
+
+    private void makePaintIndex()
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        org.jfree.chart.plot.WaferMapPlot $stack7, $stack8;
+        org.jfree.data.general.WaferMapDataset data;
+        java.lang.Number dataMin, dataMax;
+        java.util.Set uniqueValues;
+        int $stack13, $stack14, $stack15, $stack21, count;
+        java.util.Iterator i;
+        boolean $stack17;
+        java.util.Map $stack18;
+        java.lang.Object $stack19;
+        java.lang.Integer $stack20;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        $stack7 = this.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.plot.WaferMapPlot plot>;
+
+        if $stack7 != null goto label1;
+
+        return;
+
+     label1:
+        $stack8 = this.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.plot.WaferMapPlot plot>;
+
+        data = virtualinvoke $stack8.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset getDataset()>();
+
+        dataMin = virtualinvoke data.<org.jfree.data.general.WaferMapDataset: java.lang.Number getMinValue()>();
+
+        dataMax = virtualinvoke data.<org.jfree.data.general.WaferMapDataset: java.lang.Number getMaxValue()>();
+
+        uniqueValues = virtualinvoke data.<org.jfree.data.general.WaferMapDataset: java.util.Set getUniqueValues()>();
+
+        $stack13 = interfaceinvoke uniqueValues.<java.util.Set: int size()>();
+
+        $stack14 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        if $stack13 > $stack14 goto label4;
+
+        count = 0;
+
+        i = interfaceinvoke uniqueValues.<java.util.Set: java.util.Iterator iterator()>();
+
+     label2:
+        $stack17 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack17 == 0 goto label3;
+
+        $stack18 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack19 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack20 = new java.lang.Integer;
+
+        $stack21 = count;
+
+        count = count + 1;
+
+        specialinvoke $stack20.<java.lang.Integer: void <init>(int)>($stack21);
+
+        interfaceinvoke $stack18.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack19, $stack20);
+
+        goto label2;
+
+     label3:
+        goto label7;
+
+     label4:
+        $stack15 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintIndexMethod>;
+
+        lookupswitch($stack15)
+        {
+            case 0: goto label5;
+            case 1: goto label6;
+            default: goto label7;
+        };
+
+     label5:
+        specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: void makePositionIndex(java.util.Set)>(uniqueValues);
+
+        goto label7;
+
+     label6:
+        specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: void makeValueIndex(java.lang.Number,java.lang.Number,java.util.Set)>(dataMax, dataMin, uniqueValues);
+
+        goto label7;
+
+     label7:
+        return;
+    }
+
+    private void makePositionIndex(java.util.Set)
+    {
+        java.util.Set uniqueValues;
+        int $stack6, $stack7, valuesPerColor, $stack18, $stack19, count, paint;
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        double $stack8, $stack9, $stack10, $stack11;
+        java.util.Iterator i;
+        java.util.Map $stack14;
+        java.lang.Object $stack15;
+        java.lang.Integer $stack16;
+        boolean $stack13;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        uniqueValues := @parameter0: java.util.Set;
+
+        $stack6 = interfaceinvoke uniqueValues.<java.util.Set: int size()>();
+
+        $stack9 = (double) $stack6;
+
+        $stack7 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        $stack8 = (double) $stack7;
+
+        $stack10 = $stack9 / $stack8;
+
+        $stack11 = staticinvoke <java.lang.Math: double ceil(double)>($stack10);
+
+        valuesPerColor = (int) $stack11;
+
+        count = 0;
+
+        paint = 0;
+
+        i = interfaceinvoke uniqueValues.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack13 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label3;
+
+        $stack14 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack15 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack16 = new java.lang.Integer;
+
+        specialinvoke $stack16.<java.lang.Integer: void <init>(int)>(paint);
+
+        interfaceinvoke $stack14.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack15, $stack16);
+
+        count = count + 1;
+
+        $stack18 = count % valuesPerColor;
+
+        if $stack18 != 0 goto label2;
+
+        paint = paint + 1;
+
+     label2:
+        $stack19 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        if paint <= $stack19 goto label1;
+
+        paint = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    private void makeValueIndex(java.lang.Number, java.lang.Number, java.util.Set)
+    {
+        java.lang.Number max, min, value;
+        double $stack13, $stack14, valueRange, $stack16, valueStep, $stack17, cutPoint, $stack21;
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        int $stack15, $stack27, paint;
+        java.util.Set uniqueValues;
+        java.util.Iterator i;
+        boolean $stack19;
+        java.lang.Object $stack20;
+        java.lang.Integer $stack23;
+        java.util.Map $stack24;
+        byte $stack22;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        max := @parameter0: java.lang.Number;
+
+        min := @parameter1: java.lang.Number;
+
+        uniqueValues := @parameter2: java.util.Set;
+
+        $stack13 = virtualinvoke max.<java.lang.Number: double doubleValue()>();
+
+        $stack14 = virtualinvoke min.<java.lang.Number: double doubleValue()>();
+
+        valueRange = $stack13 - $stack14;
+
+        $stack15 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        $stack16 = (double) $stack15;
+
+        valueStep = valueRange / $stack16;
+
+        paint = 0;
+
+        $stack17 = virtualinvoke min.<java.lang.Number: double doubleValue()>();
+
+        cutPoint = $stack17 + valueStep;
+
+        i = interfaceinvoke uniqueValues.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack19 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack19 == 0 goto label4;
+
+        $stack20 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        value = (java.lang.Number) $stack20;
+
+     label2:
+        $stack21 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+
+        $stack22 = $stack21 cmpl cutPoint;
+
+        if $stack22 <= 0 goto label3;
+
+        cutPoint = cutPoint + valueStep;
+
+        paint = paint + 1;
+
+        $stack27 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        if paint <= $stack27 goto label2;
+
+        paint = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        goto label2;
+
+     label3:
+        $stack24 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack23 = new java.lang.Integer;
+
+        specialinvoke $stack23.<java.lang.Integer: void <init>(int)>(paint);
+
+        interfaceinvoke $stack24.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(value, $stack23);
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendCollection()
+    {
+        org.jfree.chart.LegendItemCollection $stack11;
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.util.Map $stack12, $stack13, $stack16, $stack20, $stack47;
+        int $stack14, $stack17, $stack18, $stack44, $stack57;
+        java.util.HashSet $stack19;
+        java.util.Set $stack21, $stack48;
+        boolean $stack23, $stack26, $stack50;
+        java.lang.Object $stack24, $stack25, $stack29, $stack35, $stack42, $stack51, $stack52, $stack55;
+        java.lang.StringBuilder $stack28, $stack33, $stack34, $stack39;
+        java.lang.Integer $stack30, $stack36, $stack43, $stack56;
+        java.lang.Number $stack31, $stack37;
+        java.lang.String $stack32, $stack38, label, description;
+        java.awt.geom.Rectangle2D$Double $stack41, $stack54;
+        java.awt.Stroke outlineStroke;
+        org.jfree.chart.LegendItem $stack46, $stack59;
+        java.util.Iterator i, entry#10;
+        java.util.Map$Entry entry, label#11;
+        java.awt.Paint paint, outlinePaint#15;
+        java.awt.Color outlinePaint, outlineStroke;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        $stack11 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack11.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        $stack12 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        if $stack12 == null goto label6;
+
+        $stack13 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: int size()>();
+
+        if $stack14 <= 0 goto label6;
+
+        $stack16 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack17 = interfaceinvoke $stack16.<java.util.Map: int size()>();
+
+        $stack18 = this.<org.jfree.chart.renderer.WaferMapRenderer: int paintLimit>;
+
+        if $stack17 > $stack18 goto label3;
+
+        $stack47 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack48 = interfaceinvoke $stack47.<java.util.Map: java.util.Set entrySet()>();
+
+        i = interfaceinvoke $stack48.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack50 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack50 == 0 goto label2;
+
+        $stack51 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack51;
+
+        $stack52 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        label = virtualinvoke $stack52.<java.lang.Object: java.lang.String toString()>();
+
+        $stack54 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack54.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(1.0, 1.0, 1.0, 1.0);
+
+        $stack55 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack56 = (java.lang.Integer) $stack55;
+
+        $stack57 = virtualinvoke $stack56.<java.lang.Integer: int intValue()>();
+
+        paint = virtualinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: java.awt.Paint lookupSeriesPaint(int)>($stack57);
+
+        outlinePaint = <java.awt.Color: java.awt.Color BLACK>;
+
+        outlineStroke = <org.jfree.chart.renderer.WaferMapRenderer: java.awt.Stroke DEFAULT_STROKE>;
+
+        $stack59 = new org.jfree.chart.LegendItem;
+
+        specialinvoke $stack59.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>(label, label, null, null, $stack54, paint, outlineStroke, outlinePaint);
+
+        virtualinvoke $stack11.<org.jfree.chart.LegendItemCollection: void add(org.jfree.chart.LegendItem)>($stack59);
+
+        goto label1;
+
+     label2:
+        goto label6;
+
+     label3:
+        $stack19 = new java.util.HashSet;
+
+        specialinvoke $stack19.<java.util.HashSet: void <init>()>();
+
+        $stack20 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack21 = interfaceinvoke $stack20.<java.util.Map: java.util.Set entrySet()>();
+
+        entry#10 = interfaceinvoke $stack21.<java.util.Set: java.util.Iterator iterator()>();
+
+     label4:
+        $stack23 = interfaceinvoke entry#10.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack23 == 0 goto label6;
+
+        $stack24 = interfaceinvoke entry#10.<java.util.Iterator: java.lang.Object next()>();
+
+        label#11 = (java.util.Map$Entry) $stack24;
+
+        $stack25 = interfaceinvoke label#11.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack26 = interfaceinvoke $stack19.<java.util.Set: boolean add(java.lang.Object)>($stack25);
+
+        if $stack26 == 0 goto label5;
+
+        $stack28 = new java.lang.StringBuilder;
+
+        specialinvoke $stack28.<java.lang.StringBuilder: void <init>()>();
+
+        $stack29 = interfaceinvoke label#11.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack30 = (java.lang.Integer) $stack29;
+
+        $stack31 = specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: java.lang.Number getMinPaintValue(java.lang.Integer)>($stack30);
+
+        $stack32 = virtualinvoke $stack31.<java.lang.Object: java.lang.String toString()>();
+
+        $stack33 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack32);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" - ");
+
+        $stack35 = interfaceinvoke label#11.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack36 = (java.lang.Integer) $stack35;
+
+        $stack37 = specialinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: java.lang.Number getMaxPaintValue(java.lang.Integer)>($stack36);
+
+        $stack38 = virtualinvoke $stack37.<java.lang.Object: java.lang.String toString()>();
+
+        $stack39 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack38);
+
+        description = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack41 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack41.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(1.0, 1.0, 1.0, 1.0);
+
+        $stack42 = interfaceinvoke label#11.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack43 = (java.lang.Integer) $stack42;
+
+        $stack44 = virtualinvoke $stack43.<java.lang.Integer: int intValue()>();
+
+        outlinePaint#15 = virtualinvoke this.<org.jfree.chart.renderer.WaferMapRenderer: java.awt.Paint getSeriesPaint(int)>($stack44);
+
+        outlineStroke = <java.awt.Color: java.awt.Color BLACK>;
+
+        outlineStroke = <org.jfree.chart.renderer.WaferMapRenderer: java.awt.Stroke DEFAULT_STROKE>;
+
+        $stack46 = new org.jfree.chart.LegendItem;
+
+        specialinvoke $stack46.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>(description, description, null, null, $stack41, outlinePaint#15, outlineStroke, outlineStroke);
+
+        virtualinvoke $stack11.<org.jfree.chart.LegendItemCollection: void add(org.jfree.chart.LegendItem)>($stack46);
+
+     label5:
+        goto label4;
+
+     label6:
+        return $stack11;
+    }
+
+    private java.lang.Number getMinPaintValue(java.lang.Integer)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.util.Map $stack6;
+        java.util.Set $stack7;
+        java.util.Iterator i;
+        boolean $stack9, $stack14;
+        java.lang.Double $stack10;
+        java.lang.Object $stack11, $stack12, $stack16, $stack20;
+        java.util.Map$Entry entry;
+        java.lang.Integer index, $stack13;
+        java.lang.Number $stack17, $stack21;
+        double $stack18, minValue;
+        byte $stack19;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        index := @parameter0: java.lang.Integer;
+
+        minValue = #Infinity;
+
+        $stack6 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: java.util.Set entrySet()>();
+
+        i = interfaceinvoke $stack7.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label3;
+
+        $stack11 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack11;
+
+        $stack12 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack13 = (java.lang.Integer) $stack12;
+
+        $stack14 = virtualinvoke $stack13.<java.lang.Integer: boolean equals(java.lang.Object)>(index);
+
+        if $stack14 == 0 goto label2;
+
+        $stack16 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack17 = (java.lang.Number) $stack16;
+
+        $stack18 = virtualinvoke $stack17.<java.lang.Number: double doubleValue()>();
+
+        $stack19 = $stack18 cmpg minValue;
+
+        if $stack19 >= 0 goto label2;
+
+        $stack20 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack21 = (java.lang.Number) $stack20;
+
+        minValue = virtualinvoke $stack21.<java.lang.Number: double doubleValue()>();
+
+     label2:
+        goto label1;
+
+     label3:
+        $stack10 = new java.lang.Double;
+
+        specialinvoke $stack10.<java.lang.Double: void <init>(double)>(minValue);
+
+        return $stack10;
+    }
+
+    private java.lang.Number getMaxPaintValue(java.lang.Integer)
+    {
+        org.jfree.chart.renderer.WaferMapRenderer this;
+        java.util.Map $stack6;
+        java.util.Set $stack7;
+        java.util.Iterator i;
+        boolean $stack9, $stack14;
+        java.lang.Double $stack10;
+        java.lang.Object $stack11, $stack12, $stack16, $stack20;
+        java.util.Map$Entry entry;
+        java.lang.Integer index, $stack13;
+        java.lang.Number $stack17, $stack21;
+        double $stack18, maxValue;
+        byte $stack19;
+
+        this := @this: org.jfree.chart.renderer.WaferMapRenderer;
+
+        index := @parameter0: java.lang.Integer;
+
+        maxValue = #-Infinity;
+
+        $stack6 = this.<org.jfree.chart.renderer.WaferMapRenderer: java.util.Map paintIndex>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: java.util.Set entrySet()>();
+
+        i = interfaceinvoke $stack7.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label3;
+
+        $stack11 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack11;
+
+        $stack12 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack13 = (java.lang.Integer) $stack12;
+
+        $stack14 = virtualinvoke $stack13.<java.lang.Integer: boolean equals(java.lang.Object)>(index);
+
+        if $stack14 == 0 goto label2;
+
+        $stack16 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack17 = (java.lang.Number) $stack16;
+
+        $stack18 = virtualinvoke $stack17.<java.lang.Number: double doubleValue()>();
+
+        $stack19 = $stack18 cmpl maxValue;
+
+        if $stack19 <= 0 goto label2;
+
+        $stack20 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack21 = (java.lang.Number) $stack20;
+
+        maxValue = virtualinvoke $stack21.<java.lang.Number: double doubleValue()>();
+
+     label2:
+        goto label1;
+
+     label3:
+        $stack10 = new java.lang.Double;
+
+        specialinvoke $stack10.<java.lang.Double: void <init>(double)>(maxValue);
+
+        return $stack10;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.renderer.WaferMapRenderer: int VALUE_INDEX> = 1;
+
+        <org.jfree.chart.renderer.WaferMapRenderer: int POSITION_INDEX> = 0;
+
+        <org.jfree.chart.renderer.WaferMapRenderer: int DEFAULT_PAINT_LIMIT> = 35;
+
+        return;
+    }
+}

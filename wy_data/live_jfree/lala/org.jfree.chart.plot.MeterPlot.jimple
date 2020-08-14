@@ -1,0 +1,2241 @@
+public class org.jfree.chart.plot.MeterPlot extends org.jfree.chart.plot.Plot implements java.io.Serializable, java.lang.Cloneable
+{
+    private static final long serialVersionUID;
+    static final java.awt.Paint DEFAULT_DIAL_BACKGROUND_PAINT;
+    static final java.awt.Paint DEFAULT_NEEDLE_PAINT;
+    static final java.awt.Font DEFAULT_VALUE_FONT;
+    static final java.awt.Paint DEFAULT_VALUE_PAINT;
+    public static final int DEFAULT_METER_ANGLE;
+    public static final float DEFAULT_BORDER_SIZE;
+    public static final float DEFAULT_CIRCLE_SIZE;
+    public static final java.awt.Font DEFAULT_LABEL_FONT;
+    private org.jfree.data.general.ValueDataset dataset;
+    private org.jfree.chart.plot.DialShape shape;
+    private int meterAngle;
+    private org.jfree.data.Range range;
+    private double tickSize;
+    private transient java.awt.Paint tickPaint;
+    private java.lang.String units;
+    private java.awt.Font valueFont;
+    private transient java.awt.Paint valuePaint;
+    private boolean drawBorder;
+    private transient java.awt.Paint dialOutlinePaint;
+    private transient java.awt.Paint dialBackgroundPaint;
+    private transient java.awt.Paint needlePaint;
+    private boolean tickLabelsVisible;
+    private java.awt.Font tickLabelFont;
+    private transient java.awt.Paint tickLabelPaint;
+    private java.text.NumberFormat tickLabelFormat;
+    protected static java.util.ResourceBundle localizationResources;
+    private java.util.List intervals;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        specialinvoke this.<org.jfree.chart.plot.MeterPlot: void <init>(org.jfree.data.general.ValueDataset)>(null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.general.ValueDataset)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.chart.plot.DialShape $stack2;
+        org.jfree.data.Range $stack3;
+        java.awt.Color $stack4, $stack7;
+        java.awt.Paint $stack5, $stack10, $stack11;
+        java.awt.Font $stack6, $stack9;
+        java.text.NumberFormat $stack8;
+        java.util.ArrayList $stack12;
+        org.jfree.data.general.ValueDataset dataset;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        dataset := @parameter0: org.jfree.data.general.ValueDataset;
+
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+
+        $stack2 = <org.jfree.chart.plot.DialShape: org.jfree.chart.plot.DialShape CIRCLE>;
+
+        this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape> = $stack2;
+
+        this.<org.jfree.chart.plot.MeterPlot: int meterAngle> = 270;
+
+        $stack3 = new org.jfree.data.Range;
+
+        specialinvoke $stack3.<org.jfree.data.Range: void <init>(double,double)>(0.0, 100.0);
+
+        this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range> = $stack3;
+
+        this.<org.jfree.chart.plot.MeterPlot: double tickSize> = 10.0;
+
+        $stack4 = <java.awt.Color: java.awt.Color WHITE>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint> = $stack4;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.lang.String units> = "Units";
+
+        $stack5 = <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_NEEDLE_PAINT>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint> = $stack5;
+
+        this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible> = 1;
+
+        $stack6 = <org.jfree.chart.plot.MeterPlot: java.awt.Font DEFAULT_LABEL_FONT>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont> = $stack6;
+
+        $stack7 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint> = $stack7;
+
+        $stack8 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+
+        this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat> = $stack8;
+
+        $stack9 = <org.jfree.chart.plot.MeterPlot: java.awt.Font DEFAULT_VALUE_FONT>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont> = $stack9;
+
+        $stack10 = <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_VALUE_PAINT>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint> = $stack10;
+
+        $stack11 = <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_DIAL_BACKGROUND_PAINT>;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint> = $stack11;
+
+        $stack12 = new java.util.ArrayList;
+
+        specialinvoke $stack12.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals> = $stack12;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void setDataset(org.jfree.data.general.ValueDataset)>(dataset);
+
+        return;
+    }
+
+    public org.jfree.chart.plot.DialShape getDialShape()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.chart.plot.DialShape $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        return $stack1;
+    }
+
+    public void setDialShape(org.jfree.chart.plot.DialShape)
+    {
+        org.jfree.chart.plot.DialShape shape;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        shape := @parameter0: org.jfree.chart.plot.DialShape;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(shape, "shape");
+
+        this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape> = shape;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public int getMeterAngle()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        return $stack1;
+    }
+
+    public void setMeterAngle(int)
+    {
+        int angle;
+        java.lang.IllegalArgumentException $stack2;
+        java.lang.StringBuilder $stack3, $stack4, $stack5, $stack6;
+        java.lang.String $stack7;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        angle := @parameter0: int;
+
+        if angle < 1 goto label1;
+
+        if angle <= 360 goto label2;
+
+     label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid \'angle\' (");
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(angle);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack7);
+
+        throw $stack2;
+
+     label2:
+        this.<org.jfree.chart.plot.MeterPlot: int meterAngle> = angle;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.data.Range getRange()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.data.Range $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        return $stack1;
+    }
+
+    public void setRange(org.jfree.data.Range)
+    {
+        org.jfree.data.Range range;
+        double $stack2;
+        byte $stack3;
+        org.jfree.chart.plot.MeterPlot this;
+        java.lang.IllegalArgumentException $stack4;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        range := @parameter0: org.jfree.data.Range;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(range, "range");
+
+        $stack2 = virtualinvoke range.<org.jfree.data.Range: double getLength()>();
+
+        $stack3 = $stack2 cmpl 0.0;
+
+        if $stack3 > 0 goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Range length must be positive.");
+
+        throw $stack4;
+
+     label1:
+        this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range> = range;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getTickSize()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: double tickSize>;
+
+        return $stack1;
+    }
+
+    public void setTickSize(double)
+    {
+        double size;
+        byte $stack3;
+        org.jfree.chart.plot.MeterPlot this;
+        java.lang.IllegalArgumentException $stack4;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        size := @parameter0: double;
+
+        $stack3 = size cmpg 0.0;
+
+        if $stack3 > 0 goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'size\' > 0.");
+
+        throw $stack4;
+
+     label1:
+        this.<org.jfree.chart.plot.MeterPlot: double tickSize> = size;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getTickPaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint>;
+
+        return $stack1;
+    }
+
+    public void setTickPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.lang.String getUnits()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.lang.String units>;
+
+        return $stack1;
+    }
+
+    public void setUnits(java.lang.String)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.lang.String units;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        units := @parameter0: java.lang.String;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.lang.String units> = units;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getNeedlePaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint>;
+
+        return $stack1;
+    }
+
+    public void setNeedlePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean getTickLabelsVisible()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible>;
+
+        return $stack1;
+    }
+
+    public void setTickLabelsVisible(boolean)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        boolean visible, $stack2;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        visible := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible>;
+
+        if $stack2 == visible goto label1;
+
+        this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible> = visible;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Font getTickLabelFont()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont>;
+
+        return $stack1;
+    }
+
+    public void setTickLabelFont(java.awt.Font)
+    {
+        java.awt.Font font, $stack2;
+        org.jfree.chart.plot.MeterPlot this;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        $stack2 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont>;
+
+        $stack3 = virtualinvoke $stack2.<java.awt.Font: boolean equals(java.lang.Object)>(font);
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont> = font;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Paint getTickLabelPaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        return $stack1;
+    }
+
+    public void setTickLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint, $stack2;
+        org.jfree.chart.plot.MeterPlot this;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        $stack2 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: boolean equals(java.lang.Object)>(paint);
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.text.NumberFormat getTickLabelFormat()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.text.NumberFormat $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        return $stack1;
+    }
+
+    public void setTickLabelFormat(java.text.NumberFormat)
+    {
+        java.text.NumberFormat format;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        format := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(format, "format");
+
+        this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat> = format;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Font getValueFont()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont>;
+
+        return $stack1;
+    }
+
+    public void setValueFont(java.awt.Font)
+    {
+        java.awt.Font font;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont> = font;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getValuePaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint>;
+
+        return $stack1;
+    }
+
+    public void setValuePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getDialBackgroundPaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        return $stack1;
+    }
+
+    public void setDialBackgroundPaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean getDrawBorder()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: boolean drawBorder>;
+
+        return $stack1;
+    }
+
+    public void setDrawBorder(boolean)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        boolean draw;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        draw := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.MeterPlot: boolean drawBorder> = draw;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getDialOutlinePaint()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setDialOutlinePaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.data.general.ValueDataset getDataset()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.data.general.ValueDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        return $stack1;
+    }
+
+    public void setDataset(org.jfree.data.general.ValueDataset)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.data.general.ValueDataset existing, dataset;
+        org.jfree.data.general.DatasetChangeEvent $stack4;
+        org.jfree.data.general.DatasetGroup $stack5;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        dataset := @parameter0: org.jfree.data.general.ValueDataset;
+
+        existing = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if existing == null goto label1;
+
+        interfaceinvoke existing.<org.jfree.data.general.ValueDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset> = dataset;
+
+        if dataset == null goto label2;
+
+        $stack5 = interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: org.jfree.data.general.DatasetGroup getGroup()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void setDatasetGroup(org.jfree.data.general.DatasetGroup)>($stack5);
+
+        interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label2:
+        $stack4 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack4.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack4);
+
+        return;
+    }
+
+    public java.util.List getIntervals()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.util.List $stack1, $stack2;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+
+        return $stack2;
+    }
+
+    public void addInterval(org.jfree.chart.plot.MeterInterval)
+    {
+        org.jfree.chart.plot.MeterInterval interval;
+        org.jfree.chart.plot.MeterPlot this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        interval := @parameter0: org.jfree.chart.plot.MeterInterval;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(interval, "interval");
+
+        $stack2 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(interval);
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void clearIntervals()
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.util.List $stack1;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        interfaceinvoke $stack1.<java.util.List: void clear()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.LegendItemCollection $stack6;
+        org.jfree.chart.plot.MeterPlot this;
+        java.util.List $stack7;
+        java.util.Iterator iterator;
+        boolean $stack9;
+        java.lang.Object $stack10;
+        org.jfree.chart.plot.MeterInterval mi;
+        org.jfree.chart.LegendItem $stack12;
+        java.lang.String $stack13, $stack14;
+        java.awt.geom.Rectangle2D$Double $stack15;
+        org.jfree.data.general.ValueDataset $stack18;
+        java.awt.Paint color;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack6 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack6.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        $stack7 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        iterator = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label3;
+
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        mi = (org.jfree.chart.plot.MeterInterval) $stack10;
+
+        color = virtualinvoke mi.<org.jfree.chart.plot.MeterInterval: java.awt.Paint getBackgroundPaint()>();
+
+        if color != null goto label2;
+
+        color = virtualinvoke mi.<org.jfree.chart.plot.MeterInterval: java.awt.Paint getOutlinePaint()>();
+
+     label2:
+        $stack12 = new org.jfree.chart.LegendItem;
+
+        $stack13 = virtualinvoke mi.<org.jfree.chart.plot.MeterInterval: java.lang.String getLabel()>();
+
+        $stack14 = virtualinvoke mi.<org.jfree.chart.plot.MeterInterval: java.lang.String getLabel()>();
+
+        $stack15 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack15.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(-4.0, -4.0, 8.0, 8.0);
+
+        specialinvoke $stack12.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint)>($stack13, $stack14, null, null, $stack15, color);
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset getDataset()>();
+
+        virtualinvoke $stack12.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>($stack18);
+
+        virtualinvoke $stack6.<org.jfree.chart.LegendItemCollection: void add(org.jfree.chart.LegendItem)>($stack12);
+
+        goto label1;
+
+     label3:
+        return $stack6;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.geom.Rectangle2D area;
+        double $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack59, $stack61, $stack62, $stack63, $stack64, $stack65, $stack66, min, meterMiddleX, meterMiddleY, dataMin, dataMax, value, $stack119, $stack120, $stack121, radius, valueAngle, $stack123, $stack124, $stack125, $stack126, valueP1, $stack127, $stack128, $stack129, $stack130, valueP2, $stack134, $stack137, valueP4, $stack244, meterX, meterY, meterW, $stack68, $stack204, meterH, $stack69, $stack70, $stack71, $stack72, $stack73, $stack74, $stack75, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, valueP3, $stack144, $stack143;
+        boolean $stack60, $stack112, $stack107, $stack89;
+        int $stack67, $stack135, $stack136, $stack138, $stack139, $stack167, $stack168, $stack169, $stack170, $stack141, $stack140;
+        org.jfree.data.general.ValueDataset data;
+        java.awt.Graphics2D g2;
+        org.jfree.data.Range $stack90, $stack92, $stack103, $stack111;
+        java.awt.Shape savedClip;
+        java.awt.Composite originalComposite;
+        float $stack97;
+        java.awt.AlphaComposite $stack98;
+        java.awt.Paint $stack99, $stack104, $stack117, $stack188;
+        org.jfree.chart.plot.MeterInterval $stack100, interval;
+        java.awt.BasicStroke $stack101, $stack118;
+        java.util.List $stack105;
+        java.util.Iterator iterator;
+        java.awt.Polygon $stack131;
+        byte $stack132, $stack133, $stack145, $stack171;
+        java.lang.Object $stack186;
+        org.jfree.chart.plot.DialShape $stack202, $stack203;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotState parentState;
+        java.awt.geom.Rectangle2D$Double $stack76, $stack77;
+        java.lang.Number interval#137;
+        java.awt.geom.Ellipse2D$Double $stack142;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        if info == null goto label01;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label01:
+        insets = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        $stack52 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack53 = $stack52 + 4.0;
+
+        $stack54 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack55 = $stack54 + 4.0;
+
+        $stack56 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack57 = $stack56 - 8.0;
+
+        $stack58 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack59 = $stack58 - 8.0;
+
+        virtualinvoke area.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack53, $stack55, $stack57, $stack59);
+
+        $stack60 = this.<org.jfree.chart.plot.MeterPlot: boolean drawBorder>;
+
+        if $stack60 == 0 goto label02;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+     label02:
+        $stack61 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack62 = 6.0 / 2.0;
+
+        meterX = $stack61 + $stack62;
+
+        $stack63 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack64 = 6.0 / 2.0;
+
+        meterY = $stack63 + $stack64;
+
+        $stack65 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        meterW = $stack65 - 6.0;
+
+        $stack66 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack68 = $stack66 - 6.0;
+
+        $stack67 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        if $stack67 > 180 goto label03;
+
+        $stack203 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        $stack202 = <org.jfree.chart.plot.DialShape: org.jfree.chart.plot.DialShape CIRCLE>;
+
+        if $stack203 == $stack202 goto label03;
+
+        $stack244 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack204 = $stack244 / 1.25;
+
+        goto label04;
+
+     label03:
+        $stack204 = 0.0;
+
+     label04:
+        meterH = $stack68 + $stack204;
+
+        $stack69 = staticinvoke <java.lang.Math: double min(double,double)>(meterW, meterH);
+
+        min = $stack69 / 2.0;
+
+        $stack70 = meterX + meterX;
+
+        $stack71 = $stack70 + meterW;
+
+        $stack72 = $stack71 / 2.0;
+
+        meterX = $stack72 - min;
+
+        $stack73 = meterY + meterY;
+
+        $stack74 = $stack73 + meterH;
+
+        $stack75 = $stack74 / 2.0;
+
+        meterY = $stack75 - min;
+
+        meterW = 2.0 * min;
+
+        meterH = 2.0 * min;
+
+        $stack76 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack76.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(meterX, meterY, meterW, meterH);
+
+        $stack77 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack78 = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack79 = $stack78 - 4.0;
+
+        $stack80 = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack81 = $stack80 - 4.0;
+
+        $stack82 = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack83 = $stack82 + 8.0;
+
+        $stack84 = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack85 = $stack84 + 8.0;
+
+        specialinvoke $stack77.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack79, $stack81, $stack83, $stack85);
+
+        meterMiddleX = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        meterMiddleY = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        data = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset getDataset()>();
+
+        if data == null goto label13;
+
+        $stack90 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        dataMin = virtualinvoke $stack90.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack92 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        dataMax = virtualinvoke $stack92.<org.jfree.data.Range: double getUpperBound()>();
+
+        savedClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>($stack77);
+
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+
+        $stack97 = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: float getForegroundAlpha()>();
+
+        $stack98 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack97);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack98);
+
+        $stack99 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        if $stack99 == null goto label05;
+
+        $stack188 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fillArc(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,double,java.awt.Paint,boolean)>(g2, $stack77, dataMin, dataMax, $stack188, 1);
+
+     label05:
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawTicks(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,double)>(g2, $stack76, dataMin, dataMax);
+
+        $stack100 = new org.jfree.chart.plot.MeterInterval;
+
+        $stack103 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack104 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint>;
+
+        $stack101 = new java.awt.BasicStroke;
+
+        specialinvoke $stack101.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        specialinvoke $stack100.<org.jfree.chart.plot.MeterInterval: void <init>(java.lang.String,org.jfree.data.Range,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>("", $stack103, $stack104, $stack101, null);
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawArcForInterval(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.MeterInterval)>(g2, $stack76, $stack100);
+
+        $stack105 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        iterator = interfaceinvoke $stack105.<java.util.List: java.util.Iterator iterator()>();
+
+     label06:
+        $stack107 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack107 == 0 goto label07;
+
+        $stack186 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        interval = (org.jfree.chart.plot.MeterInterval) $stack186;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawArcForInterval(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.MeterInterval)>(g2, $stack76, interval);
+
+        goto label06;
+
+     label07:
+        interval#137 = interfaceinvoke data.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        if interval#137 == null goto label12;
+
+        value = virtualinvoke interval#137.<java.lang.Number: double doubleValue()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawValueLabel(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, $stack76);
+
+        $stack111 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack112 = virtualinvoke $stack111.<org.jfree.data.Range: boolean contains(double)>(value);
+
+        if $stack112 == 0 goto label12;
+
+        $stack117 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack117);
+
+        $stack118 = new java.awt.BasicStroke;
+
+        specialinvoke $stack118.<java.awt.BasicStroke: void <init>(float)>(2.0F);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack118);
+
+        $stack119 = virtualinvoke $stack76.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack120 = $stack119 / 2.0;
+
+        $stack121 = $stack120 + 3.0;
+
+        radius = $stack121 + 15.0;
+
+        valueAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(value);
+
+        $stack123 = valueAngle / 180.0;
+
+        $stack124 = 3.141592653589793 * $stack123;
+
+        $stack125 = staticinvoke <java.lang.Math: double cos(double)>($stack124);
+
+        $stack126 = radius * $stack125;
+
+        valueP1 = meterMiddleX + $stack126;
+
+        $stack127 = valueAngle / 180.0;
+
+        $stack128 = 3.141592653589793 * $stack127;
+
+        $stack129 = staticinvoke <java.lang.Math: double sin(double)>($stack128);
+
+        $stack130 = radius * $stack129;
+
+        valueP2 = meterMiddleY - $stack130;
+
+        $stack131 = new java.awt.Polygon;
+
+        specialinvoke $stack131.<java.awt.Polygon: void <init>()>();
+
+        $stack132 = valueAngle cmpl 135.0;
+
+        if $stack132 <= 0 goto label08;
+
+        $stack171 = valueAngle cmpg 225.0;
+
+        if $stack171 < 0 goto label09;
+
+     label08:
+        $stack133 = valueAngle cmpg 45.0;
+
+        if $stack133 >= 0 goto label10;
+
+        $stack145 = valueAngle cmpl -45.0;
+
+        if $stack145 <= 0 goto label10;
+
+     label09:
+        valueP3 = meterMiddleY - 2.5;
+
+        valueP4 = meterMiddleY + 2.5;
+
+        $stack168 = (int) meterMiddleX;
+
+        $stack167 = (int) valueP3;
+
+        virtualinvoke $stack131.<java.awt.Polygon: void addPoint(int,int)>($stack168, $stack167);
+
+        $stack170 = (int) meterMiddleX;
+
+        $stack169 = (int) valueP4;
+
+        virtualinvoke $stack131.<java.awt.Polygon: void addPoint(int,int)>($stack170, $stack169);
+
+        goto label11;
+
+     label10:
+        $stack134 = meterMiddleX - 2.5;
+
+        $stack136 = (int) $stack134;
+
+        $stack135 = (int) meterMiddleY;
+
+        virtualinvoke $stack131.<java.awt.Polygon: void addPoint(int,int)>($stack136, $stack135);
+
+        $stack137 = meterMiddleX + 2.5;
+
+        $stack139 = (int) $stack137;
+
+        $stack138 = (int) meterMiddleY;
+
+        virtualinvoke $stack131.<java.awt.Polygon: void addPoint(int,int)>($stack139, $stack138);
+
+     label11:
+        $stack141 = (int) valueP1;
+
+        $stack140 = (int) valueP2;
+
+        virtualinvoke $stack131.<java.awt.Polygon: void addPoint(int,int)>($stack141, $stack140);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack131);
+
+        $stack142 = new java.awt.geom.Ellipse2D$Double;
+
+        $stack144 = meterMiddleX - 5.0;
+
+        $stack143 = meterMiddleY - 5.0;
+
+        specialinvoke $stack142.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack144, $stack143, 10.0, 10.0);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack142);
+
+     label12:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+
+     label13:
+        $stack89 = this.<org.jfree.chart.plot.MeterPlot: boolean drawBorder>;
+
+        if $stack89 == 0 goto label14;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+     label14:
+        return;
+    }
+
+    protected void drawArcForInterval(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.MeterInterval)
+    {
+        org.jfree.chart.plot.MeterInterval interval;
+        org.jfree.data.Range $stack11, $stack13;
+        double minValue, maxValue;
+        java.awt.Paint outlinePaint, backgroundPaint;
+        java.awt.Stroke outlineStroke;
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D meterArea;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        meterArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        interval := @parameter2: org.jfree.chart.plot.MeterInterval;
+
+        $stack11 = virtualinvoke interval.<org.jfree.chart.plot.MeterInterval: org.jfree.data.Range getRange()>();
+
+        minValue = virtualinvoke $stack11.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack13 = virtualinvoke interval.<org.jfree.chart.plot.MeterInterval: org.jfree.data.Range getRange()>();
+
+        maxValue = virtualinvoke $stack13.<org.jfree.data.Range: double getUpperBound()>();
+
+        outlinePaint = virtualinvoke interval.<org.jfree.chart.plot.MeterInterval: java.awt.Paint getOutlinePaint()>();
+
+        outlineStroke = virtualinvoke interval.<org.jfree.chart.plot.MeterInterval: java.awt.Stroke getOutlineStroke()>();
+
+        backgroundPaint = virtualinvoke interval.<org.jfree.chart.plot.MeterInterval: java.awt.Paint getBackgroundPaint()>();
+
+        if backgroundPaint == null goto label1;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void fillArc(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,double,java.awt.Paint,boolean)>(g2, meterArea, minValue, maxValue, backgroundPaint, 0);
+
+     label1:
+        if outlinePaint == null goto label3;
+
+        if outlineStroke == null goto label2;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawArc(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,double,java.awt.Paint,java.awt.Stroke)>(g2, meterArea, minValue, maxValue, outlinePaint, outlineStroke);
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawTick(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,boolean)>(g2, meterArea, minValue, 1);
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawTick(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,boolean)>(g2, meterArea, maxValue, 1);
+
+     label3:
+        return;
+    }
+
+    protected void drawArc(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, double, java.awt.Paint, java.awt.Stroke)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        double maxValue, startAngle, minValue, endAngle, extent, x, y, w, h;
+        java.awt.geom.Rectangle2D area;
+        java.awt.Graphics2D g2;
+        java.awt.Paint paint;
+        java.awt.Stroke stroke;
+        java.awt.geom.Arc2D$Double $stack30;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        minValue := @parameter2: double;
+
+        maxValue := @parameter3: double;
+
+        paint := @parameter4: java.awt.Paint;
+
+        stroke := @parameter5: java.awt.Stroke;
+
+        startAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(maxValue);
+
+        endAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(minValue);
+
+        extent = endAngle - startAngle;
+
+        x = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        w = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        h = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(stroke);
+
+        if paint == null goto label1;
+
+        if stroke == null goto label1;
+
+        $stack30 = new java.awt.geom.Arc2D$Double;
+
+        specialinvoke $stack30.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(x, y, w, h, startAngle, extent, 0);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(stroke);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack30);
+
+     label1:
+        return;
+    }
+
+    protected void fillArc(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, double, java.awt.Paint, boolean)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.MeterPlot this;
+        double maxValue, startAngle, minValue, endAngle, x, y, w, h, extent;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.plot.DialShape $stack31, $stack32, $stack33, $stack34, $stack35, $stack36;
+        java.lang.IllegalStateException $stack37;
+        boolean dial;
+        java.awt.Graphics2D g2;
+        int $stack50;
+        byte joinType#3;
+        java.awt.geom.Arc2D$Double $stack38;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        minValue := @parameter2: double;
+
+        maxValue := @parameter3: double;
+
+        paint := @parameter4: java.awt.Paint;
+
+        dial := @parameter5: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        startAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(maxValue);
+
+        endAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(minValue);
+
+        extent = endAngle - startAngle;
+
+        x = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        w = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        h = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack32 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        $stack31 = <org.jfree.chart.plot.DialShape: org.jfree.chart.plot.DialShape PIE>;
+
+        if $stack32 != $stack31 goto label1;
+
+        joinType#3 = 2;
+
+        goto label5;
+
+     label1:
+        $stack34 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        $stack33 = <org.jfree.chart.plot.DialShape: org.jfree.chart.plot.DialShape CHORD>;
+
+        if $stack34 != $stack33 goto label3;
+
+        if dial == 0 goto label2;
+
+        $stack50 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        if $stack50 <= 180 goto label2;
+
+        joinType#3 = 1;
+
+        goto label5;
+
+     label2:
+        joinType#3 = 2;
+
+        goto label5;
+
+     label3:
+        $stack36 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        $stack35 = <org.jfree.chart.plot.DialShape: org.jfree.chart.plot.DialShape CIRCLE>;
+
+        if $stack36 != $stack35 goto label4;
+
+        joinType#3 = 2;
+
+        if dial == 0 goto label5;
+
+        extent = 360.0;
+
+        goto label5;
+
+     label4:
+        $stack37 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack37.<java.lang.IllegalStateException: void <init>(java.lang.String)>("DialShape not recognised.");
+
+        throw $stack37;
+
+     label5:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+
+        $stack38 = new java.awt.geom.Arc2D$Double;
+
+        specialinvoke $stack38.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(x, y, w, h, startAngle, extent, joinType#3);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack38);
+
+        return;
+    }
+
+    public double valueToAngle(double)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        org.jfree.data.Range $stack5, $stack11;
+        double $stack6, baseAngle, $stack12, $stack14, $stack15, $stack16, $stack17, value, value#2;
+        int $stack7, $stack8, $stack9, $stack10, $stack13;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        value := @parameter0: double;
+
+        $stack5 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.Range: double getLowerBound()>();
+
+        value#2 = value - $stack6;
+
+        $stack7 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        $stack8 = $stack7 - 180;
+
+        $stack9 = $stack8 / 2;
+
+        $stack10 = 180 + $stack9;
+
+        baseAngle = (double) $stack10;
+
+        $stack11 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.data.Range: double getLength()>();
+
+        $stack15 = value#2 / $stack12;
+
+        $stack13 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        $stack14 = (double) $stack13;
+
+        $stack16 = $stack15 * $stack14;
+
+        $stack17 = baseAngle - $stack16;
+
+        return $stack17;
+    }
+
+    protected void drawTicks(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, double)
+    {
+        double minValue, maxValue, $stack10, v;
+        byte $stack9;
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D meterArea;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        meterArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        minValue := @parameter2: double;
+
+        maxValue := @parameter3: double;
+
+        v = minValue;
+
+     label1:
+        $stack9 = v cmpg maxValue;
+
+        if $stack9 > 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawTick(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double)>(g2, meterArea, v);
+
+        $stack10 = this.<org.jfree.chart.plot.MeterPlot: double tickSize>;
+
+        v = v + $stack10;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    protected void drawTick(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D meterArea;
+        double value;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        meterArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        value := @parameter2: double;
+
+        virtualinvoke this.<org.jfree.chart.plot.MeterPlot: void drawTick(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,boolean)>(g2, meterArea, value, 0);
+
+        return;
+    }
+
+    protected void drawTick(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, boolean)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        double value, valueAngle, meterMiddleX, meterMiddleY, $stack37, $stack38, radius, radius1, $stack39, $stack40, $stack41, $stack42, valueP1X, $stack43, $stack44, $stack45, $stack46, valueP1Y, $stack47, $stack48, $stack49, $stack50, valueP2X, $stack51, $stack52, $stack53, $stack54, valueP2Y, $stack64, $stack65, $stack73, $stack74, $stack88, x, y, $stack68, $stack69;
+        java.awt.geom.Rectangle2D meterArea, tickLabelBounds;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack35, $stack60;
+        java.awt.BasicStroke $stack36;
+        java.awt.geom.Line2D$Double $stack55;
+        boolean $stack56, label;
+        java.text.NumberFormat $stack57;
+        java.lang.String tickLabel;
+        java.awt.Font $stack59;
+        java.awt.FontMetrics fm;
+        byte $stack63, $stack67, $stack72, $stack83, $stack86, $stack87, $stack91, $stack66;
+        float $stack70, $stack71;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        meterArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        value := @parameter2: double;
+
+        label := @parameter3: boolean;
+
+        valueAngle = virtualinvoke this.<org.jfree.chart.plot.MeterPlot: double valueToAngle(double)>(value);
+
+        meterMiddleX = virtualinvoke meterArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        meterMiddleY = virtualinvoke meterArea.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        $stack35 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack35);
+
+        $stack36 = new java.awt.BasicStroke;
+
+        specialinvoke $stack36.<java.awt.BasicStroke: void <init>(float)>(2.0F);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack36);
+
+        $stack37 = virtualinvoke meterArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack38 = $stack37 / 2.0;
+
+        radius = $stack38 + 3.0;
+
+        radius1 = radius - 15.0;
+
+        $stack39 = valueAngle / 180.0;
+
+        $stack40 = 3.141592653589793 * $stack39;
+
+        $stack41 = staticinvoke <java.lang.Math: double cos(double)>($stack40);
+
+        $stack42 = radius * $stack41;
+
+        valueP1X = meterMiddleX + $stack42;
+
+        $stack43 = valueAngle / 180.0;
+
+        $stack44 = 3.141592653589793 * $stack43;
+
+        $stack45 = staticinvoke <java.lang.Math: double sin(double)>($stack44);
+
+        $stack46 = radius * $stack45;
+
+        valueP1Y = meterMiddleY - $stack46;
+
+        $stack47 = valueAngle / 180.0;
+
+        $stack48 = 3.141592653589793 * $stack47;
+
+        $stack49 = staticinvoke <java.lang.Math: double cos(double)>($stack48);
+
+        $stack50 = radius1 * $stack49;
+
+        valueP2X = meterMiddleX + $stack50;
+
+        $stack51 = valueAngle / 180.0;
+
+        $stack52 = 3.141592653589793 * $stack51;
+
+        $stack53 = staticinvoke <java.lang.Math: double sin(double)>($stack52);
+
+        $stack54 = radius1 * $stack53;
+
+        valueP2Y = meterMiddleY - $stack54;
+
+        $stack55 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack55.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(valueP1X, valueP1Y, valueP2X, valueP2Y);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack55);
+
+        $stack56 = this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible>;
+
+        if $stack56 == 0 goto label9;
+
+        if label == 0 goto label9;
+
+        $stack57 = this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        tickLabel = virtualinvoke $stack57.<java.text.NumberFormat: java.lang.String format(double)>(value);
+
+        $stack59 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack59);
+
+        $stack60 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack60);
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        tickLabelBounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(tickLabel, g2, fm);
+
+        x = valueP2X;
+
+        $stack63 = valueAngle cmpl 90.0;
+
+        if $stack63 == 0 goto label1;
+
+        $stack86 = valueAngle cmpl 270.0;
+
+        if $stack86 != 0 goto label2;
+
+     label1:
+        $stack64 = virtualinvoke tickLabelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack65 = $stack64 / 2.0;
+
+        x = valueP2X - $stack65;
+
+        goto label4;
+
+     label2:
+        $stack87 = valueAngle cmpg 90.0;
+
+        if $stack87 < 0 goto label3;
+
+        $stack91 = valueAngle cmpl 270.0;
+
+        if $stack91 <= 0 goto label4;
+
+     label3:
+        $stack88 = virtualinvoke tickLabelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        x = valueP2X - $stack88;
+
+     label4:
+        $stack66 = valueAngle cmpl 135.0;
+
+        if $stack66 <= 0 goto label5;
+
+        $stack83 = valueAngle cmpg 225.0;
+
+        if $stack83 < 0 goto label6;
+
+     label5:
+        $stack67 = valueAngle cmpl 315.0;
+
+        if $stack67 > 0 goto label6;
+
+        $stack72 = valueAngle cmpg 45.0;
+
+        if $stack72 >= 0 goto label7;
+
+     label6:
+        $stack68 = virtualinvoke tickLabelBounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack69 = $stack68 / 2.0;
+
+        y = valueP2Y - $stack69;
+
+        goto label8;
+
+     label7:
+        $stack73 = virtualinvoke tickLabelBounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack74 = $stack73 / 2.0;
+
+        y = valueP2Y + $stack74;
+
+     label8:
+        $stack71 = (float) x;
+
+        $stack70 = (float) y;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(tickLabel, $stack71, $stack70);
+
+     label9:
+        return;
+    }
+
+    protected void drawValueLabel(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.Graphics2D g2;
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Font $stack6;
+        java.awt.Paint $stack7;
+        org.jfree.data.general.ValueDataset $stack8, $stack14;
+        java.awt.geom.Rectangle2D area;
+        float y, n#9, $stack11;
+        java.lang.StringBuilder $stack25, $stack29, $stack30, $stack32;
+        java.text.NumberFormat $stack26;
+        double $stack27, $stack9, $stack10;
+        java.lang.String $stack28, $stack31, valueStr;
+        java.lang.Number n;
+        org.jfree.chart.ui.TextAnchor $stack12;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        $stack6 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack6);
+
+        $stack7 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack7);
+
+        valueStr = "No value";
+
+        $stack8 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack8 == null goto label1;
+
+        $stack14 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        n = interfaceinvoke $stack14.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+
+        if n == null goto label1;
+
+        $stack25 = new java.lang.StringBuilder;
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+
+        $stack26 = this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        $stack27 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+
+        $stack28 = virtualinvoke $stack26.<java.text.NumberFormat: java.lang.String format(double)>($stack27);
+
+        $stack29 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack31 = this.<org.jfree.chart.plot.MeterPlot: java.lang.String units>;
+
+        $stack32 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack31);
+
+        valueStr = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label1:
+        $stack9 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        n#9 = (float) $stack9;
+
+        $stack10 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        $stack11 = (float) $stack10;
+
+        y = $stack11 + 10.0F;
+
+        $stack12 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(valueStr, g2, n#9, y, $stack12);
+
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        java.util.ResourceBundle $stack1;
+        java.lang.String $stack2;
+        org.jfree.chart.plot.MeterPlot this;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack1 = <org.jfree.chart.plot.MeterPlot: java.util.ResourceBundle localizationResources>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Meter_Plot");
+
+        return $stack2;
+    }
+
+    public void zoom(double)
+    {
+        org.jfree.chart.plot.MeterPlot this;
+        double percent;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        percent := @parameter0: double;
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.MeterPlot this, that;
+        boolean $stack3, $stack4, $stack7, $stack10, $stack13, $stack16, $stack21, $stack24, $stack27, $stack30, $stack33, $stack37, $stack38, $stack41, $stack44, $stack47, $stack48, $stack49;
+        java.lang.String $stack5, $stack6;
+        org.jfree.data.Range $stack8, $stack9;
+        java.util.List $stack11, $stack12;
+        java.awt.Paint $stack14, $stack15, $stack19, $stack20, $stack22, $stack23, $stack28, $stack29, $stack31, $stack32, $stack42, $stack43;
+        org.jfree.chart.plot.DialShape $stack17, $stack18;
+        java.awt.Font $stack25, $stack26, $stack39, $stack40;
+        double $stack34, $stack35;
+        byte $stack36;
+        java.text.NumberFormat $stack45, $stack46;
+        int $stack50, $stack51;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.MeterPlot;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        $stack4 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        that = (org.jfree.chart.plot.MeterPlot) obj;
+
+        $stack6 = this.<org.jfree.chart.plot.MeterPlot: java.lang.String units>;
+
+        $stack5 = that.<org.jfree.chart.plot.MeterPlot: java.lang.String units>;
+
+        $stack7 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack6, $stack5);
+
+        if $stack7 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack9 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack8 = that.<org.jfree.chart.plot.MeterPlot: org.jfree.data.Range range>;
+
+        $stack10 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack12 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        $stack11 = that.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        $stack13 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+
+        if $stack13 != 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack15 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint>;
+
+        $stack14 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint>;
+
+        $stack16 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack15, $stack14);
+
+        if $stack16 != 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack18 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        $stack17 = that.<org.jfree.chart.plot.MeterPlot: org.jfree.chart.plot.DialShape shape>;
+
+        if $stack18 == $stack17 goto label08;
+
+        return 0;
+
+     label08:
+        $stack20 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        $stack19 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        $stack21 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack20, $stack19);
+
+        if $stack21 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack23 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint>;
+
+        $stack22 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint>;
+
+        $stack24 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack23, $stack22);
+
+        if $stack24 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack26 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont>;
+
+        $stack25 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Font valueFont>;
+
+        $stack27 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack26, $stack25);
+
+        if $stack27 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack29 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint>;
+
+        $stack28 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint>;
+
+        $stack30 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack29, $stack28);
+
+        if $stack30 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack32 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint>;
+
+        $stack31 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint>;
+
+        $stack33 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack32, $stack31);
+
+        if $stack33 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack35 = this.<org.jfree.chart.plot.MeterPlot: double tickSize>;
+
+        $stack34 = that.<org.jfree.chart.plot.MeterPlot: double tickSize>;
+
+        $stack36 = $stack35 cmpl $stack34;
+
+        if $stack36 == 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack38 = this.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible>;
+
+        $stack37 = that.<org.jfree.chart.plot.MeterPlot: boolean tickLabelsVisible>;
+
+        if $stack38 == $stack37 goto label15;
+
+        return 0;
+
+     label15:
+        $stack40 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont>;
+
+        $stack39 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Font tickLabelFont>;
+
+        $stack41 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack40, $stack39);
+
+        if $stack41 != 0 goto label16;
+
+        return 0;
+
+     label16:
+        $stack43 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        $stack42 = that.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        $stack44 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack43, $stack42);
+
+        if $stack44 != 0 goto label17;
+
+        return 0;
+
+     label17:
+        $stack46 = this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        $stack45 = that.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        $stack47 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack46, $stack45);
+
+        if $stack47 != 0 goto label18;
+
+        return 0;
+
+     label18:
+        $stack49 = this.<org.jfree.chart.plot.MeterPlot: boolean drawBorder>;
+
+        $stack48 = that.<org.jfree.chart.plot.MeterPlot: boolean drawBorder>;
+
+        if $stack49 == $stack48 goto label19;
+
+        return 0;
+
+     label19:
+        $stack51 = this.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        $stack50 = that.<org.jfree.chart.plot.MeterPlot: int meterAngle>;
+
+        if $stack51 == $stack50 goto label20;
+
+        return 0;
+
+     label20:
+        return 1;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+
+        $stack7 = this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack7, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.MeterPlot this;
+        java.awt.Paint $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+        org.jfree.data.general.ValueDataset $stack8, $stack9;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialBackgroundPaint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint dialOutlinePaint> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint needlePaint> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint valuePaint> = $stack5;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickPaint> = $stack6;
+
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.MeterPlot: java.awt.Paint tickLabelPaint> = $stack7;
+
+        $stack8 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack8 == null goto label1;
+
+        $stack9 = this.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        interfaceinvoke $stack9.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        return;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.MeterPlot this, clone;
+        java.lang.Object $stack2, $stack4;
+        java.text.NumberFormat $stack3, $stack5;
+        java.util.ArrayList $stack6;
+        java.util.List $stack7;
+        org.jfree.data.general.ValueDataset $stack8, $stack9;
+
+        this := @this: org.jfree.chart.plot.MeterPlot;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.plot.Plot: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.plot.MeterPlot) $stack2;
+
+        $stack3 = this.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat>;
+
+        $stack4 = virtualinvoke $stack3.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack5 = (java.text.NumberFormat) $stack4;
+
+        clone.<org.jfree.chart.plot.MeterPlot: java.text.NumberFormat tickLabelFormat> = $stack5;
+
+        $stack6 = new java.util.ArrayList;
+
+        $stack7 = this.<org.jfree.chart.plot.MeterPlot: java.util.List intervals>;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>(java.util.Collection)>($stack7);
+
+        clone.<org.jfree.chart.plot.MeterPlot: java.util.List intervals> = $stack6;
+
+        $stack8 = clone.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        if $stack8 == null goto label1;
+
+        $stack9 = clone.<org.jfree.chart.plot.MeterPlot: org.jfree.data.general.ValueDataset dataset>;
+
+        interfaceinvoke $stack9.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(clone);
+
+     label1:
+        return clone;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.Color $stack0, $stack1, $stack3;
+        java.awt.Font $stack2, $stack4;
+        java.util.ResourceBundle $stack5;
+
+        <org.jfree.chart.plot.MeterPlot: float DEFAULT_CIRCLE_SIZE> = 10.0F;
+
+        <org.jfree.chart.plot.MeterPlot: float DEFAULT_BORDER_SIZE> = 3.0F;
+
+        <org.jfree.chart.plot.MeterPlot: int DEFAULT_METER_ANGLE> = 270;
+
+        <org.jfree.chart.plot.MeterPlot: long serialVersionUID> = 2987472457734470962L;
+
+        $stack0 = <java.awt.Color: java.awt.Color BLACK>;
+
+        <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_DIAL_BACKGROUND_PAINT> = $stack0;
+
+        $stack1 = <java.awt.Color: java.awt.Color GREEN>;
+
+        <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_NEEDLE_PAINT> = $stack1;
+
+        $stack2 = new java.awt.Font;
+
+        specialinvoke $stack2.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 1, 12);
+
+        <org.jfree.chart.plot.MeterPlot: java.awt.Font DEFAULT_VALUE_FONT> = $stack2;
+
+        $stack3 = <java.awt.Color: java.awt.Color YELLOW>;
+
+        <org.jfree.chart.plot.MeterPlot: java.awt.Paint DEFAULT_VALUE_PAINT> = $stack3;
+
+        $stack4 = new java.awt.Font;
+
+        specialinvoke $stack4.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 1, 10);
+
+        <org.jfree.chart.plot.MeterPlot: java.awt.Font DEFAULT_LABEL_FONT> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.plot.LocalizationBundle");
+
+        <org.jfree.chart.plot.MeterPlot: java.util.ResourceBundle localizationResources> = $stack5;
+
+        return;
+    }
+}

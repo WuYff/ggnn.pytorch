@@ -1,0 +1,305 @@
+public class org.jfree.chart.urls.CustomPieURLGenerator extends java.lang.Object implements org.jfree.chart.urls.PieURLGenerator, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private final java.util.List urlMaps;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        java.util.ArrayList $stack1;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps> = $stack1;
+
+        return;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.general.PieDataset, java.lang.Comparable, int)
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        java.lang.Comparable key;
+        int plotIndex;
+        java.lang.String $stack4;
+        org.jfree.data.general.PieDataset dataset;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+
+        key := @parameter1: java.lang.Comparable;
+
+        plotIndex := @parameter2: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: java.lang.String getURL(java.lang.Comparable,int)>(key, plotIndex);
+
+        return $stack4;
+    }
+
+    public int getListCount()
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public int getURLCount(int)
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        int plotIndex, result;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        java.util.Map urlMap;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        plotIndex := @parameter0: int;
+
+        result = 0;
+
+        $stack4 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(plotIndex);
+
+        urlMap = (java.util.Map) $stack5;
+
+        if urlMap == null goto label1;
+
+        result = interfaceinvoke urlMap.<java.util.Map: int size()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.String getURL(java.lang.Comparable, int)
+    {
+        int plotIndex, $stack5;
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        java.util.List $stack6;
+        java.lang.Object $stack7, $stack9;
+        java.util.Map urlMap;
+        java.lang.Comparable key;
+        java.lang.String result;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        key := @parameter0: java.lang.Comparable;
+
+        plotIndex := @parameter1: int;
+
+        result = null;
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: int getListCount()>();
+
+        if plotIndex >= $stack5 goto label1;
+
+        $stack6 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(plotIndex);
+
+        urlMap = (java.util.Map) $stack7;
+
+        if urlMap == null goto label1;
+
+        $stack9 = interfaceinvoke urlMap.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        result = (java.lang.String) $stack9;
+
+     label1:
+        return result;
+    }
+
+    public void addURLs(java.util.Map)
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator this;
+        java.util.Map urlMap;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        urlMap := @parameter0: java.util.Map;
+
+        $stack2 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(urlMap);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object o, $stack14, $stack21;
+        org.jfree.chart.urls.CustomPieURLGenerator this, generator;
+        boolean $stack7, $stack18, $stack24;
+        int $stack8, $stack9, $stack10, $stack11, $stack12, pieItem;
+        java.util.List $stack13;
+        java.util.Map $stack15;
+        java.util.Set keySet;
+        java.util.Iterator i;
+        java.lang.String key, $stack22, $stack23;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        o := @parameter0: java.lang.Object;
+
+        if o != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack7 = o instanceof org.jfree.chart.urls.CustomPieURLGenerator;
+
+        if $stack7 == 0 goto label8;
+
+        generator = (org.jfree.chart.urls.CustomPieURLGenerator) o;
+
+        $stack8 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: int getListCount()>();
+
+        $stack9 = virtualinvoke generator.<org.jfree.chart.urls.CustomPieURLGenerator: int getListCount()>();
+
+        if $stack8 == $stack9 goto label2;
+
+        return 0;
+
+     label2:
+        pieItem = 0;
+
+     label3:
+        $stack10 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: int getListCount()>();
+
+        if pieItem >= $stack10 goto label7;
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: int getURLCount(int)>(pieItem);
+
+        $stack12 = virtualinvoke generator.<org.jfree.chart.urls.CustomPieURLGenerator: int getURLCount(int)>(pieItem);
+
+        if $stack11 == $stack12 goto label4;
+
+        return 0;
+
+     label4:
+        $stack13 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.List: java.lang.Object get(int)>(pieItem);
+
+        $stack15 = (java.util.Map) $stack14;
+
+        keySet = interfaceinvoke $stack15.<java.util.Map: java.util.Set keySet()>();
+
+        i = interfaceinvoke keySet.<java.util.Set: java.util.Iterator iterator()>();
+
+     label5:
+        $stack18 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack18 == 0 goto label6;
+
+        $stack21 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.String) $stack21;
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.urls.CustomPieURLGenerator: java.lang.String getURL(java.lang.Comparable,int)>(key, pieItem);
+
+        $stack23 = virtualinvoke generator.<org.jfree.chart.urls.CustomPieURLGenerator: java.lang.String getURL(java.lang.Comparable,int)>(key, pieItem);
+
+        $stack24 = virtualinvoke $stack22.<java.lang.String: boolean equals(java.lang.Object)>($stack23);
+
+        if $stack24 != 0 goto label5;
+
+        return 0;
+
+     label6:
+        pieItem = pieItem + 1;
+
+        goto label3;
+
+     label7:
+        return 1;
+
+     label8:
+        return 0;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.urls.CustomPieURLGenerator $stack7, this;
+        java.util.List $stack8;
+        java.util.Iterator i, j;
+        boolean $stack10, $stack15;
+        java.lang.Object $stack11, $stack17, $stack18;
+        java.util.Map map;
+        java.util.HashMap $stack12;
+        java.util.Set $stack13;
+        java.lang.String key;
+
+        this := @this: org.jfree.chart.urls.CustomPieURLGenerator;
+
+        $stack7 = new org.jfree.chart.urls.CustomPieURLGenerator;
+
+        specialinvoke $stack7.<org.jfree.chart.urls.CustomPieURLGenerator: void <init>()>();
+
+        $stack8 = this.<org.jfree.chart.urls.CustomPieURLGenerator: java.util.List urlMaps>;
+
+        i = interfaceinvoke $stack8.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label4;
+
+        $stack11 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        map = (java.util.Map) $stack11;
+
+        $stack12 = new java.util.HashMap;
+
+        specialinvoke $stack12.<java.util.HashMap: void <init>()>();
+
+        $stack13 = interfaceinvoke map.<java.util.Map: java.util.Set keySet()>();
+
+        j = interfaceinvoke $stack13.<java.util.Set: java.util.Iterator iterator()>();
+
+     label2:
+        $stack15 = interfaceinvoke j.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack15 == 0 goto label3;
+
+        $stack17 = interfaceinvoke j.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.String) $stack17;
+
+        $stack18 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        interfaceinvoke $stack12.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack18);
+
+        goto label2;
+
+     label3:
+        virtualinvoke $stack7.<org.jfree.chart.urls.CustomPieURLGenerator: void addURLs(java.util.Map)>($stack12);
+
+        goto label1;
+
+     label4:
+        return $stack7;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.CustomPieURLGenerator: long serialVersionUID> = 7100607670144900503L;
+
+        return;
+    }
+}

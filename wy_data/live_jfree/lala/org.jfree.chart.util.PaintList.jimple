@@ -1,0 +1,207 @@
+public class org.jfree.chart.util.PaintList extends org.jfree.chart.util.AbstractObjectList
+{
+    private static final long serialVersionUID;
+
+    public void <init>()
+    {
+        org.jfree.chart.util.PaintList this;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>()>();
+
+        return;
+    }
+
+    public java.awt.Paint getPaint(int)
+    {
+        org.jfree.chart.util.PaintList this;
+        int index;
+        java.lang.Object $stack2;
+        java.awt.Paint $stack3;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        index := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.util.PaintList: java.lang.Object get(int)>(index);
+
+        $stack3 = (java.awt.Paint) $stack2;
+
+        return $stack3;
+    }
+
+    public void setPaint(int, java.awt.Paint)
+    {
+        org.jfree.chart.util.PaintList this;
+        int index;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        index := @parameter0: int;
+
+        paint := @parameter1: java.awt.Paint;
+
+        virtualinvoke this.<org.jfree.chart.util.PaintList: void set(int,java.lang.Object)>(index, paint);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.util.PaintList this, that;
+        boolean $stack5, $stack9;
+        int listSize, i;
+        java.awt.Paint $stack7, $stack8;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != null goto label1;
+
+        return 0;
+
+     label1:
+        if obj != this goto label2;
+
+        return 1;
+
+     label2:
+        $stack5 = obj instanceof org.jfree.chart.util.PaintList;
+
+        if $stack5 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.util.PaintList) obj;
+
+        listSize = virtualinvoke this.<org.jfree.chart.util.PaintList: int size()>();
+
+        i = 0;
+
+     label4:
+        if i >= listSize goto label6;
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(i);
+
+        $stack8 = virtualinvoke that.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(i);
+
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack7, $stack8);
+
+        if $stack9 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        i = i + 1;
+
+        goto label4;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.util.PaintList this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: int hashCode()>();
+
+        return $stack1;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.util.PaintList this;
+        int count, i;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        count = virtualinvoke this.<org.jfree.chart.util.PaintList: int size()>();
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(count);
+
+        i = 0;
+
+     label1:
+        if i >= count goto label4;
+
+        paint = virtualinvoke this.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(i);
+
+        if paint == null goto label2;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i);
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>(paint, stream);
+
+        goto label3;
+
+     label2:
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(-1);
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        int count, index, i;
+        org.jfree.chart.util.PaintList this;
+        java.awt.Paint $stack9;
+
+        this := @this: org.jfree.chart.util.PaintList;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        count = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+
+        i = 0;
+
+     label1:
+        if i >= count goto label3;
+
+        index = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+
+        if index == -1 goto label2;
+
+        $stack9 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        virtualinvoke this.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(index, $stack9);
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.util.PaintList: long serialVersionUID> = -708669381577938219L;
+
+        return;
+    }
+}

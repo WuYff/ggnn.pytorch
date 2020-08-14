@@ -1,0 +1,796 @@
+public class org.jfree.chart.plot.WaferMapPlot extends org.jfree.chart.plot.Plot implements org.jfree.chart.event.RendererChangeListener, java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final java.awt.Stroke DEFAULT_GRIDLINE_STROKE;
+    public static final java.awt.Paint DEFAULT_GRIDLINE_PAINT;
+    public static final boolean DEFAULT_CROSSHAIR_VISIBLE;
+    public static final java.awt.Stroke DEFAULT_CROSSHAIR_STROKE;
+    public static final java.awt.Paint DEFAULT_CROSSHAIR_PAINT;
+    protected static java.util.ResourceBundle localizationResources;
+    private org.jfree.chart.plot.PlotOrientation orientation;
+    private org.jfree.data.general.WaferMapDataset dataset;
+    private org.jfree.chart.renderer.WaferMapRenderer renderer;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        specialinvoke this.<org.jfree.chart.plot.WaferMapPlot: void <init>(org.jfree.data.general.WaferMapDataset)>(null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.general.WaferMapDataset)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.data.general.WaferMapDataset dataset;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        dataset := @parameter0: org.jfree.data.general.WaferMapDataset;
+
+        specialinvoke this.<org.jfree.chart.plot.WaferMapPlot: void <init>(org.jfree.data.general.WaferMapDataset,org.jfree.chart.renderer.WaferMapRenderer)>(dataset, null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.general.WaferMapDataset, org.jfree.chart.renderer.WaferMapRenderer)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.chart.plot.PlotOrientation $stack3;
+        org.jfree.data.general.WaferMapDataset dataset;
+        org.jfree.chart.renderer.WaferMapRenderer renderer;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        dataset := @parameter0: org.jfree.data.general.WaferMapDataset;
+
+        renderer := @parameter1: org.jfree.chart.renderer.WaferMapRenderer;
+
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+
+        $stack3 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.plot.PlotOrientation orientation> = $stack3;
+
+        this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset> = dataset;
+
+        if dataset == null goto label1;
+
+        virtualinvoke dataset.<org.jfree.data.general.WaferMapDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer> = renderer;
+
+        if renderer == null goto label2;
+
+        virtualinvoke renderer.<org.jfree.chart.renderer.WaferMapRenderer: void setPlot(org.jfree.chart.plot.WaferMapPlot)>(this);
+
+        virtualinvoke renderer.<org.jfree.chart.renderer.WaferMapRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label2:
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        return "WMAP_Plot";
+    }
+
+    public org.jfree.data.general.WaferMapDataset getDataset()
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.data.general.WaferMapDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        return $stack1;
+    }
+
+    public void setDataset(org.jfree.data.general.WaferMapDataset)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.data.general.WaferMapDataset $stack2, dataset, $stack8;
+        org.jfree.data.general.DatasetChangeEvent $stack3;
+        org.jfree.data.general.DatasetGroup $stack4;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        dataset := @parameter0: org.jfree.data.general.WaferMapDataset;
+
+        $stack2 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        if $stack2 == null goto label1;
+
+        $stack8 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        virtualinvoke $stack8.<org.jfree.data.general.WaferMapDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset> = dataset;
+
+        if dataset == null goto label2;
+
+        $stack4 = virtualinvoke dataset.<org.jfree.data.general.WaferMapDataset: org.jfree.data.general.DatasetGroup getGroup()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void setDatasetGroup(org.jfree.data.general.DatasetGroup)>($stack4);
+
+        virtualinvoke dataset.<org.jfree.data.general.WaferMapDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label2:
+        $stack3 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack3.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack3);
+
+        return;
+    }
+
+    public void setRenderer(org.jfree.chart.renderer.WaferMapRenderer)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.chart.renderer.WaferMapRenderer $stack2, renderer, $stack4;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        renderer := @parameter0: org.jfree.chart.renderer.WaferMapRenderer;
+
+        $stack2 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer>;
+
+        if $stack2 == null goto label1;
+
+        $stack4 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer>;
+
+        virtualinvoke $stack4.<org.jfree.chart.renderer.WaferMapRenderer: void removeChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer> = renderer;
+
+        if renderer == null goto label2;
+
+        virtualinvoke renderer.<org.jfree.chart.renderer.WaferMapRenderer: void setPlot(org.jfree.chart.plot.WaferMapPlot)>(this);
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        java.awt.geom.Rectangle2D area;
+        double $stack9, $stack11;
+        byte $stack10, $stack12;
+        boolean b1, $stack25, $stack23;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotState state;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        state := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack9 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack10 = $stack9 cmpg 10.0;
+
+        if $stack10 > 0 goto label1;
+
+        $stack25 = 1;
+
+        goto label2;
+
+     label1:
+        $stack25 = 0;
+
+     label2:
+        b1 = $stack25;
+
+        $stack11 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack12 = $stack11 cmpg 10.0;
+
+        if $stack12 > 0 goto label3;
+
+        $stack23 = 1;
+
+        goto label4;
+
+     label3:
+        $stack23 = 0;
+
+     label4:
+        if b1 != 0 goto label5;
+
+        if $stack23 == 0 goto label6;
+
+     label5:
+        return;
+
+     label6:
+        if info == null goto label7;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label7:
+        insets = virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void drawChipGrid(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void drawWaferEdge(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        return;
+    }
+
+    protected void drawChipGrid(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.Graphics2D g2;
+        java.awt.Shape savedClip;
+        org.jfree.chart.plot.WaferMapPlot this;
+        java.awt.geom.Rectangle2D plotArea;
+        java.awt.geom.Ellipse2D $stack24;
+        java.awt.geom.Rectangle2D$Double $stack25;
+        org.jfree.data.general.WaferMapDataset $stack26, $stack52, $stack60, $stack109, $stack111, $stack113;
+        double $stack29, $stack30, $stack32, $stack33, $stack34, $stack36, $stack37, $stack38, upperLeftX, $stack41, $stack42, $stack43, $stack45, $stack46, $stack47, upperLeftY, $stack69, $stack70, $stack74, $stack76, $stack77, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, $stack89, $stack91, $stack92, $stack93, $stack94, $stack95, $stack96, $stack97, $stack98, $stack99, $stack100, $stack101, $stack102, $stack103, $stack104, space, startX, startY, chipWidth, chipHeight, major, minor;
+        byte $stack31, $stack71, $stack75;
+        int $stack35, $stack44, $stack49, $stack50, $stack51, $stack57, $stack58, $stack59, $stack110, $stack112, xchips, ychips, major#12, y;
+        java.awt.Color $stack48, $stack54;
+        java.lang.Number $stack53, $stack62;
+        org.jfree.chart.renderer.WaferMapRenderer $stack61;
+        java.awt.Paint $stack63;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        savedClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+
+        $stack24 = virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: java.awt.geom.Ellipse2D getWaferEdge(java.awt.geom.Rectangle2D)>(plotArea);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>($stack24);
+
+        $stack25 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack25.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+
+        xchips = 35;
+
+        ychips = 20;
+
+        space = 1.0;
+
+        $stack26 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        if $stack26 == null goto label01;
+
+        $stack109 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        $stack110 = virtualinvoke $stack109.<org.jfree.data.general.WaferMapDataset: int getMaxChipX()>();
+
+        xchips = $stack110 + 2;
+
+        $stack111 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        $stack112 = virtualinvoke $stack111.<org.jfree.data.general.WaferMapDataset: int getMaxChipY()>();
+
+        ychips = $stack112 + 2;
+
+        $stack113 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        space = virtualinvoke $stack113.<org.jfree.data.general.WaferMapDataset: double getChipSpace()>();
+
+     label01:
+        startX = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        startY = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+
+        chipWidth = 1.0;
+
+        chipHeight = 1.0;
+
+        $stack29 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack30 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack31 = $stack29 cmpl $stack30;
+
+        if $stack31 == 0 goto label05;
+
+        $stack69 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack70 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack71 = $stack69 cmpl $stack70;
+
+        if $stack71 <= 0 goto label02;
+
+        major = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        minor = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        goto label03;
+
+     label02:
+        major = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        minor = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+     label03:
+        $stack74 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack75 = $stack74 cmpl minor;
+
+        if $stack75 != 0 goto label04;
+
+        $stack91 = major - minor;
+
+        $stack92 = $stack91 / 2.0;
+
+        startY = startY + $stack92;
+
+        $stack93 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack94 = (double) xchips;
+
+        $stack95 = space * $stack94;
+
+        $stack96 = $stack95 - 1.0;
+
+        $stack98 = $stack93 - $stack96;
+
+        $stack97 = (double) xchips;
+
+        chipWidth = $stack98 / $stack97;
+
+        $stack99 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack100 = (double) ychips;
+
+        $stack101 = space * $stack100;
+
+        $stack102 = $stack101 - 1.0;
+
+        $stack104 = $stack99 - $stack102;
+
+        $stack103 = (double) ychips;
+
+        chipHeight = $stack104 / $stack103;
+
+        goto label05;
+
+     label04:
+        $stack76 = major - minor;
+
+        $stack77 = $stack76 / 2.0;
+
+        startX = startX + $stack77;
+
+        $stack78 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack79 = (double) xchips;
+
+        $stack80 = space * $stack79;
+
+        $stack81 = $stack80 - 1.0;
+
+        $stack83 = $stack78 - $stack81;
+
+        $stack82 = (double) xchips;
+
+        chipWidth = $stack83 / $stack82;
+
+        $stack84 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack85 = (double) ychips;
+
+        $stack86 = space * $stack85;
+
+        $stack87 = $stack86 - 1.0;
+
+        $stack89 = $stack84 - $stack87;
+
+        $stack88 = (double) ychips;
+
+        chipHeight = $stack89 / $stack88;
+
+     label05:
+        major#12 = 1;
+
+     label06:
+        if major#12 > xchips goto label10;
+
+        $stack34 = startX - chipWidth;
+
+        $stack32 = (double) major#12;
+
+        $stack33 = chipWidth * $stack32;
+
+        $stack38 = $stack34 + $stack33;
+
+        $stack35 = major#12 - 1;
+
+        $stack36 = (double) $stack35;
+
+        $stack37 = space * $stack36;
+
+        upperLeftX = $stack38 + $stack37;
+
+        y = 1;
+
+     label07:
+        if y > ychips goto label09;
+
+        $stack43 = startY - chipHeight;
+
+        $stack41 = (double) y;
+
+        $stack42 = chipHeight * $stack41;
+
+        $stack47 = $stack43 + $stack42;
+
+        $stack44 = y - 1;
+
+        $stack45 = (double) $stack44;
+
+        $stack46 = space * $stack45;
+
+        upperLeftY = $stack47 + $stack46;
+
+        virtualinvoke $stack25.<java.awt.geom.Rectangle2D: void setFrame(double,double,double,double)>(upperLeftX, upperLeftY, chipWidth, chipHeight);
+
+        $stack48 = <java.awt.Color: java.awt.Color WHITE>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack48);
+
+        $stack52 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        $stack51 = major#12 - 1;
+
+        $stack49 = ychips - y;
+
+        $stack50 = $stack49 - 1;
+
+        $stack53 = virtualinvoke $stack52.<org.jfree.data.general.WaferMapDataset: java.lang.Number getChipValue(int,int)>($stack51, $stack50);
+
+        if $stack53 == null goto label08;
+
+        $stack61 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer>;
+
+        $stack60 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.data.general.WaferMapDataset dataset>;
+
+        $stack59 = major#12 - 1;
+
+        $stack57 = ychips - y;
+
+        $stack58 = $stack57 - 1;
+
+        $stack62 = virtualinvoke $stack60.<org.jfree.data.general.WaferMapDataset: java.lang.Number getChipValue(int,int)>($stack59, $stack58);
+
+        $stack63 = virtualinvoke $stack61.<org.jfree.chart.renderer.WaferMapRenderer: java.awt.Paint getChipColor(java.lang.Number)>($stack62);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack63);
+
+     label08:
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack25);
+
+        $stack54 = <java.awt.Color: java.awt.Color LIGHT_GRAY>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack54);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack25);
+
+        y = y + 1;
+
+        goto label07;
+
+     label09:
+        major#12 = major#12 + 1;
+
+        goto label06;
+
+     label10:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+
+        return;
+    }
+
+    protected java.awt.geom.Ellipse2D getWaferEdge(java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Ellipse2D$Double $stack13;
+        java.awt.geom.Rectangle2D plotArea;
+        double $stack17, $stack18, $stack20, $stack21, $stack25, $stack27, $stack28, $stack29, $stack36, $stack37, $stack38, diameter, upperLeftX, upperLeftY, major, minor;
+        byte $stack19, $stack22, $stack26;
+        org.jfree.chart.plot.WaferMapPlot this;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        plotArea := @parameter0: java.awt.geom.Rectangle2D;
+
+        $stack13 = new java.awt.geom.Ellipse2D$Double;
+
+        specialinvoke $stack13.<java.awt.geom.Ellipse2D$Double: void <init>()>();
+
+        diameter = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        upperLeftX = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        upperLeftY = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack17 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack18 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack19 = $stack17 cmpl $stack18;
+
+        if $stack19 == 0 goto label4;
+
+        $stack20 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack21 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack22 = $stack20 cmpl $stack21;
+
+        if $stack22 <= 0 goto label1;
+
+        major = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        minor = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        goto label2;
+
+     label1:
+        major = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        minor = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+     label2:
+        diameter = minor;
+
+        $stack25 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack26 = $stack25 cmpl minor;
+
+        if $stack26 != 0 goto label3;
+
+        $stack36 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack37 = major - minor;
+
+        $stack38 = $stack37 / 2.0;
+
+        upperLeftY = $stack36 + $stack38;
+
+        goto label4;
+
+     label3:
+        $stack27 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack28 = major - minor;
+
+        $stack29 = $stack28 / 2.0;
+
+        upperLeftX = $stack27 + $stack29;
+
+     label4:
+        virtualinvoke $stack13.<java.awt.geom.Ellipse2D: void setFrame(double,double,double,double)>(upperLeftX, upperLeftY, diameter, diameter);
+
+        return $stack13;
+    }
+
+    protected void drawWaferEdge(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        java.awt.geom.Rectangle2D plotArea, waferFrame;
+        java.awt.geom.Ellipse2D waferEdge;
+        java.awt.Graphics2D g2;
+        java.awt.Color $stack10, $stack28, $stack29;
+        double $stack12, notchDiameter, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41;
+        org.jfree.chart.plot.PlotOrientation $stack13, $stack14;
+        java.awt.geom.Rectangle2D$Double $stack15, $stack30;
+        java.awt.geom.Arc2D$Double $stack27, $stack42, notch;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        waferEdge = virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: java.awt.geom.Ellipse2D getWaferEdge(java.awt.geom.Rectangle2D)>(plotArea);
+
+        $stack10 = <java.awt.Color: java.awt.Color BLACK>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack10);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(waferEdge);
+
+        waferFrame = virtualinvoke waferEdge.<java.awt.geom.Ellipse2D: java.awt.geom.Rectangle2D getFrame()>();
+
+        $stack12 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        notchDiameter = $stack12 * 0.04;
+
+        $stack14 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.plot.PlotOrientation orientation>;
+
+        $stack13 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack14 != $stack13 goto label1;
+
+        $stack30 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack31 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack32 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack34 = $stack31 + $stack32;
+
+        $stack33 = notchDiameter / 2.0;
+
+        $stack35 = $stack34 - $stack33;
+
+        $stack36 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack37 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack38 = $stack37 / 2.0;
+
+        $stack40 = $stack36 + $stack38;
+
+        $stack39 = notchDiameter / 2.0;
+
+        $stack41 = $stack40 - $stack39;
+
+        specialinvoke $stack30.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack35, $stack41, notchDiameter, notchDiameter);
+
+        $stack42 = new java.awt.geom.Arc2D$Double;
+
+        specialinvoke $stack42.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>($stack30, 90.0, 180.0, 0);
+
+        notch = $stack42;
+
+        goto label2;
+
+     label1:
+        $stack15 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack16 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack17 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack18 = $stack17 / 2.0;
+
+        $stack20 = $stack16 + $stack18;
+
+        $stack19 = notchDiameter / 2.0;
+
+        $stack21 = $stack20 - $stack19;
+
+        $stack22 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack23 = virtualinvoke waferFrame.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack25 = $stack22 + $stack23;
+
+        $stack24 = notchDiameter / 2.0;
+
+        $stack26 = $stack25 - $stack24;
+
+        specialinvoke $stack15.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack21, $stack26, notchDiameter, notchDiameter);
+
+        $stack27 = new java.awt.geom.Arc2D$Double;
+
+        specialinvoke $stack27.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>($stack15, 0.0, 180.0, 0);
+
+        notch = $stack27;
+
+     label2:
+        $stack28 = <java.awt.Color: java.awt.Color WHITE>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack28);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(notch);
+
+        $stack29 = <java.awt.Color: java.awt.Color BLACK>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack29);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(notch);
+
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.chart.renderer.WaferMapRenderer $stack1;
+        org.jfree.chart.LegendItemCollection $stack2;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.WaferMapPlot: org.jfree.chart.renderer.WaferMapRenderer renderer>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.renderer.WaferMapRenderer: org.jfree.chart.LegendItemCollection getLegendCollection()>();
+
+        return $stack2;
+    }
+
+    public void rendererChanged(org.jfree.chart.event.RendererChangeEvent)
+    {
+        org.jfree.chart.plot.WaferMapPlot this;
+        org.jfree.chart.event.RendererChangeEvent event;
+
+        this := @this: org.jfree.chart.plot.WaferMapPlot;
+
+        event := @parameter0: org.jfree.chart.event.RendererChangeEvent;
+
+        virtualinvoke this.<org.jfree.chart.plot.WaferMapPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.BasicStroke $stack0;
+        float[] $stack1;
+        java.awt.Color $stack2, $stack4;
+        java.awt.Stroke $stack3;
+        java.util.ResourceBundle $stack5;
+
+        <org.jfree.chart.plot.WaferMapPlot: boolean DEFAULT_CROSSHAIR_VISIBLE> = 0;
+
+        <org.jfree.chart.plot.WaferMapPlot: long serialVersionUID> = 4668320403707308155L;
+
+        $stack0 = new java.awt.BasicStroke;
+
+        $stack1 = newarray (float)[2];
+
+        $stack1[0] = 2.0F;
+
+        $stack1[1] = 2.0F;
+
+        specialinvoke $stack0.<java.awt.BasicStroke: void <init>(float,int,int,float,float[],float)>(0.5F, 0, 2, 0.0F, $stack1, 0.0F);
+
+        <org.jfree.chart.plot.WaferMapPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE> = $stack0;
+
+        $stack2 = <java.awt.Color: java.awt.Color LIGHT_GRAY>;
+
+        <org.jfree.chart.plot.WaferMapPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT> = $stack2;
+
+        $stack3 = <org.jfree.chart.plot.WaferMapPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE>;
+
+        <org.jfree.chart.plot.WaferMapPlot: java.awt.Stroke DEFAULT_CROSSHAIR_STROKE> = $stack3;
+
+        $stack4 = <java.awt.Color: java.awt.Color BLUE>;
+
+        <org.jfree.chart.plot.WaferMapPlot: java.awt.Paint DEFAULT_CROSSHAIR_PAINT> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.plot.LocalizationBundle");
+
+        <org.jfree.chart.plot.WaferMapPlot: java.util.ResourceBundle localizationResources> = $stack5;
+
+        return;
+    }
+}

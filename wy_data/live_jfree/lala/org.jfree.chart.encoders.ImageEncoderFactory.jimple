@@ -1,0 +1,182 @@
+public class org.jfree.chart.encoders.ImageEncoderFactory extends java.lang.Object
+{
+    private static java.util.Map encoders;
+
+    public void <init>()
+    {
+        org.jfree.chart.encoders.ImageEncoderFactory this;
+
+        this := @this: org.jfree.chart.encoders.ImageEncoderFactory;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    private static void init()
+    {
+        java.util.HashMap $stack0;
+        java.util.Map $stack1, $stack3;
+
+        $stack0 = new java.util.HashMap;
+
+        specialinvoke $stack0.<java.util.HashMap: void <init>()>();
+
+        <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders> = $stack0;
+
+        $stack1 = <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders>;
+
+        interfaceinvoke $stack1.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("jpeg", "org.jfree.chart.encoders.SunJPEGEncoderAdapter");
+
+        $stack3 = <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders>;
+
+        interfaceinvoke $stack3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("png", "org.jfree.chart.encoders.SunPNGEncoderAdapter");
+
+        return;
+    }
+
+    public static void setImageEncoder(java.lang.String, java.lang.String)
+    {
+        java.lang.String format, imageEncoderClassName;
+        java.util.Map $stack2;
+
+        format := @parameter0: java.lang.String;
+
+        imageEncoderClassName := @parameter1: java.lang.String;
+
+        $stack2 = <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders>;
+
+        interfaceinvoke $stack2.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(format, imageEncoderClassName);
+
+        return;
+    }
+
+    public static org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String)
+    {
+        java.lang.String format, className, $stack12, $stack15;
+        java.util.Map $stack4;
+        java.lang.Object $stack5, $stack7;
+        java.lang.IllegalArgumentException $stack8, $stack14;
+        java.lang.StringBuilder $stack9, $stack10, $stack11;
+        java.lang.Exception $stack13;
+        java.lang.Class imageEncoderClass;
+        org.jfree.chart.encoders.ImageEncoder imageEncoder;
+
+        format := @parameter0: java.lang.String;
+
+        $stack4 = <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.Map: java.lang.Object get(java.lang.Object)>(format);
+
+        className = (java.lang.String) $stack5;
+
+        if className != null goto label1;
+
+        $stack8 = new java.lang.IllegalArgumentException;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unsupported image format - ");
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(format);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack12);
+
+        throw $stack8;
+
+     label1:
+        imageEncoderClass = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(className);
+
+        $stack7 = virtualinvoke imageEncoderClass.<java.lang.Class: java.lang.Object newInstance()>();
+
+        imageEncoder = (org.jfree.chart.encoders.ImageEncoder) $stack7;
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack13 := @caughtexception;
+
+        $stack14 = new java.lang.IllegalArgumentException;
+
+        $stack15 = virtualinvoke $stack13.<java.lang.Exception: java.lang.String toString()>();
+
+        specialinvoke $stack14.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack14;
+
+     label4:
+        return imageEncoder;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public static org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String, float)
+    {
+        java.lang.String format;
+        org.jfree.chart.encoders.ImageEncoder imageEncoder;
+        float quality;
+
+        format := @parameter0: java.lang.String;
+
+        quality := @parameter1: float;
+
+        imageEncoder = staticinvoke <org.jfree.chart.encoders.ImageEncoderFactory: org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String)>(format);
+
+        interfaceinvoke imageEncoder.<org.jfree.chart.encoders.ImageEncoder: void setQuality(float)>(quality);
+
+        return imageEncoder;
+    }
+
+    public static org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String, boolean)
+    {
+        java.lang.String format;
+        org.jfree.chart.encoders.ImageEncoder imageEncoder;
+        boolean encodingAlpha;
+
+        format := @parameter0: java.lang.String;
+
+        encodingAlpha := @parameter1: boolean;
+
+        imageEncoder = staticinvoke <org.jfree.chart.encoders.ImageEncoderFactory: org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String)>(format);
+
+        interfaceinvoke imageEncoder.<org.jfree.chart.encoders.ImageEncoder: void setEncodingAlpha(boolean)>(encodingAlpha);
+
+        return imageEncoder;
+    }
+
+    public static org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String, float, boolean)
+    {
+        java.lang.String format;
+        org.jfree.chart.encoders.ImageEncoder imageEncoder;
+        float quality;
+        boolean encodingAlpha;
+
+        format := @parameter0: java.lang.String;
+
+        quality := @parameter1: float;
+
+        encodingAlpha := @parameter2: boolean;
+
+        imageEncoder = staticinvoke <org.jfree.chart.encoders.ImageEncoderFactory: org.jfree.chart.encoders.ImageEncoder newInstance(java.lang.String)>(format);
+
+        interfaceinvoke imageEncoder.<org.jfree.chart.encoders.ImageEncoder: void setQuality(float)>(quality);
+
+        interfaceinvoke imageEncoder.<org.jfree.chart.encoders.ImageEncoder: void setEncodingAlpha(boolean)>(encodingAlpha);
+
+        return imageEncoder;
+    }
+
+    static void <clinit>()
+    {
+        <org.jfree.chart.encoders.ImageEncoderFactory: java.util.Map encoders> = null;
+
+        staticinvoke <org.jfree.chart.encoders.ImageEncoderFactory: void init()>();
+
+        return;
+    }
+}

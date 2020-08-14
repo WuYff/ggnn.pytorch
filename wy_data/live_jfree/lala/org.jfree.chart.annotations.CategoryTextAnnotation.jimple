@@ -1,0 +1,375 @@
+public class org.jfree.chart.annotations.CategoryTextAnnotation extends org.jfree.chart.annotations.TextAnnotation implements org.jfree.chart.annotations.CategoryAnnotation, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.lang.Comparable category;
+    private org.jfree.chart.axis.CategoryAnchor categoryAnchor;
+    private double value;
+
+    public void <init>(java.lang.String, java.lang.Comparable, double)
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        java.lang.String text;
+        java.lang.Comparable category;
+        double value;
+        org.jfree.chart.axis.CategoryAnchor $stack5;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        text := @parameter0: java.lang.String;
+
+        category := @parameter1: java.lang.Comparable;
+
+        value := @parameter2: double;
+
+        specialinvoke this.<org.jfree.chart.annotations.TextAnnotation: void <init>(java.lang.String)>(text);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(category, "category");
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category> = category;
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value> = value;
+
+        $stack5 = <org.jfree.chart.axis.CategoryAnchor: org.jfree.chart.axis.CategoryAnchor MIDDLE>;
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor> = $stack5;
+
+        return;
+    }
+
+    public java.lang.Comparable getCategory()
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        java.lang.Comparable $stack1;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category>;
+
+        return $stack1;
+    }
+
+    public void setCategory(java.lang.Comparable)
+    {
+        java.lang.Comparable category;
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        category := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(category, "category");
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category> = category;
+
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: void fireAnnotationChanged()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.CategoryAnchor getCategoryAnchor()
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        org.jfree.chart.axis.CategoryAnchor $stack1;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor>;
+
+        return $stack1;
+    }
+
+    public void setCategoryAnchor(org.jfree.chart.axis.CategoryAnchor)
+    {
+        org.jfree.chart.axis.CategoryAnchor anchor;
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        anchor := @parameter0: org.jfree.chart.axis.CategoryAnchor;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(anchor, "anchor");
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor> = anchor;
+
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: void fireAnnotationChanged()>();
+
+        return;
+    }
+
+    public double getValue()
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value>;
+
+        return $stack1;
+    }
+
+    public void setValue(double)
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        double value;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        value := @parameter0: double;
+
+        this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value> = value;
+
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: void fireAnnotationChanged()>();
+
+        return;
+    }
+
+    public void draw(java.awt.Graphics2D, org.jfree.chart.plot.CategoryPlot, java.awt.geom.Rectangle2D, org.jfree.chart.axis.CategoryAxis, org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        java.lang.Comparable $stack15;
+        int catIndex, catCount;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack23, $stack24;
+        org.jfree.chart.axis.AxisLocation $stack19, $stack21;
+        org.jfree.chart.ui.RectangleEdge domainEdge, rangeEdge;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.CategoryAnchor $stack31, $stack46;
+        double $stack32, $stack33, $stack34, $stack47, $stack48, $stack49, $stack29;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        float anchorX, anchorY;
+        java.awt.Font $stack25;
+        java.awt.Paint $stack26;
+        java.lang.String $stack27;
+        org.jfree.chart.ui.TextAnchor $stack28, $stack30;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        domainAxis := @parameter3: org.jfree.chart.axis.CategoryAxis;
+
+        rangeAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+
+        dataset = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+
+        $stack15 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category>;
+
+        catIndex = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnIndex(java.lang.Comparable)>($stack15);
+
+        catCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+
+        anchorX = 0.0F;
+
+        anchorY = 0.0F;
+
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack19 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.AxisLocation getDomainAxisLocation()>();
+
+        domainEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveDomainAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack19, orientation);
+
+        $stack21 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.AxisLocation getRangeAxisLocation()>();
+
+        rangeEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack21, orientation);
+
+        $stack23 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack23 goto label1;
+
+        $stack46 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor>;
+
+        $stack47 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack46, catIndex, catCount, dataArea, domainEdge);
+
+        anchorY = (float) $stack47;
+
+        $stack48 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value>;
+
+        $stack49 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack48, dataArea, rangeEdge);
+
+        anchorX = (float) $stack49;
+
+        goto label2;
+
+     label1:
+        $stack24 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack24 goto label2;
+
+        $stack31 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor>;
+
+        $stack32 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack31, catIndex, catCount, dataArea, domainEdge);
+
+        anchorX = (float) $stack32;
+
+        $stack33 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value>;
+
+        $stack34 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack33, dataArea, rangeEdge);
+
+        anchorY = (float) $stack34;
+
+     label2:
+        $stack25 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.awt.Font getFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack25);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.awt.Paint getPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack26);
+
+        $stack27 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.String getText()>();
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.ui.TextAnchor getTextAnchor()>();
+
+        $stack29 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: double getRotationAngle()>();
+
+        $stack30 = virtualinvoke this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.ui.TextAnchor getRotationAnchor()>();
+
+        staticinvoke <org.jfree.chart.text.TextUtils: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,double,org.jfree.chart.ui.TextAnchor)>($stack27, g2, anchorX, anchorY, $stack28, $stack29, $stack30);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.annotations.CategoryTextAnnotation this, that;
+        boolean $stack3, $stack4, $stack7, $stack10;
+        java.lang.Comparable $stack5, $stack6;
+        org.jfree.chart.axis.CategoryAnchor $stack8, $stack9;
+        double $stack11, $stack12;
+        byte $stack13;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.annotations.CategoryTextAnnotation) obj;
+
+        $stack4 = specialinvoke this.<org.jfree.chart.annotations.TextAnnotation: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack5 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category>;
+
+        $stack6 = virtualinvoke that.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable getCategory()>();
+
+        $stack7 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack6);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack8 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor>;
+
+        $stack9 = virtualinvoke that.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor getCategoryAnchor()>();
+
+        $stack10 = virtualinvoke $stack8.<org.jfree.chart.axis.CategoryAnchor: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack11 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value>;
+
+        $stack12 = virtualinvoke that.<org.jfree.chart.annotations.CategoryTextAnnotation: double getValue()>();
+
+        $stack13 = $stack11 cmpl $stack12;
+
+        if $stack13 == 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        java.lang.Comparable $stack5;
+        int $stack6, $stack7, $stack9, $stack10, $stack15, $stack16, result;
+        org.jfree.chart.axis.CategoryAnchor $stack8;
+        double $stack11;
+        long temp, $stack13, $stack14;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        result = specialinvoke this.<org.jfree.chart.annotations.TextAnnotation: int hashCode()>();
+
+        $stack6 = 37 * result;
+
+        $stack5 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: java.lang.Comparable category>;
+
+        $stack7 = virtualinvoke $stack5.<java.lang.Object: int hashCode()>();
+
+        result = $stack6 + $stack7;
+
+        $stack9 = 37 * result;
+
+        $stack8 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: org.jfree.chart.axis.CategoryAnchor categoryAnchor>;
+
+        $stack10 = virtualinvoke $stack8.<org.jfree.chart.axis.CategoryAnchor: int hashCode()>();
+
+        result = $stack9 + $stack10;
+
+        $stack11 = this.<org.jfree.chart.annotations.CategoryTextAnnotation: double value>;
+
+        temp = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack11);
+
+        $stack16 = 37 * result;
+
+        $stack13 = temp >>> 32;
+
+        $stack14 = temp ^ $stack13;
+
+        $stack15 = (int) $stack14;
+
+        result = $stack16 + $stack15;
+
+        return result;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.annotations.CategoryTextAnnotation this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.annotations.CategoryTextAnnotation;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.annotations.TextAnnotation: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.annotations.CategoryTextAnnotation: long serialVersionUID> = 3333360090781320147L;
+
+        return;
+    }
+}

@@ -1,0 +1,694 @@
+public class org.jfree.chart.date.SpreadsheetDate extends org.jfree.chart.date.SerialDate
+{
+    private static final long serialVersionUID;
+    private final int serial;
+    private final int day;
+    private final int month;
+    private final int year;
+
+    public void <init>(int, int, int)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int year, month, day, $stack9, $stack11;
+        java.lang.IllegalArgumentException $stack4, $stack6, $stack8;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        day := @parameter0: int;
+
+        month := @parameter1: int;
+
+        year := @parameter2: int;
+
+        specialinvoke this.<org.jfree.chart.date.SerialDate: void <init>()>();
+
+        if year < 1900 goto label1;
+
+        if year > 9999 goto label1;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int year> = year;
+
+        goto label2;
+
+     label1:
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'year\' argument must be in range 1900 to 9999.");
+
+        throw $stack4;
+
+     label2:
+        if month < 1 goto label3;
+
+        if month > 12 goto label3;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int month> = month;
+
+        goto label4;
+
+     label3:
+        $stack6 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'month\' argument must be in the range 1 to 12.");
+
+        throw $stack6;
+
+     label4:
+        if day < 1 goto label5;
+
+        $stack9 = staticinvoke <org.jfree.chart.date.SerialDate: int lastDayOfMonth(int,int)>(month, year);
+
+        if day > $stack9 goto label5;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int day> = day;
+
+        goto label6;
+
+     label5:
+        $stack8 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Invalid \'day\' argument.");
+
+        throw $stack8;
+
+     label6:
+        $stack11 = specialinvoke this.<org.jfree.chart.date.SpreadsheetDate: int calcSerial(int,int,int)>(day, month, year);
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int serial> = $stack11;
+
+        return;
+    }
+
+    public void <init>(int)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int serial, $stack13, days, $stack14, overestimatedYYYY, leaps, nonleapdays, $stack16, $stack18, $stack19, $stack20, $stack22, $stack24, $stack25, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, underestimatedYYYY, ss1, mm, sss, $stack26;
+        java.lang.IllegalArgumentException $stack11;
+        boolean $stack23;
+        int[] daysToEndOfPrecedingMonth;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        serial := @parameter0: int;
+
+        specialinvoke this.<org.jfree.chart.date.SerialDate: void <init>()>();
+
+        if serial < 2 goto label1;
+
+        if serial > 2958465 goto label1;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int serial> = serial;
+
+        goto label2;
+
+     label1:
+        $stack11 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack11.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("SpreadsheetDate: Serial must be in range 2 to 2958465.");
+
+        throw $stack11;
+
+     label2:
+        $stack13 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        days = $stack13 - 2;
+
+        $stack14 = days / 365;
+
+        overestimatedYYYY = 1900 + $stack14;
+
+        leaps = staticinvoke <org.jfree.chart.date.SerialDate: int leapYearCount(int)>(overestimatedYYYY);
+
+        nonleapdays = days - leaps;
+
+        $stack16 = nonleapdays / 365;
+
+        underestimatedYYYY = 1900 + $stack16;
+
+        if underestimatedYYYY != overestimatedYYYY goto label3;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int year> = underestimatedYYYY;
+
+        goto label6;
+
+     label3:
+        ss1 = specialinvoke this.<org.jfree.chart.date.SpreadsheetDate: int calcSerial(int,int,int)>(1, 1, underestimatedYYYY);
+
+     label4:
+        $stack18 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        if ss1 > $stack18 goto label5;
+
+        underestimatedYYYY = underestimatedYYYY + 1;
+
+        ss1 = specialinvoke this.<org.jfree.chart.date.SpreadsheetDate: int calcSerial(int,int,int)>(1, 1, underestimatedYYYY);
+
+        goto label4;
+
+     label5:
+        $stack19 = underestimatedYYYY - 1;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int year> = $stack19;
+
+     label6:
+        $stack20 = this.<org.jfree.chart.date.SpreadsheetDate: int year>;
+
+        ss1 = specialinvoke this.<org.jfree.chart.date.SpreadsheetDate: int calcSerial(int,int,int)>(1, 1, $stack20);
+
+        daysToEndOfPrecedingMonth = <org.jfree.chart.date.SpreadsheetDate: int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH>;
+
+        $stack22 = this.<org.jfree.chart.date.SpreadsheetDate: int year>;
+
+        $stack23 = staticinvoke <org.jfree.chart.date.SpreadsheetDate: boolean isLeapYear(int)>($stack22);
+
+        if $stack23 == 0 goto label7;
+
+        daysToEndOfPrecedingMonth = <org.jfree.chart.date.SpreadsheetDate: int[] LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH>;
+
+     label7:
+        mm = 1;
+
+        $stack24 = daysToEndOfPrecedingMonth[1];
+
+        $stack25 = ss1 + $stack24;
+
+        sss = $stack25 - 1;
+
+     label8:
+        $stack26 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        if sss >= $stack26 goto label9;
+
+        mm = mm + 1;
+
+        $stack34 = daysToEndOfPrecedingMonth[mm];
+
+        $stack35 = ss1 + $stack34;
+
+        sss = $stack35 - 1;
+
+        goto label8;
+
+     label9:
+        $stack27 = mm - 1;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int month> = $stack27;
+
+        $stack28 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack31 = $stack28 - ss1;
+
+        $stack29 = this.<org.jfree.chart.date.SpreadsheetDate: int month>;
+
+        $stack30 = daysToEndOfPrecedingMonth[$stack29];
+
+        $stack32 = $stack31 - $stack30;
+
+        $stack33 = $stack32 + 1;
+
+        this.<org.jfree.chart.date.SpreadsheetDate: int day> = $stack33;
+
+        return;
+    }
+
+    public int toSerial()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        return $stack1;
+    }
+
+    public java.util.Date toDate()
+    {
+        java.util.Calendar calendar;
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack3, $stack4, $stack5, $stack6;
+        java.util.Date $stack7;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int getYYYY()>();
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int getMonth()>();
+
+        $stack5 = $stack4 - 1;
+
+        $stack6 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int getDayOfMonth()>();
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack3, $stack5, $stack6, 0, 0, 0);
+
+        $stack7 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        return $stack7;
+    }
+
+    public int getYYYY()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = this.<org.jfree.chart.date.SpreadsheetDate: int year>;
+
+        return $stack1;
+    }
+
+    public int getMonth()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = this.<org.jfree.chart.date.SpreadsheetDate: int month>;
+
+        return $stack1;
+    }
+
+    public int getDayOfMonth()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = this.<org.jfree.chart.date.SpreadsheetDate: int day>;
+
+        return $stack1;
+    }
+
+    public int getDayOfWeek()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1, $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack2 = $stack1 + 6;
+
+        $stack3 = $stack2 % 7;
+
+        $stack4 = $stack3 + 1;
+
+        return $stack4;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object object;
+        boolean $stack3, $stack6;
+        org.jfree.chart.date.SerialDate s;
+        int $stack4, $stack5;
+        org.jfree.chart.date.SpreadsheetDate this;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        object := @parameter0: java.lang.Object;
+
+        $stack3 = object instanceof org.jfree.chart.date.SerialDate;
+
+        if $stack3 == 0 goto label3;
+
+        s = (org.jfree.chart.date.SerialDate) object;
+
+        $stack4 = virtualinvoke s.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int toSerial()>();
+
+        if $stack4 != $stack5 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+
+     label3:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int toSerial()>();
+
+        return $stack1;
+    }
+
+    public int compare(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        $stack4 = $stack2 - $stack3;
+
+        return $stack4;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        java.lang.Object other;
+        org.jfree.chart.date.SerialDate $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: java.lang.Object;
+
+        $stack2 = (org.jfree.chart.date.SerialDate) other;
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int compare(org.jfree.chart.date.SerialDate)>($stack2);
+
+        return $stack3;
+    }
+
+    public boolean isOn(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3;
+        boolean $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        if $stack2 != $stack3 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public boolean isBefore(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3;
+        boolean $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        if $stack2 >= $stack3 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public boolean isOnOrBefore(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3;
+        boolean $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        if $stack2 > $stack3 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public boolean isAfter(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3;
+        boolean $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        if $stack2 <= $stack3 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public boolean isOnOrAfter(org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate other;
+        int $stack2, $stack3;
+        boolean $stack4;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        other := @parameter0: org.jfree.chart.date.SerialDate;
+
+        $stack2 = this.<org.jfree.chart.date.SpreadsheetDate: int serial>;
+
+        $stack3 = virtualinvoke other.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        if $stack2 < $stack3 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    public boolean isInRange(org.jfree.chart.date.SerialDate, org.jfree.chart.date.SerialDate)
+    {
+        org.jfree.chart.date.SpreadsheetDate this;
+        org.jfree.chart.date.SerialDate d1, d2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        d1 := @parameter0: org.jfree.chart.date.SerialDate;
+
+        d2 := @parameter1: org.jfree.chart.date.SerialDate;
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: boolean isInRange(org.jfree.chart.date.SerialDate,org.jfree.chart.date.SerialDate,int)>(d1, d2, 3);
+
+        return $stack3;
+    }
+
+    public boolean isInRange(org.jfree.chart.date.SerialDate, org.jfree.chart.date.SerialDate, int)
+    {
+        org.jfree.chart.date.SerialDate d1, d2;
+        int s1, s2, start, end, s, include;
+        org.jfree.chart.date.SpreadsheetDate this;
+        boolean $stack17, $stack16, $stack15, $stack14;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        d1 := @parameter0: org.jfree.chart.date.SerialDate;
+
+        d2 := @parameter1: org.jfree.chart.date.SerialDate;
+
+        include := @parameter2: int;
+
+        s1 = virtualinvoke d1.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        s2 = virtualinvoke d2.<org.jfree.chart.date.SerialDate: int toSerial()>();
+
+        start = staticinvoke <java.lang.Math: int min(int,int)>(s1, s2);
+
+        end = staticinvoke <java.lang.Math: int max(int,int)>(s1, s2);
+
+        s = virtualinvoke this.<org.jfree.chart.date.SpreadsheetDate: int toSerial()>();
+
+        if include != 3 goto label03;
+
+        if s < start goto label01;
+
+        if s > end goto label01;
+
+        $stack17 = 1;
+
+        goto label02;
+
+     label01:
+        $stack17 = 0;
+
+     label02:
+        return $stack17;
+
+     label03:
+        if include != 1 goto label06;
+
+        if s < start goto label04;
+
+        if s >= end goto label04;
+
+        $stack16 = 1;
+
+        goto label05;
+
+     label04:
+        $stack16 = 0;
+
+     label05:
+        return $stack16;
+
+     label06:
+        if include != 2 goto label09;
+
+        if s <= start goto label07;
+
+        if s > end goto label07;
+
+        $stack15 = 1;
+
+        goto label08;
+
+     label07:
+        $stack15 = 0;
+
+     label08:
+        return $stack15;
+
+     label09:
+        if s <= start goto label10;
+
+        if s >= end goto label10;
+
+        $stack14 = 1;
+
+        goto label11;
+
+     label10:
+        $stack14 = 0;
+
+     label11:
+        return $stack14;
+    }
+
+    private int calcSerial(int, int, int)
+    {
+        int y, $stack7, $stack8, $stack9, $stack10, yy, m, d, mm, $stack12, $stack13, $stack14;
+        int[] $stack11;
+        boolean $stack15;
+        org.jfree.chart.date.SpreadsheetDate this;
+
+        this := @this: org.jfree.chart.date.SpreadsheetDate;
+
+        d := @parameter0: int;
+
+        m := @parameter1: int;
+
+        y := @parameter2: int;
+
+        $stack7 = y - 1900;
+
+        $stack9 = $stack7 * 365;
+
+        $stack8 = y - 1;
+
+        $stack10 = staticinvoke <org.jfree.chart.date.SerialDate: int leapYearCount(int)>($stack8);
+
+        yy = $stack9 + $stack10;
+
+        $stack11 = <org.jfree.chart.date.SerialDate: int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH>;
+
+        mm = $stack11[m];
+
+        if m <= 2 goto label1;
+
+        $stack15 = staticinvoke <org.jfree.chart.date.SerialDate: boolean isLeapYear(int)>(y);
+
+        if $stack15 == 0 goto label1;
+
+        mm = mm + 1;
+
+     label1:
+        $stack12 = yy + mm;
+
+        $stack13 = $stack12 + d;
+
+        $stack14 = $stack13 + 1;
+
+        return $stack14;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.date.SpreadsheetDate: long serialVersionUID> = -2039586705374454461L;
+
+        return;
+    }
+}

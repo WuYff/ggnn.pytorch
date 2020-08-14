@@ -1,0 +1,631 @@
+public class org.jfree.chart.util.PaintAlpha extends java.lang.Object
+{
+    private static final double FACTOR;
+    private static boolean legacyAlpha;
+
+    public void <init>()
+    {
+        org.jfree.chart.util.PaintAlpha this;
+
+        this := @this: org.jfree.chart.util.PaintAlpha;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean setLegacyAlpha(boolean)
+    {
+        boolean old, legacyAlpha;
+
+        legacyAlpha := @parameter0: boolean;
+
+        old = <org.jfree.chart.util.PaintAlpha: boolean legacyAlpha>;
+
+        <org.jfree.chart.util.PaintAlpha: boolean legacyAlpha> = legacyAlpha;
+
+        return old;
+    }
+
+    public static java.awt.Paint darker(java.awt.Paint)
+    {
+        java.awt.Paint paint, $stack11, $stack13;
+        boolean $stack2, $stack3, $stack4, $stack5, $stack6, $stack7;
+        java.awt.TexturePaint $stack8, $stack9;
+        java.awt.RadialGradientPaint $stack10;
+        java.awt.LinearGradientPaint $stack12;
+        java.awt.GradientPaint $stack14, $stack15;
+        java.awt.Color $stack16, $stack17;
+        java.lang.Exception $stack18;
+
+        paint := @parameter0: java.awt.Paint;
+
+        $stack2 = paint instanceof java.awt.Color;
+
+        if $stack2 == 0 goto label1;
+
+        $stack16 = (java.awt.Color) paint;
+
+        $stack17 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Color darker(java.awt.Color)>($stack16);
+
+        return $stack17;
+
+     label1:
+        $stack3 = <org.jfree.chart.util.PaintAlpha: boolean legacyAlpha>;
+
+        if $stack3 != 1 goto label2;
+
+        return paint;
+
+     label2:
+        $stack4 = paint instanceof java.awt.GradientPaint;
+
+        if $stack4 == 0 goto label3;
+
+        $stack14 = (java.awt.GradientPaint) paint;
+
+        $stack15 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.GradientPaint darker(java.awt.GradientPaint)>($stack14);
+
+        return $stack15;
+
+     label3:
+        $stack5 = paint instanceof java.awt.LinearGradientPaint;
+
+        if $stack5 == 0 goto label4;
+
+        $stack12 = (java.awt.LinearGradientPaint) paint;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Paint darkerLinearGradientPaint(java.awt.LinearGradientPaint)>($stack12);
+
+        return $stack13;
+
+     label4:
+        $stack6 = paint instanceof java.awt.RadialGradientPaint;
+
+        if $stack6 == 0 goto label5;
+
+        $stack10 = (java.awt.RadialGradientPaint) paint;
+
+        $stack11 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Paint darkerRadialGradientPaint(java.awt.RadialGradientPaint)>($stack10);
+
+        return $stack11;
+
+     label5:
+        $stack7 = paint instanceof java.awt.TexturePaint;
+
+        if $stack7 == 0 goto label9;
+
+     label6:
+        $stack8 = (java.awt.TexturePaint) paint;
+
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.TexturePaint darkerTexturePaint(java.awt.TexturePaint)>($stack8);
+
+     label7:
+        return $stack9;
+
+     label8:
+        $stack18 := @caughtexception;
+
+        return paint;
+
+     label9:
+        return paint;
+
+        catch java.lang.Exception from label6 to label7 with label8;
+    }
+
+    private static java.awt.Color darker(java.awt.Color)
+    {
+        java.awt.Color $stack1, paint;
+        int $stack2, $stack5, $stack6, $stack9, $stack10, $stack13, $stack14;
+        double $stack3, $stack4, $stack7, $stack8, $stack11, $stack12;
+
+        paint := @parameter0: java.awt.Color;
+
+        $stack1 = new java.awt.Color;
+
+        $stack2 = virtualinvoke paint.<java.awt.Color: int getRed()>();
+
+        $stack3 = (double) $stack2;
+
+        $stack4 = $stack3 * 0.7;
+
+        $stack5 = (int) $stack4;
+
+        $stack6 = virtualinvoke paint.<java.awt.Color: int getGreen()>();
+
+        $stack7 = (double) $stack6;
+
+        $stack8 = $stack7 * 0.7;
+
+        $stack9 = (int) $stack8;
+
+        $stack10 = virtualinvoke paint.<java.awt.Color: int getBlue()>();
+
+        $stack11 = (double) $stack10;
+
+        $stack12 = $stack11 * 0.7;
+
+        $stack13 = (int) $stack12;
+
+        $stack14 = virtualinvoke paint.<java.awt.Color: int getAlpha()>();
+
+        specialinvoke $stack1.<java.awt.Color: void <init>(int,int,int,int)>($stack5, $stack9, $stack13, $stack14);
+
+        return $stack1;
+    }
+
+    private static java.awt.GradientPaint darker(java.awt.GradientPaint)
+    {
+        java.awt.GradientPaint $stack1, paint;
+        java.awt.geom.Point2D $stack2, $stack5;
+        java.awt.Color $stack3, $stack4, $stack6, $stack7;
+        boolean $stack8;
+
+        paint := @parameter0: java.awt.GradientPaint;
+
+        $stack1 = new java.awt.GradientPaint;
+
+        $stack2 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+
+        $stack3 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+
+        $stack4 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Color darker(java.awt.Color)>($stack3);
+
+        $stack5 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+
+        $stack6 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Color darker(java.awt.Color)>($stack6);
+
+        $stack8 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        specialinvoke $stack1.<java.awt.GradientPaint: void <init>(java.awt.geom.Point2D,java.awt.Color,java.awt.geom.Point2D,java.awt.Color,boolean)>($stack2, $stack4, $stack5, $stack7, $stack8);
+
+        return $stack1;
+    }
+
+    private static java.awt.Paint darkerLinearGradientPaint(java.awt.LinearGradientPaint)
+    {
+        java.awt.LinearGradientPaint paint, $stack5;
+        java.awt.Color[] paintColors;
+        int $stack4, i;
+        java.awt.geom.Point2D $stack6, $stack7;
+        float[] $stack8;
+        java.awt.MultipleGradientPaint$CycleMethod $stack9;
+        java.awt.MultipleGradientPaint$ColorSpaceType $stack10;
+        java.awt.geom.AffineTransform $stack11;
+        java.awt.Color $stack12, $stack13;
+
+        paint := @parameter0: java.awt.LinearGradientPaint;
+
+        paintColors = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.Color[] getColors()>();
+
+        i = 0;
+
+     label1:
+        $stack4 = lengthof paintColors;
+
+        if i >= $stack4 goto label2;
+
+        $stack12 = paintColors[i];
+
+        $stack13 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Color darker(java.awt.Color)>($stack12);
+
+        paintColors[i] = $stack13;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack5 = new java.awt.LinearGradientPaint;
+
+        $stack6 = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.geom.Point2D getStartPoint()>();
+
+        $stack7 = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.geom.Point2D getEndPoint()>();
+
+        $stack8 = virtualinvoke paint.<java.awt.LinearGradientPaint: float[] getFractions()>();
+
+        $stack9 = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.MultipleGradientPaint$CycleMethod getCycleMethod()>();
+
+        $stack10 = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.MultipleGradientPaint$ColorSpaceType getColorSpace()>();
+
+        $stack11 = virtualinvoke paint.<java.awt.LinearGradientPaint: java.awt.geom.AffineTransform getTransform()>();
+
+        specialinvoke $stack5.<java.awt.LinearGradientPaint: void <init>(java.awt.geom.Point2D,java.awt.geom.Point2D,float[],java.awt.Color[],java.awt.MultipleGradientPaint$CycleMethod,java.awt.MultipleGradientPaint$ColorSpaceType,java.awt.geom.AffineTransform)>($stack6, $stack7, $stack8, paintColors, $stack9, $stack10, $stack11);
+
+        return $stack5;
+    }
+
+    private static java.awt.Paint darkerRadialGradientPaint(java.awt.RadialGradientPaint)
+    {
+        java.awt.RadialGradientPaint paint, $stack5;
+        java.awt.Color[] paintColors;
+        int $stack4, i;
+        java.awt.geom.Point2D $stack6, $stack8;
+        float $stack7;
+        float[] $stack9;
+        java.awt.MultipleGradientPaint$CycleMethod $stack10;
+        java.awt.MultipleGradientPaint$ColorSpaceType $stack11;
+        java.awt.geom.AffineTransform $stack12;
+        java.awt.Color $stack13, $stack14;
+
+        paint := @parameter0: java.awt.RadialGradientPaint;
+
+        paintColors = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.Color[] getColors()>();
+
+        i = 0;
+
+     label1:
+        $stack4 = lengthof paintColors;
+
+        if i >= $stack4 goto label2;
+
+        $stack13 = paintColors[i];
+
+        $stack14 = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.Color darker(java.awt.Color)>($stack13);
+
+        paintColors[i] = $stack14;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack5 = new java.awt.RadialGradientPaint;
+
+        $stack6 = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.geom.Point2D getCenterPoint()>();
+
+        $stack7 = virtualinvoke paint.<java.awt.RadialGradientPaint: float getRadius()>();
+
+        $stack8 = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.geom.Point2D getFocusPoint()>();
+
+        $stack9 = virtualinvoke paint.<java.awt.RadialGradientPaint: float[] getFractions()>();
+
+        $stack10 = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.MultipleGradientPaint$CycleMethod getCycleMethod()>();
+
+        $stack11 = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.MultipleGradientPaint$ColorSpaceType getColorSpace()>();
+
+        $stack12 = virtualinvoke paint.<java.awt.RadialGradientPaint: java.awt.geom.AffineTransform getTransform()>();
+
+        specialinvoke $stack5.<java.awt.RadialGradientPaint: void <init>(java.awt.geom.Point2D,float,java.awt.geom.Point2D,float[],java.awt.Color[],java.awt.MultipleGradientPaint$CycleMethod,java.awt.MultipleGradientPaint$ColorSpaceType,java.awt.geom.AffineTransform)>($stack6, $stack7, $stack8, $stack9, paintColors, $stack10, $stack11, $stack12);
+
+        return $stack5;
+    }
+
+    private static java.awt.TexturePaint darkerTexturePaint(java.awt.TexturePaint)
+    {
+        java.awt.TexturePaint paint, $stack29, $stack41, $stack67;
+        java.awt.image.BufferedImage $stack11, $stack14, img;
+        java.awt.image.ColorModel $stack12, $stack25, $stack73, $stack88;
+        boolean $stack13, $stack26;
+        java.awt.image.WritableRaster ras;
+        int miX, miY, $stack19, $stack20, maY, wid, $stack23, $stack24, $stack28, $stack32, $stack35, $stack38, $stack44, $stack49, $stack52, $stack55, $stack58, $stack61, $stack64, $stack70, $stack74, $stack76, $stack79, $stack80, $stack83, $stack84, $stack87, $stack89, y, p, nco#5, y#7;
+        java.awt.image.SampleModel $stack22, $stack27;
+        java.awt.geom.Rectangle2D $stack30, $stack42, $stack68;
+        double $stack36, $stack37, $stack50, $stack51, $stack56, $stack57, $stack62, $stack63, $stack77, $stack78, $stack81, $stack82, $stack85, $stack86;
+        int[] pix, nco;
+
+        paint := @parameter0: java.awt.TexturePaint;
+
+        $stack11 = virtualinvoke paint.<java.awt.TexturePaint: java.awt.image.BufferedImage getImage()>();
+
+        $stack12 = virtualinvoke $stack11.<java.awt.image.BufferedImage: java.awt.image.ColorModel getColorModel()>();
+
+        $stack13 = virtualinvoke $stack12.<java.awt.image.ColorModel: boolean isAlphaPremultiplied()>();
+
+        if $stack13 == 0 goto label01;
+
+     label01:
+        $stack14 = virtualinvoke paint.<java.awt.TexturePaint: java.awt.image.BufferedImage getImage()>();
+
+        img = staticinvoke <org.jfree.chart.util.PaintAlpha: java.awt.image.BufferedImage cloneImage(java.awt.image.BufferedImage)>($stack14);
+
+        ras = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.WritableRaster copyData(java.awt.image.WritableRaster)>(null);
+
+        miX = virtualinvoke ras.<java.awt.image.WritableRaster: int getMinX()>();
+
+        miY = virtualinvoke ras.<java.awt.image.WritableRaster: int getMinY()>();
+
+        $stack19 = virtualinvoke ras.<java.awt.image.WritableRaster: int getMinY()>();
+
+        $stack20 = virtualinvoke ras.<java.awt.image.WritableRaster: int getHeight()>();
+
+        maY = $stack19 + $stack20;
+
+        wid = virtualinvoke ras.<java.awt.image.WritableRaster: int getWidth()>();
+
+        $stack22 = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.SampleModel getSampleModel()>();
+
+        $stack23 = virtualinvoke $stack22.<java.awt.image.SampleModel: int getNumBands()>();
+
+        $stack24 = wid * $stack23;
+
+        pix = newarray (int)[$stack24];
+
+        $stack25 = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.ColorModel getColorModel()>();
+
+        $stack26 = $stack25 instanceof java.awt.image.IndexColorModel;
+
+        if $stack26 == 0 goto label06;
+
+        nco = newarray (int)[4];
+
+        y = miY;
+
+     label02:
+        if y >= maY goto label05;
+
+        pix = virtualinvoke ras.<java.awt.image.WritableRaster: int[] getPixels(int,int,int,int,int[])>(miX, y, wid, 1, pix);
+
+        p = 0;
+
+     label03:
+        $stack70 = lengthof pix;
+
+        if p >= $stack70 goto label04;
+
+        $stack73 = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.ColorModel getColorModel()>();
+
+        $stack74 = pix[p];
+
+        nco = virtualinvoke $stack73.<java.awt.image.ColorModel: int[] getComponents(int,int[],int)>($stack74, nco, 0);
+
+        $stack76 = nco[0];
+
+        $stack77 = (double) $stack76;
+
+        $stack78 = $stack77 * 0.7;
+
+        $stack79 = (int) $stack78;
+
+        nco[0] = $stack79;
+
+        $stack80 = nco[1];
+
+        $stack81 = (double) $stack80;
+
+        $stack82 = $stack81 * 0.7;
+
+        $stack83 = (int) $stack82;
+
+        nco[1] = $stack83;
+
+        $stack84 = nco[2];
+
+        $stack85 = (double) $stack84;
+
+        $stack86 = $stack85 * 0.7;
+
+        $stack87 = (int) $stack86;
+
+        nco[2] = $stack87;
+
+        $stack88 = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.ColorModel getColorModel()>();
+
+        $stack89 = virtualinvoke $stack88.<java.awt.image.ColorModel: int getDataElement(int[],int)>(nco, 0);
+
+        pix[p] = $stack89;
+
+        p = p + 1;
+
+        goto label03;
+
+     label04:
+        virtualinvoke ras.<java.awt.image.WritableRaster: void setPixels(int,int,int,int,int[])>(miX, y, wid, 1, pix);
+
+        y = y + 1;
+
+        goto label02;
+
+     label05:
+        virtualinvoke img.<java.awt.image.BufferedImage: void setData(java.awt.image.Raster)>(ras);
+
+        $stack67 = new java.awt.TexturePaint;
+
+        $stack68 = virtualinvoke paint.<java.awt.TexturePaint: java.awt.geom.Rectangle2D getAnchorRect()>();
+
+        specialinvoke $stack67.<java.awt.TexturePaint: void <init>(java.awt.image.BufferedImage,java.awt.geom.Rectangle2D)>(img, $stack68);
+
+        return $stack67;
+
+     label06:
+        $stack27 = virtualinvoke img.<java.awt.image.BufferedImage: java.awt.image.SampleModel getSampleModel()>();
+
+        $stack28 = virtualinvoke $stack27.<java.awt.image.SampleModel: int getNumBands()>();
+
+        if $stack28 != 4 goto label11;
+
+        nco#5 = miY;
+
+     label07:
+        if nco#5 >= maY goto label10;
+
+        pix = virtualinvoke ras.<java.awt.image.WritableRaster: int[] getPixels(int,int,int,int,int[])>(miX, nco#5, wid, 1, pix);
+
+        y = 0;
+
+     label08:
+        $stack44 = lengthof pix;
+
+        if y >= $stack44 goto label09;
+
+        y#7 = y + 1;
+
+        $stack49 = pix[y];
+
+        $stack50 = (double) $stack49;
+
+        $stack51 = $stack50 * 0.7;
+
+        $stack52 = (int) $stack51;
+
+        pix[y] = $stack52;
+
+        y = y#7 + 1;
+
+        $stack55 = pix[y#7];
+
+        $stack56 = (double) $stack55;
+
+        $stack57 = $stack56 * 0.7;
+
+        $stack58 = (int) $stack57;
+
+        pix[y#7] = $stack58;
+
+        y#7 = y + 1;
+
+        $stack61 = pix[y];
+
+        $stack62 = (double) $stack61;
+
+        $stack63 = $stack62 * 0.7;
+
+        $stack64 = (int) $stack63;
+
+        pix[y] = $stack64;
+
+        y = y#7 + 1;
+
+        goto label08;
+
+     label09:
+        virtualinvoke ras.<java.awt.image.WritableRaster: void setPixels(int,int,int,int,int[])>(miX, nco#5, wid, 1, pix);
+
+        nco#5 = nco#5 + 1;
+
+        goto label07;
+
+     label10:
+        virtualinvoke img.<java.awt.image.BufferedImage: void setData(java.awt.image.Raster)>(ras);
+
+        $stack41 = new java.awt.TexturePaint;
+
+        $stack42 = virtualinvoke paint.<java.awt.TexturePaint: java.awt.geom.Rectangle2D getAnchorRect()>();
+
+        specialinvoke $stack41.<java.awt.TexturePaint: void <init>(java.awt.image.BufferedImage,java.awt.geom.Rectangle2D)>(img, $stack42);
+
+        return $stack41;
+
+     label11:
+        nco#5 = miY;
+
+     label12:
+        if nco#5 >= maY goto label15;
+
+        pix = virtualinvoke ras.<java.awt.image.WritableRaster: int[] getPixels(int,int,int,int,int[])>(miX, nco#5, wid, 1, pix);
+
+        y#7 = 0;
+
+     label13:
+        $stack32 = lengthof pix;
+
+        if y#7 >= $stack32 goto label14;
+
+        $stack35 = pix[y#7];
+
+        $stack36 = (double) $stack35;
+
+        $stack37 = $stack36 * 0.7;
+
+        $stack38 = (int) $stack37;
+
+        pix[y#7] = $stack38;
+
+        y#7 = y#7 + 1;
+
+        goto label13;
+
+     label14:
+        virtualinvoke ras.<java.awt.image.WritableRaster: void setPixels(int,int,int,int,int[])>(miX, nco#5, wid, 1, pix);
+
+        nco#5 = nco#5 + 1;
+
+        goto label12;
+
+     label15:
+        virtualinvoke img.<java.awt.image.BufferedImage: void setData(java.awt.image.Raster)>(ras);
+
+        $stack29 = new java.awt.TexturePaint;
+
+        $stack30 = virtualinvoke paint.<java.awt.TexturePaint: java.awt.geom.Rectangle2D getAnchorRect()>();
+
+        specialinvoke $stack29.<java.awt.TexturePaint: void <init>(java.awt.image.BufferedImage,java.awt.geom.Rectangle2D)>(img, $stack30);
+
+        return $stack29;
+    }
+
+    public static java.awt.image.BufferedImage cloneImage(java.awt.image.BufferedImage)
+    {
+        java.awt.image.BufferedImage image, $stack9;
+        java.awt.image.WritableRaster rin, ras;
+        java.lang.String[] propNames;
+        java.awt.image.ColorModel $stack10;
+        boolean $stack11;
+        java.util.Hashtable $stack12, props;
+        int $stack13, i;
+        java.lang.String $stack18, $stack19;
+        java.lang.Object $stack20;
+
+        image := @parameter0: java.awt.image.BufferedImage;
+
+        rin = virtualinvoke image.<java.awt.image.BufferedImage: java.awt.image.WritableRaster getRaster()>();
+
+        ras = virtualinvoke rin.<java.awt.image.WritableRaster: java.awt.image.WritableRaster createCompatibleWritableRaster()>();
+
+        virtualinvoke ras.<java.awt.image.WritableRaster: void setRect(java.awt.image.Raster)>(rin);
+
+        props = null;
+
+        propNames = virtualinvoke image.<java.awt.image.BufferedImage: java.lang.String[] getPropertyNames()>();
+
+        if propNames == null goto label2;
+
+        $stack12 = new java.util.Hashtable;
+
+        specialinvoke $stack12.<java.util.Hashtable: void <init>()>();
+
+        props = $stack12;
+
+        i = 0;
+
+     label1:
+        $stack13 = lengthof propNames;
+
+        if i >= $stack13 goto label2;
+
+        $stack19 = propNames[i];
+
+        $stack18 = propNames[i];
+
+        $stack20 = virtualinvoke image.<java.awt.image.BufferedImage: java.lang.Object getProperty(java.lang.String)>($stack18);
+
+        virtualinvoke $stack12.<java.util.Hashtable: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack19, $stack20);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack9 = new java.awt.image.BufferedImage;
+
+        $stack10 = virtualinvoke image.<java.awt.image.BufferedImage: java.awt.image.ColorModel getColorModel()>();
+
+        $stack11 = virtualinvoke image.<java.awt.image.BufferedImage: boolean isAlphaPremultiplied()>();
+
+        specialinvoke $stack9.<java.awt.image.BufferedImage: void <init>(java.awt.image.ColorModel,java.awt.image.WritableRaster,boolean,java.util.Hashtable)>($stack10, ras, $stack11, props);
+
+        return $stack9;
+    }
+
+    static void <clinit>()
+    {
+        <org.jfree.chart.util.PaintAlpha: double FACTOR> = 0.7;
+
+        <org.jfree.chart.util.PaintAlpha: boolean legacyAlpha> = 0;
+
+        return;
+    }
+}

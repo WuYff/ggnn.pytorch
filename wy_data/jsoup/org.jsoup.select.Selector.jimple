@@ -1,0 +1,216 @@
+public class org.jsoup.select.Selector extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        org.jsoup.select.Selector this;
+
+        this := @this: org.jsoup.select.Selector;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jsoup.select.Elements select(java.lang.String, org.jsoup.nodes.Element)
+    {
+        java.lang.String query;
+        org.jsoup.select.Evaluator $stack2;
+        org.jsoup.nodes.Element root;
+        org.jsoup.select.Elements $stack3;
+
+        query := @parameter0: java.lang.String;
+
+        root := @parameter1: org.jsoup.nodes.Element;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(query);
+
+        $stack2 = staticinvoke <org.jsoup.select.QueryParser: org.jsoup.select.Evaluator parse(java.lang.String)>(query);
+
+        $stack3 = staticinvoke <org.jsoup.select.Selector: org.jsoup.select.Elements select(org.jsoup.select.Evaluator,org.jsoup.nodes.Element)>($stack2, root);
+
+        return $stack3;
+    }
+
+    public static org.jsoup.select.Elements select(org.jsoup.select.Evaluator, org.jsoup.nodes.Element)
+    {
+        org.jsoup.select.Evaluator evaluator;
+        org.jsoup.nodes.Element root;
+        org.jsoup.select.Elements $stack2;
+
+        evaluator := @parameter0: org.jsoup.select.Evaluator;
+
+        root := @parameter1: org.jsoup.nodes.Element;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(evaluator);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(root);
+
+        $stack2 = staticinvoke <org.jsoup.select.Collector: org.jsoup.select.Elements collect(org.jsoup.select.Evaluator,org.jsoup.nodes.Element)>(evaluator, root);
+
+        return $stack2;
+    }
+
+    public static org.jsoup.select.Elements select(java.lang.String, java.lang.Iterable)
+    {
+        java.lang.String query;
+        java.lang.Iterable roots;
+        org.jsoup.select.Evaluator evaluator;
+        java.util.ArrayList $stack11;
+        java.util.IdentityHashMap $stack12;
+        java.util.Iterator l5, l8;
+        boolean $stack14, $stack19, $stack22;
+        org.jsoup.select.Elements $stack15, found;
+        java.lang.Object $stack16, $stack21;
+        org.jsoup.nodes.Element root, el;
+        java.lang.Boolean $stack25;
+
+        query := @parameter0: java.lang.String;
+
+        roots := @parameter1: java.lang.Iterable;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(query);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(roots);
+
+        evaluator = staticinvoke <org.jsoup.select.QueryParser: org.jsoup.select.Evaluator parse(java.lang.String)>(query);
+
+        $stack11 = new java.util.ArrayList;
+
+        specialinvoke $stack11.<java.util.ArrayList: void <init>()>();
+
+        $stack12 = new java.util.IdentityHashMap;
+
+        specialinvoke $stack12.<java.util.IdentityHashMap: void <init>()>();
+
+        l5 = interfaceinvoke roots.<java.lang.Iterable: java.util.Iterator iterator()>();
+
+     label1:
+        $stack14 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack14 == 0 goto label5;
+
+        $stack16 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        root = (org.jsoup.nodes.Element) $stack16;
+
+        found = staticinvoke <org.jsoup.select.Selector: org.jsoup.select.Elements select(org.jsoup.select.Evaluator,org.jsoup.nodes.Element)>(evaluator, root);
+
+        l8 = virtualinvoke found.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label2:
+        $stack19 = interfaceinvoke l8.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack19 == 0 goto label4;
+
+        $stack21 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack21;
+
+        $stack22 = virtualinvoke $stack12.<java.util.IdentityHashMap: boolean containsKey(java.lang.Object)>(el);
+
+        if $stack22 != 0 goto label3;
+
+        virtualinvoke $stack11.<java.util.ArrayList: boolean add(java.lang.Object)>(el);
+
+        $stack25 = <java.lang.Boolean: java.lang.Boolean TRUE>;
+
+        virtualinvoke $stack12.<java.util.IdentityHashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(el, $stack25);
+
+     label3:
+        goto label2;
+
+     label4:
+        goto label1;
+
+     label5:
+        $stack15 = new org.jsoup.select.Elements;
+
+        specialinvoke $stack15.<org.jsoup.select.Elements: void <init>(java.util.List)>($stack11);
+
+        return $stack15;
+    }
+
+    static org.jsoup.select.Elements filterOut(java.util.Collection, java.util.Collection)
+    {
+        org.jsoup.select.Elements $stack8;
+        java.util.Collection elements, outs;
+        java.util.Iterator l3, l6;
+        boolean $stack10, $stack13, $stack17, found;
+        java.lang.Object $stack11, $stack16;
+        org.jsoup.nodes.Element el, out;
+
+        elements := @parameter0: java.util.Collection;
+
+        outs := @parameter1: java.util.Collection;
+
+        $stack8 = new org.jsoup.select.Elements;
+
+        specialinvoke $stack8.<org.jsoup.select.Elements: void <init>()>();
+
+        l3 = interfaceinvoke elements.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label6;
+
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack11;
+
+        found = 0;
+
+        l6 = interfaceinvoke outs.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label2:
+        $stack13 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label4;
+
+        $stack16 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        out = (org.jsoup.nodes.Element) $stack16;
+
+        $stack17 = virtualinvoke el.<org.jsoup.nodes.Element: boolean equals(java.lang.Object)>(out);
+
+        if $stack17 == 0 goto label3;
+
+        found = 1;
+
+        goto label4;
+
+     label3:
+        goto label2;
+
+     label4:
+        if found != 0 goto label5;
+
+        virtualinvoke $stack8.<org.jsoup.select.Elements: boolean add(java.lang.Object)>(el);
+
+     label5:
+        goto label1;
+
+     label6:
+        return $stack8;
+    }
+
+    public static org.jsoup.nodes.Element selectFirst(java.lang.String, org.jsoup.nodes.Element)
+    {
+        java.lang.String cssQuery;
+        org.jsoup.select.Evaluator $stack2;
+        org.jsoup.nodes.Element root, $stack3;
+
+        cssQuery := @parameter0: java.lang.String;
+
+        root := @parameter1: org.jsoup.nodes.Element;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(cssQuery);
+
+        $stack2 = staticinvoke <org.jsoup.select.QueryParser: org.jsoup.select.Evaluator parse(java.lang.String)>(cssQuery);
+
+        $stack3 = staticinvoke <org.jsoup.select.Collector: org.jsoup.nodes.Element findFirst(org.jsoup.select.Evaluator,org.jsoup.nodes.Element)>($stack2, root);
+
+        return $stack3;
+    }
+}

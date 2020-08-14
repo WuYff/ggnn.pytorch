@@ -1,0 +1,71 @@
+public final class org.jsoup.internal.Normalizer extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jsoup.internal.Normalizer this;
+
+        this := @this: org.jsoup.internal.Normalizer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.String lowerCase(java.lang.String)
+    {
+        java.lang.String input, $stack2;
+        java.util.Locale $stack1;
+
+        input := @parameter0: java.lang.String;
+
+        if input == null goto label1;
+
+        $stack1 = <java.util.Locale: java.util.Locale ENGLISH>;
+
+        $stack2 = virtualinvoke input.<java.lang.String: java.lang.String toLowerCase(java.util.Locale)>($stack1);
+
+        goto label2;
+
+     label1:
+        $stack2 = "";
+
+     label2:
+        return $stack2;
+    }
+
+    public static java.lang.String normalize(java.lang.String)
+    {
+        java.lang.String input, $stack1, $stack2;
+
+        input := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(input);
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: java.lang.String trim()>();
+
+        return $stack2;
+    }
+
+    public static java.lang.String normalize(java.lang.String, boolean)
+    {
+        boolean isStringLiteral;
+        java.lang.String input, $stack2;
+
+        input := @parameter0: java.lang.String;
+
+        isStringLiteral := @parameter1: boolean;
+
+        if isStringLiteral == 0 goto label1;
+
+        $stack2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(input);
+
+        goto label2;
+
+     label1:
+        $stack2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String normalize(java.lang.String)>(input);
+
+     label2:
+        return $stack2;
+    }
+}

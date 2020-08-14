@@ -1,0 +1,855 @@
+public abstract class org.jfree.data.statistics.Statistics extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.data.statistics.Statistics this;
+
+        this := @this: org.jfree.data.statistics.Statistics;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static double calculateMean(java.lang.Number[])
+    {
+        java.lang.Number[] values;
+        double $stack1;
+
+        values := @parameter0: java.lang.Number[];
+
+        $stack1 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.lang.Number[],boolean)>(values, 1);
+
+        return $stack1;
+    }
+
+    public static double calculateMean(java.lang.Number[], boolean)
+    {
+        java.lang.Number[] values;
+        int $stack9, counter, i;
+        double $stack10, sum, current, i#5;
+        java.lang.Number $stack11, $stack18;
+        boolean includeNullAndNaN, $stack14;
+
+        values := @parameter0: java.lang.Number[];
+
+        includeNullAndNaN := @parameter1: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(values, "values");
+
+        sum = 0.0;
+
+        counter = 0;
+
+        i = 0;
+
+     label1:
+        $stack9 = lengthof values;
+
+        if i >= $stack9 goto label6;
+
+        $stack11 = values[i];
+
+        if $stack11 == null goto label2;
+
+        $stack18 = values[i];
+
+        current = virtualinvoke $stack18.<java.lang.Number: double doubleValue()>();
+
+        goto label3;
+
+     label2:
+        current = #NaN;
+
+     label3:
+        if includeNullAndNaN != 0 goto label4;
+
+        $stack14 = staticinvoke <java.lang.Double: boolean isNaN(double)>(current);
+
+        if $stack14 != 0 goto label5;
+
+     label4:
+        sum = sum + current;
+
+        counter = counter + 1;
+
+     label5:
+        i = i + 1;
+
+        goto label1;
+
+     label6:
+        $stack10 = (double) counter;
+
+        i#5 = sum / $stack10;
+
+        return i#5;
+    }
+
+    public static double calculateMean(java.util.Collection)
+    {
+        java.util.Collection values;
+        double $stack1;
+
+        values := @parameter0: java.util.Collection;
+
+        $stack1 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.util.Collection,boolean)>(values, 1);
+
+        return $stack1;
+    }
+
+    public static double calculateMean(java.util.Collection, boolean)
+    {
+        java.util.Collection values;
+        java.util.Iterator iterator;
+        boolean $stack11, $stack15, $stack18, includeNullAndNaN;
+        double $stack12, $stack13, value, $stack19, total;
+        java.lang.Object object;
+        java.lang.Number number;
+        int count;
+
+        values := @parameter0: java.util.Collection;
+
+        includeNullAndNaN := @parameter1: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(values, "values");
+
+        count = 0;
+
+        total = 0.0;
+
+        iterator = interfaceinvoke values.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label5;
+
+        object = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        if object != null goto label2;
+
+        if includeNullAndNaN == 0 goto label4;
+
+        return #NaN;
+
+     label2:
+        $stack15 = object instanceof java.lang.Number;
+
+        if $stack15 == 0 goto label4;
+
+        number = (java.lang.Number) object;
+
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+
+        $stack18 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+
+        if $stack18 == 0 goto label3;
+
+        if includeNullAndNaN == 0 goto label4;
+
+        return #NaN;
+
+     label3:
+        $stack19 = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+
+        total = total + $stack19;
+
+        count = count + 1;
+
+     label4:
+        goto label1;
+
+     label5:
+        $stack12 = (double) count;
+
+        $stack13 = total / $stack12;
+
+        return $stack13;
+    }
+
+    public static double calculateMedian(java.util.List)
+    {
+        java.util.List values;
+        double $stack1;
+
+        values := @parameter0: java.util.List;
+
+        $stack1 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,boolean)>(values, 1);
+
+        return $stack1;
+    }
+
+    public static double calculateMedian(java.util.List, boolean)
+    {
+        boolean copyAndSort;
+        int $stack9, $stack10, $stack11, $stack13, $stack20, $stack21, itemCount, i;
+        java.lang.Object $stack12, $stack14, $stack18, $stack22, $stack28;
+        double $stack15, $stack16, $stack17, result;
+        java.util.ArrayList $stack25;
+        java.util.List values;
+        java.lang.Number copy#7, i#10;
+
+        values := @parameter0: java.util.List;
+
+        copyAndSort := @parameter1: boolean;
+
+        result = #NaN;
+
+        if values == null goto label6;
+
+        if copyAndSort == 0 goto label3;
+
+        itemCount = interfaceinvoke values.<java.util.List: int size()>();
+
+        $stack25 = new java.util.ArrayList;
+
+        specialinvoke $stack25.<java.util.ArrayList: void <init>(int)>(itemCount);
+
+        i = 0;
+
+     label1:
+        if i >= itemCount goto label2;
+
+        $stack28 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>(i);
+
+        interfaceinvoke $stack25.<java.util.List: void add(int,java.lang.Object)>(i, $stack28);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        staticinvoke <java.util.Collections: void sort(java.util.List)>($stack25);
+
+        values = $stack25;
+
+     label3:
+        itemCount = interfaceinvoke values.<java.util.List: int size()>();
+
+        if itemCount <= 0 goto label6;
+
+        $stack9 = itemCount % 2;
+
+        if $stack9 != 1 goto label5;
+
+        if itemCount <= 1 goto label4;
+
+        $stack20 = itemCount - 1;
+
+        $stack21 = $stack20 / 2;
+
+        $stack22 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack21);
+
+        copy#7 = (java.lang.Number) $stack22;
+
+        result = virtualinvoke copy#7.<java.lang.Number: double doubleValue()>();
+
+        goto label6;
+
+     label4:
+        $stack18 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>(0);
+
+        copy#7 = (java.lang.Number) $stack18;
+
+        result = virtualinvoke copy#7.<java.lang.Number: double doubleValue()>();
+
+        goto label6;
+
+     label5:
+        $stack10 = itemCount / 2;
+
+        $stack11 = $stack10 - 1;
+
+        $stack12 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack11);
+
+        copy#7 = (java.lang.Number) $stack12;
+
+        $stack13 = itemCount / 2;
+
+        $stack14 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack13);
+
+        i#10 = (java.lang.Number) $stack14;
+
+        $stack15 = virtualinvoke copy#7.<java.lang.Number: double doubleValue()>();
+
+        $stack16 = virtualinvoke i#10.<java.lang.Number: double doubleValue()>();
+
+        $stack17 = $stack15 + $stack16;
+
+        result = $stack17 / 2.0;
+
+     label6:
+        return result;
+    }
+
+    public static double calculateMedian(java.util.List, int, int)
+    {
+        java.util.List values;
+        int start, end;
+        double $stack3;
+
+        values := @parameter0: java.util.List;
+
+        start := @parameter1: int;
+
+        end := @parameter2: int;
+
+        $stack3 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,int,int,boolean)>(values, start, end, 1);
+
+        return $stack3;
+    }
+
+    public static double calculateMedian(java.util.List, int, int, boolean)
+    {
+        boolean copyAndSort;
+        int end, start, $stack9, $stack10, $stack11, $stack12, $stack13, $stack15, $stack16, $stack24, $stack25, $stack26, $stack30, $stack31, i, working#4;
+        java.util.List values;
+        java.lang.Object $stack14, $stack17, $stack22, $stack27, $stack33;
+        java.lang.Number value2, i#5;
+        double $stack18, $stack19, $stack20, result;
+        java.util.ArrayList $stack29;
+
+        values := @parameter0: java.util.List;
+
+        start := @parameter1: int;
+
+        end := @parameter2: int;
+
+        copyAndSort := @parameter3: boolean;
+
+        result = #NaN;
+
+        if copyAndSort == 0 goto label3;
+
+        $stack29 = new java.util.ArrayList;
+
+        $stack30 = end - start;
+
+        $stack31 = $stack30 + 1;
+
+        specialinvoke $stack29.<java.util.ArrayList: void <init>(int)>($stack31);
+
+        i = start;
+
+     label1:
+        if i > end goto label2;
+
+        $stack33 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>(i);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack33);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        staticinvoke <java.util.Collections: void sort(java.util.List)>($stack29);
+
+        result = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMedian(java.util.List,boolean)>($stack29, 0);
+
+        goto label6;
+
+     label3:
+        $stack9 = end - start;
+
+        working#4 = $stack9 + 1;
+
+        if working#4 <= 0 goto label6;
+
+        $stack10 = working#4 % 2;
+
+        if $stack10 != 1 goto label5;
+
+        if working#4 <= 1 goto label4;
+
+        $stack24 = working#4 - 1;
+
+        $stack25 = $stack24 / 2;
+
+        $stack26 = start + $stack25;
+
+        $stack27 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack26);
+
+        i#5 = (java.lang.Number) $stack27;
+
+        result = virtualinvoke i#5.<java.lang.Number: double doubleValue()>();
+
+        goto label6;
+
+     label4:
+        $stack22 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>(start);
+
+        i#5 = (java.lang.Number) $stack22;
+
+        result = virtualinvoke i#5.<java.lang.Number: double doubleValue()>();
+
+        goto label6;
+
+     label5:
+        $stack11 = working#4 / 2;
+
+        $stack12 = start + $stack11;
+
+        $stack13 = $stack12 - 1;
+
+        $stack14 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack13);
+
+        i#5 = (java.lang.Number) $stack14;
+
+        $stack15 = working#4 / 2;
+
+        $stack16 = start + $stack15;
+
+        $stack17 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>($stack16);
+
+        value2 = (java.lang.Number) $stack17;
+
+        $stack18 = virtualinvoke i#5.<java.lang.Number: double doubleValue()>();
+
+        $stack19 = virtualinvoke value2.<java.lang.Number: double doubleValue()>();
+
+        $stack20 = $stack18 + $stack19;
+
+        result = $stack20 / 2.0;
+
+     label6:
+        return result;
+    }
+
+    public static double getStdDev(java.lang.Number[])
+    {
+        java.lang.Number[] data;
+        int $stack8, $stack10, $stack11, $stack12, counter;
+        double avg, $stack13, $stack14, $stack15, $stack17, diff, $stack18, sum;
+        java.lang.Number $stack16;
+        java.lang.IllegalArgumentException $stack21;
+
+        data := @parameter0: java.lang.Number[];
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data, "data");
+
+        $stack8 = lengthof data;
+
+        if $stack8 != 0 goto label1;
+
+        $stack21 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack21.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Zero length \'data\' array.");
+
+        throw $stack21;
+
+     label1:
+        avg = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.lang.Number[])>(data);
+
+        sum = 0.0;
+
+        counter = 0;
+
+     label2:
+        $stack10 = lengthof data;
+
+        if counter >= $stack10 goto label3;
+
+        $stack16 = data[counter];
+
+        $stack17 = virtualinvoke $stack16.<java.lang.Number: double doubleValue()>();
+
+        diff = $stack17 - avg;
+
+        $stack18 = diff * diff;
+
+        sum = sum + $stack18;
+
+        counter = counter + 1;
+
+        goto label2;
+
+     label3:
+        $stack11 = lengthof data;
+
+        $stack12 = $stack11 - 1;
+
+        $stack13 = (double) $stack12;
+
+        $stack14 = sum / $stack13;
+
+        $stack15 = staticinvoke <java.lang.Math: double sqrt(double)>($stack14);
+
+        return $stack15;
+    }
+
+    public static double[] getLinearFit(java.lang.Number[], java.lang.Number[])
+    {
+        java.lang.Number[] xData, yData;
+        int $stack3, $stack4;
+        double[] result;
+        double $stack6, $stack8, $stack9, $stack10, $stack11, $stack12;
+        java.lang.IllegalArgumentException $stack13;
+
+        xData := @parameter0: java.lang.Number[];
+
+        yData := @parameter1: java.lang.Number[];
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(xData, "xData");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(yData, "yData");
+
+        $stack4 = lengthof xData;
+
+        $stack3 = lengthof yData;
+
+        if $stack4 == $stack3 goto label1;
+
+        $stack13 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack13.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Statistics.getLinearFit(): array lengths must be equal.");
+
+        throw $stack13;
+
+     label1:
+        result = newarray (double)[2];
+
+        $stack6 = staticinvoke <org.jfree.data.statistics.Statistics: double getSlope(java.lang.Number[],java.lang.Number[])>(xData, yData);
+
+        result[1] = $stack6;
+
+        $stack8 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.lang.Number[])>(yData);
+
+        $stack9 = result[1];
+
+        $stack10 = staticinvoke <org.jfree.data.statistics.Statistics: double calculateMean(java.lang.Number[])>(xData);
+
+        $stack11 = $stack9 * $stack10;
+
+        $stack12 = $stack8 - $stack11;
+
+        result[0] = $stack12;
+
+        return result;
+    }
+
+    public static double getSlope(java.lang.Number[], java.lang.Number[])
+    {
+        java.lang.Number[] xData, yData;
+        int $stack11, $stack12, $stack13, counter;
+        double $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack24, $stack26, $stack27, $stack29, $stack31, $stack32, $stack34, sx, sxx, sxy, sy;
+        java.lang.Number $stack23, $stack25, $stack28, $stack30, $stack33;
+        java.lang.IllegalArgumentException $stack37;
+
+        xData := @parameter0: java.lang.Number[];
+
+        yData := @parameter1: java.lang.Number[];
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(xData, "xData");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(yData, "yData");
+
+        $stack12 = lengthof xData;
+
+        $stack11 = lengthof yData;
+
+        if $stack12 == $stack11 goto label1;
+
+        $stack37 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack37.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Array lengths must be equal.");
+
+        throw $stack37;
+
+     label1:
+        sx = 0.0;
+
+        sxx = 0.0;
+
+        sxy = 0.0;
+
+        sy = 0.0;
+
+        counter = 0;
+
+     label2:
+        $stack13 = lengthof xData;
+
+        if counter >= $stack13 goto label3;
+
+        $stack23 = xData[counter];
+
+        $stack24 = virtualinvoke $stack23.<java.lang.Number: double doubleValue()>();
+
+        sx = sx + $stack24;
+
+        $stack25 = xData[counter];
+
+        $stack26 = virtualinvoke $stack25.<java.lang.Number: double doubleValue()>();
+
+        $stack27 = staticinvoke <java.lang.Math: double pow(double,double)>($stack26, 2.0);
+
+        sxx = sxx + $stack27;
+
+        $stack28 = yData[counter];
+
+        $stack29 = virtualinvoke $stack28.<java.lang.Number: double doubleValue()>();
+
+        $stack30 = xData[counter];
+
+        $stack31 = virtualinvoke $stack30.<java.lang.Number: double doubleValue()>();
+
+        $stack32 = $stack29 * $stack31;
+
+        sxy = sxy + $stack32;
+
+        $stack33 = yData[counter];
+
+        $stack34 = virtualinvoke $stack33.<java.lang.Number: double doubleValue()>();
+
+        sy = sy + $stack34;
+
+        counter = counter + 1;
+
+        goto label2;
+
+     label3:
+        $stack15 = sx * sy;
+
+        $stack14 = (double) counter;
+
+        $stack16 = $stack15 / $stack14;
+
+        $stack21 = sxy - $stack16;
+
+        $stack18 = sx * sx;
+
+        $stack17 = (double) counter;
+
+        $stack19 = $stack18 / $stack17;
+
+        $stack20 = sxx - $stack19;
+
+        $stack22 = $stack21 / $stack20;
+
+        return $stack22;
+    }
+
+    public static double getCorrelation(java.lang.Number[], java.lang.Number[])
+    {
+        java.lang.Number[] data1, data2;
+        int $stack18, $stack19, n, i;
+        double $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack37, $stack38, $stack39, sumX, sumY, sumX2, sumY2, sumXY, x, y;
+        java.lang.Number $stack35, $stack36, $stack42, $stack62;
+        java.lang.IllegalArgumentException $stack67;
+
+        data1 := @parameter0: java.lang.Number[];
+
+        data2 := @parameter1: java.lang.Number[];
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data1, "data1");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data2, "data2");
+
+        $stack19 = lengthof data1;
+
+        $stack18 = lengthof data2;
+
+        if $stack19 == $stack18 goto label1;
+
+        $stack67 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack67.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("\'data1\' and \'data2\' arrays must have same length.");
+
+        throw $stack67;
+
+     label1:
+        n = lengthof data1;
+
+        sumX = 0.0;
+
+        sumY = 0.0;
+
+        sumX2 = 0.0;
+
+        sumY2 = 0.0;
+
+        sumXY = 0.0;
+
+        i = 0;
+
+     label2:
+        if i >= n goto label5;
+
+        x = 0.0;
+
+        $stack35 = data1[i];
+
+        if $stack35 == null goto label3;
+
+        $stack62 = data1[i];
+
+        x = virtualinvoke $stack62.<java.lang.Number: double doubleValue()>();
+
+     label3:
+        y = 0.0;
+
+        $stack36 = data2[i];
+
+        if $stack36 == null goto label4;
+
+        $stack42 = data2[i];
+
+        y = virtualinvoke $stack42.<java.lang.Number: double doubleValue()>();
+
+     label4:
+        sumX = sumX + x;
+
+        sumY = sumY + y;
+
+        $stack37 = x * y;
+
+        sumXY = sumXY + $stack37;
+
+        $stack38 = x * x;
+
+        sumX2 = sumX2 + $stack38;
+
+        $stack39 = y * y;
+
+        sumY2 = sumY2 + $stack39;
+
+        i = i + 1;
+
+        goto label2;
+
+     label5:
+        $stack20 = (double) n;
+
+        $stack22 = $stack20 * sumXY;
+
+        $stack21 = sumX * sumY;
+
+        $stack32 = $stack22 - $stack21;
+
+        $stack23 = (double) n;
+
+        $stack25 = $stack23 * sumX2;
+
+        $stack24 = sumX * sumX;
+
+        $stack30 = $stack25 - $stack24;
+
+        $stack26 = (double) n;
+
+        $stack28 = $stack26 * sumY2;
+
+        $stack27 = sumY * sumY;
+
+        $stack29 = $stack28 - $stack27;
+
+        $stack31 = $stack30 * $stack29;
+
+        $stack33 = staticinvoke <java.lang.Math: double pow(double,double)>($stack31, 0.5);
+
+        $stack34 = $stack32 / $stack33;
+
+        return $stack34;
+    }
+
+    public static double[][] getMovingAverage(java.lang.Number[], java.lang.Number[], int)
+    {
+        java.lang.Number[] xData, yData;
+        int $stack8, $stack9, period, $stack10, $stack11, $stack12, $stack13, $stack14, $stack23, i, j;
+        double[][] result;
+        java.lang.Number $stack15, $stack24;
+        double[] $stack16, $stack20;
+        double $stack18, $stack19, $stack25, sum;
+        java.lang.IllegalArgumentException $stack28, $stack29;
+
+        xData := @parameter0: java.lang.Number[];
+
+        yData := @parameter1: java.lang.Number[];
+
+        period := @parameter2: int;
+
+        $stack9 = lengthof xData;
+
+        $stack8 = lengthof yData;
+
+        if $stack9 == $stack8 goto label1;
+
+        $stack29 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack29.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Array lengths must be equal.");
+
+        throw $stack29;
+
+     label1:
+        $stack10 = lengthof xData;
+
+        if period <= $stack10 goto label2;
+
+        $stack28 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack28.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Period can\'t be longer than dataset.");
+
+        throw $stack28;
+
+     label2:
+        $stack11 = lengthof xData;
+
+        $stack12 = $stack11 - period;
+
+        result = newmultiarray (double)[$stack12][2];
+
+        i = 0;
+
+     label3:
+        $stack13 = lengthof result;
+
+        if i >= $stack13 goto label6;
+
+        $stack16 = result[i];
+
+        $stack14 = i + period;
+
+        $stack15 = xData[$stack14];
+
+        $stack18 = virtualinvoke $stack15.<java.lang.Number: double doubleValue()>();
+
+        $stack16[0] = $stack18;
+
+        sum = 0.0;
+
+        j = 0;
+
+     label4:
+        if j >= period goto label5;
+
+        $stack23 = i + j;
+
+        $stack24 = yData[$stack23];
+
+        $stack25 = virtualinvoke $stack24.<java.lang.Number: double doubleValue()>();
+
+        sum = sum + $stack25;
+
+        j = j + 1;
+
+        goto label4;
+
+     label5:
+        $stack19 = (double) period;
+
+        sum = sum / $stack19;
+
+        $stack20 = result[i];
+
+        $stack20[1] = sum;
+
+        i = i + 1;
+
+        goto label3;
+
+     label6:
+        return result;
+    }
+}

@@ -1,0 +1,420 @@
+public class org.jfree.chart.util.AbstractObjectList extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final int DEFAULT_INITIAL_CAPACITY;
+    private transient java.lang.Object[] objects;
+    private int size;
+    private int increment;
+
+    protected void <init>()
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>(int)>(8);
+
+        return;
+    }
+
+    protected void <init>(int)
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        int initialCapacity;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        initialCapacity := @parameter0: int;
+
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>(int,int)>(initialCapacity, initialCapacity);
+
+        return;
+    }
+
+    protected void <init>(int, int)
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        int initialCapacity, increment;
+        java.lang.Object[] $stack3;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        initialCapacity := @parameter0: int;
+
+        increment := @parameter1: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = 0;
+
+        this.<org.jfree.chart.util.AbstractObjectList: int increment> = 8;
+
+        $stack3 = newarray (java.lang.Object)[initialCapacity];
+
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack3;
+
+        this.<org.jfree.chart.util.AbstractObjectList: int increment> = increment;
+
+        return;
+    }
+
+    protected java.lang.Object get(int)
+    {
+        int index, $stack3;
+        org.jfree.chart.util.AbstractObjectList this;
+        java.lang.Object[] $stack5;
+        java.lang.Object result;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        index := @parameter0: int;
+
+        result = null;
+
+        if index < 0 goto label1;
+
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+
+        if index >= $stack3 goto label1;
+
+        $stack5 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        result = $stack5[index];
+
+     label1:
+        return result;
+    }
+
+    protected void set(int, java.lang.Object)
+    {
+        int index, $stack5, $stack7, $stack8, $stack9, $stack10, $stack11, $stack13;
+        org.jfree.chart.util.AbstractObjectList this;
+        java.lang.Object[] $stack4, $stack6, enlarged, $stack12, $stack14;
+        java.lang.Object object;
+        java.lang.IllegalArgumentException $stack22;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        index := @parameter0: int;
+
+        object := @parameter1: java.lang.Object;
+
+        if index >= 0 goto label1;
+
+        $stack22 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack22.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires index >= 0.");
+
+        throw $stack22;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack5 = lengthof $stack4;
+
+        if index < $stack5 goto label2;
+
+        $stack10 = this.<org.jfree.chart.util.AbstractObjectList: int increment>;
+
+        $stack11 = index + $stack10;
+
+        enlarged = newarray (java.lang.Object)[$stack11];
+
+        $stack14 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack12 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack13 = lengthof $stack12;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack14, 0, enlarged, 0, $stack13);
+
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = enlarged;
+
+     label2:
+        $stack6 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack6[index] = object;
+
+        $stack8 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+
+        $stack7 = index + 1;
+
+        $stack9 = staticinvoke <java.lang.Math: int max(int,int)>($stack8, $stack7);
+
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = $stack9;
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        java.lang.Object[] $stack1;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        $stack1 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        staticinvoke <java.util.Arrays: void fill(java.lang.Object[],java.lang.Object)>($stack1, null);
+
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = 0;
+
+        return;
+    }
+
+    public int size()
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        $stack1 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+
+        return $stack1;
+    }
+
+    protected int indexOf(java.lang.Object)
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        int $stack3, index;
+        java.lang.Object[] $stack4;
+        java.lang.Object object, $stack5;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        object := @parameter0: java.lang.Object;
+
+        index = 0;
+
+     label1:
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+
+        if index >= $stack3 goto label3;
+
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack5 = $stack4[index];
+
+        if $stack5 != object goto label2;
+
+        return index;
+
+     label2:
+        index = index + 1;
+
+        goto label1;
+
+     label3:
+        return -1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj, $stack7, $stack8;
+        org.jfree.chart.util.AbstractObjectList this, other;
+        boolean $stack5, $stack9;
+        int listSize, i;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != null goto label1;
+
+        return 0;
+
+     label1:
+        if obj != this goto label2;
+
+        return 1;
+
+     label2:
+        $stack5 = obj instanceof org.jfree.chart.util.AbstractObjectList;
+
+        if $stack5 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        other = (org.jfree.chart.util.AbstractObjectList) obj;
+
+        listSize = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: int size()>();
+
+        i = 0;
+
+     label4:
+        if i >= listSize goto label6;
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+
+        $stack8 = virtualinvoke other.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack7, $stack8);
+
+        if $stack9 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        i = i + 1;
+
+        goto label4;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        $stack1 = specialinvoke this.<java.lang.Object: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.util.AbstractObjectList this, clone;
+        java.lang.Object $stack2;
+        java.lang.Object[] $stack3, $stack4, $stack6, $stack7, $stack9, $stack10;
+        int $stack5, $stack8;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.util.AbstractObjectList) $stack2;
+
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        if $stack3 == null goto label1;
+
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack5 = lengthof $stack4;
+
+        $stack6 = newarray (java.lang.Object)[$stack5];
+
+        clone.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack6;
+
+        $stack10 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack9 = clone.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack7 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+
+        $stack8 = lengthof $stack7;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack10, 0, $stack9, 0, $stack8);
+
+     label1:
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.util.AbstractObjectList this;
+        int count, i;
+        java.lang.Object object;
+        boolean $stack9;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        count = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: int size()>();
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(count);
+
+        i = 0;
+
+     label1:
+        if i >= count goto label4;
+
+        object = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+
+        if object == null goto label2;
+
+        $stack9 = object instanceof java.io.Serializable;
+
+        if $stack9 == 0 goto label2;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i);
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeObject(java.lang.Object)>(object);
+
+        goto label3;
+
+     label2:
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(-1);
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.util.AbstractObjectList this;
+        int $stack5, count, index, i;
+        java.lang.Object[] $stack6;
+        java.lang.Object $stack11;
+
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack5 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+
+        $stack6 = newarray (java.lang.Object)[$stack5];
+
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack6;
+
+        count = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+
+        i = 0;
+
+     label1:
+        if i >= count goto label3;
+
+        index = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+
+        if index == -1 goto label2;
+
+        $stack11 = virtualinvoke stream.<java.io.ObjectInputStream: java.lang.Object readObject()>();
+
+        virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: void set(int,java.lang.Object)>(index, $stack11);
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.util.AbstractObjectList: int DEFAULT_INITIAL_CAPACITY> = 8;
+
+        <org.jfree.chart.util.AbstractObjectList: long serialVersionUID> = 7789833772597351595L;
+
+        return;
+    }
+}

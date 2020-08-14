@@ -1,0 +1,1082 @@
+public class org.jfree.chart.renderer.xy.XYSplineRenderer extends org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
+{
+    private int precision;
+    private org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType;
+    private org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        $stack1 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void <init>(int,org.jfree.chart.renderer.xy.XYSplineRenderer$FillType)>(5, $stack1);
+
+        return;
+    }
+
+    public void <init>(int)
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        int precision;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType $stack2;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        precision := @parameter0: int;
+
+        $stack2 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void <init>(int,org.jfree.chart.renderer.xy.XYSplineRenderer$FillType)>(precision, $stack2);
+
+        return;
+    }
+
+    public void <init>(int, org.jfree.chart.renderer.xy.XYSplineRenderer$FillType)
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        int precision;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType;
+        org.jfree.chart.ui.StandardGradientPaintTransformer $stack3;
+        java.lang.IllegalArgumentException $stack4;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        precision := @parameter0: int;
+
+        fillType := @parameter1: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>()>();
+
+        if precision > 0 goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires precision > 0.");
+
+        throw $stack4;
+
+     label1:
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(fillType, "fillType");
+
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision> = precision;
+
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType> = fillType;
+
+        $stack3 = new org.jfree.chart.ui.StandardGradientPaintTransformer;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.StandardGradientPaintTransformer: void <init>()>();
+
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer> = $stack3;
+
+        return;
+    }
+
+    public int getPrecision()
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision>;
+
+        return $stack1;
+    }
+
+    public void setPrecision(int)
+    {
+        int p;
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        p := @parameter0: int;
+
+        if p > 0 goto label1;
+
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires p > 0.");
+
+        throw $stack2;
+
+     label1:
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision> = p;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.renderer.xy.XYSplineRenderer$FillType getFillType()
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        return $stack1;
+    }
+
+    public void setFillType(org.jfree.chart.renderer.xy.XYSplineRenderer$FillType)
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        fillType := @parameter0: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType;
+
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType> = fillType;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.ui.GradientPaintTransformer getGradientPaintTransformer()
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.ui.GradientPaintTransformer $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer>;
+
+        return $stack1;
+    }
+
+    public void setGradientPaintTransformer(org.jfree.chart.ui.GradientPaintTransformer)
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.ui.GradientPaintTransformer gpt;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        gpt := @parameter0: org.jfree.chart.ui.GradientPaintTransformer;
+
+        this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer> = gpt;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.XYPlot, org.jfree.data.xy.XYDataset, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState $stack7;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.data.xy.XYDataset data;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+
+        data := @parameter3: org.jfree.data.xy.XYDataset;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void setDrawSeriesLineAsPath(boolean)>(1);
+
+        $stack7 = new org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState;
+
+        specialinvoke $stack7.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: void <init>(org.jfree.chart.plot.PlotRenderingInfo)>(info);
+
+        virtualinvoke $stack7.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: void setProcessVisibleItemsOnly(boolean)>(0);
+
+        return $stack7;
+    }
+
+    protected void drawPrimaryLineAsPath(org.jfree.chart.renderer.xy.XYItemRendererState, java.awt.Graphics2D, org.jfree.chart.plot.XYPlot, org.jfree.data.xy.XYDataset, int, int, int, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState s;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.ui.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.data.xy.XYDataset dataset;
+        int series, item, $stack50, $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, pass, $stack112, $stack113, $stack124, $stack125, $stack130, $stack136, $stack140, $stack147, $stack164, $stack172, $stack177, $stack182, $stack185, $stack188, $stack199, $stack47, $stack48, $stack71, yz#83, i, j;
+        double x1, y1, transX1, transY1, $stack56, $stack57, $stack58, $stack59, $stack116, $stack117, $stack121, $stack128, $stack217, $stack218, $stack221, $stack222, $stack224, $stack225, $stack233, $stack234, $stack236, $stack237, $stack241, $stack242, $stack254, $stack255, $stack256, $stack257, $stack262, $stack263, $stack66, $stack67;
+        org.jfree.chart.axis.ValueAxis xAxis, yAxis;
+        java.awt.geom.Rectangle2D dataArea;
+        boolean $stack46, $stack97, $stack268, $stack279;
+        java.util.List $stack49, $stack72, $stack109, $stack111, $stack122, $stack123, $stack206, $stack212, $stack278, $stack280, $stack63, $stack70;
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType $stack52, $stack53, $stack54, $stack55, $stack81, $stack82, $stack167, $stack168, $stack214, $stack215, $stack69, $stack68, $stack84, $stack83;
+        org.jfree.chart.plot.PlotOrientation $stack60, $stack61, $stack107, $stack108, $stack230, $stack231, $stack258, $stack259, $stack264, $stack265, $stack273, $stack274;
+        float[] x, a, h, sup, d, i#88, cpi#89;
+        float oldt, oldy, $stack134, $stack135, $stack137, $stack138, t1, $stack139, t2, $stack141, $stack142, $stack143, $stack144, $stack145, $stack146, $stack148, $stack149, $stack150, $stack151, $stack152, $stack153, $stack154, $stack155, $stack156, $stack157, $stack158, $stack159, $stack160, $stack161, $stack162, $stack163, y, $stack165, t, $stack173, $stack174, $stack175, $stack176, $stack178, $stack179, $stack180, $stack181, $stack183, $stack184, $stack186, $stack187, $stack189, $stack190, $stack191, $stack192, $stack193, $stack194, $stack195, $stack200, $stack201, $stack202, $stack208, $stack209, $stack276, $stack277, $stack283, $stack284, xz, yz;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.GradientPaintTransformer $stack88, $stack105;
+        java.awt.geom.GeneralPath $stack103, $stack110, $stack118, $stack120, $stack166, $stack171, $stack216, $stack220, $stack223, $stack226, $stack232, $stack235, $stack240, $stack65, $stack89, $stack90, $stack85;
+        java.awt.GradientPaint $stack104, d#100;
+        java.lang.Object $stack114, $stack126, $stack207, $stack213, $stack64;
+        java.awt.geom.Point2D $stack115, $stack127, xz#46, yz#82;
+        java.awt.geom.Point2D$Float $stack275, p, $stack266, $stack260, $stack62, cpi;
+        java.awt.Paint yz#99;
+        java.util.ArrayList $stack51;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        state := @parameter0: org.jfree.chart.renderer.xy.XYItemRendererState;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+
+        pass := @parameter4: int;
+
+        series := @parameter5: int;
+
+        item := @parameter6: int;
+
+        xAxis := @parameter7: org.jfree.chart.axis.ValueAxis;
+
+        yAxis := @parameter8: org.jfree.chart.axis.ValueAxis;
+
+        dataArea := @parameter9: java.awt.geom.Rectangle2D;
+
+        s = (org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState) state;
+
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        x1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+
+        y1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+
+        transX1 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(x1, dataArea, xAxisLocation);
+
+        transY1 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(y1, dataArea, yAxisLocation);
+
+        $stack46 = staticinvoke <java.lang.Double: boolean isNaN(double)>(transX1);
+
+        if $stack46 != 0 goto label03;
+
+        $stack268 = staticinvoke <java.lang.Double: boolean isNaN(double)>(transY1);
+
+        if $stack268 != 0 goto label03;
+
+        $stack273 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack274 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack273 != $stack274 goto label01;
+
+        $stack275 = new java.awt.geom.Point2D$Float;
+
+        $stack284 = (float) transY1;
+
+        $stack283 = (float) transX1;
+
+        specialinvoke $stack275.<java.awt.geom.Point2D$Float: void <init>(float,float)>($stack284, $stack283);
+
+        goto label02;
+
+     label01:
+        $stack275 = new java.awt.geom.Point2D$Float;
+
+        $stack277 = (float) transX1;
+
+        $stack276 = (float) transY1;
+
+        specialinvoke $stack275.<java.awt.geom.Point2D$Float: void <init>(float,float)>($stack277, $stack276);
+
+     label02:
+        $stack278 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack279 = interfaceinvoke $stack278.<java.util.List: boolean contains(java.lang.Object)>($stack275);
+
+        if $stack279 != 0 goto label03;
+
+        $stack280 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        interfaceinvoke $stack280.<java.util.List: boolean add(java.lang.Object)>($stack275);
+
+     label03:
+        $stack47 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+
+        $stack48 = $stack47 - 1;
+
+        if item != $stack48 goto label36;
+
+        $stack49 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack50 = interfaceinvoke $stack49.<java.util.List: int size()>();
+
+        if $stack50 <= 1 goto label35;
+
+        $stack53 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack52 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType TO_ZERO>;
+
+        if $stack53 != $stack52 goto label06;
+
+        $stack262 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(0.0, dataArea, yAxisLocation);
+
+        xz = (float) $stack262;
+
+        $stack263 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(0.0, dataArea, yAxisLocation);
+
+        yz = (float) $stack263;
+
+        $stack264 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack265 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack264 != $stack265 goto label04;
+
+        $stack266 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack266.<java.awt.geom.Point2D$Float: void <init>(float,float)>(yz, xz);
+
+        goto label05;
+
+     label04:
+        $stack266 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack266.<java.awt.geom.Point2D$Float: void <init>(float,float)>(xz, yz);
+
+     label05:
+        p = $stack266;
+
+        goto label12;
+
+     label06:
+        $stack55 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack54 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType TO_LOWER_BOUND>;
+
+        if $stack55 != $stack54 goto label09;
+
+        $stack254 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+
+        $stack255 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack254, dataArea, xAxisLocation);
+
+        xz = (float) $stack255;
+
+        $stack256 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+
+        $stack257 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack256, dataArea, yAxisLocation);
+
+        yz = (float) $stack257;
+
+        $stack258 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack259 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack258 != $stack259 goto label07;
+
+        $stack260 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack260.<java.awt.geom.Point2D$Float: void <init>(float,float)>(yz, xz);
+
+        goto label08;
+
+     label07:
+        $stack260 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack260.<java.awt.geom.Point2D$Float: void <init>(float,float)>(xz, yz);
+
+     label08:
+        p = $stack260;
+
+        goto label12;
+
+     label09:
+        $stack56 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double getUpperBound()>();
+
+        $stack57 = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack56, dataArea, xAxisLocation);
+
+        xz = (float) $stack57;
+
+        $stack58 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double getUpperBound()>();
+
+        $stack59 = virtualinvoke yAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack58, dataArea, yAxisLocation);
+
+        yz = (float) $stack59;
+
+        $stack60 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack61 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack60 != $stack61 goto label10;
+
+        $stack62 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack62.<java.awt.geom.Point2D$Float: void <init>(float,float)>(yz, xz);
+
+        goto label11;
+
+     label10:
+        $stack62 = new java.awt.geom.Point2D$Float;
+
+        specialinvoke $stack62.<java.awt.geom.Point2D$Float: void <init>(float,float)>(xz, yz);
+
+     label11:
+        p = $stack62;
+
+     label12:
+        $stack63 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack64 = interfaceinvoke $stack63.<java.util.List: java.lang.Object get(int)>(0);
+
+        xz#46 = (java.awt.geom.Point2D) $stack64;
+
+        $stack65 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath seriesPath>;
+
+        $stack66 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getX()>();
+
+        $stack67 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack65.<java.awt.geom.GeneralPath: void moveTo(double,double)>($stack66, $stack67);
+
+        $stack69 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack68 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        if $stack69 == $stack68 goto label15;
+
+        $stack230 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack231 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack230 != $stack231 goto label13;
+
+        $stack240 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack241 = virtualinvoke p.<java.awt.geom.Point2D: double getX()>();
+
+        $stack242 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack240.<java.awt.geom.GeneralPath: void moveTo(double,double)>($stack241, $stack242);
+
+        goto label14;
+
+     label13:
+        $stack232 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack233 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getX()>();
+
+        $stack234 = virtualinvoke p.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack232.<java.awt.geom.GeneralPath: void moveTo(double,double)>($stack233, $stack234);
+
+     label14:
+        $stack235 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack236 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getX()>();
+
+        $stack237 = virtualinvoke xz#46.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack235.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack236, $stack237);
+
+     label15:
+        $stack70 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack71 = interfaceinvoke $stack70.<java.util.List: int size()>();
+
+        if $stack71 != 2 goto label17;
+
+        $stack212 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack213 = interfaceinvoke $stack212.<java.util.List: java.lang.Object get(int)>(1);
+
+        yz#82 = (java.awt.geom.Point2D) $stack213;
+
+        $stack215 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack214 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        if $stack215 == $stack214 goto label16;
+
+        $stack220 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack221 = virtualinvoke yz#82.<java.awt.geom.Point2D: double getX()>();
+
+        $stack222 = virtualinvoke yz#82.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack220.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack221, $stack222);
+
+        $stack223 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack224 = virtualinvoke yz#82.<java.awt.geom.Point2D: double getX()>();
+
+        $stack225 = virtualinvoke p.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack223.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack224, $stack225);
+
+        $stack226 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        virtualinvoke $stack226.<java.awt.geom.GeneralPath: void closePath()>();
+
+     label16:
+        $stack216 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath seriesPath>;
+
+        $stack217 = virtualinvoke yz#82.<java.awt.geom.Point2D: double getX()>();
+
+        $stack218 = virtualinvoke yz#82.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack216.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack217, $stack218);
+
+        goto label28;
+
+     label17:
+        $stack72 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        yz#83 = interfaceinvoke $stack72.<java.util.List: int size()>();
+
+        d = newarray (float)[yz#83];
+
+        x = newarray (float)[yz#83];
+
+        a = newarray (float)[yz#83];
+
+        h = newarray (float)[yz#83];
+
+        i = 0;
+
+     label18:
+        if i >= yz#83 goto label19;
+
+        $stack206 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack207 = interfaceinvoke $stack206.<java.util.List: java.lang.Object get(int)>(i);
+
+        cpi = (java.awt.geom.Point2D$Float) $stack207;
+
+        $stack208 = cpi.<java.awt.geom.Point2D$Float: float x>;
+
+        x[i] = $stack208;
+
+        $stack209 = cpi.<java.awt.geom.Point2D$Float: float y>;
+
+        d[i] = $stack209;
+
+        i = i + 1;
+
+        goto label18;
+
+     label19:
+        i = 1;
+
+     label20:
+        $stack74 = yz#83 - 1;
+
+        if i > $stack74 goto label21;
+
+        $stack201 = x[i];
+
+        $stack199 = i - 1;
+
+        $stack200 = x[$stack199];
+
+        $stack202 = $stack201 - $stack200;
+
+        h[i] = $stack202;
+
+        i = i + 1;
+
+        goto label20;
+
+     label21:
+        $stack75 = yz#83 - 1;
+
+        i#88 = newarray (float)[$stack75];
+
+        $stack76 = yz#83 - 1;
+
+        cpi#89 = newarray (float)[$stack76];
+
+        $stack77 = yz#83 - 1;
+
+        sup = newarray (float)[$stack77];
+
+        i = 1;
+
+     label22:
+        $stack78 = yz#83 - 2;
+
+        if i > $stack78 goto label23;
+
+        $stack174 = h[i];
+
+        $stack172 = i + 1;
+
+        $stack173 = h[$stack172];
+
+        $stack175 = $stack174 + $stack173;
+
+        $stack176 = $stack175 / 3.0F;
+
+        cpi#89[i] = $stack176;
+
+        $stack177 = i + 1;
+
+        $stack178 = h[$stack177];
+
+        $stack179 = $stack178 / 6.0F;
+
+        sup[i] = $stack179;
+
+        $stack180 = h[i];
+
+        $stack181 = $stack180 / 6.0F;
+
+        i#88[i] = $stack181;
+
+        $stack182 = i + 1;
+
+        $stack184 = d[$stack182];
+
+        $stack183 = d[i];
+
+        $stack187 = $stack184 - $stack183;
+
+        $stack185 = i + 1;
+
+        $stack186 = h[$stack185];
+
+        $stack194 = $stack187 / $stack186;
+
+        $stack190 = d[i];
+
+        $stack188 = i - 1;
+
+        $stack189 = d[$stack188];
+
+        $stack192 = $stack190 - $stack189;
+
+        $stack191 = h[i];
+
+        $stack193 = $stack192 / $stack191;
+
+        $stack195 = $stack194 - $stack193;
+
+        a[i] = $stack195;
+
+        i = i + 1;
+
+        goto label22;
+
+     label23:
+        $stack79 = yz#83 - 2;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void solveTridiag(float[],float[],float[],float[],int)>(i#88, cpi#89, sup, a, $stack79);
+
+        oldt = x[0];
+
+        oldy = d[0];
+
+        i = 1;
+
+     label24:
+        $stack80 = yz#83 - 1;
+
+        if i > $stack80 goto label28;
+
+        j = 1;
+
+     label25:
+        $stack130 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision>;
+
+        if j > $stack130 goto label27;
+
+        $stack135 = h[i];
+
+        $stack134 = (float) j;
+
+        $stack138 = $stack135 * $stack134;
+
+        $stack136 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision>;
+
+        $stack137 = (float) $stack136;
+
+        t1 = $stack138 / $stack137;
+
+        $stack139 = h[i];
+
+        t2 = $stack139 - t1;
+
+        $stack140 = i - 1;
+
+        $stack141 = a[$stack140];
+
+        $stack142 = neg $stack141;
+
+        $stack145 = $stack142 / 6.0F;
+
+        $stack143 = h[i];
+
+        $stack144 = t2 + $stack143;
+
+        $stack146 = $stack145 * $stack144;
+
+        $stack149 = $stack146 * t1;
+
+        $stack147 = i - 1;
+
+        $stack148 = d[$stack147];
+
+        $stack150 = $stack149 + $stack148;
+
+        $stack161 = $stack150 * t2;
+
+        $stack151 = a[i];
+
+        $stack152 = neg $stack151;
+
+        $stack155 = $stack152 / 6.0F;
+
+        $stack153 = h[i];
+
+        $stack154 = t1 + $stack153;
+
+        $stack156 = $stack155 * $stack154;
+
+        $stack158 = $stack156 * t2;
+
+        $stack157 = d[i];
+
+        $stack159 = $stack158 + $stack157;
+
+        $stack160 = $stack159 * t1;
+
+        $stack163 = $stack161 + $stack160;
+
+        $stack162 = h[i];
+
+        y = $stack163 / $stack162;
+
+        $stack164 = i - 1;
+
+        $stack165 = x[$stack164];
+
+        t = $stack165 + t1;
+
+        $stack166 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath seriesPath>;
+
+        virtualinvoke $stack166.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, y);
+
+        $stack168 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack167 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        if $stack168 == $stack167 goto label26;
+
+        $stack171 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        virtualinvoke $stack171.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, y);
+
+     label26:
+        j = j + 1;
+
+        goto label25;
+
+     label27:
+        i = i + 1;
+
+        goto label24;
+
+     label28:
+        $stack82 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack81 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        if $stack82 == $stack81 goto label31;
+
+        $stack107 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack108 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack107 != $stack108 goto label29;
+
+        $stack120 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack121 = virtualinvoke p.<java.awt.geom.Point2D: double getX()>();
+
+        $stack123 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack122 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack124 = interfaceinvoke $stack122.<java.util.List: int size()>();
+
+        $stack125 = $stack124 - 1;
+
+        $stack126 = interfaceinvoke $stack123.<java.util.List: java.lang.Object get(int)>($stack125);
+
+        $stack127 = (java.awt.geom.Point2D) $stack126;
+
+        $stack128 = virtualinvoke $stack127.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack120.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack121, $stack128);
+
+        goto label30;
+
+     label29:
+        $stack110 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        $stack111 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack109 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points>;
+
+        $stack112 = interfaceinvoke $stack109.<java.util.List: int size()>();
+
+        $stack113 = $stack112 - 1;
+
+        $stack114 = interfaceinvoke $stack111.<java.util.List: java.lang.Object get(int)>($stack113);
+
+        $stack115 = (java.awt.geom.Point2D) $stack114;
+
+        $stack116 = virtualinvoke $stack115.<java.awt.geom.Point2D: double getX()>();
+
+        $stack117 = virtualinvoke p.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack110.<java.awt.geom.GeneralPath: void lineTo(double,double)>($stack116, $stack117);
+
+     label30:
+        $stack118 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        virtualinvoke $stack118.<java.awt.geom.GeneralPath: void closePath()>();
+
+     label31:
+        $stack84 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack83 = <org.jfree.chart.renderer.xy.XYSplineRenderer$FillType: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType NONE>;
+
+        if $stack84 == $stack83 goto label34;
+
+        yz#99 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: java.awt.Paint getSeriesFillPaint(int)>(series);
+
+        $stack88 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer>;
+
+        if $stack88 == null goto label32;
+
+        $stack97 = yz#99 instanceof java.awt.GradientPaint;
+
+        if $stack97 == 0 goto label32;
+
+        $stack105 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer>;
+
+        $stack104 = (java.awt.GradientPaint) yz#99;
+
+        $stack103 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        d#100 = interfaceinvoke $stack105.<org.jfree.chart.ui.GradientPaintTransformer: java.awt.GradientPaint transform(java.awt.GradientPaint,java.awt.Shape)>($stack104, $stack103);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(d#100);
+
+        goto label33;
+
+     label32:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(yz#99);
+
+     label33:
+        $stack89 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack89);
+
+        $stack90 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath fillArea>;
+
+        virtualinvoke $stack90.<java.awt.geom.GeneralPath: void reset()>();
+
+     label34:
+        $stack85 = s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.awt.geom.GeneralPath seriesPath>;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYSplineRenderer: void drawFirstPassShape(java.awt.Graphics2D,int,int,int,java.awt.Shape)>(g2, pass, series, item, $stack85);
+
+     label35:
+        $stack51 = new java.util.ArrayList;
+
+        specialinvoke $stack51.<java.util.ArrayList: void <init>()>();
+
+        s.<org.jfree.chart.renderer.xy.XYSplineRenderer$XYSplineState: java.util.List points> = $stack51;
+
+     label36:
+        return;
+    }
+
+    private void solveTridiag(float[], float[], float[], float[], int)
+    {
+        int n, $stack10, $stack20, $stack24, $stack30, i;
+        float[] b, diag, sup, sub;
+        float $stack7, $stack8, $stack9, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack21, $stack22, $stack23, $stack25, $stack26, $stack27, $stack28, $stack29, $stack31, $stack32, $stack33, $stack34, $stack35;
+        org.jfree.chart.renderer.xy.XYSplineRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        sub := @parameter0: float[];
+
+        diag := @parameter1: float[];
+
+        sup := @parameter2: float[];
+
+        b := @parameter3: float[];
+
+        n := @parameter4: int;
+
+        i = 2;
+
+     label1:
+        if i > n goto label2;
+
+        $stack22 = sub[i];
+
+        $stack20 = i - 1;
+
+        $stack21 = diag[$stack20];
+
+        $stack23 = $stack22 / $stack21;
+
+        sub[i] = $stack23;
+
+        $stack28 = diag[i];
+
+        $stack26 = sub[i];
+
+        $stack24 = i - 1;
+
+        $stack25 = sup[$stack24];
+
+        $stack27 = $stack26 * $stack25;
+
+        $stack29 = $stack28 - $stack27;
+
+        diag[i] = $stack29;
+
+        $stack34 = b[i];
+
+        $stack32 = sub[i];
+
+        $stack30 = i - 1;
+
+        $stack31 = b[$stack30];
+
+        $stack33 = $stack32 * $stack31;
+
+        $stack35 = $stack34 - $stack33;
+
+        b[i] = $stack35;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = b[n];
+
+        $stack7 = diag[n];
+
+        $stack9 = $stack8 / $stack7;
+
+        b[n] = $stack9;
+
+        i = n - 1;
+
+     label3:
+        if i < 1 goto label4;
+
+        $stack14 = b[i];
+
+        $stack12 = sup[i];
+
+        $stack10 = i + 1;
+
+        $stack11 = b[$stack10];
+
+        $stack13 = $stack12 * $stack11;
+
+        $stack16 = $stack14 - $stack13;
+
+        $stack15 = diag[i];
+
+        $stack17 = $stack16 / $stack15;
+
+        b[i] = $stack17;
+
+        i = i + -1;
+
+        goto label3;
+
+     label4:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.XYSplineRenderer this, that;
+        boolean $stack3, $stack10, $stack11;
+        int $stack4, $stack5;
+        org.jfree.chart.renderer.xy.XYSplineRenderer$FillType $stack6, $stack7;
+        org.jfree.chart.ui.GradientPaintTransformer $stack8, $stack9;
+
+        this := @this: org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.XYSplineRenderer;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.renderer.xy.XYSplineRenderer) obj;
+
+        $stack5 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision>;
+
+        $stack4 = that.<org.jfree.chart.renderer.xy.XYSplineRenderer: int precision>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        $stack6 = that.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.renderer.xy.XYSplineRenderer$FillType fillType>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer>;
+
+        $stack8 = that.<org.jfree.chart.renderer.xy.XYSplineRenderer: org.jfree.chart.ui.GradientPaintTransformer gradientPaintTransformer>;
+
+        $stack10 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack11 = specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: boolean equals(java.lang.Object)>(obj);
+
+        return $stack11;
+    }
+}

@@ -1,0 +1,1534 @@
+public class org.jfree.chart.title.PaintScaleLegend extends org.jfree.chart.title.Title implements org.jfree.chart.event.AxisChangeListener, org.jfree.chart.util.PublicCloneable
+{
+    static final long serialVersionUID;
+    private org.jfree.chart.renderer.PaintScale scale;
+    private org.jfree.chart.axis.ValueAxis axis;
+    private org.jfree.chart.axis.AxisLocation axisLocation;
+    private double axisOffset;
+    private double stripWidth;
+    private boolean stripOutlineVisible;
+    private transient java.awt.Paint stripOutlinePaint;
+    private transient java.awt.Stroke stripOutlineStroke;
+    private transient java.awt.Paint backgroundPaint;
+    private int subdivisions;
+    static final boolean $assertionsDisabled;
+
+    public void <init>(org.jfree.chart.renderer.PaintScale, org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.axis.ValueAxis axis, $stack3, $stack5;
+        org.jfree.chart.renderer.PaintScale scale;
+        org.jfree.chart.axis.AxisLocation $stack4;
+        double $stack6, $stack7;
+        java.awt.Color $stack8, $stack10;
+        java.awt.BasicStroke $stack9;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        scale := @parameter0: org.jfree.chart.renderer.PaintScale;
+
+        axis := @parameter1: org.jfree.chart.axis.ValueAxis;
+
+        specialinvoke this.<org.jfree.chart.title.Title: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(axis, "axis");
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale> = scale;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis> = axis;
+
+        $stack3 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        virtualinvoke $stack3.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        $stack4 = <org.jfree.chart.axis.AxisLocation: org.jfree.chart.axis.AxisLocation BOTTOM_OR_LEFT>;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation> = $stack4;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset> = 0.0;
+
+        $stack5 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack6 = interfaceinvoke scale.<org.jfree.chart.renderer.PaintScale: double getLowerBound()>();
+
+        $stack7 = interfaceinvoke scale.<org.jfree.chart.renderer.PaintScale: double getUpperBound()>();
+
+        virtualinvoke $stack5.<org.jfree.chart.axis.ValueAxis: void setRange(double,double)>($stack6, $stack7);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth> = 15.0;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: boolean stripOutlineVisible> = 1;
+
+        $stack8 = <java.awt.Color: java.awt.Color GRAY>;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint> = $stack8;
+
+        $stack9 = new java.awt.BasicStroke;
+
+        specialinvoke $stack9.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke> = $stack9;
+
+        $stack10 = <java.awt.Color: java.awt.Color WHITE>;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint> = $stack10;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions> = 100;
+
+        return;
+    }
+
+    public org.jfree.chart.renderer.PaintScale getScale()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.renderer.PaintScale $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        return $stack1;
+    }
+
+    public void setScale(org.jfree.chart.renderer.PaintScale)
+    {
+        org.jfree.chart.renderer.PaintScale scale;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        scale := @parameter0: org.jfree.chart.renderer.PaintScale;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(scale, "scale");
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale> = scale;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public org.jfree.chart.axis.ValueAxis getAxis()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.axis.ValueAxis $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        return $stack1;
+    }
+
+    public void setAxis(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.axis.ValueAxis axis, $stack2, $stack3;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack4;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(axis, "axis");
+
+        $stack2 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        virtualinvoke $stack2.<org.jfree.chart.axis.ValueAxis: void removeChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis> = axis;
+
+        $stack3 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        virtualinvoke $stack3.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+        $stack4 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack4.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack4);
+
+        return;
+    }
+
+    public org.jfree.chart.axis.AxisLocation getAxisLocation()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.axis.AxisLocation $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation>;
+
+        return $stack1;
+    }
+
+    public void setAxisLocation(org.jfree.chart.axis.AxisLocation)
+    {
+        org.jfree.chart.axis.AxisLocation location;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        location := @parameter0: org.jfree.chart.axis.AxisLocation;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(location, "location");
+
+        this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation> = location;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public double getAxisOffset()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        return $stack1;
+    }
+
+    public void setAxisOffset(double)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        double offset;
+        org.jfree.chart.event.TitleChangeEvent $stack3;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        offset := @parameter0: double;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset> = offset;
+
+        $stack3 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack3.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack3);
+
+        return;
+    }
+
+    public double getStripWidth()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        return $stack1;
+    }
+
+    public void setStripWidth(double)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        double width;
+        org.jfree.chart.event.TitleChangeEvent $stack3;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        width := @parameter0: double;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth> = width;
+
+        $stack3 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack3.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack3);
+
+        return;
+    }
+
+    public boolean isStripOutlineVisible()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: boolean stripOutlineVisible>;
+
+        return $stack1;
+    }
+
+    public void setStripOutlineVisible(boolean)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        boolean visible;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        visible := @parameter0: boolean;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: boolean stripOutlineVisible> = visible;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Paint getStripOutlinePaint()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setStripOutlinePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Stroke getStripOutlineStroke()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setStripOutlineStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke> = stroke;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Paint getBackgroundPaint()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        return $stack1;
+    }
+
+    public void setBackgroundPaint(java.awt.Paint)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint paint;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public int getSubdivisionCount()
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        $stack1 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        return $stack1;
+    }
+
+    public void setSubdivisionCount(int)
+    {
+        int count;
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        java.lang.IllegalArgumentException $stack3;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        count := @parameter0: int;
+
+        if count > 0 goto label1;
+
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'count\' > 0.");
+
+        throw $stack3;
+
+     label1:
+        this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions> = count;
+
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public void axisChanged(org.jfree.chart.event.AxisChangeEvent)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.event.AxisChangeEvent event;
+        org.jfree.chart.axis.ValueAxis $stack2;
+        org.jfree.chart.axis.Axis $stack3;
+        org.jfree.chart.event.TitleChangeEvent $stack4;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        event := @parameter0: org.jfree.chart.event.AxisChangeEvent;
+
+        $stack2 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack3 = virtualinvoke event.<org.jfree.chart.event.AxisChangeEvent: org.jfree.chart.axis.Axis getAxis()>();
+
+        if $stack2 != $stack3 goto label1;
+
+        $stack4 = new org.jfree.chart.event.TitleChangeEvent;
+
+        specialinvoke $stack4.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack4);
+
+     label1:
+        return;
+    }
+
+    public org.jfree.chart.ui.Size2D arrange(java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.block.RectangleConstraint constraint, cc;
+        org.jfree.chart.block.LengthConstraintType w, h, $stack10, $stack11, $stack12, $stack24, $stack25, $stack26, $stack30, $stack31, $stack32, $stack38, $stack39, $stack40;
+        org.jfree.chart.ui.Size2D $stack14, $stack43, contentSize;
+        double $stack15, $stack16, $stack17, $stack18, $stack44, $stack45;
+        java.lang.AssertionError $stack23;
+        java.lang.RuntimeException $stack27, $stack28, $stack29, $stack33, $stack37, $stack41, $stack42;
+        java.awt.Graphics2D g2;
+        org.jfree.data.Range $stack34, $stack35;
+        boolean $stack13;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        constraint := @parameter1: org.jfree.chart.block.RectangleConstraint;
+
+        cc = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.block.RectangleConstraint toContentConstraint(org.jfree.chart.block.RectangleConstraint)>(constraint);
+
+        w = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getWidthConstraintType()>();
+
+        h = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getHeightConstraintType()>();
+
+        contentSize = null;
+
+        $stack10 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if w != $stack10 goto label03;
+
+        $stack38 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack38 goto label01;
+
+        $stack43 = new org.jfree.chart.ui.Size2D;
+
+        $stack44 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: double getWidth()>();
+
+        $stack45 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: double getHeight()>();
+
+        specialinvoke $stack43.<org.jfree.chart.ui.Size2D: void <init>(double,double)>($stack44, $stack45);
+
+        contentSize = $stack43;
+
+        goto label09;
+
+     label01:
+        $stack39 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack39 goto label02;
+
+        $stack42 = new java.lang.RuntimeException;
+
+        specialinvoke $stack42.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack42;
+
+     label02:
+        $stack40 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack40 goto label09;
+
+        $stack41 = new java.lang.RuntimeException;
+
+        specialinvoke $stack41.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack41;
+
+     label03:
+        $stack11 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if w != $stack11 goto label06;
+
+        $stack30 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack30 goto label04;
+
+        $stack37 = new java.lang.RuntimeException;
+
+        specialinvoke $stack37.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack37;
+
+     label04:
+        $stack31 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack31 goto label05;
+
+        $stack34 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack35 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getHeightRange()>();
+
+        contentSize = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.ui.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)>(g2, $stack34, $stack35);
+
+        goto label09;
+
+     label05:
+        $stack32 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack32 goto label09;
+
+        $stack33 = new java.lang.RuntimeException;
+
+        specialinvoke $stack33.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack33;
+
+     label06:
+        $stack12 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if w != $stack12 goto label09;
+
+        $stack24 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack24 goto label07;
+
+        $stack29 = new java.lang.RuntimeException;
+
+        specialinvoke $stack29.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack29;
+
+     label07:
+        $stack25 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack25 goto label08;
+
+        $stack28 = new java.lang.RuntimeException;
+
+        specialinvoke $stack28.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack28;
+
+     label08:
+        $stack26 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack26 goto label09;
+
+        $stack27 = new java.lang.RuntimeException;
+
+        specialinvoke $stack27.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+
+        throw $stack27;
+
+     label09:
+        $stack13 = <org.jfree.chart.title.PaintScaleLegend: boolean $assertionsDisabled>;
+
+        if $stack13 != 0 goto label10;
+
+        if contentSize != null goto label10;
+
+        $stack23 = new java.lang.AssertionError;
+
+        specialinvoke $stack23.<java.lang.AssertionError: void <init>()>();
+
+        throw $stack23;
+
+     label10:
+        $stack14 = new org.jfree.chart.ui.Size2D;
+
+        $stack15 = virtualinvoke contentSize.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack16 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: double calculateTotalWidth(double)>($stack15);
+
+        $stack17 = virtualinvoke contentSize.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: double calculateTotalHeight(double)>($stack17);
+
+        specialinvoke $stack14.<org.jfree.chart.ui.Size2D: void <init>(double,double)>($stack16, $stack18);
+
+        return $stack14;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeRR(java.awt.Graphics2D, org.jfree.data.Range, org.jfree.data.Range)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        org.jfree.chart.ui.RectangleEdge position, $stack8, $stack14, $stack25, $stack26, $stack32, $stack43;
+        org.jfree.data.Range widthRange, heightRange;
+        double $stack9, $stack11, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack27, $stack29, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D$Double $stack10, $stack28;
+        org.jfree.chart.axis.ValueAxis $stack12, $stack30;
+        org.jfree.chart.ui.Size2D $stack16, $stack34;
+        java.lang.RuntimeException $stack44;
+        float maxWidth;
+        org.jfree.chart.axis.AxisSpace space;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        widthRange := @parameter1: org.jfree.data.Range;
+
+        heightRange := @parameter2: org.jfree.data.Range;
+
+        position = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.ui.RectangleEdge getPosition()>();
+
+        $stack8 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if position == $stack8 goto label1;
+
+        $stack25 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if position != $stack25 goto label2;
+
+     label1:
+        $stack9 = virtualinvoke widthRange.<org.jfree.data.Range: double getUpperBound()>();
+
+        maxWidth = (float) $stack9;
+
+        $stack12 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack10 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack11 = (double) maxWidth;
+
+        specialinvoke $stack10.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, $stack11, 100.0);
+
+        $stack14 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        space = virtualinvoke $stack12.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, null, $stack10, $stack14, null);
+
+        $stack16 = new org.jfree.chart.ui.Size2D;
+
+        $stack19 = (double) maxWidth;
+
+        $stack18 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack17 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack20 = $stack18 + $stack17;
+
+        $stack21 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: double getTop()>();
+
+        $stack22 = $stack20 + $stack21;
+
+        $stack23 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: double getBottom()>();
+
+        $stack24 = $stack22 + $stack23;
+
+        specialinvoke $stack16.<org.jfree.chart.ui.Size2D: void <init>(double,double)>($stack19, $stack24);
+
+        return $stack16;
+
+     label2:
+        $stack26 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if position == $stack26 goto label3;
+
+        $stack43 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if position != $stack43 goto label4;
+
+     label3:
+        $stack27 = virtualinvoke heightRange.<org.jfree.data.Range: double getUpperBound()>();
+
+        maxWidth = (float) $stack27;
+
+        $stack30 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack28 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack29 = (double) maxWidth;
+
+        specialinvoke $stack28.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, 100.0, $stack29);
+
+        $stack32 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        space = virtualinvoke $stack30.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, null, $stack28, $stack32, null);
+
+        $stack34 = new org.jfree.chart.ui.Size2D;
+
+        $stack36 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack35 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack37 = $stack36 + $stack35;
+
+        $stack38 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: double getLeft()>();
+
+        $stack39 = $stack37 + $stack38;
+
+        $stack40 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: double getRight()>();
+
+        $stack42 = $stack39 + $stack40;
+
+        $stack41 = (double) maxWidth;
+
+        specialinvoke $stack34.<org.jfree.chart.ui.Size2D: void <init>(double,double)>($stack42, $stack41);
+
+        return $stack34;
+
+     label4:
+        $stack44 = new java.lang.RuntimeException;
+
+        specialinvoke $stack44.<java.lang.RuntimeException: void <init>(java.lang.String)>("Unrecognised position.");
+
+        throw $stack44;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: java.lang.Object draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.lang.Object)>(g2, area, null);
+
+        return;
+    }
+
+    public java.lang.Object draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.lang.Object)
+    {
+        java.awt.geom.Rectangle2D area, target;
+        java.lang.Object $stack21, params;
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint $stack23, $stack54, $stack97, $stack149, $stack192, $stack229, p;
+        org.jfree.chart.block.BlockFrame $stack24, $stack25;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.RectangleInsets $stack26;
+        org.jfree.chart.axis.ValueAxis $stack28, $stack30, $stack45, $stack74, $stack78, $stack89, $stack119, $stack123, $stack141, $stack169, $stack173, $stack184, $stack214, $stack218;
+        double base, $stack32, $stack34, increment, $stack46, $stack47, $stack48, $stack49, $stack51, $stack57, $stack58, $stack59, $stack60, $stack69, $stack70, $stack77, $stack80, $stack81, $stack82, $stack83, $stack84, $stack90, $stack91, $stack92, $stack93, $stack95, $stack100, $stack101, $stack102, $stack103, $stack104, $stack105, $stack114, $stack115, $stack122, $stack125, $stack126, $stack127, $stack128, $stack129, $stack130, $stack131, $stack142, $stack143, $stack144, $stack145, $stack147, $stack152, $stack153, $stack154, $stack155, $stack164, $stack165, $stack172, $stack175, $stack176, $stack177, $stack178, $stack179, $stack185, $stack186, $stack187, $stack188, $stack190, $stack195, $stack196, $stack197, $stack198, $stack199, $stack200, $stack209, $stack210, $stack217, $stack220, $stack221, $stack222, $stack223, $stack224, $stack225, $stack226, v, vv0, vv1, ww;
+        org.jfree.data.Range $stack31;
+        int $stack33, $stack43, $stack87, $stack139, $stack182, i;
+        java.awt.geom.Rectangle2D$Double $stack35, $stack56, $stack99, $stack151, $stack194;
+        org.jfree.chart.ui.RectangleEdge $stack36, $stack41, $stack42, $stack50, $stack73, $stack76, $stack94, $stack118, $stack121, $stack137, $stack138, $stack146, $stack168, $stack171, $stack189, $stack213, $stack216, axisEdge;
+        boolean $stack37, $stack44, $stack88, $stack140, $stack183;
+        org.jfree.chart.plot.PlotOrientation $stack38, $stack134;
+        org.jfree.chart.axis.AxisLocation $stack39, $stack135;
+        java.awt.Stroke $stack55, $stack98, $stack150, $stack193;
+        org.jfree.chart.renderer.PaintScale $stack71, $stack116, $stack166, $stack211;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        params := @parameter2: java.lang.Object;
+
+        $stack21 = virtualinvoke area.<java.awt.geom.Rectangle2D: java.lang.Object clone()>();
+
+        target = (java.awt.geom.Rectangle2D) $stack21;
+
+        target = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: java.awt.geom.Rectangle2D trimMargin(java.awt.geom.Rectangle2D)>(target);
+
+        $stack23 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        if $stack23 == null goto label01;
+
+        $stack229 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack229);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(target);
+
+     label01:
+        $stack24 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.block.BlockFrame getFrame()>();
+
+        interfaceinvoke $stack24.<org.jfree.chart.block.BlockFrame: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, target);
+
+        $stack25 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.block.BlockFrame getFrame()>();
+
+        $stack26 = interfaceinvoke $stack25.<org.jfree.chart.block.BlockFrame: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke $stack26.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(target);
+
+        target = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: java.awt.geom.Rectangle2D trimPadding(java.awt.geom.Rectangle2D)>(target);
+
+        $stack28 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        base = virtualinvoke $stack28.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+
+        $stack30 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack31 = virtualinvoke $stack30.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()>();
+
+        $stack32 = virtualinvoke $stack31.<org.jfree.data.Range: double getLength()>();
+
+        $stack33 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        $stack34 = (double) $stack33;
+
+        increment = $stack32 / $stack34;
+
+        $stack35 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack35.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.ui.RectangleEdge getPosition()>();
+
+        $stack37 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>($stack36);
+
+        if $stack37 == 0 goto label10;
+
+        $stack135 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation>;
+
+        $stack134 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        axisEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack135, $stack134);
+
+        $stack137 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if axisEdge != $stack137 goto label05;
+
+        i = 0;
+
+     label02:
+        $stack182 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        if i >= $stack182 goto label03;
+
+        $stack209 = (double) i;
+
+        $stack210 = $stack209 * increment;
+
+        v = base + $stack210;
+
+        $stack211 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        p = interfaceinvoke $stack211.<org.jfree.chart.renderer.PaintScale: java.awt.Paint getPaint(double)>(v);
+
+        $stack214 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack213 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        vv0 = virtualinvoke $stack214.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(v, target, $stack213);
+
+        $stack218 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack217 = v + increment;
+
+        $stack216 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        vv1 = virtualinvoke $stack218.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack217, target, $stack216);
+
+        $stack220 = vv1 - vv0;
+
+        $stack221 = staticinvoke <java.lang.Math: double abs(double)>($stack220);
+
+        ww = $stack221 + 1.0;
+
+        $stack222 = staticinvoke <java.lang.Math: double min(double,double)>(vv0, vv1);
+
+        $stack223 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack224 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack226 = $stack223 - $stack224;
+
+        $stack225 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        virtualinvoke $stack35.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack222, $stack226, ww, $stack225);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack35);
+
+        i = i + 1;
+
+        goto label02;
+
+     label03:
+        $stack183 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: boolean isStripOutlineVisible()>();
+
+        if $stack183 == 0 goto label04;
+
+        $stack192 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack192);
+
+        $stack193 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack193);
+
+        $stack194 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack195 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack196 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack197 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack198 = $stack196 - $stack197;
+
+        $stack199 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack200 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        specialinvoke $stack194.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack195, $stack198, $stack199, $stack200);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack194);
+
+     label04:
+        $stack184 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack185 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack186 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack188 = $stack185 - $stack186;
+
+        $stack187 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack190 = $stack188 - $stack187;
+
+        $stack189 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        virtualinvoke $stack184.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack190, target, target, $stack189, null);
+
+        goto label09;
+
+     label05:
+        $stack138 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if axisEdge != $stack138 goto label09;
+
+        i = 0;
+
+     label06:
+        $stack139 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        if i >= $stack139 goto label07;
+
+        $stack164 = (double) i;
+
+        $stack165 = $stack164 * increment;
+
+        v = base + $stack165;
+
+        $stack166 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        p = interfaceinvoke $stack166.<org.jfree.chart.renderer.PaintScale: java.awt.Paint getPaint(double)>(v);
+
+        $stack169 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack168 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        vv0 = virtualinvoke $stack169.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(v, target, $stack168);
+
+        $stack173 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack172 = v + increment;
+
+        $stack171 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        vv1 = virtualinvoke $stack173.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack172, target, $stack171);
+
+        $stack175 = vv1 - vv0;
+
+        $stack176 = staticinvoke <java.lang.Math: double abs(double)>($stack175);
+
+        ww = $stack176 + 1.0;
+
+        $stack177 = staticinvoke <java.lang.Math: double min(double,double)>(vv0, vv1);
+
+        $stack178 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack179 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        virtualinvoke $stack35.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack177, $stack178, ww, $stack179);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack35);
+
+        i = i + 1;
+
+        goto label06;
+
+     label07:
+        $stack140 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: boolean isStripOutlineVisible()>();
+
+        if $stack140 == 0 goto label08;
+
+        $stack149 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack149);
+
+        $stack150 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack150);
+
+        $stack151 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack152 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack153 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack154 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack155 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        specialinvoke $stack151.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack152, $stack153, $stack154, $stack155);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack151);
+
+     label08:
+        $stack141 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack142 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack143 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack145 = $stack142 + $stack143;
+
+        $stack144 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack147 = $stack145 + $stack144;
+
+        $stack146 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        virtualinvoke $stack141.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack147, target, target, $stack146, null);
+
+     label09:
+        goto label18;
+
+     label10:
+        $stack39 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation>;
+
+        $stack38 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        axisEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack39, $stack38);
+
+        $stack41 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if axisEdge != $stack41 goto label14;
+
+        i = 0;
+
+     label11:
+        $stack87 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        if i >= $stack87 goto label12;
+
+        $stack114 = (double) i;
+
+        $stack115 = $stack114 * increment;
+
+        v = base + $stack115;
+
+        $stack116 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        p = interfaceinvoke $stack116.<org.jfree.chart.renderer.PaintScale: java.awt.Paint getPaint(double)>(v);
+
+        $stack119 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack118 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        vv0 = virtualinvoke $stack119.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(v, target, $stack118);
+
+        $stack123 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack122 = v + increment;
+
+        $stack121 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        vv1 = virtualinvoke $stack123.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack122, target, $stack121);
+
+        $stack125 = vv1 - vv0;
+
+        $stack126 = staticinvoke <java.lang.Math: double abs(double)>($stack125);
+
+        ww = $stack126 + 1.0;
+
+        $stack127 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack128 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack129 = $stack127 - $stack128;
+
+        $stack130 = staticinvoke <java.lang.Math: double min(double,double)>(vv0, vv1);
+
+        $stack131 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        virtualinvoke $stack35.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack129, $stack130, $stack131, ww);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack35);
+
+        i = i + 1;
+
+        goto label11;
+
+     label12:
+        $stack88 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: boolean isStripOutlineVisible()>();
+
+        if $stack88 == 0 goto label13;
+
+        $stack97 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack97);
+
+        $stack98 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack98);
+
+        $stack99 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack100 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack101 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack102 = $stack100 - $stack101;
+
+        $stack103 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack104 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack105 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        specialinvoke $stack99.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack102, $stack103, $stack104, $stack105);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack99);
+
+     label13:
+        $stack89 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack90 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack91 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack93 = $stack90 - $stack91;
+
+        $stack92 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack95 = $stack93 - $stack92;
+
+        $stack94 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        virtualinvoke $stack89.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack95, target, target, $stack94, null);
+
+        goto label18;
+
+     label14:
+        $stack42 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if axisEdge != $stack42 goto label18;
+
+        i = 0;
+
+     label15:
+        $stack43 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        if i >= $stack43 goto label16;
+
+        $stack69 = (double) i;
+
+        $stack70 = $stack69 * increment;
+
+        v = base + $stack70;
+
+        $stack71 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        p = interfaceinvoke $stack71.<org.jfree.chart.renderer.PaintScale: java.awt.Paint getPaint(double)>(v);
+
+        $stack74 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack73 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        vv0 = virtualinvoke $stack74.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(v, target, $stack73);
+
+        $stack78 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack77 = v + increment;
+
+        $stack76 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        vv1 = virtualinvoke $stack78.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack77, target, $stack76);
+
+        $stack80 = vv1 - vv0;
+
+        $stack81 = staticinvoke <java.lang.Math: double abs(double)>($stack80);
+
+        ww = $stack81 + 1.0;
+
+        $stack82 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack83 = staticinvoke <java.lang.Math: double min(double,double)>(vv0, vv1);
+
+        $stack84 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        virtualinvoke $stack35.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack82, $stack83, $stack84, ww);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack35);
+
+        i = i + 1;
+
+        goto label15;
+
+     label16:
+        $stack44 = virtualinvoke this.<org.jfree.chart.title.PaintScaleLegend: boolean isStripOutlineVisible()>();
+
+        if $stack44 == 0 goto label17;
+
+        $stack54 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack54);
+
+        $stack55 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack55);
+
+        $stack56 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack57 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack58 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack59 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack60 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        specialinvoke $stack56.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack57, $stack58, $stack59, $stack60);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack56);
+
+     label17:
+        $stack45 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack46 = virtualinvoke target.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack47 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack49 = $stack46 + $stack47;
+
+        $stack48 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack51 = $stack49 + $stack48;
+
+        $stack50 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        virtualinvoke $stack45.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack51, target, target, $stack50, null);
+
+     label18:
+        return null;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack19, $stack20, $stack23, $stack26, $stack29, $stack32;
+        org.jfree.chart.title.PaintScaleLegend that, this;
+        org.jfree.chart.renderer.PaintScale $stack4, $stack5;
+        org.jfree.chart.axis.ValueAxis $stack7, $stack8;
+        org.jfree.chart.axis.AxisLocation $stack10, $stack11;
+        double $stack13, $stack14, $stack16, $stack17;
+        byte $stack15, $stack18;
+        java.awt.Paint $stack21, $stack22, $stack27, $stack28;
+        java.awt.Stroke $stack24, $stack25;
+        int $stack30, $stack31;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack3 = obj instanceof org.jfree.chart.title.PaintScaleLegend;
+
+        if $stack3 != 0 goto label01;
+
+        return 0;
+
+     label01:
+        that = (org.jfree.chart.title.PaintScaleLegend) obj;
+
+        $stack5 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        $stack4 = that.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.renderer.PaintScale scale>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        $stack8 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack7 = that.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.ValueAxis axis>;
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack11 = this.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation>;
+
+        $stack10 = that.<org.jfree.chart.title.PaintScaleLegend: org.jfree.chart.axis.AxisLocation axisLocation>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.axis.AxisLocation: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack14 = this.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack13 = that.<org.jfree.chart.title.PaintScaleLegend: double axisOffset>;
+
+        $stack15 = $stack14 cmpl $stack13;
+
+        if $stack15 == 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack17 = this.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack16 = that.<org.jfree.chart.title.PaintScaleLegend: double stripWidth>;
+
+        $stack18 = $stack17 cmpl $stack16;
+
+        if $stack18 == 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack20 = this.<org.jfree.chart.title.PaintScaleLegend: boolean stripOutlineVisible>;
+
+        $stack19 = that.<org.jfree.chart.title.PaintScaleLegend: boolean stripOutlineVisible>;
+
+        if $stack20 == $stack19 goto label07;
+
+        return 0;
+
+     label07:
+        $stack22 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        $stack21 = that.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        $stack23 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack22, $stack21);
+
+        if $stack23 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack25 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        $stack24 = that.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        $stack26 = virtualinvoke $stack25.<java.lang.Object: boolean equals(java.lang.Object)>($stack24);
+
+        if $stack26 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack28 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        $stack27 = that.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        $stack29 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack28, $stack27);
+
+        if $stack29 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack31 = this.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        $stack30 = that.<org.jfree.chart.title.PaintScaleLegend: int subdivisions>;
+
+        if $stack31 == $stack30 goto label11;
+
+        return 0;
+
+     label11:
+        $stack32 = specialinvoke this.<org.jfree.chart.title.Title: boolean equals(java.lang.Object)>(obj);
+
+        return $stack32;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint $stack2, $stack3;
+        java.awt.Stroke $stack4;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack4, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.title.PaintScaleLegend this;
+        java.awt.Paint $stack2, $stack3;
+        java.awt.Stroke $stack4;
+
+        this := @this: org.jfree.chart.title.PaintScaleLegend;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint backgroundPaint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Paint stripOutlinePaint> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.title.PaintScaleLegend: java.awt.Stroke stripOutlineStroke> = $stack4;
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $stack0;
+        boolean $stack1, $stack2;
+
+        <org.jfree.chart.title.PaintScaleLegend: long serialVersionUID> = -1365146490993227503L;
+
+        $stack0 = class "Lorg/jfree/chart/title/PaintScaleLegend;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        <org.jfree.chart.title.PaintScaleLegend: boolean $assertionsDisabled> = $stack2;
+
+        return;
+    }
+}

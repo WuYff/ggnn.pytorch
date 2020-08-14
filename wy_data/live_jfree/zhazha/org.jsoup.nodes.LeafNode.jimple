@@ -1,0 +1,363 @@
+abstract class org.jsoup.nodes.LeafNode extends org.jsoup.nodes.Node
+{
+    private static final java.util.List EmptyNodes;
+    java.lang.Object value;
+
+    void <init>()
+    {
+        org.jsoup.nodes.LeafNode this;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        specialinvoke this.<org.jsoup.nodes.Node: void <init>()>();
+
+        return;
+    }
+
+    protected final boolean hasAttributes()
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.Object $stack1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        $stack1 = this.<org.jsoup.nodes.LeafNode: java.lang.Object value>;
+
+        $stack2 = $stack1 instanceof org.jsoup.nodes.Attributes;
+
+        return $stack2;
+    }
+
+    public final org.jsoup.nodes.Attributes attributes()
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.Object $stack1;
+        org.jsoup.nodes.Attributes $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void ensureAttributes()>();
+
+        $stack1 = this.<org.jsoup.nodes.LeafNode: java.lang.Object value>;
+
+        $stack2 = (org.jsoup.nodes.Attributes) $stack1;
+
+        return $stack2;
+    }
+
+    private void ensureAttributes()
+    {
+        org.jsoup.nodes.LeafNode this;
+        boolean $stack3;
+        java.lang.Object coreValue;
+        org.jsoup.nodes.Attributes $stack4;
+        java.lang.String $stack5, $stack6;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        $stack3 = virtualinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttributes()>();
+
+        if $stack3 != 0 goto label1;
+
+        coreValue = this.<org.jsoup.nodes.LeafNode: java.lang.Object value>;
+
+        $stack4 = new org.jsoup.nodes.Attributes;
+
+        specialinvoke $stack4.<org.jsoup.nodes.Attributes: void <init>()>();
+
+        this.<org.jsoup.nodes.LeafNode: java.lang.Object value> = $stack4;
+
+        if coreValue == null goto label1;
+
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String nodeName()>();
+
+        $stack6 = (java.lang.String) coreValue;
+
+        virtualinvoke $stack4.<org.jsoup.nodes.Attributes: org.jsoup.nodes.Attributes put(java.lang.String,java.lang.String)>($stack5, $stack6);
+
+     label1:
+        return;
+    }
+
+    java.lang.String coreValue()
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String $stack1, $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String nodeName()>();
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String attr(java.lang.String)>($stack1);
+
+        return $stack2;
+    }
+
+    void coreValue(java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String $stack2, value;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        value := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String nodeName()>();
+
+        virtualinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>($stack2, value);
+
+        return;
+    }
+
+    public java.lang.String attr(java.lang.String)
+    {
+        java.lang.String key, $stack3, $stack4, $stack7;
+        org.jsoup.nodes.LeafNode this;
+        boolean $stack2, $stack5;
+        java.lang.Object $stack6;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        key := @parameter0: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(key);
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttributes()>();
+
+        if $stack2 != 0 goto label3;
+
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String nodeName()>();
+
+        $stack5 = virtualinvoke key.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.nodes.LeafNode: java.lang.Object value>;
+
+        $stack7 = (java.lang.String) $stack6;
+
+        goto label2;
+
+     label1:
+        $stack7 = "";
+
+     label2:
+        return $stack7;
+
+     label3:
+        $stack3 = specialinvoke this.<org.jsoup.nodes.Node: java.lang.String attr(java.lang.String)>(key);
+
+        return $stack3;
+    }
+
+    public org.jsoup.nodes.Node attr(java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        boolean $stack3, $stack6;
+        java.lang.String key, value, $stack5;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        key := @parameter0: java.lang.String;
+
+        value := @parameter1: java.lang.String;
+
+        $stack3 = virtualinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttributes()>();
+
+        if $stack3 != 0 goto label1;
+
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String nodeName()>();
+
+        $stack6 = virtualinvoke key.<java.lang.String: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label1;
+
+        this.<org.jsoup.nodes.LeafNode: java.lang.Object value> = value;
+
+        goto label2;
+
+     label1:
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void ensureAttributes()>();
+
+        specialinvoke this.<org.jsoup.nodes.Node: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>(key, value);
+
+     label2:
+        return this;
+    }
+
+    public boolean hasAttr(java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String key;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        key := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void ensureAttributes()>();
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.Node: boolean hasAttr(java.lang.String)>(key);
+
+        return $stack2;
+    }
+
+    public org.jsoup.nodes.Node removeAttr(java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String key;
+        org.jsoup.nodes.Node $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        key := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void ensureAttributes()>();
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.Node: org.jsoup.nodes.Node removeAttr(java.lang.String)>(key);
+
+        return $stack2;
+    }
+
+    public java.lang.String absUrl(java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String key, $stack2;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        key := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void ensureAttributes()>();
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.Node: java.lang.String absUrl(java.lang.String)>(key);
+
+        return $stack2;
+    }
+
+    public java.lang.String baseUri()
+    {
+        org.jsoup.nodes.LeafNode this;
+        boolean $stack1;
+        org.jsoup.nodes.Node $stack2;
+        java.lang.String $stack3;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.LeafNode: boolean hasParent()>();
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node parent()>();
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.nodes.Node: java.lang.String baseUri()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = "";
+
+     label2:
+        return $stack3;
+    }
+
+    protected void doSetBaseUri(java.lang.String)
+    {
+        org.jsoup.nodes.LeafNode this;
+        java.lang.String baseUri;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        baseUri := @parameter0: java.lang.String;
+
+        return;
+    }
+
+    public int childNodeSize()
+    {
+        org.jsoup.nodes.LeafNode this;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        return 0;
+    }
+
+    public org.jsoup.nodes.Node empty()
+    {
+        org.jsoup.nodes.LeafNode this;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        return this;
+    }
+
+    protected java.util.List ensureChildNodes()
+    {
+        java.util.List $stack1;
+        org.jsoup.nodes.LeafNode this;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        $stack1 = <org.jsoup.nodes.LeafNode: java.util.List EmptyNodes>;
+
+        return $stack1;
+    }
+
+    protected org.jsoup.nodes.LeafNode doClone(org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.LeafNode this, clone;
+        org.jsoup.nodes.Node parent, $stack3;
+        boolean $stack4;
+        java.lang.Object $stack5;
+        org.jsoup.nodes.Attributes $stack6, $stack7;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        parent := @parameter0: org.jsoup.nodes.Node;
+
+        $stack3 = specialinvoke this.<org.jsoup.nodes.Node: org.jsoup.nodes.Node doClone(org.jsoup.nodes.Node)>(parent);
+
+        clone = (org.jsoup.nodes.LeafNode) $stack3;
+
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttributes()>();
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = this.<org.jsoup.nodes.LeafNode: java.lang.Object value>;
+
+        $stack6 = (org.jsoup.nodes.Attributes) $stack5;
+
+        $stack7 = virtualinvoke $stack6.<org.jsoup.nodes.Attributes: org.jsoup.nodes.Attributes clone()>();
+
+        clone.<org.jsoup.nodes.LeafNode: java.lang.Object value> = $stack7;
+
+     label1:
+        return clone;
+    }
+
+    protected volatile org.jsoup.nodes.Node doClone(org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.LeafNode this, $stack2;
+        org.jsoup.nodes.Node l1;
+
+        this := @this: org.jsoup.nodes.LeafNode;
+
+        l1 := @parameter0: org.jsoup.nodes.Node;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.LeafNode doClone(org.jsoup.nodes.Node)>(l1);
+
+        return $stack2;
+    }
+
+    static void <clinit>()
+    {
+        java.util.List $stack0;
+
+        $stack0 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+        <org.jsoup.nodes.LeafNode: java.util.List EmptyNodes> = $stack0;
+
+        return;
+    }
+}

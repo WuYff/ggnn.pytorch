@@ -1,0 +1,73 @@
+public final class org.jsoup.select.Evaluator$IsEmpty extends org.jsoup.select.Evaluator
+{
+
+    public void <init>()
+    {
+        org.jsoup.select.Evaluator$IsEmpty this;
+
+        this := @this: org.jsoup.select.Evaluator$IsEmpty;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, root;
+        java.util.List family;
+        java.util.Iterator l4;
+        boolean $stack8, $stack10, $stack12, $stack13;
+        java.lang.Object $stack9;
+        org.jsoup.nodes.Node n;
+        org.jsoup.select.Evaluator$IsEmpty this;
+
+        this := @this: org.jsoup.select.Evaluator$IsEmpty;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        family = virtualinvoke element.<org.jsoup.nodes.Element: java.util.List childNodes()>();
+
+        l4 = interfaceinvoke family.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label3;
+
+        $stack9 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+
+        n = (org.jsoup.nodes.Node) $stack9;
+
+        $stack10 = n instanceof org.jsoup.nodes.Comment;
+
+        if $stack10 != 0 goto label2;
+
+        $stack12 = n instanceof org.jsoup.nodes.XmlDeclaration;
+
+        if $stack12 != 0 goto label2;
+
+        $stack13 = n instanceof org.jsoup.nodes.DocumentType;
+
+        if $stack13 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        goto label1;
+
+     label3:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.select.Evaluator$IsEmpty this;
+
+        this := @this: org.jsoup.select.Evaluator$IsEmpty;
+
+        return ":empty";
+    }
+}

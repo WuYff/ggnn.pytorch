@@ -1,0 +1,321 @@
+public class org.jsoup.helper.W3CDom extends java.lang.Object
+{
+    protected javax.xml.parsers.DocumentBuilderFactory factory;
+
+    public void <init>()
+    {
+        org.jsoup.helper.W3CDom this;
+        javax.xml.parsers.DocumentBuilderFactory $stack1, $stack2;
+
+        this := @this: org.jsoup.helper.W3CDom;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = staticinvoke <javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilderFactory newInstance()>();
+
+        this.<org.jsoup.helper.W3CDom: javax.xml.parsers.DocumentBuilderFactory factory> = $stack1;
+
+        $stack2 = this.<org.jsoup.helper.W3CDom: javax.xml.parsers.DocumentBuilderFactory factory>;
+
+        virtualinvoke $stack2.<javax.xml.parsers.DocumentBuilderFactory: void setNamespaceAware(boolean)>(1);
+
+        return;
+    }
+
+    public static org.w3c.dom.Document convert(org.jsoup.nodes.Document)
+    {
+        org.jsoup.helper.W3CDom $stack1;
+        org.jsoup.nodes.Document in;
+        org.w3c.dom.Document $stack2;
+
+        in := @parameter0: org.jsoup.nodes.Document;
+
+        $stack1 = new org.jsoup.helper.W3CDom;
+
+        specialinvoke $stack1.<org.jsoup.helper.W3CDom: void <init>()>();
+
+        $stack2 = virtualinvoke $stack1.<org.jsoup.helper.W3CDom: org.w3c.dom.Document fromJsoup(org.jsoup.nodes.Document)>(in);
+
+        return $stack2;
+    }
+
+    public static java.lang.String asString(org.w3c.dom.Document, java.util.Map)
+    {
+        javax.xml.transform.dom.DOMSource $stack8;
+        org.w3c.dom.Document doc;
+        java.io.StringWriter $stack9;
+        javax.xml.transform.stream.StreamResult $stack10;
+        javax.xml.transform.TransformerFactory tf;
+        javax.xml.transform.Transformer transformer;
+        java.util.Map properties;
+        org.w3c.dom.DocumentType $stack13, doctype;
+        java.lang.String $stack16, $stack18, $stack20, $stack26, $stack28, $stack31, $stack33, $stack14;
+        boolean $stack17, $stack19, $stack21, $stack27, $stack29;
+        java.util.Properties $stack35;
+        javax.xml.transform.TransformerException $stack37;
+        java.lang.IllegalStateException $stack38;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        properties := @parameter1: java.util.Map;
+
+     label1:
+        $stack8 = new javax.xml.transform.dom.DOMSource;
+
+        specialinvoke $stack8.<javax.xml.transform.dom.DOMSource: void <init>(org.w3c.dom.Node)>(doc);
+
+        $stack9 = new java.io.StringWriter;
+
+        specialinvoke $stack9.<java.io.StringWriter: void <init>()>();
+
+        $stack10 = new javax.xml.transform.stream.StreamResult;
+
+        specialinvoke $stack10.<javax.xml.transform.stream.StreamResult: void <init>(java.io.Writer)>($stack9);
+
+        tf = staticinvoke <javax.xml.transform.TransformerFactory: javax.xml.transform.TransformerFactory newInstance()>();
+
+        transformer = virtualinvoke tf.<javax.xml.transform.TransformerFactory: javax.xml.transform.Transformer newTransformer()>();
+
+        if properties == null goto label2;
+
+        $stack35 = staticinvoke <org.jsoup.helper.W3CDom: java.util.Properties propertiesFromMap(java.util.Map)>(properties);
+
+        virtualinvoke transformer.<javax.xml.transform.Transformer: void setOutputProperties(java.util.Properties)>($stack35);
+
+     label2:
+        $stack13 = interfaceinvoke doc.<org.w3c.dom.Document: org.w3c.dom.DocumentType getDoctype()>();
+
+        if $stack13 == null goto label5;
+
+        doctype = interfaceinvoke doc.<org.w3c.dom.Document: org.w3c.dom.DocumentType getDoctype()>();
+
+        $stack16 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getPublicId()>();
+
+        $stack17 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack16);
+
+        if $stack17 != 0 goto label3;
+
+        $stack33 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getPublicId()>();
+
+        virtualinvoke transformer.<javax.xml.transform.Transformer: void setOutputProperty(java.lang.String,java.lang.String)>("doctype-public", $stack33);
+
+     label3:
+        $stack18 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getSystemId()>();
+
+        $stack19 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack18);
+
+        if $stack19 != 0 goto label4;
+
+        $stack31 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getSystemId()>();
+
+        virtualinvoke transformer.<javax.xml.transform.Transformer: void setOutputProperty(java.lang.String,java.lang.String)>("doctype-system", $stack31);
+
+        goto label5;
+
+     label4:
+        $stack20 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getName()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("html");
+
+        if $stack21 == 0 goto label5;
+
+        $stack26 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getPublicId()>();
+
+        $stack27 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack26);
+
+        if $stack27 == 0 goto label5;
+
+        $stack28 = interfaceinvoke doctype.<org.w3c.dom.DocumentType: java.lang.String getSystemId()>();
+
+        $stack29 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack28);
+
+        if $stack29 == 0 goto label5;
+
+        virtualinvoke transformer.<javax.xml.transform.Transformer: void setOutputProperty(java.lang.String,java.lang.String)>("doctype-system", "about:legacy-compat");
+
+     label5:
+        virtualinvoke transformer.<javax.xml.transform.Transformer: void transform(javax.xml.transform.Source,javax.xml.transform.Result)>($stack8, $stack10);
+
+        $stack14 = virtualinvoke $stack9.<java.io.StringWriter: java.lang.String toString()>();
+
+     label6:
+        return $stack14;
+
+     label7:
+        $stack37 := @caughtexception;
+
+        $stack38 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack38.<java.lang.IllegalStateException: void <init>(java.lang.Throwable)>($stack37);
+
+        throw $stack38;
+
+        catch javax.xml.transform.TransformerException from label1 to label6 with label7;
+    }
+
+    static java.util.Properties propertiesFromMap(java.util.Map)
+    {
+        java.util.Properties $stack2;
+        java.util.Map map;
+
+        map := @parameter0: java.util.Map;
+
+        $stack2 = new java.util.Properties;
+
+        specialinvoke $stack2.<java.util.Properties: void <init>()>();
+
+        virtualinvoke $stack2.<java.util.Properties: void putAll(java.util.Map)>(map);
+
+        return $stack2;
+    }
+
+    public static java.util.HashMap OutputHtml()
+    {
+        java.util.HashMap $stack0;
+
+        $stack0 = staticinvoke <org.jsoup.helper.W3CDom: java.util.HashMap methodMap(java.lang.String)>("html");
+
+        return $stack0;
+    }
+
+    public static java.util.HashMap OutputXml()
+    {
+        java.util.HashMap $stack0;
+
+        $stack0 = staticinvoke <org.jsoup.helper.W3CDom: java.util.HashMap methodMap(java.lang.String)>("xml");
+
+        return $stack0;
+    }
+
+    private static java.util.HashMap methodMap(java.lang.String)
+    {
+        java.util.HashMap $stack2;
+        java.lang.String method;
+
+        method := @parameter0: java.lang.String;
+
+        $stack2 = new java.util.HashMap;
+
+        specialinvoke $stack2.<java.util.HashMap: void <init>()>();
+
+        virtualinvoke $stack2.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>("method", method);
+
+        return $stack2;
+    }
+
+    public org.w3c.dom.Document fromJsoup(org.jsoup.nodes.Document)
+    {
+        org.jsoup.nodes.Document in;
+        org.jsoup.helper.W3CDom this;
+        javax.xml.parsers.DocumentBuilderFactory $stack7;
+        javax.xml.parsers.DocumentBuilder builder;
+        org.w3c.dom.Document out;
+        org.jsoup.nodes.DocumentType doctype;
+        java.lang.String $stack12, $stack13, $stack14;
+        org.w3c.dom.DocumentType documentType;
+        javax.xml.parsers.ParserConfigurationException $stack23;
+        java.lang.IllegalStateException $stack24;
+        org.w3c.dom.DOMImplementation impl;
+
+        this := @this: org.jsoup.helper.W3CDom;
+
+        in := @parameter0: org.jsoup.nodes.Document;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(in);
+
+     label1:
+        $stack7 = this.<org.jsoup.helper.W3CDom: javax.xml.parsers.DocumentBuilderFactory factory>;
+
+        builder = virtualinvoke $stack7.<javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilder newDocumentBuilder()>();
+
+        impl = virtualinvoke builder.<javax.xml.parsers.DocumentBuilder: org.w3c.dom.DOMImplementation getDOMImplementation()>();
+
+        out = virtualinvoke builder.<javax.xml.parsers.DocumentBuilder: org.w3c.dom.Document newDocument()>();
+
+        doctype = virtualinvoke in.<org.jsoup.nodes.Document: org.jsoup.nodes.DocumentType documentType()>();
+
+        if doctype == null goto label2;
+
+        $stack12 = virtualinvoke doctype.<org.jsoup.nodes.DocumentType: java.lang.String name()>();
+
+        $stack13 = virtualinvoke doctype.<org.jsoup.nodes.DocumentType: java.lang.String publicId()>();
+
+        $stack14 = virtualinvoke doctype.<org.jsoup.nodes.DocumentType: java.lang.String systemId()>();
+
+        documentType = interfaceinvoke impl.<org.w3c.dom.DOMImplementation: org.w3c.dom.DocumentType createDocumentType(java.lang.String,java.lang.String,java.lang.String)>($stack12, $stack13, $stack14);
+
+        interfaceinvoke out.<org.w3c.dom.Document: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(documentType);
+
+     label2:
+        interfaceinvoke out.<org.w3c.dom.Document: void setXmlStandalone(boolean)>(1);
+
+        virtualinvoke this.<org.jsoup.helper.W3CDom: void convert(org.jsoup.nodes.Document,org.w3c.dom.Document)>(in, out);
+
+     label3:
+        return out;
+
+     label4:
+        $stack23 := @caughtexception;
+
+        $stack24 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack24.<java.lang.IllegalStateException: void <init>(java.lang.Throwable)>($stack23);
+
+        throw $stack24;
+
+        catch javax.xml.parsers.ParserConfigurationException from label1 to label3 with label4;
+    }
+
+    public void convert(org.jsoup.nodes.Document, org.w3c.dom.Document)
+    {
+        org.jsoup.nodes.Document in;
+        java.lang.String $stack4, $stack8;
+        boolean $stack5;
+        org.jsoup.nodes.Element rootEl;
+        org.jsoup.helper.W3CDom$W3CBuilder $stack7;
+        org.w3c.dom.Document out;
+        org.jsoup.helper.W3CDom this;
+
+        this := @this: org.jsoup.helper.W3CDom;
+
+        in := @parameter0: org.jsoup.nodes.Document;
+
+        out := @parameter1: org.w3c.dom.Document;
+
+        $stack4 = virtualinvoke in.<org.jsoup.nodes.Document: java.lang.String location()>();
+
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack4);
+
+        if $stack5 != 0 goto label1;
+
+        $stack8 = virtualinvoke in.<org.jsoup.nodes.Document: java.lang.String location()>();
+
+        interfaceinvoke out.<org.w3c.dom.Document: void setDocumentURI(java.lang.String)>($stack8);
+
+     label1:
+        rootEl = virtualinvoke in.<org.jsoup.nodes.Document: org.jsoup.nodes.Element child(int)>(0);
+
+        $stack7 = new org.jsoup.helper.W3CDom$W3CBuilder;
+
+        specialinvoke $stack7.<org.jsoup.helper.W3CDom$W3CBuilder: void <init>(org.w3c.dom.Document)>(out);
+
+        staticinvoke <org.jsoup.select.NodeTraversor: void traverse(org.jsoup.select.NodeVisitor,org.jsoup.nodes.Node)>($stack7, rootEl);
+
+        return;
+    }
+
+    public java.lang.String asString(org.w3c.dom.Document)
+    {
+        org.w3c.dom.Document doc;
+        java.lang.String $stack2;
+        org.jsoup.helper.W3CDom this;
+
+        this := @this: org.jsoup.helper.W3CDom;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        $stack2 = staticinvoke <org.jsoup.helper.W3CDom: java.lang.String asString(org.w3c.dom.Document,java.util.Map)>(doc, null);
+
+        return $stack2;
+    }
+}

@@ -1,0 +1,65 @@
+public final class org.jsoup.select.Evaluator$ContainsText extends org.jsoup.select.Evaluator
+{
+    private java.lang.String searchText;
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.select.Evaluator$ContainsText this;
+        java.lang.String searchText, $stack2;
+
+        this := @this: org.jsoup.select.Evaluator$ContainsText;
+
+        searchText := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        $stack2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(searchText);
+
+        this.<org.jsoup.select.Evaluator$ContainsText: java.lang.String searchText> = $stack2;
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, root;
+        java.lang.String $stack3, $stack4, $stack5;
+        org.jsoup.select.Evaluator$ContainsText this;
+        boolean $stack6;
+
+        this := @this: org.jsoup.select.Evaluator$ContainsText;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        $stack3 = virtualinvoke element.<org.jsoup.nodes.Element: java.lang.String text()>();
+
+        $stack4 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>($stack3);
+
+        $stack5 = this.<org.jsoup.select.Evaluator$ContainsText: java.lang.String searchText>;
+
+        $stack6 = virtualinvoke $stack4.<java.lang.String: boolean contains(java.lang.CharSequence)>($stack5);
+
+        return $stack6;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.Object[] $stack1;
+        org.jsoup.select.Evaluator$ContainsText this;
+        java.lang.String $stack2, $stack3;
+
+        this := @this: org.jsoup.select.Evaluator$ContainsText;
+
+        $stack1 = newarray (java.lang.Object)[1];
+
+        $stack2 = this.<org.jsoup.select.Evaluator$ContainsText: java.lang.String searchText>;
+
+        $stack1[0] = $stack2;
+
+        $stack3 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(":contains(%s)", $stack1);
+
+        return $stack3;
+    }
+}

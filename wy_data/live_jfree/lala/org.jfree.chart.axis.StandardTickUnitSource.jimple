@@ -1,0 +1,136 @@
+public class org.jfree.chart.axis.StandardTickUnitSource extends java.lang.Object implements org.jfree.chart.axis.TickUnitSource, java.io.Serializable
+{
+    private static final double LOG_10_VALUE;
+
+    public void <init>()
+    {
+        org.jfree.chart.axis.StandardTickUnitSource this;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.TickUnit unit;
+        double x, $stack9, $stack10, log, higher, $stack13;
+        org.jfree.chart.axis.NumberTickUnit $stack12;
+        java.text.DecimalFormat $stack14;
+        org.jfree.chart.axis.StandardTickUnitSource this;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+
+        x = virtualinvoke unit.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        $stack9 = staticinvoke <java.lang.Math: double log(double)>(x);
+
+        $stack10 = <org.jfree.chart.axis.StandardTickUnitSource: double LOG_10_VALUE>;
+
+        log = $stack9 / $stack10;
+
+        higher = staticinvoke <java.lang.Math: double ceil(double)>(log);
+
+        $stack12 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack13 = staticinvoke <java.lang.Math: double pow(double,double)>(10.0, higher);
+
+        $stack14 = new java.text.DecimalFormat;
+
+        specialinvoke $stack14.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0E0");
+
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>($stack13, $stack14);
+
+        return $stack12;
+    }
+
+    public org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.StandardTickUnitSource this;
+        org.jfree.chart.axis.TickUnit unit, $stack2;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.StandardTickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(unit);
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)
+    {
+        double size, $stack7, $stack8, log, higher, $stack11;
+        org.jfree.chart.axis.NumberTickUnit $stack10;
+        java.text.DecimalFormat $stack12;
+        org.jfree.chart.axis.StandardTickUnitSource this;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        size := @parameter0: double;
+
+        $stack7 = staticinvoke <java.lang.Math: double log(double)>(size);
+
+        $stack8 = <org.jfree.chart.axis.StandardTickUnitSource: double LOG_10_VALUE>;
+
+        log = $stack7 / $stack8;
+
+        higher = staticinvoke <java.lang.Math: double ceil(double)>(log);
+
+        $stack10 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack11 = staticinvoke <java.lang.Math: double pow(double,double)>(10.0, higher);
+
+        $stack12 = new java.text.DecimalFormat;
+
+        specialinvoke $stack12.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0E0");
+
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>($stack11, $stack12);
+
+        return $stack10;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.StandardTickUnitSource this;
+        boolean $stack2;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = obj instanceof org.jfree.chart.axis.StandardTickUnitSource;
+
+        return $stack2;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.StandardTickUnitSource this;
+
+        this := @this: org.jfree.chart.axis.StandardTickUnitSource;
+
+        return 0;
+    }
+
+    static void <clinit>()
+    {
+        double $stack0;
+
+        $stack0 = staticinvoke <java.lang.Math: double log(double)>(10.0);
+
+        <org.jfree.chart.axis.StandardTickUnitSource: double LOG_10_VALUE> = $stack0;
+
+        return;
+    }
+}

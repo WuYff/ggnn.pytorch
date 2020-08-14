@@ -1,0 +1,219 @@
+public class org.jfree.chart.urls.StandardXYURLGenerator extends java.lang.Object implements org.jfree.chart.urls.XYURLGenerator, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final java.lang.String DEFAULT_PREFIX;
+    public static final java.lang.String DEFAULT_SERIES_PARAMETER;
+    public static final java.lang.String DEFAULT_ITEM_PARAMETER;
+    private java.lang.String prefix;
+    private java.lang.String seriesParameterName;
+    private java.lang.String itemParameterName;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.StandardXYURLGenerator this;
+
+        this := @this: org.jfree.chart.urls.StandardXYURLGenerator;
+
+        specialinvoke this.<org.jfree.chart.urls.StandardXYURLGenerator: void <init>(java.lang.String,java.lang.String,java.lang.String)>("index.html", "series", "item");
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.urls.StandardXYURLGenerator this;
+        java.lang.String prefix;
+
+        this := @this: org.jfree.chart.urls.StandardXYURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.urls.StandardXYURLGenerator: void <init>(java.lang.String,java.lang.String,java.lang.String)>(prefix, "series", "item");
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.jfree.chart.urls.StandardXYURLGenerator this;
+        java.lang.String prefix, seriesParameterName, itemParameterName;
+
+        this := @this: org.jfree.chart.urls.StandardXYURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        seriesParameterName := @parameter1: java.lang.String;
+
+        itemParameterName := @parameter2: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(seriesParameterName, "seriesParameterName");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(itemParameterName, "itemParameterName");
+
+        this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String prefix> = prefix;
+
+        this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String seriesParameterName> = seriesParameterName;
+
+        this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String itemParameterName> = itemParameterName;
+
+        return;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.urls.StandardXYURLGenerator this;
+        boolean $stack6, $stack33;
+        java.lang.StringBuilder $stack7, $stack8, $stack9, $stack11, $stack12, $stack14, $stack15, $stack16, $stack17, $stack19, $stack20, $stack21;
+        java.lang.String $stack13, $stack18, url, $stack23;
+        int series, item;
+        org.jfree.data.xy.XYDataset dataset;
+
+        this := @this: org.jfree.chart.urls.StandardXYURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        url = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String prefix>;
+
+        $stack6 = virtualinvoke url.<java.lang.String: boolean contains(java.lang.CharSequence)>("?");
+
+        if $stack6 != 0 goto label1;
+
+        $stack33 = 1;
+
+        goto label2;
+
+     label1:
+        $stack33 = 0;
+
+     label2:
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        if $stack33 == 0 goto label3;
+
+        $stack23 = "?";
+
+        goto label4;
+
+     label3:
+        $stack23 = "&amp;";
+
+     label4:
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack23);
+
+        url = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack11 = new java.lang.StringBuilder;
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack13 = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack13);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(series);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("&amp;");
+
+        $stack18 = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String itemParameterName>;
+
+        $stack19 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(item);
+
+        url = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return url;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.urls.StandardXYURLGenerator this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.lang.String $stack4, $stack5, $stack7, $stack8, $stack10, $stack11;
+
+        this := @this: org.jfree.chart.urls.StandardXYURLGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.urls.StandardXYURLGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.urls.StandardXYURLGenerator) obj;
+
+        $stack5 = that.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String prefix>;
+
+        $stack4 = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String prefix>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = that.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack7 = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = that.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String itemParameterName>;
+
+        $stack10 = this.<org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String itemParameterName>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String DEFAULT_ITEM_PARAMETER> = "item";
+
+        <org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String DEFAULT_SERIES_PARAMETER> = "series";
+
+        <org.jfree.chart.urls.StandardXYURLGenerator: java.lang.String DEFAULT_PREFIX> = "index.html";
+
+        <org.jfree.chart.urls.StandardXYURLGenerator: long serialVersionUID> = -1771624523496595382L;
+
+        return;
+    }
+}

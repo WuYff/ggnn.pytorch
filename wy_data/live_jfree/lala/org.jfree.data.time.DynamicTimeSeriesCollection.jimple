@@ -1,0 +1,1608 @@
+public class org.jfree.data.time.DynamicTimeSeriesCollection extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.data.xy.IntervalXYDataset, org.jfree.data.DomainInfo, org.jfree.data.RangeInfo
+{
+    public static final int START;
+    public static final int MIDDLE;
+    public static final int END;
+    private int maximumItemCount;
+    protected int historyCount;
+    private java.lang.Comparable[] seriesKeys;
+    private java.lang.Class timePeriodClass;
+    protected org.jfree.data.time.RegularTimePeriod[] pointsInTime;
+    private int seriesCount;
+    protected org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory;
+    protected java.util.Calendar workingCalendar;
+    private int position;
+    private boolean domainIsPointsInTime;
+    private int oldestAt;
+    private int newestAt;
+    private long deltaTime;
+    private java.lang.Long domainStart;
+    private java.lang.Long domainEnd;
+    private org.jfree.data.Range domainRange;
+    private java.lang.Float minValue;
+    private java.lang.Float maxValue;
+    private org.jfree.data.Range valueRange;
+
+    public void <init>(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int nSeries, nMoments, $stack5;
+        org.jfree.data.time.Millisecond $stack3;
+        java.util.TimeZone $stack4;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        nSeries := @parameter0: int;
+
+        nMoments := @parameter1: int;
+
+        $stack3 = new org.jfree.data.time.Millisecond;
+
+        specialinvoke $stack3.<org.jfree.data.time.Millisecond: void <init>()>();
+
+        $stack4 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void <init>(int,int,org.jfree.data.time.RegularTimePeriod,java.util.TimeZone)>(nSeries, nMoments, $stack3, $stack4);
+
+        $stack5 = nMoments - 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt> = $stack5;
+
+        return;
+    }
+
+    public void <init>(int, int, java.util.TimeZone)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int nSeries, nMoments, $stack5;
+        org.jfree.data.time.Millisecond $stack4;
+        java.util.TimeZone zone;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        nSeries := @parameter0: int;
+
+        nMoments := @parameter1: int;
+
+        zone := @parameter2: java.util.TimeZone;
+
+        $stack4 = new org.jfree.data.time.Millisecond;
+
+        specialinvoke $stack4.<org.jfree.data.time.Millisecond: void <init>()>();
+
+        specialinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void <init>(int,int,org.jfree.data.time.RegularTimePeriod,java.util.TimeZone)>(nSeries, nMoments, $stack4, zone);
+
+        $stack5 = nMoments - 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt> = $stack5;
+
+        return;
+    }
+
+    public void <init>(int, int, org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int nSeries, nMoments;
+        org.jfree.data.time.RegularTimePeriod timeSample;
+        java.util.TimeZone $stack4;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        nSeries := @parameter0: int;
+
+        nMoments := @parameter1: int;
+
+        timeSample := @parameter2: org.jfree.data.time.RegularTimePeriod;
+
+        $stack4 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void <init>(int,int,org.jfree.data.time.RegularTimePeriod,java.util.TimeZone)>(nSeries, nMoments, timeSample, $stack4);
+
+        return;
+    }
+
+    public void <init>(int, int, org.jfree.data.time.RegularTimePeriod, java.util.TimeZone)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        java.lang.Float $stack6;
+        int nMoments, nSeries, $stack8, i;
+        java.lang.Comparable[] $stack7, $stack26;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack9;
+        org.jfree.data.time.RegularTimePeriod timeSample;
+        java.lang.Class $stack10, $stack11, $stack12, $stack13, $stack14;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Hour[] $stack16;
+        org.jfree.data.time.Minute[] $stack23;
+        org.jfree.data.time.Second[] $stack24;
+        org.jfree.data.time.Millisecond[] $stack25;
+        java.util.Calendar $stack15;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        nSeries := @parameter0: int;
+
+        nMoments := @parameter1: int;
+
+        timeSample := @parameter2: org.jfree.data.time.RegularTimePeriod;
+
+        zone := @parameter3: java.util.TimeZone;
+
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int maximumItemCount> = 2000;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass> = class "Lorg/jfree/data/time/Minute;";
+
+        $stack6 = staticinvoke <java.lang.Float: java.lang.Float valueOf(float)>(0.0F);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float minValue> = $stack6;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue> = null;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int maximumItemCount> = nMoments;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount> = nMoments;
+
+        $stack7 = newarray (java.lang.Comparable)[nSeries];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Comparable[] seriesKeys> = $stack7;
+
+        i = 0;
+
+     label1:
+        if i >= nSeries goto label2;
+
+        $stack26 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Comparable[] seriesKeys>;
+
+        $stack26[i] = "";
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = nMoments - 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt> = $stack8;
+
+        $stack9 = newarray (org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence)[nSeries];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory> = $stack9;
+
+        $stack10 = virtualinvoke timeSample.<java.lang.Object: java.lang.Class getClass()>();
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass> = $stack10;
+
+        $stack11 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass>;
+
+        if $stack11 != class "Lorg/jfree/data/time/Millisecond;" goto label3;
+
+        $stack25 = newarray (org.jfree.data.time.Millisecond)[nMoments];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime> = $stack25;
+
+        goto label6;
+
+     label3:
+        $stack12 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass>;
+
+        if $stack12 != class "Lorg/jfree/data/time/Second;" goto label4;
+
+        $stack24 = newarray (org.jfree.data.time.Second)[nMoments];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime> = $stack24;
+
+        goto label6;
+
+     label4:
+        $stack13 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass>;
+
+        if $stack13 != class "Lorg/jfree/data/time/Minute;" goto label5;
+
+        $stack23 = newarray (org.jfree.data.time.Minute)[nMoments];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime> = $stack23;
+
+        goto label6;
+
+     label5:
+        $stack14 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Class timePeriodClass>;
+
+        if $stack14 != class "Lorg/jfree/data/time/Hour;" goto label6;
+
+        $stack16 = newarray (org.jfree.data.time.Hour)[nMoments];
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime> = $stack16;
+
+     label6:
+        $stack15 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar> = $stack15;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int position> = 0;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: boolean domainIsPointsInTime> = 1;
+
+        return;
+    }
+
+    public synchronized long setTimeBase(org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.time.RegularTimePeriod[] $stack6, $stack8, $stack12, $stack20, $stack39, $stack41;
+        org.jfree.data.time.RegularTimePeriod $stack7, $stack10, $stack14, start, $stack40, $stack42;
+        java.util.Calendar $stack9, $stack13;
+        long nextL, $stack16, $stack19, i#2;
+        int $stack17, $stack18, $stack21, $stack38, i;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        start := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack7 = $stack6[0];
+
+        if $stack7 != null goto label2;
+
+        $stack20 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack20[0] = start;
+
+        i = 1;
+
+     label1:
+        $stack21 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if i >= $stack21 goto label2;
+
+        $stack41 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack39 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack38 = i - 1;
+
+        $stack40 = $stack39[$stack38];
+
+        $stack42 = virtualinvoke $stack40.<org.jfree.data.time.RegularTimePeriod: org.jfree.data.time.RegularTimePeriod next()>();
+
+        $stack41[i] = $stack42;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack10 = $stack8[0];
+
+        $stack9 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        i#2 = virtualinvoke $stack10.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack9);
+
+        $stack12 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack14 = $stack12[1];
+
+        $stack13 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        nextL = virtualinvoke $stack14.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack13);
+
+        $stack16 = nextL - i#2;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: long deltaTime> = $stack16;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt> = 0;
+
+        $stack17 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        $stack18 = $stack17 - 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt> = $stack18;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void findDomainLimits()>();
+
+        $stack19 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: long deltaTime>;
+
+        return $stack19;
+    }
+
+    protected void findDomainLimits()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.time.RegularTimePeriod $stack5, $stack9, $stack17;
+        java.util.Calendar $stack6, $stack10, $stack18;
+        long startL, endL;
+        boolean $stack8;
+        java.lang.Long $stack12, $stack13;
+        org.jfree.data.Range $stack14;
+        double $stack15, $stack16;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack5 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod getOldestTime()>();
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        startL = virtualinvoke $stack5.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack6);
+
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: boolean domainIsPointsInTime>;
+
+        if $stack8 == 0 goto label1;
+
+        $stack17 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod getNewestTime()>();
+
+        $stack18 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        endL = virtualinvoke $stack17.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack18);
+
+        goto label2;
+
+     label1:
+        $stack9 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod getNewestTime()>();
+
+        $stack10 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        endL = virtualinvoke $stack9.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack10);
+
+     label2:
+        $stack12 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(startL);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainStart> = $stack12;
+
+        $stack13 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(endL);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainEnd> = $stack13;
+
+        $stack14 = new org.jfree.data.Range;
+
+        $stack16 = (double) startL;
+
+        $stack15 = (double) endL;
+
+        specialinvoke $stack14.<org.jfree.data.Range: void <init>(double,double)>($stack16, $stack15);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range domainRange> = $stack14;
+
+        return;
+    }
+
+    public int getPosition()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int position>;
+
+        return $stack1;
+    }
+
+    public void setPosition(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int position;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        position := @parameter0: int;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int position> = position;
+
+        return;
+    }
+
+    public void addSeries(float[], int, java.lang.Comparable)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        float[] values;
+        int seriesNumber, $stack9, srcLength, $stack12, $stack15, $stack28, $stack30, $stack31, copyLength, i;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack8, $stack10, $stack17, $stack21, $stack29;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence $stack11, $stack18, $stack23, $stack27;
+        java.lang.Comparable seriesKey;
+        java.lang.Comparable[] $stack13;
+        float $stack22;
+        java.lang.IllegalArgumentException $stack39, $stack40;
+        boolean fillNeeded;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        values := @parameter0: float[];
+
+        seriesNumber := @parameter1: int;
+
+        seriesKey := @parameter2: java.lang.Comparable;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void invalidateRangeInfo()>();
+
+        if values != null goto label1;
+
+        $stack40 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack40.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("TimeSeriesDataset.addSeries(): cannot add null array of values.");
+
+        throw $stack40;
+
+     label1:
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack9 = lengthof $stack8;
+
+        if seriesNumber < $stack9 goto label2;
+
+        $stack39 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack39.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("TimeSeriesDataset.addSeries(): cannot add more series than specified in c\'tor");
+
+        throw $stack39;
+
+     label2:
+        $stack10 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack11 = $stack10[seriesNumber];
+
+        if $stack11 != null goto label3;
+
+        $stack29 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack27 = new org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence;
+
+        $stack28 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        specialinvoke $stack27.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void <init>(org.jfree.data.time.DynamicTimeSeriesCollection,int)>(this, $stack28);
+
+        $stack29[seriesNumber] = $stack27;
+
+        $stack30 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int seriesCount>;
+
+        $stack31 = $stack30 + 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int seriesCount> = $stack31;
+
+     label3:
+        srcLength = lengthof values;
+
+        copyLength = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        fillNeeded = 0;
+
+        $stack12 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if srcLength >= $stack12 goto label4;
+
+        fillNeeded = 1;
+
+        copyLength = srcLength;
+
+     label4:
+        i = 0;
+
+     label5:
+        if i >= copyLength goto label6;
+
+        $stack21 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack23 = $stack21[seriesNumber];
+
+        $stack22 = values[i];
+
+        virtualinvoke $stack23.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>(i, $stack22);
+
+        i = i + 1;
+
+        goto label5;
+
+     label6:
+        if fillNeeded == 0 goto label8;
+
+        i = copyLength;
+
+     label7:
+        $stack15 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if i >= $stack15 goto label8;
+
+        $stack17 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack18 = $stack17[seriesNumber];
+
+        virtualinvoke $stack18.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>(i, 0.0F);
+
+        i = i + 1;
+
+        goto label7;
+
+     label8:
+        if seriesKey == null goto label9;
+
+        $stack13 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Comparable[] seriesKeys>;
+
+        $stack13[seriesNumber] = seriesKey;
+
+     label9:
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void fireSeriesChanged()>();
+
+        return;
+    }
+
+    public void setSeriesKey(int, java.lang.Comparable)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int seriesNumber;
+        java.lang.Comparable key;
+        java.lang.Comparable[] $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        seriesNumber := @parameter0: int;
+
+        key := @parameter1: java.lang.Comparable;
+
+        $stack3 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Comparable[] seriesKeys>;
+
+        $stack3[seriesNumber] = key;
+
+        return;
+    }
+
+    public void addValue(int, int, float)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int seriesNumber, $stack5, index, $stack11, $stack13, $stack14;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack4, $stack6, $stack8, $stack12;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence $stack7, $stack9, $stack10;
+        float value;
+        java.lang.IllegalArgumentException $stack20;
+        java.lang.StringBuilder $stack21, $stack22, $stack23, $stack24;
+        java.lang.String $stack25;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        seriesNumber := @parameter0: int;
+
+        index := @parameter1: int;
+
+        value := @parameter2: float;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void invalidateRangeInfo()>();
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack5 = lengthof $stack4;
+
+        if seriesNumber < $stack5 goto label1;
+
+        $stack20 = new java.lang.IllegalArgumentException;
+
+        $stack21 = new java.lang.StringBuilder;
+
+        specialinvoke $stack21.<java.lang.StringBuilder: void <init>()>();
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("TimeSeriesDataset.addValue(): series #");
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(seriesNumber);
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("unspecified in c\'tor");
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack20.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack25);
+
+        throw $stack20;
+
+     label1:
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack7 = $stack6[seriesNumber];
+
+        if $stack7 != null goto label2;
+
+        $stack12 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack10 = new org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence;
+
+        $stack11 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        specialinvoke $stack10.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void <init>(org.jfree.data.time.DynamicTimeSeriesCollection,int)>(this, $stack11);
+
+        $stack12[seriesNumber] = $stack10;
+
+        $stack13 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int seriesCount>;
+
+        $stack14 = $stack13 + 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int seriesCount> = $stack14;
+
+     label2:
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack9 = $stack8[seriesNumber];
+
+        virtualinvoke $stack9.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>(index, value);
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void fireSeriesChanged()>();
+
+        return;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int seriesCount>;
+
+        return $stack1;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack2, series;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        return $stack2;
+    }
+
+    protected int translateGet(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack3, toFetch, $stack4, $stack5, $stack6, newIndex;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        toFetch := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        if $stack3 != 0 goto label1;
+
+        return toFetch;
+
+     label1:
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        newIndex = toFetch + $stack4;
+
+        $stack5 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if newIndex < $stack5 goto label2;
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        newIndex = newIndex - $stack6;
+
+     label2:
+        return newIndex;
+    }
+
+    public int offsetFromNewest(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int delta, $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        delta := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        $stack3 = $stack2 + delta;
+
+        $stack4 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int wrapOffset(int)>($stack3);
+
+        return $stack4;
+    }
+
+    public int offsetFromOldest(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int delta, $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        delta := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        $stack3 = $stack2 + delta;
+
+        $stack4 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int wrapOffset(int)>($stack3);
+
+        return $stack4;
+    }
+
+    protected int wrapOffset(int)
+    {
+        int protoIndex, $stack3, $stack4, $stack6, tmp;
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        protoIndex := @parameter0: int;
+
+        tmp = protoIndex;
+
+        $stack3 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if protoIndex < $stack3 goto label1;
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        tmp = protoIndex - $stack6;
+
+        goto label2;
+
+     label1:
+        if protoIndex >= 0 goto label2;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        tmp = protoIndex + $stack4;
+
+     label2:
+        return tmp;
+    }
+
+    public synchronized org.jfree.data.time.RegularTimePeriod advanceTime()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack9, $stack13, $stack17, $stack19, $stack20, $stack21, $stack22, $stack50, $stack57, s, $stack15, $stack16;
+        org.jfree.data.time.RegularTimePeriod[] $stack10, $stack18;
+        org.jfree.data.time.RegularTimePeriod $stack11, nextInstant;
+        java.lang.Float $stack14, $stack65;
+        java.lang.Long $stack23, $stack27, $stack28, $stack32;
+        long $stack25, $stack26, endL, $stack30, $stack31, s#18;
+        org.jfree.data.Range $stack33;
+        double $stack34, $stack35;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack49, $stack56;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence $stack51, $stack58;
+        float $stack59, oldMax;
+        byte $stack60;
+        boolean extremaChanged;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack10 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack9 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        $stack11 = $stack10[$stack9];
+
+        nextInstant = virtualinvoke $stack11.<org.jfree.data.time.RegularTimePeriod: org.jfree.data.time.RegularTimePeriod next()>();
+
+        $stack13 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt> = $stack13;
+
+        extremaChanged = 0;
+
+        oldMax = 0.0F;
+
+        $stack14 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue>;
+
+        if $stack14 == null goto label1;
+
+        $stack65 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue>;
+
+        oldMax = virtualinvoke $stack65.<java.lang.Float: float floatValue()>();
+
+     label1:
+        s = 0;
+
+     label2:
+        $stack15 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int getSeriesCount()>();
+
+        if s >= $stack15 goto label5;
+
+        $stack56 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack58 = $stack56[s];
+
+        $stack57 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        $stack59 = virtualinvoke $stack58.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: float getData(int)>($stack57);
+
+        $stack60 = $stack59 cmpl oldMax;
+
+        if $stack60 != 0 goto label3;
+
+        extremaChanged = 1;
+
+     label3:
+        if extremaChanged == 0 goto label4;
+
+        goto label5;
+
+     label4:
+        s = s + 1;
+
+        goto label2;
+
+     label5:
+        if extremaChanged == 0 goto label6;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void invalidateRangeInfo()>();
+
+     label6:
+        s = 0;
+
+     label7:
+        $stack16 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int getSeriesCount()>();
+
+        if s >= $stack16 goto label8;
+
+        $stack49 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack51 = $stack49[s];
+
+        $stack50 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        virtualinvoke $stack51.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>($stack50, 0.0F);
+
+        s = s + 1;
+
+        goto label7;
+
+     label8:
+        $stack18 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack17 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        $stack18[$stack17] = nextInstant;
+
+        $stack19 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        $stack20 = $stack19 + 1;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt> = $stack20;
+
+        $stack22 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        $stack21 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if $stack22 < $stack21 goto label9;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt> = 0;
+
+     label9:
+        $stack23 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainStart>;
+
+        s#18 = virtualinvoke $stack23.<java.lang.Long: long longValue()>();
+
+        $stack25 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: long deltaTime>;
+
+        $stack26 = s#18 + $stack25;
+
+        $stack27 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack26);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainStart> = $stack27;
+
+        $stack28 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainEnd>;
+
+        endL = virtualinvoke $stack28.<java.lang.Long: long longValue()>();
+
+        $stack30 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: long deltaTime>;
+
+        $stack31 = endL + $stack30;
+
+        $stack32 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack31);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainEnd> = $stack32;
+
+        $stack33 = new org.jfree.data.Range;
+
+        $stack35 = (double) s#18;
+
+        $stack34 = (double) endL;
+
+        specialinvoke $stack33.<org.jfree.data.Range: void <init>(double,double)>($stack35, $stack34);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range domainRange> = $stack33;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void fireSeriesChanged()>();
+
+        return nextInstant;
+    }
+
+    public void invalidateRangeInfo()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue> = null;
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range valueRange> = null;
+
+        return;
+    }
+
+    protected double findMaxValue()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack7, $stack8, s, i;
+        double tmp, max;
+        byte $stack12;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        max = 0.0;
+
+        s = 0;
+
+     label1:
+        $stack7 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int getSeriesCount()>();
+
+        if s >= $stack7 goto label5;
+
+        i = 0;
+
+     label2:
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        if i >= $stack8 goto label4;
+
+        tmp = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: double getYValue(int,int)>(s, i);
+
+        $stack12 = tmp cmpl max;
+
+        if $stack12 <= 0 goto label3;
+
+        max = tmp;
+
+     label3:
+        i = i + 1;
+
+        goto label2;
+
+     label4:
+        s = s + 1;
+
+        goto label1;
+
+     label5:
+        return max;
+    }
+
+    public int getOldestIndex()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        return $stack1;
+    }
+
+    public int getNewestIndex()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        return $stack1;
+    }
+
+    public void appendData(float[])
+    {
+        float[] newData;
+        int nDataPoints, $stack5, $stack10, $stack15, s;
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack4, $stack6, $stack8, $stack16;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence $stack7, $stack11, $stack14;
+        float $stack9;
+        java.lang.IllegalArgumentException $stack22;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        newData := @parameter0: float[];
+
+        nDataPoints = lengthof newData;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack5 = lengthof $stack4;
+
+        if nDataPoints <= $stack5 goto label1;
+
+        $stack22 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack22.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("More data than series to put them in");
+
+        throw $stack22;
+
+     label1:
+        s = 0;
+
+     label2:
+        if s >= nDataPoints goto label4;
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack7 = $stack6[s];
+
+        if $stack7 != null goto label3;
+
+        $stack16 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack14 = new org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence;
+
+        $stack15 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        specialinvoke $stack14.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void <init>(org.jfree.data.time.DynamicTimeSeriesCollection,int)>(this, $stack15);
+
+        $stack16[s] = $stack14;
+
+     label3:
+        $stack8 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack11 = $stack8[s];
+
+        $stack10 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        $stack9 = newData[s];
+
+        virtualinvoke $stack11.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>($stack10, $stack9);
+
+        s = s + 1;
+
+        goto label2;
+
+     label4:
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void fireSeriesChanged()>();
+
+        return;
+    }
+
+    public void appendData(float[], int, int)
+    {
+        float[] newData;
+        int nDataPoints, $stack7, refresh, $stack8, $stack17, insertionIndex, s, insertionIndex#3;
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack6, $stack9, $stack11, $stack18;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence $stack10, $stack13, $stack16;
+        float $stack12;
+        java.lang.IllegalArgumentException $stack24;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        newData := @parameter0: float[];
+
+        insertionIndex := @parameter1: int;
+
+        refresh := @parameter2: int;
+
+        nDataPoints = lengthof newData;
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack7 = lengthof $stack6;
+
+        if nDataPoints <= $stack7 goto label1;
+
+        $stack24 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack24.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("More data than series to put them in");
+
+        throw $stack24;
+
+     label1:
+        s = 0;
+
+     label2:
+        if s >= nDataPoints goto label4;
+
+        $stack9 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack10 = $stack9[s];
+
+        if $stack10 != null goto label3;
+
+        $stack18 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack16 = new org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence;
+
+        $stack17 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int historyCount>;
+
+        specialinvoke $stack16.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void <init>(org.jfree.data.time.DynamicTimeSeriesCollection,int)>(this, $stack17);
+
+        $stack18[s] = $stack16;
+
+     label3:
+        $stack11 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        $stack13 = $stack11[s];
+
+        $stack12 = newData[s];
+
+        virtualinvoke $stack13.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: void enterData(int,float)>(insertionIndex, $stack12);
+
+        s = s + 1;
+
+        goto label2;
+
+     label4:
+        if refresh <= 0 goto label5;
+
+        insertionIndex#3 = insertionIndex + 1;
+
+        $stack8 = insertionIndex#3 % refresh;
+
+        if $stack8 != 0 goto label5;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void fireSeriesChanged()>();
+
+     label5:
+        return;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod getNewestTime()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+        org.jfree.data.time.RegularTimePeriod[] $stack2;
+        org.jfree.data.time.RegularTimePeriod $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int newestAt>;
+
+        $stack3 = $stack2[$stack1];
+
+        return $stack3;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod getOldestTime()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack1;
+        org.jfree.data.time.RegularTimePeriod[] $stack2;
+        org.jfree.data.time.RegularTimePeriod $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack1 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int oldestAt>;
+
+        $stack3 = $stack2[$stack1];
+
+        return $stack3;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int item, $stack5, series;
+        org.jfree.data.time.RegularTimePeriod[] $stack4;
+        org.jfree.data.time.RegularTimePeriod tp;
+        long $stack6;
+        java.lang.Long $stack7;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack5 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int translateGet(int)>(item);
+
+        tp = $stack4[$stack5];
+
+        $stack6 = specialinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(tp);
+
+        $stack7 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack6);
+
+        return $stack7;
+    }
+
+    public double getYValue(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int series, item, $stack5;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] $stack4;
+        org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence values;
+        float $stack6;
+        double $stack7;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence[] valueHistory>;
+
+        values = $stack4[series];
+
+        $stack5 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int translateGet(int)>(item);
+
+        $stack6 = virtualinvoke values.<org.jfree.data.time.DynamicTimeSeriesCollection$ValueSequence: float getData(int)>($stack5);
+
+        $stack7 = (double) $stack6;
+
+        return $stack7;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        java.lang.Float $stack3;
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int series, item;
+        double $stack4;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = new java.lang.Float;
+
+        $stack4 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: double getYValue(int,int)>(series, item);
+
+        specialinvoke $stack3.<java.lang.Float: void <init>(double)>($stack4);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getStartX(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int item, $stack5, series;
+        org.jfree.data.time.RegularTimePeriod[] $stack4;
+        org.jfree.data.time.RegularTimePeriod tp;
+        java.util.Calendar $stack6;
+        long $stack7;
+        java.lang.Long $stack8;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack5 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int translateGet(int)>(item);
+
+        tp = $stack4[$stack5];
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack7 = virtualinvoke tp.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack6);
+
+        $stack8 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack7);
+
+        return $stack8;
+    }
+
+    public java.lang.Number getEndX(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int item, $stack5, series;
+        org.jfree.data.time.RegularTimePeriod[] $stack4;
+        org.jfree.data.time.RegularTimePeriod tp;
+        java.util.Calendar $stack6;
+        long $stack7;
+        java.lang.Long $stack8;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.time.RegularTimePeriod[] pointsInTime>;
+
+        $stack5 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: int translateGet(int)>(item);
+
+        tp = $stack4[$stack5];
+
+        $stack6 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack7 = virtualinvoke tp.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack6);
+
+        $stack8 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack7);
+
+        return $stack8;
+    }
+
+    public java.lang.Number getStartY(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getEndY(int, int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int series;
+        java.lang.Comparable[] $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Comparable[] seriesKeys>;
+
+        $stack3 = $stack2[series];
+
+        return $stack3;
+    }
+
+    protected void fireSeriesChanged()
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.general.SeriesChangeEvent $stack1;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = new org.jfree.data.general.SeriesChangeEvent;
+
+        specialinvoke $stack1.<org.jfree.data.general.SeriesChangeEvent: void <init>(java.lang.Object)>(this);
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void seriesChanged(org.jfree.data.general.SeriesChangeEvent)>($stack1);
+
+        return;
+    }
+
+    public double getDomainLowerBound(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        java.lang.Long $stack2;
+        double $stack3;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainStart>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Long: double doubleValue()>();
+
+        return $stack3;
+    }
+
+    public double getDomainUpperBound(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        java.lang.Long $stack2;
+        double $stack3;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Long domainEnd>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Long: double doubleValue()>();
+
+        return $stack3;
+    }
+
+    public org.jfree.data.Range getDomainBounds(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.Range $stack2, $stack3;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range domainRange>;
+
+        if $stack2 != null goto label1;
+
+        virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: void findDomainLimits()>();
+
+     label1:
+        $stack3 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range domainRange>;
+
+        return $stack3;
+    }
+
+    private long getX(org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        int $stack2;
+        org.jfree.data.time.RegularTimePeriod period;
+        java.util.Calendar $stack3, $stack5, $stack7, $stack9;
+        long $stack4, $stack6, $stack8, $stack10;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        period := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        $stack2 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: int position>;
+
+        tableswitch($stack2)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label3;
+            default: goto label4;
+        };
+
+     label1:
+        $stack7 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack8 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack7);
+
+        return $stack8;
+
+     label2:
+        $stack5 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack6 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond(java.util.Calendar)>($stack5);
+
+        return $stack6;
+
+     label3:
+        $stack3 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack4 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack3);
+
+        return $stack4;
+
+     label4:
+        $stack9 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack10 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond(java.util.Calendar)>($stack9);
+
+        return $stack10;
+    }
+
+    public double getRangeLowerBound(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        java.lang.Float $stack4, $stack5;
+        boolean includeInterval;
+        double result;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float minValue>;
+
+        if $stack4 == null goto label1;
+
+        $stack5 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float minValue>;
+
+        result = virtualinvoke $stack5.<java.lang.Float: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public double getRangeUpperBound(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        java.lang.Float $stack4, $stack5;
+        boolean includeInterval;
+        double result;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue>;
+
+        if $stack4 == null goto label1;
+
+        $stack5 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: java.lang.Float maxValue>;
+
+        result = virtualinvoke $stack5.<java.lang.Float: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.data.Range getRangeBounds(boolean)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection this;
+        org.jfree.data.Range $stack4, $stack5, $stack7;
+        boolean includeInterval;
+        double max;
+
+        this := @this: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack4 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range valueRange>;
+
+        if $stack4 != null goto label1;
+
+        max = virtualinvoke this.<org.jfree.data.time.DynamicTimeSeriesCollection: double getRangeUpperBound(boolean)>(includeInterval);
+
+        $stack7 = new org.jfree.data.Range;
+
+        specialinvoke $stack7.<org.jfree.data.Range: void <init>(double,double)>(0.0, max);
+
+        this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range valueRange> = $stack7;
+
+     label1:
+        $stack5 = this.<org.jfree.data.time.DynamicTimeSeriesCollection: org.jfree.data.Range valueRange>;
+
+        return $stack5;
+    }
+
+    static int access$000(org.jfree.data.time.DynamicTimeSeriesCollection)
+    {
+        org.jfree.data.time.DynamicTimeSeriesCollection x0;
+        int $stack1;
+
+        x0 := @parameter0: org.jfree.data.time.DynamicTimeSeriesCollection;
+
+        $stack1 = x0.<org.jfree.data.time.DynamicTimeSeriesCollection: int maximumItemCount>;
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.time.DynamicTimeSeriesCollection: int END> = 2;
+
+        <org.jfree.data.time.DynamicTimeSeriesCollection: int MIDDLE> = 1;
+
+        <org.jfree.data.time.DynamicTimeSeriesCollection: int START> = 0;
+
+        return;
+    }
+}

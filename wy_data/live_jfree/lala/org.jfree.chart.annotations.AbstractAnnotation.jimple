@@ -1,0 +1,240 @@
+public abstract class org.jfree.chart.annotations.AbstractAnnotation extends java.lang.Object implements org.jfree.chart.annotations.Annotation, java.lang.Cloneable, java.io.Serializable
+{
+    private transient javax.swing.event.EventListenerList listenerList;
+    private boolean notify;
+
+    protected void <init>()
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        javax.swing.event.EventListenerList $stack1;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.annotations.AbstractAnnotation: boolean notify> = 1;
+
+        $stack1 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack1.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList> = $stack1;
+
+        return;
+    }
+
+    public void addChangeListener(org.jfree.chart.event.AnnotationChangeListener)
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        org.jfree.chart.event.AnnotationChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        listener := @parameter0: org.jfree.chart.event.AnnotationChangeListener;
+
+        $stack2 = this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/AnnotationChangeListener;", listener);
+
+        return;
+    }
+
+    public void removeChangeListener(org.jfree.chart.event.AnnotationChangeListener)
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        org.jfree.chart.event.AnnotationChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        listener := @parameter0: org.jfree.chart.event.AnnotationChangeListener;
+
+        $stack2 = this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/AnnotationChangeListener;", listener);
+
+        return;
+    }
+
+    public boolean hasListener(java.util.EventListener)
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        javax.swing.event.EventListenerList $stack3;
+        java.lang.Object[] $stack4;
+        java.util.List list;
+        java.util.EventListener listener;
+        boolean $stack6;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        listener := @parameter0: java.util.EventListener;
+
+        $stack3 = this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList>;
+
+        $stack4 = virtualinvoke $stack3.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        list = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack4);
+
+        $stack6 = interfaceinvoke list.<java.util.List: boolean contains(java.lang.Object)>(listener);
+
+        return $stack6;
+    }
+
+    protected void fireAnnotationChanged()
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        boolean $stack1;
+        org.jfree.chart.event.AnnotationChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.AbstractAnnotation: boolean notify>;
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = new org.jfree.chart.event.AnnotationChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.AnnotationChangeEvent: void <init>(java.lang.Object,org.jfree.chart.annotations.Annotation)>(this, this);
+
+        virtualinvoke this.<org.jfree.chart.annotations.AbstractAnnotation: void notifyListeners(org.jfree.chart.event.AnnotationChangeEvent)>($stack2);
+
+     label1:
+        return;
+    }
+
+    protected void notifyListeners(org.jfree.chart.event.AnnotationChangeEvent)
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        javax.swing.event.EventListenerList $stack4;
+        java.lang.Object[] listeners;
+        int $stack6, $stack9, i;
+        java.lang.Object $stack7, $stack10;
+        org.jfree.chart.event.AnnotationChangeEvent event;
+        org.jfree.chart.event.AnnotationChangeListener $stack11;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        event := @parameter0: org.jfree.chart.event.AnnotationChangeEvent;
+
+        $stack4 = this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList>;
+
+        listeners = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        $stack6 = lengthof listeners;
+
+        i = $stack6 - 2;
+
+     label1:
+        if i < 0 goto label3;
+
+        $stack7 = listeners[i];
+
+        if $stack7 != class "Lorg/jfree/chart/event/AnnotationChangeListener;" goto label2;
+
+        $stack9 = i + 1;
+
+        $stack10 = listeners[$stack9];
+
+        $stack11 = (org.jfree.chart.event.AnnotationChangeListener) $stack10;
+
+        interfaceinvoke $stack11.<org.jfree.chart.event.AnnotationChangeListener: void annotationChanged(org.jfree.chart.event.AnnotationChangeEvent)>(event);
+
+     label2:
+        i = i + -2;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public boolean getNotify()
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.AbstractAnnotation: boolean notify>;
+
+        return $stack1;
+    }
+
+    public void setNotify(boolean)
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        boolean flag, $stack2;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.annotations.AbstractAnnotation: boolean notify> = flag;
+
+        $stack2 = this.<org.jfree.chart.annotations.AbstractAnnotation: boolean notify>;
+
+        if $stack2 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.annotations.AbstractAnnotation: void fireAnnotationChanged()>();
+
+     label1:
+        return;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.annotations.AbstractAnnotation this, clone;
+        java.lang.Object $stack2;
+        javax.swing.event.EventListenerList $stack3;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.annotations.AbstractAnnotation) $stack2;
+
+        $stack3 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack3.<javax.swing.event.EventListenerList: void <init>()>();
+
+        clone.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList> = $stack3;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.annotations.AbstractAnnotation this;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.annotations.AbstractAnnotation this;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.annotations.AbstractAnnotation;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack2.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.chart.annotations.AbstractAnnotation: javax.swing.event.EventListenerList listenerList> = $stack2;
+
+        return;
+    }
+}

@@ -1,0 +1,776 @@
+public final class org.jsoup.internal.StringUtil extends java.lang.Object
+{
+    static final java.lang.String[] padding;
+    private static final java.util.Stack builders;
+    private static final int MaxCachedBuilderSize;
+    private static final int MaxIdleBuilders;
+
+    public void <init>()
+    {
+        org.jsoup.internal.StringUtil this;
+
+        this := @this: org.jsoup.internal.StringUtil;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.String join(java.util.Collection, java.lang.String)
+    {
+        java.util.Collection strings;
+        java.util.Iterator $stack2;
+        java.lang.String sep, $stack3;
+
+        strings := @parameter0: java.util.Collection;
+
+        sep := @parameter1: java.lang.String;
+
+        $stack2 = interfaceinvoke strings.<java.util.Collection: java.util.Iterator iterator()>();
+
+        $stack3 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String join(java.util.Iterator,java.lang.String)>($stack2, sep);
+
+        return $stack3;
+    }
+
+    public static java.lang.String join(java.util.Iterator, java.lang.String)
+    {
+        java.util.Iterator strings;
+        boolean $stack4, $stack7, $stack10;
+        java.lang.Object $stack5, $stack13;
+        java.lang.String start, $stack11, sep;
+        java.lang.StringBuilder $stack8, sb;
+
+        strings := @parameter0: java.util.Iterator;
+
+        sep := @parameter1: java.lang.String;
+
+        $stack4 = interfaceinvoke strings.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack4 != 0 goto label1;
+
+        return "";
+
+     label1:
+        $stack5 = interfaceinvoke strings.<java.util.Iterator: java.lang.Object next()>();
+
+        start = virtualinvoke $stack5.<java.lang.Object: java.lang.String toString()>();
+
+        $stack7 = interfaceinvoke strings.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 != 0 goto label2;
+
+        return start;
+
+     label2:
+        $stack8 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        sb = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(start);
+
+     label3:
+        $stack10 = interfaceinvoke strings.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label4;
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(sep);
+
+        $stack13 = interfaceinvoke strings.<java.util.Iterator: java.lang.Object next()>();
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack13);
+
+        goto label3;
+
+     label4:
+        $stack11 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(sb);
+
+        return $stack11;
+    }
+
+    public static java.lang.String join(java.lang.String[], java.lang.String)
+    {
+        java.lang.String[] strings;
+        java.util.List $stack2;
+        java.lang.String sep, $stack3;
+
+        strings := @parameter0: java.lang.String[];
+
+        sep := @parameter1: java.lang.String;
+
+        $stack2 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>(strings);
+
+        $stack3 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String join(java.util.Collection,java.lang.String)>($stack2, sep);
+
+        return $stack3;
+    }
+
+    public static java.lang.String padding(int)
+    {
+        int width, $stack4, i;
+        java.lang.String[] $stack3, $stack8;
+        char[] out;
+        java.lang.String $stack5, $stack9;
+        java.lang.IllegalArgumentException $stack10;
+
+        width := @parameter0: int;
+
+        if width >= 0 goto label1;
+
+        $stack10 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("width must be > 0");
+
+        throw $stack10;
+
+     label1:
+        $stack3 = <org.jsoup.internal.StringUtil: java.lang.String[] padding>;
+
+        $stack4 = lengthof $stack3;
+
+        if width >= $stack4 goto label2;
+
+        $stack8 = <org.jsoup.internal.StringUtil: java.lang.String[] padding>;
+
+        $stack9 = $stack8[width];
+
+        return $stack9;
+
+     label2:
+        out = newarray (char)[width];
+
+        i = 0;
+
+     label3:
+        if i >= width goto label4;
+
+        out[i] = 32;
+
+        i = i + 1;
+
+        goto label3;
+
+     label4:
+        $stack5 = staticinvoke <java.lang.String: java.lang.String valueOf(char[])>(out);
+
+        return $stack5;
+    }
+
+    public static boolean isBlank(java.lang.String)
+    {
+        java.lang.String string;
+        int $stack3, l, $stack5, i;
+        boolean $stack6;
+
+        string := @parameter0: java.lang.String;
+
+        if string == null goto label1;
+
+        $stack3 = virtualinvoke string.<java.lang.String: int length()>();
+
+        if $stack3 != 0 goto label2;
+
+     label1:
+        return 1;
+
+     label2:
+        l = virtualinvoke string.<java.lang.String: int length()>();
+
+        i = 0;
+
+     label3:
+        if i >= l goto label5;
+
+        $stack5 = virtualinvoke string.<java.lang.String: int codePointAt(int)>(i);
+
+        $stack6 = staticinvoke <org.jsoup.internal.StringUtil: boolean isWhitespace(int)>($stack5);
+
+        if $stack6 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        return 1;
+    }
+
+    public static boolean isNumeric(java.lang.String)
+    {
+        java.lang.String string;
+        int $stack3, l, $stack5, i;
+        boolean $stack6;
+
+        string := @parameter0: java.lang.String;
+
+        if string == null goto label1;
+
+        $stack3 = virtualinvoke string.<java.lang.String: int length()>();
+
+        if $stack3 != 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        l = virtualinvoke string.<java.lang.String: int length()>();
+
+        i = 0;
+
+     label3:
+        if i >= l goto label5;
+
+        $stack5 = virtualinvoke string.<java.lang.String: int codePointAt(int)>(i);
+
+        $stack6 = staticinvoke <java.lang.Character: boolean isDigit(int)>($stack5);
+
+        if $stack6 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        return 1;
+    }
+
+    public static boolean isWhitespace(int)
+    {
+        int c;
+        boolean $stack1;
+
+        c := @parameter0: int;
+
+        if c == 32 goto label1;
+
+        if c == 9 goto label1;
+
+        if c == 10 goto label1;
+
+        if c == 12 goto label1;
+
+        if c != 13 goto label2;
+
+     label1:
+        $stack1 = 1;
+
+        goto label3;
+
+     label2:
+        $stack1 = 0;
+
+     label3:
+        return $stack1;
+    }
+
+    public static boolean isActuallyWhitespace(int)
+    {
+        int c;
+        boolean $stack1;
+
+        c := @parameter0: int;
+
+        if c == 32 goto label1;
+
+        if c == 9 goto label1;
+
+        if c == 10 goto label1;
+
+        if c == 12 goto label1;
+
+        if c == 13 goto label1;
+
+        if c != 160 goto label2;
+
+     label1:
+        $stack1 = 1;
+
+        goto label3;
+
+     label2:
+        $stack1 = 0;
+
+     label3:
+        return $stack1;
+    }
+
+    public static boolean isInvisibleChar(int)
+    {
+        int c;
+        boolean $stack1;
+
+        c := @parameter0: int;
+
+        if c == 8203 goto label1;
+
+        if c != 173 goto label2;
+
+     label1:
+        $stack1 = 1;
+
+        goto label3;
+
+     label2:
+        $stack1 = 0;
+
+     label3:
+        return $stack1;
+    }
+
+    public static java.lang.String normaliseWhitespace(java.lang.String)
+    {
+        java.lang.StringBuilder sb;
+        java.lang.String string, $stack3;
+
+        string := @parameter0: java.lang.String;
+
+        sb = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        staticinvoke <org.jsoup.internal.StringUtil: void appendNormalisedWhitespace(java.lang.StringBuilder,java.lang.String,boolean)>(sb, string, 0);
+
+        $stack3 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(sb);
+
+        return $stack3;
+    }
+
+    public static void appendNormalisedWhitespace(java.lang.StringBuilder, java.lang.String, boolean)
+    {
+        java.lang.String string;
+        int len, c, i, $stack12;
+        boolean $stack10, $stack11, stripLeading, lastWasWhite, reachedNonWhite;
+        java.lang.StringBuilder accum;
+
+        accum := @parameter0: java.lang.StringBuilder;
+
+        string := @parameter1: java.lang.String;
+
+        stripLeading := @parameter2: boolean;
+
+        lastWasWhite = 0;
+
+        reachedNonWhite = 0;
+
+        len = virtualinvoke string.<java.lang.String: int length()>();
+
+        i = 0;
+
+     label1:
+        if i >= len goto label6;
+
+        c = virtualinvoke string.<java.lang.String: int codePointAt(int)>(i);
+
+        $stack10 = staticinvoke <org.jsoup.internal.StringUtil: boolean isActuallyWhitespace(int)>(c);
+
+        if $stack10 == 0 goto label4;
+
+        if stripLeading == 0 goto label2;
+
+        if reachedNonWhite == 0 goto label5;
+
+     label2:
+        if lastWasWhite == 0 goto label3;
+
+        goto label5;
+
+     label3:
+        virtualinvoke accum.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(32);
+
+        lastWasWhite = 1;
+
+        goto label5;
+
+     label4:
+        $stack11 = staticinvoke <org.jsoup.internal.StringUtil: boolean isInvisibleChar(int)>(c);
+
+        if $stack11 != 0 goto label5;
+
+        virtualinvoke accum.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>(c);
+
+        lastWasWhite = 0;
+
+        reachedNonWhite = 1;
+
+     label5:
+        $stack12 = staticinvoke <java.lang.Character: int charCount(int)>(c);
+
+        i = i + $stack12;
+
+        goto label1;
+
+     label6:
+        return;
+    }
+
+    public static transient boolean in(java.lang.String, java.lang.String[])
+    {
+        java.lang.String[] haystack;
+        int len, i;
+        java.lang.String needle, $stack4;
+        boolean $stack5;
+
+        needle := @parameter0: java.lang.String;
+
+        haystack := @parameter1: java.lang.String[];
+
+        len = lengthof haystack;
+
+        i = 0;
+
+     label1:
+        if i >= len goto label3;
+
+        $stack4 = haystack[i];
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>(needle);
+
+        if $stack5 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public static boolean inSorted(java.lang.String, java.lang.String[])
+    {
+        java.lang.String[] haystack;
+        java.lang.String needle;
+        int $stack2;
+        boolean $stack3;
+
+        needle := @parameter0: java.lang.String;
+
+        haystack := @parameter1: java.lang.String[];
+
+        $stack2 = staticinvoke <java.util.Arrays: int binarySearch(java.lang.Object[],java.lang.Object)>(haystack, needle);
+
+        if $stack2 < 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public static java.net.URL resolve(java.net.URL, java.lang.String) throws java.net.MalformedURLException
+    {
+        boolean $stack2;
+        int $stack3, $stack6, $stack12;
+        java.lang.String $stack5, $stack10, $stack11, $stack15, $stack17, $stack19, relUrl;
+        java.net.URL $stack9, base, $stack4;
+        java.lang.StringBuilder $stack13, $stack14, $stack16, $stack18, $stack20, $stack21;
+
+        base := @parameter0: java.net.URL;
+
+        relUrl := @parameter1: java.lang.String;
+
+        $stack2 = virtualinvoke relUrl.<java.lang.String: boolean startsWith(java.lang.String)>("?");
+
+        if $stack2 == 0 goto label1;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke base.<java.net.URL: java.lang.String getPath()>();
+
+        $stack20 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack19);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(relUrl);
+
+        relUrl = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label1:
+        $stack3 = virtualinvoke relUrl.<java.lang.String: int indexOf(int)>(46);
+
+        if $stack3 != 0 goto label2;
+
+        $stack5 = virtualinvoke base.<java.net.URL: java.lang.String getFile()>();
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: int indexOf(int)>(47);
+
+        if $stack6 == 0 goto label2;
+
+        $stack9 = new java.net.URL;
+
+        $stack10 = virtualinvoke base.<java.net.URL: java.lang.String getProtocol()>();
+
+        $stack11 = virtualinvoke base.<java.net.URL: java.lang.String getHost()>();
+
+        $stack12 = virtualinvoke base.<java.net.URL: int getPort()>();
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/");
+
+        $stack15 = virtualinvoke base.<java.net.URL: java.lang.String getFile()>();
+
+        $stack16 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack15);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack9.<java.net.URL: void <init>(java.lang.String,java.lang.String,int,java.lang.String)>($stack10, $stack11, $stack12, $stack17);
+
+        base = $stack9;
+
+     label2:
+        $stack4 = new java.net.URL;
+
+        specialinvoke $stack4.<java.net.URL: void <init>(java.net.URL,java.lang.String)>(base, relUrl);
+
+        return $stack4;
+    }
+
+    public static java.lang.String resolve(java.lang.String, java.lang.String)
+    {
+        java.net.URL $stack5, $stack6, $stack10;
+        java.lang.String baseUrl, relUrl, $stack7, $stack11;
+        java.net.MalformedURLException $stack8, $stack9;
+
+        baseUrl := @parameter0: java.lang.String;
+
+        relUrl := @parameter1: java.lang.String;
+
+     label1:
+        $stack5 = new java.net.URL;
+
+        specialinvoke $stack5.<java.net.URL: void <init>(java.lang.String)>(baseUrl);
+
+     label2:
+        goto label5;
+
+     label3:
+        $stack9 := @caughtexception;
+
+        $stack10 = new java.net.URL;
+
+        specialinvoke $stack10.<java.net.URL: void <init>(java.lang.String)>(relUrl);
+
+        $stack11 = virtualinvoke $stack10.<java.net.URL: java.lang.String toExternalForm()>();
+
+     label4:
+        return $stack11;
+
+     label5:
+        $stack6 = staticinvoke <org.jsoup.internal.StringUtil: java.net.URL resolve(java.net.URL,java.lang.String)>($stack5, relUrl);
+
+        $stack7 = virtualinvoke $stack6.<java.net.URL: java.lang.String toExternalForm()>();
+
+     label6:
+        return $stack7;
+
+     label7:
+        $stack8 := @caughtexception;
+
+        return "";
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+        catch java.net.MalformedURLException from label1 to label4 with label7;
+        catch java.net.MalformedURLException from label5 to label6 with label7;
+    }
+
+    public static java.lang.StringBuilder borrowBuilder()
+    {
+        java.util.Stack $stack2, $stack3, $stack5;
+        boolean $stack4;
+        java.lang.Object $stack6;
+        java.lang.Throwable $stack10;
+        java.lang.StringBuilder $stack8;
+
+        $stack2 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        entermonitor $stack2;
+
+     label1:
+        $stack3 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.Stack: boolean empty()>();
+
+        if $stack4 == 0 goto label2;
+
+        $stack8 = new java.lang.StringBuilder;
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>(int)>(8192);
+
+        goto label3;
+
+     label2:
+        $stack5 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.Stack: java.lang.Object pop()>();
+
+        $stack8 = (java.lang.StringBuilder) $stack6;
+
+     label3:
+        exitmonitor $stack2;
+
+     label4:
+        return $stack8;
+
+     label5:
+        $stack10 := @caughtexception;
+
+        exitmonitor $stack2;
+
+     label6:
+        throw $stack10;
+
+        catch java.lang.Throwable from label1 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    public static java.lang.String releaseBuilder(java.lang.StringBuilder)
+    {
+        java.lang.String string;
+        int $stack5, $stack7, $stack13;
+        java.util.Stack $stack9, $stack10, $stack15, $stack12;
+        java.lang.StringBuilder $stack18, sb;
+        java.lang.Throwable $stack20;
+
+        sb := @parameter0: java.lang.StringBuilder;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(sb);
+
+        string = virtualinvoke sb.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack5 = virtualinvoke sb.<java.lang.StringBuilder: int length()>();
+
+        if $stack5 <= 8192 goto label1;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>(int)>(8192);
+
+        sb = $stack18;
+
+        goto label2;
+
+     label1:
+        $stack7 = virtualinvoke sb.<java.lang.StringBuilder: int length()>();
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder delete(int,int)>(0, $stack7);
+
+     label2:
+        $stack9 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        entermonitor $stack9;
+
+     label3:
+        $stack10 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        virtualinvoke $stack10.<java.util.Stack: java.lang.Object push(java.lang.Object)>(sb);
+
+     label4:
+        $stack12 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        $stack13 = virtualinvoke $stack12.<java.util.Stack: int size()>();
+
+        if $stack13 <= 8 goto label5;
+
+        $stack15 = <org.jsoup.internal.StringUtil: java.util.Stack builders>;
+
+        virtualinvoke $stack15.<java.util.Stack: java.lang.Object pop()>();
+
+        goto label4;
+
+     label5:
+        exitmonitor $stack9;
+
+     label6:
+        goto label9;
+
+     label7:
+        $stack20 := @caughtexception;
+
+        exitmonitor $stack9;
+
+     label8:
+        throw $stack20;
+
+     label9:
+        return string;
+
+        catch java.lang.Throwable from label3 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $stack0;
+        java.util.Stack $stack1;
+
+        <org.jsoup.internal.StringUtil: int MaxIdleBuilders> = 8;
+
+        <org.jsoup.internal.StringUtil: int MaxCachedBuilderSize> = 8192;
+
+        $stack0 = newarray (java.lang.String)[21];
+
+        $stack0[0] = "";
+
+        $stack0[1] = " ";
+
+        $stack0[2] = "  ";
+
+        $stack0[3] = "   ";
+
+        $stack0[4] = "    ";
+
+        $stack0[5] = "     ";
+
+        $stack0[6] = "      ";
+
+        $stack0[7] = "       ";
+
+        $stack0[8] = "        ";
+
+        $stack0[9] = "         ";
+
+        $stack0[10] = "          ";
+
+        $stack0[11] = "           ";
+
+        $stack0[12] = "            ";
+
+        $stack0[13] = "             ";
+
+        $stack0[14] = "              ";
+
+        $stack0[15] = "               ";
+
+        $stack0[16] = "                ";
+
+        $stack0[17] = "                 ";
+
+        $stack0[18] = "                  ";
+
+        $stack0[19] = "                   ";
+
+        $stack0[20] = "                    ";
+
+        <org.jsoup.internal.StringUtil: java.lang.String[] padding> = $stack0;
+
+        $stack1 = new java.util.Stack;
+
+        specialinvoke $stack1.<java.util.Stack: void <init>()>();
+
+        <org.jsoup.internal.StringUtil: java.util.Stack builders> = $stack1;
+
+        return;
+    }
+}

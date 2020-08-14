@@ -1,0 +1,602 @@
+public class org.jfree.chart.text.TextBlock extends java.lang.Object implements java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List lines;
+    private org.jfree.chart.ui.HorizontalAlignment lineAlignment;
+
+    public void <init>()
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.util.ArrayList $stack1;
+        org.jfree.chart.ui.HorizontalAlignment $stack2;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.text.TextBlock: java.util.List lines> = $stack1;
+
+        $stack2 = <org.jfree.chart.ui.HorizontalAlignment: org.jfree.chart.ui.HorizontalAlignment CENTER>;
+
+        this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.HorizontalAlignment lineAlignment> = $stack2;
+
+        return;
+    }
+
+    public org.jfree.chart.ui.HorizontalAlignment getLineAlignment()
+    {
+        org.jfree.chart.text.TextBlock this;
+        org.jfree.chart.ui.HorizontalAlignment $stack1;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        $stack1 = this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.HorizontalAlignment lineAlignment>;
+
+        return $stack1;
+    }
+
+    public void setLineAlignment(org.jfree.chart.ui.HorizontalAlignment)
+    {
+        org.jfree.chart.ui.HorizontalAlignment alignment;
+        org.jfree.chart.text.TextBlock this;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        alignment := @parameter0: org.jfree.chart.ui.HorizontalAlignment;
+
+        if alignment != null goto label1;
+
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'alignment\' argument.");
+
+        throw $stack2;
+
+     label1:
+        this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.HorizontalAlignment lineAlignment> = alignment;
+
+        return;
+    }
+
+    public void addLine(java.lang.String, java.awt.Font, java.awt.Paint)
+    {
+        org.jfree.chart.text.TextBlock this;
+        org.jfree.chart.text.TextLine $stack4;
+        java.lang.String text;
+        java.awt.Font font;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        paint := @parameter2: java.awt.Paint;
+
+        $stack4 = new org.jfree.chart.text.TextLine;
+
+        specialinvoke $stack4.<org.jfree.chart.text.TextLine: void <init>(java.lang.String,java.awt.Font,java.awt.Paint)>(text, font, paint);
+
+        virtualinvoke this.<org.jfree.chart.text.TextBlock: void addLine(org.jfree.chart.text.TextLine)>($stack4);
+
+        return;
+    }
+
+    public void addLine(org.jfree.chart.text.TextLine)
+    {
+        org.jfree.chart.text.TextBlock this;
+        org.jfree.chart.text.TextLine line;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        line := @parameter0: org.jfree.chart.text.TextLine;
+
+        $stack2 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(line);
+
+        return;
+    }
+
+    public org.jfree.chart.text.TextLine getLastLine()
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.util.List $stack3, $stack5;
+        int $stack4, index;
+        java.lang.Object $stack6;
+        org.jfree.chart.text.TextLine last;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        last = null;
+
+        $stack3 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+
+        index = $stack4 - 1;
+
+        if index < 0 goto label1;
+
+        $stack5 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(index);
+
+        last = (org.jfree.chart.text.TextLine) $stack6;
+
+     label1:
+        return last;
+    }
+
+    public java.util.List getLines()
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.util.List $stack1, $stack2;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        $stack1 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.ui.Size2D calculateDimensions(java.awt.Graphics2D)
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.util.List $stack9;
+        java.util.Iterator iterator;
+        boolean $stack11;
+        org.jfree.chart.ui.Size2D $stack12, dimension;
+        java.lang.Object $stack13;
+        org.jfree.chart.text.TextLine line;
+        java.awt.Graphics2D g2;
+        double $stack15, $stack17, width, height;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        width = 0.0;
+
+        height = 0.0;
+
+        $stack9 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        iterator = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack13 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        line = (org.jfree.chart.text.TextLine) $stack13;
+
+        dimension = virtualinvoke line.<org.jfree.chart.text.TextLine: org.jfree.chart.ui.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+
+        $stack15 = virtualinvoke dimension.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        width = staticinvoke <java.lang.Math: double max(double,double)>(width, $stack15);
+
+        $stack17 = virtualinvoke dimension.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        height = height + $stack17;
+
+        goto label1;
+
+     label2:
+        $stack12 = new org.jfree.chart.ui.Size2D;
+
+        specialinvoke $stack12.<org.jfree.chart.ui.Size2D: void <init>(double,double)>(width, height);
+
+        return $stack12;
+    }
+
+    public java.awt.Shape calculateBounds(java.awt.Graphics2D, float, float, org.jfree.chart.text.TextBlockAnchor, float, float, double)
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D d;
+        org.jfree.chart.text.TextBlockAnchor anchor;
+        double $stack14, $stack15, $stack22, $stack23, $stack24, $stack25, angle;
+        float[] offsets;
+        java.awt.geom.Rectangle2D$Double $stack17;
+        float anchorX, $stack18, $stack19, anchorY, $stack20, $stack21, rotateX, rotateY;
+        java.awt.Shape rotatedBounds;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        anchorX := @parameter1: float;
+
+        anchorY := @parameter2: float;
+
+        anchor := @parameter3: org.jfree.chart.text.TextBlockAnchor;
+
+        rotateX := @parameter4: float;
+
+        rotateY := @parameter5: float;
+
+        angle := @parameter6: double;
+
+        d = virtualinvoke this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+
+        $stack14 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack15 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        offsets = specialinvoke this.<org.jfree.chart.text.TextBlock: float[] calculateOffsets(org.jfree.chart.text.TextBlockAnchor,double,double)>(anchor, $stack14, $stack15);
+
+        $stack17 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack18 = offsets[0];
+
+        $stack19 = anchorX + $stack18;
+
+        $stack22 = (double) $stack19;
+
+        $stack20 = offsets[1];
+
+        $stack21 = anchorY + $stack20;
+
+        $stack23 = (double) $stack21;
+
+        $stack24 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack25 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        specialinvoke $stack17.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack22, $stack23, $stack24, $stack25);
+
+        rotatedBounds = staticinvoke <org.jfree.chart.util.ShapeUtils: java.awt.Shape rotateShape(java.awt.Shape,double,float,float)>($stack17, angle, rotateX, rotateY);
+
+        return rotatedBounds;
+    }
+
+    public void draw(java.awt.Graphics2D, float, float, org.jfree.chart.text.TextBlockAnchor)
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.awt.Graphics2D g2;
+        float x, y;
+        org.jfree.chart.text.TextBlockAnchor anchor;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        x := @parameter1: float;
+
+        y := @parameter2: float;
+
+        anchor := @parameter3: org.jfree.chart.text.TextBlockAnchor;
+
+        virtualinvoke this.<org.jfree.chart.text.TextBlock: void draw(java.awt.Graphics2D,float,float,org.jfree.chart.text.TextBlockAnchor,float,float,double)>(g2, x, y, anchor, 0.0F, 0.0F, 0.0);
+
+        return;
+    }
+
+    public void draw(java.awt.Graphics2D, float, float, org.jfree.chart.text.TextBlockAnchor, float, float, double)
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D d, dimension;
+        org.jfree.chart.text.TextBlockAnchor anchor;
+        double $stack17, $stack18, angle, $stack39, $stack40, $stack41, $stack58, $stack59, $stack60, $stack36;
+        float[] offsets;
+        java.util.List $stack20;
+        java.util.Iterator iterator;
+        boolean $stack22;
+        java.lang.Object $stack23;
+        org.jfree.chart.text.TextLine line;
+        org.jfree.chart.ui.HorizontalAlignment $stack25, $stack26, $stack27, $stack28;
+        float anchorX, anchorY, rotateX, rotateY, $stack61, yCursor, lineOffset, $stack29, $stack30, $stack35, $stack31, $stack32, $stack34, $stack37;
+        org.jfree.chart.ui.TextAnchor $stack33;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        anchorX := @parameter1: float;
+
+        anchorY := @parameter2: float;
+
+        anchor := @parameter3: org.jfree.chart.text.TextBlockAnchor;
+
+        rotateX := @parameter4: float;
+
+        rotateY := @parameter5: float;
+
+        angle := @parameter6: double;
+
+        d = virtualinvoke this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+
+        $stack17 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack18 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        offsets = specialinvoke this.<org.jfree.chart.text.TextBlock: float[] calculateOffsets(org.jfree.chart.text.TextBlockAnchor,double,double)>(anchor, $stack17, $stack18);
+
+        $stack20 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        iterator = interfaceinvoke $stack20.<java.util.List: java.util.Iterator iterator()>();
+
+        yCursor = 0.0F;
+
+     label1:
+        $stack22 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack22 == 0 goto label4;
+
+        $stack23 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        line = (org.jfree.chart.text.TextLine) $stack23;
+
+        dimension = virtualinvoke line.<org.jfree.chart.text.TextLine: org.jfree.chart.ui.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+
+        lineOffset = 0.0F;
+
+        $stack26 = this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.HorizontalAlignment lineAlignment>;
+
+        $stack25 = <org.jfree.chart.ui.HorizontalAlignment: org.jfree.chart.ui.HorizontalAlignment CENTER>;
+
+        if $stack26 != $stack25 goto label2;
+
+        $stack58 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack59 = virtualinvoke dimension.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack60 = $stack58 - $stack59;
+
+        $stack61 = (float) $stack60;
+
+        lineOffset = $stack61 / 2.0F;
+
+        goto label3;
+
+     label2:
+        $stack28 = this.<org.jfree.chart.text.TextBlock: org.jfree.chart.ui.HorizontalAlignment lineAlignment>;
+
+        $stack27 = <org.jfree.chart.ui.HorizontalAlignment: org.jfree.chart.ui.HorizontalAlignment RIGHT>;
+
+        if $stack28 != $stack27 goto label3;
+
+        $stack39 = virtualinvoke d.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack40 = virtualinvoke dimension.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack41 = $stack39 - $stack40;
+
+        lineOffset = (float) $stack41;
+
+     label3:
+        $stack29 = offsets[0];
+
+        $stack30 = anchorX + $stack29;
+
+        $stack35 = $stack30 + lineOffset;
+
+        $stack31 = offsets[1];
+
+        $stack32 = anchorY + $stack31;
+
+        $stack34 = $stack32 + yCursor;
+
+        $stack33 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        virtualinvoke line.<org.jfree.chart.text.TextLine: void draw(java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor,float,float,double)>(g2, $stack35, $stack34, $stack33, rotateX, rotateY, angle);
+
+        $stack36 = virtualinvoke dimension.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        $stack37 = (float) $stack36;
+
+        yCursor = yCursor + $stack37;
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    private float[] calculateOffsets(org.jfree.chart.text.TextBlockAnchor, double, double)
+    {
+        float[] result;
+        org.jfree.chart.text.TextBlockAnchor anchor, $stack9, $stack13, $stack15, $stack16, $stack26, $stack30, $stack31, $stack33, $stack36, $stack37, $stack41, $stack42, $stack45, $stack48, $stack12;
+        double width, height, $stack10, $stack43, $stack17, $stack32;
+        org.jfree.chart.text.TextBlock this;
+        float xAdj, yAdj, $stack11, $stack18;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        anchor := @parameter0: org.jfree.chart.text.TextBlockAnchor;
+
+        width := @parameter1: double;
+
+        height := @parameter2: double;
+
+        result = newarray (float)[2];
+
+        xAdj = 0.0F;
+
+        yAdj = 0.0F;
+
+        $stack9 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_CENTER>;
+
+        if anchor == $stack9 goto label01;
+
+        $stack37 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor CENTER>;
+
+        if anchor == $stack37 goto label01;
+
+        $stack41 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_CENTER>;
+
+        if anchor != $stack41 goto label02;
+
+     label01:
+        $stack10 = neg width;
+
+        $stack11 = (float) $stack10;
+
+        xAdj = $stack11 / 2.0F;
+
+        goto label04;
+
+     label02:
+        $stack42 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_RIGHT>;
+
+        if anchor == $stack42 goto label03;
+
+        $stack45 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor CENTER_RIGHT>;
+
+        if anchor == $stack45 goto label03;
+
+        $stack48 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_RIGHT>;
+
+        if anchor != $stack48 goto label04;
+
+     label03:
+        $stack43 = neg width;
+
+        xAdj = (float) $stack43;
+
+     label04:
+        $stack12 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_LEFT>;
+
+        if anchor == $stack12 goto label05;
+
+        $stack13 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_CENTER>;
+
+        if anchor == $stack13 goto label05;
+
+        $stack15 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_RIGHT>;
+
+        if anchor != $stack15 goto label06;
+
+     label05:
+        yAdj = 0.0F;
+
+        goto label10;
+
+     label06:
+        $stack16 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor CENTER_LEFT>;
+
+        if anchor == $stack16 goto label07;
+
+        $stack26 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor CENTER>;
+
+        if anchor == $stack26 goto label07;
+
+        $stack30 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor CENTER_RIGHT>;
+
+        if anchor != $stack30 goto label08;
+
+     label07:
+        $stack17 = neg height;
+
+        $stack18 = (float) $stack17;
+
+        yAdj = $stack18 / 2.0F;
+
+        goto label10;
+
+     label08:
+        $stack31 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_LEFT>;
+
+        if anchor == $stack31 goto label09;
+
+        $stack33 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_CENTER>;
+
+        if anchor == $stack33 goto label09;
+
+        $stack36 = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_RIGHT>;
+
+        if anchor != $stack36 goto label10;
+
+     label09:
+        $stack32 = neg height;
+
+        yAdj = (float) $stack32;
+
+     label10:
+        result[0] = xAdj;
+
+        result[1] = yAdj;
+
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.text.TextBlock this, block;
+        boolean $stack3, $stack6;
+        java.util.List $stack4, $stack5;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.text.TextBlock;
+
+        if $stack3 == 0 goto label2;
+
+        block = (org.jfree.chart.text.TextBlock) obj;
+
+        $stack5 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack4 = block.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: boolean equals(java.lang.Object)>($stack4);
+
+        return $stack6;
+
+     label2:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.text.TextBlock this;
+        java.util.List $stack1, $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.chart.text.TextBlock;
+
+        $stack1 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<org.jfree.chart.text.TextBlock: java.util.List lines>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.text.TextBlock: long serialVersionUID> = -4333175719424385526L;
+
+        return;
+    }
+}

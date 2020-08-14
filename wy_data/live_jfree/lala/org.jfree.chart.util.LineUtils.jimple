@@ -1,0 +1,295 @@
+public class org.jfree.chart.util.LineUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.util.LineUtils this;
+
+        this := @this: org.jfree.chart.util.LineUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean clipLine(java.awt.geom.Line2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Line2D line;
+        java.awt.geom.Rectangle2D rect;
+        double minX, maxX, minY, maxY, dx, dy, $stack47, $stack48, $stack49, $stack54, $stack55, $stack56, $stack61, $stack62, $stack63, $stack68, $stack69, $stack70, $stack80, $stack81, $stack82, $stack87, $stack88, $stack89, $stack94, $stack95, $stack96, $stack101, $stack102, $stack103, x1, y1, x2, y2;
+        int $stack34, $stack35, $stack38, $stack39, $stack40, $stack41, $stack71, $stack72, $stack73, $stack74, f1, f2;
+        byte $stack43, $stack50, $stack57, $stack64, $stack76, $stack83, $stack90, $stack97;
+
+        line := @parameter0: java.awt.geom.Line2D;
+
+        rect := @parameter1: java.awt.geom.Rectangle2D;
+
+        x1 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        y1 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        x2 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        y2 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        minX = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        maxX = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        minY = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        maxY = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        f1 = virtualinvoke rect.<java.awt.geom.Rectangle2D: int outcode(double,double)>(x1, y1);
+
+        f2 = virtualinvoke rect.<java.awt.geom.Rectangle2D: int outcode(double,double)>(x2, y2);
+
+     label01:
+        $stack34 = f1 | f2;
+
+        if $stack34 == 0 goto label13;
+
+        $stack35 = f1 & f2;
+
+        if $stack35 == 0 goto label02;
+
+        return 0;
+
+     label02:
+        dx = x2 - x1;
+
+        dy = y2 - y1;
+
+        if f1 == 0 goto label07;
+
+        $stack71 = f1 & 1;
+
+        if $stack71 != 1 goto label03;
+
+        $stack97 = dx cmpl 0.0;
+
+        if $stack97 == 0 goto label03;
+
+        $stack101 = minX - x1;
+
+        $stack102 = $stack101 * dy;
+
+        $stack103 = $stack102 / dx;
+
+        y1 = y1 + $stack103;
+
+        x1 = minX;
+
+        goto label06;
+
+     label03:
+        $stack72 = f1 & 4;
+
+        if $stack72 != 4 goto label04;
+
+        $stack90 = dx cmpl 0.0;
+
+        if $stack90 == 0 goto label04;
+
+        $stack94 = maxX - x1;
+
+        $stack95 = $stack94 * dy;
+
+        $stack96 = $stack95 / dx;
+
+        y1 = y1 + $stack96;
+
+        x1 = maxX;
+
+        goto label06;
+
+     label04:
+        $stack73 = f1 & 8;
+
+        if $stack73 != 8 goto label05;
+
+        $stack83 = dy cmpl 0.0;
+
+        if $stack83 == 0 goto label05;
+
+        $stack87 = maxY - y1;
+
+        $stack88 = $stack87 * dx;
+
+        $stack89 = $stack88 / dy;
+
+        x1 = x1 + $stack89;
+
+        y1 = maxY;
+
+        goto label06;
+
+     label05:
+        $stack74 = f1 & 2;
+
+        if $stack74 != 2 goto label06;
+
+        $stack76 = dy cmpl 0.0;
+
+        if $stack76 == 0 goto label06;
+
+        $stack80 = minY - y1;
+
+        $stack81 = $stack80 * dx;
+
+        $stack82 = $stack81 / dy;
+
+        x1 = x1 + $stack82;
+
+        y1 = minY;
+
+     label06:
+        f1 = virtualinvoke rect.<java.awt.geom.Rectangle2D: int outcode(double,double)>(x1, y1);
+
+        goto label12;
+
+     label07:
+        if f2 == 0 goto label12;
+
+        $stack38 = f2 & 1;
+
+        if $stack38 != 1 goto label08;
+
+        $stack64 = dx cmpl 0.0;
+
+        if $stack64 == 0 goto label08;
+
+        $stack68 = minX - x2;
+
+        $stack69 = $stack68 * dy;
+
+        $stack70 = $stack69 / dx;
+
+        y2 = y2 + $stack70;
+
+        x2 = minX;
+
+        goto label11;
+
+     label08:
+        $stack39 = f2 & 4;
+
+        if $stack39 != 4 goto label09;
+
+        $stack57 = dx cmpl 0.0;
+
+        if $stack57 == 0 goto label09;
+
+        $stack61 = maxX - x2;
+
+        $stack62 = $stack61 * dy;
+
+        $stack63 = $stack62 / dx;
+
+        y2 = y2 + $stack63;
+
+        x2 = maxX;
+
+        goto label11;
+
+     label09:
+        $stack40 = f2 & 8;
+
+        if $stack40 != 8 goto label10;
+
+        $stack50 = dy cmpl 0.0;
+
+        if $stack50 == 0 goto label10;
+
+        $stack54 = maxY - y2;
+
+        $stack55 = $stack54 * dx;
+
+        $stack56 = $stack55 / dy;
+
+        x2 = x2 + $stack56;
+
+        y2 = maxY;
+
+        goto label11;
+
+     label10:
+        $stack41 = f2 & 2;
+
+        if $stack41 != 2 goto label11;
+
+        $stack43 = dy cmpl 0.0;
+
+        if $stack43 == 0 goto label11;
+
+        $stack47 = minY - y2;
+
+        $stack48 = $stack47 * dx;
+
+        $stack49 = $stack48 / dy;
+
+        x2 = x2 + $stack49;
+
+        y2 = minY;
+
+     label11:
+        f2 = virtualinvoke rect.<java.awt.geom.Rectangle2D: int outcode(double,double)>(x2, y2);
+
+     label12:
+        goto label01;
+
+     label13:
+        virtualinvoke line.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x1, y1, x2, y2);
+
+        return 1;
+    }
+
+    public static java.awt.geom.Line2D extendLine(java.awt.geom.Line2D, double, double)
+    {
+        java.awt.geom.Line2D line;
+        double deltaX, deltaY, startPercent, $stack21, $stack22, endPercent, $stack23, $stack24, x1, x2, y1, y2;
+        java.awt.geom.Line2D$Double $stack25;
+
+        line := @parameter0: java.awt.geom.Line2D;
+
+        startPercent := @parameter1: double;
+
+        endPercent := @parameter2: double;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(line, "line");
+
+        x1 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        x2 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        deltaX = x2 - x1;
+
+        y1 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        y2 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        deltaY = y2 - y1;
+
+        $stack21 = startPercent * deltaX;
+
+        x1 = x1 - $stack21;
+
+        $stack22 = startPercent * deltaY;
+
+        y1 = y1 - $stack22;
+
+        $stack23 = endPercent * deltaX;
+
+        x2 = x2 + $stack23;
+
+        $stack24 = endPercent * deltaY;
+
+        y2 = y2 + $stack24;
+
+        $stack25 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack25.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x1, y1, x2, y2);
+
+        return $stack25;
+    }
+}

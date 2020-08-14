@@ -1,0 +1,118 @@
+public class org.jfree.chart.util.HMSNumberFormat extends java.text.NumberFormat
+{
+    private final java.text.NumberFormat formatter;
+
+    public void <init>()
+    {
+        org.jfree.chart.util.HMSNumberFormat this;
+        java.text.DecimalFormat $stack1;
+
+        this := @this: org.jfree.chart.util.HMSNumberFormat;
+
+        specialinvoke this.<java.text.NumberFormat: void <init>()>();
+
+        $stack1 = new java.text.DecimalFormat;
+
+        specialinvoke $stack1.<java.text.DecimalFormat: void <init>(java.lang.String)>("00");
+
+        this.<org.jfree.chart.util.HMSNumberFormat: java.text.NumberFormat formatter> = $stack1;
+
+        return;
+    }
+
+    public java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        org.jfree.chart.util.HMSNumberFormat this;
+        double number;
+        java.lang.StringBuffer toAppendTo, $stack6;
+        java.text.FieldPosition pos;
+        long $stack5;
+
+        this := @this: org.jfree.chart.util.HMSNumberFormat;
+
+        number := @parameter0: double;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        pos := @parameter2: java.text.FieldPosition;
+
+        $stack5 = (long) number;
+
+        $stack6 = virtualinvoke this.<org.jfree.chart.util.HMSNumberFormat: java.lang.StringBuffer format(long,java.lang.StringBuffer,java.text.FieldPosition)>($stack5, toAppendTo, pos);
+
+        return $stack6;
+    }
+
+    public java.lang.StringBuffer format(long, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        java.lang.StringBuffer $stack14, $stack17, $stack22, toAppendTo;
+        long number, hours, $stack19, remaining, minutes, $stack24, seconds;
+        org.jfree.chart.util.HMSNumberFormat this;
+        java.text.NumberFormat $stack15, $stack20, $stack25;
+        java.lang.String $stack16, $stack21, $stack26;
+        java.text.FieldPosition pos;
+
+        this := @this: org.jfree.chart.util.HMSNumberFormat;
+
+        number := @parameter0: long;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        pos := @parameter2: java.text.FieldPosition;
+
+        $stack14 = new java.lang.StringBuffer;
+
+        specialinvoke $stack14.<java.lang.StringBuffer: void <init>()>();
+
+        hours = number / 3600L;
+
+        $stack15 = this.<org.jfree.chart.util.HMSNumberFormat: java.text.NumberFormat formatter>;
+
+        $stack16 = virtualinvoke $stack15.<java.text.NumberFormat: java.lang.String format(long)>(hours);
+
+        $stack17 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack16);
+
+        virtualinvoke $stack17.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(":");
+
+        $stack19 = hours * 3600L;
+
+        remaining = number - $stack19;
+
+        minutes = remaining / 60L;
+
+        $stack20 = this.<org.jfree.chart.util.HMSNumberFormat: java.text.NumberFormat formatter>;
+
+        $stack21 = virtualinvoke $stack20.<java.text.NumberFormat: java.lang.String format(long)>(minutes);
+
+        $stack22 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack21);
+
+        virtualinvoke $stack22.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(":");
+
+        $stack24 = minutes * 60L;
+
+        seconds = remaining - $stack24;
+
+        $stack25 = this.<org.jfree.chart.util.HMSNumberFormat: java.text.NumberFormat formatter>;
+
+        $stack26 = virtualinvoke $stack25.<java.text.NumberFormat: java.lang.String format(long)>(seconds);
+
+        virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack26);
+
+        return $stack14;
+    }
+
+    public java.lang.Number parse(java.lang.String, java.text.ParsePosition)
+    {
+        org.jfree.chart.util.HMSNumberFormat this;
+        java.lang.String source;
+        java.text.ParsePosition parsePosition;
+
+        this := @this: org.jfree.chart.util.HMSNumberFormat;
+
+        source := @parameter0: java.lang.String;
+
+        parsePosition := @parameter1: java.text.ParsePosition;
+
+        return null;
+    }
+}

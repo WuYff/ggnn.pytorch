@@ -1,0 +1,1905 @@
+public class org.jsoup.helper.HttpConnection$Response extends org.jsoup.helper.HttpConnection$Base implements org.jsoup.Connection$Response
+{
+    private static final int MAX_REDIRECTS;
+    private static final java.lang.String LOCATION;
+    private int statusCode;
+    private java.lang.String statusMessage;
+    private java.nio.ByteBuffer byteData;
+    private java.io.InputStream bodyStream;
+    private java.net.HttpURLConnection conn;
+    private java.lang.String charset;
+    private java.lang.String contentType;
+    private boolean executed;
+    private boolean inputStreamRead;
+    private int numRedirects;
+    private org.jsoup.Connection$Request req;
+    private static final java.util.regex.Pattern xmlContentTypeRxp;
+
+    void <init>()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Base: void <init>(org.jsoup.helper.HttpConnection$1)>(null);
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean executed> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Response: int numRedirects> = 0;
+
+        return;
+    }
+
+    private void <init>(org.jsoup.helper.HttpConnection$Response) throws java.io.IOException
+    {
+        org.jsoup.helper.HttpConnection$Response this, previousResponse;
+        int $stack2, $stack3, $stack4;
+        java.io.IOException $stack5;
+        java.lang.Object[] $stack6;
+        java.net.URL $stack9;
+        java.lang.String $stack10;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        previousResponse := @parameter0: org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Base: void <init>(org.jsoup.helper.HttpConnection$1)>(null);
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean executed> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Response: int numRedirects> = 0;
+
+        if previousResponse == null goto label1;
+
+        $stack2 = previousResponse.<org.jsoup.helper.HttpConnection$Response: int numRedirects>;
+
+        $stack3 = $stack2 + 1;
+
+        this.<org.jsoup.helper.HttpConnection$Response: int numRedirects> = $stack3;
+
+        $stack4 = this.<org.jsoup.helper.HttpConnection$Response: int numRedirects>;
+
+        if $stack4 < 20 goto label1;
+
+        $stack5 = new java.io.IOException;
+
+        $stack6 = newarray (java.lang.Object)[1];
+
+        $stack9 = virtualinvoke previousResponse.<org.jsoup.helper.HttpConnection$Response: java.net.URL url()>();
+
+        $stack6[0] = $stack9;
+
+        $stack10 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Too many redirects occurred trying to load URL %s", $stack6);
+
+        specialinvoke $stack5.<java.io.IOException: void <init>(java.lang.String)>($stack10);
+
+        throw $stack5;
+
+     label1:
+        return;
+    }
+
+    static org.jsoup.helper.HttpConnection$Response execute(org.jsoup.Connection$Request) throws java.io.IOException
+    {
+        org.jsoup.Connection$Request req;
+        org.jsoup.helper.HttpConnection$Response $stack1;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        $stack1 = staticinvoke <org.jsoup.helper.HttpConnection$Response: org.jsoup.helper.HttpConnection$Response execute(org.jsoup.Connection$Request,org.jsoup.helper.HttpConnection$Response)>(req, null);
+
+        return $stack1;
+    }
+
+    static org.jsoup.helper.HttpConnection$Response execute(org.jsoup.Connection$Request, org.jsoup.helper.HttpConnection$Response) throws java.io.IOException
+    {
+        org.jsoup.Connection$Request req;
+        java.net.URL $stack15, $stack16, $stack84, $stack88, redir, $stack98, $stack100;
+        java.lang.String protocol, $stack21, $stack85, $stack89, $stack109, $stack111, $stack151, mimeBoundary, location, $stack32, $stack33;
+        boolean $stack18, methodHasBody, hasRequestBody, $stack29, $stack30, $stack41, $stack42, $stack67, $stack71, $stack73, $stack76, $stack78, $stack81, $stack93, $stack97, $stack156, $stack154, $stack26, $stack105;
+        org.jsoup.Connection$Method $stack19, $stack36, $stack37, $stack121, $stack149;
+        java.util.Collection $stack22, $stack123;
+        int $stack23, status, $stack34, $stack45, $stack47;
+        long startTime, $stack48;
+        java.net.HttpURLConnection conn;
+        org.jsoup.helper.HttpConnection$Response $stack28, previousResponse, $stack106, res;
+        java.nio.ByteBuffer $stack35;
+        java.io.InputStream $stack39, $stack52, $stack59, $stack40, $stack43;
+        java.util.zip.InflaterInputStream $stack50;
+        java.util.zip.Inflater $stack51;
+        java.util.zip.GZIPInputStream $stack58;
+        java.util.regex.Pattern $stack65, $stack79;
+        java.util.regex.Matcher $stack66, $stack80;
+        org.jsoup.helper.HttpConnection$Request $stack72;
+        org.jsoup.parser.Parser $stack74;
+        org.jsoup.UnsupportedMimeTypeException $stack82;
+        org.jsoup.HttpStatusException $stack86;
+        java.util.Iterator l13;
+        java.lang.Object $stack107, $stack108, $stack110;
+        java.util.Map$Entry cookie;
+        char $stack114;
+        java.io.OutputStream $stack130;
+        java.lang.StringBuilder $stack147, $stack148, $stack150;
+        java.net.MalformedURLException $stack159;
+        java.io.IOException $stack160;
+        java.util.Map $stack102;
+        java.util.Set $stack103;
+        org.jsoup.internal.ConstrainableInputStream $stack46, $stack49;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        previousResponse := @parameter1: org.jsoup.helper.HttpConnection$Response;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>(req, "Request must not be null");
+
+        $stack15 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>($stack15, "URL must be specified to connect");
+
+        $stack16 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        protocol = virtualinvoke $stack16.<java.net.URL: java.lang.String getProtocol()>();
+
+        $stack18 = virtualinvoke protocol.<java.lang.String: boolean equals(java.lang.Object)>("http");
+
+        if $stack18 != 0 goto label01;
+
+        $stack156 = virtualinvoke protocol.<java.lang.String: boolean equals(java.lang.Object)>("https");
+
+        if $stack156 != 0 goto label01;
+
+        $stack159 = new java.net.MalformedURLException;
+
+        specialinvoke $stack159.<java.net.MalformedURLException: void <init>(java.lang.String)>("Only http & https protocols supported");
+
+        throw $stack159;
+
+     label01:
+        $stack19 = interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Method method()>();
+
+        methodHasBody = virtualinvoke $stack19.<org.jsoup.Connection$Method: boolean hasBody()>();
+
+        $stack21 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String requestBody()>();
+
+        if $stack21 == null goto label02;
+
+        $stack154 = 1;
+
+        goto label03;
+
+     label02:
+        $stack154 = 0;
+
+     label03:
+        hasRequestBody = $stack154;
+
+        if methodHasBody != 0 goto label04;
+
+        $stack147 = new java.lang.StringBuilder;
+
+        specialinvoke $stack147.<java.lang.StringBuilder: void <init>()>();
+
+        $stack148 = virtualinvoke $stack147.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot set a request body for HTTP method ");
+
+        $stack149 = interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Method method()>();
+
+        $stack150 = virtualinvoke $stack148.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack149);
+
+        $stack151 = virtualinvoke $stack150.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean,java.lang.String)>($stack154, $stack151);
+
+     label04:
+        mimeBoundary = null;
+
+        $stack22 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Collection data()>();
+
+        $stack23 = interfaceinvoke $stack22.<java.util.Collection: int size()>();
+
+        if $stack23 <= 0 goto label06;
+
+        if methodHasBody == 0 goto label05;
+
+        if hasRequestBody == 0 goto label06;
+
+     label05:
+        staticinvoke <org.jsoup.helper.HttpConnection$Response: void serialiseRequestUrl(org.jsoup.Connection$Request)>(req);
+
+        goto label07;
+
+     label06:
+        if methodHasBody == 0 goto label07;
+
+        mimeBoundary = staticinvoke <org.jsoup.helper.HttpConnection$Response: java.lang.String setOutputContentType(org.jsoup.Connection$Request)>(req);
+
+     label07:
+        startTime = staticinvoke <java.lang.System: long nanoTime()>();
+
+        conn = staticinvoke <org.jsoup.helper.HttpConnection$Response: java.net.HttpURLConnection createConnection(org.jsoup.Connection$Request)>(req);
+
+        res = null;
+
+     label08:
+        virtualinvoke conn.<java.net.HttpURLConnection: void connect()>();
+
+        $stack26 = virtualinvoke conn.<java.net.HttpURLConnection: boolean getDoOutput()>();
+
+        if $stack26 == 0 goto label09;
+
+        $stack130 = virtualinvoke conn.<java.net.HttpURLConnection: java.io.OutputStream getOutputStream()>();
+
+        staticinvoke <org.jsoup.helper.HttpConnection$Response: void writePost(org.jsoup.Connection$Request,java.io.OutputStream,java.lang.String)>(req, $stack130, mimeBoundary);
+
+     label09:
+        status = virtualinvoke conn.<java.net.HttpURLConnection: int getResponseCode()>();
+
+        $stack28 = new org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: void <init>(org.jsoup.helper.HttpConnection$Response)>(previousResponse);
+
+        res = $stack28;
+
+        specialinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: void setupFromConnection(java.net.HttpURLConnection,org.jsoup.helper.HttpConnection$Response)>(conn, previousResponse);
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Request req> = req;
+
+        $stack29 = virtualinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: boolean hasHeader(java.lang.String)>("Location");
+
+        if $stack29 == 0 goto label15;
+
+        $stack93 = interfaceinvoke req.<org.jsoup.Connection$Request: boolean followRedirects()>();
+
+        if $stack93 == 0 goto label15;
+
+        if status == 307 goto label10;
+
+        $stack121 = <org.jsoup.Connection$Method: org.jsoup.Connection$Method GET>;
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base method(org.jsoup.Connection$Method)>($stack121);
+
+        $stack123 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Collection data()>();
+
+        interfaceinvoke $stack123.<java.util.Collection: void clear()>();
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Request requestBody(java.lang.String)>(null);
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base removeHeader(java.lang.String)>("Content-Type");
+
+     label10:
+        location = virtualinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: java.lang.String header(java.lang.String)>("Location");
+
+        $stack97 = virtualinvoke location.<java.lang.String: boolean startsWith(java.lang.String)>("http:/");
+
+        if $stack97 == 0 goto label11;
+
+        $stack114 = virtualinvoke location.<java.lang.String: char charAt(int)>(6);
+
+        if $stack114 == 47 goto label11;
+
+        location = virtualinvoke location.<java.lang.String: java.lang.String substring(int)>(6);
+
+     label11:
+        $stack98 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        redir = staticinvoke <org.jsoup.internal.StringUtil: java.net.URL resolve(java.net.URL,java.lang.String)>($stack98, location);
+
+        $stack100 = staticinvoke <org.jsoup.helper.HttpConnection: java.net.URL encodeUrl(java.net.URL)>(redir);
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base url(java.net.URL)>($stack100);
+
+        $stack102 = $stack28.<org.jsoup.helper.HttpConnection$Response: java.util.Map cookies>;
+
+        $stack103 = interfaceinvoke $stack102.<java.util.Map: java.util.Set entrySet()>();
+
+        l13 = interfaceinvoke $stack103.<java.util.Set: java.util.Iterator iterator()>();
+
+     label12:
+        $stack105 = interfaceinvoke l13.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack105 == 0 goto label13;
+
+        $stack107 = interfaceinvoke l13.<java.util.Iterator: java.lang.Object next()>();
+
+        cookie = (java.util.Map$Entry) $stack107;
+
+        $stack108 = interfaceinvoke cookie.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack109 = (java.lang.String) $stack108;
+
+        $stack110 = interfaceinvoke cookie.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack111 = (java.lang.String) $stack110;
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base cookie(java.lang.String,java.lang.String)>($stack109, $stack111);
+
+        goto label12;
+
+     label13:
+        $stack106 = staticinvoke <org.jsoup.helper.HttpConnection$Response: org.jsoup.helper.HttpConnection$Response execute(org.jsoup.Connection$Request,org.jsoup.helper.HttpConnection$Response)>(req, $stack28);
+
+     label14:
+        return $stack106;
+
+     label15:
+        if status < 200 goto label16;
+
+        if status < 400 goto label17;
+
+     label16:
+        $stack30 = interfaceinvoke req.<org.jsoup.Connection$Request: boolean ignoreHttpErrors()>();
+
+        if $stack30 != 0 goto label17;
+
+        $stack86 = new org.jsoup.HttpStatusException;
+
+        $stack88 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        $stack89 = virtualinvoke $stack88.<java.net.URL: java.lang.String toString()>();
+
+        specialinvoke $stack86.<org.jsoup.HttpStatusException: void <init>(java.lang.String,int,java.lang.String)>("HTTP error fetching URL", status, $stack89);
+
+        throw $stack86;
+
+     label17:
+        location = virtualinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: java.lang.String contentType()>();
+
+        if location == null goto label18;
+
+        $stack76 = interfaceinvoke req.<org.jsoup.Connection$Request: boolean ignoreContentType()>();
+
+        if $stack76 != 0 goto label18;
+
+        $stack78 = virtualinvoke location.<java.lang.String: boolean startsWith(java.lang.String)>("text/");
+
+        if $stack78 != 0 goto label18;
+
+        $stack79 = <org.jsoup.helper.HttpConnection$Response: java.util.regex.Pattern xmlContentTypeRxp>;
+
+        $stack80 = virtualinvoke $stack79.<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>(location);
+
+        $stack81 = virtualinvoke $stack80.<java.util.regex.Matcher: boolean matches()>();
+
+        if $stack81 != 0 goto label18;
+
+        $stack82 = new org.jsoup.UnsupportedMimeTypeException;
+
+        $stack84 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        $stack85 = virtualinvoke $stack84.<java.net.URL: java.lang.String toString()>();
+
+        specialinvoke $stack82.<org.jsoup.UnsupportedMimeTypeException: void <init>(java.lang.String,java.lang.String,java.lang.String)>("Unhandled content type. Must be text/*, application/xml, or application/*+xml", location, $stack85);
+
+        throw $stack82;
+
+     label18:
+        if location == null goto label19;
+
+        $stack65 = <org.jsoup.helper.HttpConnection$Response: java.util.regex.Pattern xmlContentTypeRxp>;
+
+        $stack66 = virtualinvoke $stack65.<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>(location);
+
+        $stack67 = virtualinvoke $stack66.<java.util.regex.Matcher: boolean matches()>();
+
+        if $stack67 == 0 goto label19;
+
+        $stack71 = req instanceof org.jsoup.helper.HttpConnection$Request;
+
+        if $stack71 == 0 goto label19;
+
+        $stack72 = (org.jsoup.helper.HttpConnection$Request) req;
+
+        $stack73 = staticinvoke <org.jsoup.helper.HttpConnection$Request: boolean access$100(org.jsoup.helper.HttpConnection$Request)>($stack72);
+
+        if $stack73 != 0 goto label19;
+
+        $stack74 = staticinvoke <org.jsoup.parser.Parser: org.jsoup.parser.Parser xmlParser()>();
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Request parser(org.jsoup.parser.Parser)>($stack74);
+
+     label19:
+        $stack32 = $stack28.<org.jsoup.helper.HttpConnection$Response: java.lang.String contentType>;
+
+        $stack33 = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String getCharsetFromContentType(java.lang.String)>($stack32);
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset> = $stack33;
+
+        $stack34 = virtualinvoke conn.<java.net.HttpURLConnection: int getContentLength()>();
+
+        if $stack34 == 0 goto label24;
+
+        $stack36 = interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Method method()>();
+
+        $stack37 = <org.jsoup.Connection$Method: org.jsoup.Connection$Method HEAD>;
+
+        if $stack36 == $stack37 goto label24;
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = null;
+
+        $stack39 = virtualinvoke conn.<java.net.HttpURLConnection: java.io.InputStream getErrorStream()>();
+
+        if $stack39 == null goto label20;
+
+        $stack40 = virtualinvoke conn.<java.net.HttpURLConnection: java.io.InputStream getErrorStream()>();
+
+        goto label21;
+
+     label20:
+        $stack40 = virtualinvoke conn.<java.net.HttpURLConnection: java.io.InputStream getInputStream()>();
+
+     label21:
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = $stack40;
+
+        $stack41 = virtualinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: boolean hasHeaderWithValue(java.lang.String,java.lang.String)>("Content-Encoding", "gzip");
+
+        if $stack41 == 0 goto label22;
+
+        $stack58 = new java.util.zip.GZIPInputStream;
+
+        $stack59 = $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        specialinvoke $stack58.<java.util.zip.GZIPInputStream: void <init>(java.io.InputStream)>($stack59);
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = $stack58;
+
+        goto label23;
+
+     label22:
+        $stack42 = virtualinvoke $stack28.<org.jsoup.helper.HttpConnection$Response: boolean hasHeaderWithValue(java.lang.String,java.lang.String)>("Content-Encoding", "deflate");
+
+        if $stack42 == 0 goto label23;
+
+        $stack50 = new java.util.zip.InflaterInputStream;
+
+        $stack52 = $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        $stack51 = new java.util.zip.Inflater;
+
+        specialinvoke $stack51.<java.util.zip.Inflater: void <init>(boolean)>(1);
+
+        specialinvoke $stack50.<java.util.zip.InflaterInputStream: void <init>(java.io.InputStream,java.util.zip.Inflater)>($stack52, $stack51);
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = $stack50;
+
+     label23:
+        $stack43 = $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        $stack45 = interfaceinvoke req.<org.jsoup.Connection$Request: int maxBodySize()>();
+
+        $stack46 = staticinvoke <org.jsoup.internal.ConstrainableInputStream: org.jsoup.internal.ConstrainableInputStream wrap(java.io.InputStream,int,int)>($stack43, 32768, $stack45);
+
+        $stack47 = interfaceinvoke req.<org.jsoup.Connection$Request: int timeout()>();
+
+        $stack48 = (long) $stack47;
+
+        $stack49 = virtualinvoke $stack46.<org.jsoup.internal.ConstrainableInputStream: org.jsoup.internal.ConstrainableInputStream timeout(long,long)>(startTime, $stack48);
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = $stack49;
+
+        goto label25;
+
+     label24:
+        $stack35 = staticinvoke <org.jsoup.helper.DataUtil: java.nio.ByteBuffer emptyByteBuffer()>();
+
+        $stack28.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData> = $stack35;
+
+     label25:
+        goto label28;
+
+     label26:
+        $stack160 := @caughtexception;
+
+        if res == null goto label27;
+
+        specialinvoke res.<org.jsoup.helper.HttpConnection$Response: void safeClose()>();
+
+     label27:
+        throw $stack160;
+
+     label28:
+        $stack28.<org.jsoup.helper.HttpConnection$Response: boolean executed> = 1;
+
+        return $stack28;
+
+        catch java.io.IOException from label08 to label14 with label26;
+        catch java.io.IOException from label15 to label25 with label26;
+    }
+
+    public int statusCode()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        int $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: int statusCode>;
+
+        return $stack1;
+    }
+
+    public java.lang.String statusMessage()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String statusMessage>;
+
+        return $stack1;
+    }
+
+    public java.lang.String charset()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.helper.HttpConnection$Response charset(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String charset;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        charset := @parameter0: java.lang.String;
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset> = charset;
+
+        return this;
+    }
+
+    public java.lang.String contentType()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String contentType>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document parse() throws java.io.IOException
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        boolean $stack2, $stack4;
+        java.nio.ByteBuffer $stack3, $stack16;
+        java.net.URL $stack5;
+        java.io.InputStream $stack6;
+        java.lang.String $stack7, $stack8, $stack14;
+        org.jsoup.Connection$Request $stack9;
+        org.jsoup.parser.Parser $stack10;
+        org.jsoup.nodes.Document doc;
+        org.jsoup.nodes.Document$OutputSettings $stack12;
+        java.nio.charset.Charset $stack13;
+        java.io.ByteArrayInputStream $stack15;
+        byte[] $stack17;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack2 = this.<org.jsoup.helper.HttpConnection$Response: boolean executed>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack2, "Request must be executed (with .execute(), .get(), or .post() before parsing response");
+
+        $stack3 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        if $stack3 == null goto label1;
+
+        $stack15 = new java.io.ByteArrayInputStream;
+
+        $stack16 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        $stack17 = virtualinvoke $stack16.<java.nio.ByteBuffer: byte[] array()>();
+
+        specialinvoke $stack15.<java.io.ByteArrayInputStream: void <init>(byte[])>($stack17);
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = $stack15;
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 0;
+
+     label1:
+        $stack4 = this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean,java.lang.String)>($stack4, "Input stream already read and parsed, cannot re-read.");
+
+        $stack6 = this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        $stack7 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset>;
+
+        $stack5 = this.<org.jsoup.helper.HttpConnection$Response: java.net.URL url>;
+
+        $stack8 = virtualinvoke $stack5.<java.net.URL: java.lang.String toExternalForm()>();
+
+        $stack9 = this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Request req>;
+
+        $stack10 = interfaceinvoke $stack9.<org.jsoup.Connection$Request: org.jsoup.parser.Parser parser()>();
+
+        doc = staticinvoke <org.jsoup.helper.DataUtil: org.jsoup.nodes.Document parseInputStream(java.io.InputStream,java.lang.String,java.lang.String,org.jsoup.parser.Parser)>($stack6, $stack7, $stack8, $stack10);
+
+        $stack12 = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings()>();
+
+        $stack13 = virtualinvoke $stack12.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset()>();
+
+        $stack14 = virtualinvoke $stack13.<java.nio.charset.Charset: java.lang.String name()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset> = $stack14;
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 1;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void safeClose()>();
+
+        return doc;
+    }
+
+    private void prepareByteData()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        boolean $stack3, $stack5;
+        java.nio.ByteBuffer $stack4, $stack9;
+        org.jsoup.Connection$Request $stack6;
+        java.io.InputStream $stack7;
+        int $stack8;
+        java.lang.Throwable $stack10;
+        java.io.IOException $stack11;
+        org.jsoup.UncheckedIOException $stack12;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack3 = this.<org.jsoup.helper.HttpConnection$Response: boolean executed>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack3, "Request must be executed (with .execute(), .get(), or .post() before getting response body");
+
+        $stack4 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        if $stack4 != null goto label6;
+
+        $stack5 = this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean,java.lang.String)>($stack5, "Request has already been read (with .parse())");
+
+     label1:
+        $stack7 = this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        $stack6 = this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Request req>;
+
+        $stack8 = interfaceinvoke $stack6.<org.jsoup.Connection$Request: int maxBodySize()>();
+
+        $stack9 = staticinvoke <org.jsoup.helper.DataUtil: java.nio.ByteBuffer readToByteBuffer(java.io.InputStream,int)>($stack7, $stack8);
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData> = $stack9;
+
+     label2:
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 1;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void safeClose()>();
+
+        goto label6;
+
+     label3:
+        $stack11 := @caughtexception;
+
+        $stack12 = new org.jsoup.UncheckedIOException;
+
+        specialinvoke $stack12.<org.jsoup.UncheckedIOException: void <init>(java.io.IOException)>($stack11);
+
+        throw $stack12;
+
+     label4:
+        $stack10 := @caughtexception;
+
+     label5:
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 1;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void safeClose()>();
+
+        throw $stack10;
+
+     label6:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+        catch java.lang.Throwable from label3 to label5 with label4;
+    }
+
+    public java.lang.String body()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String $stack2, $stack3, body;
+        java.nio.charset.Charset $stack4, $stack10;
+        java.nio.ByteBuffer $stack5, $stack8, $stack11;
+        java.nio.CharBuffer $stack6, $stack12;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void prepareByteData()>();
+
+        $stack2 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset>;
+
+        if $stack2 != null goto label1;
+
+        $stack10 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>("UTF-8");
+
+        $stack11 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        $stack12 = virtualinvoke $stack10.<java.nio.charset.Charset: java.nio.CharBuffer decode(java.nio.ByteBuffer)>($stack11);
+
+        body = virtualinvoke $stack12.<java.nio.CharBuffer: java.lang.String toString()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.helper.HttpConnection$Response: java.lang.String charset>;
+
+        $stack4 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>($stack3);
+
+        $stack5 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.charset.Charset: java.nio.CharBuffer decode(java.nio.ByteBuffer)>($stack5);
+
+        body = virtualinvoke $stack6.<java.nio.CharBuffer: java.lang.String toString()>();
+
+     label2:
+        $stack8 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        virtualinvoke $stack8.<java.nio.Buffer: java.nio.Buffer rewind()>();
+
+        return body;
+    }
+
+    public byte[] bodyAsBytes()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.nio.ByteBuffer $stack1;
+        byte[] $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void prepareByteData()>();
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: java.nio.ByteBuffer byteData>;
+
+        $stack2 = virtualinvoke $stack1.<java.nio.ByteBuffer: byte[] array()>();
+
+        return $stack2;
+    }
+
+    public org.jsoup.Connection$Response bufferUp()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Response: void prepareByteData()>();
+
+        return this;
+    }
+
+    public java.io.BufferedInputStream bodyStream()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        boolean $stack1, $stack2;
+        org.jsoup.Connection$Request $stack3;
+        java.io.InputStream $stack4;
+        int $stack6;
+        org.jsoup.internal.ConstrainableInputStream $stack7;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Response: boolean executed>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack1, "Request must be executed (with .execute(), .get(), or .post() before getting response body");
+
+        $stack2 = this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean,java.lang.String)>($stack2, "Request has already been read");
+
+        this.<org.jsoup.helper.HttpConnection$Response: boolean inputStreamRead> = 1;
+
+        $stack4 = this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        $stack3 = this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Request req>;
+
+        $stack6 = interfaceinvoke $stack3.<org.jsoup.Connection$Request: int maxBodySize()>();
+
+        $stack7 = staticinvoke <org.jsoup.internal.ConstrainableInputStream: org.jsoup.internal.ConstrainableInputStream wrap(java.io.InputStream,int,int)>($stack4, 32768, $stack6);
+
+        return $stack7;
+    }
+
+    private static java.net.HttpURLConnection createConnection(org.jsoup.Connection$Request) throws java.io.IOException
+    {
+        org.jsoup.Connection$Request req;
+        java.net.Proxy $stack6, $stack8;
+        java.net.URL $stack7, $stack43;
+        java.net.HttpURLConnection $stack10, conn;
+        org.jsoup.Connection$Method $stack11, $stack17;
+        java.lang.String $stack12, value, $stack33, $stack36;
+        int $stack13, $stack14, $stack15, $stack20;
+        javax.net.ssl.SSLSocketFactory $stack16, $stack42;
+        java.util.Map $stack19, $stack21;
+        java.util.Set $stack22;
+        java.util.Iterator l2, l4;
+        java.lang.Object $stack25, $stack26, $stack31, $stack32;
+        java.util.Map$Entry header;
+        java.util.List $stack27;
+        boolean $stack29, $stack39, $stack18, $stack24;
+        javax.net.ssl.HttpsURLConnection $stack41;
+        java.net.URLConnection $stack9;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        $stack6 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.Proxy proxy()>();
+
+        if $stack6 != null goto label1;
+
+        $stack43 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        $stack9 = virtualinvoke $stack43.<java.net.URL: java.net.URLConnection openConnection()>();
+
+        goto label2;
+
+     label1:
+        $stack7 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        $stack8 = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.Proxy proxy()>();
+
+        $stack9 = virtualinvoke $stack7.<java.net.URL: java.net.URLConnection openConnection(java.net.Proxy)>($stack8);
+
+     label2:
+        $stack10 = (java.net.HttpURLConnection) $stack9;
+
+        conn = (java.net.HttpURLConnection) $stack10;
+
+        $stack11 = interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Method method()>();
+
+        $stack12 = virtualinvoke $stack11.<org.jsoup.Connection$Method: java.lang.String name()>();
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void setRequestMethod(java.lang.String)>($stack12);
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void setInstanceFollowRedirects(boolean)>(0);
+
+        $stack13 = interfaceinvoke req.<org.jsoup.Connection$Request: int timeout()>();
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void setConnectTimeout(int)>($stack13);
+
+        $stack14 = interfaceinvoke req.<org.jsoup.Connection$Request: int timeout()>();
+
+        $stack15 = $stack14 / 2;
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void setReadTimeout(int)>($stack15);
+
+        $stack16 = interfaceinvoke req.<org.jsoup.Connection$Request: javax.net.ssl.SSLSocketFactory sslSocketFactory()>();
+
+        if $stack16 == null goto label3;
+
+        $stack39 = conn instanceof javax.net.ssl.HttpsURLConnection;
+
+        if $stack39 == 0 goto label3;
+
+        $stack41 = (javax.net.ssl.HttpsURLConnection) conn;
+
+        $stack42 = interfaceinvoke req.<org.jsoup.Connection$Request: javax.net.ssl.SSLSocketFactory sslSocketFactory()>();
+
+        virtualinvoke $stack41.<javax.net.ssl.HttpsURLConnection: void setSSLSocketFactory(javax.net.ssl.SSLSocketFactory)>($stack42);
+
+     label3:
+        $stack17 = interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Method method()>();
+
+        $stack18 = virtualinvoke $stack17.<org.jsoup.Connection$Method: boolean hasBody()>();
+
+        if $stack18 == 0 goto label4;
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void setDoOutput(boolean)>(1);
+
+     label4:
+        $stack19 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Map cookies()>();
+
+        $stack20 = interfaceinvoke $stack19.<java.util.Map: int size()>();
+
+        if $stack20 <= 0 goto label5;
+
+        $stack36 = staticinvoke <org.jsoup.helper.HttpConnection$Response: java.lang.String getRequestCookieString(org.jsoup.Connection$Request)>(req);
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void addRequestProperty(java.lang.String,java.lang.String)>("Cookie", $stack36);
+
+     label5:
+        $stack21 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Map multiHeaders()>();
+
+        $stack22 = interfaceinvoke $stack21.<java.util.Map: java.util.Set entrySet()>();
+
+        l2 = interfaceinvoke $stack22.<java.util.Set: java.util.Iterator iterator()>();
+
+     label6:
+        $stack24 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack24 == 0 goto label9;
+
+        $stack25 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        header = (java.util.Map$Entry) $stack25;
+
+        $stack26 = interfaceinvoke header.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack27 = (java.util.List) $stack26;
+
+        l4 = interfaceinvoke $stack27.<java.util.List: java.util.Iterator iterator()>();
+
+     label7:
+        $stack29 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack29 == 0 goto label8;
+
+        $stack31 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+
+        value = (java.lang.String) $stack31;
+
+        $stack32 = interfaceinvoke header.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack33 = (java.lang.String) $stack32;
+
+        virtualinvoke conn.<java.net.HttpURLConnection: void addRequestProperty(java.lang.String,java.lang.String)>($stack33, value);
+
+        goto label7;
+
+     label8:
+        goto label6;
+
+     label9:
+        return conn;
+    }
+
+    private void safeClose()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.io.InputStream $stack3, $stack6;
+        java.net.HttpURLConnection $stack5, $stack4;
+        java.lang.Throwable $stack8;
+        java.io.IOException $stack9;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack3 = this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        if $stack3 == null goto label5;
+
+     label1:
+        $stack6 = this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream>;
+
+        virtualinvoke $stack6.<java.io.InputStream: void close()>();
+
+     label2:
+        this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = null;
+
+        goto label5;
+
+     label3:
+        $stack9 := @caughtexception;
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = null;
+
+        goto label5;
+
+     label4:
+        $stack8 := @caughtexception;
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.io.InputStream bodyStream> = null;
+
+        throw $stack8;
+
+     label5:
+        $stack4 = this.<org.jsoup.helper.HttpConnection$Response: java.net.HttpURLConnection conn>;
+
+        if $stack4 == null goto label6;
+
+        $stack5 = this.<org.jsoup.helper.HttpConnection$Response: java.net.HttpURLConnection conn>;
+
+        virtualinvoke $stack5.<java.net.HttpURLConnection: void disconnect()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.net.HttpURLConnection conn> = null;
+
+     label6:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+    }
+
+    private void setupFromConnection(java.net.HttpURLConnection, org.jsoup.helper.HttpConnection$Response) throws java.io.IOException
+    {
+        org.jsoup.helper.HttpConnection$Response this, previousResponse;
+        java.net.HttpURLConnection conn;
+        java.lang.String $stack6, $stack10, $stack11, $stack19, $stack23, $stack25;
+        org.jsoup.Connection$Method $stack7;
+        java.net.URL $stack8;
+        int $stack9;
+        java.util.LinkedHashMap resHeaders;
+        java.util.Map $stack13;
+        java.util.Set $stack14;
+        java.util.Iterator l4;
+        boolean $stack16, $stack20;
+        java.lang.Object $stack17, $stack18, $stack22, $stack24;
+        java.util.Map$Entry prevCookie;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        conn := @parameter0: java.net.HttpURLConnection;
+
+        previousResponse := @parameter1: org.jsoup.helper.HttpConnection$Response;
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.net.HttpURLConnection conn> = conn;
+
+        $stack6 = virtualinvoke conn.<java.net.HttpURLConnection: java.lang.String getRequestMethod()>();
+
+        $stack7 = staticinvoke <org.jsoup.Connection$Method: org.jsoup.Connection$Method valueOf(java.lang.String)>($stack6);
+
+        this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Method method> = $stack7;
+
+        $stack8 = virtualinvoke conn.<java.net.HttpURLConnection: java.net.URL getURL()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.net.URL url> = $stack8;
+
+        $stack9 = virtualinvoke conn.<java.net.HttpURLConnection: int getResponseCode()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: int statusCode> = $stack9;
+
+        $stack10 = virtualinvoke conn.<java.net.HttpURLConnection: java.lang.String getResponseMessage()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.lang.String statusMessage> = $stack10;
+
+        $stack11 = virtualinvoke conn.<java.net.HttpURLConnection: java.lang.String getContentType()>();
+
+        this.<org.jsoup.helper.HttpConnection$Response: java.lang.String contentType> = $stack11;
+
+        resHeaders = staticinvoke <org.jsoup.helper.HttpConnection$Response: java.util.LinkedHashMap createHeaderMap(java.net.HttpURLConnection)>(conn);
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: void processResponseHeaders(java.util.Map)>(resHeaders);
+
+        if previousResponse == null goto label4;
+
+        $stack13 = virtualinvoke previousResponse.<org.jsoup.helper.HttpConnection$Response: java.util.Map cookies()>();
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: java.util.Set entrySet()>();
+
+        l4 = interfaceinvoke $stack14.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack16 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack16 == 0 goto label3;
+
+        $stack17 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+
+        prevCookie = (java.util.Map$Entry) $stack17;
+
+        $stack18 = interfaceinvoke prevCookie.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack19 = (java.lang.String) $stack18;
+
+        $stack20 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: boolean hasCookie(java.lang.String)>($stack19);
+
+        if $stack20 != 0 goto label2;
+
+        $stack22 = interfaceinvoke prevCookie.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack23 = (java.lang.String) $stack22;
+
+        $stack24 = interfaceinvoke prevCookie.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack25 = (java.lang.String) $stack24;
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Base cookie(java.lang.String,java.lang.String)>($stack23, $stack25);
+
+     label2:
+        goto label1;
+
+     label3:
+        specialinvoke previousResponse.<org.jsoup.helper.HttpConnection$Response: void safeClose()>();
+
+     label4:
+        return;
+    }
+
+    private static java.util.LinkedHashMap createHeaderMap(java.net.HttpURLConnection)
+    {
+        java.util.LinkedHashMap $stack6;
+        java.net.HttpURLConnection conn;
+        java.lang.String key, val;
+        boolean $stack14;
+        java.util.ArrayList $stack15;
+        java.lang.Object $stack18;
+        java.util.List $stack19;
+        int i;
+
+        conn := @parameter0: java.net.HttpURLConnection;
+
+        $stack6 = new java.util.LinkedHashMap;
+
+        specialinvoke $stack6.<java.util.LinkedHashMap: void <init>()>();
+
+        i = 0;
+
+     label1:
+        key = virtualinvoke conn.<java.net.HttpURLConnection: java.lang.String getHeaderFieldKey(int)>(i);
+
+        val = virtualinvoke conn.<java.net.HttpURLConnection: java.lang.String getHeaderField(int)>(i);
+
+        if key != null goto label2;
+
+        if val != null goto label2;
+
+        goto label6;
+
+     label2:
+        i = i + 1;
+
+        if key == null goto label1;
+
+        if val != null goto label3;
+
+        goto label1;
+
+     label3:
+        $stack14 = virtualinvoke $stack6.<java.util.LinkedHashMap: boolean containsKey(java.lang.Object)>(key);
+
+        if $stack14 == 0 goto label4;
+
+        $stack18 = virtualinvoke $stack6.<java.util.LinkedHashMap: java.lang.Object get(java.lang.Object)>(key);
+
+        $stack19 = (java.util.List) $stack18;
+
+        interfaceinvoke $stack19.<java.util.List: boolean add(java.lang.Object)>(val);
+
+        goto label5;
+
+     label4:
+        $stack15 = new java.util.ArrayList;
+
+        specialinvoke $stack15.<java.util.ArrayList: void <init>()>();
+
+        virtualinvoke $stack15.<java.util.ArrayList: boolean add(java.lang.Object)>(val);
+
+        virtualinvoke $stack6.<java.util.LinkedHashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack15);
+
+     label5:
+        goto label1;
+
+     label6:
+        return $stack6;
+    }
+
+    void processResponseHeaders(java.util.Map)
+    {
+        java.util.Map resHeaders;
+        java.util.Set $stack11;
+        java.util.Iterator l2, l6;
+        java.lang.Object $stack14, $stack15, $stack16, $stack21, $stack27;
+        java.util.Map$Entry entry;
+        java.lang.String name, $stack29, cookieName, $stack31, cookieVal, value;
+        java.util.List values;
+        boolean $stack17, $stack13, $stack25, $stack19;
+        org.jsoup.helper.HttpConnection$Response this;
+        org.jsoup.parser.TokenQueue $stack28;
+        int $stack33;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        resHeaders := @parameter0: java.util.Map;
+
+        $stack11 = interfaceinvoke resHeaders.<java.util.Map: java.util.Set entrySet()>();
+
+        l2 = interfaceinvoke $stack11.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack13 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label9;
+
+        $stack14 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack14;
+
+        $stack15 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        name = (java.lang.String) $stack15;
+
+        if name != null goto label2;
+
+        goto label1;
+
+     label2:
+        $stack16 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        values = (java.util.List) $stack16;
+
+        $stack17 = virtualinvoke name.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("Set-Cookie");
+
+        if $stack17 == 0 goto label6;
+
+        l6 = interfaceinvoke values.<java.util.List: java.util.Iterator iterator()>();
+
+     label3:
+        $stack25 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack25 == 0 goto label6;
+
+        $stack27 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        value = (java.lang.String) $stack27;
+
+        if value != null goto label4;
+
+        goto label3;
+
+     label4:
+        $stack28 = new org.jsoup.parser.TokenQueue;
+
+        specialinvoke $stack28.<org.jsoup.parser.TokenQueue: void <init>(java.lang.String)>(value);
+
+        $stack29 = virtualinvoke $stack28.<org.jsoup.parser.TokenQueue: java.lang.String chompTo(java.lang.String)>("=");
+
+        cookieName = virtualinvoke $stack29.<java.lang.String: java.lang.String trim()>();
+
+        $stack31 = virtualinvoke $stack28.<org.jsoup.parser.TokenQueue: java.lang.String consumeTo(java.lang.String)>(";");
+
+        cookieVal = virtualinvoke $stack31.<java.lang.String: java.lang.String trim()>();
+
+        $stack33 = virtualinvoke cookieName.<java.lang.String: int length()>();
+
+        if $stack33 <= 0 goto label5;
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Base cookie(java.lang.String,java.lang.String)>(cookieName, cookieVal);
+
+     label5:
+        goto label3;
+
+     label6:
+        l6 = interfaceinvoke values.<java.util.List: java.util.Iterator iterator()>();
+
+     label7:
+        $stack19 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack19 == 0 goto label8;
+
+        $stack21 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        value = (java.lang.String) $stack21;
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.Connection$Base addHeader(java.lang.String,java.lang.String)>(name, value);
+
+        goto label7;
+
+     label8:
+        goto label1;
+
+     label9:
+        return;
+    }
+
+    private static java.lang.String setOutputContentType(org.jsoup.Connection$Request)
+    {
+        org.jsoup.Connection$Request req;
+        boolean $stack2, $stack3, $stack20, $stack22;
+        java.lang.StringBuilder $stack4, $stack6, $stack8, $stack12, $stack14, $stack15, $stack24, $stack26, $stack27;
+        java.lang.String $stack7, $stack9, $stack16, $stack19, $stack21, $stack28, bound;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        bound = null;
+
+        $stack2 = interfaceinvoke req.<org.jsoup.Connection$Request: boolean hasHeader(java.lang.String)>("Content-Type");
+
+        if $stack2 == 0 goto label1;
+
+        $stack19 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String header(java.lang.String)>("Content-Type");
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: boolean contains(java.lang.CharSequence)>("multipart/form-data");
+
+        if $stack20 == 0 goto label3;
+
+        $stack21 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String header(java.lang.String)>("Content-Type");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.String: boolean contains(java.lang.CharSequence)>("boundary");
+
+        if $stack22 != 0 goto label3;
+
+        bound = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String mimeBoundary()>();
+
+        $stack24 = new java.lang.StringBuilder;
+
+        specialinvoke $stack24.<java.lang.StringBuilder: void <init>()>();
+
+        $stack26 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("multipart/form-data; boundary=");
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(bound);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base header(java.lang.String,java.lang.String)>("Content-Type", $stack28);
+
+        goto label3;
+
+     label1:
+        $stack3 = staticinvoke <org.jsoup.helper.HttpConnection: boolean access$200(org.jsoup.Connection$Request)>(req);
+
+        if $stack3 == 0 goto label2;
+
+        bound = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String mimeBoundary()>();
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("multipart/form-data; boundary=");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(bound);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base header(java.lang.String,java.lang.String)>("Content-Type", $stack16);
+
+        goto label3;
+
+     label2:
+        $stack4 = new java.lang.StringBuilder;
+
+        specialinvoke $stack4.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("application/x-www-form-urlencoded; charset=");
+
+        $stack7 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String postDataCharset()>();
+
+        $stack8 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack7);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base header(java.lang.String,java.lang.String)>("Content-Type", $stack9);
+
+     label3:
+        return bound;
+    }
+
+    private static void writePost(org.jsoup.Connection$Request, java.io.OutputStream, java.lang.String) throws java.io.IOException
+    {
+        org.jsoup.Connection$Request req;
+        java.util.Collection data;
+        java.io.BufferedWriter $stack9;
+        java.io.OutputStreamWriter $stack10;
+        java.io.OutputStream outputStream;
+        java.lang.String $stack11, bound, $stack12, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack32, $stack37, $stack38, $stack40, $stack42, $stack43, $stack44, $stack48;
+        boolean $stack14, $stack35, $stack39, first#4;
+        java.lang.Object $stack15, $stack36;
+        org.jsoup.Connection$KeyVal keyVal;
+        java.io.InputStream $stack45;
+        java.util.Iterator first, keyVal;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        outputStream := @parameter1: java.io.OutputStream;
+
+        bound := @parameter2: java.lang.String;
+
+        data = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Collection data()>();
+
+        $stack9 = new java.io.BufferedWriter;
+
+        $stack10 = new java.io.OutputStreamWriter;
+
+        $stack11 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String postDataCharset()>();
+
+        specialinvoke $stack10.<java.io.OutputStreamWriter: void <init>(java.io.OutputStream,java.lang.String)>(outputStream, $stack11);
+
+        specialinvoke $stack9.<java.io.BufferedWriter: void <init>(java.io.Writer)>($stack10);
+
+        if bound == null goto label07;
+
+        first = interfaceinvoke data.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label01:
+        $stack35 = interfaceinvoke first.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack35 == 0 goto label06;
+
+        $stack36 = interfaceinvoke first.<java.util.Iterator: java.lang.Object next()>();
+
+        keyVal = (org.jsoup.Connection$KeyVal) $stack36;
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("--");
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>(bound);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\r\n");
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("Content-Disposition: form-data; name=\"");
+
+        $stack37 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String key()>();
+
+        $stack38 = staticinvoke <org.jsoup.helper.HttpConnection: java.lang.String access$300(java.lang.String)>($stack37);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack38);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\"");
+
+        $stack39 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: boolean hasInputStream()>();
+
+        if $stack39 == 0 goto label04;
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("; filename=\"");
+
+        $stack42 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String value()>();
+
+        $stack43 = staticinvoke <org.jsoup.helper.HttpConnection: java.lang.String access$300(java.lang.String)>($stack42);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack43);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\"\r\nContent-Type: ");
+
+        $stack44 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String contentType()>();
+
+        if $stack44 == null goto label02;
+
+        $stack48 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String contentType()>();
+
+        goto label03;
+
+     label02:
+        $stack48 = "application/octet-stream";
+
+     label03:
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack48);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\r\n\r\n");
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void flush()>();
+
+        $stack45 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.io.InputStream inputStream()>();
+
+        staticinvoke <org.jsoup.helper.DataUtil: void crossStreams(java.io.InputStream,java.io.OutputStream)>($stack45, outputStream);
+
+        virtualinvoke outputStream.<java.io.OutputStream: void flush()>();
+
+        goto label05;
+
+     label04:
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\r\n\r\n");
+
+        $stack40 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String value()>();
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack40);
+
+     label05:
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("\r\n");
+
+        goto label01;
+
+     label06:
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("--");
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>(bound);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>("--");
+
+        goto label12;
+
+     label07:
+        $stack12 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String requestBody()>();
+
+        if $stack12 == null goto label08;
+
+        $stack32 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String requestBody()>();
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack32);
+
+        goto label12;
+
+     label08:
+        first#4 = 1;
+
+        keyVal = interfaceinvoke data.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label09:
+        $stack14 = interfaceinvoke keyVal.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack14 == 0 goto label12;
+
+        $stack15 = interfaceinvoke keyVal.<java.util.Iterator: java.lang.Object next()>();
+
+        keyVal = (org.jsoup.Connection$KeyVal) $stack15;
+
+        if first#4 != 0 goto label10;
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: java.io.Writer append(char)>(38);
+
+        goto label11;
+
+     label10:
+        first#4 = 0;
+
+     label11:
+        $stack16 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String key()>();
+
+        $stack17 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String postDataCharset()>();
+
+        $stack18 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack16, $stack17);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack18);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(int)>(61);
+
+        $stack19 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String value()>();
+
+        $stack20 = interfaceinvoke req.<org.jsoup.Connection$Request: java.lang.String postDataCharset()>();
+
+        $stack21 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack19, $stack20);
+
+        virtualinvoke $stack9.<java.io.BufferedWriter: void write(java.lang.String)>($stack21);
+
+        goto label09;
+
+     label12:
+        virtualinvoke $stack9.<java.io.BufferedWriter: void close()>();
+
+        return;
+    }
+
+    private static java.lang.String getRequestCookieString(org.jsoup.Connection$Request)
+    {
+        java.lang.StringBuilder sb, $stack14, $stack15;
+        org.jsoup.Connection$Request req;
+        java.util.Map $stack6;
+        java.util.Set $stack7;
+        java.util.Iterator l3;
+        boolean $stack9, first;
+        java.lang.String $stack10, $stack13, $stack17;
+        java.lang.Object $stack11, $stack12, $stack16;
+        java.util.Map$Entry cookie;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        sb = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        first = 1;
+
+        $stack6 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Map cookies()>();
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: java.util.Set entrySet()>();
+
+        l3 = interfaceinvoke $stack7.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label4;
+
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        cookie = (java.util.Map$Entry) $stack11;
+
+        if first != 0 goto label2;
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("; ");
+
+        goto label3;
+
+     label2:
+        first = 0;
+
+     label3:
+        $stack12 = interfaceinvoke cookie.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack13 = (java.lang.String) $stack12;
+
+        $stack14 = virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack13);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(61);
+
+        $stack16 = interfaceinvoke cookie.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack17 = (java.lang.String) $stack16;
+
+        virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+
+        goto label1;
+
+     label4:
+        $stack10 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(sb);
+
+        return $stack10;
+    }
+
+    private static void serialiseRequestUrl(org.jsoup.Connection$Request) throws java.io.IOException
+    {
+        org.jsoup.Connection$Request req;
+        java.net.URL in, $stack20;
+        java.lang.StringBuilder url, $stack9, $stack10, $stack12, $stack14, $stack28, $stack29;
+        java.lang.String $stack8, $stack11, $stack13, $stack16, $stack21, $stack26, $stack27, $stack30, $stack31, $stack41;
+        java.util.Collection $stack17, $stack23;
+        java.util.Iterator l4;
+        java.lang.Object $stack24;
+        org.jsoup.Connection$KeyVal keyVal;
+        boolean $stack25, first, $stack19;
+
+        req := @parameter0: org.jsoup.Connection$Request;
+
+        in = interfaceinvoke req.<org.jsoup.Connection$Request: java.net.URL url()>();
+
+        url = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        first = 1;
+
+        $stack8 = virtualinvoke in.<java.net.URL: java.lang.String getProtocol()>();
+
+        $stack9 = virtualinvoke url.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("://");
+
+        $stack11 = virtualinvoke in.<java.net.URL: java.lang.String getAuthority()>();
+
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+
+        $stack13 = virtualinvoke in.<java.net.URL: java.lang.String getPath()>();
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack13);
+
+        virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("?");
+
+        $stack16 = virtualinvoke in.<java.net.URL: java.lang.String getQuery()>();
+
+        if $stack16 == null goto label1;
+
+        $stack41 = virtualinvoke in.<java.net.URL: java.lang.String getQuery()>();
+
+        virtualinvoke url.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack41);
+
+        first = 0;
+
+     label1:
+        $stack17 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Collection data()>();
+
+        l4 = interfaceinvoke $stack17.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label2:
+        $stack19 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack19 == 0 goto label5;
+
+        $stack24 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+
+        keyVal = (org.jsoup.Connection$KeyVal) $stack24;
+
+        $stack25 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: boolean hasInputStream()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean,java.lang.String)>($stack25, "InputStream data not supported in URL query string.");
+
+        if first != 0 goto label3;
+
+        virtualinvoke url.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(38);
+
+        goto label4;
+
+     label3:
+        first = 0;
+
+     label4:
+        $stack26 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String key()>();
+
+        $stack27 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack26, "UTF-8");
+
+        $stack28 = virtualinvoke url.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(61);
+
+        $stack30 = interfaceinvoke keyVal.<org.jsoup.Connection$KeyVal: java.lang.String value()>();
+
+        $stack31 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack30, "UTF-8");
+
+        virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack31);
+
+        goto label2;
+
+     label5:
+        $stack20 = new java.net.URL;
+
+        $stack21 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(url);
+
+        specialinvoke $stack20.<java.net.URL: void <init>(java.lang.String)>($stack21);
+
+        interfaceinvoke req.<org.jsoup.Connection$Request: org.jsoup.Connection$Base url(java.net.URL)>($stack20);
+
+        $stack23 = interfaceinvoke req.<org.jsoup.Connection$Request: java.util.Collection data()>();
+
+        interfaceinvoke $stack23.<java.util.Collection: void clear()>();
+
+        return;
+    }
+
+    public volatile java.util.Map cookies()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map cookies()>();
+
+        return $stack1;
+    }
+
+    public volatile boolean hasCookie(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasCookie(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.String cookie(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.lang.String cookie(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.util.Map multiHeaders()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map multiHeaders()>();
+
+        return $stack1;
+    }
+
+    public volatile java.util.Map headers()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map headers()>();
+
+        return $stack1;
+    }
+
+    public volatile boolean hasHeaderWithValue(java.lang.String, java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1, l2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasHeaderWithValue(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile boolean hasHeader(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasHeader(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.util.List headers(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1;
+        java.util.List $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.List headers(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.String header(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.lang.String header(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.Connection$Method method()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        org.jsoup.Connection$Method $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: org.jsoup.Connection$Method method()>();
+
+        return $stack1;
+    }
+
+    public volatile java.net.URL url()
+    {
+        org.jsoup.helper.HttpConnection$Response this;
+        java.net.URL $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.net.URL url()>();
+
+        return $stack1;
+    }
+
+    public volatile org.jsoup.Connection$Response charset(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Response this, $stack2;
+        java.lang.String l1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Response;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Response: org.jsoup.helper.HttpConnection$Response charset(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    static void <clinit>()
+    {
+        java.util.regex.Pattern $stack0;
+
+        <org.jsoup.helper.HttpConnection$Response: java.lang.String LOCATION> = "Location";
+
+        <org.jsoup.helper.HttpConnection$Response: int MAX_REDIRECTS> = 20;
+
+        $stack0 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("(application|text)/\\w*\\+?xml.*");
+
+        <org.jsoup.helper.HttpConnection$Response: java.util.regex.Pattern xmlContentTypeRxp> = $stack0;
+
+        return;
+    }
+}

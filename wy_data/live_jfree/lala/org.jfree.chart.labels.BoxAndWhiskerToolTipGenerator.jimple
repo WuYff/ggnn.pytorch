@@ -1,0 +1,153 @@
+public class org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator extends org.jfree.chart.labels.StandardCategoryToolTipGenerator implements org.jfree.chart.labels.CategoryToolTipGenerator, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final java.lang.String DEFAULT_TOOL_TIP_FORMAT;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator this;
+        java.text.NumberFormat $stack2;
+
+        this := @this: org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat)>("X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ", $stack2);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator this;
+        java.lang.String format;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+
+        format := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat)>(format, formatter);
+
+        return;
+    }
+
+    protected java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset, int, int)
+    {
+        java.lang.Object[] result;
+        org.jfree.data.category.CategoryDataset dataset;
+        int series, item;
+        java.lang.Comparable $stack9;
+        java.lang.Number y, $stack16, $stack19, $stack22, $stack25, $stack28, $stack31;
+        org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator this;
+        java.text.NumberFormat formatter;
+        java.lang.String $stack13, $stack17, $stack20, $stack23, $stack26, $stack29, $stack32;
+        boolean $stack14;
+        org.jfree.data.statistics.BoxAndWhiskerCategoryDataset d;
+
+        this := @this: org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        result = newarray (java.lang.Object)[8];
+
+        $stack9 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(series);
+
+        result[0] = $stack9;
+
+        y = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+
+        formatter = virtualinvoke this.<org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        $stack13 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(y);
+
+        result[1] = $stack13;
+
+        $stack14 = dataset instanceof org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
+
+        if $stack14 == 0 goto label1;
+
+        d = (org.jfree.data.statistics.BoxAndWhiskerCategoryDataset) dataset;
+
+        $stack16 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMeanValue(int,int)>(series, item);
+
+        $stack17 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack16);
+
+        result[2] = $stack17;
+
+        $stack19 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMedianValue(int,int)>(series, item);
+
+        $stack20 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack19);
+
+        result[3] = $stack20;
+
+        $stack22 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMinRegularValue(int,int)>(series, item);
+
+        $stack23 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack22);
+
+        result[4] = $stack23;
+
+        $stack25 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMaxRegularValue(int,int)>(series, item);
+
+        $stack26 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack25);
+
+        result[5] = $stack26;
+
+        $stack28 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ1Value(int,int)>(series, item);
+
+        $stack29 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack28);
+
+        result[6] = $stack29;
+
+        $stack31 = interfaceinvoke d.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ3Value(int,int)>(series, item);
+
+        $stack32 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>($stack31);
+
+        result[7] = $stack32;
+
+     label1:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator this;
+        boolean $stack2, $stack3;
+
+        this := @this: org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = obj instanceof org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+
+        if $stack2 == 0 goto label2;
+
+        $stack3 = specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: boolean equals(java.lang.Object)>(obj);
+
+        return $stack3;
+
+     label2:
+        return 0;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator: java.lang.String DEFAULT_TOOL_TIP_FORMAT> = "X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ";
+
+        <org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator: long serialVersionUID> = -6076837753823076334L;
+
+        return;
+    }
+}

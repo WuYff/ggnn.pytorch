@@ -1,0 +1,1226 @@
+public class org.jsoup.parser.Tag extends java.lang.Object implements java.lang.Cloneable
+{
+    private static final java.util.Map tags;
+    private java.lang.String tagName;
+    private java.lang.String normalName;
+    private boolean isBlock;
+    private boolean formatAsBlock;
+    private boolean empty;
+    private boolean selfClosing;
+    private boolean preserveWhitespace;
+    private boolean formList;
+    private boolean formSubmit;
+    private static final java.lang.String[] blockTags;
+    private static final java.lang.String[] inlineTags;
+    private static final java.lang.String[] emptyTags;
+    private static final java.lang.String[] formatAsInlineTags;
+    private static final java.lang.String[] preserveWhitespaceTags;
+    private static final java.lang.String[] formListedTags;
+    private static final java.lang.String[] formSubmitTags;
+
+    private void <init>(java.lang.String)
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String tagName, $stack2;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        tagName := @parameter0: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.parser.Tag: boolean isBlock> = 1;
+
+        this.<org.jsoup.parser.Tag: boolean formatAsBlock> = 1;
+
+        this.<org.jsoup.parser.Tag: boolean empty> = 0;
+
+        this.<org.jsoup.parser.Tag: boolean selfClosing> = 0;
+
+        this.<org.jsoup.parser.Tag: boolean preserveWhitespace> = 0;
+
+        this.<org.jsoup.parser.Tag: boolean formList> = 0;
+
+        this.<org.jsoup.parser.Tag: boolean formSubmit> = 0;
+
+        this.<org.jsoup.parser.Tag: java.lang.String tagName> = tagName;
+
+        $stack2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(tagName);
+
+        this.<org.jsoup.parser.Tag: java.lang.String normalName> = $stack2;
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        return $stack1;
+    }
+
+    public java.lang.String normalName()
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: java.lang.String normalName>;
+
+        return $stack1;
+    }
+
+    public static org.jsoup.parser.Tag valueOf(java.lang.String, org.jsoup.parser.ParseSettings)
+    {
+        java.util.Map $stack4, $stack8;
+        java.lang.Object $stack5, $stack9;
+        org.jsoup.parser.ParseSettings settings;
+        java.lang.String normalName, tagName, tagName#3;
+        boolean $stack10, $stack12;
+        org.jsoup.parser.Tag $stack14, tag;
+
+        tagName := @parameter0: java.lang.String;
+
+        settings := @parameter1: org.jsoup.parser.ParseSettings;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tagName);
+
+        $stack4 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack5;
+
+        if tag != null goto label2;
+
+        tagName#3 = virtualinvoke settings.<org.jsoup.parser.ParseSettings: java.lang.String normalizeTag(java.lang.String)>(tagName);
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String)>(tagName#3);
+
+        normalName = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(tagName#3);
+
+        $stack8 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.Map: java.lang.Object get(java.lang.Object)>(normalName);
+
+        tag = (org.jsoup.parser.Tag) $stack9;
+
+        if tag != null goto label1;
+
+        $stack14 = new org.jsoup.parser.Tag;
+
+        specialinvoke $stack14.<org.jsoup.parser.Tag: void <init>(java.lang.String)>(tagName#3);
+
+        tag = $stack14;
+
+        $stack14.<org.jsoup.parser.Tag: boolean isBlock> = 0;
+
+        goto label2;
+
+     label1:
+        $stack10 = virtualinvoke settings.<org.jsoup.parser.ParseSettings: boolean preserveTagCase()>();
+
+        if $stack10 == 0 goto label2;
+
+        $stack12 = virtualinvoke tagName#3.<java.lang.String: boolean equals(java.lang.Object)>(normalName);
+
+        if $stack12 != 0 goto label2;
+
+        tag = virtualinvoke tag.<org.jsoup.parser.Tag: org.jsoup.parser.Tag clone()>();
+
+        tag.<org.jsoup.parser.Tag: java.lang.String tagName> = tagName#3;
+
+     label2:
+        return tag;
+    }
+
+    public static org.jsoup.parser.Tag valueOf(java.lang.String)
+    {
+        java.lang.String tagName;
+        org.jsoup.parser.ParseSettings $stack1;
+        org.jsoup.parser.Tag $stack2;
+
+        tagName := @parameter0: java.lang.String;
+
+        $stack1 = <org.jsoup.parser.ParseSettings: org.jsoup.parser.ParseSettings preserveCase>;
+
+        $stack2 = staticinvoke <org.jsoup.parser.Tag: org.jsoup.parser.Tag valueOf(java.lang.String,org.jsoup.parser.ParseSettings)>(tagName, $stack1);
+
+        return $stack2;
+    }
+
+    public boolean isBlock()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean isBlock>;
+
+        return $stack1;
+    }
+
+    public boolean formatAsBlock()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean formatAsBlock>;
+
+        return $stack1;
+    }
+
+    public boolean isInline()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1, $stack2;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean isBlock>;
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    public boolean isEmpty()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean empty>;
+
+        return $stack1;
+    }
+
+    public boolean isSelfClosing()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1, $stack2, $stack3;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean empty>;
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = this.<org.jsoup.parser.Tag: boolean selfClosing>;
+
+        if $stack2 == 0 goto label2;
+
+     label1:
+        $stack3 = 1;
+
+        goto label3;
+
+     label2:
+        $stack3 = 0;
+
+     label3:
+        return $stack3;
+    }
+
+    public boolean isKnownTag()
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String $stack1;
+        java.util.Map $stack2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack2 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack1 = this.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: boolean containsKey(java.lang.Object)>($stack1);
+
+        return $stack3;
+    }
+
+    public static boolean isKnownTag(java.lang.String)
+    {
+        java.lang.String tagName;
+        java.util.Map $stack1;
+        boolean $stack2;
+
+        tagName := @parameter0: java.lang.String;
+
+        $stack1 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Map: boolean containsKey(java.lang.Object)>(tagName);
+
+        return $stack2;
+    }
+
+    public boolean preserveWhitespace()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean preserveWhitespace>;
+
+        return $stack1;
+    }
+
+    public boolean isFormListed()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean formList>;
+
+        return $stack1;
+    }
+
+    public boolean isFormSubmittable()
+    {
+        org.jsoup.parser.Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: boolean formSubmit>;
+
+        return $stack1;
+    }
+
+    org.jsoup.parser.Tag setSelfClosing()
+    {
+        org.jsoup.parser.Tag this;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        this.<org.jsoup.parser.Tag: boolean selfClosing> = 1;
+
+        return this;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.jsoup.parser.Tag this, tag;
+        java.lang.Object o;
+        boolean $stack3, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21;
+        java.lang.String $stack4, $stack5;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        o := @parameter0: java.lang.Object;
+
+        if this != o goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = o instanceof org.jsoup.parser.Tag;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        tag = (org.jsoup.parser.Tag) o;
+
+        $stack5 = this.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        $stack4 = tag.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack8 = this.<org.jsoup.parser.Tag: boolean empty>;
+
+        $stack7 = tag.<org.jsoup.parser.Tag: boolean empty>;
+
+        if $stack8 == $stack7 goto label04;
+
+        return 0;
+
+     label04:
+        $stack10 = this.<org.jsoup.parser.Tag: boolean formatAsBlock>;
+
+        $stack9 = tag.<org.jsoup.parser.Tag: boolean formatAsBlock>;
+
+        if $stack10 == $stack9 goto label05;
+
+        return 0;
+
+     label05:
+        $stack12 = this.<org.jsoup.parser.Tag: boolean isBlock>;
+
+        $stack11 = tag.<org.jsoup.parser.Tag: boolean isBlock>;
+
+        if $stack12 == $stack11 goto label06;
+
+        return 0;
+
+     label06:
+        $stack14 = this.<org.jsoup.parser.Tag: boolean preserveWhitespace>;
+
+        $stack13 = tag.<org.jsoup.parser.Tag: boolean preserveWhitespace>;
+
+        if $stack14 == $stack13 goto label07;
+
+        return 0;
+
+     label07:
+        $stack16 = this.<org.jsoup.parser.Tag: boolean selfClosing>;
+
+        $stack15 = tag.<org.jsoup.parser.Tag: boolean selfClosing>;
+
+        if $stack16 == $stack15 goto label08;
+
+        return 0;
+
+     label08:
+        $stack18 = this.<org.jsoup.parser.Tag: boolean formList>;
+
+        $stack17 = tag.<org.jsoup.parser.Tag: boolean formList>;
+
+        if $stack18 == $stack17 goto label09;
+
+        return 0;
+
+     label09:
+        $stack20 = this.<org.jsoup.parser.Tag: boolean formSubmit>;
+
+        $stack19 = tag.<org.jsoup.parser.Tag: boolean formSubmit>;
+
+        if $stack20 != $stack19 goto label10;
+
+        $stack21 = 1;
+
+        goto label11;
+
+     label10:
+        $stack21 = 0;
+
+     label11:
+        return $stack21;
+    }
+
+    public int hashCode()
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String $stack2;
+        boolean $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack16;
+        int $stack5, $stack7, $stack9, $stack11, $stack13, $stack15, $stack17, result;
+        byte $stack46, $stack41, $stack36, $stack31, $stack26, $stack21, $stack18;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack2 = this.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        result = virtualinvoke $stack2.<java.lang.String: int hashCode()>();
+
+        $stack5 = 31 * result;
+
+        $stack4 = this.<org.jsoup.parser.Tag: boolean isBlock>;
+
+        if $stack4 == 0 goto label01;
+
+        $stack46 = 1;
+
+        goto label02;
+
+     label01:
+        $stack46 = 0;
+
+     label02:
+        result = $stack5 + $stack46;
+
+        $stack7 = 31 * result;
+
+        $stack6 = this.<org.jsoup.parser.Tag: boolean formatAsBlock>;
+
+        if $stack6 == 0 goto label03;
+
+        $stack41 = 1;
+
+        goto label04;
+
+     label03:
+        $stack41 = 0;
+
+     label04:
+        result = $stack7 + $stack41;
+
+        $stack9 = 31 * result;
+
+        $stack8 = this.<org.jsoup.parser.Tag: boolean empty>;
+
+        if $stack8 == 0 goto label05;
+
+        $stack36 = 1;
+
+        goto label06;
+
+     label05:
+        $stack36 = 0;
+
+     label06:
+        result = $stack9 + $stack36;
+
+        $stack11 = 31 * result;
+
+        $stack10 = this.<org.jsoup.parser.Tag: boolean selfClosing>;
+
+        if $stack10 == 0 goto label07;
+
+        $stack31 = 1;
+
+        goto label08;
+
+     label07:
+        $stack31 = 0;
+
+     label08:
+        result = $stack11 + $stack31;
+
+        $stack13 = 31 * result;
+
+        $stack12 = this.<org.jsoup.parser.Tag: boolean preserveWhitespace>;
+
+        if $stack12 == 0 goto label09;
+
+        $stack26 = 1;
+
+        goto label10;
+
+     label09:
+        $stack26 = 0;
+
+     label10:
+        result = $stack13 + $stack26;
+
+        $stack15 = 31 * result;
+
+        $stack14 = this.<org.jsoup.parser.Tag: boolean formList>;
+
+        if $stack14 == 0 goto label11;
+
+        $stack21 = 1;
+
+        goto label12;
+
+     label11:
+        $stack21 = 0;
+
+     label12:
+        result = $stack15 + $stack21;
+
+        $stack17 = 31 * result;
+
+        $stack16 = this.<org.jsoup.parser.Tag: boolean formSubmit>;
+
+        if $stack16 == 0 goto label13;
+
+        $stack18 = 1;
+
+        goto label14;
+
+     label13:
+        $stack18 = 0;
+
+     label14:
+        result = $stack17 + $stack18;
+
+        return result;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.parser.Tag this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = this.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        return $stack1;
+    }
+
+    protected org.jsoup.parser.Tag clone()
+    {
+        org.jsoup.parser.Tag this, $stack3;
+        java.lang.Object $stack2;
+        java.lang.CloneNotSupportedException $stack4;
+        java.lang.RuntimeException $stack5;
+
+        this := @this: org.jsoup.parser.Tag;
+
+     label1:
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack3 = (org.jsoup.parser.Tag) $stack2;
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.lang.RuntimeException;
+
+        specialinvoke $stack5.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack4);
+
+        throw $stack5;
+
+        catch java.lang.CloneNotSupportedException from label1 to label2 with label3;
+    }
+
+    private static void register(org.jsoup.parser.Tag)
+    {
+        org.jsoup.parser.Tag tag;
+        java.lang.String $stack1;
+        java.util.Map $stack2;
+
+        tag := @parameter0: org.jsoup.parser.Tag;
+
+        $stack2 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack1 = tag.<org.jsoup.parser.Tag: java.lang.String tagName>;
+
+        interfaceinvoke $stack2.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack1, tag);
+
+        return;
+    }
+
+    protected volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.parser.Tag this, $stack1;
+
+        this := @this: org.jsoup.parser.Tag;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.Tag: org.jsoup.parser.Tag clone()>();
+
+        return $stack1;
+    }
+
+    static void <clinit>()
+    {
+        java.util.HashMap $stack5;
+        java.lang.String[] $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, l0;
+        java.util.Map $stack13, $stack17, $stack21, $stack25, $stack29;
+        java.lang.Object $stack14, $stack18, $stack22, $stack26, $stack30;
+        org.jsoup.parser.Tag $stack33, $stack36, tag;
+        int l1, l2;
+        java.lang.String tagName;
+
+        $stack5 = new java.util.HashMap;
+
+        specialinvoke $stack5.<java.util.HashMap: void <init>()>();
+
+        <org.jsoup.parser.Tag: java.util.Map tags> = $stack5;
+
+        $stack6 = newarray (java.lang.String)[64];
+
+        $stack6[0] = "html";
+
+        $stack6[1] = "head";
+
+        $stack6[2] = "body";
+
+        $stack6[3] = "frameset";
+
+        $stack6[4] = "script";
+
+        $stack6[5] = "noscript";
+
+        $stack6[6] = "style";
+
+        $stack6[7] = "meta";
+
+        $stack6[8] = "link";
+
+        $stack6[9] = "title";
+
+        $stack6[10] = "frame";
+
+        $stack6[11] = "noframes";
+
+        $stack6[12] = "section";
+
+        $stack6[13] = "nav";
+
+        $stack6[14] = "aside";
+
+        $stack6[15] = "hgroup";
+
+        $stack6[16] = "header";
+
+        $stack6[17] = "footer";
+
+        $stack6[18] = "p";
+
+        $stack6[19] = "h1";
+
+        $stack6[20] = "h2";
+
+        $stack6[21] = "h3";
+
+        $stack6[22] = "h4";
+
+        $stack6[23] = "h5";
+
+        $stack6[24] = "h6";
+
+        $stack6[25] = "ul";
+
+        $stack6[26] = "ol";
+
+        $stack6[27] = "pre";
+
+        $stack6[28] = "div";
+
+        $stack6[29] = "blockquote";
+
+        $stack6[30] = "hr";
+
+        $stack6[31] = "address";
+
+        $stack6[32] = "figure";
+
+        $stack6[33] = "figcaption";
+
+        $stack6[34] = "form";
+
+        $stack6[35] = "fieldset";
+
+        $stack6[36] = "ins";
+
+        $stack6[37] = "del";
+
+        $stack6[38] = "dl";
+
+        $stack6[39] = "dt";
+
+        $stack6[40] = "dd";
+
+        $stack6[41] = "li";
+
+        $stack6[42] = "table";
+
+        $stack6[43] = "caption";
+
+        $stack6[44] = "thead";
+
+        $stack6[45] = "tfoot";
+
+        $stack6[46] = "tbody";
+
+        $stack6[47] = "colgroup";
+
+        $stack6[48] = "col";
+
+        $stack6[49] = "tr";
+
+        $stack6[50] = "th";
+
+        $stack6[51] = "td";
+
+        $stack6[52] = "video";
+
+        $stack6[53] = "audio";
+
+        $stack6[54] = "canvas";
+
+        $stack6[55] = "details";
+
+        $stack6[56] = "menu";
+
+        $stack6[57] = "plaintext";
+
+        $stack6[58] = "template";
+
+        $stack6[59] = "article";
+
+        $stack6[60] = "main";
+
+        $stack6[61] = "svg";
+
+        $stack6[62] = "math";
+
+        $stack6[63] = "center";
+
+        <org.jsoup.parser.Tag: java.lang.String[] blockTags> = $stack6;
+
+        $stack7 = newarray (java.lang.String)[66];
+
+        $stack7[0] = "object";
+
+        $stack7[1] = "base";
+
+        $stack7[2] = "font";
+
+        $stack7[3] = "tt";
+
+        $stack7[4] = "i";
+
+        $stack7[5] = "b";
+
+        $stack7[6] = "u";
+
+        $stack7[7] = "big";
+
+        $stack7[8] = "small";
+
+        $stack7[9] = "em";
+
+        $stack7[10] = "strong";
+
+        $stack7[11] = "dfn";
+
+        $stack7[12] = "code";
+
+        $stack7[13] = "samp";
+
+        $stack7[14] = "kbd";
+
+        $stack7[15] = "var";
+
+        $stack7[16] = "cite";
+
+        $stack7[17] = "abbr";
+
+        $stack7[18] = "time";
+
+        $stack7[19] = "acronym";
+
+        $stack7[20] = "mark";
+
+        $stack7[21] = "ruby";
+
+        $stack7[22] = "rt";
+
+        $stack7[23] = "rp";
+
+        $stack7[24] = "a";
+
+        $stack7[25] = "img";
+
+        $stack7[26] = "br";
+
+        $stack7[27] = "wbr";
+
+        $stack7[28] = "map";
+
+        $stack7[29] = "q";
+
+        $stack7[30] = "sub";
+
+        $stack7[31] = "sup";
+
+        $stack7[32] = "bdo";
+
+        $stack7[33] = "iframe";
+
+        $stack7[34] = "embed";
+
+        $stack7[35] = "span";
+
+        $stack7[36] = "input";
+
+        $stack7[37] = "select";
+
+        $stack7[38] = "textarea";
+
+        $stack7[39] = "label";
+
+        $stack7[40] = "button";
+
+        $stack7[41] = "optgroup";
+
+        $stack7[42] = "option";
+
+        $stack7[43] = "legend";
+
+        $stack7[44] = "datalist";
+
+        $stack7[45] = "keygen";
+
+        $stack7[46] = "output";
+
+        $stack7[47] = "progress";
+
+        $stack7[48] = "meter";
+
+        $stack7[49] = "area";
+
+        $stack7[50] = "param";
+
+        $stack7[51] = "source";
+
+        $stack7[52] = "track";
+
+        $stack7[53] = "summary";
+
+        $stack7[54] = "command";
+
+        $stack7[55] = "device";
+
+        $stack7[56] = "area";
+
+        $stack7[57] = "basefont";
+
+        $stack7[58] = "bgsound";
+
+        $stack7[59] = "menuitem";
+
+        $stack7[60] = "param";
+
+        $stack7[61] = "source";
+
+        $stack7[62] = "track";
+
+        $stack7[63] = "data";
+
+        $stack7[64] = "bdi";
+
+        $stack7[65] = "s";
+
+        <org.jsoup.parser.Tag: java.lang.String[] inlineTags> = $stack7;
+
+        $stack8 = newarray (java.lang.String)[21];
+
+        $stack8[0] = "meta";
+
+        $stack8[1] = "link";
+
+        $stack8[2] = "base";
+
+        $stack8[3] = "frame";
+
+        $stack8[4] = "img";
+
+        $stack8[5] = "br";
+
+        $stack8[6] = "wbr";
+
+        $stack8[7] = "embed";
+
+        $stack8[8] = "hr";
+
+        $stack8[9] = "input";
+
+        $stack8[10] = "keygen";
+
+        $stack8[11] = "col";
+
+        $stack8[12] = "command";
+
+        $stack8[13] = "device";
+
+        $stack8[14] = "area";
+
+        $stack8[15] = "basefont";
+
+        $stack8[16] = "bgsound";
+
+        $stack8[17] = "menuitem";
+
+        $stack8[18] = "param";
+
+        $stack8[19] = "source";
+
+        $stack8[20] = "track";
+
+        <org.jsoup.parser.Tag: java.lang.String[] emptyTags> = $stack8;
+
+        $stack9 = newarray (java.lang.String)[19];
+
+        $stack9[0] = "title";
+
+        $stack9[1] = "a";
+
+        $stack9[2] = "p";
+
+        $stack9[3] = "h1";
+
+        $stack9[4] = "h2";
+
+        $stack9[5] = "h3";
+
+        $stack9[6] = "h4";
+
+        $stack9[7] = "h5";
+
+        $stack9[8] = "h6";
+
+        $stack9[9] = "pre";
+
+        $stack9[10] = "address";
+
+        $stack9[11] = "li";
+
+        $stack9[12] = "th";
+
+        $stack9[13] = "td";
+
+        $stack9[14] = "script";
+
+        $stack9[15] = "style";
+
+        $stack9[16] = "ins";
+
+        $stack9[17] = "del";
+
+        $stack9[18] = "s";
+
+        <org.jsoup.parser.Tag: java.lang.String[] formatAsInlineTags> = $stack9;
+
+        $stack10 = newarray (java.lang.String)[4];
+
+        $stack10[0] = "pre";
+
+        $stack10[1] = "plaintext";
+
+        $stack10[2] = "title";
+
+        $stack10[3] = "textarea";
+
+        <org.jsoup.parser.Tag: java.lang.String[] preserveWhitespaceTags> = $stack10;
+
+        $stack11 = newarray (java.lang.String)[8];
+
+        $stack11[0] = "button";
+
+        $stack11[1] = "fieldset";
+
+        $stack11[2] = "input";
+
+        $stack11[3] = "keygen";
+
+        $stack11[4] = "object";
+
+        $stack11[5] = "output";
+
+        $stack11[6] = "select";
+
+        $stack11[7] = "textarea";
+
+        <org.jsoup.parser.Tag: java.lang.String[] formListedTags> = $stack11;
+
+        $stack12 = newarray (java.lang.String)[5];
+
+        $stack12[0] = "input";
+
+        $stack12[1] = "keygen";
+
+        $stack12[2] = "object";
+
+        $stack12[3] = "select";
+
+        $stack12[4] = "textarea";
+
+        <org.jsoup.parser.Tag: java.lang.String[] formSubmitTags> = $stack12;
+
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] blockTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label01:
+        if l2 >= l1 goto label02;
+
+        tagName = l0[l2];
+
+        $stack36 = new org.jsoup.parser.Tag;
+
+        specialinvoke $stack36.<org.jsoup.parser.Tag: void <init>(java.lang.String)>(tagName);
+
+        staticinvoke <org.jsoup.parser.Tag: void register(org.jsoup.parser.Tag)>($stack36);
+
+        l2 = l2 + 1;
+
+        goto label01;
+
+     label02:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] inlineTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label03:
+        if l2 >= l1 goto label04;
+
+        tagName = l0[l2];
+
+        $stack33 = new org.jsoup.parser.Tag;
+
+        specialinvoke $stack33.<org.jsoup.parser.Tag: void <init>(java.lang.String)>(tagName);
+
+        $stack33.<org.jsoup.parser.Tag: boolean isBlock> = 0;
+
+        $stack33.<org.jsoup.parser.Tag: boolean formatAsBlock> = 0;
+
+        staticinvoke <org.jsoup.parser.Tag: void register(org.jsoup.parser.Tag)>($stack33);
+
+        l2 = l2 + 1;
+
+        goto label03;
+
+     label04:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] emptyTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label05:
+        if l2 >= l1 goto label06;
+
+        tagName = l0[l2];
+
+        $stack29 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack30 = interfaceinvoke $stack29.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack30;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tag);
+
+        tag.<org.jsoup.parser.Tag: boolean empty> = 1;
+
+        l2 = l2 + 1;
+
+        goto label05;
+
+     label06:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] formatAsInlineTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label07:
+        if l2 >= l1 goto label08;
+
+        tagName = l0[l2];
+
+        $stack25 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack26 = interfaceinvoke $stack25.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack26;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tag);
+
+        tag.<org.jsoup.parser.Tag: boolean formatAsBlock> = 0;
+
+        l2 = l2 + 1;
+
+        goto label07;
+
+     label08:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] preserveWhitespaceTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label09:
+        if l2 >= l1 goto label10;
+
+        tagName = l0[l2];
+
+        $stack21 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack22 = interfaceinvoke $stack21.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack22;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tag);
+
+        tag.<org.jsoup.parser.Tag: boolean preserveWhitespace> = 1;
+
+        l2 = l2 + 1;
+
+        goto label09;
+
+     label10:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] formListedTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label11:
+        if l2 >= l1 goto label12;
+
+        tagName = l0[l2];
+
+        $stack17 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack18 = interfaceinvoke $stack17.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack18;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tag);
+
+        tag.<org.jsoup.parser.Tag: boolean formList> = 1;
+
+        l2 = l2 + 1;
+
+        goto label11;
+
+     label12:
+        l0 = <org.jsoup.parser.Tag: java.lang.String[] formSubmitTags>;
+
+        l1 = lengthof l0;
+
+        l2 = 0;
+
+     label13:
+        if l2 >= l1 goto label14;
+
+        tagName = l0[l2];
+
+        $stack13 = <org.jsoup.parser.Tag: java.util.Map tags>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: java.lang.Object get(java.lang.Object)>(tagName);
+
+        tag = (org.jsoup.parser.Tag) $stack14;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(tag);
+
+        tag.<org.jsoup.parser.Tag: boolean formSubmit> = 1;
+
+        l2 = l2 + 1;
+
+        goto label13;
+
+     label14:
+        return;
+    }
+}

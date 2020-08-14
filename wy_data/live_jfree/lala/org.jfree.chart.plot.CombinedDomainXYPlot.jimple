@@ -1,0 +1,1400 @@
+public class org.jfree.chart.plot.CombinedDomainXYPlot extends org.jfree.chart.plot.XYPlot implements org.jfree.chart.event.PlotChangeListener
+{
+    private static final long serialVersionUID;
+    private java.util.List subplots;
+    private double gap;
+    private transient java.awt.geom.Rectangle2D[] subplotAreas;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.axis.NumberAxis $stack1;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        $stack1 = new org.jfree.chart.axis.NumberAxis;
+
+        specialinvoke $stack1.<org.jfree.chart.axis.NumberAxis: void <init>()>();
+
+        specialinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void <init>(org.jfree.chart.axis.ValueAxis)>($stack1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.axis.ValueAxis domainAxis;
+        java.util.ArrayList $stack2;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        domainAxis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(null, domainAxis, null, null);
+
+        this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap> = 5.0;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots> = $stack2;
+
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        return "Combined_Domain_XYPlot";
+    }
+
+    public double getGap()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        return $stack1;
+    }
+
+    public void setGap(double)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        double gap;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        gap := @parameter0: double;
+
+        this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap> = gap;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isRangePannable()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack3;
+        java.util.Iterator l1;
+        boolean $stack5, $stack7;
+        java.lang.Object $stack6;
+        org.jfree.chart.plot.XYPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        $stack3 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label3;
+
+        $stack6 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.XYPlot) $stack6;
+
+        $stack7 = virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: boolean isRangePannable()>();
+
+        if $stack7 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public void setRangePannable(boolean)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6, pannable;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        pannable := @parameter0: boolean;
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.XYPlot) $stack7;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setRangePannable(boolean)>(pannable);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void setOrientation(org.jfree.chart.plot.PlotOrientation)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.PlotOrientation orientation;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot p;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        orientation := @parameter0: org.jfree.chart.plot.PlotOrientation;
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>(orientation);
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack7;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>(orientation);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.util.ShadowGenerator generator;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot p;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        generator := @parameter0: org.jfree.chart.util.ShadowGenerator;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void setNotify(boolean)>(0);
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)>(generator);
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack7;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)>(generator);
+
+        goto label1;
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void setNotify(boolean)>(1);
+
+        return;
+    }
+
+    public org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack5, $stack6;
+        java.util.Iterator l3;
+        boolean $stack8;
+        java.lang.Object $stack9;
+        org.jfree.chart.plot.XYPlot p;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.data.Range $stack10, result;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        if $stack5 != null goto label1;
+
+        return null;
+
+     label1:
+        result = null;
+
+        $stack6 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l3 = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack8 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label3;
+
+        $stack9 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack9;
+
+        $stack10 = virtualinvoke p.<org.jfree.chart.plot.XYPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(axis);
+
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, $stack10);
+
+        goto label2;
+
+     label3:
+        return result;
+    }
+
+    public void add(org.jfree.chart.plot.XYPlot)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.XYPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.XYPlot;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void add(org.jfree.chart.plot.XYPlot,int)>(subplot, 1);
+
+        return;
+    }
+
+    public void add(org.jfree.chart.plot.XYPlot, int)
+    {
+        org.jfree.chart.plot.XYPlot subplot;
+        int weight;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.ui.RectangleInsets $stack4;
+        java.util.List $stack5;
+        org.jfree.chart.axis.ValueAxis axis;
+        java.lang.IllegalArgumentException $stack9;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.XYPlot;
+
+        weight := @parameter1: int;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(subplot, "subplot");
+
+        if weight > 0 goto label1;
+
+        $stack9 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack9.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Require weight >= 1.");
+
+        throw $stack9;
+
+     label1:
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setParent(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setWeight(int)>(weight);
+
+        $stack4 = <org.jfree.chart.ui.RectangleInsets: org.jfree.chart.ui.RectangleInsets ZERO_INSETS>;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setInsets(org.jfree.chart.ui.RectangleInsets,boolean)>($stack4, 0);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setDomainAxis(org.jfree.chart.axis.ValueAxis)>(null);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void addChangeListener(org.jfree.chart.event.PlotChangeListener)>(this);
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>(subplot);
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        if axis == null goto label2;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void remove(org.jfree.chart.plot.XYPlot)
+    {
+        org.jfree.chart.plot.XYPlot subplot;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack6, $stack8, $stack14;
+        int size, position, i;
+        org.jfree.chart.axis.ValueAxis domain;
+        java.lang.Object $stack15;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.XYPlot;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(subplot, "subplot");
+
+        position = -1;
+
+        $stack6 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        size = interfaceinvoke $stack6.<java.util.List: int size()>();
+
+        i = 0;
+
+     label1:
+        if position != -1 goto label3;
+
+        if i >= size goto label3;
+
+        $stack14 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack15 = interfaceinvoke $stack14.<java.util.List: java.lang.Object get(int)>(i);
+
+        if $stack15 != subplot goto label2;
+
+        position = i;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        if position == -1 goto label5;
+
+        $stack8 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        interfaceinvoke $stack8.<java.util.List: java.lang.Object remove(int)>(position);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void setParent(org.jfree.chart.plot.Plot)>(null);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void removeChangeListener(org.jfree.chart.event.PlotChangeListener)>(this);
+
+        domain = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        if domain == null goto label4;
+
+        virtualinvoke domain.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label4:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void fireChangeEvent()>();
+
+     label5:
+        return;
+    }
+
+    public java.util.List getSubplots()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack1, $stack2;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+
+        return $stack2;
+    }
+
+    protected org.jfree.chart.axis.AxisSpace calculateAxisSpace(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.axis.AxisSpace $stack19, fixed, space, w#84;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack31, $stack32, $stack35, $stack36, $stack90, $stack91;
+        org.jfree.chart.axis.AxisLocation $stack23;
+        java.awt.geom.Rectangle2D plotArea, xAxis#20, $stack38;
+        java.awt.geom.Rectangle2D[] $stack28, $stack47, $stack63, $stack37;
+        java.util.List $stack33, $stack78, $stack26;
+        java.lang.Object $stack34, $stack79;
+        org.jfree.chart.plot.XYPlot plot, sub;
+        java.awt.Graphics2D g2;
+        int $stack42, $stack58, $stack68, $stack74, $stack80, xEdge#33, totalWeight, i;
+        double $stack43, $stack44, $stack45, $stack48, $stack49, $stack50, $stack59, $stack60, $stack61, $stack64, $stack65, $stack66, $stack67, $stack69, $stack70, $stack71, $stack73, $stack75, $stack76, $stack77, $stack92, $stack93, $stack94, $stack95, i#54, y, usableSize, w;
+        java.awt.geom.Rectangle2D$Double $stack46, $stack62;
+        org.jfree.chart.axis.ValueAxis xAxis;
+        org.jfree.chart.ui.RectangleEdge xEdge;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        $stack19 = new org.jfree.chart.axis.AxisSpace;
+
+        specialinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+
+        space = $stack19;
+
+        orientation = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        fixed = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.AxisSpace getFixedDomainAxisSpace()>();
+
+        if fixed == null goto label02;
+
+        $stack90 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack90 goto label01;
+
+        $stack94 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getLeft()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setLeft(double)>($stack94);
+
+        $stack95 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getRight()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setRight(double)>($stack95);
+
+        goto label03;
+
+     label01:
+        $stack91 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack91 goto label03;
+
+        $stack92 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getTop()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setTop(double)>($stack92);
+
+        $stack93 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getBottom()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setBottom(double)>($stack93);
+
+        goto label03;
+
+     label02:
+        xAxis = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.AxisLocation getDomainAxisLocation()>();
+
+        xEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveDomainAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack23, orientation);
+
+        if xAxis == null goto label03;
+
+        space = virtualinvoke xAxis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, this, plotArea, xEdge, $stack19);
+
+     label03:
+        xAxis#20 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: java.awt.geom.Rectangle2D shrink(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(plotArea, null);
+
+        $stack26 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        xEdge#33 = interfaceinvoke $stack26.<java.util.List: int size()>();
+
+        totalWeight = 0;
+
+        i = 0;
+
+     label04:
+        if i >= xEdge#33 goto label05;
+
+        $stack78 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack79 = interfaceinvoke $stack78.<java.util.List: java.lang.Object get(int)>(i);
+
+        sub = (org.jfree.chart.plot.XYPlot) $stack79;
+
+        $stack80 = virtualinvoke sub.<org.jfree.chart.plot.XYPlot: int getWeight()>();
+
+        totalWeight = totalWeight + $stack80;
+
+        i = i + 1;
+
+        goto label04;
+
+     label05:
+        $stack28 = newarray (java.awt.geom.Rectangle2D)[xEdge#33];
+
+        this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.awt.geom.Rectangle2D[] subplotAreas> = $stack28;
+
+        i#54 = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getY()>();
+
+        usableSize = 0.0;
+
+        $stack31 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack31 goto label06;
+
+        $stack73 = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack76 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        $stack74 = xEdge#33 - 1;
+
+        $stack75 = (double) $stack74;
+
+        $stack77 = $stack76 * $stack75;
+
+        usableSize = $stack73 - $stack77;
+
+        goto label07;
+
+     label06:
+        $stack32 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack32 goto label07;
+
+        $stack67 = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack70 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        $stack68 = xEdge#33 - 1;
+
+        $stack69 = (double) $stack68;
+
+        $stack71 = $stack70 * $stack69;
+
+        usableSize = $stack67 - $stack71;
+
+     label07:
+        i = 0;
+
+     label08:
+        if i >= xEdge#33 goto label11;
+
+        $stack33 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack34 = interfaceinvoke $stack33.<java.util.List: java.lang.Object get(int)>(i);
+
+        plot = (org.jfree.chart.plot.XYPlot) $stack34;
+
+        $stack35 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack35 goto label09;
+
+        $stack58 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: int getWeight()>();
+
+        $stack59 = (double) $stack58;
+
+        $stack61 = usableSize * $stack59;
+
+        $stack60 = (double) totalWeight;
+
+        w = $stack61 / $stack60;
+
+        $stack63 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.awt.geom.Rectangle2D[] subplotAreas>;
+
+        $stack62 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack64 = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        specialinvoke $stack62.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(i#54, y, w, $stack64);
+
+        $stack63[i] = $stack62;
+
+        $stack66 = i#54 + w;
+
+        $stack65 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        i#54 = $stack66 + $stack65;
+
+        goto label10;
+
+     label09:
+        $stack36 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack36 goto label10;
+
+        $stack42 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: int getWeight()>();
+
+        $stack43 = (double) $stack42;
+
+        $stack45 = usableSize * $stack43;
+
+        $stack44 = (double) totalWeight;
+
+        w = $stack45 / $stack44;
+
+        $stack47 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.awt.geom.Rectangle2D[] subplotAreas>;
+
+        $stack46 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack48 = virtualinvoke xAxis#20.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        specialinvoke $stack46.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(i#54, y, $stack48, w);
+
+        $stack47[i] = $stack46;
+
+        $stack50 = y + w;
+
+        $stack49 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        y = $stack50 + $stack49;
+
+     label10:
+        $stack37 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.awt.geom.Rectangle2D[] subplotAreas>;
+
+        $stack38 = $stack37[i];
+
+        w#84 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.AxisSpace calculateRangeAxisSpace(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.axis.AxisSpace)>(g2, $stack38, null);
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void ensureAtLeast(org.jfree.chart.axis.AxisSpace)>(w#84);
+
+        i = i + 1;
+
+        goto label08;
+
+     label11:
+        return space;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info, $stack34, subplotInfo;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.geom.Rectangle2D area, dataArea, $stack31;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.AxisSpace space;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.ui.RectangleEdge edge;
+        double cursor;
+        org.jfree.chart.axis.AxisState axisState;
+        java.util.Map $stack24;
+        java.util.List $stack28, $stack26;
+        java.lang.Object $stack29;
+        org.jfree.chart.plot.XYPlot plot;
+        java.awt.geom.Rectangle2D[] $stack30;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.ChartRenderingInfo $stack35;
+        org.jfree.chart.plot.PlotState $stack43, parentState;
+        int i, $stack27;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        if info == null goto label1;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label1:
+        insets = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void setFixedRangeAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)>(null);
+
+        space = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.AxisSpace calculateAxisSpace(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        dataArea = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: java.awt.geom.Rectangle2D shrink(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(area, null);
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void setFixedRangeAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)>(space);
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        edge = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        cursor = staticinvoke <org.jfree.chart.ui.RectangleEdge: double coordinate(java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(dataArea, edge);
+
+        axisState = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, area, dataArea, edge, info);
+
+        if parentState != null goto label2;
+
+        $stack43 = new org.jfree.chart.plot.PlotState;
+
+        specialinvoke $stack43.<org.jfree.chart.plot.PlotState: void <init>()>();
+
+        parentState = $stack43;
+
+     label2:
+        $stack24 = virtualinvoke parentState.<org.jfree.chart.plot.PlotState: java.util.Map getSharedAxisStates()>();
+
+        interfaceinvoke $stack24.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(axis, axisState);
+
+        i = 0;
+
+     label3:
+        $stack26 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack27 = interfaceinvoke $stack26.<java.util.List: int size()>();
+
+        if i >= $stack27 goto label5;
+
+        $stack28 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack29 = interfaceinvoke $stack28.<java.util.List: java.lang.Object get(int)>(i);
+
+        plot = (org.jfree.chart.plot.XYPlot) $stack29;
+
+        subplotInfo = null;
+
+        if info == null goto label4;
+
+        $stack34 = new org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack35 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+
+        specialinvoke $stack34.<org.jfree.chart.plot.PlotRenderingInfo: void <init>(org.jfree.chart.ChartRenderingInfo)>($stack35);
+
+        subplotInfo = $stack34;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void addSubplotInfo(org.jfree.chart.plot.PlotRenderingInfo)>($stack34);
+
+     label4:
+        $stack30 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.awt.geom.Rectangle2D[] subplotAreas>;
+
+        $stack31 = $stack30[i];
+
+        virtualinvoke plot.<org.jfree.chart.plot.XYPlot: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotState,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack31, anchor, parentState, subplotInfo);
+
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        if info == null goto label6;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(dataArea);
+
+     label6:
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.LegendItemCollection $stack6, more, result;
+        java.util.List $stack7, $stack9;
+        java.util.Iterator l2;
+        boolean $stack11;
+        java.lang.Object $stack12;
+        org.jfree.chart.plot.XYPlot plot;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        result = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.LegendItemCollection getFixedLegendItems()>();
+
+        if result != null goto label2;
+
+        $stack6 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack6.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        result = $stack6;
+
+        $stack7 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        if $stack7 == null goto label2;
+
+        $stack9 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack12 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        plot = (org.jfree.chart.plot.XYPlot) $stack12;
+
+        more = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.LegendItemCollection getLegendItems()>();
+
+        virtualinvoke $stack6.<org.jfree.chart.LegendItemCollection: void addAll(org.jfree.chart.LegendItemCollection)>(more);
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        factor := @parameter0: double;
+
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>(factor, info, source, 0);
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D, boolean)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.plot.XYPlot subplot, p;
+        java.util.List $stack10;
+        java.util.Iterator l7;
+        boolean $stack12, useAnchor;
+        java.lang.Object $stack13;
+        double factor;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        useAnchor := @parameter3: boolean;
+
+        subplot = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.plot.XYPlot findSubplot(org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(state, source);
+
+        if subplot == null goto label1;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>(factor, state, source, useAnchor);
+
+        goto label3;
+
+     label1:
+        $stack10 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l7 = interfaceinvoke $stack10.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack12 = interfaceinvoke l7.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack12 == 0 goto label3;
+
+        $stack13 = interfaceinvoke l7.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack13;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>(factor, state, source, useAnchor);
+
+        goto label2;
+
+     label3:
+        return;
+    }
+
+    public void zoomRangeAxes(double, double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.plot.XYPlot subplot, p;
+        java.util.List $stack11;
+        java.util.Iterator l8;
+        boolean $stack13;
+        java.lang.Object $stack14;
+        double lowerPercent, upperPercent;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter3: java.awt.geom.Point2D;
+
+        subplot = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.plot.XYPlot findSubplot(org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(info, source);
+
+        if subplot == null goto label1;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void zoomRangeAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(lowerPercent, upperPercent, info, source);
+
+        goto label3;
+
+     label1:
+        $stack11 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l8 = interfaceinvoke $stack11.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack13 = interfaceinvoke l8.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label3;
+
+        $stack14 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack14;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void zoomRangeAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(lowerPercent, upperPercent, info, source);
+
+        goto label2;
+
+     label3:
+        return;
+    }
+
+    public void panRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info, subplotInfo;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.plot.XYPlot subplot;
+        boolean $stack10;
+        int $stack11, $stack13, i;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        double panRange;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        panRange := @parameter0: double;
+
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        subplot = virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.plot.XYPlot findSubplot(org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(info, source);
+
+        if subplot != null goto label1;
+
+        return;
+
+     label1:
+        $stack10 = virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: boolean isRangePannable()>();
+
+        if $stack10 != 0 goto label2;
+
+        return;
+
+     label2:
+        $stack11 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: int getSubplotIndex(java.awt.geom.Point2D)>(source);
+
+        subplotInfo = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getSubplotInfo(int)>($stack11);
+
+        if subplotInfo != null goto label3;
+
+        return;
+
+     label3:
+        i = 0;
+
+     label4:
+        $stack13 = virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: int getRangeAxisCount()>();
+
+        if i >= $stack13 goto label6;
+
+        rangeAxis = virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getRangeAxis(int)>(i);
+
+        if rangeAxis == null goto label5;
+
+        virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: void pan(double)>(panRange);
+
+     label5:
+        i = i + 1;
+
+        goto label4;
+
+     label6:
+        return;
+    }
+
+    public org.jfree.chart.plot.XYPlot findSubplot(org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.geom.Point2D source;
+        int subplotIndex;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot result;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        info := @parameter0: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter1: java.awt.geom.Point2D;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(info, "info");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(source, "source");
+
+        result = null;
+
+        subplotIndex = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: int getSubplotIndex(java.awt.geom.Point2D)>(source);
+
+        if subplotIndex < 0 goto label1;
+
+        $stack6 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(subplotIndex);
+
+        result = (org.jfree.chart.plot.XYPlot) $stack7;
+
+     label1:
+        return result;
+    }
+
+    public void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.renderer.xy.XYItemRenderer renderer;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot p;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        renderer := @parameter0: org.jfree.chart.renderer.xy.XYItemRenderer;
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>(renderer);
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack7;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>(renderer);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void setFixedRangeAxisSpace(org.jfree.chart.axis.AxisSpace)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.axis.AxisSpace space;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        space := @parameter0: org.jfree.chart.axis.AxisSpace;
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void setFixedRangeAxisSpace(org.jfree.chart.axis.AxisSpace)>(space);
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void setFixedRangeAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)>(space);
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    protected void setFixedRangeAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.XYPlot p;
+        org.jfree.chart.axis.AxisSpace space;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        space := @parameter0: org.jfree.chart.axis.AxisSpace;
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        p = (org.jfree.chart.plot.XYPlot) $stack7;
+
+        virtualinvoke p.<org.jfree.chart.plot.XYPlot: void setFixedRangeAxisSpace(org.jfree.chart.axis.AxisSpace,boolean)>(space, 0);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void handleClick(int, int, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info, subplotInfo;
+        java.awt.geom.Rectangle2D dataArea;
+        int x, y, $stack13, i;
+        double $stack9, $stack10;
+        boolean $stack11;
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        java.util.List $stack12, $stack14;
+        java.lang.Object $stack15;
+        org.jfree.chart.plot.XYPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        x := @parameter0: int;
+
+        y := @parameter1: int;
+
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        dataArea = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+
+        $stack10 = (double) x;
+
+        $stack9 = (double) y;
+
+        $stack11 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: boolean contains(double,double)>($stack10, $stack9);
+
+        if $stack11 == 0 goto label2;
+
+        i = 0;
+
+     label1:
+        $stack12 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack13 = interfaceinvoke $stack12.<java.util.List: int size()>();
+
+        if i >= $stack13 goto label2;
+
+        $stack14 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack15 = interfaceinvoke $stack14.<java.util.List: java.lang.Object get(int)>(i);
+
+        subplot = (org.jfree.chart.plot.XYPlot) $stack15;
+
+        subplotInfo = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getSubplotInfo(int)>(i);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void handleClick(int,int,org.jfree.chart.plot.PlotRenderingInfo)>(x, y, subplotInfo);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void datasetChanged(org.jfree.data.general.DatasetChangeEvent)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.data.general.DatasetChangeEvent event;
+        java.util.List $stack5, $stack8;
+        org.jfree.data.general.Dataset $stack6, $stack14;
+        boolean $stack7, $stack10;
+        java.util.Iterator l3;
+        java.lang.Object $stack11;
+        org.jfree.chart.plot.XYPlot subplot;
+        int $stack12;
+        org.jfree.data.xy.XYDataset dataset;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke this.<org.jfree.chart.plot.XYPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>(event);
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        if $stack5 != null goto label1;
+
+        return;
+
+     label1:
+        dataset = null;
+
+        $stack6 = virtualinvoke event.<org.jfree.data.general.DatasetChangeEvent: org.jfree.data.general.Dataset getDataset()>();
+
+        $stack7 = $stack6 instanceof org.jfree.data.xy.XYDataset;
+
+        if $stack7 == 0 goto label2;
+
+        $stack14 = virtualinvoke event.<org.jfree.data.general.DatasetChangeEvent: org.jfree.data.general.Dataset getDataset()>();
+
+        dataset = (org.jfree.data.xy.XYDataset) $stack14;
+
+     label2:
+        $stack8 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        l3 = interfaceinvoke $stack8.<java.util.List: java.util.Iterator iterator()>();
+
+     label3:
+        $stack10 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label5;
+
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.XYPlot) $stack11;
+
+        $stack12 = virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: int indexOf(org.jfree.data.xy.XYDataset)>(dataset);
+
+        if $stack12 < 0 goto label4;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.XYPlot: void configureRangeAxes()>();
+
+     label4:
+        goto label3;
+
+     label5:
+        return;
+    }
+
+    public void plotChanged(org.jfree.chart.event.PlotChangeEvent)
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this;
+        org.jfree.chart.event.PlotChangeEvent event;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        event := @parameter0: org.jfree.chart.event.PlotChangeEvent;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedDomainXYPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>(event);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.CombinedDomainXYPlot this, that;
+        boolean $stack3, $stack9, $stack10;
+        double $stack4, $stack5;
+        byte $stack6;
+        java.util.List $stack7, $stack8;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.plot.CombinedDomainXYPlot) obj;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        $stack4 = that.<org.jfree.chart.plot.CombinedDomainXYPlot: double gap>;
+
+        $stack6 = $stack5 cmpl $stack4;
+
+        if $stack6 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack7 = that.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack10 = specialinvoke this.<org.jfree.chart.plot.XYPlot: boolean equals(java.lang.Object)>(obj);
+
+        return $stack10;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.CombinedDomainXYPlot this, result;
+        java.lang.Object $stack4, $stack12;
+        java.util.List $stack5, $stack6, $stack7;
+        boolean $stack9;
+        org.jfree.chart.plot.XYPlot child;
+        java.util.Iterator domainAxis;
+        org.jfree.chart.axis.ValueAxis domainAxis#2;
+
+        this := @this: org.jfree.chart.plot.CombinedDomainXYPlot;
+
+        $stack4 = specialinvoke this.<org.jfree.chart.plot.XYPlot: java.lang.Object clone()>();
+
+        result = (org.jfree.chart.plot.CombinedDomainXYPlot) $stack4;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack5);
+
+        result.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots> = $stack6;
+
+        $stack7 = result.<org.jfree.chart.plot.CombinedDomainXYPlot: java.util.List subplots>;
+
+        domainAxis = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke domainAxis.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label2;
+
+        $stack12 = interfaceinvoke domainAxis.<java.util.Iterator: java.lang.Object next()>();
+
+        child = (org.jfree.chart.plot.XYPlot) $stack12;
+
+        virtualinvoke child.<org.jfree.chart.plot.XYPlot: void setParent(org.jfree.chart.plot.Plot)>(result);
+
+        goto label1;
+
+     label2:
+        domainAxis#2 = virtualinvoke result.<org.jfree.chart.plot.CombinedDomainXYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+        if domainAxis#2 == null goto label3;
+
+        virtualinvoke domainAxis#2.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label3:
+        return result;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.plot.CombinedDomainXYPlot: long serialVersionUID> = -7765545541261907383L;
+
+        return;
+    }
+}

@@ -1,0 +1,375 @@
+public class org.jsoup.nodes.XmlDeclaration extends org.jsoup.nodes.LeafNode
+{
+    private final boolean isProcessingInstruction;
+
+    public void <init>(java.lang.String, boolean)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String name;
+        boolean isProcessingInstruction;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        name := @parameter0: java.lang.String;
+
+        isProcessingInstruction := @parameter1: boolean;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void <init>()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(name);
+
+        this.<org.jsoup.nodes.XmlDeclaration: java.lang.Object value> = name;
+
+        this.<org.jsoup.nodes.XmlDeclaration: boolean isProcessingInstruction> = isProcessingInstruction;
+
+        return;
+    }
+
+    public java.lang.String nodeName()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        return "#declaration";
+    }
+
+    public java.lang.String name()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: java.lang.String coreValue()>();
+
+        return $stack1;
+    }
+
+    public java.lang.String getWholeDeclaration()
+    {
+        java.lang.StringBuilder sb;
+        org.jsoup.nodes.XmlDeclaration this;
+        org.jsoup.nodes.Document$OutputSettings $stack4;
+        java.lang.String $stack5, $stack6;
+        java.io.IOException $stack7;
+        org.jsoup.SerializationException $stack8;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        sb = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+     label1:
+        $stack4 = new org.jsoup.nodes.Document$OutputSettings;
+
+        specialinvoke $stack4.<org.jsoup.nodes.Document$OutputSettings: void <init>()>();
+
+        specialinvoke this.<org.jsoup.nodes.XmlDeclaration: void getWholeDeclaration(java.lang.Appendable,org.jsoup.nodes.Document$OutputSettings)>(sb, $stack4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack7 := @caughtexception;
+
+        $stack8 = new org.jsoup.SerializationException;
+
+        specialinvoke $stack8.<org.jsoup.SerializationException: void <init>(java.lang.Throwable)>($stack7);
+
+        throw $stack8;
+
+     label4:
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(sb);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String trim()>();
+
+        return $stack6;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    private void getWholeDeclaration(java.lang.Appendable, org.jsoup.nodes.Document$OutputSettings) throws java.io.IOException
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        org.jsoup.nodes.Attributes $stack5;
+        java.util.Iterator l3;
+        boolean $stack7, $stack11;
+        java.lang.Object $stack8;
+        org.jsoup.nodes.Attribute attribute;
+        java.lang.String $stack9, $stack10;
+        java.lang.Appendable accum;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        out := @parameter1: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Attributes attributes()>();
+
+        l3 = virtualinvoke $stack5.<org.jsoup.nodes.Attributes: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label3;
+
+        $stack8 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        attribute = (org.jsoup.nodes.Attribute) $stack8;
+
+        $stack9 = virtualinvoke attribute.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        $stack10 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: java.lang.String nodeName()>();
+
+        $stack11 = virtualinvoke $stack9.<java.lang.String: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack11 != 0 goto label2;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(32);
+
+        virtualinvoke attribute.<org.jsoup.nodes.Attribute: void html(java.lang.Appendable,org.jsoup.nodes.Document$OutputSettings)>(accum, out);
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    void outerHtmlHead(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings) throws java.io.IOException
+    {
+        java.lang.Appendable accum, $stack4, $stack6, $stack10;
+        org.jsoup.nodes.XmlDeclaration this;
+        boolean $stack5, $stack9;
+        java.lang.String $stack7, $stack15, $stack12;
+        org.jsoup.nodes.Document$OutputSettings out;
+        int depth;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack4 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("<");
+
+        $stack5 = this.<org.jsoup.nodes.XmlDeclaration: boolean isProcessingInstruction>;
+
+        if $stack5 == 0 goto label1;
+
+        $stack15 = "!";
+
+        goto label2;
+
+     label1:
+        $stack15 = "?";
+
+     label2:
+        $stack6 = interfaceinvoke $stack4.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack15);
+
+        $stack7 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: java.lang.String coreValue()>();
+
+        interfaceinvoke $stack6.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack7);
+
+        specialinvoke this.<org.jsoup.nodes.XmlDeclaration: void getWholeDeclaration(java.lang.Appendable,org.jsoup.nodes.Document$OutputSettings)>(accum, out);
+
+        $stack9 = this.<org.jsoup.nodes.XmlDeclaration: boolean isProcessingInstruction>;
+
+        if $stack9 == 0 goto label3;
+
+        $stack12 = "!";
+
+        goto label4;
+
+     label3:
+        $stack12 = "?";
+
+     label4:
+        $stack10 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack12);
+
+        interfaceinvoke $stack10.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(">");
+
+        return;
+    }
+
+    void outerHtmlTail(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.Appendable accum;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: java.lang.String outerHtml()>();
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.XmlDeclaration clone()
+    {
+        org.jsoup.nodes.XmlDeclaration this, $stack2;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node clone()>();
+
+        $stack2 = (org.jsoup.nodes.XmlDeclaration) $stack1;
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node empty()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node empty()>();
+
+        return $stack1;
+    }
+
+    public volatile int childNodeSize()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        int $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: int childNodeSize()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String baseUri()
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String baseUri()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String absUrl(java.lang.String)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String absUrl(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node removeAttr(java.lang.String)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String l1;
+        org.jsoup.nodes.Node $stack2;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node removeAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile boolean hasAttr(java.lang.String)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node attr(java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String l1, l2;
+        org.jsoup.nodes.Node $stack3;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile java.lang.String attr(java.lang.String)
+    {
+        org.jsoup.nodes.XmlDeclaration this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String attr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node clone()
+    {
+        org.jsoup.nodes.XmlDeclaration this, $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.XmlDeclaration clone()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.XmlDeclaration this, $stack1;
+
+        this := @this: org.jsoup.nodes.XmlDeclaration;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.XmlDeclaration clone()>();
+
+        return $stack1;
+    }
+}

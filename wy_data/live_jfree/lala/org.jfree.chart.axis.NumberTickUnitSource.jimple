@@ -1,0 +1,558 @@
+public class org.jfree.chart.axis.NumberTickUnitSource extends java.lang.Object implements org.jfree.chart.axis.TickUnitSource, java.io.Serializable
+{
+    private boolean integers;
+    private int power;
+    private int factor;
+    private java.text.NumberFormat formatter;
+    private java.text.DecimalFormat dfNeg4;
+    private java.text.DecimalFormat dfNeg3;
+    private java.text.DecimalFormat dfNeg2;
+    private java.text.DecimalFormat dfNeg1;
+    private java.text.DecimalFormat df0;
+    private java.text.DecimalFormat df;
+
+    public void <init>()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: void <init>(boolean)>(0);
+
+        return;
+    }
+
+    public void <init>(boolean)
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        boolean integers;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        integers := @parameter0: boolean;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: void <init>(boolean,java.text.NumberFormat)>(integers, null);
+
+        return;
+    }
+
+    public void <init>(boolean, java.text.NumberFormat)
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        java.text.DecimalFormat $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+        boolean integers;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        integers := @parameter0: boolean;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = 0;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 1;
+
+        $stack3 = new java.text.DecimalFormat;
+
+        specialinvoke $stack3.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0000");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg4> = $stack3;
+
+        $stack4 = new java.text.DecimalFormat;
+
+        specialinvoke $stack4.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.000");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg3> = $stack4;
+
+        $stack5 = new java.text.DecimalFormat;
+
+        specialinvoke $stack5.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.00");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg2> = $stack5;
+
+        $stack6 = new java.text.DecimalFormat;
+
+        specialinvoke $stack6.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg1> = $stack6;
+
+        $stack7 = new java.text.DecimalFormat;
+
+        specialinvoke $stack7.<java.text.DecimalFormat: void <init>(java.lang.String)>("#,##0");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat df0> = $stack7;
+
+        $stack8 = new java.text.DecimalFormat;
+
+        specialinvoke $stack8.<java.text.DecimalFormat: void <init>(java.lang.String)>("#.######E0");
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat df> = $stack8;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: boolean integers> = integers;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat formatter> = formatter;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = 0;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 1;
+
+        return;
+    }
+
+    public org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        org.jfree.chart.axis.TickUnit unit, t;
+        boolean $stack4;
+        org.jfree.chart.axis.NumberTickUnit $stack6;
+        double $stack7;
+        java.text.NumberFormat $stack8;
+        int $stack9;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+
+        t = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)>(unit);
+
+        $stack4 = virtualinvoke t.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(unit);
+
+        if $stack4 == 0 goto label1;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: boolean next()>();
+
+        $stack6 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack7 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: double getTickSize()>();
+
+        $stack8 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat getTickLabelFormat()>();
+
+        $stack9 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: int getMinorTickCount()>();
+
+        specialinvoke $stack6.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>($stack7, $stack8, $stack9);
+
+        t = $stack6;
+
+     label1:
+        return t;
+    }
+
+    public org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        org.jfree.chart.axis.TickUnit unit, $stack3;
+        double $stack2;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+
+        $stack2 = virtualinvoke unit.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>($stack2);
+
+        return $stack3;
+    }
+
+    public org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)
+    {
+        double size, $stack5, $stack6, $stack10, $stack14;
+        boolean $stack4, $stack8, $stack13, done, $stack18;
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        int $stack7, $stack12, $stack21, $stack22;
+        org.jfree.chart.axis.NumberTickUnit $stack9;
+        java.text.NumberFormat $stack11;
+        byte $stack15;
+        java.lang.IllegalArgumentException $stack26;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        size := @parameter0: double;
+
+        $stack4 = staticinvoke <java.lang.Double: boolean isInfinite(double)>(size);
+
+        if $stack4 == 0 goto label1;
+
+        $stack26 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack26.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Must be finite.");
+
+        throw $stack26;
+
+     label1:
+        $stack5 = staticinvoke <java.lang.Math: double log10(double)>(size);
+
+        $stack6 = staticinvoke <java.lang.Math: double ceil(double)>($stack5);
+
+        $stack7 = (int) $stack6;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = $stack7;
+
+        $stack8 = this.<org.jfree.chart.axis.NumberTickUnitSource: boolean integers>;
+
+        if $stack8 == 0 goto label2;
+
+        $stack21 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        $stack22 = staticinvoke <java.lang.Math: int max(int,int)>($stack21, 0);
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = $stack22;
+
+     label2:
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 1;
+
+        done = 0;
+
+     label3:
+        if done != 0 goto label6;
+
+        $stack13 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: boolean previous()>();
+
+        if $stack13 != 0 goto label4;
+
+        $stack18 = 1;
+
+        goto label5;
+
+     label4:
+        $stack18 = 0;
+
+     label5:
+        done = $stack18;
+
+        $stack14 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: double getTickSize()>();
+
+        $stack15 = $stack14 cmpg size;
+
+        if $stack15 >= 0 goto label3;
+
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: boolean next()>();
+
+        done = 1;
+
+        goto label3;
+
+     label6:
+        $stack9 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack10 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: double getTickSize()>();
+
+        $stack11 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat getTickLabelFormat()>();
+
+        $stack12 = specialinvoke this.<org.jfree.chart.axis.NumberTickUnitSource: int getMinorTickCount()>();
+
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>($stack10, $stack11, $stack12);
+
+        return $stack9;
+    }
+
+    private boolean next()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        int $stack1, $stack2, $stack3, $stack5, $stack6, $stack7;
+        java.lang.IllegalStateException $stack4;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        $stack1 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack1 != 1 goto label1;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 2;
+
+        return 1;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack2 != 2 goto label2;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 5;
+
+        return 1;
+
+     label2:
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack3 != 5 goto label4;
+
+        $stack5 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack5 != 300 goto label3;
+
+        return 0;
+
+     label3:
+        $stack6 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        $stack7 = $stack6 + 1;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = $stack7;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 1;
+
+        return 1;
+
+     label4:
+        $stack4 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack4.<java.lang.IllegalStateException: void <init>(java.lang.String)>("We should never get here.");
+
+        throw $stack4;
+    }
+
+    private boolean previous()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        int $stack1, $stack2, $stack3, $stack6, $stack7, $stack8, $stack9;
+        java.lang.IllegalStateException $stack4;
+        boolean $stack5;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        $stack1 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack1 != 1 goto label4;
+
+        $stack5 = this.<org.jfree.chart.axis.NumberTickUnitSource: boolean integers>;
+
+        if $stack5 == 0 goto label1;
+
+        $stack9 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack9 == 0 goto label2;
+
+     label1:
+        $stack6 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack6 != -300 goto label3;
+
+     label2:
+        return 0;
+
+     label3:
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 5;
+
+        $stack7 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        $stack8 = $stack7 - 1;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int power> = $stack8;
+
+        return 1;
+
+     label4:
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack2 != 2 goto label5;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 1;
+
+        return 1;
+
+     label5:
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack3 != 5 goto label6;
+
+        this.<org.jfree.chart.axis.NumberTickUnitSource: int factor> = 2;
+
+        return 1;
+
+     label6:
+        $stack4 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack4.<java.lang.IllegalStateException: void <init>(java.lang.String)>("We should never get here.");
+
+        throw $stack4;
+    }
+
+    private double getTickSize()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        int $stack1, $stack2;
+        double $stack3, $stack4, $stack5, $stack6;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        $stack1 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        $stack4 = (double) $stack1;
+
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        $stack3 = (double) $stack2;
+
+        $stack5 = staticinvoke <java.lang.Math: double pow(double,double)>(10.0, $stack3);
+
+        $stack6 = $stack4 * $stack5;
+
+        return $stack6;
+    }
+
+    private java.text.NumberFormat getTickLabelFormat()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        java.text.NumberFormat $stack1, $stack15;
+        int $stack2, $stack3, $stack4, $stack5, $stack6, $stack8;
+        java.text.DecimalFormat $stack7, $stack10, $stack11, $stack12, $stack13, $stack14;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        $stack1 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat formatter>;
+
+        if $stack1 == null goto label1;
+
+        $stack15 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat formatter>;
+
+        return $stack15;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack2 != -4 goto label2;
+
+        $stack14 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg4>;
+
+        return $stack14;
+
+     label2:
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack3 != -3 goto label3;
+
+        $stack13 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg3>;
+
+        return $stack13;
+
+     label3:
+        $stack4 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack4 != -2 goto label4;
+
+        $stack12 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg2>;
+
+        return $stack12;
+
+     label4:
+        $stack5 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack5 != -1 goto label5;
+
+        $stack11 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat dfNeg1>;
+
+        return $stack11;
+
+     label5:
+        $stack6 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack6 < 0 goto label6;
+
+        $stack8 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack8 > 6 goto label6;
+
+        $stack10 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat df0>;
+
+        return $stack10;
+
+     label6:
+        $stack7 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.DecimalFormat df>;
+
+        return $stack7;
+    }
+
+    private int getMinorTickCount()
+    {
+        org.jfree.chart.axis.NumberTickUnitSource this;
+        int $stack1, $stack2;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        $stack1 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack1 != 1 goto label1;
+
+        return 10;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack2 != 5 goto label2;
+
+        return 5;
+
+     label2:
+        return 0;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.NumberTickUnitSource this, that;
+        boolean $stack3, $stack4, $stack5, $stack8;
+        java.text.NumberFormat $stack6, $stack7;
+        int $stack9, $stack10, $stack11, $stack12;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnitSource;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.NumberTickUnitSource;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.axis.NumberTickUnitSource) obj;
+
+        $stack5 = this.<org.jfree.chart.axis.NumberTickUnitSource: boolean integers>;
+
+        $stack4 = that.<org.jfree.chart.axis.NumberTickUnitSource: boolean integers>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat formatter>;
+
+        $stack6 = that.<org.jfree.chart.axis.NumberTickUnitSource: java.text.NumberFormat formatter>;
+
+        $stack8 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack7, $stack6);
+
+        if $stack8 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack10 = this.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        $stack9 = that.<org.jfree.chart.axis.NumberTickUnitSource: int power>;
+
+        if $stack10 == $stack9 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        $stack11 = that.<org.jfree.chart.axis.NumberTickUnitSource: int factor>;
+
+        if $stack12 == $stack11 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+}

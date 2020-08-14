@@ -1,0 +1,265 @@
+public class org.jfree.chart.urls.StandardPieURLGenerator extends java.lang.Object implements org.jfree.chart.urls.PieURLGenerator, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.lang.String prefix;
+    private java.lang.String categoryParamName;
+    private java.lang.String indexParamName;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.StandardPieURLGenerator this;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        specialinvoke this.<org.jfree.chart.urls.StandardPieURLGenerator: void <init>(java.lang.String)>("index.html");
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.urls.StandardPieURLGenerator this;
+        java.lang.String prefix;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.urls.StandardPieURLGenerator: void <init>(java.lang.String,java.lang.String)>(prefix, "category");
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        org.jfree.chart.urls.StandardPieURLGenerator this;
+        java.lang.String prefix, categoryParamName;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        categoryParamName := @parameter1: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.urls.StandardPieURLGenerator: void <init>(java.lang.String,java.lang.String,java.lang.String)>(prefix, categoryParamName, "pieIndex");
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.jfree.chart.urls.StandardPieURLGenerator this;
+        java.lang.String prefix, categoryParamName, indexParamName;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        categoryParamName := @parameter1: java.lang.String;
+
+        indexParamName := @parameter2: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName> = "category";
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName> = "pieIndex";
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(categoryParamName, "categoryParamName");
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String prefix> = prefix;
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName> = categoryParamName;
+
+        this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName> = indexParamName;
+
+        return;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.general.PieDataset, java.lang.Comparable, int)
+    {
+        org.jfree.chart.urls.StandardPieURLGenerator this;
+        boolean $stack6;
+        java.lang.StringBuilder $stack7, $stack8, $stack9, $stack11, $stack12, $stack15, $stack18, $stack19, $stack20, $stack22, $stack23, $stack24, $stack26, $stack27, $stack28, $stack30, $stack31, $stack34;
+        java.lang.String $stack10, $stack13, $stack14, $stack17, $stack21, $stack29, $stack32, $stack33, url;
+        java.lang.Comparable key;
+        int pieIndex;
+        java.io.UnsupportedEncodingException $stack37;
+        java.lang.RuntimeException $stack38;
+        org.jfree.data.general.PieDataset dataset;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+
+        key := @parameter1: java.lang.Comparable;
+
+        pieIndex := @parameter2: int;
+
+        url = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String prefix>;
+
+     label1:
+        $stack6 = virtualinvoke url.<java.lang.String: boolean contains(java.lang.CharSequence)>("?");
+
+        if $stack6 == 0 goto label2;
+
+        $stack26 = new java.lang.StringBuilder;
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("&amp;");
+
+        $stack29 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName>;
+
+        $stack30 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack29);
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack32 = virtualinvoke key.<java.lang.Object: java.lang.String toString()>();
+
+        $stack33 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack32, "UTF-8");
+
+        $stack34 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack33);
+
+        url = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label3;
+
+     label2:
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("?");
+
+        $stack10 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName>;
+
+        $stack11 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack10);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack13 = virtualinvoke key.<java.lang.Object: java.lang.String toString()>();
+
+        $stack14 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack13, "UTF-8");
+
+        $stack15 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+
+        url = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label3:
+        $stack17 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName>;
+
+        if $stack17 == null goto label4;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("&amp;");
+
+        $stack21 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName>;
+
+        $stack22 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack21);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(pieIndex);
+
+        url = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label4:
+        goto label6;
+
+     label5:
+        $stack37 := @caughtexception;
+
+        $stack38 = new java.lang.RuntimeException;
+
+        specialinvoke $stack38.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack37);
+
+        throw $stack38;
+
+     label6:
+        return url;
+
+        catch java.io.UnsupportedEncodingException from label1 to label4 with label5;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.urls.StandardPieURLGenerator this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.lang.String $stack4, $stack5, $stack7, $stack8, $stack10, $stack11;
+
+        this := @this: org.jfree.chart.urls.StandardPieURLGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.urls.StandardPieURLGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.urls.StandardPieURLGenerator) obj;
+
+        $stack5 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String prefix>;
+
+        $stack4 = that.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String prefix>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName>;
+
+        $stack7 = that.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String categoryParamName>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName>;
+
+        $stack10 = that.<org.jfree.chart.urls.StandardPieURLGenerator: java.lang.String indexParamName>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.StandardPieURLGenerator: long serialVersionUID> = 1626966402065883419L;
+
+        return;
+    }
+}

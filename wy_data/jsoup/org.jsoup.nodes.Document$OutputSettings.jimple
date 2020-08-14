@@ -1,0 +1,354 @@
+public class org.jsoup.nodes.Document$OutputSettings extends java.lang.Object implements java.lang.Cloneable
+{
+    private org.jsoup.nodes.Entities$EscapeMode escapeMode;
+    private java.nio.charset.Charset charset;
+    private java.lang.ThreadLocal encoderThreadLocal;
+    org.jsoup.nodes.Entities$CoreCharset coreCharset;
+    private boolean prettyPrint;
+    private boolean outline;
+    private int indentAmount;
+    private org.jsoup.nodes.Document$OutputSettings$Syntax syntax;
+
+    public void <init>()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        org.jsoup.nodes.Entities$EscapeMode $stack1;
+        java.lang.ThreadLocal $stack2;
+        org.jsoup.nodes.Document$OutputSettings$Syntax $stack3;
+        java.nio.charset.Charset $stack4;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode base>;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode> = $stack1;
+
+        $stack2 = new java.lang.ThreadLocal;
+
+        specialinvoke $stack2.<java.lang.ThreadLocal: void <init>()>();
+
+        this.<org.jsoup.nodes.Document$OutputSettings: java.lang.ThreadLocal encoderThreadLocal> = $stack2;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: boolean prettyPrint> = 1;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: boolean outline> = 0;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: int indentAmount> = 1;
+
+        $stack3 = <org.jsoup.nodes.Document$OutputSettings$Syntax: org.jsoup.nodes.Document$OutputSettings$Syntax html>;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings$Syntax syntax> = $stack3;
+
+        $stack4 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>("UTF8");
+
+        virtualinvoke this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings charset(java.nio.charset.Charset)>($stack4);
+
+        return;
+    }
+
+    public org.jsoup.nodes.Entities$EscapeMode escapeMode()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        org.jsoup.nodes.Entities$EscapeMode $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings escapeMode(org.jsoup.nodes.Entities$EscapeMode)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        org.jsoup.nodes.Entities$EscapeMode escapeMode;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        escapeMode := @parameter0: org.jsoup.nodes.Entities$EscapeMode;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode> = escapeMode;
+
+        return this;
+    }
+
+    public java.nio.charset.Charset charset()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        java.nio.charset.Charset $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings charset(java.nio.charset.Charset)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        java.nio.charset.Charset charset;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        charset := @parameter0: java.nio.charset.Charset;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset> = charset;
+
+        return this;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings charset(java.lang.String)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        java.lang.String charset;
+        java.nio.charset.Charset $stack2;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        charset := @parameter0: java.lang.String;
+
+        $stack2 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>(charset);
+
+        virtualinvoke this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings charset(java.nio.charset.Charset)>($stack2);
+
+        return this;
+    }
+
+    java.nio.charset.CharsetEncoder prepareEncoder()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        java.nio.charset.Charset $stack2, $stack5;
+        java.nio.charset.CharsetEncoder encoder;
+        java.lang.ThreadLocal $stack4;
+        java.lang.String $stack6;
+        org.jsoup.nodes.Entities$CoreCharset $stack7;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack2 = this.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset>;
+
+        encoder = virtualinvoke $stack2.<java.nio.charset.Charset: java.nio.charset.CharsetEncoder newEncoder()>();
+
+        $stack4 = this.<org.jsoup.nodes.Document$OutputSettings: java.lang.ThreadLocal encoderThreadLocal>;
+
+        virtualinvoke $stack4.<java.lang.ThreadLocal: void set(java.lang.Object)>(encoder);
+
+        $stack5 = virtualinvoke encoder.<java.nio.charset.CharsetEncoder: java.nio.charset.Charset charset()>();
+
+        $stack6 = virtualinvoke $stack5.<java.nio.charset.Charset: java.lang.String name()>();
+
+        $stack7 = staticinvoke <org.jsoup.nodes.Entities$CoreCharset: org.jsoup.nodes.Entities$CoreCharset byName(java.lang.String)>($stack6);
+
+        this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$CoreCharset coreCharset> = $stack7;
+
+        return encoder;
+    }
+
+    java.nio.charset.CharsetEncoder encoder()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        java.lang.ThreadLocal $stack2;
+        java.lang.Object $stack3;
+        java.nio.charset.CharsetEncoder encoder, $stack4;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack2 = this.<org.jsoup.nodes.Document$OutputSettings: java.lang.ThreadLocal encoderThreadLocal>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.ThreadLocal: java.lang.Object get()>();
+
+        encoder = (java.nio.charset.CharsetEncoder) $stack3;
+
+        if encoder == null goto label1;
+
+        $stack4 = encoder;
+
+        goto label2;
+
+     label1:
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.CharsetEncoder prepareEncoder()>();
+
+     label2:
+        return $stack4;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings$Syntax syntax()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        org.jsoup.nodes.Document$OutputSettings$Syntax $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings$Syntax syntax>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings syntax(org.jsoup.nodes.Document$OutputSettings$Syntax)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        org.jsoup.nodes.Document$OutputSettings$Syntax syntax;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        syntax := @parameter0: org.jsoup.nodes.Document$OutputSettings$Syntax;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings$Syntax syntax> = syntax;
+
+        return this;
+    }
+
+    public boolean prettyPrint()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: boolean prettyPrint>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings prettyPrint(boolean)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        boolean pretty;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        pretty := @parameter0: boolean;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: boolean prettyPrint> = pretty;
+
+        return this;
+    }
+
+    public boolean outline()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: boolean outline>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings outline(boolean)
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        boolean outlineMode;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        outlineMode := @parameter0: boolean;
+
+        this.<org.jsoup.nodes.Document$OutputSettings: boolean outline> = outlineMode;
+
+        return this;
+    }
+
+    public int indentAmount()
+    {
+        org.jsoup.nodes.Document$OutputSettings this;
+        int $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = this.<org.jsoup.nodes.Document$OutputSettings: int indentAmount>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings indentAmount(int)
+    {
+        int indentAmount;
+        org.jsoup.nodes.Document$OutputSettings this;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        indentAmount := @parameter0: int;
+
+        if indentAmount < 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean)>($stack2);
+
+        this.<org.jsoup.nodes.Document$OutputSettings: int indentAmount> = indentAmount;
+
+        return this;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings clone()
+    {
+        org.jsoup.nodes.Document$OutputSettings this, clone;
+        java.lang.Object $stack3;
+        java.nio.charset.Charset $stack4;
+        java.lang.String $stack5, $stack8;
+        org.jsoup.nodes.Entities$EscapeMode $stack7, $stack9;
+        java.lang.CloneNotSupportedException $stack10;
+        java.lang.RuntimeException $stack11;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+     label1:
+        $stack3 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jsoup.nodes.Document$OutputSettings) $stack3;
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack10 := @caughtexception;
+
+        $stack11 = new java.lang.RuntimeException;
+
+        specialinvoke $stack11.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack10);
+
+        throw $stack11;
+
+     label4:
+        $stack4 = this.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset>;
+
+        $stack5 = virtualinvoke $stack4.<java.nio.charset.Charset: java.lang.String name()>();
+
+        virtualinvoke clone.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings charset(java.lang.String)>($stack5);
+
+        $stack7 = this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode>;
+
+        $stack8 = virtualinvoke $stack7.<org.jsoup.nodes.Entities$EscapeMode: java.lang.String name()>();
+
+        $stack9 = staticinvoke <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode valueOf(java.lang.String)>($stack8);
+
+        clone.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode> = $stack9;
+
+        return clone;
+
+        catch java.lang.CloneNotSupportedException from label1 to label2 with label3;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.Document$OutputSettings this, $stack1;
+
+        this := @this: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings clone()>();
+
+        return $stack1;
+    }
+}

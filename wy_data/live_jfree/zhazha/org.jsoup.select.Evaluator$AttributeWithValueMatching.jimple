@@ -1,0 +1,98 @@
+public final class org.jsoup.select.Evaluator$AttributeWithValueMatching extends org.jsoup.select.Evaluator
+{
+    java.lang.String key;
+    java.util.regex.Pattern pattern;
+
+    public void <init>(java.lang.String, java.util.regex.Pattern)
+    {
+        org.jsoup.select.Evaluator$AttributeWithValueMatching this;
+        java.lang.String key, $stack3;
+        java.util.regex.Pattern pattern;
+
+        this := @this: org.jsoup.select.Evaluator$AttributeWithValueMatching;
+
+        key := @parameter0: java.lang.String;
+
+        pattern := @parameter1: java.util.regex.Pattern;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        $stack3 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String normalize(java.lang.String)>(key);
+
+        this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.lang.String key> = $stack3;
+
+        this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.util.regex.Pattern pattern> = pattern;
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, root;
+        org.jsoup.select.Evaluator$AttributeWithValueMatching this;
+        java.lang.String $stack3, $stack5, $stack7;
+        boolean $stack4, $stack9, $stack10;
+        java.util.regex.Pattern $stack6;
+        java.util.regex.Matcher $stack8;
+
+        this := @this: org.jsoup.select.Evaluator$AttributeWithValueMatching;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        $stack3 = this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.lang.String key>;
+
+        $stack4 = virtualinvoke element.<org.jsoup.nodes.Element: boolean hasAttr(java.lang.String)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.util.regex.Pattern pattern>;
+
+        $stack5 = this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.lang.String key>;
+
+        $stack7 = virtualinvoke element.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>($stack5);
+
+        $stack8 = virtualinvoke $stack6.<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>($stack7);
+
+        $stack9 = virtualinvoke $stack8.<java.util.regex.Matcher: boolean find()>();
+
+        if $stack9 == 0 goto label1;
+
+        $stack10 = 1;
+
+        goto label2;
+
+     label1:
+        $stack10 = 0;
+
+     label2:
+        return $stack10;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.Object[] $stack1;
+        org.jsoup.select.Evaluator$AttributeWithValueMatching this;
+        java.lang.String $stack2, $stack6, $stack7;
+        java.util.regex.Pattern $stack3;
+
+        this := @this: org.jsoup.select.Evaluator$AttributeWithValueMatching;
+
+        $stack1 = newarray (java.lang.Object)[2];
+
+        $stack2 = this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.lang.String key>;
+
+        $stack1[0] = $stack2;
+
+        $stack3 = this.<org.jsoup.select.Evaluator$AttributeWithValueMatching: java.util.regex.Pattern pattern>;
+
+        $stack6 = virtualinvoke $stack3.<java.util.regex.Pattern: java.lang.String toString()>();
+
+        $stack1[1] = $stack6;
+
+        $stack7 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("[%s~=%s]", $stack1);
+
+        return $stack7;
+    }
+}

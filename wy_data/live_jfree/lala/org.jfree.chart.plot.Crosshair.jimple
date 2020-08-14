@@ -1,0 +1,1063 @@
+public class org.jfree.chart.plot.Crosshair extends java.lang.Object implements java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private boolean visible;
+    private double value;
+    private transient java.awt.Paint paint;
+    private transient java.awt.Stroke stroke;
+    private boolean labelVisible;
+    private org.jfree.chart.ui.RectangleAnchor labelAnchor;
+    private org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator;
+    private double labelXOffset;
+    private double labelYOffset;
+    private java.awt.Font labelFont;
+    private transient java.awt.Paint labelPaint;
+    private transient java.awt.Paint labelBackgroundPaint;
+    private boolean labelOutlineVisible;
+    private transient java.awt.Stroke labelOutlineStroke;
+    private transient java.awt.Paint labelOutlinePaint;
+    private transient java.beans.PropertyChangeSupport pcs;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.Crosshair this;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        specialinvoke this.<org.jfree.chart.plot.Crosshair: void <init>(double)>(0.0);
+
+        return;
+    }
+
+    public void <init>(double)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double value;
+        java.awt.BasicStroke $stack3;
+        java.awt.Color $stack4;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        value := @parameter0: double;
+
+        $stack4 = <java.awt.Color: java.awt.Color BLACK>;
+
+        $stack3 = new java.awt.BasicStroke;
+
+        specialinvoke $stack3.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        specialinvoke this.<org.jfree.chart.plot.Crosshair: void <init>(double,java.awt.Paint,java.awt.Stroke)>(value, $stack4, $stack3);
+
+        return;
+    }
+
+    public void <init>(double, java.awt.Paint, java.awt.Stroke)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint paint;
+        java.awt.Stroke stroke;
+        double value;
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator $stack5;
+        org.jfree.chart.ui.RectangleAnchor $stack6;
+        java.awt.Font $stack7;
+        java.awt.Color $stack8, $stack9, $stack10;
+        java.awt.BasicStroke $stack11;
+        java.beans.PropertyChangeSupport $stack12;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        value := @parameter0: double;
+
+        paint := @parameter1: java.awt.Paint;
+
+        stroke := @parameter2: java.awt.Stroke;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.plot.Crosshair: boolean visible> = 1;
+
+        this.<org.jfree.chart.plot.Crosshair: double value> = value;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint> = paint;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke> = stroke;
+
+        this.<org.jfree.chart.plot.Crosshair: boolean labelVisible> = 0;
+
+        $stack5 = new org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        specialinvoke $stack5.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: void <init>()>();
+
+        this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator> = $stack5;
+
+        $stack6 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor BOTTOM_LEFT>;
+
+        this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor> = $stack6;
+
+        this.<org.jfree.chart.plot.Crosshair: double labelXOffset> = 3.0;
+
+        this.<org.jfree.chart.plot.Crosshair: double labelYOffset> = 3.0;
+
+        $stack7 = new java.awt.Font;
+
+        specialinvoke $stack7.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 12);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont> = $stack7;
+
+        $stack8 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint> = $stack8;
+
+        $stack9 = new java.awt.Color;
+
+        specialinvoke $stack9.<java.awt.Color: void <init>(int,int,int,int)>(0, 0, 255, 63);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint> = $stack9;
+
+        this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible> = 1;
+
+        $stack10 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint> = $stack10;
+
+        $stack11 = new java.awt.BasicStroke;
+
+        specialinvoke $stack11.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke> = $stack11;
+
+        $stack12 = new java.beans.PropertyChangeSupport;
+
+        specialinvoke $stack12.<java.beans.PropertyChangeSupport: void <init>(java.lang.Object)>(this);
+
+        this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs> = $stack12;
+
+        return;
+    }
+
+    public boolean isVisible()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: boolean visible>;
+
+        return $stack1;
+    }
+
+    public void setVisible(boolean)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean old, visible;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        visible := @parameter0: boolean;
+
+        old = this.<org.jfree.chart.plot.Crosshair: boolean visible>;
+
+        this.<org.jfree.chart.plot.Crosshair: boolean visible> = visible;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,boolean,boolean)>("visible", old, visible);
+
+        return;
+    }
+
+    public double getValue()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: double value>;
+
+        return $stack1;
+    }
+
+    public void setValue(double)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack4, value;
+        java.lang.Double oldValue, $stack8;
+        java.beans.PropertyChangeSupport $stack6;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        value := @parameter0: double;
+
+        $stack4 = this.<org.jfree.chart.plot.Crosshair: double value>;
+
+        oldValue = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack4);
+
+        this.<org.jfree.chart.plot.Crosshair: double value> = value;
+
+        $stack6 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        $stack8 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(value);
+
+        virtualinvoke $stack6.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("value", oldValue, $stack8);
+
+        return;
+    }
+
+    public java.awt.Paint getPaint()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        return $stack1;
+    }
+
+    public void setPaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint old, paint;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        paint := @parameter0: java.awt.Paint;
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint> = paint;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("paint", old, paint);
+
+        return;
+    }
+
+    public java.awt.Stroke getStroke()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        return $stack1;
+    }
+
+    public void setStroke(java.awt.Stroke)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Stroke old, stroke;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke> = stroke;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("stroke", old, stroke);
+
+        return;
+    }
+
+    public boolean isLabelVisible()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: boolean labelVisible>;
+
+        return $stack1;
+    }
+
+    public void setLabelVisible(boolean)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean old, visible;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        visible := @parameter0: boolean;
+
+        old = this.<org.jfree.chart.plot.Crosshair: boolean labelVisible>;
+
+        this.<org.jfree.chart.plot.Crosshair: boolean labelVisible> = visible;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,boolean,boolean)>("labelVisible", old, visible);
+
+        return;
+    }
+
+    public org.jfree.chart.labels.CrosshairLabelGenerator getLabelGenerator()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        org.jfree.chart.labels.CrosshairLabelGenerator $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator>;
+
+        return $stack1;
+    }
+
+    public void setLabelGenerator(org.jfree.chart.labels.CrosshairLabelGenerator)
+    {
+        org.jfree.chart.labels.CrosshairLabelGenerator generator, old;
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        generator := @parameter0: org.jfree.chart.labels.CrosshairLabelGenerator;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(generator, "generator");
+
+        old = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator>;
+
+        this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator> = generator;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelGenerator", old, generator);
+
+        return;
+    }
+
+    public org.jfree.chart.ui.RectangleAnchor getLabelAnchor()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        org.jfree.chart.ui.RectangleAnchor $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        return $stack1;
+    }
+
+    public void setLabelAnchor(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        org.jfree.chart.ui.RectangleAnchor old, anchor;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        old = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor> = anchor;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelAnchor", old, anchor);
+
+        return;
+    }
+
+    public double getLabelXOffset()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: double labelXOffset>;
+
+        return $stack1;
+    }
+
+    public void setLabelXOffset(double)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack4, offset;
+        java.lang.Double old, $stack8;
+        java.beans.PropertyChangeSupport $stack6;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        offset := @parameter0: double;
+
+        $stack4 = this.<org.jfree.chart.plot.Crosshair: double labelXOffset>;
+
+        old = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack4);
+
+        this.<org.jfree.chart.plot.Crosshair: double labelXOffset> = offset;
+
+        $stack6 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        $stack8 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(offset);
+
+        virtualinvoke $stack6.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelXOffset", old, $stack8);
+
+        return;
+    }
+
+    public double getLabelYOffset()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: double labelYOffset>;
+
+        return $stack1;
+    }
+
+    public void setLabelYOffset(double)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        double $stack4, offset;
+        java.lang.Double old, $stack8;
+        java.beans.PropertyChangeSupport $stack6;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        offset := @parameter0: double;
+
+        $stack4 = this.<org.jfree.chart.plot.Crosshair: double labelYOffset>;
+
+        old = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack4);
+
+        this.<org.jfree.chart.plot.Crosshair: double labelYOffset> = offset;
+
+        $stack6 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        $stack8 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(offset);
+
+        virtualinvoke $stack6.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelYOffset", old, $stack8);
+
+        return;
+    }
+
+    public java.awt.Font getLabelFont()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont>;
+
+        return $stack1;
+    }
+
+    public void setLabelFont(java.awt.Font)
+    {
+        java.awt.Font font, old;
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont> = font;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelFont", old, font);
+
+        return;
+    }
+
+    public java.awt.Paint getLabelPaint()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        return $stack1;
+    }
+
+    public void setLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint, old;
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint> = paint;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelPaint", old, paint);
+
+        return;
+    }
+
+    public java.awt.Paint getLabelBackgroundPaint()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        return $stack1;
+    }
+
+    public void setLabelBackgroundPaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint old, paint;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        paint := @parameter0: java.awt.Paint;
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint> = paint;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelBackgroundPaint", old, paint);
+
+        return;
+    }
+
+    public boolean isLabelOutlineVisible()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible>;
+
+        return $stack1;
+    }
+
+    public void setLabelOutlineVisible(boolean)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean old, visible;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        visible := @parameter0: boolean;
+
+        old = this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible>;
+
+        this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible> = visible;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,boolean,boolean)>("labelOutlineVisible", old, visible);
+
+        return;
+    }
+
+    public java.awt.Paint getLabelOutlinePaint()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setLabelOutlinePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint, old;
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint> = paint;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelOutlinePaint", old, paint);
+
+        return;
+    }
+
+    public java.awt.Stroke getLabelOutlineStroke()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setLabelOutlineStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke, old;
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeSupport $stack3;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        old = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke> = stroke;
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("labelOutlineStroke", old, stroke);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.Crosshair this, that;
+        boolean $stack3, $stack4, $stack5, $stack11, $stack14, $stack15, $stack16, $stack19, $stack22, $stack31, $stack34, $stack37, $stack38, $stack39, $stack42, $stack45;
+        double $stack6, $stack7, $stack23, $stack24, $stack26, $stack27;
+        byte $stack8, $stack25, $stack28;
+        java.awt.Paint $stack9, $stack10, $stack32, $stack33, $stack35, $stack36, $stack40, $stack41;
+        java.awt.Stroke $stack12, $stack13, $stack43, $stack44;
+        org.jfree.chart.labels.CrosshairLabelGenerator $stack17, $stack18;
+        org.jfree.chart.ui.RectangleAnchor $stack20, $stack21;
+        java.awt.Font $stack29, $stack30;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.Crosshair;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.plot.Crosshair) obj;
+
+        $stack5 = this.<org.jfree.chart.plot.Crosshair: boolean visible>;
+
+        $stack4 = that.<org.jfree.chart.plot.Crosshair: boolean visible>;
+
+        if $stack5 == $stack4 goto label03;
+
+        return 0;
+
+     label03:
+        $stack7 = this.<org.jfree.chart.plot.Crosshair: double value>;
+
+        $stack6 = that.<org.jfree.chart.plot.Crosshair: double value>;
+
+        $stack8 = $stack7 cmpl $stack6;
+
+        if $stack8 == 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack10 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        $stack9 = that.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        $stack11 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack10, $stack9);
+
+        if $stack11 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack13 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        $stack12 = that.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        $stack14 = virtualinvoke $stack13.<java.lang.Object: boolean equals(java.lang.Object)>($stack12);
+
+        if $stack14 != 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack16 = this.<org.jfree.chart.plot.Crosshair: boolean labelVisible>;
+
+        $stack15 = that.<org.jfree.chart.plot.Crosshair: boolean labelVisible>;
+
+        if $stack16 == $stack15 goto label07;
+
+        return 0;
+
+     label07:
+        $stack18 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator>;
+
+        $stack17 = that.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator>;
+
+        $stack19 = virtualinvoke $stack18.<java.lang.Object: boolean equals(java.lang.Object)>($stack17);
+
+        if $stack19 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack21 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        $stack20 = that.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        $stack22 = virtualinvoke $stack21.<org.jfree.chart.ui.RectangleAnchor: boolean equals(java.lang.Object)>($stack20);
+
+        if $stack22 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack24 = this.<org.jfree.chart.plot.Crosshair: double labelXOffset>;
+
+        $stack23 = that.<org.jfree.chart.plot.Crosshair: double labelXOffset>;
+
+        $stack25 = $stack24 cmpl $stack23;
+
+        if $stack25 == 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack27 = this.<org.jfree.chart.plot.Crosshair: double labelYOffset>;
+
+        $stack26 = that.<org.jfree.chart.plot.Crosshair: double labelYOffset>;
+
+        $stack28 = $stack27 cmpl $stack26;
+
+        if $stack28 == 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack30 = this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont>;
+
+        $stack29 = that.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont>;
+
+        $stack31 = virtualinvoke $stack30.<java.awt.Font: boolean equals(java.lang.Object)>($stack29);
+
+        if $stack31 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack33 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        $stack32 = that.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        $stack34 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack33, $stack32);
+
+        if $stack34 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack36 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        $stack35 = that.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        $stack37 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack36, $stack35);
+
+        if $stack37 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack39 = this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible>;
+
+        $stack38 = that.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible>;
+
+        if $stack39 == $stack38 goto label15;
+
+        return 0;
+
+     label15:
+        $stack41 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        $stack40 = that.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        $stack42 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack41, $stack40);
+
+        if $stack42 != 0 goto label16;
+
+        return 0;
+
+     label16:
+        $stack44 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        $stack43 = that.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        $stack45 = virtualinvoke $stack44.<java.lang.Object: boolean equals(java.lang.Object)>($stack43);
+
+        if $stack45 != 0 goto label17;
+
+        return 0;
+
+     label17:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.plot.Crosshair this;
+        boolean $stack2, $stack10, $stack26;
+        double $stack4, $stack16, $stack18;
+        java.awt.Paint $stack6, $stack22, $stack24, $stack30;
+        java.awt.Stroke $stack8, $stack28;
+        org.jfree.chart.ui.RectangleAnchor $stack12;
+        org.jfree.chart.labels.CrosshairLabelGenerator $stack14;
+        java.awt.Font $stack20;
+        int hash#2;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack2 = this.<org.jfree.chart.plot.Crosshair: boolean visible>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,boolean)>(7, $stack2);
+
+        $stack4 = this.<org.jfree.chart.plot.Crosshair: double value>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,double)>(hash#2, $stack4);
+
+        $stack6 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(hash#2, $stack6);
+
+        $stack8 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Stroke)>(hash#2, $stack8);
+
+        $stack10 = this.<org.jfree.chart.plot.Crosshair: boolean labelVisible>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,boolean)>(hash#2, $stack10);
+
+        $stack12 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Comparable)>(hash#2, $stack12);
+
+        $stack14 = this.<org.jfree.chart.plot.Crosshair: org.jfree.chart.labels.CrosshairLabelGenerator labelGenerator>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Object)>(hash#2, $stack14);
+
+        $stack16 = this.<org.jfree.chart.plot.Crosshair: double labelXOffset>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,double)>(hash#2, $stack16);
+
+        $stack18 = this.<org.jfree.chart.plot.Crosshair: double labelYOffset>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,double)>(hash#2, $stack18);
+
+        $stack20 = this.<org.jfree.chart.plot.Crosshair: java.awt.Font labelFont>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Object)>(hash#2, $stack20);
+
+        $stack22 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(hash#2, $stack22);
+
+        $stack24 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(hash#2, $stack24);
+
+        $stack26 = this.<org.jfree.chart.plot.Crosshair: boolean labelOutlineVisible>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,boolean)>(hash#2, $stack26);
+
+        $stack28 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Stroke)>(hash#2, $stack28);
+
+        $stack30 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        hash#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(hash#2, $stack30);
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public void addPropertyChangeListener(java.beans.PropertyChangeListener)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeListener l;
+        java.beans.PropertyChangeSupport $stack2;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        l := @parameter0: java.beans.PropertyChangeListener;
+
+        $stack2 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack2.<java.beans.PropertyChangeSupport: void addPropertyChangeListener(java.beans.PropertyChangeListener)>(l);
+
+        return;
+    }
+
+    public void removePropertyChangeListener(java.beans.PropertyChangeListener)
+    {
+        org.jfree.chart.plot.Crosshair this;
+        java.beans.PropertyChangeListener l;
+        java.beans.PropertyChangeSupport $stack2;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        l := @parameter0: java.beans.PropertyChangeListener;
+
+        $stack2 = this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs>;
+
+        virtualinvoke $stack2.<java.beans.PropertyChangeSupport: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(l);
+
+        return;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack2, $stack4, $stack5, $stack7;
+        java.awt.Stroke $stack3, $stack6;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack6, stream);
+
+        $stack7 = this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack7, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.Crosshair this;
+        java.awt.Paint $stack2, $stack4, $stack5, $stack7;
+        java.awt.Stroke $stack3, $stack6;
+        java.beans.PropertyChangeSupport $stack8;
+
+        this := @this: org.jfree.chart.plot.Crosshair;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint paint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke stroke> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelPaint> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelBackgroundPaint> = $stack5;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Stroke labelOutlineStroke> = $stack6;
+
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Crosshair: java.awt.Paint labelOutlinePaint> = $stack7;
+
+        $stack8 = new java.beans.PropertyChangeSupport;
+
+        specialinvoke $stack8.<java.beans.PropertyChangeSupport: void <init>(java.lang.Object)>(this);
+
+        this.<org.jfree.chart.plot.Crosshair: java.beans.PropertyChangeSupport pcs> = $stack8;
+
+        return;
+    }
+}

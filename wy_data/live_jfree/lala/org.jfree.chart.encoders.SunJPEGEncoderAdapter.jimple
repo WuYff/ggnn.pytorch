@@ -1,0 +1,160 @@
+public class org.jfree.chart.encoders.SunJPEGEncoderAdapter extends java.lang.Object implements org.jfree.chart.encoders.ImageEncoder
+{
+    private float quality;
+
+    public void <init>()
+    {
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.encoders.SunJPEGEncoderAdapter: float quality> = 0.95F;
+
+        return;
+    }
+
+    public float getQuality()
+    {
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+        float $stack1;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        $stack1 = this.<org.jfree.chart.encoders.SunJPEGEncoderAdapter: float quality>;
+
+        return $stack1;
+    }
+
+    public void setQuality(float)
+    {
+        float quality;
+        byte $stack2, $stack4;
+        java.lang.IllegalArgumentException $stack3;
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        quality := @parameter0: float;
+
+        $stack2 = quality cmpg 0.0F;
+
+        if $stack2 < 0 goto label1;
+
+        $stack4 = quality cmpl 1.0F;
+
+        if $stack4 <= 0 goto label2;
+
+     label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'quality\' must be in the range 0.0f to 1.0f");
+
+        throw $stack3;
+
+     label2:
+        this.<org.jfree.chart.encoders.SunJPEGEncoderAdapter: float quality> = quality;
+
+        return;
+    }
+
+    public boolean isEncodingAlpha()
+    {
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        return 0;
+    }
+
+    public void setEncodingAlpha(boolean)
+    {
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+        boolean encodingAlpha;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        encodingAlpha := @parameter0: boolean;
+
+        return;
+    }
+
+    public byte[] encode(java.awt.image.BufferedImage) throws java.io.IOException
+    {
+        java.io.ByteArrayOutputStream $stack3;
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+        java.awt.image.BufferedImage bufferedImage;
+        byte[] $stack4;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        bufferedImage := @parameter0: java.awt.image.BufferedImage;
+
+        $stack3 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $stack3.<java.io.ByteArrayOutputStream: void <init>()>();
+
+        virtualinvoke this.<org.jfree.chart.encoders.SunJPEGEncoderAdapter: void encode(java.awt.image.BufferedImage,java.io.OutputStream)>(bufferedImage, $stack3);
+
+        $stack4 = virtualinvoke $stack3.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        return $stack4;
+    }
+
+    public void encode(java.awt.image.BufferedImage, java.io.OutputStream) throws java.io.IOException
+    {
+        java.awt.image.BufferedImage bufferedImage;
+        java.io.OutputStream outputStream;
+        java.util.Iterator iterator;
+        java.lang.Object $stack8;
+        javax.imageio.ImageWriter writer;
+        javax.imageio.ImageWriteParam p;
+        org.jfree.chart.encoders.SunJPEGEncoderAdapter this;
+        float $stack10;
+        javax.imageio.stream.ImageOutputStream ios;
+        javax.imageio.IIOImage $stack12;
+
+        this := @this: org.jfree.chart.encoders.SunJPEGEncoderAdapter;
+
+        bufferedImage := @parameter0: java.awt.image.BufferedImage;
+
+        outputStream := @parameter1: java.io.OutputStream;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(bufferedImage, "bufferedImage");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(outputStream, "outputStream");
+
+        iterator = staticinvoke <javax.imageio.ImageIO: java.util.Iterator getImageWritersByFormatName(java.lang.String)>("jpeg");
+
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        writer = (javax.imageio.ImageWriter) $stack8;
+
+        p = virtualinvoke writer.<javax.imageio.ImageWriter: javax.imageio.ImageWriteParam getDefaultWriteParam()>();
+
+        virtualinvoke p.<javax.imageio.ImageWriteParam: void setCompressionMode(int)>(2);
+
+        $stack10 = this.<org.jfree.chart.encoders.SunJPEGEncoderAdapter: float quality>;
+
+        virtualinvoke p.<javax.imageio.ImageWriteParam: void setCompressionQuality(float)>($stack10);
+
+        ios = staticinvoke <javax.imageio.ImageIO: javax.imageio.stream.ImageOutputStream createImageOutputStream(java.lang.Object)>(outputStream);
+
+        virtualinvoke writer.<javax.imageio.ImageWriter: void setOutput(java.lang.Object)>(ios);
+
+        $stack12 = new javax.imageio.IIOImage;
+
+        specialinvoke $stack12.<javax.imageio.IIOImage: void <init>(java.awt.image.RenderedImage,java.util.List,javax.imageio.metadata.IIOMetadata)>(bufferedImage, null, null);
+
+        virtualinvoke writer.<javax.imageio.ImageWriter: void write(javax.imageio.metadata.IIOMetadata,javax.imageio.IIOImage,javax.imageio.ImageWriteParam)>(null, $stack12, p);
+
+        interfaceinvoke ios.<javax.imageio.stream.ImageOutputStream: void flush()>();
+
+        virtualinvoke writer.<javax.imageio.ImageWriter: void dispose()>();
+
+        interfaceinvoke ios.<javax.imageio.stream.ImageOutputStream: void close()>();
+
+        return;
+    }
+}

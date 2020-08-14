@@ -1,0 +1,1495 @@
+public class org.jfree.chart.text.TextUtils extends java.lang.Object
+{
+    private static boolean drawStringsWithFontAttributes;
+    private static boolean useDrawRotatedStringWorkaround;
+    private static boolean useFontMetricsGetStringBounds;
+
+    private void <init>()
+    {
+        org.jfree.chart.text.TextUtils this;
+
+        this := @this: org.jfree.chart.text.TextUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jfree.chart.text.TextBlock createTextBlock(java.lang.String, java.awt.Font, java.awt.Paint)
+    {
+        java.lang.String text, line, input;
+        org.jfree.chart.text.TextBlock $stack9;
+        int $stack10, index, $stack13, $stack14, $stack15, $stack18, $stack19, $stack20;
+        java.awt.Font font;
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException $stack24;
+        boolean $stack22, moreInputToProcess;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        paint := @parameter2: java.awt.Paint;
+
+        if text != null goto label01;
+
+        $stack24 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack24.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'text\' argument.");
+
+        throw $stack24;
+
+     label01:
+        $stack9 = new org.jfree.chart.text.TextBlock;
+
+        specialinvoke $stack9.<org.jfree.chart.text.TextBlock: void <init>()>();
+
+        input = text;
+
+        $stack10 = virtualinvoke text.<java.lang.String: int length()>();
+
+        if $stack10 <= 0 goto label02;
+
+        $stack22 = 1;
+
+        goto label03;
+
+     label02:
+        $stack22 = 0;
+
+     label03:
+        moreInputToProcess = $stack22;
+
+     label04:
+        if moreInputToProcess == 0 goto label11;
+
+        index = virtualinvoke input.<java.lang.String: int indexOf(java.lang.String)>("\n");
+
+        if index <= 0 goto label07;
+
+        line = virtualinvoke input.<java.lang.String: java.lang.String substring(int,int)>(0, index);
+
+        $stack18 = virtualinvoke input.<java.lang.String: int length()>();
+
+        $stack19 = $stack18 - 1;
+
+        if index >= $stack19 goto label05;
+
+        virtualinvoke $stack9.<org.jfree.chart.text.TextBlock: void addLine(java.lang.String,java.awt.Font,java.awt.Paint)>(line, font, paint);
+
+        $stack20 = index + 1;
+
+        input = virtualinvoke input.<java.lang.String: java.lang.String substring(int)>($stack20);
+
+        goto label06;
+
+     label05:
+        moreInputToProcess = 0;
+
+     label06:
+        goto label10;
+
+     label07:
+        if index != 0 goto label09;
+
+        $stack13 = virtualinvoke input.<java.lang.String: int length()>();
+
+        $stack14 = $stack13 - 1;
+
+        if index >= $stack14 goto label08;
+
+        $stack15 = index + 1;
+
+        input = virtualinvoke input.<java.lang.String: java.lang.String substring(int)>($stack15);
+
+        goto label10;
+
+     label08:
+        moreInputToProcess = 0;
+
+        goto label10;
+
+     label09:
+        virtualinvoke $stack9.<org.jfree.chart.text.TextBlock: void addLine(java.lang.String,java.awt.Font,java.awt.Paint)>(input, font, paint);
+
+        moreInputToProcess = 0;
+
+     label10:
+        goto label04;
+
+     label11:
+        return $stack9;
+    }
+
+    public static org.jfree.chart.text.TextBlock createTextBlock(java.lang.String, java.awt.Font, java.awt.Paint, float, org.jfree.chart.text.TextMeasurer)
+    {
+        java.lang.String text;
+        java.awt.Font font;
+        java.awt.Paint paint;
+        float maxWidth;
+        org.jfree.chart.text.TextMeasurer measurer;
+        org.jfree.chart.text.TextBlock $stack5;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        paint := @parameter2: java.awt.Paint;
+
+        maxWidth := @parameter3: float;
+
+        measurer := @parameter4: org.jfree.chart.text.TextMeasurer;
+
+        $stack5 = staticinvoke <org.jfree.chart.text.TextUtils: org.jfree.chart.text.TextBlock createTextBlock(java.lang.String,java.awt.Font,java.awt.Paint,float,int,org.jfree.chart.text.TextMeasurer)>(text, font, paint, maxWidth, 2147483647, measurer);
+
+        return $stack5;
+    }
+
+    public static org.jfree.chart.text.TextBlock createTextBlock(java.lang.String, java.awt.Font, java.awt.Paint, float, int, org.jfree.chart.text.TextMeasurer)
+    {
+        org.jfree.chart.text.TextBlock $stack16;
+        java.text.BreakIterator iterator;
+        java.lang.String text, oldStr, $stack31, $stack45, $stack59, newStr;
+        int length, $stack22, $stack29, $stack30, maxLines, current, lines, next, $stack46;
+        org.jfree.chart.text.TextFragment lastFragment, $stack23;
+        java.awt.Font $stack24, font;
+        java.awt.Paint $stack25, paint;
+        java.lang.StringBuilder $stack27, $stack32, $stack33;
+        float maxWidth;
+        org.jfree.chart.text.TextMeasurer measurer;
+        char $stack49;
+        org.jfree.chart.text.TextLine next#10;
+
+        text := @parameter0: java.lang.String;
+
+        font := @parameter1: java.awt.Font;
+
+        paint := @parameter2: java.awt.Paint;
+
+        maxWidth := @parameter3: float;
+
+        maxLines := @parameter4: int;
+
+        measurer := @parameter5: org.jfree.chart.text.TextMeasurer;
+
+        $stack16 = new org.jfree.chart.text.TextBlock;
+
+        specialinvoke $stack16.<org.jfree.chart.text.TextBlock: void <init>()>();
+
+        iterator = staticinvoke <java.text.BreakIterator: java.text.BreakIterator getLineInstance()>();
+
+        virtualinvoke iterator.<java.text.BreakIterator: void setText(java.lang.String)>(text);
+
+        current = 0;
+
+        lines = 0;
+
+        length = virtualinvoke text.<java.lang.String: int length()>();
+
+     label1:
+        if current >= length goto label6;
+
+        if lines >= maxLines goto label6;
+
+        next = staticinvoke <org.jfree.chart.text.TextUtils: int nextLineBreak(java.lang.String,int,float,java.text.BreakIterator,org.jfree.chart.text.TextMeasurer)>(text, current, maxWidth, iterator, measurer);
+
+        if next != -1 goto label2;
+
+        $stack59 = virtualinvoke text.<java.lang.String: java.lang.String substring(int)>(current);
+
+        virtualinvoke $stack16.<org.jfree.chart.text.TextBlock: void addLine(java.lang.String,java.awt.Font,java.awt.Paint)>($stack59, font, paint);
+
+        return $stack16;
+
+     label2:
+        if next != current goto label3;
+
+        next = next + 1;
+
+     label3:
+        $stack45 = virtualinvoke text.<java.lang.String: java.lang.String substring(int,int)>(current, next);
+
+        virtualinvoke $stack16.<org.jfree.chart.text.TextBlock: void addLine(java.lang.String,java.awt.Font,java.awt.Paint)>($stack45, font, paint);
+
+        lines = lines + 1;
+
+        current = next;
+
+     label4:
+        $stack46 = virtualinvoke text.<java.lang.String: int length()>();
+
+        if current >= $stack46 goto label5;
+
+        $stack49 = virtualinvoke text.<java.lang.String: char charAt(int)>(current);
+
+        if $stack49 != 10 goto label5;
+
+        current = current + 1;
+
+        goto label4;
+
+     label5:
+        goto label1;
+
+     label6:
+        if current >= length goto label8;
+
+        next#10 = virtualinvoke $stack16.<org.jfree.chart.text.TextBlock: org.jfree.chart.text.TextLine getLastLine()>();
+
+        lastFragment = virtualinvoke next#10.<org.jfree.chart.text.TextLine: org.jfree.chart.text.TextFragment getLastTextFragment()>();
+
+        oldStr = virtualinvoke lastFragment.<org.jfree.chart.text.TextFragment: java.lang.String getText()>();
+
+        newStr = "...";
+
+        $stack22 = virtualinvoke oldStr.<java.lang.String: int length()>();
+
+        if $stack22 <= 3 goto label7;
+
+        $stack27 = new java.lang.StringBuilder;
+
+        specialinvoke $stack27.<java.lang.StringBuilder: void <init>()>();
+
+        $stack29 = virtualinvoke oldStr.<java.lang.String: int length()>();
+
+        $stack30 = $stack29 - 3;
+
+        $stack31 = virtualinvoke oldStr.<java.lang.String: java.lang.String substring(int,int)>(0, $stack30);
+
+        $stack32 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack31);
+
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("...");
+
+        newStr = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label7:
+        virtualinvoke next#10.<org.jfree.chart.text.TextLine: void removeFragment(org.jfree.chart.text.TextFragment)>(lastFragment);
+
+        $stack23 = new org.jfree.chart.text.TextFragment;
+
+        $stack24 = virtualinvoke lastFragment.<org.jfree.chart.text.TextFragment: java.awt.Font getFont()>();
+
+        $stack25 = virtualinvoke lastFragment.<org.jfree.chart.text.TextFragment: java.awt.Paint getPaint()>();
+
+        specialinvoke $stack23.<org.jfree.chart.text.TextFragment: void <init>(java.lang.String,java.awt.Font,java.awt.Paint)>(newStr, $stack24, $stack25);
+
+        virtualinvoke next#10.<org.jfree.chart.text.TextLine: void addFragment(org.jfree.chart.text.TextFragment)>($stack23);
+
+     label8:
+        return $stack16;
+    }
+
+    private static int nextLineBreak(java.lang.String, int, float, java.text.BreakIterator, org.jfree.chart.text.TextMeasurer)
+    {
+        int start, current, newline, $stack11, end;
+        java.lang.String text;
+        java.text.BreakIterator iterator;
+        org.jfree.chart.text.TextMeasurer measurer;
+        float $stack12, width, $stack18, x;
+        byte $stack13, $stack19;
+        boolean firstWord;
+
+        text := @parameter0: java.lang.String;
+
+        start := @parameter1: int;
+
+        width := @parameter2: float;
+
+        iterator := @parameter3: java.text.BreakIterator;
+
+        measurer := @parameter4: org.jfree.chart.text.TextMeasurer;
+
+        current = start;
+
+        x = 0.0F;
+
+        firstWord = 1;
+
+        newline = virtualinvoke text.<java.lang.String: int indexOf(int,int)>(10, start);
+
+        if newline >= 0 goto label1;
+
+        newline = 2147483647;
+
+     label1:
+        $stack11 = virtualinvoke iterator.<java.text.BreakIterator: int following(int)>(current);
+
+        end = $stack11;
+
+        if $stack11 == -1 goto label7;
+
+        $stack12 = interfaceinvoke measurer.<org.jfree.chart.text.TextMeasurer: float getStringWidth(java.lang.String,int,int)>(text, current, $stack11);
+
+        x = x + $stack12;
+
+        $stack13 = x cmpl width;
+
+        if $stack13 <= 0 goto label5;
+
+        if firstWord == 0 goto label4;
+
+     label2:
+        $stack18 = interfaceinvoke measurer.<org.jfree.chart.text.TextMeasurer: float getStringWidth(java.lang.String,int,int)>(text, start, end);
+
+        $stack19 = $stack18 cmpl width;
+
+        if $stack19 <= 0 goto label3;
+
+        end = end + -1;
+
+        if end > start goto label2;
+
+        return end;
+
+     label3:
+        return end;
+
+     label4:
+        end = virtualinvoke iterator.<java.text.BreakIterator: int previous()>();
+
+        return end;
+
+     label5:
+        if $stack11 <= newline goto label6;
+
+        return newline;
+
+     label6:
+        firstWord = 0;
+
+        current = $stack11;
+
+        goto label1;
+
+     label7:
+        return -1;
+    }
+
+    public static java.awt.geom.Rectangle2D getTextBounds(java.lang.String, java.awt.Graphics2D, java.awt.FontMetrics)
+    {
+        boolean $stack8;
+        java.awt.FontMetrics fm;
+        java.lang.String text;
+        int $stack9, $stack10, $stack13, $stack14;
+        double height, $stack15, $stack20, $stack21, $stack22, $stack24, lm#3;
+        java.awt.geom.Rectangle2D$Double $stack11;
+        java.awt.Graphics2D g2;
+        java.awt.Font $stack17;
+        java.awt.font.FontRenderContext $stack18;
+        float $stack23;
+        java.awt.geom.Rectangle2D bounds;
+        java.awt.font.LineMetrics lm;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        fm := @parameter2: java.awt.FontMetrics;
+
+        $stack8 = <org.jfree.chart.text.TextUtils: boolean useFontMetricsGetStringBounds>;
+
+        if $stack8 == 0 goto label1;
+
+        bounds = virtualinvoke fm.<java.awt.FontMetrics: java.awt.geom.Rectangle2D getStringBounds(java.lang.String,java.awt.Graphics)>(text, g2);
+
+        $stack17 = virtualinvoke fm.<java.awt.FontMetrics: java.awt.Font getFont()>();
+
+        $stack18 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        lm = virtualinvoke $stack17.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(text, $stack18);
+
+        $stack20 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack21 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack22 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack23 = virtualinvoke lm.<java.awt.font.LineMetrics: float getHeight()>();
+
+        $stack24 = (double) $stack23;
+
+        virtualinvoke bounds.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack20, $stack21, $stack22, $stack24);
+
+        goto label2;
+
+     label1:
+        $stack9 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(text);
+
+        lm#3 = (double) $stack9;
+
+        $stack10 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        height = (double) $stack10;
+
+        $stack11 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack13 = virtualinvoke fm.<java.awt.FontMetrics: int getAscent()>();
+
+        $stack14 = neg $stack13;
+
+        $stack15 = (double) $stack14;
+
+        specialinvoke $stack11.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, $stack15, lm#3, height);
+
+        bounds = $stack11;
+
+     label2:
+        return bounds;
+    }
+
+    public static java.awt.geom.Rectangle2D calcAlignedStringBounds(java.lang.String, java.awt.Graphics2D, float, float, org.jfree.chart.ui.TextAnchor)
+    {
+        java.awt.geom.Rectangle2D$Double $stack7;
+        java.awt.Graphics2D g2;
+        java.lang.String text;
+        org.jfree.chart.ui.TextAnchor anchor;
+        float[] adjust;
+        float x, $stack9, $stack10, y, $stack11, $stack12, $stack13, $stack14;
+        double $stack15, $stack16, $stack17, $stack18;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        anchor := @parameter4: org.jfree.chart.ui.TextAnchor;
+
+        $stack7 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack7.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+
+        adjust = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor,java.awt.geom.Rectangle2D)>(g2, text, anchor, $stack7);
+
+        $stack9 = adjust[0];
+
+        $stack10 = x + $stack9;
+
+        $stack15 = (double) $stack10;
+
+        $stack11 = adjust[1];
+
+        $stack13 = y + $stack11;
+
+        $stack12 = adjust[2];
+
+        $stack14 = $stack13 + $stack12;
+
+        $stack16 = (double) $stack14;
+
+        $stack17 = virtualinvoke $stack7.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack18 = virtualinvoke $stack7.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        virtualinvoke $stack7.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack15, $stack16, $stack17, $stack18);
+
+        return $stack7;
+    }
+
+    public static java.awt.geom.Rectangle2D drawAlignedString(java.lang.String, java.awt.Graphics2D, float, float, org.jfree.chart.ui.TextAnchor)
+    {
+        java.awt.geom.Rectangle2D$Double $stack8;
+        java.awt.Graphics2D g2;
+        java.lang.String text;
+        org.jfree.chart.ui.TextAnchor anchor;
+        float[] adjust;
+        float x, $stack10, $stack11, y, $stack12, $stack13, $stack14, $stack15, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32;
+        double $stack16, $stack17, $stack18, $stack19;
+        boolean $stack20;
+        java.text.AttributedString $stack21;
+        java.awt.Font $stack22;
+        java.util.Map $stack23;
+        java.text.AttributedCharacterIterator $stack24;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        anchor := @parameter4: org.jfree.chart.ui.TextAnchor;
+
+        $stack8 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack8.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+
+        adjust = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor,java.awt.geom.Rectangle2D)>(g2, text, anchor, $stack8);
+
+        $stack10 = adjust[0];
+
+        $stack11 = x + $stack10;
+
+        $stack16 = (double) $stack11;
+
+        $stack12 = adjust[1];
+
+        $stack14 = y + $stack12;
+
+        $stack13 = adjust[2];
+
+        $stack15 = $stack14 + $stack13;
+
+        $stack17 = (double) $stack15;
+
+        $stack18 = virtualinvoke $stack8.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack19 = virtualinvoke $stack8.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        virtualinvoke $stack8.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack16, $stack17, $stack18, $stack19);
+
+        $stack20 = <org.jfree.chart.text.TextUtils: boolean drawStringsWithFontAttributes>;
+
+        if $stack20 != 0 goto label1;
+
+        $stack29 = adjust[0];
+
+        $stack32 = x + $stack29;
+
+        $stack30 = adjust[1];
+
+        $stack31 = y + $stack30;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(text, $stack32, $stack31);
+
+        goto label2;
+
+     label1:
+        $stack21 = new java.text.AttributedString;
+
+        $stack22 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        $stack23 = virtualinvoke $stack22.<java.awt.Font: java.util.Map getAttributes()>();
+
+        specialinvoke $stack21.<java.text.AttributedString: void <init>(java.lang.String,java.util.Map)>(text, $stack23);
+
+        $stack24 = virtualinvoke $stack21.<java.text.AttributedString: java.text.AttributedCharacterIterator getIterator()>();
+
+        $stack25 = adjust[0];
+
+        $stack28 = x + $stack25;
+
+        $stack26 = adjust[1];
+
+        $stack27 = y + $stack26;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.text.AttributedCharacterIterator,float,float)>($stack24, $stack28, $stack27);
+
+     label2:
+        return $stack8;
+    }
+
+    private static float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D, java.lang.String, org.jfree.chart.ui.TextAnchor, java.awt.geom.Rectangle2D)
+    {
+        float[] result;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.Font f;
+        java.awt.FontMetrics fm;
+        java.lang.String text;
+        java.awt.geom.Rectangle2D bounds, textBounds;
+        java.awt.font.LineMetrics metrics;
+        float ascent, $stack22, halfAscent, descent, leading, $stack39, $stack40, $stack41, $stack43, $stack44, $stack47, $stack48, $stack49, $stack51, $stack57, xAdj, yAdj;
+        org.jfree.chart.ui.TextAnchor anchor;
+        boolean $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, $stack27;
+        double $stack45, $stack46, $stack50, $stack52, $stack53, $stack55, $stack56;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        text := @parameter1: java.lang.String;
+
+        anchor := @parameter2: org.jfree.chart.ui.TextAnchor;
+
+        textBounds := @parameter3: java.awt.geom.Rectangle2D;
+
+        result = newarray (float)[3];
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        f = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(f);
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(text, g2, fm);
+
+        metrics = virtualinvoke f.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(text, frc);
+
+        ascent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getAscent()>();
+
+        $stack22 = neg ascent;
+
+        result[2] = $stack22;
+
+        halfAscent = ascent / 2.0F;
+
+        descent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        leading = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        xAdj = 0.0F;
+
+        yAdj = 0.0F;
+
+        $stack25 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHorizontalCenter()>();
+
+        if $stack25 == 0 goto label1;
+
+        $stack55 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack56 = neg $stack55;
+
+        $stack57 = (float) $stack56;
+
+        xAdj = $stack57 / 2.0F;
+
+        goto label2;
+
+     label1:
+        $stack26 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isRight()>();
+
+        if $stack26 == 0 goto label2;
+
+        $stack52 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack53 = neg $stack52;
+
+        xAdj = (float) $stack53;
+
+     label2:
+        $stack27 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isTop()>();
+
+        if $stack27 == 0 goto label3;
+
+        $stack48 = neg descent;
+
+        $stack49 = $stack48 - leading;
+
+        $stack50 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack51 = (float) $stack50;
+
+        yAdj = $stack49 + $stack51;
+
+        goto label7;
+
+     label3:
+        $stack28 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHalfAscent()>();
+
+        if $stack28 == 0 goto label4;
+
+        yAdj = halfAscent;
+
+        goto label7;
+
+     label4:
+        $stack29 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isVerticalCenter()>();
+
+        if $stack29 == 0 goto label5;
+
+        $stack43 = neg descent;
+
+        $stack44 = $stack43 - leading;
+
+        $stack45 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack46 = $stack45 / 2.0;
+
+        $stack47 = (float) $stack46;
+
+        yAdj = $stack44 + $stack47;
+
+        goto label7;
+
+     label5:
+        $stack30 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBaseline()>();
+
+        if $stack30 == 0 goto label6;
+
+        yAdj = 0.0F;
+
+        goto label7;
+
+     label6:
+        $stack31 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBottom()>();
+
+        if $stack31 == 0 goto label7;
+
+        $stack39 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        $stack40 = neg $stack39;
+
+        $stack41 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        yAdj = $stack40 - $stack41;
+
+     label7:
+        if textBounds == null goto label8;
+
+        virtualinvoke textBounds.<java.awt.geom.Rectangle2D: void setRect(java.awt.geom.Rectangle2D)>(bounds);
+
+     label8:
+        result[0] = xAdj;
+
+        result[1] = yAdj;
+
+        return result;
+    }
+
+    public static void drawRotatedString(java.lang.String, java.awt.Graphics2D, double, float, float)
+    {
+        java.lang.String text;
+        java.awt.Graphics2D g2;
+        float x, y;
+        double angle;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        angle := @parameter2: double;
+
+        x := @parameter3: float;
+
+        y := @parameter4: float;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,double,float,float)>(text, g2, x, y, angle, x, y);
+
+        return;
+    }
+
+    public static void drawRotatedString(java.lang.String, java.awt.Graphics2D, float, float, double, float, float)
+    {
+        java.lang.String text;
+        boolean $stack11, $stack17, $stack18;
+        double angle, $stack14, $stack15;
+        byte $stack12;
+        java.awt.Graphics2D g2;
+        java.awt.geom.AffineTransform saved, rotate;
+        float rotateX, rotateY, textX, textY;
+        java.text.AttributedString $stack19;
+        java.awt.Font $stack20, $stack26;
+        java.util.Map $stack21;
+        java.text.AttributedCharacterIterator $stack22;
+        java.awt.font.TextLayout $stack25;
+        java.awt.font.FontRenderContext $stack27;
+        org.jfree.chart.ui.TextAnchor $stack28;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        textX := @parameter2: float;
+
+        textY := @parameter3: float;
+
+        angle := @parameter4: double;
+
+        rotateX := @parameter5: float;
+
+        rotateY := @parameter6: float;
+
+        if text == null goto label1;
+
+        $stack11 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>("");
+
+        if $stack11 == 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $stack12 = angle cmpl 0.0;
+
+        if $stack12 != 0 goto label3;
+
+        $stack28 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BASELINE_LEFT>;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(text, g2, textX, textY, $stack28);
+
+        return;
+
+     label3:
+        saved = virtualinvoke g2.<java.awt.Graphics2D: java.awt.geom.AffineTransform getTransform()>();
+
+        $stack15 = (double) rotateX;
+
+        $stack14 = (double) rotateY;
+
+        rotate = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getRotateInstance(double,double,double)>(angle, $stack15, $stack14);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>(rotate);
+
+        $stack17 = <org.jfree.chart.text.TextUtils: boolean useDrawRotatedStringWorkaround>;
+
+        if $stack17 == 0 goto label4;
+
+        $stack25 = new java.awt.font.TextLayout;
+
+        $stack26 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        $stack27 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        specialinvoke $stack25.<java.awt.font.TextLayout: void <init>(java.lang.String,java.awt.Font,java.awt.font.FontRenderContext)>(text, $stack26, $stack27);
+
+        virtualinvoke $stack25.<java.awt.font.TextLayout: void draw(java.awt.Graphics2D,float,float)>(g2, textX, textY);
+
+        goto label6;
+
+     label4:
+        $stack18 = <org.jfree.chart.text.TextUtils: boolean drawStringsWithFontAttributes>;
+
+        if $stack18 != 0 goto label5;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(text, textX, textY);
+
+        goto label6;
+
+     label5:
+        $stack19 = new java.text.AttributedString;
+
+        $stack20 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        $stack21 = virtualinvoke $stack20.<java.awt.Font: java.util.Map getAttributes()>();
+
+        specialinvoke $stack19.<java.text.AttributedString: void <init>(java.lang.String,java.util.Map)>(text, $stack21);
+
+        $stack22 = virtualinvoke $stack19.<java.text.AttributedString: java.text.AttributedCharacterIterator getIterator()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.text.AttributedCharacterIterator,float,float)>($stack22, textX, textY);
+
+     label6:
+        virtualinvoke g2.<java.awt.Graphics2D: void setTransform(java.awt.geom.AffineTransform)>(saved);
+
+        return;
+    }
+
+    public static void drawRotatedString(java.lang.String, java.awt.Graphics2D, float, float, org.jfree.chart.ui.TextAnchor, double, float, float)
+    {
+        java.lang.String text;
+        boolean $stack10;
+        double angle;
+        byte $stack11;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.TextAnchor textAnchor;
+        float[] textAdj;
+        float x, $stack13, y, $stack14, rotationX, rotationY, $stack15, $stack16;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        textAnchor := @parameter4: org.jfree.chart.ui.TextAnchor;
+
+        angle := @parameter5: double;
+
+        rotationX := @parameter6: float;
+
+        rotationY := @parameter7: float;
+
+        if text == null goto label1;
+
+        $stack10 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>("");
+
+        if $stack10 == 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $stack11 = angle cmpl 0.0;
+
+        if $stack11 != 0 goto label3;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(text, g2, x, y, textAnchor);
+
+        goto label4;
+
+     label3:
+        textAdj = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor)>(g2, text, textAnchor);
+
+        $stack13 = textAdj[0];
+
+        $stack16 = x + $stack13;
+
+        $stack14 = textAdj[1];
+
+        $stack15 = y + $stack14;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,double,float,float)>(text, g2, $stack16, $stack15, angle, rotationX, rotationY);
+
+     label4:
+        return;
+    }
+
+    public static void drawRotatedString(java.lang.String, java.awt.Graphics2D, float, float, org.jfree.chart.ui.TextAnchor, double, org.jfree.chart.ui.TextAnchor)
+    {
+        java.lang.String text;
+        boolean $stack10;
+        double angle;
+        byte $stack11;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.TextAnchor textAnchor, rotationAnchor;
+        float[] textAdj, rotateAdj;
+        float x, $stack14, y, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        textAnchor := @parameter4: org.jfree.chart.ui.TextAnchor;
+
+        angle := @parameter5: double;
+
+        rotationAnchor := @parameter6: org.jfree.chart.ui.TextAnchor;
+
+        if text == null goto label1;
+
+        $stack10 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>("");
+
+        if $stack10 == 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $stack11 = angle cmpl 0.0;
+
+        if $stack11 != 0 goto label3;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(text, g2, x, y, textAnchor);
+
+        goto label4;
+
+     label3:
+        textAdj = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor)>(g2, text, textAnchor);
+
+        rotateAdj = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveRotationAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor)>(g2, text, rotationAnchor);
+
+        $stack14 = textAdj[0];
+
+        $stack25 = x + $stack14;
+
+        $stack15 = textAdj[1];
+
+        $stack24 = y + $stack15;
+
+        $stack16 = textAdj[0];
+
+        $stack18 = x + $stack16;
+
+        $stack17 = rotateAdj[0];
+
+        $stack23 = $stack18 + $stack17;
+
+        $stack19 = textAdj[1];
+
+        $stack21 = y + $stack19;
+
+        $stack20 = rotateAdj[1];
+
+        $stack22 = $stack21 + $stack20;
+
+        staticinvoke <org.jfree.chart.text.TextUtils: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,double,float,float)>(text, g2, $stack25, $stack24, angle, $stack23, $stack22);
+
+     label4:
+        return;
+    }
+
+    public static java.awt.Shape calculateRotatedStringBounds(java.lang.String, java.awt.Graphics2D, float, float, org.jfree.chart.ui.TextAnchor, double, org.jfree.chart.ui.TextAnchor)
+    {
+        java.lang.String text;
+        boolean $stack11;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.TextAnchor textAnchor, rotationAnchor;
+        float[] textAdj, rotateAdj;
+        float x, $stack14, y, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25;
+        double angle;
+        java.awt.Shape result;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        textAnchor := @parameter4: org.jfree.chart.ui.TextAnchor;
+
+        angle := @parameter5: double;
+
+        rotationAnchor := @parameter6: org.jfree.chart.ui.TextAnchor;
+
+        if text == null goto label1;
+
+        $stack11 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>("");
+
+        if $stack11 == 0 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        textAdj = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor)>(g2, text, textAnchor);
+
+        rotateAdj = staticinvoke <org.jfree.chart.text.TextUtils: float[] deriveRotationAnchorOffsets(java.awt.Graphics2D,java.lang.String,org.jfree.chart.ui.TextAnchor)>(g2, text, rotationAnchor);
+
+        $stack14 = textAdj[0];
+
+        $stack25 = x + $stack14;
+
+        $stack15 = textAdj[1];
+
+        $stack24 = y + $stack15;
+
+        $stack16 = textAdj[0];
+
+        $stack18 = x + $stack16;
+
+        $stack17 = rotateAdj[0];
+
+        $stack23 = $stack18 + $stack17;
+
+        $stack19 = textAdj[1];
+
+        $stack21 = y + $stack19;
+
+        $stack20 = rotateAdj[1];
+
+        $stack22 = $stack21 + $stack20;
+
+        result = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.Shape calculateRotatedStringBounds(java.lang.String,java.awt.Graphics2D,float,float,double,float,float)>(text, g2, $stack25, $stack24, angle, $stack23, $stack22);
+
+        return result;
+    }
+
+    private static float[] deriveTextBoundsAnchorOffsets(java.awt.Graphics2D, java.lang.String, org.jfree.chart.ui.TextAnchor)
+    {
+        float[] result;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.Font f;
+        java.awt.FontMetrics fm;
+        java.lang.String text;
+        java.awt.geom.Rectangle2D bounds;
+        java.awt.font.LineMetrics metrics;
+        float ascent, halfAscent, descent, leading, $stack30, $stack31, $stack32, $stack40, $stack41, $stack44, $stack45, $stack46, $stack48, $stack54, xAdj, yAdj;
+        org.jfree.chart.ui.TextAnchor anchor;
+        boolean $stack23, $stack24, $stack26, $stack27, $stack28, $stack29, $stack25;
+        double $stack42, $stack43, $stack47, $stack49, $stack50, $stack52, $stack53;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        text := @parameter1: java.lang.String;
+
+        anchor := @parameter2: org.jfree.chart.ui.TextAnchor;
+
+        result = newarray (float)[2];
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        f = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(f);
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(text, g2, fm);
+
+        metrics = virtualinvoke f.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(text, frc);
+
+        ascent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getAscent()>();
+
+        halfAscent = ascent / 2.0F;
+
+        descent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        leading = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        xAdj = 0.0F;
+
+        yAdj = 0.0F;
+
+        $stack23 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHorizontalCenter()>();
+
+        if $stack23 == 0 goto label1;
+
+        $stack52 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack53 = neg $stack52;
+
+        $stack54 = (float) $stack53;
+
+        xAdj = $stack54 / 2.0F;
+
+        goto label2;
+
+     label1:
+        $stack24 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isRight()>();
+
+        if $stack24 == 0 goto label2;
+
+        $stack49 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack50 = neg $stack49;
+
+        xAdj = (float) $stack50;
+
+     label2:
+        $stack25 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isTop()>();
+
+        if $stack25 == 0 goto label3;
+
+        $stack45 = neg descent;
+
+        $stack46 = $stack45 - leading;
+
+        $stack47 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack48 = (float) $stack47;
+
+        yAdj = $stack46 + $stack48;
+
+        goto label7;
+
+     label3:
+        $stack26 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHalfAscent()>();
+
+        if $stack26 == 0 goto label4;
+
+        yAdj = halfAscent;
+
+        goto label7;
+
+     label4:
+        $stack27 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isVerticalCenter()>();
+
+        if $stack27 == 0 goto label5;
+
+        $stack40 = neg descent;
+
+        $stack41 = $stack40 - leading;
+
+        $stack42 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack43 = $stack42 / 2.0;
+
+        $stack44 = (float) $stack43;
+
+        yAdj = $stack41 + $stack44;
+
+        goto label7;
+
+     label5:
+        $stack28 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBaseline()>();
+
+        if $stack28 == 0 goto label6;
+
+        yAdj = 0.0F;
+
+        goto label7;
+
+     label6:
+        $stack29 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBottom()>();
+
+        if $stack29 == 0 goto label7;
+
+        $stack30 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        $stack31 = neg $stack30;
+
+        $stack32 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        yAdj = $stack31 - $stack32;
+
+     label7:
+        result[0] = xAdj;
+
+        result[1] = yAdj;
+
+        return result;
+    }
+
+    private static float[] deriveRotationAnchorOffsets(java.awt.Graphics2D, java.lang.String, org.jfree.chart.ui.TextAnchor)
+    {
+        float[] result;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.Font $stack15;
+        java.lang.String text;
+        java.awt.font.LineMetrics metrics;
+        java.awt.FontMetrics fm;
+        java.awt.geom.Rectangle2D bounds;
+        float ascent, halfAscent, descent, leading, $stack30, $stack31, $stack39, $stack42, $stack43, $stack45, $stack49, xAdj, yAdj;
+        org.jfree.chart.ui.TextAnchor anchor;
+        boolean $stack22, $stack23, $stack24, $stack26, $stack27, $stack28, $stack29, $stack25;
+        double $stack40, $stack41, $stack44, $stack46, $stack48;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        text := @parameter1: java.lang.String;
+
+        anchor := @parameter2: org.jfree.chart.ui.TextAnchor;
+
+        result = newarray (float)[2];
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        $stack15 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Font getFont()>();
+
+        metrics = virtualinvoke $stack15.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(text, frc);
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(text, g2, fm);
+
+        ascent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getAscent()>();
+
+        halfAscent = ascent / 2.0F;
+
+        descent = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        leading = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        xAdj = 0.0F;
+
+        yAdj = 0.0F;
+
+        $stack22 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isLeft()>();
+
+        if $stack22 == 0 goto label1;
+
+        xAdj = 0.0F;
+
+        goto label3;
+
+     label1:
+        $stack23 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHorizontalCenter()>();
+
+        if $stack23 == 0 goto label2;
+
+        $stack48 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack49 = (float) $stack48;
+
+        xAdj = $stack49 / 2.0F;
+
+        goto label3;
+
+     label2:
+        $stack24 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isRight()>();
+
+        if $stack24 == 0 goto label3;
+
+        $stack46 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        xAdj = (float) $stack46;
+
+     label3:
+        $stack25 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isTop()>();
+
+        if $stack25 == 0 goto label4;
+
+        $stack43 = descent + leading;
+
+        $stack44 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack45 = (float) $stack44;
+
+        yAdj = $stack43 - $stack45;
+
+        goto label8;
+
+     label4:
+        $stack26 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isVerticalCenter()>();
+
+        if $stack26 == 0 goto label5;
+
+        $stack39 = descent + leading;
+
+        $stack40 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack41 = $stack40 / 2.0;
+
+        $stack42 = (float) $stack41;
+
+        yAdj = $stack39 - $stack42;
+
+        goto label8;
+
+     label5:
+        $stack27 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isHalfAscent()>();
+
+        if $stack27 == 0 goto label6;
+
+        yAdj = neg halfAscent;
+
+        goto label8;
+
+     label6:
+        $stack28 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBaseline()>();
+
+        if $stack28 == 0 goto label7;
+
+        yAdj = 0.0F;
+
+        goto label8;
+
+     label7:
+        $stack29 = virtualinvoke anchor.<org.jfree.chart.ui.TextAnchor: boolean isBottom()>();
+
+        if $stack29 == 0 goto label8;
+
+        $stack30 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+
+        $stack31 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getLeading()>();
+
+        yAdj = $stack30 + $stack31;
+
+     label8:
+        result[0] = xAdj;
+
+        result[1] = yAdj;
+
+        return result;
+    }
+
+    public static java.awt.Shape calculateRotatedStringBounds(java.lang.String, java.awt.Graphics2D, float, float, double, float, float)
+    {
+        java.lang.String text;
+        boolean $stack14;
+        java.awt.Graphics2D g2;
+        java.awt.FontMetrics fm;
+        java.awt.geom.Rectangle2D bounds;
+        float textX, textY, rotateX, rotateY;
+        double $stack17, $stack18, angle, $stack21, $stack22;
+        java.awt.geom.AffineTransform translate, rotate;
+        java.awt.Shape translatedBounds, result;
+
+        text := @parameter0: java.lang.String;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        textX := @parameter2: float;
+
+        textY := @parameter3: float;
+
+        angle := @parameter4: double;
+
+        rotateX := @parameter5: float;
+
+        rotateY := @parameter6: float;
+
+        if text == null goto label1;
+
+        $stack14 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>("");
+
+        if $stack14 == 0 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(text, g2, fm);
+
+        $stack18 = (double) textX;
+
+        $stack17 = (double) textY;
+
+        translate = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getTranslateInstance(double,double)>($stack18, $stack17);
+
+        translatedBounds = virtualinvoke translate.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(bounds);
+
+        $stack22 = (double) rotateX;
+
+        $stack21 = (double) rotateY;
+
+        rotate = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getRotateInstance(double,double,double)>(angle, $stack22, $stack21);
+
+        result = virtualinvoke rotate.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(translatedBounds);
+
+        return result;
+    }
+
+    public static boolean getUseFontMetricsGetStringBounds()
+    {
+        boolean $stack0;
+
+        $stack0 = <org.jfree.chart.text.TextUtils: boolean useFontMetricsGetStringBounds>;
+
+        return $stack0;
+    }
+
+    public static void setUseFontMetricsGetStringBounds(boolean)
+    {
+        boolean use;
+
+        use := @parameter0: boolean;
+
+        <org.jfree.chart.text.TextUtils: boolean useFontMetricsGetStringBounds> = use;
+
+        return;
+    }
+
+    public static boolean isUseDrawRotatedStringWorkaround()
+    {
+        boolean $stack0;
+
+        $stack0 = <org.jfree.chart.text.TextUtils: boolean useDrawRotatedStringWorkaround>;
+
+        return $stack0;
+    }
+
+    public static void setUseDrawRotatedStringWorkaround(boolean)
+    {
+        boolean use;
+
+        use := @parameter0: boolean;
+
+        <org.jfree.chart.text.TextUtils: boolean useDrawRotatedStringWorkaround> = use;
+
+        return;
+    }
+
+    public static boolean getDrawStringsWithFontAttributes()
+    {
+        boolean $stack0;
+
+        $stack0 = <org.jfree.chart.text.TextUtils: boolean drawStringsWithFontAttributes>;
+
+        return $stack0;
+    }
+
+    public static void setDrawStringsWithFontAttributes(boolean)
+    {
+        boolean b;
+
+        b := @parameter0: boolean;
+
+        <org.jfree.chart.text.TextUtils: boolean drawStringsWithFontAttributes> = b;
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        <org.jfree.chart.text.TextUtils: boolean drawStringsWithFontAttributes> = 0;
+
+        <org.jfree.chart.text.TextUtils: boolean useDrawRotatedStringWorkaround> = 1;
+
+        <org.jfree.chart.text.TextUtils: boolean useFontMetricsGetStringBounds> = 0;
+
+        return;
+    }
+}

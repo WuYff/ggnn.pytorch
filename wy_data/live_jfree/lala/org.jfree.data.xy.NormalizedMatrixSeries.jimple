@@ -1,0 +1,140 @@
+public class org.jfree.data.xy.NormalizedMatrixSeries extends org.jfree.data.xy.MatrixSeries
+{
+    public static final double DEFAULT_SCALE_FACTOR;
+    private double m_scaleFactor;
+    private double m_totalSum;
+
+    public void <init>(java.lang.String, int, int)
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+        java.lang.String name;
+        int rows, columns;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        name := @parameter0: java.lang.String;
+
+        rows := @parameter1: int;
+
+        columns := @parameter2: int;
+
+        specialinvoke this.<org.jfree.data.xy.MatrixSeries: void <init>(java.lang.Comparable,int,int)>(name, rows, columns);
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_scaleFactor> = 1.0;
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum> = 4.9E-324;
+
+        return;
+    }
+
+    public java.lang.Number getItem(int)
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+        int itemIndex, i, j;
+        double $stack9, $stack10, mij, $stack12, $stack13;
+        java.lang.Double $stack11;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        itemIndex := @parameter0: int;
+
+        i = virtualinvoke this.<org.jfree.data.xy.NormalizedMatrixSeries: int getItemRow(int)>(itemIndex);
+
+        j = virtualinvoke this.<org.jfree.data.xy.NormalizedMatrixSeries: int getItemColumn(int)>(itemIndex);
+
+        $stack9 = virtualinvoke this.<org.jfree.data.xy.NormalizedMatrixSeries: double get(int,int)>(i, j);
+
+        $stack10 = this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_scaleFactor>;
+
+        mij = $stack9 * $stack10;
+
+        $stack11 = new java.lang.Double;
+
+        $stack12 = this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum>;
+
+        $stack13 = mij / $stack12;
+
+        specialinvoke $stack11.<java.lang.Double: void <init>(double)>($stack13);
+
+        return $stack11;
+    }
+
+    public void setScaleFactor(double)
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+        double factor;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        factor := @parameter0: double;
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_scaleFactor> = factor;
+
+        return;
+    }
+
+    public double getScaleFactor()
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+        double $stack1;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        $stack1 = this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_scaleFactor>;
+
+        return $stack1;
+    }
+
+    public void update(int, int, double)
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+        int i, j;
+        double $stack5, $stack6, $stack7, mij, $stack8, $stack9;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        i := @parameter0: int;
+
+        j := @parameter1: int;
+
+        mij := @parameter2: double;
+
+        $stack5 = this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum>;
+
+        $stack6 = virtualinvoke this.<org.jfree.data.xy.NormalizedMatrixSeries: double get(int,int)>(i, j);
+
+        $stack7 = $stack5 - $stack6;
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum> = $stack7;
+
+        $stack8 = this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum>;
+
+        $stack9 = $stack8 + mij;
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum> = $stack9;
+
+        specialinvoke this.<org.jfree.data.xy.MatrixSeries: void update(int,int,double)>(i, j, mij);
+
+        return;
+    }
+
+    public void zeroAll()
+    {
+        org.jfree.data.xy.NormalizedMatrixSeries this;
+
+        this := @this: org.jfree.data.xy.NormalizedMatrixSeries;
+
+        this.<org.jfree.data.xy.NormalizedMatrixSeries: double m_totalSum> = 0.0;
+
+        specialinvoke this.<org.jfree.data.xy.MatrixSeries: void zeroAll()>();
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.xy.NormalizedMatrixSeries: double DEFAULT_SCALE_FACTOR> = 1.0;
+
+        return;
+    }
+}

@@ -1,0 +1,2641 @@
+public class org.jfree.chart.plot.SpiderWebPlot extends org.jfree.chart.plot.Plot implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final double DEFAULT_HEAD;
+    public static final double DEFAULT_AXIS_LABEL_GAP;
+    public static final double DEFAULT_INTERIOR_GAP;
+    public static final double MAX_INTERIOR_GAP;
+    public static final double DEFAULT_START_ANGLE;
+    public static final java.awt.Font DEFAULT_LABEL_FONT;
+    public static final java.awt.Paint DEFAULT_LABEL_PAINT;
+    public static final java.awt.Paint DEFAULT_LABEL_BACKGROUND_PAINT;
+    public static final java.awt.Paint DEFAULT_LABEL_OUTLINE_PAINT;
+    public static final java.awt.Stroke DEFAULT_LABEL_OUTLINE_STROKE;
+    public static final java.awt.Paint DEFAULT_LABEL_SHADOW_PAINT;
+    public static final double DEFAULT_MAX_VALUE;
+    protected double headPercent;
+    private double interiorGap;
+    private double axisLabelGap;
+    private transient java.awt.Paint axisLinePaint;
+    private transient java.awt.Stroke axisLineStroke;
+    private org.jfree.data.category.CategoryDataset dataset;
+    private double maxValue;
+    private org.jfree.chart.util.TableOrder dataExtractOrder;
+    private double startAngle;
+    private org.jfree.chart.util.Rotation direction;
+    private transient java.awt.Shape legendItemShape;
+    private transient java.awt.Paint seriesPaint;
+    private org.jfree.chart.util.PaintList seriesPaintList;
+    private transient java.awt.Paint baseSeriesPaint;
+    private transient java.awt.Paint seriesOutlinePaint;
+    private org.jfree.chart.util.PaintList seriesOutlinePaintList;
+    private transient java.awt.Paint baseSeriesOutlinePaint;
+    private transient java.awt.Stroke seriesOutlineStroke;
+    private org.jfree.chart.util.StrokeList seriesOutlineStrokeList;
+    private transient java.awt.Stroke baseSeriesOutlineStroke;
+    private java.awt.Font labelFont;
+    private transient java.awt.Paint labelPaint;
+    private org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator;
+    private boolean webFilled;
+    private org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator;
+    private org.jfree.chart.urls.CategoryURLGenerator urlGenerator;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        specialinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void <init>(org.jfree.data.category.CategoryDataset)>(null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.category.CategoryDataset)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.chart.util.TableOrder $stack2;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        $stack2 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        specialinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.util.TableOrder)>(dataset, $stack2);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.category.CategoryDataset, org.jfree.chart.util.TableOrder)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.util.TableOrder extract;
+        org.jfree.data.category.CategoryDataset dataset;
+        java.awt.Color $stack3;
+        java.awt.BasicStroke $stack4;
+        org.jfree.chart.util.Rotation $stack5;
+        org.jfree.chart.util.PaintList $stack6, $stack7;
+        java.awt.Paint $stack8, $stack12;
+        org.jfree.chart.util.StrokeList $stack9;
+        java.awt.Stroke $stack10;
+        java.awt.Font $stack11;
+        org.jfree.chart.labels.StandardCategoryItemLabelGenerator $stack13;
+        java.awt.Shape $stack14;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        extract := @parameter1: org.jfree.chart.util.TableOrder;
+
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled> = 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(extract, "extract");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset> = dataset;
+
+        if dataset == null goto label1;
+
+        interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder> = extract;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent> = 0.01;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap> = 0.1;
+
+        $stack3 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint> = $stack3;
+
+        $stack4 = new java.awt.BasicStroke;
+
+        specialinvoke $stack4.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke> = $stack4;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap> = 0.25;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double startAngle> = 90.0;
+
+        $stack5 = <org.jfree.chart.util.Rotation: org.jfree.chart.util.Rotation CLOCKWISE>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation direction> = $stack5;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue> = -1.0;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint> = null;
+
+        $stack6 = new org.jfree.chart.util.PaintList;
+
+        specialinvoke $stack6.<org.jfree.chart.util.PaintList: void <init>()>();
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList> = $stack6;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint> = null;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint> = null;
+
+        $stack7 = new org.jfree.chart.util.PaintList;
+
+        specialinvoke $stack7.<org.jfree.chart.util.PaintList: void <init>()>();
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList> = $stack7;
+
+        $stack8 = <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_OUTLINE_PAINT>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint> = $stack8;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke> = null;
+
+        $stack9 = new org.jfree.chart.util.StrokeList;
+
+        specialinvoke $stack9.<org.jfree.chart.util.StrokeList: void <init>()>();
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList> = $stack9;
+
+        $stack10 = <org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke DEFAULT_OUTLINE_STROKE>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke> = $stack10;
+
+        $stack11 = <org.jfree.chart.plot.SpiderWebPlot: java.awt.Font DEFAULT_LABEL_FONT>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font labelFont> = $stack11;
+
+        $stack12 = <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_LABEL_PAINT>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint> = $stack12;
+
+        $stack13 = new org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryItemLabelGenerator: void <init>()>();
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator> = $stack13;
+
+        $stack14 = <org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape DEFAULT_LEGEND_ITEM_CIRCLE>;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape> = $stack14;
+
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        return "Spider Web Plot";
+    }
+
+    public org.jfree.data.category.CategoryDataset getDataset()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.data.category.CategoryDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        return $stack1;
+    }
+
+    public void setDataset(org.jfree.data.category.CategoryDataset)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.data.category.CategoryDataset $stack2, dataset, $stack8;
+        org.jfree.data.general.DatasetChangeEvent $stack3;
+        org.jfree.data.general.DatasetGroup $stack4;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        $stack2 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        if $stack2 == null goto label1;
+
+        $stack8 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        interfaceinvoke $stack8.<org.jfree.data.category.CategoryDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset> = dataset;
+
+        if dataset == null goto label2;
+
+        $stack4 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: org.jfree.data.general.DatasetGroup getGroup()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void setDatasetGroup(org.jfree.data.general.DatasetGroup)>($stack4);
+
+        interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label2:
+        $stack3 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack3.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack3);
+
+        return;
+    }
+
+    public boolean isWebFilled()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled>;
+
+        return $stack1;
+    }
+
+    public void setWebFilled(boolean)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        boolean flag;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled> = flag;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.util.TableOrder getDataExtractOrder()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.util.TableOrder $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        return $stack1;
+    }
+
+    public void setDataExtractOrder(org.jfree.chart.util.TableOrder)
+    {
+        org.jfree.chart.util.TableOrder order;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        order := @parameter0: org.jfree.chart.util.TableOrder;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(order, "order");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder> = order;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getHeadPercent()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent>;
+
+        return $stack1;
+    }
+
+    public void setHeadPercent(double)
+    {
+        double percent;
+        byte $stack3;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.lang.IllegalArgumentException $stack4;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        percent := @parameter0: double;
+
+        $stack3 = percent cmpg 0.0;
+
+        if $stack3 >= 0 goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Percentage outside valid range.");
+
+        throw $stack4;
+
+     label1:
+        this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent> = percent;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getStartAngle()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: double startAngle>;
+
+        return $stack1;
+    }
+
+    public void setStartAngle(double)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double angle;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        angle := @parameter0: double;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double startAngle> = angle;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getMaxValue()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        return $stack1;
+    }
+
+    public void setMaxValue(double)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double value;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        value := @parameter0: double;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue> = value;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.util.Rotation getDirection()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.util.Rotation $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation direction>;
+
+        return $stack1;
+    }
+
+    public void setDirection(org.jfree.chart.util.Rotation)
+    {
+        org.jfree.chart.util.Rotation direction;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        direction := @parameter0: org.jfree.chart.util.Rotation;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(direction, "direction");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation direction> = direction;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getInteriorGap()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap>;
+
+        return $stack1;
+    }
+
+    public void setInteriorGap(double)
+    {
+        double percent, $stack6;
+        byte $stack3, $stack5, $stack7;
+        java.lang.IllegalArgumentException $stack4;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        percent := @parameter0: double;
+
+        $stack3 = percent cmpg 0.0;
+
+        if $stack3 < 0 goto label1;
+
+        $stack5 = percent cmpl 0.4;
+
+        if $stack5 <= 0 goto label2;
+
+     label1:
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Percentage outside valid range.");
+
+        throw $stack4;
+
+     label2:
+        $stack6 = this.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap>;
+
+        $stack7 = $stack6 cmpl percent;
+
+        if $stack7 == 0 goto label3;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap> = percent;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+     label3:
+        return;
+    }
+
+    public double getAxisLabelGap()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap>;
+
+        return $stack1;
+    }
+
+    public void setAxisLabelGap(double)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        double gap;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        gap := @parameter0: double;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap> = gap;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getAxisLinePaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint>;
+
+        return $stack1;
+    }
+
+    public void setAxisLinePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getAxisLineStroke()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke>;
+
+        return $stack1;
+    }
+
+    public void setAxisLineStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getSeriesPaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        return $stack1;
+    }
+
+    public void setSeriesPaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getSeriesPaint(int)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack5, p, $stack12, result;
+        int series;
+        org.jfree.chart.util.PaintList $stack6, $stack11;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        $stack5 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        if $stack5 == null goto label1;
+
+        $stack12 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        return $stack12;
+
+     label1:
+        $stack6 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        result = virtualinvoke $stack6.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+
+        if result != null goto label3;
+
+        supplier = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+
+        if supplier == null goto label2;
+
+        p = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Paint getNextPaint()>();
+
+        $stack11 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        virtualinvoke $stack11.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, p);
+
+        result = p;
+
+        goto label3;
+
+     label2:
+        result = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint>;
+
+     label3:
+        return result;
+    }
+
+    public void setSeriesPaint(int, java.awt.Paint)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.util.PaintList $stack3;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        paint := @parameter1: java.awt.Paint;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        virtualinvoke $stack3.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getBaseSeriesPaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint>;
+
+        return $stack1;
+    }
+
+    public void setBaseSeriesPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getSeriesOutlinePaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setSeriesOutlinePaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getSeriesOutlinePaint(int)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack3, $stack7, result;
+        int series;
+        org.jfree.chart.util.PaintList $stack4;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        if $stack3 == null goto label1;
+
+        $stack7 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        return $stack7;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList>;
+
+        result = virtualinvoke $stack4.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+
+        if result != null goto label2;
+
+        result = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint>;
+
+     label2:
+        return result;
+    }
+
+    public void setSeriesOutlinePaint(int, java.awt.Paint)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.util.PaintList $stack3;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        paint := @parameter1: java.awt.Paint;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList>;
+
+        virtualinvoke $stack3.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getBaseSeriesOutlinePaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setBaseSeriesOutlinePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getSeriesOutlineStroke()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setSeriesOutlineStroke(java.awt.Stroke)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Stroke stroke;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getSeriesOutlineStroke(int)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Stroke $stack3, $stack7, result;
+        int series;
+        org.jfree.chart.util.StrokeList $stack4;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        if $stack3 == null goto label1;
+
+        $stack7 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        return $stack7;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList>;
+
+        result = virtualinvoke $stack4.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>(series);
+
+        if result != null goto label2;
+
+        result = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke>;
+
+     label2:
+        return result;
+    }
+
+    public void setSeriesOutlineStroke(int, java.awt.Stroke)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        int series;
+        java.awt.Stroke stroke;
+        org.jfree.chart.util.StrokeList $stack3;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList>;
+
+        virtualinvoke $stack3.<org.jfree.chart.util.StrokeList: void setStroke(int,java.awt.Stroke)>(series, stroke);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getBaseSeriesOutlineStroke()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setBaseSeriesOutlineStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Shape getLegendItemShape()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Shape $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape>;
+
+        return $stack1;
+    }
+
+    public void setLegendItemShape(java.awt.Shape)
+    {
+        java.awt.Shape shape;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        shape := @parameter0: java.awt.Shape;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(shape, "shape");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape> = shape;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Font getLabelFont()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font labelFont>;
+
+        return $stack1;
+    }
+
+    public void setLabelFont(java.awt.Font)
+    {
+        java.awt.Font font;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font labelFont> = font;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getLabelPaint()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint>;
+
+        return $stack1;
+    }
+
+    public void setLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.labels.CategoryItemLabelGenerator getLabelGenerator()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.labels.CategoryItemLabelGenerator $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator>;
+
+        return $stack1;
+    }
+
+    public void setLabelGenerator(org.jfree.chart.labels.CategoryItemLabelGenerator)
+    {
+        org.jfree.chart.labels.CategoryItemLabelGenerator generator;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        generator := @parameter0: org.jfree.chart.labels.CategoryItemLabelGenerator;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(generator, "generator");
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator> = generator;
+
+        return;
+    }
+
+    public org.jfree.chart.labels.CategoryToolTipGenerator getToolTipGenerator()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.labels.CategoryToolTipGenerator $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator>;
+
+        return $stack1;
+    }
+
+    public void setToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.labels.CategoryToolTipGenerator generator;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        generator := @parameter0: org.jfree.chart.labels.CategoryToolTipGenerator;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator> = generator;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.urls.CategoryURLGenerator getURLGenerator()
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.urls.CategoryURLGenerator $stack1;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator>;
+
+        return $stack1;
+    }
+
+    public void setURLGenerator(org.jfree.chart.urls.CategoryURLGenerator)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.urls.CategoryURLGenerator generator;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        generator := @parameter0: org.jfree.chart.urls.CategoryURLGenerator;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator> = generator;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.LegendItemCollection $stack13;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.data.category.CategoryDataset $stack14, $stack28, $stack30, $stack33;
+        org.jfree.chart.util.TableOrder $stack15, $stack16, $stack17, $stack18;
+        java.util.Iterator iterator;
+        java.awt.Shape shape;
+        boolean $stack21;
+        java.lang.Object $stack22;
+        java.lang.Comparable key;
+        java.lang.String label;
+        java.awt.Paint paint, outlinePaint;
+        java.awt.Stroke stroke;
+        org.jfree.chart.LegendItem $stack27;
+        java.util.List keys;
+        int series;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack13 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack13.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        $stack14 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+
+        if $stack14 != null goto label1;
+
+        return $stack13;
+
+     label1:
+        keys = null;
+
+        $stack16 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack15 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        if $stack16 != $stack15 goto label2;
+
+        $stack33 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        keys = interfaceinvoke $stack33.<org.jfree.data.category.CategoryDataset: java.util.List getRowKeys()>();
+
+        goto label3;
+
+     label2:
+        $stack18 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack17 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+
+        if $stack18 != $stack17 goto label3;
+
+        $stack30 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        keys = interfaceinvoke $stack30.<org.jfree.data.category.CategoryDataset: java.util.List getColumnKeys()>();
+
+     label3:
+        if keys != null goto label4;
+
+        return $stack13;
+
+     label4:
+        series = 0;
+
+        iterator = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+
+        shape = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape getLegendItemShape()>();
+
+     label5:
+        $stack21 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack21 == 0 goto label6;
+
+        $stack22 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.Comparable) $stack22;
+
+        label = virtualinvoke key.<java.lang.Object: java.lang.String toString()>();
+
+        paint = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getSeriesPaint(int)>(series);
+
+        outlinePaint = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getSeriesOutlinePaint(int)>(series);
+
+        stroke = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke getSeriesOutlineStroke(int)>(series);
+
+        $stack27 = new org.jfree.chart.LegendItem;
+
+        specialinvoke $stack27.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>(label, label, null, null, shape, paint, stroke, outlinePaint);
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+
+        virtualinvoke $stack27.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>($stack28);
+
+        virtualinvoke $stack27.<org.jfree.chart.LegendItem: void setSeriesKey(java.lang.Comparable)>(key);
+
+        virtualinvoke $stack27.<org.jfree.chart.LegendItem: void setSeriesIndex(int)>(series);
+
+        virtualinvoke $stack13.<org.jfree.chart.LegendItemCollection: void add(org.jfree.chart.LegendItem)>($stack27);
+
+        series = series + 1;
+
+        goto label5;
+
+     label6:
+        return $stack13;
+    }
+
+    protected java.awt.geom.Point2D getWebPoint(java.awt.geom.Rectangle2D, double, double)
+    {
+        double angle, angrad, $stack13, length, $stack14, $stack15, $stack16, x, $stack17, $stack18, $stack19, $stack20, $stack21, y, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32;
+        java.awt.geom.Rectangle2D bounds;
+        java.awt.geom.Point2D$Double $stack22;
+        org.jfree.chart.plot.SpiderWebPlot this;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        bounds := @parameter0: java.awt.geom.Rectangle2D;
+
+        angle := @parameter1: double;
+
+        length := @parameter2: double;
+
+        angrad = staticinvoke <java.lang.Math: double toRadians(double)>(angle);
+
+        $stack13 = staticinvoke <java.lang.Math: double cos(double)>(angrad);
+
+        $stack14 = $stack13 * length;
+
+        $stack15 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack16 = $stack14 * $stack15;
+
+        x = $stack16 / 2.0;
+
+        $stack17 = staticinvoke <java.lang.Math: double sin(double)>(angrad);
+
+        $stack18 = neg $stack17;
+
+        $stack19 = $stack18 * length;
+
+        $stack20 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack21 = $stack19 * $stack20;
+
+        y = $stack21 / 2.0;
+
+        $stack22 = new java.awt.geom.Point2D$Double;
+
+        $stack23 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack24 = $stack23 + x;
+
+        $stack25 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack26 = $stack25 / 2.0;
+
+        $stack27 = $stack24 + $stack26;
+
+        $stack28 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack29 = $stack28 + y;
+
+        $stack30 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack31 = $stack30 / 2.0;
+
+        $stack32 = $stack29 + $stack31;
+
+        specialinvoke $stack22.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack27, $stack32);
+
+        return $stack22;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.Graphics2D g2;
+        java.awt.Shape savedClip;
+        java.awt.Composite originalComposite;
+        float $stack40;
+        java.awt.AlphaComposite $stack41;
+        org.jfree.data.category.CategoryDataset $stack42, $stack46, $stack48, $stack163, $stack165;
+        boolean $stack43;
+        org.jfree.chart.util.TableOrder $stack44, $stack45;
+        double $stack50, $stack52, $stack53, gapHorizontal, $stack54, $stack55, gapVertical, $stack56, $stack57, $stack58, $stack59, $stack60, $stack61, $stack62, $stack63, headW, $stack64, $stack65, headH, $stack66, min, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack74, $stack75, $stack76, $stack77, $stack88, $stack90, $stack91, $stack92, $stack93, $stack94, $stack95, angle, $stack100, $stack101, X, Y, W, H;
+        byte $stack51;
+        java.awt.geom.Point2D$Double $stack73;
+        java.awt.geom.Rectangle2D$Double $stack78;
+        org.jfree.chart.util.Rotation $stack89;
+        java.awt.geom.Point2D endPoint, anchor;
+        java.awt.geom.Line2D$Double $stack97;
+        java.awt.Paint $stack98;
+        java.awt.Stroke $stack99;
+        org.jfree.chart.plot.PlotState parentState;
+        int seriesCount, catCount, cat;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        insets = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        if info == null goto label01;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(area);
+
+     label01:
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        savedClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>(area);
+
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+
+        $stack40 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: float getForegroundAlpha()>();
+
+        $stack41 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack40);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack41);
+
+        $stack42 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        $stack43 = staticinvoke <org.jfree.data.general.DatasetUtils: boolean isEmptyOrNull(org.jfree.data.category.CategoryDataset)>($stack42);
+
+        if $stack43 != 0 goto label09;
+
+        $stack45 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack44 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        if $stack45 != $stack44 goto label02;
+
+        $stack163 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        seriesCount = interfaceinvoke $stack163.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+
+        $stack165 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        catCount = interfaceinvoke $stack165.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+
+        goto label03;
+
+     label02:
+        $stack46 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        seriesCount = interfaceinvoke $stack46.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+
+        $stack48 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        catCount = interfaceinvoke $stack48.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+
+     label03:
+        $stack50 = this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        $stack51 = $stack50 cmpl -1.0;
+
+        if $stack51 != 0 goto label04;
+
+        specialinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void calculateMaxValue(int,int)>(seriesCount, catCount);
+
+     label04:
+        $stack52 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack53 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: double getInteriorGap()>();
+
+        gapHorizontal = $stack52 * $stack53;
+
+        $stack54 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack55 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: double getInteriorGap()>();
+
+        gapVertical = $stack54 * $stack55;
+
+        $stack56 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack57 = gapHorizontal / 2.0;
+
+        X = $stack56 + $stack57;
+
+        $stack58 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack59 = gapVertical / 2.0;
+
+        Y = $stack58 + $stack59;
+
+        $stack60 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        W = $stack60 - gapHorizontal;
+
+        $stack61 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        H = $stack61 - gapVertical;
+
+        $stack62 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack63 = this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent>;
+
+        headW = $stack62 * $stack63;
+
+        $stack64 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack65 = this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent>;
+
+        headH = $stack64 * $stack65;
+
+        $stack66 = staticinvoke <java.lang.Math: double min(double,double)>(W, H);
+
+        min = $stack66 / 2.0;
+
+        $stack67 = X + X;
+
+        $stack68 = $stack67 + W;
+
+        $stack69 = $stack68 / 2.0;
+
+        X = $stack69 - min;
+
+        $stack70 = Y + Y;
+
+        $stack71 = $stack70 + H;
+
+        $stack72 = $stack71 / 2.0;
+
+        Y = $stack72 - min;
+
+        W = 2.0 * min;
+
+        H = 2.0 * min;
+
+        $stack73 = new java.awt.geom.Point2D$Double;
+
+        $stack74 = W / 2.0;
+
+        $stack77 = X + $stack74;
+
+        $stack75 = H / 2.0;
+
+        $stack76 = Y + $stack75;
+
+        specialinvoke $stack73.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack77, $stack76);
+
+        $stack78 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack78.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(X, Y, W, H);
+
+        cat = 0;
+
+     label05:
+        if cat >= catCount goto label06;
+
+        $stack88 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: double getStartAngle()>();
+
+        $stack89 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation getDirection()>();
+
+        $stack90 = virtualinvoke $stack89.<org.jfree.chart.util.Rotation: double getFactor()>();
+
+        $stack91 = (double) cat;
+
+        $stack92 = $stack90 * $stack91;
+
+        $stack94 = $stack92 * 360.0;
+
+        $stack93 = (double) catCount;
+
+        $stack95 = $stack94 / $stack93;
+
+        angle = $stack88 + $stack95;
+
+        endPoint = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.geom.Point2D getWebPoint(java.awt.geom.Rectangle2D,double,double)>($stack78, angle, 1.0);
+
+        $stack97 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack97.<java.awt.geom.Line2D$Double: void <init>(java.awt.geom.Point2D,java.awt.geom.Point2D)>($stack73, endPoint);
+
+        $stack98 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack98);
+
+        $stack99 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack99);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack97);
+
+        $stack100 = (double) catCount;
+
+        $stack101 = 360.0 / $stack100;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawLabel(java.awt.Graphics2D,java.awt.geom.Rectangle2D,double,int,double,double)>(g2, $stack78, 0.0, cat, angle, $stack101);
+
+        cat = cat + 1;
+
+        goto label05;
+
+     label06:
+        cat = 0;
+
+     label07:
+        if cat >= seriesCount goto label08;
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawRadarPoly(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotRenderingInfo,int,int,double,double)>(g2, $stack78, $stack73, info, cat, catCount, headH, headW);
+
+        cat = cat + 1;
+
+        goto label07;
+
+     label08:
+        goto label10;
+
+     label09:
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawNoDataMessage(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+     label10:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+
+        virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        return;
+    }
+
+    private void calculateMaxValue(int, int)
+    {
+        int seriesCount, catCount, seriesIndex, catIndex;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.lang.Number nV;
+        double v, $stack14;
+        byte $stack15;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        seriesCount := @parameter0: int;
+
+        catCount := @parameter1: int;
+
+        seriesIndex = 0;
+
+     label1:
+        if seriesIndex >= seriesCount goto label5;
+
+        catIndex = 0;
+
+     label2:
+        if catIndex >= catCount goto label4;
+
+        nV = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.lang.Number getPlotValue(int,int)>(seriesIndex, catIndex);
+
+        if nV == null goto label3;
+
+        v = virtualinvoke nV.<java.lang.Number: double doubleValue()>();
+
+        $stack14 = this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        $stack15 = v cmpl $stack14;
+
+        if $stack15 <= 0 goto label3;
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue> = v;
+
+     label3:
+        catIndex = catIndex + 1;
+
+        goto label2;
+
+     label4:
+        seriesIndex = seriesIndex + 1;
+
+        goto label1;
+
+     label5:
+        return;
+    }
+
+    protected void drawRadarPoly(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotRenderingInfo, int, int, double, double)
+    {
+        java.awt.Polygon $stack30;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        int catCount, series, $stack55, $stack57, $stack75, $stack80, $stack81, $stack82, cat, row, col;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Graphics2D g2;
+        java.awt.Stroke $stack32, outlineStroke;
+        boolean $stack33;
+        java.awt.AlphaComposite $stack34, $stack37;
+        float $stack36;
+        java.lang.Number dataValue;
+        double value, $stack43, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50, angle, $stack51, $stack52, $stack54, $stack56, $stack62, headW, $stack63, $stack64, $stack65, headH, $stack66, $stack67, $stack73, $stack74, $stack76, $stack77, $stack78, $stack79;
+        byte $stack42;
+        org.jfree.chart.util.Rotation $stack44;
+        java.awt.geom.Rectangle2D plotArea;
+        java.awt.geom.Point2D point, centre;
+        java.awt.Paint paint, outlinePaint, cat#11;
+        java.awt.geom.Ellipse2D$Double $stack61;
+        org.jfree.chart.util.TableOrder $stack68, $stack69;
+        org.jfree.chart.labels.CategoryToolTipGenerator $stack70, $stack111;
+        org.jfree.chart.urls.CategoryURLGenerator $stack71, $stack90;
+        java.awt.Rectangle $stack72;
+        org.jfree.chart.entity.CategoryItemEntity $stack83;
+        org.jfree.data.category.CategoryDataset $stack84, $stack85, $stack87, $stack89, $stack110;
+        java.lang.Comparable $stack86, $stack88;
+        org.jfree.chart.ChartRenderingInfo $stack117;
+        org.jfree.chart.entity.EntityCollection entities;
+        java.lang.String tip, url;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        centre := @parameter2: java.awt.geom.Point2D;
+
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+
+        series := @parameter4: int;
+
+        catCount := @parameter5: int;
+
+        headH := @parameter6: double;
+
+        headW := @parameter7: double;
+
+        $stack30 = new java.awt.Polygon;
+
+        specialinvoke $stack30.<java.awt.Polygon: void <init>()>();
+
+        entities = null;
+
+        if info == null goto label1;
+
+        $stack117 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+
+        entities = virtualinvoke $stack117.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+
+     label1:
+        cat = 0;
+
+     label2:
+        if cat >= catCount goto label8;
+
+        dataValue = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.lang.Number getPlotValue(int,int)>(series, cat);
+
+        if dataValue == null goto label7;
+
+        value = virtualinvoke dataValue.<java.lang.Number: double doubleValue()>();
+
+        $stack42 = value cmpl 0.0;
+
+        if $stack42 < 0 goto label7;
+
+        $stack43 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: double getStartAngle()>();
+
+        $stack44 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation getDirection()>();
+
+        $stack45 = virtualinvoke $stack44.<org.jfree.chart.util.Rotation: double getFactor()>();
+
+        $stack46 = (double) cat;
+
+        $stack47 = $stack45 * $stack46;
+
+        $stack49 = $stack47 * 360.0;
+
+        $stack48 = (double) catCount;
+
+        $stack50 = $stack49 / $stack48;
+
+        angle = $stack43 + $stack50;
+
+        $stack51 = this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        $stack52 = value / $stack51;
+
+        point = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.geom.Point2D getWebPoint(java.awt.geom.Rectangle2D,double,double)>(plotArea, angle, $stack52);
+
+        $stack54 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+
+        $stack55 = (int) $stack54;
+
+        $stack56 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+
+        $stack57 = (int) $stack56;
+
+        virtualinvoke $stack30.<java.awt.Polygon: void addPoint(int,int)>($stack55, $stack57);
+
+        paint = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getSeriesPaint(int)>(series);
+
+        outlinePaint = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getSeriesOutlinePaint(int)>(series);
+
+        outlineStroke = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke getSeriesOutlineStroke(int)>(series);
+
+        $stack61 = new java.awt.geom.Ellipse2D$Double;
+
+        $stack62 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+
+        $stack63 = headW / 2.0;
+
+        $stack64 = $stack62 - $stack63;
+
+        $stack65 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+
+        $stack66 = headH / 2.0;
+
+        $stack67 = $stack65 - $stack66;
+
+        specialinvoke $stack61.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack64, $stack67, headW, headH);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack61);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack61);
+
+        if entities == null goto label7;
+
+        $stack69 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack68 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        if $stack69 != $stack68 goto label3;
+
+        row = series;
+
+        col = cat;
+
+        goto label4;
+
+     label3:
+        row = cat;
+
+        col = series;
+
+     label4:
+        tip = null;
+
+        $stack70 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator>;
+
+        if $stack70 == null goto label5;
+
+        $stack111 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator>;
+
+        $stack110 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        tip = interfaceinvoke $stack111.<org.jfree.chart.labels.CategoryToolTipGenerator: java.lang.String generateToolTip(org.jfree.data.category.CategoryDataset,int,int)>($stack110, row, col);
+
+     label5:
+        url = null;
+
+        $stack71 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator>;
+
+        if $stack71 == null goto label6;
+
+        $stack90 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator>;
+
+        $stack89 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        url = interfaceinvoke $stack90.<org.jfree.chart.urls.CategoryURLGenerator: java.lang.String generateURL(org.jfree.data.category.CategoryDataset,int,int)>($stack89, row, col);
+
+     label6:
+        $stack72 = new java.awt.Rectangle;
+
+        $stack73 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+
+        $stack74 = $stack73 - headW;
+
+        $stack75 = (int) $stack74;
+
+        $stack76 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+
+        $stack77 = $stack76 - headH;
+
+        $stack82 = (int) $stack77;
+
+        $stack78 = headW * 2.0;
+
+        $stack81 = (int) $stack78;
+
+        $stack79 = headH * 2.0;
+
+        $stack80 = (int) $stack79;
+
+        specialinvoke $stack72.<java.awt.Rectangle: void <init>(int,int,int,int)>($stack75, $stack82, $stack81, $stack80);
+
+        $stack83 = new org.jfree.chart.entity.CategoryItemEntity;
+
+        $stack85 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        $stack84 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        $stack86 = interfaceinvoke $stack84.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        $stack87 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        $stack88 = interfaceinvoke $stack87.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(col);
+
+        specialinvoke $stack83.<org.jfree.chart.entity.CategoryItemEntity: void <init>(java.awt.Shape,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,java.lang.Comparable,java.lang.Comparable)>($stack72, tip, url, $stack85, $stack86, $stack88);
+
+        interfaceinvoke entities.<org.jfree.chart.entity.EntityCollection: void add(org.jfree.chart.entity.ChartEntity)>($stack83);
+
+     label7:
+        cat = cat + 1;
+
+        goto label2;
+
+     label8:
+        cat#11 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getSeriesPaint(int)>(series);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(cat#11);
+
+        $stack32 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke getSeriesOutlineStroke(int)>(series);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack32);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack30);
+
+        $stack33 = this.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled>;
+
+        if $stack33 == 0 goto label9;
+
+        $stack34 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, 0.1F);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack34);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack30);
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: float getForegroundAlpha()>();
+
+        $stack37 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack36);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack37);
+
+     label9:
+        return;
+    }
+
+    protected java.lang.Number getPlotValue(int, int)
+    {
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.util.TableOrder $stack4, $stack5, $stack6, $stack7;
+        int cat, series;
+        org.jfree.data.category.CategoryDataset $stack8, $stack11;
+        java.lang.Number value;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        series := @parameter0: int;
+
+        cat := @parameter1: int;
+
+        value = null;
+
+        $stack5 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack4 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        if $stack5 != $stack4 goto label1;
+
+        $stack11 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        value = interfaceinvoke $stack11.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, cat);
+
+        goto label2;
+
+     label1:
+        $stack7 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack6 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+
+        if $stack7 != $stack6 goto label2;
+
+        $stack8 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        value = interfaceinvoke $stack8.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(cat, series);
+
+     label2:
+        return value;
+    }
+
+    protected void drawLabel(java.awt.Graphics2D, java.awt.geom.Rectangle2D, double, int, double, double)
+    {
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        org.jfree.chart.util.TableOrder $stack19, $stack20;
+        int cat;
+        org.jfree.data.category.CategoryDataset $stack21, $stack38;
+        org.jfree.chart.labels.CategoryItemLabelGenerator $stack22, $stack39;
+        java.awt.Font $stack24, $stack26, $stack33;
+        java.awt.geom.Rectangle2D labelBounds, plotArea;
+        java.awt.font.LineMetrics lm;
+        float $stack28, $stack35, $stack37;
+        double ascent, startAngle, $stack34, $stack36, value, extent;
+        java.awt.geom.Point2D labelLocation;
+        java.awt.Composite saveComposite;
+        java.awt.AlphaComposite $stack31;
+        java.awt.Paint $stack32;
+        java.lang.String label;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        value := @parameter2: double;
+
+        cat := @parameter3: int;
+
+        startAngle := @parameter4: double;
+
+        extent := @parameter5: double;
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        $stack20 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack19 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+
+        if $stack20 != $stack19 goto label1;
+
+        $stack39 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator>;
+
+        $stack38 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        label = interfaceinvoke $stack39.<org.jfree.chart.labels.CategoryItemLabelGenerator: java.lang.String generateColumnLabel(org.jfree.data.category.CategoryDataset,int)>($stack38, cat);
+
+        goto label2;
+
+     label1:
+        $stack22 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator>;
+
+        $stack21 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        label = interfaceinvoke $stack22.<org.jfree.chart.labels.CategoryItemLabelGenerator: java.lang.String generateRowLabel(org.jfree.data.category.CategoryDataset,int)>($stack21, cat);
+
+     label2:
+        $stack24 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font getLabelFont()>();
+
+        labelBounds = virtualinvoke $stack24.<java.awt.Font: java.awt.geom.Rectangle2D getStringBounds(java.lang.String,java.awt.font.FontRenderContext)>(label, frc);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font getLabelFont()>();
+
+        lm = virtualinvoke $stack26.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(label, frc);
+
+        $stack28 = virtualinvoke lm.<java.awt.font.LineMetrics: float getAscent()>();
+
+        ascent = (double) $stack28;
+
+        labelLocation = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.geom.Point2D calculateLabelLocation(java.awt.geom.Rectangle2D,double,java.awt.geom.Rectangle2D,double)>(labelBounds, ascent, plotArea, startAngle);
+
+        saveComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+
+        $stack31 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, 1.0F);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack31);
+
+        $stack32 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack32);
+
+        $stack33 = virtualinvoke this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font getLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack33);
+
+        $stack34 = virtualinvoke labelLocation.<java.awt.geom.Point2D: double getX()>();
+
+        $stack35 = (float) $stack34;
+
+        $stack36 = virtualinvoke labelLocation.<java.awt.geom.Point2D: double getY()>();
+
+        $stack37 = (float) $stack36;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(label, $stack35, $stack37);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(saveComposite);
+
+        return;
+    }
+
+    protected java.awt.geom.Point2D calculateLabelLocation(java.awt.geom.Rectangle2D, double, java.awt.geom.Rectangle2D, double)
+    {
+        java.awt.geom.Arc2D$Double $stack17;
+        java.awt.geom.Rectangle2D plotArea, labelBounds;
+        double startAngle, $stack19, $stack20, $stack21, $stack22, $stack23, deltaX, $stack24, $stack25, $stack26, $stack27, $stack28, deltaY, $stack29, $stack30, $stack31, $stack33, $stack35, ascent, $stack40, $stack41, $stack44, labelX, labelY;
+        java.awt.geom.Point2D point1;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        byte $stack32, $stack34, $stack36;
+        java.awt.geom.Point2D$Double $stack37;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        labelBounds := @parameter0: java.awt.geom.Rectangle2D;
+
+        ascent := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        startAngle := @parameter3: double;
+
+        $stack17 = new java.awt.geom.Arc2D$Double;
+
+        specialinvoke $stack17.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(plotArea, startAngle, 0.0, 0);
+
+        point1 = virtualinvoke $stack17.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+
+        $stack19 = virtualinvoke point1.<java.awt.geom.Point2D: double getX()>();
+
+        $stack20 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        $stack21 = $stack19 - $stack20;
+
+        $stack23 = neg $stack21;
+
+        $stack22 = this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap>;
+
+        deltaX = $stack23 * $stack22;
+
+        $stack24 = virtualinvoke point1.<java.awt.geom.Point2D: double getY()>();
+
+        $stack25 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        $stack26 = $stack24 - $stack25;
+
+        $stack28 = neg $stack26;
+
+        $stack27 = this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap>;
+
+        deltaY = $stack28 * $stack27;
+
+        $stack29 = virtualinvoke point1.<java.awt.geom.Point2D: double getX()>();
+
+        labelX = $stack29 - deltaX;
+
+        $stack30 = virtualinvoke point1.<java.awt.geom.Point2D: double getY()>();
+
+        labelY = $stack30 - deltaY;
+
+        $stack31 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        $stack32 = labelX cmpg $stack31;
+
+        if $stack32 >= 0 goto label1;
+
+        $stack44 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        labelX = labelX - $stack44;
+
+     label1:
+        $stack33 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        $stack34 = labelX cmpl $stack33;
+
+        if $stack34 != 0 goto label2;
+
+        $stack40 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack41 = $stack40 / 2.0;
+
+        labelX = labelX - $stack41;
+
+     label2:
+        $stack35 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        $stack36 = labelY cmpl $stack35;
+
+        if $stack36 <= 0 goto label3;
+
+        labelY = labelY + ascent;
+
+     label3:
+        $stack37 = new java.awt.geom.Point2D$Double;
+
+        specialinvoke $stack37.<java.awt.geom.Point2D$Double: void <init>(double,double)>(labelX, labelY);
+
+        return $stack37;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.SpiderWebPlot this, that;
+        boolean $stack3, $stack4, $stack7, $stack19, $stack23, $stack24, $stack30, $stack33, $stack36, $stack39, $stack42, $stack45, $stack48, $stack51, $stack54, $stack57, $stack60, $stack63, $stack66, $stack69, $stack72, $stack75, $stack78;
+        org.jfree.chart.util.TableOrder $stack5, $stack6;
+        double $stack8, $stack9, $stack11, $stack12, $stack14, $stack15, $stack20, $stack21, $stack25, $stack26;
+        byte $stack10, $stack13, $stack16, $stack22, $stack27;
+        org.jfree.chart.util.Rotation $stack17, $stack18;
+        java.awt.Paint $stack28, $stack29, $stack37, $stack38, $stack43, $stack44, $stack46, $stack47, $stack52, $stack53, $stack67, $stack68;
+        java.awt.Stroke $stack31, $stack32, $stack55, $stack56, $stack61, $stack62;
+        java.awt.Shape $stack34, $stack35;
+        org.jfree.chart.util.PaintList $stack40, $stack41, $stack49, $stack50;
+        org.jfree.chart.util.StrokeList $stack58, $stack59;
+        java.awt.Font $stack64, $stack65;
+        org.jfree.chart.labels.CategoryItemLabelGenerator $stack70, $stack71;
+        org.jfree.chart.labels.CategoryToolTipGenerator $stack73, $stack74;
+        org.jfree.chart.urls.CategoryURLGenerator $stack76, $stack77;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.SpiderWebPlot;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        $stack4 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        that = (org.jfree.chart.plot.SpiderWebPlot) obj;
+
+        $stack6 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack5 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.TableOrder dataExtractOrder>;
+
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.util.TableOrder: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack7 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack9 = this.<org.jfree.chart.plot.SpiderWebPlot: double headPercent>;
+
+        $stack8 = that.<org.jfree.chart.plot.SpiderWebPlot: double headPercent>;
+
+        $stack10 = $stack9 cmpl $stack8;
+
+        if $stack10 == 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack12 = this.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap>;
+
+        $stack11 = that.<org.jfree.chart.plot.SpiderWebPlot: double interiorGap>;
+
+        $stack13 = $stack12 cmpl $stack11;
+
+        if $stack13 == 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack15 = this.<org.jfree.chart.plot.SpiderWebPlot: double startAngle>;
+
+        $stack14 = that.<org.jfree.chart.plot.SpiderWebPlot: double startAngle>;
+
+        $stack16 = $stack15 cmpl $stack14;
+
+        if $stack16 == 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack18 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation direction>;
+
+        $stack17 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.Rotation direction>;
+
+        $stack19 = virtualinvoke $stack18.<org.jfree.chart.util.Rotation: boolean equals(java.lang.Object)>($stack17);
+
+        if $stack19 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack21 = this.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        $stack20 = that.<org.jfree.chart.plot.SpiderWebPlot: double maxValue>;
+
+        $stack22 = $stack21 cmpl $stack20;
+
+        if $stack22 == 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack24 = this.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled>;
+
+        $stack23 = that.<org.jfree.chart.plot.SpiderWebPlot: boolean webFilled>;
+
+        if $stack24 == $stack23 goto label10;
+
+        return 0;
+
+     label10:
+        $stack26 = this.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap>;
+
+        $stack25 = that.<org.jfree.chart.plot.SpiderWebPlot: double axisLabelGap>;
+
+        $stack27 = $stack26 cmpl $stack25;
+
+        if $stack27 == 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack29 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint>;
+
+        $stack28 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint>;
+
+        $stack30 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack29, $stack28);
+
+        if $stack30 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack32 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke>;
+
+        $stack31 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke>;
+
+        $stack33 = virtualinvoke $stack32.<java.lang.Object: boolean equals(java.lang.Object)>($stack31);
+
+        if $stack33 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack35 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape>;
+
+        $stack34 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape>;
+
+        $stack36 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.Shape,java.awt.Shape)>($stack35, $stack34);
+
+        if $stack36 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack38 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        $stack37 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        $stack39 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack38, $stack37);
+
+        if $stack39 != 0 goto label15;
+
+        return 0;
+
+     label15:
+        $stack41 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        $stack40 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        $stack42 = virtualinvoke $stack41.<org.jfree.chart.util.PaintList: boolean equals(java.lang.Object)>($stack40);
+
+        if $stack42 != 0 goto label16;
+
+        return 0;
+
+     label16:
+        $stack44 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint>;
+
+        $stack43 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint>;
+
+        $stack45 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack44, $stack43);
+
+        if $stack45 != 0 goto label17;
+
+        return 0;
+
+     label17:
+        $stack47 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        $stack46 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        $stack48 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack47, $stack46);
+
+        if $stack48 != 0 goto label18;
+
+        return 0;
+
+     label18:
+        $stack50 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList>;
+
+        $stack49 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList>;
+
+        $stack51 = virtualinvoke $stack50.<org.jfree.chart.util.PaintList: boolean equals(java.lang.Object)>($stack49);
+
+        if $stack51 != 0 goto label19;
+
+        return 0;
+
+     label19:
+        $stack53 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint>;
+
+        $stack52 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint>;
+
+        $stack54 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack53, $stack52);
+
+        if $stack54 != 0 goto label20;
+
+        return 0;
+
+     label20:
+        $stack56 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        $stack55 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        $stack57 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack56, $stack55);
+
+        if $stack57 != 0 goto label21;
+
+        return 0;
+
+     label21:
+        $stack59 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList>;
+
+        $stack58 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList>;
+
+        $stack60 = virtualinvoke $stack59.<org.jfree.chart.util.StrokeList: boolean equals(java.lang.Object)>($stack58);
+
+        if $stack60 != 0 goto label22;
+
+        return 0;
+
+     label22:
+        $stack62 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke>;
+
+        $stack61 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke>;
+
+        $stack63 = virtualinvoke $stack62.<java.lang.Object: boolean equals(java.lang.Object)>($stack61);
+
+        if $stack63 != 0 goto label23;
+
+        return 0;
+
+     label23:
+        $stack65 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font labelFont>;
+
+        $stack64 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Font labelFont>;
+
+        $stack66 = virtualinvoke $stack65.<java.awt.Font: boolean equals(java.lang.Object)>($stack64);
+
+        if $stack66 != 0 goto label24;
+
+        return 0;
+
+     label24:
+        $stack68 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint>;
+
+        $stack67 = that.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint>;
+
+        $stack69 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack68, $stack67);
+
+        if $stack69 != 0 goto label25;
+
+        return 0;
+
+     label25:
+        $stack71 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator>;
+
+        $stack70 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryItemLabelGenerator labelGenerator>;
+
+        $stack72 = virtualinvoke $stack71.<java.lang.Object: boolean equals(java.lang.Object)>($stack70);
+
+        if $stack72 != 0 goto label26;
+
+        return 0;
+
+     label26:
+        $stack74 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator>;
+
+        $stack73 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.labels.CategoryToolTipGenerator toolTipGenerator>;
+
+        $stack75 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack74, $stack73);
+
+        if $stack75 != 0 goto label27;
+
+        return 0;
+
+     label27:
+        $stack77 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator>;
+
+        $stack76 = that.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.urls.CategoryURLGenerator urlGenerator>;
+
+        $stack78 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack77, $stack76);
+
+        if $stack78 != 0 goto label28;
+
+        return 0;
+
+     label28:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.SpiderWebPlot this, clone;
+        java.lang.Object $stack2, $stack6, $stack9, $stack12;
+        java.awt.Shape $stack3, $stack4;
+        org.jfree.chart.util.PaintList $stack5, $stack7, $stack8, $stack10;
+        org.jfree.chart.util.StrokeList $stack11, $stack13;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.plot.Plot: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.plot.SpiderWebPlot) $stack2;
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.ShapeUtils: java.awt.Shape clone(java.awt.Shape)>($stack3);
+
+        clone.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape> = $stack4;
+
+        $stack5 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+
+        $stack7 = (org.jfree.chart.util.PaintList) $stack6;
+
+        clone.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesPaintList> = $stack7;
+
+        $stack8 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList>;
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+
+        $stack10 = (org.jfree.chart.util.PaintList) $stack9;
+
+        clone.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.PaintList seriesOutlinePaintList> = $stack10;
+
+        $stack11 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.util.StrokeList: java.lang.Object clone()>();
+
+        $stack13 = (org.jfree.chart.util.StrokeList) $stack12;
+
+        clone.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.chart.util.StrokeList seriesOutlineStrokeList> = $stack13;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Shape $stack2;
+        java.awt.Paint $stack3, $stack4, $stack5, $stack6, $stack9, $stack10;
+        java.awt.Stroke $stack7, $stack8, $stack11;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+
+        $stack7 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack7, stream);
+
+        $stack8 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack8, stream);
+
+        $stack9 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack9, stream);
+
+        $stack10 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack10, stream);
+
+        $stack11 = this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack11, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.SpiderWebPlot this;
+        java.awt.Shape $stack2;
+        java.awt.Paint $stack3, $stack4, $stack5, $stack6, $stack9, $stack10;
+        java.awt.Stroke $stack7, $stack8, $stack11;
+        org.jfree.data.category.CategoryDataset $stack12, $stack13;
+
+        this := @this: org.jfree.chart.plot.SpiderWebPlot;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Shape legendItemShape> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesPaint> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesPaint> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint seriesOutlinePaint> = $stack5;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint baseSeriesOutlinePaint> = $stack6;
+
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke seriesOutlineStroke> = $stack7;
+
+        $stack8 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke baseSeriesOutlineStroke> = $stack8;
+
+        $stack9 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint labelPaint> = $stack9;
+
+        $stack10 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint axisLinePaint> = $stack10;
+
+        $stack11 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke axisLineStroke> = $stack11;
+
+        $stack12 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        if $stack12 == null goto label1;
+
+        $stack13 = this.<org.jfree.chart.plot.SpiderWebPlot: org.jfree.data.category.CategoryDataset dataset>;
+
+        interfaceinvoke $stack13.<org.jfree.data.category.CategoryDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.Font $stack0;
+        java.awt.Color $stack1, $stack2, $stack3, $stack5;
+        java.awt.BasicStroke $stack4;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double DEFAULT_MAX_VALUE> = -1.0;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double DEFAULT_START_ANGLE> = 90.0;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double MAX_INTERIOR_GAP> = 0.4;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double DEFAULT_INTERIOR_GAP> = 0.25;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double DEFAULT_AXIS_LABEL_GAP> = 0.1;
+
+        <org.jfree.chart.plot.SpiderWebPlot: double DEFAULT_HEAD> = 0.01;
+
+        <org.jfree.chart.plot.SpiderWebPlot: long serialVersionUID> = -5376340422031599463L;
+
+        $stack0 = new java.awt.Font;
+
+        specialinvoke $stack0.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 0, 10);
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Font DEFAULT_LABEL_FONT> = $stack0;
+
+        $stack1 = <java.awt.Color: java.awt.Color BLACK>;
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_LABEL_PAINT> = $stack1;
+
+        $stack2 = new java.awt.Color;
+
+        specialinvoke $stack2.<java.awt.Color: void <init>(int,int,int)>(255, 255, 192);
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_LABEL_BACKGROUND_PAINT> = $stack2;
+
+        $stack3 = <java.awt.Color: java.awt.Color BLACK>;
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_LABEL_OUTLINE_PAINT> = $stack3;
+
+        $stack4 = new java.awt.BasicStroke;
+
+        specialinvoke $stack4.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Stroke DEFAULT_LABEL_OUTLINE_STROKE> = $stack4;
+
+        $stack5 = <java.awt.Color: java.awt.Color LIGHT_GRAY>;
+
+        <org.jfree.chart.plot.SpiderWebPlot: java.awt.Paint DEFAULT_LABEL_SHADOW_PAINT> = $stack5;
+
+        return;
+    }
+}

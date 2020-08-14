@@ -1,0 +1,374 @@
+abstract class org.jsoup.parser.TreeBuilder extends java.lang.Object
+{
+    protected org.jsoup.parser.Parser parser;
+    org.jsoup.parser.CharacterReader reader;
+    org.jsoup.parser.Tokeniser tokeniser;
+    protected org.jsoup.nodes.Document doc;
+    protected java.util.ArrayList stack;
+    protected java.lang.String baseUri;
+    protected org.jsoup.parser.Token currentToken;
+    protected org.jsoup.parser.ParseSettings settings;
+    private org.jsoup.parser.Token$StartTag start;
+    private org.jsoup.parser.Token$EndTag end;
+
+    void <init>()
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Token$StartTag $stack1;
+        org.jsoup.parser.Token$EndTag $stack2;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new org.jsoup.parser.Token$StartTag;
+
+        specialinvoke $stack1.<org.jsoup.parser.Token$StartTag: void <init>()>();
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$StartTag start> = $stack1;
+
+        $stack2 = new org.jsoup.parser.Token$EndTag;
+
+        specialinvoke $stack2.<org.jsoup.parser.Token$EndTag: void <init>()>();
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$EndTag end> = $stack2;
+
+        return;
+    }
+
+    abstract org.jsoup.parser.ParseSettings defaultSettings();
+
+    protected void initialiseParse(java.io.Reader, java.lang.String, org.jsoup.parser.Parser)
+    {
+        java.io.Reader input;
+        java.lang.String baseUri;
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.nodes.Document $stack4, $stack5;
+        org.jsoup.parser.Parser parser;
+        org.jsoup.parser.ParseSettings $stack7;
+        org.jsoup.parser.CharacterReader $stack8, $stack10;
+        org.jsoup.parser.Tokeniser $stack9;
+        org.jsoup.parser.ParseErrorList $stack11;
+        java.util.ArrayList $stack12;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        input := @parameter0: java.io.Reader;
+
+        baseUri := @parameter1: java.lang.String;
+
+        parser := @parameter2: org.jsoup.parser.Parser;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>(input, "String input must not be null");
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>(baseUri, "BaseURI must not be null");
+
+        $stack4 = new org.jsoup.nodes.Document;
+
+        specialinvoke $stack4.<org.jsoup.nodes.Document: void <init>(java.lang.String)>(baseUri);
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document doc> = $stack4;
+
+        $stack5 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document doc>;
+
+        virtualinvoke $stack5.<org.jsoup.nodes.Document: org.jsoup.nodes.Document parser(org.jsoup.parser.Parser)>(parser);
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Parser parser> = parser;
+
+        $stack7 = virtualinvoke parser.<org.jsoup.parser.Parser: org.jsoup.parser.ParseSettings settings()>();
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.ParseSettings settings> = $stack7;
+
+        $stack8 = new org.jsoup.parser.CharacterReader;
+
+        specialinvoke $stack8.<org.jsoup.parser.CharacterReader: void <init>(java.io.Reader)>(input);
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.CharacterReader reader> = $stack8;
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token currentToken> = null;
+
+        $stack9 = new org.jsoup.parser.Tokeniser;
+
+        $stack10 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.CharacterReader reader>;
+
+        $stack11 = virtualinvoke parser.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList getErrors()>();
+
+        specialinvoke $stack9.<org.jsoup.parser.Tokeniser: void <init>(org.jsoup.parser.CharacterReader,org.jsoup.parser.ParseErrorList)>($stack10, $stack11);
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Tokeniser tokeniser> = $stack9;
+
+        $stack12 = new java.util.ArrayList;
+
+        specialinvoke $stack12.<java.util.ArrayList: void <init>(int)>(32);
+
+        this.<org.jsoup.parser.TreeBuilder: java.util.ArrayList stack> = $stack12;
+
+        this.<org.jsoup.parser.TreeBuilder: java.lang.String baseUri> = baseUri;
+
+        return;
+    }
+
+    org.jsoup.nodes.Document parse(java.io.Reader, java.lang.String, org.jsoup.parser.Parser)
+    {
+        org.jsoup.parser.TreeBuilder this;
+        java.io.Reader input;
+        java.lang.String baseUri;
+        org.jsoup.parser.Parser parser;
+        org.jsoup.parser.CharacterReader $stack4;
+        org.jsoup.nodes.Document $stack5;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        input := @parameter0: java.io.Reader;
+
+        baseUri := @parameter1: java.lang.String;
+
+        parser := @parameter2: org.jsoup.parser.Parser;
+
+        virtualinvoke this.<org.jsoup.parser.TreeBuilder: void initialiseParse(java.io.Reader,java.lang.String,org.jsoup.parser.Parser)>(input, baseUri, parser);
+
+        virtualinvoke this.<org.jsoup.parser.TreeBuilder: void runParser()>();
+
+        $stack4 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack4.<org.jsoup.parser.CharacterReader: void close()>();
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.CharacterReader reader> = null;
+
+        this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Tokeniser tokeniser> = null;
+
+        this.<org.jsoup.parser.TreeBuilder: java.util.ArrayList stack> = null;
+
+        $stack5 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document doc>;
+
+        return $stack5;
+    }
+
+    abstract java.util.List parseFragment(java.lang.String, org.jsoup.nodes.Element, java.lang.String, org.jsoup.parser.Parser);
+
+    protected void runParser()
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Tokeniser tokeniser;
+        org.jsoup.parser.Token$TokenType eof, $stack7;
+        org.jsoup.parser.Token token;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        tokeniser = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Tokeniser tokeniser>;
+
+        eof = <org.jsoup.parser.Token$TokenType: org.jsoup.parser.Token$TokenType EOF>;
+
+     label1:
+        token = virtualinvoke tokeniser.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token read()>();
+
+        virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>(token);
+
+        virtualinvoke token.<org.jsoup.parser.Token: org.jsoup.parser.Token reset()>();
+
+        $stack7 = token.<org.jsoup.parser.Token: org.jsoup.parser.Token$TokenType type>;
+
+        if $stack7 != eof goto label2;
+
+        goto label3;
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    protected abstract boolean process(org.jsoup.parser.Token);
+
+    protected boolean processStartTag(java.lang.String)
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Token$StartTag start, $stack7;
+        org.jsoup.parser.Token $stack3;
+        org.jsoup.parser.Token$Tag $stack4, $stack5, $stack8;
+        java.lang.String name;
+        boolean $stack6, $stack9;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        name := @parameter0: java.lang.String;
+
+        start = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$StartTag start>;
+
+        $stack3 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token currentToken>;
+
+        if $stack3 != start goto label1;
+
+        $stack7 = new org.jsoup.parser.Token$StartTag;
+
+        specialinvoke $stack7.<org.jsoup.parser.Token$StartTag: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$Tag name(java.lang.String)>(name);
+
+        $stack9 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>($stack8);
+
+        return $stack9;
+
+     label1:
+        $stack4 = virtualinvoke start.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$Tag reset()>();
+
+        $stack5 = virtualinvoke $stack4.<org.jsoup.parser.Token$Tag: org.jsoup.parser.Token$Tag name(java.lang.String)>(name);
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>($stack5);
+
+        return $stack6;
+    }
+
+    public boolean processStartTag(java.lang.String, org.jsoup.nodes.Attributes)
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Token$StartTag start, $stack8, $stack9;
+        org.jsoup.parser.Token $stack4;
+        java.lang.String name;
+        org.jsoup.nodes.Attributes attrs;
+        boolean $stack7, $stack10;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        name := @parameter0: java.lang.String;
+
+        attrs := @parameter1: org.jsoup.nodes.Attributes;
+
+        start = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$StartTag start>;
+
+        $stack4 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token currentToken>;
+
+        if $stack4 != start goto label1;
+
+        $stack8 = new org.jsoup.parser.Token$StartTag;
+
+        specialinvoke $stack8.<org.jsoup.parser.Token$StartTag: void <init>()>();
+
+        $stack9 = virtualinvoke $stack8.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$StartTag nameAttr(java.lang.String,org.jsoup.nodes.Attributes)>(name, attrs);
+
+        $stack10 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>($stack9);
+
+        return $stack10;
+
+     label1:
+        virtualinvoke start.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$Tag reset()>();
+
+        virtualinvoke start.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$StartTag nameAttr(java.lang.String,org.jsoup.nodes.Attributes)>(name, attrs);
+
+        $stack7 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>(start);
+
+        return $stack7;
+    }
+
+    protected boolean processEndTag(java.lang.String)
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Token$EndTag $stack2, $stack4, $stack8;
+        org.jsoup.parser.Token $stack3;
+        org.jsoup.parser.Token$Tag $stack5, $stack6, $stack9;
+        java.lang.String name;
+        boolean $stack7, $stack10;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token currentToken>;
+
+        $stack2 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$EndTag end>;
+
+        if $stack3 != $stack2 goto label1;
+
+        $stack8 = new org.jsoup.parser.Token$EndTag;
+
+        specialinvoke $stack8.<org.jsoup.parser.Token$EndTag: void <init>()>();
+
+        $stack9 = virtualinvoke $stack8.<org.jsoup.parser.Token$EndTag: org.jsoup.parser.Token$Tag name(java.lang.String)>(name);
+
+        $stack10 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>($stack9);
+
+        return $stack10;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Token$EndTag end>;
+
+        $stack5 = virtualinvoke $stack4.<org.jsoup.parser.Token$EndTag: org.jsoup.parser.Token$Tag reset()>();
+
+        $stack6 = virtualinvoke $stack5.<org.jsoup.parser.Token$Tag: org.jsoup.parser.Token$Tag name(java.lang.String)>(name);
+
+        $stack7 = virtualinvoke this.<org.jsoup.parser.TreeBuilder: boolean process(org.jsoup.parser.Token)>($stack6);
+
+        return $stack7;
+    }
+
+    protected org.jsoup.nodes.Element currentElement()
+    {
+        org.jsoup.parser.TreeBuilder this;
+        java.util.ArrayList $stack2, $stack5;
+        int size, $stack4;
+        java.lang.Object $stack6;
+        org.jsoup.nodes.Element $stack7;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        $stack2 = this.<org.jsoup.parser.TreeBuilder: java.util.ArrayList stack>;
+
+        size = virtualinvoke $stack2.<java.util.ArrayList: int size()>();
+
+        if size <= 0 goto label1;
+
+        $stack5 = this.<org.jsoup.parser.TreeBuilder: java.util.ArrayList stack>;
+
+        $stack4 = size - 1;
+
+        $stack6 = virtualinvoke $stack5.<java.util.ArrayList: java.lang.Object get(int)>($stack4);
+
+        $stack7 = (org.jsoup.nodes.Element) $stack6;
+
+        goto label2;
+
+     label1:
+        $stack7 = null;
+
+     label2:
+        return $stack7;
+    }
+
+    protected void error(java.lang.String)
+    {
+        org.jsoup.parser.TreeBuilder this;
+        org.jsoup.parser.Parser $stack3;
+        org.jsoup.parser.ParseErrorList errors;
+        boolean $stack5;
+        org.jsoup.parser.ParseError $stack6;
+        org.jsoup.parser.CharacterReader $stack7;
+        int $stack8;
+        java.lang.String msg;
+
+        this := @this: org.jsoup.parser.TreeBuilder;
+
+        msg := @parameter0: java.lang.String;
+
+        $stack3 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Parser parser>;
+
+        errors = virtualinvoke $stack3.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList getErrors()>();
+
+        $stack5 = virtualinvoke errors.<org.jsoup.parser.ParseErrorList: boolean canAddError()>();
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = new org.jsoup.parser.ParseError;
+
+        $stack7 = this.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.CharacterReader reader>;
+
+        $stack8 = virtualinvoke $stack7.<org.jsoup.parser.CharacterReader: int pos()>();
+
+        specialinvoke $stack6.<org.jsoup.parser.ParseError: void <init>(int,java.lang.String)>($stack8, msg);
+
+        virtualinvoke errors.<org.jsoup.parser.ParseErrorList: boolean add(java.lang.Object)>($stack6);
+
+     label1:
+        return;
+    }
+}

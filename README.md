@@ -53,3 +53,13 @@ The data processing codes are from official implementation [yujiali/ggnn](https:
 ## References
 - [Gated Graph Sequence Neural Networks](https://arxiv.org/abs/1511.05493), ICLR 2016
 - [yujiali/ggnn](https://github.com/yujiali/ggnn)
+
+
+## wy record
+
+Currently, we set main3.py/model3.py as the base one.
+main4.py/model4.py try to replace Tahn with Sigmoid, but the result are similar.
+main5.py/model5.py/test5.py/vali5.py try to modify output in model5.py .
+How manual_seed influence the model
+
+

@@ -1,0 +1,94 @@
+public final class org.jsoup.select.Evaluator$IsOnlyOfType extends org.jsoup.select.Evaluator
+{
+
+    public void <init>()
+    {
+        org.jsoup.select.Evaluator$IsOnlyOfType this;
+
+        this := @this: org.jsoup.select.Evaluator$IsOnlyOfType;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, p, el, root;
+        boolean $stack9, $stack12, $stack17, $stack13;
+        org.jsoup.select.Elements family;
+        java.util.Iterator l6;
+        java.lang.Object $stack14;
+        org.jsoup.parser.Tag $stack15, $stack16;
+        org.jsoup.select.Evaluator$IsOnlyOfType this;
+        int pos;
+
+        this := @this: org.jsoup.select.Evaluator$IsOnlyOfType;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        p = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.nodes.Element parent()>();
+
+        if p == null goto label1;
+
+        $stack9 = p instanceof org.jsoup.nodes.Document;
+
+        if $stack9 == 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        pos = 0;
+
+        family = virtualinvoke p.<org.jsoup.nodes.Element: org.jsoup.select.Elements children()>();
+
+        l6 = virtualinvoke family.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label3:
+        $stack12 = interfaceinvoke l6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack12 == 0 goto label5;
+
+        $stack14 = interfaceinvoke l6.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack14;
+
+        $stack15 = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack16 = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack17 = virtualinvoke $stack15.<org.jsoup.parser.Tag: boolean equals(java.lang.Object)>($stack16);
+
+        if $stack17 == 0 goto label4;
+
+        pos = pos + 1;
+
+     label4:
+        goto label3;
+
+     label5:
+        if pos != 1 goto label6;
+
+        $stack13 = 1;
+
+        goto label7;
+
+     label6:
+        $stack13 = 0;
+
+     label7:
+        return $stack13;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.select.Evaluator$IsOnlyOfType this;
+
+        this := @this: org.jsoup.select.Evaluator$IsOnlyOfType;
+
+        return ":only-of-type";
+    }
+}

@@ -1,0 +1,136 @@
+public class org.jsoup.parser.ParseSettings extends java.lang.Object
+{
+    public static final org.jsoup.parser.ParseSettings htmlDefault;
+    public static final org.jsoup.parser.ParseSettings preserveCase;
+    private final boolean preserveTagCase;
+    private final boolean preserveAttributeCase;
+
+    public boolean preserveTagCase()
+    {
+        org.jsoup.parser.ParseSettings this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        $stack1 = this.<org.jsoup.parser.ParseSettings: boolean preserveTagCase>;
+
+        return $stack1;
+    }
+
+    public boolean preserveAttributeCase()
+    {
+        org.jsoup.parser.ParseSettings this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        $stack1 = this.<org.jsoup.parser.ParseSettings: boolean preserveAttributeCase>;
+
+        return $stack1;
+    }
+
+    public void <init>(boolean, boolean)
+    {
+        org.jsoup.parser.ParseSettings this;
+        boolean tag, attribute;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        tag := @parameter0: boolean;
+
+        attribute := @parameter1: boolean;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.parser.ParseSettings: boolean preserveTagCase> = tag;
+
+        this.<org.jsoup.parser.ParseSettings: boolean preserveAttributeCase> = attribute;
+
+        return;
+    }
+
+    public java.lang.String normalizeTag(java.lang.String)
+    {
+        org.jsoup.parser.ParseSettings this;
+        boolean $stack3;
+        java.lang.String name, name#2;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        name := @parameter0: java.lang.String;
+
+        name#2 = virtualinvoke name.<java.lang.String: java.lang.String trim()>();
+
+        $stack3 = this.<org.jsoup.parser.ParseSettings: boolean preserveTagCase>;
+
+        if $stack3 != 0 goto label1;
+
+        name#2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(name#2);
+
+     label1:
+        return name#2;
+    }
+
+    public java.lang.String normalizeAttribute(java.lang.String)
+    {
+        org.jsoup.parser.ParseSettings this;
+        boolean $stack3;
+        java.lang.String name, name#2;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        name := @parameter0: java.lang.String;
+
+        name#2 = virtualinvoke name.<java.lang.String: java.lang.String trim()>();
+
+        $stack3 = this.<org.jsoup.parser.ParseSettings: boolean preserveAttributeCase>;
+
+        if $stack3 != 0 goto label1;
+
+        name#2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(name#2);
+
+     label1:
+        return name#2;
+    }
+
+    org.jsoup.nodes.Attributes normalizeAttributes(org.jsoup.nodes.Attributes)
+    {
+        org.jsoup.nodes.Attributes attributes;
+        org.jsoup.parser.ParseSettings this;
+        boolean $stack2;
+
+        this := @this: org.jsoup.parser.ParseSettings;
+
+        attributes := @parameter0: org.jsoup.nodes.Attributes;
+
+        if attributes == null goto label1;
+
+        $stack2 = this.<org.jsoup.parser.ParseSettings: boolean preserveAttributeCase>;
+
+        if $stack2 != 0 goto label1;
+
+        virtualinvoke attributes.<org.jsoup.nodes.Attributes: void normalize()>();
+
+     label1:
+        return attributes;
+    }
+
+    static void <clinit>()
+    {
+        org.jsoup.parser.ParseSettings $stack0, $stack1;
+
+        $stack0 = new org.jsoup.parser.ParseSettings;
+
+        specialinvoke $stack0.<org.jsoup.parser.ParseSettings: void <init>(boolean,boolean)>(0, 0);
+
+        <org.jsoup.parser.ParseSettings: org.jsoup.parser.ParseSettings htmlDefault> = $stack0;
+
+        $stack1 = new org.jsoup.parser.ParseSettings;
+
+        specialinvoke $stack1.<org.jsoup.parser.ParseSettings: void <init>(boolean,boolean)>(1, 1);
+
+        <org.jsoup.parser.ParseSettings: org.jsoup.parser.ParseSettings preserveCase> = $stack1;
+
+        return;
+    }
+}

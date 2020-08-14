@@ -1,0 +1,709 @@
+public class org.jsoup.nodes.Entities extends java.lang.Object
+{
+    private static final int empty;
+    private static final java.lang.String emptyName;
+    static final int codepointRadix;
+    private static final char[] codeDelims;
+    private static final java.util.HashMap multipoints;
+    private static final org.jsoup.nodes.Document$OutputSettings DefaultOutput;
+
+    private void <init>()
+    {
+        org.jsoup.nodes.Entities this;
+
+        this := @this: org.jsoup.nodes.Entities;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean isNamedEntity(java.lang.String)
+    {
+        java.lang.String name;
+        org.jsoup.nodes.Entities$EscapeMode $stack1;
+        int $stack2;
+        boolean $stack3;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode extended>;
+
+        $stack2 = virtualinvoke $stack1.<org.jsoup.nodes.Entities$EscapeMode: int codepointForName(java.lang.String)>(name);
+
+        if $stack2 == -1 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public static boolean isBaseNamedEntity(java.lang.String)
+    {
+        java.lang.String name;
+        org.jsoup.nodes.Entities$EscapeMode $stack1;
+        int $stack2;
+        boolean $stack3;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode base>;
+
+        $stack2 = virtualinvoke $stack1.<org.jsoup.nodes.Entities$EscapeMode: int codepointForName(java.lang.String)>(name);
+
+        if $stack2 == -1 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public static java.lang.String getByName(java.lang.String)
+    {
+        java.lang.String name, val, $stack7;
+        java.util.HashMap $stack3;
+        java.lang.Object $stack4;
+        org.jsoup.nodes.Entities$EscapeMode $stack5;
+        int codepoint;
+        int[] $stack8;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = <org.jsoup.nodes.Entities: java.util.HashMap multipoints>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(name);
+
+        val = (java.lang.String) $stack4;
+
+        if val == null goto label1;
+
+        return val;
+
+     label1:
+        $stack5 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode extended>;
+
+        codepoint = virtualinvoke $stack5.<org.jsoup.nodes.Entities$EscapeMode: int codepointForName(java.lang.String)>(name);
+
+        if codepoint == -1 goto label2;
+
+        $stack7 = new java.lang.String;
+
+        $stack8 = newarray (int)[1];
+
+        $stack8[0] = codepoint;
+
+        specialinvoke $stack7.<java.lang.String: void <init>(int[],int,int)>($stack8, 0, 1);
+
+        return $stack7;
+
+     label2:
+        return "";
+    }
+
+    public static int codepointsForName(java.lang.String, int[])
+    {
+        java.lang.String name, val;
+        java.util.HashMap $stack4;
+        java.lang.Object $stack5;
+        org.jsoup.nodes.Entities$EscapeMode $stack6;
+        int codepoint, $stack9, $stack11;
+        int[] codepoints;
+
+        name := @parameter0: java.lang.String;
+
+        codepoints := @parameter1: int[];
+
+        $stack4 = <org.jsoup.nodes.Entities: java.util.HashMap multipoints>;
+
+        $stack5 = virtualinvoke $stack4.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(name);
+
+        val = (java.lang.String) $stack5;
+
+        if val == null goto label1;
+
+        $stack9 = virtualinvoke val.<java.lang.String: int codePointAt(int)>(0);
+
+        codepoints[0] = $stack9;
+
+        $stack11 = virtualinvoke val.<java.lang.String: int codePointAt(int)>(1);
+
+        codepoints[1] = $stack11;
+
+        return 2;
+
+     label1:
+        $stack6 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode extended>;
+
+        codepoint = virtualinvoke $stack6.<org.jsoup.nodes.Entities$EscapeMode: int codepointForName(java.lang.String)>(name);
+
+        if codepoint == -1 goto label2;
+
+        codepoints[0] = codepoint;
+
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    public static java.lang.String escape(java.lang.String, org.jsoup.nodes.Document$OutputSettings)
+    {
+        java.lang.String string, $stack5;
+        java.lang.StringBuilder accum;
+        org.jsoup.nodes.Document$OutputSettings out;
+        java.io.IOException $stack6;
+        org.jsoup.SerializationException $stack7;
+
+        string := @parameter0: java.lang.String;
+
+        out := @parameter1: org.jsoup.nodes.Document$OutputSettings;
+
+        if string != null goto label1;
+
+        return "";
+
+     label1:
+        accum = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+     label2:
+        staticinvoke <org.jsoup.nodes.Entities: void escape(java.lang.Appendable,java.lang.String,org.jsoup.nodes.Document$OutputSettings,boolean,boolean,boolean)>(accum, string, out, 0, 0, 0);
+
+     label3:
+        goto label5;
+
+     label4:
+        $stack6 := @caughtexception;
+
+        $stack7 = new org.jsoup.SerializationException;
+
+        specialinvoke $stack7.<org.jsoup.SerializationException: void <init>(java.lang.Throwable)>($stack6);
+
+        throw $stack7;
+
+     label5:
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(accum);
+
+        return $stack5;
+
+        catch java.io.IOException from label2 to label3 with label4;
+    }
+
+    public static java.lang.String escape(java.lang.String)
+    {
+        java.lang.String string, $stack2;
+        org.jsoup.nodes.Document$OutputSettings $stack1;
+
+        string := @parameter0: java.lang.String;
+
+        $stack1 = <org.jsoup.nodes.Entities: org.jsoup.nodes.Document$OutputSettings DefaultOutput>;
+
+        $stack2 = staticinvoke <org.jsoup.nodes.Entities: java.lang.String escape(java.lang.String,org.jsoup.nodes.Document$OutputSettings)>(string, $stack1);
+
+        return $stack2;
+    }
+
+    static void escape(java.lang.Appendable, java.lang.String, org.jsoup.nodes.Document$OutputSettings, boolean, boolean, boolean) throws java.io.IOException
+    {
+        org.jsoup.nodes.Document$OutputSettings out;
+        org.jsoup.nodes.Entities$EscapeMode escapeMode, $stack29, $stack35;
+        java.nio.charset.CharsetEncoder encoder;
+        org.jsoup.nodes.Entities$CoreCharset coreCharset;
+        java.lang.String string, $stack19;
+        int length, codePoint, offset, $stack22;
+        boolean normaliseWhite, $stack21, inAttribute, $stack42, $stack44, stripLeadingWhite, lastWasWhite, reachedNonWhite;
+        char[] $stack20;
+        java.lang.Appendable accum;
+        char c;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        string := @parameter1: java.lang.String;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        inAttribute := @parameter3: boolean;
+
+        normaliseWhite := @parameter4: boolean;
+
+        stripLeadingWhite := @parameter5: boolean;
+
+        lastWasWhite = 0;
+
+        reachedNonWhite = 0;
+
+        escapeMode = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$EscapeMode escapeMode()>();
+
+        encoder = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.CharsetEncoder encoder()>();
+
+        coreCharset = out.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Entities$CoreCharset coreCharset>;
+
+        length = virtualinvoke string.<java.lang.String: int length()>();
+
+        offset = 0;
+
+     label01:
+        if offset >= length goto label22;
+
+        codePoint = virtualinvoke string.<java.lang.String: int codePointAt(int)>(offset);
+
+        if normaliseWhite == 0 goto label05;
+
+        $stack44 = staticinvoke <org.jsoup.internal.StringUtil: boolean isWhitespace(int)>(codePoint);
+
+        if $stack44 == 0 goto label04;
+
+        if stripLeadingWhite == 0 goto label02;
+
+        if reachedNonWhite == 0 goto label21;
+
+     label02:
+        if lastWasWhite == 0 goto label03;
+
+        goto label21;
+
+     label03:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(32);
+
+        lastWasWhite = 1;
+
+        goto label21;
+
+     label04:
+        lastWasWhite = 0;
+
+        reachedNonWhite = 1;
+
+     label05:
+        if codePoint >= 65536 goto label19;
+
+        c = (char) codePoint;
+
+        lookupswitch(c)
+        {
+            case 34: goto label14;
+            case 38: goto label06;
+            case 60: goto label09;
+            case 62: goto label12;
+            case 160: goto label07;
+            default: goto label16;
+        };
+
+     label06:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&amp;");
+
+        goto label18;
+
+     label07:
+        $stack29 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode xhtml>;
+
+        if escapeMode == $stack29 goto label08;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&nbsp;");
+
+        goto label18;
+
+     label08:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&#xa0;");
+
+        goto label18;
+
+     label09:
+        if inAttribute == 0 goto label10;
+
+        $stack35 = <org.jsoup.nodes.Entities$EscapeMode: org.jsoup.nodes.Entities$EscapeMode xhtml>;
+
+        if escapeMode != $stack35 goto label11;
+
+     label10:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&lt;");
+
+        goto label18;
+
+     label11:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(c);
+
+        goto label18;
+
+     label12:
+        if inAttribute != 0 goto label13;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&gt;");
+
+        goto label18;
+
+     label13:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(c);
+
+        goto label18;
+
+     label14:
+        if inAttribute == 0 goto label15;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&quot;");
+
+        goto label18;
+
+     label15:
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(c);
+
+        goto label18;
+
+     label16:
+        $stack42 = staticinvoke <org.jsoup.nodes.Entities: boolean canEncode(org.jsoup.nodes.Entities$CoreCharset,char,java.nio.charset.CharsetEncoder)>(coreCharset, c, encoder);
+
+        if $stack42 == 0 goto label17;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(c);
+
+        goto label18;
+
+     label17:
+        staticinvoke <org.jsoup.nodes.Entities: void appendEncoded(java.lang.Appendable,org.jsoup.nodes.Entities$EscapeMode,int)>(accum, escapeMode, codePoint);
+
+     label18:
+        goto label21;
+
+     label19:
+        $stack19 = new java.lang.String;
+
+        $stack20 = staticinvoke <java.lang.Character: char[] toChars(int)>(codePoint);
+
+        specialinvoke $stack19.<java.lang.String: void <init>(char[])>($stack20);
+
+        $stack21 = virtualinvoke encoder.<java.nio.charset.CharsetEncoder: boolean canEncode(java.lang.CharSequence)>($stack19);
+
+        if $stack21 == 0 goto label20;
+
+        interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack19);
+
+        goto label21;
+
+     label20:
+        staticinvoke <org.jsoup.nodes.Entities: void appendEncoded(java.lang.Appendable,org.jsoup.nodes.Entities$EscapeMode,int)>(accum, escapeMode, codePoint);
+
+     label21:
+        $stack22 = staticinvoke <java.lang.Character: int charCount(int)>(codePoint);
+
+        offset = offset + $stack22;
+
+        goto label01;
+
+     label22:
+        return;
+    }
+
+    private static void appendEncoded(java.lang.Appendable, org.jsoup.nodes.Entities$EscapeMode, int) throws java.io.IOException
+    {
+        org.jsoup.nodes.Entities$EscapeMode escapeMode;
+        int codePoint;
+        java.lang.String name, $stack5, $stack8;
+        boolean $stack6;
+        java.lang.Appendable accum, $stack7, $stack9, $stack11, $stack12;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        escapeMode := @parameter1: org.jsoup.nodes.Entities$EscapeMode;
+
+        codePoint := @parameter2: int;
+
+        name = virtualinvoke escapeMode.<org.jsoup.nodes.Entities$EscapeMode: java.lang.String nameForCodepoint(int)>(codePoint);
+
+        $stack5 = "";
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>(name);
+
+        if $stack6 != 0 goto label1;
+
+        $stack11 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(char)>(38);
+
+        $stack12 = interfaceinvoke $stack11.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(name);
+
+        interfaceinvoke $stack12.<java.lang.Appendable: java.lang.Appendable append(char)>(59);
+
+        goto label2;
+
+     label1:
+        $stack7 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("&#x");
+
+        $stack8 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>(codePoint);
+
+        $stack9 = interfaceinvoke $stack7.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack8);
+
+        interfaceinvoke $stack9.<java.lang.Appendable: java.lang.Appendable append(char)>(59);
+
+     label2:
+        return;
+    }
+
+    public static java.lang.String unescape(java.lang.String)
+    {
+        java.lang.String string, $stack1;
+
+        string := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <org.jsoup.nodes.Entities: java.lang.String unescape(java.lang.String,boolean)>(string, 0);
+
+        return $stack1;
+    }
+
+    static java.lang.String unescape(java.lang.String, boolean)
+    {
+        java.lang.String string, $stack2;
+        boolean strict;
+
+        string := @parameter0: java.lang.String;
+
+        strict := @parameter1: boolean;
+
+        $stack2 = staticinvoke <org.jsoup.parser.Parser: java.lang.String unescapeEntities(java.lang.String,boolean)>(string, strict);
+
+        return $stack2;
+    }
+
+    private static boolean canEncode(org.jsoup.nodes.Entities$CoreCharset, char, java.nio.charset.CharsetEncoder)
+    {
+        org.jsoup.nodes.Entities$CoreCharset charset;
+        int[] $stack3;
+        int $stack4, $stack5;
+        char c;
+        java.nio.charset.CharsetEncoder fallback;
+        boolean $stack7, $stack6;
+
+        charset := @parameter0: org.jsoup.nodes.Entities$CoreCharset;
+
+        c := @parameter1: char;
+
+        fallback := @parameter2: java.nio.charset.CharsetEncoder;
+
+        $stack3 = <org.jsoup.nodes.Entities$1: int[] $SwitchMap$org$jsoup$nodes$Entities$CoreCharset>;
+
+        $stack4 = virtualinvoke charset.<org.jsoup.nodes.Entities$CoreCharset: int ordinal()>();
+
+        $stack5 = $stack3[$stack4];
+
+        lookupswitch($stack5)
+        {
+            case 1: goto label1;
+            case 2: goto label4;
+            default: goto label5;
+        };
+
+     label1:
+        if c >= 128 goto label2;
+
+        $stack6 = 1;
+
+        goto label3;
+
+     label2:
+        $stack6 = 0;
+
+     label3:
+        return $stack6;
+
+     label4:
+        return 1;
+
+     label5:
+        $stack7 = virtualinvoke fallback.<java.nio.charset.CharsetEncoder: boolean canEncode(char)>(c);
+
+        return $stack7;
+    }
+
+    private static void load(org.jsoup.nodes.Entities$EscapeMode, java.lang.String, int)
+    {
+        org.jsoup.nodes.Entities$EscapeMode e;
+        int size, cp1, index, i, cp2;
+        java.lang.String[] $stack11, $stack17, $stack30, $stack33;
+        int[] $stack13, $stack15, $stack31, $stack32, $stack36;
+        org.jsoup.parser.CharacterReader $stack19;
+        java.lang.String pointsData, name, $stack25, indexS, $stack35, $stack39;
+        boolean $stack20, $stack21;
+        char[] $stack24;
+        char codeDelim;
+        java.util.HashMap $stack37;
+
+        e := @parameter0: org.jsoup.nodes.Entities$EscapeMode;
+
+        pointsData := @parameter1: java.lang.String;
+
+        size := @parameter2: int;
+
+        $stack11 = newarray (java.lang.String)[size];
+
+        staticinvoke <org.jsoup.nodes.Entities$EscapeMode: java.lang.String[] access$102(org.jsoup.nodes.Entities$EscapeMode,java.lang.String[])>(e, $stack11);
+
+        $stack13 = newarray (int)[size];
+
+        staticinvoke <org.jsoup.nodes.Entities$EscapeMode: int[] access$202(org.jsoup.nodes.Entities$EscapeMode,int[])>(e, $stack13);
+
+        $stack15 = newarray (int)[size];
+
+        staticinvoke <org.jsoup.nodes.Entities$EscapeMode: int[] access$302(org.jsoup.nodes.Entities$EscapeMode,int[])>(e, $stack15);
+
+        $stack17 = newarray (java.lang.String)[size];
+
+        staticinvoke <org.jsoup.nodes.Entities$EscapeMode: java.lang.String[] access$402(org.jsoup.nodes.Entities$EscapeMode,java.lang.String[])>(e, $stack17);
+
+        i = 0;
+
+        $stack19 = new org.jsoup.parser.CharacterReader;
+
+        specialinvoke $stack19.<org.jsoup.parser.CharacterReader: void <init>(java.lang.String)>(pointsData);
+
+     label1:
+        $stack20 = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack20 != 0 goto label5;
+
+        name = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(61);
+
+        virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        $stack24 = <org.jsoup.nodes.Entities: char[] codeDelims>;
+
+        $stack25 = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: java.lang.String consumeToAny(char[])>($stack24);
+
+        cp1 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String,int)>($stack25, 36);
+
+        codeDelim = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: char current()>();
+
+        virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        if codeDelim != 44 goto label2;
+
+        $stack39 = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(59);
+
+        cp2 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String,int)>($stack39, 36);
+
+        virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        goto label3;
+
+     label2:
+        cp2 = -1;
+
+     label3:
+        indexS = virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(38);
+
+        index = staticinvoke <java.lang.Integer: int parseInt(java.lang.String,int)>(indexS, 36);
+
+        virtualinvoke $stack19.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        $stack30 = staticinvoke <org.jsoup.nodes.Entities$EscapeMode: java.lang.String[] access$100(org.jsoup.nodes.Entities$EscapeMode)>(e);
+
+        $stack30[i] = name;
+
+        $stack31 = staticinvoke <org.jsoup.nodes.Entities$EscapeMode: int[] access$200(org.jsoup.nodes.Entities$EscapeMode)>(e);
+
+        $stack31[i] = cp1;
+
+        $stack32 = staticinvoke <org.jsoup.nodes.Entities$EscapeMode: int[] access$300(org.jsoup.nodes.Entities$EscapeMode)>(e);
+
+        $stack32[index] = cp1;
+
+        $stack33 = staticinvoke <org.jsoup.nodes.Entities$EscapeMode: java.lang.String[] access$400(org.jsoup.nodes.Entities$EscapeMode)>(e);
+
+        $stack33[index] = name;
+
+        if cp2 == -1 goto label4;
+
+        $stack37 = <org.jsoup.nodes.Entities: java.util.HashMap multipoints>;
+
+        $stack35 = new java.lang.String;
+
+        $stack36 = newarray (int)[2];
+
+        $stack36[0] = cp1;
+
+        $stack36[1] = cp2;
+
+        specialinvoke $stack35.<java.lang.String: void <init>(int[],int,int)>($stack36, 0, 2);
+
+        virtualinvoke $stack37.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(name, $stack35);
+
+     label4:
+        i = i + 1;
+
+        goto label1;
+
+     label5:
+        if i != size goto label6;
+
+        $stack21 = 1;
+
+        goto label7;
+
+     label6:
+        $stack21 = 0;
+
+     label7:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack21, "Unexpected count of entities loaded");
+
+        return;
+    }
+
+    static void access$000(org.jsoup.nodes.Entities$EscapeMode, java.lang.String, int)
+    {
+        org.jsoup.nodes.Entities$EscapeMode x0;
+        java.lang.String x1;
+        int x2;
+
+        x0 := @parameter0: org.jsoup.nodes.Entities$EscapeMode;
+
+        x1 := @parameter1: java.lang.String;
+
+        x2 := @parameter2: int;
+
+        staticinvoke <org.jsoup.nodes.Entities: void load(org.jsoup.nodes.Entities$EscapeMode,java.lang.String,int)>(x0, x1, x2);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        char[] $stack0;
+        java.util.HashMap $stack1;
+        org.jsoup.nodes.Document$OutputSettings $stack2;
+
+        <org.jsoup.nodes.Entities: int codepointRadix> = 36;
+
+        <org.jsoup.nodes.Entities: java.lang.String emptyName> = "";
+
+        <org.jsoup.nodes.Entities: int empty> = -1;
+
+        $stack0 = newarray (char)[2];
+
+        $stack0[0] = 44;
+
+        $stack0[1] = 59;
+
+        <org.jsoup.nodes.Entities: char[] codeDelims> = $stack0;
+
+        $stack1 = new java.util.HashMap;
+
+        specialinvoke $stack1.<java.util.HashMap: void <init>()>();
+
+        <org.jsoup.nodes.Entities: java.util.HashMap multipoints> = $stack1;
+
+        $stack2 = new org.jsoup.nodes.Document$OutputSettings;
+
+        specialinvoke $stack2.<org.jsoup.nodes.Document$OutputSettings: void <init>()>();
+
+        <org.jsoup.nodes.Entities: org.jsoup.nodes.Document$OutputSettings DefaultOutput> = $stack2;
+
+        return;
+    }
+}

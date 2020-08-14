@@ -1,0 +1,1240 @@
+public class org.jsoup.parser.TokenQueue extends java.lang.Object
+{
+    private java.lang.String queue;
+    private int pos;
+    private static final char ESC;
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String data;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        data := @parameter0: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = 0;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(data);
+
+        this.<org.jsoup.parser.TokenQueue: java.lang.String queue> = data;
+
+        return;
+    }
+
+    public boolean isEmpty()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int $stack1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = specialinvoke this.<org.jsoup.parser.TokenQueue: int remainingLength()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    private int remainingLength()
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String $stack1;
+        int $stack2, $stack3, $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: int length()>();
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = $stack2 - $stack3;
+
+        return $stack4;
+    }
+
+    public char peek()
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack1;
+        int $stack2;
+        java.lang.String $stack3;
+        char $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack1 == 0 goto label1;
+
+        $stack4 = 0;
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: char charAt(int)>($stack2);
+
+     label2:
+        return $stack4;
+    }
+
+    public void addFirst(java.lang.Character)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.Character c;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        c := @parameter0: java.lang.Character;
+
+        $stack2 = virtualinvoke c.<java.lang.Character: java.lang.String toString()>();
+
+        virtualinvoke this.<org.jsoup.parser.TokenQueue: void addFirst(java.lang.String)>($stack2);
+
+        return;
+    }
+
+    public void addFirst(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.StringBuilder $stack2, $stack3, $stack7;
+        java.lang.String seq, $stack5, $stack6, $stack8;
+        int $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(seq);
+
+        $stack5 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack4 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String substring(int)>($stack4);
+
+        $stack7 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack6);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        this.<org.jsoup.parser.TokenQueue: java.lang.String queue> = $stack8;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = 0;
+
+        return;
+    }
+
+    public boolean matches(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq, $stack2;
+        int $stack4, $stack6;
+        boolean $stack7;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack4 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack6 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack7 = virtualinvoke $stack2.<java.lang.String: boolean regionMatches(boolean,int,java.lang.String,int,int)>(1, $stack4, seq, 0, $stack6);
+
+        return $stack7;
+    }
+
+    public boolean matchesCS(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq, $stack3;
+        int $stack2;
+        boolean $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: boolean startsWith(java.lang.String,int)>(seq, $stack2);
+
+        return $stack4;
+    }
+
+    public transient boolean matchesAny(java.lang.String[])
+    {
+        java.lang.String[] seq;
+        int l3, l4;
+        java.lang.String s;
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack6;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String[];
+
+        l3 = lengthof seq;
+
+        l4 = 0;
+
+     label1:
+        if l4 >= l3 goto label3;
+
+        s = seq[l4];
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matches(java.lang.String)>(s);
+
+        if $stack6 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        l4 = l4 + 1;
+
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public transient boolean matchesAny(char[])
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack6;
+        char[] seq;
+        int l3, $stack7, l4;
+        char c, $stack9;
+        java.lang.String $stack8;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: char[];
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack6 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        l3 = lengthof seq;
+
+        l4 = 0;
+
+     label2:
+        if l4 >= l3 goto label4;
+
+        c = seq[l4];
+
+        $stack8 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack7 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: char charAt(int)>($stack7);
+
+        if $stack9 != c goto label3;
+
+        return 1;
+
+     label3:
+        l4 = l4 + 1;
+
+        goto label2;
+
+     label4:
+        return 0;
+    }
+
+    public boolean matchesStartTag()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int $stack1, $stack2, $stack6, $stack7;
+        java.lang.String $stack3, $stack8;
+        char $stack4, $stack9;
+        boolean $stack10, $stack5;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = specialinvoke this.<org.jsoup.parser.TokenQueue: int remainingLength()>();
+
+        if $stack1 < 2 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: char charAt(int)>($stack2);
+
+        if $stack4 != 60 goto label1;
+
+        $stack8 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack6 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack7 = $stack6 + 1;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: char charAt(int)>($stack7);
+
+        $stack10 = staticinvoke <java.lang.Character: boolean isLetter(char)>($stack9);
+
+        if $stack10 == 0 goto label1;
+
+        $stack5 = 1;
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        return $stack5;
+    }
+
+    public boolean matchChomp(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq;
+        boolean $stack2;
+        int $stack3, $stack4, $stack5;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matches(java.lang.String)>(seq);
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack5 = $stack3 + $stack4;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack5;
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+
+    public boolean matchesWhitespace()
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack1, $stack5, $stack6;
+        int $stack2;
+        java.lang.String $stack3;
+        char $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: char charAt(int)>($stack2);
+
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: boolean isWhitespace(int)>($stack4);
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    public boolean matchesWord()
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack1, $stack5, $stack6;
+        int $stack2;
+        java.lang.String $stack3;
+        char $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: char charAt(int)>($stack2);
+
+        $stack5 = staticinvoke <java.lang.Character: boolean isLetterOrDigit(char)>($stack4);
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    public void advance()
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack1;
+        int $stack2, $stack3;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack3 = $stack2 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack3;
+
+     label1:
+        return;
+    }
+
+    public char consume()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int $stack1, $stack2;
+        java.lang.String $stack3;
+        char $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack1 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack2 = $stack1 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack2;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: char charAt(int)>($stack1);
+
+        return $stack4;
+    }
+
+    public void consume(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq;
+        boolean $stack3;
+        int len, $stack5, $stack6, $stack7;
+        java.lang.IllegalStateException $stack8, $stack9;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack3 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matches(java.lang.String)>(seq);
+
+        if $stack3 != 0 goto label1;
+
+        $stack9 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack9.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Queue did not match expected sequence");
+
+        throw $stack9;
+
+     label1:
+        len = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack5 = specialinvoke this.<org.jsoup.parser.TokenQueue: int remainingLength()>();
+
+        if len <= $stack5 goto label2;
+
+        $stack8 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack8.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Queue not long enough to consume sequence");
+
+        throw $stack8;
+
+     label2:
+        $stack6 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack7 = $stack6 + len;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack7;
+
+        return;
+    }
+
+    public java.lang.String consumeTo(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq, $stack5, $stack7, $stack9, consumed;
+        int $stack4, offset, $stack8, $stack11, $stack12, $stack13;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack5 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack4 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        offset = virtualinvoke $stack5.<java.lang.String: int indexOf(java.lang.String,int)>(seq, $stack4);
+
+        if offset == -1 goto label1;
+
+        $stack9 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack8 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        consumed = virtualinvoke $stack9.<java.lang.String: java.lang.String substring(int,int)>($stack8, offset);
+
+        $stack11 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack12 = virtualinvoke consumed.<java.lang.String: int length()>();
+
+        $stack13 = $stack11 + $stack12;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack13;
+
+        return consumed;
+
+     label1:
+        $stack7 = virtualinvoke this.<org.jsoup.parser.TokenQueue: java.lang.String remainder()>();
+
+        return $stack7;
+    }
+
+    public java.lang.String consumeToIgnoreCase(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack11, $stack15, $stack16, $stack18, $stack20, $stack21, skip, $stack22, $stack23, $stack25, $stack26, $stack27;
+        java.lang.String seq, first, $stack7, $stack8, $stack12, $stack13, $stack19, $stack24;
+        boolean canScan, $stack14, $stack10;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        first = virtualinvoke seq.<java.lang.String: java.lang.String substring(int,int)>(0, 1);
+
+        $stack7 = virtualinvoke first.<java.lang.String: java.lang.String toLowerCase()>();
+
+        $stack8 = virtualinvoke first.<java.lang.String: java.lang.String toUpperCase()>();
+
+        canScan = virtualinvoke $stack7.<java.lang.String: boolean equals(java.lang.Object)>($stack8);
+
+     label1:
+        $stack10 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack10 != 0 goto label7;
+
+        $stack14 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matches(java.lang.String)>(seq);
+
+        if $stack14 == 0 goto label2;
+
+        goto label7;
+
+     label2:
+        if canScan == 0 goto label6;
+
+        $stack19 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack18 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: int indexOf(java.lang.String,int)>(first, $stack18);
+
+        $stack21 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        skip = $stack20 - $stack21;
+
+        if skip != 0 goto label3;
+
+        $stack26 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack27 = $stack26 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack27;
+
+        goto label5;
+
+     label3:
+        if skip >= 0 goto label4;
+
+        $stack24 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack25 = virtualinvoke $stack24.<java.lang.String: int length()>();
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack25;
+
+        goto label5;
+
+     label4:
+        $stack22 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack23 = $stack22 + skip;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack23;
+
+     label5:
+        goto label1;
+
+     label6:
+        $stack15 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack16 = $stack15 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack16;
+
+        goto label1;
+
+     label7:
+        $stack12 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack11 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack13 = virtualinvoke $stack12.<java.lang.String: java.lang.String substring(int,int)>(start, $stack11);
+
+        return $stack13;
+    }
+
+    public transient java.lang.String consumeToAny(java.lang.String[])
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack4, $stack11, $stack12;
+        boolean $stack3, $stack7;
+        java.lang.String $stack5, $stack6;
+        java.lang.String[] seq;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String[];
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack3 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack3 != 0 goto label2;
+
+        $stack7 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesAny(java.lang.String[])>(seq);
+
+        if $stack7 != 0 goto label2;
+
+        $stack11 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack12 = $stack11 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack12;
+
+        goto label1;
+
+     label2:
+        $stack5 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack4 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String substring(int,int)>(start, $stack4);
+
+        return $stack6;
+    }
+
+    public java.lang.String chompTo(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq, data;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        data = virtualinvoke this.<org.jsoup.parser.TokenQueue: java.lang.String consumeTo(java.lang.String)>(seq);
+
+        virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchChomp(java.lang.String)>(seq);
+
+        return data;
+    }
+
+    public java.lang.String chompToIgnoreCase(java.lang.String)
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String seq, data;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seq := @parameter0: java.lang.String;
+
+        data = virtualinvoke this.<org.jsoup.parser.TokenQueue: java.lang.String consumeToIgnoreCase(java.lang.String)>(seq);
+
+        virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchChomp(java.lang.String)>(seq);
+
+        return data;
+    }
+
+    public java.lang.String chompBalanced(char, char)
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack10, inSingleQuote, inDoubleQuote, $stack29, $stack26;
+        java.lang.StringBuilder $stack13, $stack14, $stack15, $stack16;
+        java.lang.String $stack17, $stack19, $stack20, c#30;
+        char open, close, last, c;
+        int start, end, depth;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        open := @parameter0: char;
+
+        close := @parameter1: char;
+
+        start = -1;
+
+        end = -1;
+
+        depth = 0;
+
+        last = 0;
+
+        inSingleQuote = 0;
+
+        inDoubleQuote = 0;
+
+     label01:
+        $stack10 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack10 == 0 goto label02;
+
+        goto label15;
+
+     label02:
+        c = virtualinvoke this.<org.jsoup.parser.TokenQueue: char consume()>();
+
+        if last == 0 goto label03;
+
+        if last == 92 goto label12;
+
+     label03:
+        if c != 39 goto label06;
+
+        if c == open goto label06;
+
+        if inDoubleQuote != 0 goto label06;
+
+        if inSingleQuote != 0 goto label04;
+
+        $stack29 = 1;
+
+        goto label05;
+
+     label04:
+        $stack29 = 0;
+
+     label05:
+        inSingleQuote = $stack29;
+
+        goto label09;
+
+     label06:
+        if c != 34 goto label09;
+
+        if c == open goto label09;
+
+        if inSingleQuote != 0 goto label09;
+
+        if inDoubleQuote != 0 goto label07;
+
+        $stack26 = 1;
+
+        goto label08;
+
+     label07:
+        $stack26 = 0;
+
+     label08:
+        inDoubleQuote = $stack26;
+
+     label09:
+        if inSingleQuote != 0 goto label14;
+
+        if inDoubleQuote == 0 goto label10;
+
+        goto label14;
+
+     label10:
+        if c != open goto label11;
+
+        depth = depth + 1;
+
+        if start != -1 goto label12;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        goto label12;
+
+     label11:
+        if c != close goto label12;
+
+        depth = depth + -1;
+
+     label12:
+        if depth <= 0 goto label13;
+
+        if last == 0 goto label13;
+
+        end = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label13:
+        last = c;
+
+     label14:
+        if depth > 0 goto label01;
+
+     label15:
+        if end < 0 goto label16;
+
+        $stack19 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: java.lang.String substring(int,int)>(start, end);
+
+        goto label17;
+
+     label16:
+        $stack20 = "";
+
+     label17:
+        c#30 = $stack20;
+
+        if depth <= 0 goto label18;
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Did not find balanced marker at \'");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack20);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\'");
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void fail(java.lang.String)>($stack17);
+
+     label18:
+        return c#30;
+    }
+
+    public static java.lang.String unescape(java.lang.String)
+    {
+        java.lang.StringBuilder out;
+        java.lang.String in, $stack9;
+        char[] l3;
+        int l4, l5;
+        char c, last;
+
+        in := @parameter0: java.lang.String;
+
+        out = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        last = 0;
+
+        l3 = virtualinvoke in.<java.lang.String: char[] toCharArray()>();
+
+        l4 = lengthof l3;
+
+        l5 = 0;
+
+     label1:
+        if l5 >= l4 goto label4;
+
+        c = l3[l5];
+
+        if c != 92 goto label2;
+
+        if last == 0 goto label3;
+
+        if last != 92 goto label3;
+
+        virtualinvoke out.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(c);
+
+        goto label3;
+
+     label2:
+        virtualinvoke out.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(c);
+
+     label3:
+        last = c;
+
+        l5 = l5 + 1;
+
+        goto label1;
+
+     label4:
+        $stack9 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(out);
+
+        return $stack9;
+    }
+
+    public boolean consumeWhitespace()
+    {
+        org.jsoup.parser.TokenQueue this;
+        boolean $stack2, seen;
+        int $stack3, $stack4;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        seen = 0;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWhitespace()>();
+
+        if $stack2 == 0 goto label2;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack4 = $stack3 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack4;
+
+        seen = 1;
+
+        goto label1;
+
+     label2:
+        return seen;
+    }
+
+    public java.lang.String consumeWord()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack3, $stack6, $stack7;
+        boolean $stack2;
+        java.lang.String $stack4, $stack5;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWord()>();
+
+        if $stack2 == 0 goto label2;
+
+        $stack6 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack7 = $stack6 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack7;
+
+        goto label1;
+
+     label2:
+        $stack4 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(start, $stack3);
+
+        return $stack5;
+    }
+
+    public java.lang.String consumeTagName()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack3, $stack7, $stack8;
+        boolean $stack2, $stack6, $stack11;
+        java.lang.String $stack4, $stack5;
+        char[] $stack10;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label3;
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWord()>();
+
+        if $stack6 != 0 goto label2;
+
+        $stack10 = newarray (char)[3];
+
+        $stack10[0] = 58;
+
+        $stack10[1] = 95;
+
+        $stack10[2] = 45;
+
+        $stack11 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesAny(char[])>($stack10);
+
+        if $stack11 == 0 goto label3;
+
+     label2:
+        $stack7 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack8 = $stack7 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack8;
+
+        goto label1;
+
+     label3:
+        $stack4 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(start, $stack3);
+
+        return $stack5;
+    }
+
+    public java.lang.String consumeElementSelector()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack3, $stack7, $stack8;
+        boolean $stack2, $stack6, $stack11;
+        java.lang.String $stack4, $stack5;
+        java.lang.String[] $stack10;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label3;
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWord()>();
+
+        if $stack6 != 0 goto label2;
+
+        $stack10 = newarray (java.lang.String)[4];
+
+        $stack10[0] = "*|";
+
+        $stack10[1] = "|";
+
+        $stack10[2] = "_";
+
+        $stack10[3] = "-";
+
+        $stack11 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesAny(java.lang.String[])>($stack10);
+
+        if $stack11 == 0 goto label3;
+
+     label2:
+        $stack7 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack8 = $stack7 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack8;
+
+        goto label1;
+
+     label3:
+        $stack4 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(start, $stack3);
+
+        return $stack5;
+    }
+
+    public java.lang.String consumeCssIdentifier()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack3, $stack7, $stack8;
+        boolean $stack2, $stack6, $stack11;
+        java.lang.String $stack4, $stack5;
+        char[] $stack10;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label3;
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWord()>();
+
+        if $stack6 != 0 goto label2;
+
+        $stack10 = newarray (char)[2];
+
+        $stack10[0] = 45;
+
+        $stack10[1] = 95;
+
+        $stack11 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesAny(char[])>($stack10);
+
+        if $stack11 == 0 goto label3;
+
+     label2:
+        $stack7 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack8 = $stack7 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack8;
+
+        goto label1;
+
+     label3:
+        $stack4 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(start, $stack3);
+
+        return $stack5;
+    }
+
+    public java.lang.String consumeAttributeKey()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int start, $stack3, $stack7, $stack8;
+        boolean $stack2, $stack6, $stack11;
+        java.lang.String $stack4, $stack5;
+        char[] $stack10;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        start = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+     label1:
+        $stack2 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label3;
+
+        $stack6 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesWord()>();
+
+        if $stack6 != 0 goto label2;
+
+        $stack10 = newarray (char)[3];
+
+        $stack10[0] = 45;
+
+        $stack10[1] = 95;
+
+        $stack10[2] = 58;
+
+        $stack11 = virtualinvoke this.<org.jsoup.parser.TokenQueue: boolean matchesAny(char[])>($stack10);
+
+        if $stack11 == 0 goto label3;
+
+     label2:
+        $stack7 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack8 = $stack7 + 1;
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack8;
+
+        goto label1;
+
+     label3:
+        $stack4 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(start, $stack3);
+
+        return $stack5;
+    }
+
+    public java.lang.String remainder()
+    {
+        org.jsoup.parser.TokenQueue this;
+        java.lang.String $stack2, $stack3, remainder, $stack7;
+        int $stack4, $stack5, $stack8;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack3 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack4 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack5 = virtualinvoke $stack2.<java.lang.String: int length()>();
+
+        remainder = virtualinvoke $stack3.<java.lang.String: java.lang.String substring(int,int)>($stack4, $stack5);
+
+        $stack7 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack8 = virtualinvoke $stack7.<java.lang.String: int length()>();
+
+        this.<org.jsoup.parser.TokenQueue: int pos> = $stack8;
+
+        return remainder;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.parser.TokenQueue this;
+        int $stack1;
+        java.lang.String $stack2, $stack3;
+
+        this := @this: org.jsoup.parser.TokenQueue;
+
+        $stack2 = this.<org.jsoup.parser.TokenQueue: java.lang.String queue>;
+
+        $stack1 = this.<org.jsoup.parser.TokenQueue: int pos>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.String: java.lang.String substring(int)>($stack1);
+
+        return $stack3;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.parser.TokenQueue: char ESC> = 92;
+
+        return;
+    }
+}

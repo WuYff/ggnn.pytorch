@@ -1,0 +1,157 @@
+public class org.jfree.data.xml.CategoryDatasetHandler extends org.jfree.data.xml.RootHandler implements org.jfree.data.xml.DatasetTags
+{
+    private org.jfree.data.category.DefaultCategoryDataset dataset;
+
+    public void <init>()
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+
+        specialinvoke this.<org.jfree.data.xml.RootHandler: void <init>()>();
+
+        this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset> = null;
+
+        return;
+    }
+
+    public org.jfree.data.category.CategoryDataset getDataset()
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        org.jfree.data.category.DefaultCategoryDataset $stack1;
+
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+
+        $stack1 = this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset>;
+
+        return $stack1;
+    }
+
+    public void addItem(java.lang.Comparable, java.lang.Comparable, java.lang.Number)
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        java.lang.Number value;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.category.DefaultCategoryDataset $stack4;
+
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        value := @parameter2: java.lang.Number;
+
+        $stack4 = this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset>;
+
+        virtualinvoke $stack4.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(value, rowKey, columnKey);
+
+        return;
+    }
+
+    public void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) throws org.xml.sax.SAXException
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        org.xml.sax.helpers.DefaultHandler current;
+        java.lang.String qName, $stack14, namespaceURI, localName;
+        boolean $stack8, $stack9;
+        org.xml.sax.SAXException $stack10;
+        java.lang.StringBuilder $stack11, $stack12, $stack13;
+        org.jfree.data.xml.CategorySeriesHandler $stack15;
+        java.util.Stack $stack16;
+        org.xml.sax.Attributes atts;
+        org.jfree.data.category.DefaultCategoryDataset $stack18;
+
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+
+        namespaceURI := @parameter0: java.lang.String;
+
+        localName := @parameter1: java.lang.String;
+
+        qName := @parameter2: java.lang.String;
+
+        atts := @parameter3: org.xml.sax.Attributes;
+
+        current = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()>();
+
+        if current == this goto label1;
+
+        virtualinvoke current.<org.xml.sax.helpers.DefaultHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)>(namespaceURI, localName, qName, atts);
+
+        goto label4;
+
+     label1:
+        $stack8 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("CategoryDataset");
+
+        if $stack8 == 0 goto label2;
+
+        $stack18 = new org.jfree.data.category.DefaultCategoryDataset;
+
+        specialinvoke $stack18.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+
+        this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset> = $stack18;
+
+        goto label4;
+
+     label2:
+        $stack9 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("Series");
+
+        if $stack9 == 0 goto label3;
+
+        $stack15 = new org.jfree.data.xml.CategorySeriesHandler;
+
+        specialinvoke $stack15.<org.jfree.data.xml.CategorySeriesHandler: void <init>(org.jfree.data.xml.RootHandler)>(this);
+
+        $stack16 = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: java.util.Stack getSubHandlers()>();
+
+        virtualinvoke $stack16.<java.util.Stack: java.lang.Object push(java.lang.Object)>($stack15);
+
+        virtualinvoke $stack15.<org.jfree.data.xml.CategorySeriesHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)>(namespaceURI, localName, qName, atts);
+
+        goto label4;
+
+     label3:
+        $stack10 = new org.xml.sax.SAXException;
+
+        $stack11 = new java.lang.StringBuilder;
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Element not recognised: ");
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(qName);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack10.<org.xml.sax.SAXException: void <init>(java.lang.String)>($stack14);
+
+        throw $stack10;
+
+     label4:
+        return;
+    }
+
+    public void endElement(java.lang.String, java.lang.String, java.lang.String) throws org.xml.sax.SAXException
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        org.xml.sax.helpers.DefaultHandler current;
+        java.lang.String namespaceURI, localName, qName;
+
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+
+        namespaceURI := @parameter0: java.lang.String;
+
+        localName := @parameter1: java.lang.String;
+
+        qName := @parameter2: java.lang.String;
+
+        current = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()>();
+
+        if current == this goto label1;
+
+        virtualinvoke current.<org.xml.sax.helpers.DefaultHandler: void endElement(java.lang.String,java.lang.String,java.lang.String)>(namespaceURI, localName, qName);
+
+     label1:
+        return;
+    }
+}

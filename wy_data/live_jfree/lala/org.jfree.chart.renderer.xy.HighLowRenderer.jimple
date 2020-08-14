@@ -1,0 +1,690 @@
+public class org.jfree.chart.renderer.xy.HighLowRenderer extends org.jfree.chart.renderer.xy.AbstractXYItemRenderer implements org.jfree.chart.renderer.xy.XYItemRenderer, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private boolean drawOpenTicks;
+    private boolean drawCloseTicks;
+    private transient java.awt.Paint openTickPaint;
+    private transient java.awt.Paint closeTickPaint;
+    private double tickLength;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: void <init>()>();
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawOpenTicks> = 1;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawCloseTicks> = 1;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: double tickLength> = 2.0;
+
+        return;
+    }
+
+    public boolean getDrawOpenTicks()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawOpenTicks>;
+
+        return $stack1;
+    }
+
+    public void setDrawOpenTicks(boolean)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        boolean draw;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        draw := @parameter0: boolean;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawOpenTicks> = draw;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean getDrawCloseTicks()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawCloseTicks>;
+
+        return $stack1;
+    }
+
+    public void setDrawCloseTicks(boolean)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        boolean draw;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        draw := @parameter0: boolean;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawCloseTicks> = draw;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getOpenTickPaint()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        return $stack1;
+    }
+
+    public void setOpenTickPaint(java.awt.Paint)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getCloseTickPaint()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        return $stack1;
+    }
+
+    public void setCloseTickPaint(java.awt.Paint)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getTickLength()
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: double tickLength>;
+
+        return $stack1;
+    }
+
+    public void setTickLength(double)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        double length;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        length := @parameter0: double;
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: double tickLength> = length;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        org.jfree.data.Range $stack2;
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        if dataset == null goto label1;
+
+        $stack2 = staticinvoke <org.jfree.data.general.DatasetUtils: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+
+        return $stack2;
+
+     label1:
+        return null;
+    }
+
+    public void drawItem(java.awt.Graphics2D, org.jfree.chart.renderer.xy.XYItemRendererState, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.xy.XYDataset, int, int, org.jfree.chart.plot.CrosshairState, int)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        int series, item, $stack45, $stack47, pass;
+        double x, xx, y0, y, xx0, yy0, yy, yHigh, yLow, $stack76, $stack78, $stack89, $stack91, $stack104, $stack105, $stack106, $stack108, $stack111, $stack112, $stack113, $stack114, yyHigh, yyLow, yyOpen, hld#35;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.data.Range $stack36;
+        boolean $stack37, $stack44, $stack50, $stack51, $stack52, $stack64, $stack67, $stack70, $stack82, $stack95, $stack66, $stack68;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.ui.RectangleEdge $stack38, location, $stack53;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack57, $stack58, $stack73, $stack74, $stack86, $stack87, $stack100, $stack101;
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint itemPaint, $stack72, $stack79, $stack85, $stack92;
+        java.awt.Stroke itemStroke;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Line2D$Double $stack60, $stack61, $stack75, $stack77, $stack88, $stack90, $stack102, $stack109;
+        java.awt.geom.Rectangle2D$Double $stack103, $stack110, entityArea;
+        org.jfree.chart.ChartRenderingInfo $stack115;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.data.xy.OHLCDataset hld;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+
+        series := @parameter8: int;
+
+        item := @parameter9: int;
+
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+
+        pass := @parameter11: int;
+
+        x = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+
+        $stack36 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()>();
+
+        $stack37 = virtualinvoke $stack36.<org.jfree.data.Range: boolean contains(double)>(x);
+
+        if $stack37 != 0 goto label01;
+
+        return;
+
+     label01:
+        $stack38 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        xx = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(x, dataArea, $stack38);
+
+        entityArea = null;
+
+        entities = null;
+
+        if info == null goto label02;
+
+        $stack115 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+
+        entities = virtualinvoke $stack115.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+
+     label02:
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        location = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        itemPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint getItemPaint(int,int)>(series, item);
+
+        itemStroke = virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Stroke getItemStroke(int,int)>(series, item);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(itemPaint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(itemStroke);
+
+        $stack44 = dataset instanceof org.jfree.data.xy.OHLCDataset;
+
+        if $stack44 == 0 goto label14;
+
+        hld = (org.jfree.data.xy.OHLCDataset) dataset;
+
+        yHigh = interfaceinvoke hld.<org.jfree.data.xy.OHLCDataset: double getHighValue(int,int)>(series, item);
+
+        yLow = interfaceinvoke hld.<org.jfree.data.xy.OHLCDataset: double getLowValue(int,int)>(series, item);
+
+        $stack64 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yHigh);
+
+        if $stack64 != 0 goto label04;
+
+        $stack95 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yLow);
+
+        if $stack95 != 0 goto label04;
+
+        yyHigh = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(yHigh, dataArea, location);
+
+        yyLow = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(yLow, dataArea, location);
+
+        $stack100 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack100 goto label03;
+
+        $stack109 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack109.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyLow, xx, yyHigh, xx);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack109);
+
+        $stack110 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack111 = staticinvoke <java.lang.Math: double min(double,double)>(yyLow, yyHigh);
+
+        $stack113 = xx - 1.0;
+
+        $stack112 = yyHigh - yyLow;
+
+        $stack114 = staticinvoke <java.lang.Math: double abs(double)>($stack112);
+
+        specialinvoke $stack110.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack111, $stack113, $stack114, 2.0);
+
+        entityArea = $stack110;
+
+        goto label04;
+
+     label03:
+        $stack101 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack101 goto label04;
+
+        $stack102 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack102.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, yyLow, xx, yyHigh);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack102);
+
+        $stack103 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack104 = xx - 1.0;
+
+        $stack105 = staticinvoke <java.lang.Math: double min(double,double)>(yyLow, yyHigh);
+
+        $stack106 = yyHigh - yyLow;
+
+        $stack108 = staticinvoke <java.lang.Math: double abs(double)>($stack106);
+
+        specialinvoke $stack103.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack104, $stack105, 2.0, $stack108);
+
+        entityArea = $stack103;
+
+     label04:
+        yyHigh = virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: double getTickLength()>();
+
+        $stack66 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: boolean isInverted()>();
+
+        if $stack66 == 0 goto label05;
+
+        yyHigh = neg yyHigh;
+
+     label05:
+        $stack67 = virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean getDrawOpenTicks()>();
+
+        if $stack67 == 0 goto label09;
+
+        yyLow = interfaceinvoke hld.<org.jfree.data.xy.OHLCDataset: double getOpenValue(int,int)>(series, item);
+
+        $stack82 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yyLow);
+
+        if $stack82 != 0 goto label09;
+
+        yyOpen = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(yyLow, dataArea, location);
+
+        $stack85 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        if $stack85 == null goto label06;
+
+        $stack92 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack92);
+
+        goto label07;
+
+     label06:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(itemPaint);
+
+     label07:
+        $stack86 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack86 goto label08;
+
+        $stack90 = new java.awt.geom.Line2D$Double;
+
+        $stack91 = xx + yyHigh;
+
+        specialinvoke $stack90.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyOpen, $stack91, yyOpen, xx);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack90);
+
+        goto label09;
+
+     label08:
+        $stack87 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack87 goto label09;
+
+        $stack88 = new java.awt.geom.Line2D$Double;
+
+        $stack89 = xx - yyHigh;
+
+        specialinvoke $stack88.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack89, yyOpen, xx, yyOpen);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack88);
+
+     label09:
+        $stack68 = virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean getDrawCloseTicks()>();
+
+        if $stack68 == 0 goto label13;
+
+        yyLow = interfaceinvoke hld.<org.jfree.data.xy.OHLCDataset: double getCloseValue(int,int)>(series, item);
+
+        $stack70 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yyLow);
+
+        if $stack70 != 0 goto label13;
+
+        yyOpen = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(yyLow, dataArea, location);
+
+        $stack72 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        if $stack72 == null goto label10;
+
+        $stack79 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack79);
+
+        goto label11;
+
+     label10:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(itemPaint);
+
+     label11:
+        $stack73 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack73 goto label12;
+
+        $stack77 = new java.awt.geom.Line2D$Double;
+
+        $stack78 = xx - yyHigh;
+
+        specialinvoke $stack77.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyOpen, xx, yyOpen, $stack78);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack77);
+
+        goto label13;
+
+     label12:
+        $stack74 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack74 goto label13;
+
+        $stack75 = new java.awt.geom.Line2D$Double;
+
+        $stack76 = xx + yyHigh;
+
+        specialinvoke $stack75.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, yyOpen, $stack76, yyOpen);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack75);
+
+     label13:
+        goto label18;
+
+     label14:
+        if item <= 0 goto label18;
+
+        $stack45 = item - 1;
+
+        hld#35 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, $stack45);
+
+        $stack47 = item - 1;
+
+        y0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, $stack47);
+
+        y = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+
+        $stack50 = staticinvoke <java.lang.Double: boolean isNaN(double)>(hld#35);
+
+        if $stack50 != 0 goto label15;
+
+        $stack51 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y0);
+
+        if $stack51 != 0 goto label15;
+
+        $stack52 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y);
+
+        if $stack52 == 0 goto label16;
+
+     label15:
+        return;
+
+     label16:
+        $stack53 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        xx0 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(hld#35, dataArea, $stack53);
+
+        yy0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(y0, dataArea, location);
+
+        yy = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(y, dataArea, location);
+
+        $stack57 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack57 goto label17;
+
+        $stack61 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack61.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yy0, xx0, yy, xx);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack61);
+
+        goto label18;
+
+     label17:
+        $stack58 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack58 goto label18;
+
+        $stack60 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack60.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx0, yy0, xx, yy);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack60);
+
+     label18:
+        if entities == null goto label19;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.HighLowRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,double,double)>(entities, entityArea, dataset, series, item, 0.0, 0.0);
+
+     label19:
+        return;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.jfree.chart.renderer.xy.HighLowRenderer this, that;
+        java.lang.Object obj;
+        boolean $stack3, $stack4, $stack5, $stack6, $stack7, $stack10, $stack13, $stack17;
+        java.awt.Paint $stack8, $stack9, $stack11, $stack12;
+        double $stack14, $stack15;
+        byte $stack16;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        obj := @parameter0: java.lang.Object;
+
+        if this != obj goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.renderer.xy.HighLowRenderer) obj;
+
+        $stack5 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawOpenTicks>;
+
+        $stack4 = that.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawOpenTicks>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawCloseTicks>;
+
+        $stack6 = that.<org.jfree.chart.renderer.xy.HighLowRenderer: boolean drawCloseTicks>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        $stack8 = that.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        $stack10 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        $stack11 = that.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack12, $stack11);
+
+        if $stack13 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack15 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: double tickLength>;
+
+        $stack14 = that.<org.jfree.chart.renderer.xy.HighLowRenderer: double tickLength>;
+
+        $stack16 = $stack15 cmpl $stack14;
+
+        if $stack16 == 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack17 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: boolean equals(java.lang.Object)>(obj);
+
+        if $stack17 != 0 goto label8;
+
+        return 0;
+
+     label8:
+        return 1;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint $stack2, $stack3;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint> = $stack3;
+
+        return;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.xy.HighLowRenderer this;
+        java.awt.Paint $stack2, $stack3;
+
+        this := @this: org.jfree.chart.renderer.xy.HighLowRenderer;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint openTickPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.renderer.xy.HighLowRenderer: java.awt.Paint closeTickPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.renderer.xy.HighLowRenderer: long serialVersionUID> = -8135673815876552516L;
+
+        return;
+    }
+}

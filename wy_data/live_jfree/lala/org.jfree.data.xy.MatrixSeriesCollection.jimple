@@ -1,0 +1,429 @@
+public class org.jfree.data.xy.MatrixSeriesCollection extends org.jfree.data.xy.AbstractXYZDataset implements org.jfree.data.xy.XYZDataset, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List seriesList;
+
+    public void <init>()
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        specialinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: void <init>(org.jfree.data.xy.MatrixSeries)>(null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.xy.MatrixSeries)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.ArrayList $stack2;
+        org.jfree.data.xy.MatrixSeries series;
+        java.util.List $stack3;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        series := @parameter0: org.jfree.data.xy.MatrixSeries;
+
+        specialinvoke this.<org.jfree.data.xy.AbstractXYZDataset: void <init>()>();
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList> = $stack2;
+
+        if series == null goto label1;
+
+        $stack3 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        interfaceinvoke $stack3.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.xy.MatrixSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+     label1:
+        return;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        int seriesIndex, $stack3;
+        org.jfree.data.xy.MatrixSeries $stack2;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: org.jfree.data.xy.MatrixSeries getSeries(int)>(seriesIndex);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.MatrixSeries: int getItemCount()>();
+
+        return $stack3;
+    }
+
+    public org.jfree.data.xy.MatrixSeries getSeries(int)
+    {
+        int seriesIndex, $stack6, $stack7;
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack3, $stack8;
+        java.lang.Object $stack9;
+        org.jfree.data.xy.MatrixSeries series;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack6 = interfaceinvoke $stack3.<java.util.List: int size()>();
+
+        $stack7 = $stack6 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(seriesIndex, "seriesIndex", 0, $stack7);
+
+        $stack8 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(seriesIndex);
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack9;
+
+        return series;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        int seriesIndex;
+        org.jfree.data.xy.MatrixSeries $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: org.jfree.data.xy.MatrixSeries getSeries(int)>(seriesIndex);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.MatrixSeries: java.lang.Comparable getKey()>();
+
+        return $stack3;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        int seriesIndex, itemIndex, $stack6;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.MatrixSeries series;
+        java.lang.Integer $stack7;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        itemIndex := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(seriesIndex);
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack5;
+
+        $stack6 = virtualinvoke series.<org.jfree.data.xy.MatrixSeries: int getItemColumn(int)>(itemIndex);
+
+        $stack7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack6);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        int seriesIndex, itemIndex, $stack6;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.MatrixSeries series;
+        java.lang.Integer $stack7;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        itemIndex := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(seriesIndex);
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack5;
+
+        $stack6 = virtualinvoke series.<org.jfree.data.xy.MatrixSeries: int getItemRow(int)>(itemIndex);
+
+        $stack7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack6);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getZ(int, int)
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        int seriesIndex, itemIndex;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.MatrixSeries series;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        itemIndex := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(seriesIndex);
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack5;
+
+        $stack6 = virtualinvoke series.<org.jfree.data.xy.MatrixSeries: java.lang.Number getItem(int)>(itemIndex);
+
+        return $stack6;
+    }
+
+    public void addSeries(org.jfree.data.xy.MatrixSeries)
+    {
+        org.jfree.data.xy.MatrixSeries series;
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        series := @parameter0: org.jfree.data.xy.MatrixSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.xy.MatrixSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.xy.MatrixSeriesCollection this, c;
+        boolean $stack3, $stack6;
+        java.util.List $stack4, $stack5;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != null goto label1;
+
+        return 0;
+
+     label1:
+        if obj != this goto label2;
+
+        return 1;
+
+     label2:
+        $stack3 = obj instanceof org.jfree.data.xy.MatrixSeriesCollection;
+
+        if $stack3 == 0 goto label3;
+
+        c = (org.jfree.data.xy.MatrixSeriesCollection) obj;
+
+        $stack5 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack4 = c.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        return $stack6;
+
+     label3:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack1, $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this, clone;
+        java.lang.Object $stack2;
+        java.util.List $stack3, $stack4;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        $stack2 = specialinvoke this.<org.jfree.data.xy.AbstractXYZDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.xy.MatrixSeriesCollection) $stack2;
+
+        $stack3 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack3);
+
+        clone.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList> = $stack4;
+
+        return clone;
+    }
+
+    public void removeAllSeries()
+    {
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack3, $stack6;
+        java.util.Iterator l1;
+        boolean $stack5;
+        java.lang.Object $stack7;
+        org.jfree.data.xy.MatrixSeries series;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        $stack3 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack7;
+
+        virtualinvoke series.<org.jfree.data.xy.MatrixSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        goto label1;
+
+     label2:
+        $stack6 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        interfaceinvoke $stack6.<java.util.List: void clear()>();
+
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeSeries(org.jfree.data.xy.MatrixSeries)
+    {
+        org.jfree.data.xy.MatrixSeries series;
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack2, $stack4;
+        boolean $stack3;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        series := @parameter0: org.jfree.data.xy.MatrixSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean contains(java.lang.Object)>(series);
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke series.<org.jfree.data.xy.MatrixSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack4 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        interfaceinvoke $stack4.<java.util.List: boolean remove(java.lang.Object)>(series);
+
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: void fireDatasetChanged()>();
+
+     label1:
+        return;
+    }
+
+    public void removeSeries(int)
+    {
+        int seriesIndex, $stack6, $stack7;
+        org.jfree.data.xy.MatrixSeriesCollection this;
+        java.util.List $stack3, $stack8, $stack10;
+        java.lang.Object $stack9;
+        org.jfree.data.xy.MatrixSeries series;
+
+        this := @this: org.jfree.data.xy.MatrixSeriesCollection;
+
+        seriesIndex := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack6 = interfaceinvoke $stack3.<java.util.List: int size()>();
+
+        $stack7 = $stack6 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(seriesIndex, "seriesIndex", 0, $stack7);
+
+        $stack8 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(seriesIndex);
+
+        series = (org.jfree.data.xy.MatrixSeries) $stack9;
+
+        virtualinvoke series.<org.jfree.data.xy.MatrixSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack10 = this.<org.jfree.data.xy.MatrixSeriesCollection: java.util.List seriesList>;
+
+        interfaceinvoke $stack10.<java.util.List: java.lang.Object remove(int)>(seriesIndex);
+
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.xy.MatrixSeriesCollection: long serialVersionUID> = -3197705779242543945L;
+
+        return;
+    }
+}

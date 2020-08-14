@@ -1,0 +1,1190 @@
+public class org.jfree.data.gantt.TaskSeriesCollection extends org.jfree.data.general.AbstractSeriesDataset implements org.jfree.data.gantt.GanttCategoryDataset, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List keys;
+    private java.util.List data;
+
+    public void <init>()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.ArrayList $stack1, $stack2;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        specialinvoke this.<org.jfree.data.general.AbstractSeriesDataset: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys> = $stack1;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data> = $stack2;
+
+        return;
+    }
+
+    public org.jfree.data.gantt.TaskSeries getSeries(java.lang.Comparable)
+    {
+        java.lang.Comparable key;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int index;
+        org.jfree.data.gantt.TaskSeries result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        key := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        result = null;
+
+        index = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(key);
+
+        if index < 0 goto label1;
+
+        result = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: org.jfree.data.gantt.TaskSeries getSeries(int)>(index);
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.data.gantt.TaskSeries getSeries(int)
+    {
+        int series, $stack5, $stack6;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack2, $stack7;
+        java.lang.Object $stack8;
+        org.jfree.data.gantt.TaskSeries $stack9;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack2.<java.util.List: int size()>();
+
+        $stack6 = $stack5 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(series, "series", 0, $stack6);
+
+        $stack7 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(series);
+
+        $stack9 = (org.jfree.data.gantt.TaskSeries) $stack8;
+
+        return $stack9;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int $stack1;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack1 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowCount()>();
+
+        return $stack1;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int series;
+        java.util.List $stack3;
+        java.lang.Object $stack4;
+        org.jfree.data.gantt.TaskSeries ts;
+        java.lang.Comparable $stack5;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.gantt.TaskSeries) $stack4;
+
+        $stack5 = virtualinvoke ts.<org.jfree.data.gantt.TaskSeries: java.lang.Comparable getKey()>();
+
+        return $stack5;
+    }
+
+    public int getRowCount()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public java.util.List getRowKeys()
+    {
+        java.util.ArrayList $stack4;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack5;
+        java.util.Iterator l2;
+        boolean $stack7;
+        java.lang.Object $stack8;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.Comparable $stack9;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack4 = new java.util.ArrayList;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>()>();
+
+        $stack5 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        l2 = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label2;
+
+        $stack8 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack8;
+
+        $stack9 = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: java.lang.Comparable getKey()>();
+
+        interfaceinvoke $stack4.<java.util.List: boolean add(java.lang.Object)>($stack9);
+
+        goto label1;
+
+     label2:
+        return $stack4;
+    }
+
+    public int getColumnCount()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public java.util.List getColumnKeys()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack1;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        return $stack1;
+    }
+
+    public java.lang.Comparable getColumnKey(int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int index;
+        java.util.List $stack2;
+        java.lang.Object $stack3;
+        java.lang.Comparable $stack4;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+
+        $stack4 = (java.lang.Comparable) $stack3;
+
+        return $stack4;
+    }
+
+    public int getColumnIndex(java.lang.Comparable)
+    {
+        java.lang.Comparable columnKey;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        columnKey := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(columnKey, "columnKey");
+
+        $stack2 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int indexOf(java.lang.Object)>(columnKey);
+
+        return $stack3;
+    }
+
+    public int getRowIndex(java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack6, $stack8;
+        int count, result, i;
+        java.lang.Object $stack9;
+        org.jfree.data.gantt.TaskSeries s;
+        java.lang.Comparable $stack10, rowKey;
+        boolean $stack11;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        result = -1;
+
+        $stack6 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        count = interfaceinvoke $stack6.<java.util.List: int size()>();
+
+        i = 0;
+
+     label1:
+        if i >= count goto label3;
+
+        $stack8 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(i);
+
+        s = (org.jfree.data.gantt.TaskSeries) $stack9;
+
+        $stack10 = virtualinvoke s.<org.jfree.data.gantt.TaskSeries: java.lang.Comparable getKey()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>(rowKey);
+
+        if $stack11 == 0 goto label2;
+
+        result = i;
+
+        goto label3;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return result;
+    }
+
+    public java.lang.Comparable getRowKey(int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int index;
+        java.util.List $stack3;
+        java.lang.Object $stack4;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.Comparable $stack5;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        index := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(index);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack4;
+
+        $stack5 = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: java.lang.Comparable getKey()>();
+
+        return $stack5;
+    }
+
+    public void add(org.jfree.data.gantt.TaskSeries)
+    {
+        org.jfree.data.gantt.TaskSeries series;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack6, $stack8, $stack13, $stack16;
+        java.util.Iterator iterator;
+        boolean $stack10;
+        java.lang.Object $stack11;
+        org.jfree.data.gantt.Task task;
+        java.lang.String key;
+        int index;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        series := @parameter0: org.jfree.data.gantt.TaskSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack6 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.gantt.TaskSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack8 = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: java.util.List getTasks()>();
+
+        iterator = interfaceinvoke $stack8.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label3;
+
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        task = (org.jfree.data.gantt.Task) $stack11;
+
+        key = virtualinvoke task.<org.jfree.data.gantt.Task: java.lang.String getDescription()>();
+
+        $stack13 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        index = interfaceinvoke $stack13.<java.util.List: int indexOf(java.lang.Object)>(key);
+
+        if index >= 0 goto label2;
+
+        $stack16 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        interfaceinvoke $stack16.<java.util.List: boolean add(java.lang.Object)>(key);
+
+     label2:
+        goto label1;
+
+     label3:
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void remove(org.jfree.data.gantt.TaskSeries)
+    {
+        org.jfree.data.gantt.TaskSeries series;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack2, $stack4;
+        boolean $stack3;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        series := @parameter0: org.jfree.data.gantt.TaskSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean contains(java.lang.Object)>(series);
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke series.<org.jfree.data.gantt.TaskSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack4 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack4.<java.util.List: boolean remove(java.lang.Object)>(series);
+
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void fireDatasetChanged()>();
+
+     label1:
+        return;
+    }
+
+    public void remove(int)
+    {
+        int series, $stack6, $stack7;
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack3, $stack8, $stack10;
+        java.lang.Object $stack9;
+        org.jfree.data.gantt.TaskSeries ts;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack6 = interfaceinvoke $stack3.<java.util.List: int size()>();
+
+        $stack7 = $stack6 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(series, "series", 0, $stack7);
+
+        $stack8 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.gantt.TaskSeries) $stack9;
+
+        virtualinvoke ts.<org.jfree.data.gantt.TaskSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack10 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack10.<java.util.List: java.lang.Object remove(int)>(series);
+
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeAll()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack3, $stack6;
+        java.util.Iterator l1;
+        boolean $stack5;
+        java.lang.Object $stack7;
+        org.jfree.data.gantt.TaskSeries series;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack3 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack7;
+
+        virtualinvoke series.<org.jfree.data.gantt.TaskSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        goto label1;
+
+     label2:
+        $stack6 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack6.<java.util.List: void clear()>();
+
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public java.lang.Number getValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getStartValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getValue(int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getStartValue(int,int)>(row, column);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getStartValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row;
+        java.util.List $stack9;
+        java.lang.Object $stack10;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack11;
+        org.jfree.data.gantt.Task task;
+        org.jfree.data.time.TimePeriod duration;
+        java.util.Date $stack15;
+        long $stack16;
+        java.lang.Long result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack9 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack10;
+
+        $stack11 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack11);
+
+        if task == null goto label1;
+
+        duration = virtualinvoke task.<org.jfree.data.gantt.Task: org.jfree.data.time.TimePeriod getDuration()>();
+
+        if duration == null goto label1;
+
+        $stack15 = interfaceinvoke duration.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+
+        $stack16 = virtualinvoke $stack15.<java.util.Date: long getTime()>();
+
+        result = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack16);
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getStartValue(int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack7 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getStartValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getEndValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row;
+        java.util.List $stack9;
+        java.lang.Object $stack10;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack11;
+        org.jfree.data.gantt.Task task;
+        org.jfree.data.time.TimePeriod duration;
+        java.util.Date $stack15;
+        long $stack16;
+        java.lang.Long result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack9 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack10;
+
+        $stack11 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack11);
+
+        if task == null goto label1;
+
+        duration = virtualinvoke task.<org.jfree.data.gantt.Task: org.jfree.data.time.TimePeriod getDuration()>();
+
+        if duration == null goto label1;
+
+        $stack15 = interfaceinvoke duration.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+
+        $stack16 = virtualinvoke $stack15.<java.util.Date: long getTime()>();
+
+        result = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack16);
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getEndValue(int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack7 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getEndValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getPercentComplete(int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack7 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getPercentComplete(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getPercentComplete(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row;
+        java.util.List $stack8;
+        java.lang.Object $stack9;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack10;
+        org.jfree.data.gantt.Task task;
+        java.lang.Double result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack8 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack9;
+
+        $stack10 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack10);
+
+        if task == null goto label1;
+
+        result = virtualinvoke task.<org.jfree.data.gantt.Task: java.lang.Double getPercentComplete()>();
+
+     label1:
+        return result;
+    }
+
+    public int getSubIntervalCount(int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column, $stack7;
+        java.lang.Comparable rowKey, columnKey;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack7 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getSubIntervalCount(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack7;
+    }
+
+    public int getSubIntervalCount(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row, result;
+        java.util.List $stack8;
+        java.lang.Object $stack9;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack10;
+        org.jfree.data.gantt.Task task;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = 0;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack8 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack9;
+
+        $stack10 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack10);
+
+        if task == null goto label1;
+
+        result = virtualinvoke task.<org.jfree.data.gantt.Task: int getSubtaskCount()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getStartValue(int, int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column, subinterval;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack8;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack8 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getStartValue(java.lang.Comparable,java.lang.Comparable,int)>(rowKey, columnKey, subinterval);
+
+        return $stack8;
+    }
+
+    public java.lang.Number getStartValue(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row, subinterval;
+        java.util.List $stack11;
+        java.lang.Object $stack12;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack13;
+        org.jfree.data.gantt.Task task, sub;
+        org.jfree.data.time.TimePeriod duration;
+        java.util.Date $stack18;
+        long $stack19;
+        java.lang.Long result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack11 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack12;
+
+        $stack13 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack13);
+
+        if task == null goto label1;
+
+        sub = virtualinvoke task.<org.jfree.data.gantt.Task: org.jfree.data.gantt.Task getSubtask(int)>(subinterval);
+
+        if sub == null goto label1;
+
+        duration = virtualinvoke sub.<org.jfree.data.gantt.Task: org.jfree.data.time.TimePeriod getDuration()>();
+
+        $stack18 = interfaceinvoke duration.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+
+        $stack19 = virtualinvoke $stack18.<java.util.Date: long getTime()>();
+
+        result = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack19);
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getEndValue(int, int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column, subinterval;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack8;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack8 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getEndValue(java.lang.Comparable,java.lang.Comparable,int)>(rowKey, columnKey, subinterval);
+
+        return $stack8;
+    }
+
+    public java.lang.Number getEndValue(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row, subinterval;
+        java.util.List $stack11;
+        java.lang.Object $stack12;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack13;
+        org.jfree.data.gantt.Task task, sub;
+        org.jfree.data.time.TimePeriod duration;
+        java.util.Date $stack18;
+        long $stack19;
+        java.lang.Long result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack11 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack12;
+
+        $stack13 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack13);
+
+        if task == null goto label1;
+
+        sub = virtualinvoke task.<org.jfree.data.gantt.Task: org.jfree.data.gantt.Task getSubtask(int)>(subinterval);
+
+        if sub == null goto label1;
+
+        duration = virtualinvoke sub.<org.jfree.data.gantt.Task: org.jfree.data.time.TimePeriod getDuration()>();
+
+        $stack18 = interfaceinvoke duration.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+
+        $stack19 = virtualinvoke $stack18.<java.util.Date: long getTime()>();
+
+        result = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack19);
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getPercentComplete(int, int, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        int row, column, subinterval;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack8;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        rowKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getRowKey(int)>(row);
+
+        columnKey = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack8 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: java.lang.Number getPercentComplete(java.lang.Comparable,java.lang.Comparable,int)>(rowKey, columnKey, subinterval);
+
+        return $stack8;
+    }
+
+    public java.lang.Number getPercentComplete(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.lang.Comparable rowKey, columnKey;
+        int row, subinterval;
+        java.util.List $stack10;
+        java.lang.Object $stack11;
+        org.jfree.data.gantt.TaskSeries series;
+        java.lang.String $stack12;
+        org.jfree.data.gantt.Task task, sub;
+        java.lang.Double result;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        result = null;
+
+        row = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack10 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack11 = interfaceinvoke $stack10.<java.util.List: java.lang.Object get(int)>(row);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack11;
+
+        $stack12 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        task = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)>($stack12);
+
+        if task == null goto label1;
+
+        sub = virtualinvoke task.<org.jfree.data.gantt.Task: org.jfree.data.gantt.Task getSubtask(int)>(subinterval);
+
+        if sub == null goto label1;
+
+        result = virtualinvoke sub.<org.jfree.data.gantt.Task: java.lang.Double getPercentComplete()>();
+
+     label1:
+        return result;
+    }
+
+    public void seriesChanged(org.jfree.data.general.SeriesChangeEvent)
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        org.jfree.data.general.SeriesChangeEvent event;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        event := @parameter0: org.jfree.data.general.SeriesChangeEvent;
+
+        specialinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void refreshKeys()>();
+
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    private void refreshKeys()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack7, $stack9, $stack11, $stack18, $stack21;
+        int $stack8, index, i;
+        java.lang.Object $stack10, $stack16;
+        org.jfree.data.gantt.TaskSeries series;
+        java.util.Iterator iterator;
+        boolean $stack13;
+        org.jfree.data.gantt.Task task;
+        java.lang.String key;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack7 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        interfaceinvoke $stack7.<java.util.List: void clear()>();
+
+        i = 0;
+
+     label1:
+        $stack8 = virtualinvoke this.<org.jfree.data.gantt.TaskSeriesCollection: int getSeriesCount()>();
+
+        if i >= $stack8 goto label5;
+
+        $stack9 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(i);
+
+        series = (org.jfree.data.gantt.TaskSeries) $stack10;
+
+        $stack11 = virtualinvoke series.<org.jfree.data.gantt.TaskSeries: java.util.List getTasks()>();
+
+        iterator = interfaceinvoke $stack11.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack13 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label4;
+
+        $stack16 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        task = (org.jfree.data.gantt.Task) $stack16;
+
+        key = virtualinvoke task.<org.jfree.data.gantt.Task: java.lang.String getDescription()>();
+
+        $stack18 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        index = interfaceinvoke $stack18.<java.util.List: int indexOf(java.lang.Object)>(key);
+
+        if index >= 0 goto label3;
+
+        $stack21 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        interfaceinvoke $stack21.<java.util.List: boolean add(java.lang.Object)>(key);
+
+     label3:
+        goto label2;
+
+     label4:
+        i = i + 1;
+
+        goto label1;
+
+     label5:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.gantt.TaskSeriesCollection this, that;
+        boolean $stack3, $stack6;
+        java.util.List $stack4, $stack5;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.gantt.TaskSeriesCollection;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.gantt.TaskSeriesCollection) obj;
+
+        $stack5 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack4 = that.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this;
+        java.util.List $stack2;
+        int $stack3, $stack4, hash#2;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack3 = 89 * 7;
+
+        $stack2 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack4 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack2);
+
+        hash#2 = $stack3 + $stack4;
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.gantt.TaskSeriesCollection this, clone;
+        java.lang.Object $stack2;
+        java.util.List $stack3, $stack4, $stack6;
+        java.util.ArrayList $stack5;
+
+        this := @this: org.jfree.data.gantt.TaskSeriesCollection;
+
+        $stack2 = specialinvoke this.<org.jfree.data.general.AbstractSeriesDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.gantt.TaskSeriesCollection) $stack2;
+
+        $stack3 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack3);
+
+        clone.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List data> = $stack4;
+
+        $stack5 = new java.util.ArrayList;
+
+        $stack6 = this.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys>;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>(java.util.Collection)>($stack6);
+
+        clone.<org.jfree.data.gantt.TaskSeriesCollection: java.util.List keys> = $stack5;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.gantt.TaskSeriesCollection: long serialVersionUID> = -2065799050738449903L;
+
+        return;
+    }
+}

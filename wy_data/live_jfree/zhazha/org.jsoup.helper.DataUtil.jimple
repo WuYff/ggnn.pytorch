@@ -1,0 +1,791 @@
+public final class org.jsoup.helper.DataUtil extends java.lang.Object
+{
+    private static final java.util.regex.Pattern charsetPattern;
+    static final java.lang.String defaultCharset;
+    private static final int firstReadBufferSize;
+    static final int bufferSize;
+    private static final char[] mimeBoundaryChars;
+    static final int boundaryLength;
+
+    private void <init>()
+    {
+        org.jsoup.helper.DataUtil this;
+
+        this := @this: org.jsoup.helper.DataUtil;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jsoup.nodes.Document load(java.io.File, java.lang.String, java.lang.String) throws java.io.IOException
+    {
+        java.io.File in;
+        java.lang.String $stack7, name, charsetName, baseUri;
+        boolean $stack9, $stack23, $stack20;
+        int $stack10, $stack19;
+        java.io.InputStream stream, $stack11;
+        org.jsoup.parser.Parser $stack12;
+        org.jsoup.nodes.Document $stack13;
+        java.io.FileInputStream $u0, $u1, $u3;
+        java.util.zip.GZIPInputStream $u2;
+
+        in := @parameter0: java.io.File;
+
+        charsetName := @parameter1: java.lang.String;
+
+        baseUri := @parameter2: java.lang.String;
+
+        $u0 = new java.io.FileInputStream;
+
+        specialinvoke $u0.<java.io.FileInputStream: void <init>(java.io.File)>(in);
+
+        stream = $u0;
+
+        $stack7 = virtualinvoke in.<java.io.File: java.lang.String getName()>();
+
+        name = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>($stack7);
+
+        $stack9 = virtualinvoke name.<java.lang.String: boolean endsWith(java.lang.String)>(".gz");
+
+        if $stack9 != 0 goto label1;
+
+        $stack23 = virtualinvoke name.<java.lang.String: boolean endsWith(java.lang.String)>(".z");
+
+        if $stack23 == 0 goto label6;
+
+     label1:
+        $stack10 = virtualinvoke $u0.<java.io.InputStream: int read()>();
+
+        if $stack10 != 31 goto label2;
+
+        $stack19 = virtualinvoke $u0.<java.io.InputStream: int read()>();
+
+        if $stack19 != 139 goto label2;
+
+        $stack20 = 1;
+
+        goto label3;
+
+     label2:
+        $stack20 = 0;
+
+     label3:
+        virtualinvoke $u0.<java.io.InputStream: void close()>();
+
+        if $stack20 == 0 goto label4;
+
+        $u2 = new java.util.zip.GZIPInputStream;
+
+        $stack11 = $u2;
+
+        $u1 = new java.io.FileInputStream;
+
+        specialinvoke $u1.<java.io.FileInputStream: void <init>(java.io.File)>(in);
+
+        specialinvoke $u2.<java.util.zip.GZIPInputStream: void <init>(java.io.InputStream)>($u1);
+
+        goto label5;
+
+     label4:
+        $u3 = new java.io.FileInputStream;
+
+        $stack11 = $u3;
+
+        specialinvoke $u3.<java.io.FileInputStream: void <init>(java.io.File)>(in);
+
+     label5:
+        stream = $stack11;
+
+     label6:
+        $stack12 = staticinvoke <org.jsoup.parser.Parser: org.jsoup.parser.Parser htmlParser()>();
+
+        $stack13 = staticinvoke <org.jsoup.helper.DataUtil: org.jsoup.nodes.Document parseInputStream(java.io.InputStream,java.lang.String,java.lang.String,org.jsoup.parser.Parser)>(stream, charsetName, baseUri, $stack12);
+
+        return $stack13;
+    }
+
+    public static org.jsoup.nodes.Document load(java.io.InputStream, java.lang.String, java.lang.String) throws java.io.IOException
+    {
+        java.io.InputStream in;
+        java.lang.String charsetName, baseUri;
+        org.jsoup.parser.Parser $stack3;
+        org.jsoup.nodes.Document $stack4;
+
+        in := @parameter0: java.io.InputStream;
+
+        charsetName := @parameter1: java.lang.String;
+
+        baseUri := @parameter2: java.lang.String;
+
+        $stack3 = staticinvoke <org.jsoup.parser.Parser: org.jsoup.parser.Parser htmlParser()>();
+
+        $stack4 = staticinvoke <org.jsoup.helper.DataUtil: org.jsoup.nodes.Document parseInputStream(java.io.InputStream,java.lang.String,java.lang.String,org.jsoup.parser.Parser)>(in, charsetName, baseUri, $stack3);
+
+        return $stack4;
+    }
+
+    public static org.jsoup.nodes.Document load(java.io.InputStream, java.lang.String, java.lang.String, org.jsoup.parser.Parser) throws java.io.IOException
+    {
+        java.io.InputStream in;
+        java.lang.String charsetName, baseUri;
+        org.jsoup.parser.Parser parser;
+        org.jsoup.nodes.Document $stack4;
+
+        in := @parameter0: java.io.InputStream;
+
+        charsetName := @parameter1: java.lang.String;
+
+        baseUri := @parameter2: java.lang.String;
+
+        parser := @parameter3: org.jsoup.parser.Parser;
+
+        $stack4 = staticinvoke <org.jsoup.helper.DataUtil: org.jsoup.nodes.Document parseInputStream(java.io.InputStream,java.lang.String,java.lang.String,org.jsoup.parser.Parser)>(in, charsetName, baseUri, parser);
+
+        return $stack4;
+    }
+
+    static void crossStreams(java.io.InputStream, java.io.OutputStream) throws java.io.IOException
+    {
+        byte[] buffer;
+        java.io.InputStream in;
+        int $stack4;
+        java.io.OutputStream out;
+
+        in := @parameter0: java.io.InputStream;
+
+        out := @parameter1: java.io.OutputStream;
+
+        buffer = newarray (byte)[32768];
+
+     label1:
+        $stack4 = virtualinvoke in.<java.io.InputStream: int read(byte[])>(buffer);
+
+        if $stack4 == -1 goto label2;
+
+        virtualinvoke out.<java.io.OutputStream: void write(byte[],int,int)>(buffer, 0, $stack4);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    static org.jsoup.nodes.Document parseInputStream(java.io.InputStream, java.lang.String, java.lang.String, org.jsoup.parser.Parser) throws java.io.IOException
+    {
+        java.nio.ByteBuffer firstBytes;
+        int $stack15, $stack52;
+        boolean fullyRead, $stack23, $stack27, $stack40, $stack45, $stack48, $stack56, $stack57, $stack59, $stack61, $stack65, $stack68, $stack79, $stack33;
+        org.jsoup.helper.DataUtil$BomCharset bomCharset;
+        java.io.BufferedReader $stack17;
+        java.io.InputStreamReader $stack18;
+        org.jsoup.parser.Parser parser;
+        java.lang.String baseUri, $stack41, $stack50, $stack58, $stack71, charsetName, foundCharset;
+        org.jsoup.nodes.Document$OutputSettings $stack21;
+        java.nio.charset.Charset $stack26, $stack38, foundCharset#49;
+        byte $stack32;
+        org.jsoup.nodes.Comment comment;
+        java.lang.Object $stack64;
+        java.io.CharArrayReader $stack74;
+        char[] $stack75;
+        org.jsoup.nodes.Document $stack83, doc;
+        org.jsoup.UncheckedIOException $stack84, $stack86;
+        java.io.IOException $stack85, $stack87;
+        java.io.InputStream input;
+        org.jsoup.internal.ConstrainableInputStream input#3;
+        java.nio.CharBuffer defaultDecoded;
+        org.jsoup.select.Elements defaultDecoded#8;
+        java.util.Iterator first;
+        org.jsoup.nodes.Element meta;
+        org.jsoup.nodes.Node first#14;
+        org.jsoup.nodes.XmlDeclaration meta#15;
+        long foundCharset#34;
+
+        input := @parameter0: java.io.InputStream;
+
+        charsetName := @parameter1: java.lang.String;
+
+        baseUri := @parameter2: java.lang.String;
+
+        parser := @parameter3: org.jsoup.parser.Parser;
+
+        if input != null goto label01;
+
+        $stack83 = new org.jsoup.nodes.Document;
+
+        specialinvoke $stack83.<org.jsoup.nodes.Document: void <init>(java.lang.String)>(baseUri);
+
+        return $stack83;
+
+     label01:
+        input#3 = staticinvoke <org.jsoup.internal.ConstrainableInputStream: org.jsoup.internal.ConstrainableInputStream wrap(java.io.InputStream,int,int)>(input, 32768, 0);
+
+        doc = null;
+
+        virtualinvoke input#3.<java.io.InputStream: void mark(int)>(32768);
+
+        firstBytes = staticinvoke <org.jsoup.helper.DataUtil: java.nio.ByteBuffer readToByteBuffer(java.io.InputStream,int)>(input#3, 5119);
+
+        $stack15 = virtualinvoke input#3.<java.io.InputStream: int read()>();
+
+        if $stack15 != -1 goto label02;
+
+        $stack79 = 1;
+
+        goto label03;
+
+     label02:
+        $stack79 = 0;
+
+     label03:
+        fullyRead = $stack79;
+
+        virtualinvoke input#3.<java.io.InputStream: void reset()>();
+
+        bomCharset = staticinvoke <org.jsoup.helper.DataUtil: org.jsoup.helper.DataUtil$BomCharset detectCharsetFromBom(java.nio.ByteBuffer)>(firstBytes);
+
+        if bomCharset == null goto label04;
+
+        charsetName = staticinvoke <org.jsoup.helper.DataUtil$BomCharset: java.lang.String access$000(org.jsoup.helper.DataUtil$BomCharset)>(bomCharset);
+
+     label04:
+        if charsetName != null goto label20;
+
+     label05:
+        $stack38 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>("UTF-8");
+
+        defaultDecoded = virtualinvoke $stack38.<java.nio.charset.Charset: java.nio.CharBuffer decode(java.nio.ByteBuffer)>(firstBytes);
+
+        $stack40 = virtualinvoke defaultDecoded.<java.nio.CharBuffer: boolean hasArray()>();
+
+        if $stack40 == 0 goto label06;
+
+        $stack74 = new java.io.CharArrayReader;
+
+        $stack75 = virtualinvoke defaultDecoded.<java.nio.CharBuffer: char[] array()>();
+
+        specialinvoke $stack74.<java.io.CharArrayReader: void <init>(char[])>($stack75);
+
+        doc = virtualinvoke parser.<org.jsoup.parser.Parser: org.jsoup.nodes.Document parseInput(java.io.Reader,java.lang.String)>($stack74, baseUri);
+
+        goto label07;
+
+     label06:
+        $stack41 = virtualinvoke defaultDecoded.<java.nio.CharBuffer: java.lang.String toString()>();
+
+        doc = virtualinvoke parser.<org.jsoup.parser.Parser: org.jsoup.nodes.Document parseInput(java.lang.String,java.lang.String)>($stack41, baseUri);
+
+     label07:
+        goto label09;
+
+     label08:
+        $stack86 := @caughtexception;
+
+        $stack87 = virtualinvoke $stack86.<org.jsoup.UncheckedIOException: java.io.IOException ioException()>();
+
+        throw $stack87;
+
+     label09:
+        defaultDecoded#8 = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("meta[http-equiv=content-type], meta[charset]");
+
+        foundCharset = null;
+
+        first = virtualinvoke defaultDecoded#8.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label10:
+        $stack45 = interfaceinvoke first.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack45 == 0 goto label14;
+
+        $stack64 = interfaceinvoke first.<java.util.Iterator: java.lang.Object next()>();
+
+        meta = (org.jsoup.nodes.Element) $stack64;
+
+        $stack65 = virtualinvoke meta.<org.jsoup.nodes.Element: boolean hasAttr(java.lang.String)>("http-equiv");
+
+        if $stack65 == 0 goto label11;
+
+        $stack71 = virtualinvoke meta.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("content");
+
+        foundCharset = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String getCharsetFromContentType(java.lang.String)>($stack71);
+
+     label11:
+        if foundCharset != null goto label12;
+
+        $stack68 = virtualinvoke meta.<org.jsoup.nodes.Element: boolean hasAttr(java.lang.String)>("charset");
+
+        if $stack68 == 0 goto label12;
+
+        foundCharset = virtualinvoke meta.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("charset");
+
+     label12:
+        if foundCharset == null goto label13;
+
+        goto label14;
+
+     label13:
+        goto label10;
+
+     label14:
+        if foundCharset != null goto label17;
+
+        $stack52 = virtualinvoke doc.<org.jsoup.nodes.Document: int childNodeSize()>();
+
+        if $stack52 <= 0 goto label17;
+
+        first#14 = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.nodes.Node childNode(int)>(0);
+
+        meta#15 = null;
+
+        $stack56 = first#14 instanceof org.jsoup.nodes.XmlDeclaration;
+
+        if $stack56 == 0 goto label15;
+
+        meta#15 = (org.jsoup.nodes.XmlDeclaration) first#14;
+
+        goto label16;
+
+     label15:
+        $stack57 = first#14 instanceof org.jsoup.nodes.Comment;
+
+        if $stack57 == 0 goto label16;
+
+        comment = (org.jsoup.nodes.Comment) first#14;
+
+        $stack61 = virtualinvoke comment.<org.jsoup.nodes.Comment: boolean isXmlDeclaration()>();
+
+        if $stack61 == 0 goto label16;
+
+        meta#15 = virtualinvoke comment.<org.jsoup.nodes.Comment: org.jsoup.nodes.XmlDeclaration asXmlDeclaration()>();
+
+     label16:
+        if meta#15 == null goto label17;
+
+        $stack58 = virtualinvoke meta#15.<org.jsoup.nodes.XmlDeclaration: java.lang.String name()>();
+
+        $stack59 = virtualinvoke $stack58.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("xml");
+
+        if $stack59 == 0 goto label17;
+
+        foundCharset = virtualinvoke meta#15.<org.jsoup.nodes.XmlDeclaration: java.lang.String attr(java.lang.String)>("encoding");
+
+     label17:
+        foundCharset = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String validateCharset(java.lang.String)>(foundCharset);
+
+        if foundCharset == null goto label18;
+
+        $stack48 = virtualinvoke foundCharset.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("UTF-8");
+
+        if $stack48 != 0 goto label18;
+
+        $stack50 = virtualinvoke foundCharset.<java.lang.String: java.lang.String trim()>();
+
+        foundCharset = virtualinvoke $stack50.<java.lang.String: java.lang.String replaceAll(java.lang.String,java.lang.String)>("[\"\']", "");
+
+        charsetName = foundCharset;
+
+        doc = null;
+
+        goto label19;
+
+     label18:
+        if fullyRead != 0 goto label19;
+
+        doc = null;
+
+     label19:
+        goto label21;
+
+     label20:
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String,java.lang.String)>(charsetName, "Must set charset arg to character set of file to parse. Set to null to attempt to detect from HTML");
+
+     label21:
+        if doc != null goto label29;
+
+        if charsetName != null goto label22;
+
+        charsetName = "UTF-8";
+
+     label22:
+        $stack17 = new java.io.BufferedReader;
+
+        $stack18 = new java.io.InputStreamReader;
+
+        specialinvoke $stack18.<java.io.InputStreamReader: void <init>(java.io.InputStream,java.lang.String)>(input#3, charsetName);
+
+        specialinvoke $stack17.<java.io.BufferedReader: void <init>(java.io.Reader,int)>($stack18, 32768);
+
+        if bomCharset == null goto label25;
+
+        $stack27 = staticinvoke <org.jsoup.helper.DataUtil$BomCharset: boolean access$100(org.jsoup.helper.DataUtil$BomCharset)>(bomCharset);
+
+        if $stack27 == 0 goto label25;
+
+        foundCharset#34 = virtualinvoke $stack17.<java.io.BufferedReader: long skip(long)>(1L);
+
+        $stack32 = foundCharset#34 cmp 1L;
+
+        if $stack32 != 0 goto label23;
+
+        $stack33 = 1;
+
+        goto label24;
+
+     label23:
+        $stack33 = 0;
+
+     label24:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean)>($stack33);
+
+     label25:
+        doc = virtualinvoke parser.<org.jsoup.parser.Parser: org.jsoup.nodes.Document parseInput(java.io.Reader,java.lang.String)>($stack17, baseUri);
+
+     label26:
+        goto label28;
+
+     label27:
+        $stack84 := @caughtexception;
+
+        $stack85 = virtualinvoke $stack84.<org.jsoup.UncheckedIOException: java.io.IOException ioException()>();
+
+        throw $stack85;
+
+     label28:
+        foundCharset#49 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>(charsetName);
+
+        $stack21 = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings()>();
+
+        virtualinvoke $stack21.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings charset(java.nio.charset.Charset)>(foundCharset#49);
+
+        $stack23 = virtualinvoke foundCharset#49.<java.nio.charset.Charset: boolean canEncode()>();
+
+        if $stack23 != 0 goto label29;
+
+        $stack26 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>("UTF-8");
+
+        virtualinvoke doc.<org.jsoup.nodes.Document: void charset(java.nio.charset.Charset)>($stack26);
+
+     label29:
+        virtualinvoke input#3.<java.io.InputStream: void close()>();
+
+        return doc;
+
+        catch org.jsoup.UncheckedIOException from label05 to label07 with label08;
+        catch org.jsoup.UncheckedIOException from label25 to label26 with label27;
+    }
+
+    public static java.nio.ByteBuffer readToByteBuffer(java.io.InputStream, int) throws java.io.IOException
+    {
+        int maxSize;
+        java.io.InputStream inStream;
+        org.jsoup.internal.ConstrainableInputStream input;
+        java.nio.ByteBuffer $stack4;
+        boolean $stack5;
+
+        inStream := @parameter0: java.io.InputStream;
+
+        maxSize := @parameter1: int;
+
+        if maxSize < 0 goto label1;
+
+        $stack5 = 1;
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack5, "maxSize must be 0 (unlimited) or larger");
+
+        input = staticinvoke <org.jsoup.internal.ConstrainableInputStream: org.jsoup.internal.ConstrainableInputStream wrap(java.io.InputStream,int,int)>(inStream, 32768, maxSize);
+
+        $stack4 = virtualinvoke input.<org.jsoup.internal.ConstrainableInputStream: java.nio.ByteBuffer readToByteBuffer(int)>(maxSize);
+
+        return $stack4;
+    }
+
+    static java.nio.ByteBuffer emptyByteBuffer()
+    {
+        java.nio.ByteBuffer $stack0;
+
+        $stack0 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer allocate(int)>(0);
+
+        return $stack0;
+    }
+
+    static java.lang.String getCharsetFromContentType(java.lang.String)
+    {
+        java.lang.String contentType, $stack6, $stack9, charset;
+        java.util.regex.Pattern $stack3;
+        java.util.regex.Matcher m;
+        boolean $stack5;
+
+        contentType := @parameter0: java.lang.String;
+
+        if contentType != null goto label1;
+
+        return null;
+
+     label1:
+        $stack3 = <org.jsoup.helper.DataUtil: java.util.regex.Pattern charsetPattern>;
+
+        m = virtualinvoke $stack3.<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>(contentType);
+
+        $stack5 = virtualinvoke m.<java.util.regex.Matcher: boolean find()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack6 = virtualinvoke m.<java.util.regex.Matcher: java.lang.String group(int)>(1);
+
+        charset = virtualinvoke $stack6.<java.lang.String: java.lang.String trim()>();
+
+        charset = virtualinvoke charset.<java.lang.String: java.lang.String replace(java.lang.CharSequence,java.lang.CharSequence)>("charset=", "");
+
+        $stack9 = staticinvoke <org.jsoup.helper.DataUtil: java.lang.String validateCharset(java.lang.String)>(charset);
+
+        return $stack9;
+
+     label2:
+        return null;
+    }
+
+    private static java.lang.String validateCharset(java.lang.String)
+    {
+        int $stack2;
+        java.lang.String $stack3, cs, cs#2;
+        boolean $stack5, $stack8;
+        java.util.Locale $stack6;
+        java.nio.charset.IllegalCharsetNameException $stack10;
+
+        cs := @parameter0: java.lang.String;
+
+        if cs == null goto label1;
+
+        $stack2 = virtualinvoke cs.<java.lang.String: int length()>();
+
+        if $stack2 != 0 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        $stack3 = virtualinvoke cs.<java.lang.String: java.lang.String trim()>();
+
+        cs#2 = virtualinvoke $stack3.<java.lang.String: java.lang.String replaceAll(java.lang.String,java.lang.String)>("[\"\']", "");
+
+     label3:
+        $stack5 = staticinvoke <java.nio.charset.Charset: boolean isSupported(java.lang.String)>(cs#2);
+
+        if $stack5 == 0 goto label5;
+
+     label4:
+        return cs#2;
+
+     label5:
+        $stack6 = <java.util.Locale: java.util.Locale ENGLISH>;
+
+        cs#2 = virtualinvoke cs#2.<java.lang.String: java.lang.String toUpperCase(java.util.Locale)>($stack6);
+
+        $stack8 = staticinvoke <java.nio.charset.Charset: boolean isSupported(java.lang.String)>(cs#2);
+
+        if $stack8 == 0 goto label7;
+
+     label6:
+        return cs#2;
+
+     label7:
+        goto label9;
+
+     label8:
+        $stack10 := @caughtexception;
+
+     label9:
+        return null;
+
+        catch java.nio.charset.IllegalCharsetNameException from label3 to label4 with label8;
+        catch java.nio.charset.IllegalCharsetNameException from label5 to label6 with label8;
+    }
+
+    static java.lang.String mimeBoundary()
+    {
+        java.lang.StringBuilder mime;
+        java.util.Random $stack4;
+        java.lang.String $stack5;
+        char[] $stack6, $stack8;
+        int $stack7, $stack9, i;
+        char $stack10;
+
+        mime = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+        $stack4 = new java.util.Random;
+
+        specialinvoke $stack4.<java.util.Random: void <init>()>();
+
+        i = 0;
+
+     label1:
+        if i >= 32 goto label2;
+
+        $stack8 = <org.jsoup.helper.DataUtil: char[] mimeBoundaryChars>;
+
+        $stack6 = <org.jsoup.helper.DataUtil: char[] mimeBoundaryChars>;
+
+        $stack7 = lengthof $stack6;
+
+        $stack9 = virtualinvoke $stack4.<java.util.Random: int nextInt(int)>($stack7);
+
+        $stack10 = $stack8[$stack9];
+
+        virtualinvoke mime.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack10);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(mime);
+
+        return $stack5;
+    }
+
+    private static org.jsoup.helper.DataUtil$BomCharset detectCharsetFromBom(java.nio.ByteBuffer)
+    {
+        java.nio.ByteBuffer byteData;
+        byte[] bom;
+        int $stack4, $stack5;
+        byte $stack6, $stack9, $stack10, $stack11, $stack13, $stack15, $stack20, $stack26, $stack30, $stack31, $stack33, $stack37, $stack38, $stack7, $stack8;
+        org.jsoup.helper.DataUtil$BomCharset $stack14, $stack19, $stack32;
+
+        byteData := @parameter0: java.nio.ByteBuffer;
+
+        virtualinvoke byteData.<java.nio.Buffer: java.nio.Buffer mark()>();
+
+        bom = newarray (byte)[4];
+
+        $stack4 = virtualinvoke byteData.<java.nio.ByteBuffer: int remaining()>();
+
+        $stack5 = lengthof bom;
+
+        if $stack4 < $stack5 goto label1;
+
+        virtualinvoke byteData.<java.nio.ByteBuffer: java.nio.ByteBuffer get(byte[])>(bom);
+
+        virtualinvoke byteData.<java.nio.Buffer: java.nio.Buffer rewind()>();
+
+     label1:
+        $stack6 = bom[0];
+
+        if $stack6 != 0 goto label2;
+
+        $stack33 = bom[1];
+
+        if $stack33 != 0 goto label2;
+
+        $stack37 = bom[2];
+
+        if $stack37 != -2 goto label2;
+
+        $stack38 = bom[3];
+
+        if $stack38 == -1 goto label3;
+
+     label2:
+        $stack7 = bom[0];
+
+        if $stack7 != -1 goto label4;
+
+        $stack26 = bom[1];
+
+        if $stack26 != -2 goto label4;
+
+        $stack30 = bom[2];
+
+        if $stack30 != 0 goto label4;
+
+        $stack31 = bom[3];
+
+        if $stack31 != 0 goto label4;
+
+     label3:
+        $stack32 = new org.jsoup.helper.DataUtil$BomCharset;
+
+        specialinvoke $stack32.<org.jsoup.helper.DataUtil$BomCharset: void <init>(java.lang.String,boolean)>("UTF-32", 0);
+
+        return $stack32;
+
+     label4:
+        $stack8 = bom[0];
+
+        if $stack8 != -2 goto label5;
+
+        $stack20 = bom[1];
+
+        if $stack20 == -1 goto label6;
+
+     label5:
+        $stack9 = bom[0];
+
+        if $stack9 != -1 goto label7;
+
+        $stack15 = bom[1];
+
+        if $stack15 != -2 goto label7;
+
+     label6:
+        $stack19 = new org.jsoup.helper.DataUtil$BomCharset;
+
+        specialinvoke $stack19.<org.jsoup.helper.DataUtil$BomCharset: void <init>(java.lang.String,boolean)>("UTF-16", 0);
+
+        return $stack19;
+
+     label7:
+        $stack10 = bom[0];
+
+        if $stack10 != -17 goto label8;
+
+        $stack11 = bom[1];
+
+        if $stack11 != -69 goto label8;
+
+        $stack13 = bom[2];
+
+        if $stack13 != -65 goto label8;
+
+        $stack14 = new org.jsoup.helper.DataUtil$BomCharset;
+
+        specialinvoke $stack14.<org.jsoup.helper.DataUtil$BomCharset: void <init>(java.lang.String,boolean)>("UTF-8", 1);
+
+        return $stack14;
+
+     label8:
+        return null;
+    }
+
+    static void <clinit>()
+    {
+        java.util.regex.Pattern $stack0;
+        java.lang.String $stack1;
+        char[] $stack2;
+
+        <org.jsoup.helper.DataUtil: int boundaryLength> = 32;
+
+        <org.jsoup.helper.DataUtil: int bufferSize> = 32768;
+
+        <org.jsoup.helper.DataUtil: int firstReadBufferSize> = 5120;
+
+        <org.jsoup.helper.DataUtil: java.lang.String defaultCharset> = "UTF-8";
+
+        $stack0 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("(?i)\\bcharset=\\s*(?:[\"\'])?([^\\s,;\"\']*)");
+
+        <org.jsoup.helper.DataUtil: java.util.regex.Pattern charsetPattern> = $stack0;
+
+        $stack1 = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: char[] toCharArray()>();
+
+        <org.jsoup.helper.DataUtil: char[] mimeBoundaryChars> = $stack2;
+
+        return;
+    }
+}

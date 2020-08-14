@@ -1,0 +1,122 @@
+public class org.jfree.chart.panel.AbstractOverlay extends java.lang.Object
+{
+    private final transient javax.swing.event.EventListenerList changeListeners;
+
+    public void <init>()
+    {
+        org.jfree.chart.panel.AbstractOverlay this;
+        javax.swing.event.EventListenerList $stack1;
+
+        this := @this: org.jfree.chart.panel.AbstractOverlay;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack1.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.chart.panel.AbstractOverlay: javax.swing.event.EventListenerList changeListeners> = $stack1;
+
+        return;
+    }
+
+    public void addChangeListener(org.jfree.chart.event.OverlayChangeListener)
+    {
+        org.jfree.chart.event.OverlayChangeListener listener;
+        org.jfree.chart.panel.AbstractOverlay this;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.panel.AbstractOverlay;
+
+        listener := @parameter0: org.jfree.chart.event.OverlayChangeListener;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(listener, "listener");
+
+        $stack2 = this.<org.jfree.chart.panel.AbstractOverlay: javax.swing.event.EventListenerList changeListeners>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/OverlayChangeListener;", listener);
+
+        return;
+    }
+
+    public void removeChangeListener(org.jfree.chart.event.OverlayChangeListener)
+    {
+        org.jfree.chart.event.OverlayChangeListener listener;
+        org.jfree.chart.panel.AbstractOverlay this;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.panel.AbstractOverlay;
+
+        listener := @parameter0: org.jfree.chart.event.OverlayChangeListener;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(listener, "listener");
+
+        $stack2 = this.<org.jfree.chart.panel.AbstractOverlay: javax.swing.event.EventListenerList changeListeners>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/OverlayChangeListener;", listener);
+
+        return;
+    }
+
+    public void fireOverlayChanged()
+    {
+        org.jfree.chart.event.OverlayChangeEvent $stack2;
+        org.jfree.chart.panel.AbstractOverlay this;
+
+        this := @this: org.jfree.chart.panel.AbstractOverlay;
+
+        $stack2 = new org.jfree.chart.event.OverlayChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.OverlayChangeEvent: void <init>(java.lang.Object)>(this);
+
+        virtualinvoke this.<org.jfree.chart.panel.AbstractOverlay: void notifyListeners(org.jfree.chart.event.OverlayChangeEvent)>($stack2);
+
+        return;
+    }
+
+    protected void notifyListeners(org.jfree.chart.event.OverlayChangeEvent)
+    {
+        org.jfree.chart.panel.AbstractOverlay this;
+        javax.swing.event.EventListenerList $stack4;
+        java.lang.Object[] listeners;
+        int $stack6, $stack9, i;
+        java.lang.Object $stack7, $stack10;
+        org.jfree.chart.event.OverlayChangeEvent event;
+        org.jfree.chart.event.OverlayChangeListener $stack11;
+
+        this := @this: org.jfree.chart.panel.AbstractOverlay;
+
+        event := @parameter0: org.jfree.chart.event.OverlayChangeEvent;
+
+        $stack4 = this.<org.jfree.chart.panel.AbstractOverlay: javax.swing.event.EventListenerList changeListeners>;
+
+        listeners = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        $stack6 = lengthof listeners;
+
+        i = $stack6 - 2;
+
+     label1:
+        if i < 0 goto label3;
+
+        $stack7 = listeners[i];
+
+        if $stack7 != class "Lorg/jfree/chart/event/OverlayChangeListener;" goto label2;
+
+        $stack9 = i + 1;
+
+        $stack10 = listeners[$stack9];
+
+        $stack11 = (org.jfree.chart.event.OverlayChangeListener) $stack10;
+
+        interfaceinvoke $stack11.<org.jfree.chart.event.OverlayChangeListener: void overlayChanged(org.jfree.chart.event.OverlayChangeEvent)>(event);
+
+     label2:
+        i = i + -2;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+}

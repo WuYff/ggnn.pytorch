@@ -1,0 +1,242 @@
+final class org.jsoup.safety.Cleaner$CleaningVisitor extends java.lang.Object implements org.jsoup.select.NodeVisitor
+{
+    private int numDiscarded;
+    private final org.jsoup.nodes.Element root;
+    private org.jsoup.nodes.Element destination;
+    final org.jsoup.safety.Cleaner this$0;
+
+    private void <init>(org.jsoup.safety.Cleaner, org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.safety.Cleaner$CleaningVisitor this;
+        org.jsoup.safety.Cleaner l1;
+        org.jsoup.nodes.Element root, destination;
+
+        this := @this: org.jsoup.safety.Cleaner$CleaningVisitor;
+
+        l1 := @parameter0: org.jsoup.safety.Cleaner;
+
+        root := @parameter1: org.jsoup.nodes.Element;
+
+        destination := @parameter2: org.jsoup.nodes.Element;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.safety.Cleaner this$0> = l1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded> = 0;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element root> = root;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination> = destination;
+
+        return;
+    }
+
+    public void head(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node source, $stack13;
+        boolean $stack6, $stack7, $stack8, $stack15, $stack29;
+        org.jsoup.safety.Cleaner$CleaningVisitor this;
+        int $stack9, $stack10, $stack31, $stack32, $stack37, $stack38, $stack39, depth;
+        org.jsoup.safety.Cleaner $stack11, $stack26, $stack33;
+        org.jsoup.safety.Whitelist $stack12, $stack27;
+        java.lang.String $stack14, $stack19, $stack23, $stack28;
+        org.jsoup.nodes.DataNode $stack18, sourceEl#5;
+        org.jsoup.nodes.Element $stack20, $stack24, $stack30, destChild, $stack35, sourceEl;
+        org.jsoup.nodes.TextNode $stack22, sourceEl#3;
+        org.jsoup.safety.Cleaner$ElementMeta meta;
+
+        this := @this: org.jsoup.safety.Cleaner$CleaningVisitor;
+
+        source := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        $stack6 = source instanceof org.jsoup.nodes.Element;
+
+        if $stack6 == 0 goto label3;
+
+        sourceEl = (org.jsoup.nodes.Element) source;
+
+        $stack26 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.safety.Cleaner this$0>;
+
+        $stack27 = staticinvoke <org.jsoup.safety.Cleaner: org.jsoup.safety.Whitelist access$000(org.jsoup.safety.Cleaner)>($stack26);
+
+        $stack28 = virtualinvoke sourceEl.<org.jsoup.nodes.Element: java.lang.String normalName()>();
+
+        $stack29 = virtualinvoke $stack27.<org.jsoup.safety.Whitelist: boolean isSafeTag(java.lang.String)>($stack28);
+
+        if $stack29 == 0 goto label1;
+
+        $stack33 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.safety.Cleaner this$0>;
+
+        meta = staticinvoke <org.jsoup.safety.Cleaner: org.jsoup.safety.Cleaner$ElementMeta access$100(org.jsoup.safety.Cleaner,org.jsoup.nodes.Element)>($stack33, sourceEl);
+
+        destChild = meta.<org.jsoup.safety.Cleaner$ElementMeta: org.jsoup.nodes.Element el>;
+
+        $stack35 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination>;
+
+        virtualinvoke $stack35.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>(destChild);
+
+        $stack38 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded>;
+
+        $stack37 = meta.<org.jsoup.safety.Cleaner$ElementMeta: int numAttribsDiscarded>;
+
+        $stack39 = $stack38 + $stack37;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded> = $stack39;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination> = destChild;
+
+        goto label2;
+
+     label1:
+        $stack30 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element root>;
+
+        if source == $stack30 goto label2;
+
+        $stack31 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded>;
+
+        $stack32 = $stack31 + 1;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded> = $stack32;
+
+     label2:
+        goto label6;
+
+     label3:
+        $stack7 = source instanceof org.jsoup.nodes.TextNode;
+
+        if $stack7 == 0 goto label4;
+
+        sourceEl#3 = (org.jsoup.nodes.TextNode) source;
+
+        $stack22 = new org.jsoup.nodes.TextNode;
+
+        $stack23 = virtualinvoke sourceEl#3.<org.jsoup.nodes.TextNode: java.lang.String getWholeText()>();
+
+        specialinvoke $stack22.<org.jsoup.nodes.TextNode: void <init>(java.lang.String)>($stack23);
+
+        $stack24 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination>;
+
+        virtualinvoke $stack24.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>($stack22);
+
+        goto label6;
+
+     label4:
+        $stack8 = source instanceof org.jsoup.nodes.DataNode;
+
+        if $stack8 == 0 goto label5;
+
+        $stack11 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.safety.Cleaner this$0>;
+
+        $stack12 = staticinvoke <org.jsoup.safety.Cleaner: org.jsoup.safety.Whitelist access$000(org.jsoup.safety.Cleaner)>($stack11);
+
+        $stack13 = virtualinvoke source.<org.jsoup.nodes.Node: org.jsoup.nodes.Node parent()>();
+
+        $stack14 = virtualinvoke $stack13.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack15 = virtualinvoke $stack12.<org.jsoup.safety.Whitelist: boolean isSafeTag(java.lang.String)>($stack14);
+
+        if $stack15 == 0 goto label5;
+
+        sourceEl#5 = (org.jsoup.nodes.DataNode) source;
+
+        $stack18 = new org.jsoup.nodes.DataNode;
+
+        $stack19 = virtualinvoke sourceEl#5.<org.jsoup.nodes.DataNode: java.lang.String getWholeData()>();
+
+        specialinvoke $stack18.<org.jsoup.nodes.DataNode: void <init>(java.lang.String)>($stack19);
+
+        $stack20 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination>;
+
+        virtualinvoke $stack20.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>($stack18);
+
+        goto label6;
+
+     label5:
+        $stack9 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded>;
+
+        $stack10 = $stack9 + 1;
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded> = $stack10;
+
+     label6:
+        return;
+    }
+
+    public void tail(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node source;
+        boolean $stack3, $stack7;
+        org.jsoup.safety.Cleaner$CleaningVisitor this;
+        org.jsoup.safety.Cleaner $stack4;
+        org.jsoup.safety.Whitelist $stack5;
+        java.lang.String $stack6;
+        org.jsoup.nodes.Element $stack8, $stack9;
+        int depth;
+
+        this := @this: org.jsoup.safety.Cleaner$CleaningVisitor;
+
+        source := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        $stack3 = source instanceof org.jsoup.nodes.Element;
+
+        if $stack3 == 0 goto label1;
+
+        $stack4 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.safety.Cleaner this$0>;
+
+        $stack5 = staticinvoke <org.jsoup.safety.Cleaner: org.jsoup.safety.Whitelist access$000(org.jsoup.safety.Cleaner)>($stack4);
+
+        $stack6 = virtualinvoke source.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack7 = virtualinvoke $stack5.<org.jsoup.safety.Whitelist: boolean isSafeTag(java.lang.String)>($stack6);
+
+        if $stack7 == 0 goto label1;
+
+        $stack8 = this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination>;
+
+        $stack9 = virtualinvoke $stack8.<org.jsoup.nodes.Element: org.jsoup.nodes.Element parent()>();
+
+        this.<org.jsoup.safety.Cleaner$CleaningVisitor: org.jsoup.nodes.Element destination> = $stack9;
+
+     label1:
+        return;
+    }
+
+    void <init>(org.jsoup.safety.Cleaner, org.jsoup.nodes.Element, org.jsoup.nodes.Element, org.jsoup.safety.Cleaner$1)
+    {
+        org.jsoup.safety.Cleaner$CleaningVisitor this;
+        org.jsoup.safety.Cleaner x0;
+        org.jsoup.nodes.Element x1, x2;
+        org.jsoup.safety.Cleaner$1 x3;
+
+        this := @this: org.jsoup.safety.Cleaner$CleaningVisitor;
+
+        x0 := @parameter0: org.jsoup.safety.Cleaner;
+
+        x1 := @parameter1: org.jsoup.nodes.Element;
+
+        x2 := @parameter2: org.jsoup.nodes.Element;
+
+        x3 := @parameter3: org.jsoup.safety.Cleaner$1;
+
+        specialinvoke this.<org.jsoup.safety.Cleaner$CleaningVisitor: void <init>(org.jsoup.safety.Cleaner,org.jsoup.nodes.Element,org.jsoup.nodes.Element)>(x0, x1, x2);
+
+        return;
+    }
+
+    static int access$300(org.jsoup.safety.Cleaner$CleaningVisitor)
+    {
+        org.jsoup.safety.Cleaner$CleaningVisitor x0;
+        int $stack1;
+
+        x0 := @parameter0: org.jsoup.safety.Cleaner$CleaningVisitor;
+
+        $stack1 = x0.<org.jsoup.safety.Cleaner$CleaningVisitor: int numDiscarded>;
+
+        return $stack1;
+    }
+}

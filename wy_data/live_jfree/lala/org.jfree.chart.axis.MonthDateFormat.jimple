@@ -1,0 +1,383 @@
+public class org.jfree.chart.axis.MonthDateFormat extends java.text.DateFormat
+{
+    private java.lang.String[] months;
+    private boolean[] showYear;
+    private java.text.DateFormat yearFormatter;
+
+    public void <init>()
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone $stack1;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        $stack1 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone)>($stack1);
+
+        return;
+    }
+
+    public void <init>(java.util.TimeZone)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone zone;
+        java.util.Locale $stack2;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        $stack2 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone,java.util.Locale,int,boolean,boolean)>(zone, $stack2, 1, 1, 0);
+
+        return;
+    }
+
+    public void <init>(java.util.Locale)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone $stack2;
+        java.util.Locale locale;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        locale := @parameter0: java.util.Locale;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone,java.util.Locale,int,boolean,boolean)>($stack2, locale, 1, 1, 0);
+
+        return;
+    }
+
+    public void <init>(java.util.TimeZone, int)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone zone;
+        java.util.Locale $stack3;
+        int chars;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        chars := @parameter1: int;
+
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone,java.util.Locale,int,boolean,boolean)>(zone, $stack3, chars, 1, 0);
+
+        return;
+    }
+
+    public void <init>(java.util.Locale, int)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone $stack3;
+        java.util.Locale locale;
+        int chars;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        locale := @parameter0: java.util.Locale;
+
+        chars := @parameter1: int;
+
+        $stack3 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone,java.util.Locale,int,boolean,boolean)>($stack3, locale, chars, 1, 0);
+
+        return;
+    }
+
+    public void <init>(java.util.TimeZone, java.util.Locale, int, boolean, boolean)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        int chars;
+        boolean[] $stack6;
+        boolean showYearForJan, showYearForDec;
+        java.text.SimpleDateFormat $stack7;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        locale := @parameter1: java.util.Locale;
+
+        chars := @parameter2: int;
+
+        showYearForJan := @parameter3: boolean;
+
+        showYearForDec := @parameter4: boolean;
+
+        $stack6 = newarray (boolean)[13];
+
+        $stack6[0] = showYearForJan;
+
+        $stack6[1] = 0;
+
+        $stack6[2] = 0;
+
+        $stack6[3] = 0;
+
+        $stack6[4] = 0;
+
+        $stack6[5] = 0;
+
+        $stack6[6] = 0;
+
+        $stack6[7] = 0;
+
+        $stack6[8] = 0;
+
+        $stack6[9] = 0;
+
+        $stack6[10] = 0;
+
+        $stack6[11] = 0;
+
+        $stack6[12] = showYearForDec;
+
+        $stack7 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack7.<java.text.SimpleDateFormat: void <init>(java.lang.String)>("yy");
+
+        specialinvoke this.<org.jfree.chart.axis.MonthDateFormat: void <init>(java.util.TimeZone,java.util.Locale,int,boolean[],java.text.DateFormat)>(zone, locale, chars, $stack6, $stack7);
+
+        return;
+    }
+
+    public void <init>(java.util.TimeZone, java.util.Locale, int, boolean[], java.text.DateFormat)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.Locale locale;
+        java.text.DateFormatSymbols $stack9;
+        java.lang.String[] monthsFromLocale, $stack11, $stack15, $stack19;
+        java.util.GregorianCalendar $stack12;
+        java.util.TimeZone zone;
+        boolean[] showYear;
+        java.text.DateFormat yearFormatter;
+        java.text.NumberFormat $stack13;
+        int chars, $stack22, $stack23, i;
+        java.lang.String $stack14, $stack18, $stack20, $stack24;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        locale := @parameter1: java.util.Locale;
+
+        chars := @parameter2: int;
+
+        showYear := @parameter3: boolean[];
+
+        yearFormatter := @parameter4: java.text.DateFormat;
+
+        specialinvoke this.<java.text.DateFormat: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(locale, "locale");
+
+        $stack9 = new java.text.DateFormatSymbols;
+
+        specialinvoke $stack9.<java.text.DateFormatSymbols: void <init>(java.util.Locale)>(locale);
+
+        monthsFromLocale = virtualinvoke $stack9.<java.text.DateFormatSymbols: java.lang.String[] getMonths()>();
+
+        $stack11 = newarray (java.lang.String)[12];
+
+        this.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months> = $stack11;
+
+        i = 0;
+
+     label1:
+        if i >= 12 goto label4;
+
+        if chars <= 0 goto label2;
+
+        $stack19 = this.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months>;
+
+        $stack20 = monthsFromLocale[i];
+
+        $stack18 = monthsFromLocale[i];
+
+        $stack22 = virtualinvoke $stack18.<java.lang.String: int length()>();
+
+        $stack23 = staticinvoke <java.lang.Math: int min(int,int)>(chars, $stack22);
+
+        $stack24 = virtualinvoke $stack20.<java.lang.String: java.lang.String substring(int,int)>(0, $stack23);
+
+        $stack19[i] = $stack24;
+
+        goto label3;
+
+     label2:
+        $stack15 = this.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months>;
+
+        $stack14 = monthsFromLocale[i];
+
+        $stack15[i] = $stack14;
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        $stack12 = new java.util.GregorianCalendar;
+
+        specialinvoke $stack12.<java.util.GregorianCalendar: void <init>(java.util.TimeZone)>(zone);
+
+        this.<org.jfree.chart.axis.MonthDateFormat: java.util.Calendar calendar> = $stack12;
+
+        this.<org.jfree.chart.axis.MonthDateFormat: boolean[] showYear> = showYear;
+
+        this.<org.jfree.chart.axis.MonthDateFormat: java.text.DateFormat yearFormatter> = yearFormatter;
+
+        $stack13 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        this.<org.jfree.chart.axis.MonthDateFormat: java.text.NumberFormat numberFormat> = $stack13;
+
+        return;
+    }
+
+    public java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.util.Date date;
+        java.util.Calendar $stack5, $stack6;
+        int month;
+        java.lang.StringBuffer toAppendTo;
+        java.lang.String[] $stack8;
+        java.lang.String $stack9, $stack14;
+        boolean[] $stack11;
+        boolean $stack12;
+        java.text.DateFormat $stack13;
+        java.text.FieldPosition fieldPosition;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        date := @parameter0: java.util.Date;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        fieldPosition := @parameter2: java.text.FieldPosition;
+
+        $stack5 = this.<org.jfree.chart.axis.MonthDateFormat: java.util.Calendar calendar>;
+
+        virtualinvoke $stack5.<java.util.Calendar: void setTime(java.util.Date)>(date);
+
+        $stack6 = this.<org.jfree.chart.axis.MonthDateFormat: java.util.Calendar calendar>;
+
+        month = virtualinvoke $stack6.<java.util.Calendar: int get(int)>(2);
+
+        $stack8 = this.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months>;
+
+        $stack9 = $stack8[month];
+
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack9);
+
+        $stack11 = this.<org.jfree.chart.axis.MonthDateFormat: boolean[] showYear>;
+
+        $stack12 = $stack11[month];
+
+        if $stack12 == 0 goto label1;
+
+        $stack13 = this.<org.jfree.chart.axis.MonthDateFormat: java.text.DateFormat yearFormatter>;
+
+        $stack14 = virtualinvoke $stack13.<java.text.DateFormat: java.lang.String format(java.util.Date)>(date);
+
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack14);
+
+     label1:
+        return toAppendTo;
+    }
+
+    public java.util.Date parse(java.lang.String, java.text.ParsePosition)
+    {
+        org.jfree.chart.axis.MonthDateFormat this;
+        java.lang.String source;
+        java.text.ParsePosition pos;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        source := @parameter0: java.lang.String;
+
+        pos := @parameter1: java.text.ParsePosition;
+
+        return null;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.MonthDateFormat this, that;
+        boolean $stack3, $stack4, $stack7, $stack10, $stack13;
+        java.lang.String[] $stack5, $stack6;
+        boolean[] $stack8, $stack9;
+        java.text.DateFormat $stack11, $stack12;
+
+        this := @this: org.jfree.chart.axis.MonthDateFormat;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.MonthDateFormat;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<java.text.DateFormat: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.axis.MonthDateFormat) obj;
+
+        $stack6 = this.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months>;
+
+        $stack5 = that.<org.jfree.chart.axis.MonthDateFormat: java.lang.String[] months>;
+
+        $stack7 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack6, $stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.axis.MonthDateFormat: boolean[] showYear>;
+
+        $stack8 = that.<org.jfree.chart.axis.MonthDateFormat: boolean[] showYear>;
+
+        $stack10 = staticinvoke <java.util.Arrays: boolean equals(boolean[],boolean[])>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.axis.MonthDateFormat: java.text.DateFormat yearFormatter>;
+
+        $stack11 = that.<org.jfree.chart.axis.MonthDateFormat: java.text.DateFormat yearFormatter>;
+
+        $stack13 = virtualinvoke $stack12.<java.text.DateFormat: boolean equals(java.lang.Object)>($stack11);
+
+        if $stack13 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+}

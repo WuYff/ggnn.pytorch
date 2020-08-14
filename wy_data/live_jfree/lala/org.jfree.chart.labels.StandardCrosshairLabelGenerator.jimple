@@ -1,0 +1,179 @@
+public class org.jfree.chart.labels.StandardCrosshairLabelGenerator extends java.lang.Object implements org.jfree.chart.labels.CrosshairLabelGenerator, java.io.Serializable
+{
+    private java.lang.String labelTemplate;
+    private java.text.NumberFormat numberFormat;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        java.text.NumberFormat $stack2;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat)>("{0}", $stack2);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        java.lang.String labelTemplate;
+        java.text.NumberFormat numberFormat;
+        java.lang.IllegalArgumentException $stack3, $stack4;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        labelTemplate := @parameter0: java.lang.String;
+
+        numberFormat := @parameter1: java.text.NumberFormat;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        if labelTemplate != null goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'labelTemplate\' argument.");
+
+        throw $stack4;
+
+     label1:
+        if numberFormat != null goto label2;
+
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'numberFormat\' argument.");
+
+        throw $stack3;
+
+     label2:
+        this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate> = labelTemplate;
+
+        this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.text.NumberFormat numberFormat> = numberFormat;
+
+        return;
+    }
+
+    public java.lang.String getLabelTemplate()
+    {
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate>;
+
+        return $stack1;
+    }
+
+    public java.text.NumberFormat getNumberFormat()
+    {
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        java.text.NumberFormat $stack1;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        return $stack1;
+    }
+
+    public java.lang.String generateLabel(org.jfree.chart.plot.Crosshair)
+    {
+        java.lang.Object[] $stack4;
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        org.jfree.chart.plot.Crosshair crosshair;
+        java.text.NumberFormat $stack6;
+        double $stack7;
+        java.lang.String $stack8, $stack9, result;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        crosshair := @parameter0: org.jfree.chart.plot.Crosshair;
+
+        $stack4 = newarray (java.lang.Object)[1];
+
+        $stack6 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack7 = virtualinvoke crosshair.<org.jfree.chart.plot.Crosshair: double getValue()>();
+
+        $stack8 = virtualinvoke $stack6.<java.text.NumberFormat: java.lang.String format(double)>($stack7);
+
+        $stack4[0] = $stack8;
+
+        $stack9 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate>;
+
+        result = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack9, $stack4);
+
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this, that;
+        boolean $stack3, $stack6, $stack9;
+        java.lang.String $stack4, $stack5;
+        java.text.NumberFormat $stack7, $stack8;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.labels.StandardCrosshairLabelGenerator) obj;
+
+        $stack5 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate>;
+
+        $stack4 = that.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack7 = that.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack9 = virtualinvoke $stack8.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.labels.StandardCrosshairLabelGenerator this;
+        java.lang.String $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.StandardCrosshairLabelGenerator: java.lang.String labelTemplate>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: int hashCode()>();
+
+        return $stack2;
+    }
+}

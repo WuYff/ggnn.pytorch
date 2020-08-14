@@ -1,0 +1,355 @@
+public class org.jfree.data.time.FixedMillisecond extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private final long time;
+
+    public void <init>()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = staticinvoke <java.lang.System: long currentTimeMillis()>();
+
+        specialinvoke this.<org.jfree.data.time.FixedMillisecond: void <init>(long)>($stack1);
+
+        return;
+    }
+
+    public void <init>(long)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long millisecond;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        millisecond := @parameter0: long;
+
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+
+        this.<org.jfree.data.time.FixedMillisecond: long time> = millisecond;
+
+        return;
+    }
+
+    public void <init>(java.util.Date)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        java.util.Date time;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        time := @parameter0: java.util.Date;
+
+        $stack2 = virtualinvoke time.<java.util.Date: long getTime()>();
+
+        specialinvoke this.<org.jfree.data.time.FixedMillisecond: void <init>(long)>($stack2);
+
+        return;
+    }
+
+    public java.util.Date getTime()
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = new java.util.Date;
+
+        $stack2 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        specialinvoke $stack1.<java.util.Date: void <init>(long)>($stack2);
+
+        return $stack1;
+    }
+
+    public void peg(java.util.Calendar)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        java.util.Calendar calendar;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        return;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod previous()
+    {
+        org.jfree.data.time.FixedMillisecond this, $stack5, result;
+        long t, $stack6;
+        byte $stack4;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        result = null;
+
+        t = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        $stack4 = t cmp -9223372036854775808L;
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = new org.jfree.data.time.FixedMillisecond;
+
+        $stack6 = t - 1L;
+
+        specialinvoke $stack5.<org.jfree.data.time.FixedMillisecond: void <init>(long)>($stack6);
+
+        result = $stack5;
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod next()
+    {
+        org.jfree.data.time.FixedMillisecond this, $stack5, result;
+        long t, $stack6;
+        byte $stack4;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        result = null;
+
+        t = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        $stack4 = t cmp 9223372036854775807L;
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = new org.jfree.data.time.FixedMillisecond;
+
+        $stack6 = t + 1L;
+
+        specialinvoke $stack5.<org.jfree.data.time.FixedMillisecond: void <init>(long)>($stack6);
+
+        result = $stack5;
+
+     label1:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object object;
+        boolean $stack3, $stack7;
+        org.jfree.data.time.FixedMillisecond m, this;
+        long $stack4, $stack5;
+        byte $stack6;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        object := @parameter0: java.lang.Object;
+
+        $stack3 = object instanceof org.jfree.data.time.FixedMillisecond;
+
+        if $stack3 == 0 goto label3;
+
+        m = (org.jfree.data.time.FixedMillisecond) object;
+
+        $stack4 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        $stack5 = virtualinvoke m.<org.jfree.data.time.FixedMillisecond: long getFirstMillisecond()>();
+
+        $stack6 = $stack4 cmp $stack5;
+
+        if $stack6 != 0 goto label1;
+
+        $stack7 = 1;
+
+        goto label2;
+
+     label1:
+        $stack7 = 0;
+
+     label2:
+        return $stack7;
+
+     label3:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        $stack2 = (int) $stack1;
+
+        return $stack2;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        java.lang.Object o1;
+        boolean $stack6, $stack7;
+        org.jfree.data.time.FixedMillisecond t1, this;
+        long $stack9, $stack10, difference;
+        byte $stack11, $stack12, result;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        o1 := @parameter0: java.lang.Object;
+
+        $stack6 = o1 instanceof org.jfree.data.time.FixedMillisecond;
+
+        if $stack6 == 0 goto label4;
+
+        t1 = (org.jfree.data.time.FixedMillisecond) o1;
+
+        $stack10 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        $stack9 = t1.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        difference = $stack10 - $stack9;
+
+        $stack11 = difference cmp 0L;
+
+        if $stack11 <= 0 goto label1;
+
+        result = 1;
+
+        goto label3;
+
+     label1:
+        $stack12 = difference cmp 0L;
+
+        if $stack12 >= 0 goto label2;
+
+        result = -1;
+
+        goto label3;
+
+     label2:
+        result = 0;
+
+     label3:
+        goto label6;
+
+     label4:
+        $stack7 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+
+        if $stack7 == 0 goto label5;
+
+        result = 0;
+
+        goto label6;
+
+     label5:
+        result = 1;
+
+     label6:
+        return result;
+    }
+
+    public long getFirstMillisecond()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack1;
+    }
+
+    public long getFirstMillisecond(java.util.Calendar)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack2;
+        java.util.Calendar calendar;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack2 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack2;
+    }
+
+    public long getLastMillisecond()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack1;
+    }
+
+    public long getLastMillisecond(java.util.Calendar)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack2;
+        java.util.Calendar calendar;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack2 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack2;
+    }
+
+    public long getMiddleMillisecond()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack1;
+    }
+
+    public long getMiddleMillisecond(java.util.Calendar)
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack2;
+        java.util.Calendar calendar;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        calendar := @parameter0: java.util.Calendar;
+
+        $stack2 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack2;
+    }
+
+    public long getSerialIndex()
+    {
+        org.jfree.data.time.FixedMillisecond this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.FixedMillisecond;
+
+        $stack1 = this.<org.jfree.data.time.FixedMillisecond: long time>;
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.time.FixedMillisecond: long serialVersionUID> = 7867521484545646931L;
+
+        return;
+    }
+}

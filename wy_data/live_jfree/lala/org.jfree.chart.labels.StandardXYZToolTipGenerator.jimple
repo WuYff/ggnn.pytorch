@@ -1,0 +1,337 @@
+public class org.jfree.chart.labels.StandardXYZToolTipGenerator extends org.jfree.chart.labels.StandardXYToolTipGenerator implements org.jfree.chart.labels.XYZToolTipGenerator, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final java.lang.String DEFAULT_TOOL_TIP_FORMAT;
+    private java.text.NumberFormat zFormat;
+    private java.text.DateFormat zDateFormat;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.text.NumberFormat $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat,java.text.NumberFormat)>("{0}: ({1}, {2}, {3})", $stack2, $stack3, $stack4);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat, java.text.NumberFormat, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.NumberFormat xFormat, yFormat, zFormat;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.NumberFormat;
+
+        yFormat := @parameter2: java.text.NumberFormat;
+
+        zFormat := @parameter3: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(formatString, xFormat, yFormat);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(zFormat, "zFormat");
+
+        this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat> = zFormat;
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.DateFormat, java.text.DateFormat, java.text.DateFormat)
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.DateFormat xFormat, yFormat, zFormat;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.DateFormat;
+
+        yFormat := @parameter2: java.text.DateFormat;
+
+        zFormat := @parameter3: java.text.DateFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>(java.lang.String,java.text.DateFormat,java.text.DateFormat)>(formatString, xFormat, yFormat);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(zFormat, "zFormat");
+
+        this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat> = zFormat;
+
+        return;
+    }
+
+    public java.text.NumberFormat getZFormat()
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.text.NumberFormat $stack1;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat>;
+
+        return $stack1;
+    }
+
+    public java.text.DateFormat getZDateFormat()
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.text.DateFormat $stack1;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        return $stack1;
+    }
+
+    public java.lang.String generateToolTip(org.jfree.data.xy.XYZDataset, int, int)
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        org.jfree.data.xy.XYZDataset dataset;
+        int series, item;
+        java.lang.String $stack4;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYZDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.lang.String generateLabelString(org.jfree.data.xy.XYDataset,int,int)>(dataset, series, item);
+
+        return $stack4;
+    }
+
+    public java.lang.String generateLabelString(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+        int series, item;
+        org.jfree.data.xy.XYZDataset $stack6;
+        java.lang.Object[] items;
+        java.lang.String $stack8, result;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        $stack6 = (org.jfree.data.xy.XYZDataset) dataset;
+
+        items = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.lang.Object[] createItemArray(org.jfree.data.xy.XYZDataset,int,int)>($stack6, series, item);
+
+        $stack8 = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.lang.String getFormatString()>();
+
+        result = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack8, items);
+
+        return result;
+    }
+
+    protected java.lang.Object[] createItemArray(org.jfree.data.xy.XYZDataset, int, int)
+    {
+        java.lang.Object[] result;
+        org.jfree.data.xy.XYZDataset dataset;
+        int series, item;
+        java.lang.Comparable $stack11;
+        java.lang.String $stack12, $stack17, $stack22, $stack27, $stack30, $stack33, $stack39;
+        java.lang.Number x, y, z;
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.text.DateFormat xf, yf, $stack24, $stack28;
+        java.text.NumberFormat $stack16, $stack21, $stack25;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYZDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        result = newarray (java.lang.Object)[4];
+
+        $stack11 = interfaceinvoke dataset.<org.jfree.data.xy.XYZDataset: java.lang.Comparable getSeriesKey(int)>(series);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: java.lang.String toString()>();
+
+        result[0] = $stack12;
+
+        x = interfaceinvoke dataset.<org.jfree.data.xy.XYZDataset: java.lang.Number getX(int,int)>(series, item);
+
+        xf = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat getXDateFormat()>();
+
+        if xf == null goto label1;
+
+        $stack39 = virtualinvoke xf.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(x);
+
+        result[1] = $stack39;
+
+        goto label2;
+
+     label1:
+        $stack16 = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat getXFormat()>();
+
+        $stack17 = virtualinvoke $stack16.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(x);
+
+        result[1] = $stack17;
+
+     label2:
+        y = interfaceinvoke dataset.<org.jfree.data.xy.XYZDataset: java.lang.Number getY(int,int)>(series, item);
+
+        yf = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat getYDateFormat()>();
+
+        if yf == null goto label3;
+
+        $stack33 = virtualinvoke yf.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(y);
+
+        result[2] = $stack33;
+
+        goto label4;
+
+     label3:
+        $stack21 = virtualinvoke this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat getYFormat()>();
+
+        $stack22 = virtualinvoke $stack21.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(y);
+
+        result[2] = $stack22;
+
+     label4:
+        z = interfaceinvoke dataset.<org.jfree.data.xy.XYZDataset: java.lang.Number getZ(int,int)>(series, item);
+
+        $stack24 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        if $stack24 == null goto label5;
+
+        $stack28 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        $stack30 = virtualinvoke $stack28.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(z);
+
+        result[3] = $stack30;
+
+        goto label6;
+
+     label5:
+        $stack25 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat>;
+
+        $stack27 = virtualinvoke $stack25.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(z);
+
+        result[3] = $stack27;
+
+     label6:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this, that;
+        boolean $stack3, $stack4, $stack7, $stack10;
+        java.text.NumberFormat $stack5, $stack6;
+        java.text.DateFormat $stack8, $stack9;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.labels.StandardXYToolTipGenerator: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.labels.StandardXYZToolTipGenerator) obj;
+
+        $stack6 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat>;
+
+        $stack5 = that.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat>;
+
+        $stack7 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack6, $stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        $stack8 = that.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        $stack10 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.labels.StandardXYZToolTipGenerator this;
+        java.text.NumberFormat $stack3;
+        int $stack4, $stack5, $stack7, $stack8, hash;
+        java.text.DateFormat $stack6;
+
+        this := @this: org.jfree.chart.labels.StandardXYZToolTipGenerator;
+
+        hash = specialinvoke this.<org.jfree.chart.labels.StandardXYToolTipGenerator: int hashCode()>();
+
+        $stack4 = 79 * hash;
+
+        $stack3 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.NumberFormat zFormat>;
+
+        $stack5 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack3);
+
+        hash = $stack4 + $stack5;
+
+        $stack7 = 79 * hash;
+
+        $stack6 = this.<org.jfree.chart.labels.StandardXYZToolTipGenerator: java.text.DateFormat zDateFormat>;
+
+        $stack8 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack6);
+
+        hash = $stack7 + $stack8;
+
+        return hash;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.StandardXYZToolTipGenerator: java.lang.String DEFAULT_TOOL_TIP_FORMAT> = "{0}: ({1}, {2}, {3})";
+
+        <org.jfree.chart.labels.StandardXYZToolTipGenerator: long serialVersionUID> = -2961577421889473503L;
+
+        return;
+    }
+}

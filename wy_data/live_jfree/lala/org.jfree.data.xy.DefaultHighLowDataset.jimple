@@ -1,0 +1,542 @@
+public class org.jfree.data.xy.DefaultHighLowDataset extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.data.xy.OHLCDataset, org.jfree.chart.util.PublicCloneable
+{
+    private java.lang.Comparable seriesKey;
+    private java.util.Date[] date;
+    private java.lang.Number[] high;
+    private java.lang.Number[] low;
+    private java.lang.Number[] open;
+    private java.lang.Number[] close;
+    private java.lang.Number[] volume;
+
+    public void <init>(java.lang.Comparable, java.util.Date[], double[], double[], double[], double[], double[])
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        java.lang.Comparable seriesKey;
+        java.util.Date[] date;
+        double[] high, low, open, close, volume;
+        java.lang.Number[] $stack8, $stack9, $stack10, $stack11, $stack12;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        seriesKey := @parameter0: java.lang.Comparable;
+
+        date := @parameter1: java.util.Date[];
+
+        high := @parameter2: double[];
+
+        low := @parameter3: double[];
+
+        open := @parameter4: double[];
+
+        close := @parameter5: double[];
+
+        volume := @parameter6: double[];
+
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(seriesKey, "seriesKey");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(date, "date");
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Comparable seriesKey> = seriesKey;
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date> = date;
+
+        $stack8 = staticinvoke <org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] createNumberArray(double[])>(high);
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] high> = $stack8;
+
+        $stack9 = staticinvoke <org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] createNumberArray(double[])>(low);
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] low> = $stack9;
+
+        $stack10 = staticinvoke <org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] createNumberArray(double[])>(open);
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] open> = $stack10;
+
+        $stack11 = staticinvoke <org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] createNumberArray(double[])>(close);
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] close> = $stack11;
+
+        $stack12 = staticinvoke <org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] createNumberArray(double[])>(volume);
+
+        this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] volume> = $stack12;
+
+        return;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        java.lang.Comparable $stack2;
+        int series;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Comparable seriesKey>;
+
+        return $stack2;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        java.lang.Long $stack3;
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.util.Date[] $stack4;
+        java.util.Date $stack5;
+        long $stack6;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = new java.lang.Long;
+
+        $stack4 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date>;
+
+        $stack5 = $stack4[item];
+
+        $stack6 = virtualinvoke $stack5.<java.util.Date: long getTime()>();
+
+        specialinvoke $stack3.<java.lang.Long: void <init>(long)>($stack6);
+
+        return $stack3;
+    }
+
+    public java.util.Date getXDate(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.util.Date[] $stack3;
+        java.util.Date $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getClose(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getHigh(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.lang.Number[] $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] high>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public double getHighValue(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number h;
+        double result;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = #NaN;
+
+        h = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getHigh(int,int)>(series, item);
+
+        if h == null goto label1;
+
+        result = virtualinvoke h.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getLow(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.lang.Number[] $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] low>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public double getLowValue(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number l;
+        double result;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = #NaN;
+
+        l = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getLow(int,int)>(series, item);
+
+        if l == null goto label1;
+
+        result = virtualinvoke l.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getOpen(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.lang.Number[] $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] open>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public double getOpenValue(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number open;
+        double result;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = #NaN;
+
+        open = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getOpen(int,int)>(series, item);
+
+        if open == null goto label1;
+
+        result = virtualinvoke open.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getClose(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.lang.Number[] $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] close>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public double getCloseValue(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number c;
+        double result;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = #NaN;
+
+        c = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getClose(int,int)>(series, item);
+
+        if c == null goto label1;
+
+        result = virtualinvoke c.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getVolume(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int item, series;
+        java.lang.Number[] $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] volume>;
+
+        $stack4 = $stack3[item];
+
+        return $stack4;
+    }
+
+    public double getVolumeValue(int, int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        int series, item;
+        java.lang.Number v;
+        double result;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = #NaN;
+
+        v = virtualinvoke this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number getVolume(int,int)>(series, item);
+
+        if v == null goto label1;
+
+        result = virtualinvoke v.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        return 1;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.xy.DefaultHighLowDataset this;
+        java.util.Date[] $stack2;
+        int $stack3, series;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date>;
+
+        $stack3 = lengthof $stack2;
+
+        return $stack3;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.xy.DefaultHighLowDataset this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15, $stack18, $stack21, $stack24;
+        java.lang.Comparable $stack4, $stack5;
+        java.util.Date[] $stack7, $stack8;
+        java.lang.Number[] $stack10, $stack11, $stack13, $stack14, $stack16, $stack17, $stack19, $stack20, $stack22, $stack23;
+
+        this := @this: org.jfree.data.xy.DefaultHighLowDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.xy.DefaultHighLowDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.xy.DefaultHighLowDataset) obj;
+
+        $stack5 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Comparable seriesKey>;
+
+        $stack4 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Comparable seriesKey>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date>;
+
+        $stack7 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.util.Date[] date>;
+
+        $stack9 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] open>;
+
+        $stack10 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] open>;
+
+        $stack12 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack14 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] high>;
+
+        $stack13 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] high>;
+
+        $stack15 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack14, $stack13);
+
+        if $stack15 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack17 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] low>;
+
+        $stack16 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] low>;
+
+        $stack18 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack17, $stack16);
+
+        if $stack18 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack20 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] close>;
+
+        $stack19 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] close>;
+
+        $stack21 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack20, $stack19);
+
+        if $stack21 != 0 goto label8;
+
+        return 0;
+
+     label8:
+        $stack23 = this.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] volume>;
+
+        $stack22 = that.<org.jfree.data.xy.DefaultHighLowDataset: java.lang.Number[] volume>;
+
+        $stack24 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack23, $stack22);
+
+        if $stack24 != 0 goto label9;
+
+        return 0;
+
+     label9:
+        return 1;
+    }
+
+    public static java.lang.Number[] createNumberArray(double[])
+    {
+        double[] data;
+        int $stack3, $stack4, i;
+        java.lang.Number[] result;
+        java.lang.Double $stack5;
+        double $stack6;
+
+        data := @parameter0: double[];
+
+        $stack3 = lengthof data;
+
+        result = newarray (java.lang.Number)[$stack3];
+
+        i = 0;
+
+     label1:
+        $stack4 = lengthof data;
+
+        if i >= $stack4 goto label2;
+
+        $stack5 = new java.lang.Double;
+
+        $stack6 = data[i];
+
+        specialinvoke $stack5.<java.lang.Double: void <init>(double)>($stack6);
+
+        result[i] = $stack5;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+}

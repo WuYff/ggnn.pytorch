@@ -1,0 +1,582 @@
+public class org.jfree.chart.util.ExportUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.util.ExportUtils this;
+
+        this := @this: org.jfree.chart.util.ExportUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean isJFreeSVGAvailable()
+    {
+        java.lang.ClassNotFoundException $stack4;
+        java.lang.Class svgClass;
+        boolean $stack3;
+
+        svgClass = null;
+
+     label1:
+        svgClass = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("org.jfree.graphics2d.svg.SVGGraphics2D");
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack4 := @caughtexception;
+
+     label4:
+        if svgClass == null goto label5;
+
+        $stack3 = 1;
+
+        goto label6;
+
+     label5:
+        $stack3 = 0;
+
+     label6:
+        return $stack3;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    public static boolean isOrsonPDFAvailable()
+    {
+        java.lang.ClassNotFoundException $stack4;
+        java.lang.Class pdfDocumentClass;
+        boolean $stack3;
+
+        pdfDocumentClass = null;
+
+     label1:
+        pdfDocumentClass = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("com.orsonpdf.PDFDocument");
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack4 := @caughtexception;
+
+     label4:
+        if pdfDocumentClass == null goto label5;
+
+        $stack3 = 1;
+
+        goto label6;
+
+     label5:
+        $stack3 = 0;
+
+     label6:
+        return $stack3;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    public static void writeAsSVG(org.jfree.chart.ui.Drawable, int, int, java.io.File)
+    {
+        boolean $stack12;
+        org.jfree.chart.ui.Drawable drawable;
+        java.io.File file;
+        java.lang.Class[] $stack14, $stack28, $stack32;
+        java.lang.Class $stack15, $stack16, svgUtilsClass, svg2Class;
+        java.lang.reflect.Constructor c1;
+        java.lang.Object[] $stack18, $stack30, $stack34;
+        int w, h;
+        java.lang.Integer $stack20, $stack22;
+        java.lang.Object $stack23, $stack31;
+        java.awt.Graphics2D svg2;
+        java.awt.geom.Rectangle2D$Double $stack24;
+        double $stack25, $stack26;
+        java.lang.reflect.Method m1, m2;
+        java.lang.String element;
+        java.lang.IllegalStateException $stack36;
+        java.lang.reflect.InvocationTargetException $stack37;
+        java.lang.RuntimeException $stack38, $stack40, $stack42, $stack44, $stack46, $stack48, $stack50;
+        java.lang.IllegalArgumentException $stack39;
+        java.lang.SecurityException $stack41;
+        java.lang.NoSuchMethodException $stack43;
+        java.lang.IllegalAccessException $stack45;
+        java.lang.InstantiationException $stack47;
+        java.lang.ClassNotFoundException $stack49;
+
+        drawable := @parameter0: org.jfree.chart.ui.Drawable;
+
+        w := @parameter1: int;
+
+        h := @parameter2: int;
+
+        file := @parameter3: java.io.File;
+
+        $stack12 = staticinvoke <org.jfree.chart.util.ExportUtils: boolean isJFreeSVGAvailable()>();
+
+        if $stack12 != 0 goto label01;
+
+        $stack36 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack36.<java.lang.IllegalStateException: void <init>(java.lang.String)>("JFreeSVG is not present on the classpath.");
+
+        throw $stack36;
+
+     label01:
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(drawable, "drawable");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(file, "file");
+
+     label02:
+        svg2Class = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("org.jfree.graphics2d.svg.SVGGraphics2D");
+
+        $stack14 = newarray (java.lang.Class)[2];
+
+        $stack15 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        $stack14[0] = $stack15;
+
+        $stack16 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        $stack14[1] = $stack16;
+
+        c1 = virtualinvoke svg2Class.<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>($stack14);
+
+        $stack18 = newarray (java.lang.Object)[2];
+
+        $stack20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(w);
+
+        $stack18[0] = $stack20;
+
+        $stack22 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(h);
+
+        $stack18[1] = $stack22;
+
+        $stack23 = virtualinvoke c1.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack18);
+
+        svg2 = (java.awt.Graphics2D) $stack23;
+
+        $stack24 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack26 = (double) w;
+
+        $stack25 = (double) h;
+
+        specialinvoke $stack24.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, $stack26, $stack25);
+
+        interfaceinvoke drawable.<org.jfree.chart.ui.Drawable: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(svg2, $stack24);
+
+        svgUtilsClass = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("org.jfree.graphics2d.svg.SVGUtils");
+
+        $stack28 = (java.lang.Class[]) null;
+
+        m1 = virtualinvoke svg2Class.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("getSVGElement", $stack28);
+
+        $stack30 = (java.lang.Object[]) null;
+
+        $stack31 = virtualinvoke m1.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(svg2, $stack30);
+
+        element = (java.lang.String) $stack31;
+
+        $stack32 = newarray (java.lang.Class)[2];
+
+        $stack32[0] = class "Ljava/io/File;";
+
+        $stack32[1] = class "Ljava/lang/String;";
+
+        m2 = virtualinvoke svgUtilsClass.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("writeToSVG", $stack32);
+
+        $stack34 = newarray (java.lang.Object)[2];
+
+        $stack34[0] = file;
+
+        $stack34[1] = element;
+
+        virtualinvoke m2.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(svgUtilsClass, $stack34);
+
+     label03:
+        goto label11;
+
+     label04:
+        $stack49 := @caughtexception;
+
+        $stack50 = new java.lang.RuntimeException;
+
+        specialinvoke $stack50.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack49);
+
+        throw $stack50;
+
+     label05:
+        $stack47 := @caughtexception;
+
+        $stack48 = new java.lang.RuntimeException;
+
+        specialinvoke $stack48.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack47);
+
+        throw $stack48;
+
+     label06:
+        $stack45 := @caughtexception;
+
+        $stack46 = new java.lang.RuntimeException;
+
+        specialinvoke $stack46.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack45);
+
+        throw $stack46;
+
+     label07:
+        $stack43 := @caughtexception;
+
+        $stack44 = new java.lang.RuntimeException;
+
+        specialinvoke $stack44.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack43);
+
+        throw $stack44;
+
+     label08:
+        $stack41 := @caughtexception;
+
+        $stack42 = new java.lang.RuntimeException;
+
+        specialinvoke $stack42.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack41);
+
+        throw $stack42;
+
+     label09:
+        $stack39 := @caughtexception;
+
+        $stack40 = new java.lang.RuntimeException;
+
+        specialinvoke $stack40.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack39);
+
+        throw $stack40;
+
+     label10:
+        $stack37 := @caughtexception;
+
+        $stack38 = new java.lang.RuntimeException;
+
+        specialinvoke $stack38.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack37);
+
+        throw $stack38;
+
+     label11:
+        return;
+
+        catch java.lang.ClassNotFoundException from label02 to label03 with label04;
+        catch java.lang.InstantiationException from label02 to label03 with label05;
+        catch java.lang.IllegalAccessException from label02 to label03 with label06;
+        catch java.lang.NoSuchMethodException from label02 to label03 with label07;
+        catch java.lang.SecurityException from label02 to label03 with label08;
+        catch java.lang.IllegalArgumentException from label02 to label03 with label09;
+        catch java.lang.reflect.InvocationTargetException from label02 to label03 with label10;
+    }
+
+    public static final void writeAsPDF(org.jfree.chart.ui.Drawable, int, int, java.io.File)
+    {
+        boolean $stack13;
+        org.jfree.chart.ui.Drawable drawable;
+        java.io.File file;
+        java.lang.Object pdfDoc, page, $stack25;
+        java.lang.Class[] $stack16, $stack22, $stack29;
+        java.lang.reflect.Method m, m2, m3;
+        java.awt.Rectangle $stack18;
+        int w, h;
+        java.lang.Object[] $stack19, $stack24, $stack31;
+        java.lang.Class $stack21, pdfDocClass;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D$Double $stack26;
+        double $stack27, $stack28;
+        java.lang.IllegalStateException $stack33;
+        java.lang.reflect.InvocationTargetException $stack34;
+        java.lang.RuntimeException $stack35, $stack37, $stack39, $stack41, $stack43, $stack45, $stack47;
+        java.lang.IllegalArgumentException $stack36;
+        java.lang.SecurityException $stack38;
+        java.lang.NoSuchMethodException $stack40;
+        java.lang.IllegalAccessException $stack42;
+        java.lang.InstantiationException $stack44;
+        java.lang.ClassNotFoundException $stack46;
+
+        drawable := @parameter0: org.jfree.chart.ui.Drawable;
+
+        w := @parameter1: int;
+
+        h := @parameter2: int;
+
+        file := @parameter3: java.io.File;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.ExportUtils: boolean isOrsonPDFAvailable()>();
+
+        if $stack13 != 0 goto label01;
+
+        $stack33 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack33.<java.lang.IllegalStateException: void <init>(java.lang.String)>("OrsonPDF is not present on the classpath.");
+
+        throw $stack33;
+
+     label01:
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(drawable, "drawable");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(file, "file");
+
+     label02:
+        pdfDocClass = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("com.orsonpdf.PDFDocument");
+
+        pdfDoc = virtualinvoke pdfDocClass.<java.lang.Class: java.lang.Object newInstance()>();
+
+        $stack16 = newarray (java.lang.Class)[1];
+
+        $stack16[0] = class "Ljava/awt/geom/Rectangle2D;";
+
+        m = virtualinvoke pdfDocClass.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("createPage", $stack16);
+
+        $stack18 = new java.awt.Rectangle;
+
+        specialinvoke $stack18.<java.awt.Rectangle: void <init>(int,int)>(w, h);
+
+        $stack19 = newarray (java.lang.Object)[1];
+
+        $stack19[0] = $stack18;
+
+        page = virtualinvoke m.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(pdfDoc, $stack19);
+
+        $stack21 = virtualinvoke page.<java.lang.Object: java.lang.Class getClass()>();
+
+        $stack22 = newarray (java.lang.Class)[0];
+
+        m2 = virtualinvoke $stack21.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("getGraphics2D", $stack22);
+
+        $stack24 = newarray (java.lang.Object)[0];
+
+        $stack25 = virtualinvoke m2.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(page, $stack24);
+
+        g2 = (java.awt.Graphics2D) $stack25;
+
+        $stack26 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack28 = (double) w;
+
+        $stack27 = (double) h;
+
+        specialinvoke $stack26.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, $stack28, $stack27);
+
+        interfaceinvoke drawable.<org.jfree.chart.ui.Drawable: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, $stack26);
+
+        $stack29 = newarray (java.lang.Class)[1];
+
+        $stack29[0] = class "Ljava/io/File;";
+
+        m3 = virtualinvoke pdfDocClass.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("writeToFile", $stack29);
+
+        $stack31 = newarray (java.lang.Object)[1];
+
+        $stack31[0] = file;
+
+        virtualinvoke m3.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(pdfDoc, $stack31);
+
+     label03:
+        goto label11;
+
+     label04:
+        $stack46 := @caughtexception;
+
+        $stack47 = new java.lang.RuntimeException;
+
+        specialinvoke $stack47.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack46);
+
+        throw $stack47;
+
+     label05:
+        $stack44 := @caughtexception;
+
+        $stack45 = new java.lang.RuntimeException;
+
+        specialinvoke $stack45.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack44);
+
+        throw $stack45;
+
+     label06:
+        $stack42 := @caughtexception;
+
+        $stack43 = new java.lang.RuntimeException;
+
+        specialinvoke $stack43.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack42);
+
+        throw $stack43;
+
+     label07:
+        $stack40 := @caughtexception;
+
+        $stack41 = new java.lang.RuntimeException;
+
+        specialinvoke $stack41.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack40);
+
+        throw $stack41;
+
+     label08:
+        $stack38 := @caughtexception;
+
+        $stack39 = new java.lang.RuntimeException;
+
+        specialinvoke $stack39.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack38);
+
+        throw $stack39;
+
+     label09:
+        $stack36 := @caughtexception;
+
+        $stack37 = new java.lang.RuntimeException;
+
+        specialinvoke $stack37.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack36);
+
+        throw $stack37;
+
+     label10:
+        $stack34 := @caughtexception;
+
+        $stack35 = new java.lang.RuntimeException;
+
+        specialinvoke $stack35.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack34);
+
+        throw $stack35;
+
+     label11:
+        return;
+
+        catch java.lang.ClassNotFoundException from label02 to label03 with label04;
+        catch java.lang.InstantiationException from label02 to label03 with label05;
+        catch java.lang.IllegalAccessException from label02 to label03 with label06;
+        catch java.lang.NoSuchMethodException from label02 to label03 with label07;
+        catch java.lang.SecurityException from label02 to label03 with label08;
+        catch java.lang.IllegalArgumentException from label02 to label03 with label09;
+        catch java.lang.reflect.InvocationTargetException from label02 to label03 with label10;
+    }
+
+    public static void writeAsPNG(org.jfree.chart.ui.Drawable, int, int, java.io.File) throws java.io.FileNotFoundException, java.io.IOException
+    {
+        java.awt.image.BufferedImage $stack8;
+        int w, h;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Drawable drawable;
+        java.awt.Rectangle $stack10;
+        java.io.BufferedOutputStream $stack11;
+        java.io.FileOutputStream $stack12;
+        java.io.File file;
+        java.lang.Throwable $stack14;
+
+        drawable := @parameter0: org.jfree.chart.ui.Drawable;
+
+        w := @parameter1: int;
+
+        h := @parameter2: int;
+
+        file := @parameter3: java.io.File;
+
+        $stack8 = new java.awt.image.BufferedImage;
+
+        specialinvoke $stack8.<java.awt.image.BufferedImage: void <init>(int,int,int)>(w, h, 2);
+
+        g2 = virtualinvoke $stack8.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+
+        $stack10 = new java.awt.Rectangle;
+
+        specialinvoke $stack10.<java.awt.Rectangle: void <init>(int,int)>(w, h);
+
+        interfaceinvoke drawable.<org.jfree.chart.ui.Drawable: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, $stack10);
+
+        $stack11 = new java.io.BufferedOutputStream;
+
+        $stack12 = new java.io.FileOutputStream;
+
+        specialinvoke $stack12.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+
+        specialinvoke $stack11.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>($stack12);
+
+     label1:
+        staticinvoke <javax.imageio.ImageIO: boolean write(java.awt.image.RenderedImage,java.lang.String,java.io.OutputStream)>($stack8, "png", $stack11);
+
+     label2:
+        virtualinvoke $stack11.<java.io.OutputStream: void close()>();
+
+        goto label5;
+
+     label3:
+        $stack14 := @caughtexception;
+
+     label4:
+        virtualinvoke $stack11.<java.io.OutputStream: void close()>();
+
+        throw $stack14;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public static void writeAsJPEG(org.jfree.chart.ui.Drawable, int, int, java.io.File) throws java.io.FileNotFoundException, java.io.IOException
+    {
+        java.awt.image.BufferedImage $stack8;
+        int w, h;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Drawable drawable;
+        java.awt.Rectangle $stack10;
+        java.io.BufferedOutputStream $stack11;
+        java.io.FileOutputStream $stack12;
+        java.io.File file;
+        java.lang.Throwable $stack14;
+
+        drawable := @parameter0: org.jfree.chart.ui.Drawable;
+
+        w := @parameter1: int;
+
+        h := @parameter2: int;
+
+        file := @parameter3: java.io.File;
+
+        $stack8 = new java.awt.image.BufferedImage;
+
+        specialinvoke $stack8.<java.awt.image.BufferedImage: void <init>(int,int,int)>(w, h, 1);
+
+        g2 = virtualinvoke $stack8.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+
+        $stack10 = new java.awt.Rectangle;
+
+        specialinvoke $stack10.<java.awt.Rectangle: void <init>(int,int)>(w, h);
+
+        interfaceinvoke drawable.<org.jfree.chart.ui.Drawable: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, $stack10);
+
+        $stack11 = new java.io.BufferedOutputStream;
+
+        $stack12 = new java.io.FileOutputStream;
+
+        specialinvoke $stack12.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+
+        specialinvoke $stack11.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>($stack12);
+
+     label1:
+        staticinvoke <javax.imageio.ImageIO: boolean write(java.awt.image.RenderedImage,java.lang.String,java.io.OutputStream)>($stack8, "jpg", $stack11);
+
+     label2:
+        virtualinvoke $stack11.<java.io.OutputStream: void close()>();
+
+        goto label5;
+
+     label3:
+        $stack14 := @caughtexception;
+
+     label4:
+        virtualinvoke $stack11.<java.io.OutputStream: void close()>();
+
+        throw $stack14;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+}

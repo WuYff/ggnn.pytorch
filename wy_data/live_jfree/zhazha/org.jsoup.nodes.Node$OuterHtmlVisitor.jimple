@@ -1,0 +1,118 @@
+class org.jsoup.nodes.Node$OuterHtmlVisitor extends java.lang.Object implements org.jsoup.select.NodeVisitor
+{
+    private java.lang.Appendable accum;
+    private org.jsoup.nodes.Document$OutputSettings out;
+
+    void <init>(java.lang.Appendable, org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.Node$OuterHtmlVisitor this;
+        java.lang.Appendable accum;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.Node$OuterHtmlVisitor;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        out := @parameter1: org.jsoup.nodes.Document$OutputSettings;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.nodes.Node$OuterHtmlVisitor: java.lang.Appendable accum> = accum;
+
+        this.<org.jsoup.nodes.Node$OuterHtmlVisitor: org.jsoup.nodes.Document$OutputSettings out> = out;
+
+        virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.CharsetEncoder prepareEncoder()>();
+
+        return;
+    }
+
+    public void head(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node node;
+        org.jsoup.nodes.Node$OuterHtmlVisitor this;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings $stack4;
+        java.lang.Appendable $stack5;
+        java.io.IOException $stack6;
+        org.jsoup.SerializationException $stack7;
+
+        this := @this: org.jsoup.nodes.Node$OuterHtmlVisitor;
+
+        node := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+     label1:
+        $stack5 = this.<org.jsoup.nodes.Node$OuterHtmlVisitor: java.lang.Appendable accum>;
+
+        $stack4 = this.<org.jsoup.nodes.Node$OuterHtmlVisitor: org.jsoup.nodes.Document$OutputSettings out>;
+
+        virtualinvoke node.<org.jsoup.nodes.Node: void outerHtmlHead(java.lang.Appendable,int,org.jsoup.nodes.Document$OutputSettings)>($stack5, depth, $stack4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack6 := @caughtexception;
+
+        $stack7 = new org.jsoup.SerializationException;
+
+        specialinvoke $stack7.<org.jsoup.SerializationException: void <init>(java.lang.Throwable)>($stack6);
+
+        throw $stack7;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public void tail(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node node;
+        java.lang.String $stack4;
+        boolean $stack5;
+        org.jsoup.nodes.Node$OuterHtmlVisitor this;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings $stack6;
+        java.lang.Appendable $stack7;
+        java.io.IOException $stack8;
+        org.jsoup.SerializationException $stack9;
+
+        this := @this: org.jsoup.nodes.Node$OuterHtmlVisitor;
+
+        node := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        $stack4 = virtualinvoke node.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("#text");
+
+        if $stack5 != 0 goto label4;
+
+     label1:
+        $stack7 = this.<org.jsoup.nodes.Node$OuterHtmlVisitor: java.lang.Appendable accum>;
+
+        $stack6 = this.<org.jsoup.nodes.Node$OuterHtmlVisitor: org.jsoup.nodes.Document$OutputSettings out>;
+
+        virtualinvoke node.<org.jsoup.nodes.Node: void outerHtmlTail(java.lang.Appendable,int,org.jsoup.nodes.Document$OutputSettings)>($stack7, depth, $stack6);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack8 := @caughtexception;
+
+        $stack9 = new org.jsoup.SerializationException;
+
+        specialinvoke $stack9.<org.jsoup.SerializationException: void <init>(java.lang.Throwable)>($stack8);
+
+        throw $stack9;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+}

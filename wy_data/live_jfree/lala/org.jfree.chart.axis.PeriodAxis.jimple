@@ -1,0 +1,2475 @@
+public class org.jfree.chart.axis.PeriodAxis extends org.jfree.chart.axis.ValueAxis implements java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private org.jfree.data.time.RegularTimePeriod first;
+    private org.jfree.data.time.RegularTimePeriod last;
+    private java.util.TimeZone timeZone;
+    private java.util.Locale locale;
+    private java.util.Calendar calendar;
+    private java.lang.Class autoRangeTimePeriodClass;
+    private java.lang.Class majorTickTimePeriodClass;
+    private boolean minorTickMarksVisible;
+    private java.lang.Class minorTickTimePeriodClass;
+    private float minorTickMarkInsideLength;
+    private float minorTickMarkOutsideLength;
+    private transient java.awt.Stroke minorTickMarkStroke;
+    private transient java.awt.Paint minorTickMarkPaint;
+    private org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo;
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.String label;
+        org.jfree.data.time.Day $stack2, $stack3;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        label := @parameter0: java.lang.String;
+
+        $stack2 = new org.jfree.data.time.Day;
+
+        specialinvoke $stack2.<org.jfree.data.time.Day: void <init>()>();
+
+        $stack3 = new org.jfree.data.time.Day;
+
+        specialinvoke $stack3.<org.jfree.data.time.Day: void <init>()>();
+
+        specialinvoke this.<org.jfree.chart.axis.PeriodAxis: void <init>(java.lang.String,org.jfree.data.time.RegularTimePeriod,org.jfree.data.time.RegularTimePeriod)>(label, $stack2, $stack3);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, org.jfree.data.time.RegularTimePeriod, org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.String label;
+        org.jfree.data.time.RegularTimePeriod first, last;
+        java.util.TimeZone $stack4;
+        java.util.Locale $stack5;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        label := @parameter0: java.lang.String;
+
+        first := @parameter1: org.jfree.data.time.RegularTimePeriod;
+
+        last := @parameter2: org.jfree.data.time.RegularTimePeriod;
+
+        $stack4 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        $stack5 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.PeriodAxis: void <init>(java.lang.String,org.jfree.data.time.RegularTimePeriod,org.jfree.data.time.RegularTimePeriod,java.util.TimeZone,java.util.Locale)>(label, first, last, $stack4, $stack5);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, org.jfree.data.time.RegularTimePeriod, org.jfree.data.time.RegularTimePeriod, java.util.TimeZone, java.util.Locale)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.String label;
+        java.awt.BasicStroke $stack8;
+        java.awt.Color $stack9;
+        java.util.TimeZone timeZone;
+        java.util.Locale locale;
+        org.jfree.data.time.RegularTimePeriod first, last, $stack12, $stack14;
+        java.util.Calendar $stack10, $stack11, $stack13;
+        java.lang.Class $stack15, $stack16, $stack17, $stack18;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack19, $stack22, $stack26;
+        java.text.SimpleDateFormat $stack20, $stack24;
+        org.jfree.chart.axis.PeriodAxisLabelInfo $stack21, $stack25;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        label := @parameter0: java.lang.String;
+
+        first := @parameter1: org.jfree.data.time.RegularTimePeriod;
+
+        last := @parameter2: org.jfree.data.time.RegularTimePeriod;
+
+        timeZone := @parameter3: java.util.TimeZone;
+
+        locale := @parameter4: java.util.Locale;
+
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void <init>(java.lang.String,org.jfree.chart.axis.TickUnitSource)>(label, null);
+
+        this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkInsideLength> = 0.0F;
+
+        this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength> = 2.0F;
+
+        $stack8 = new java.awt.BasicStroke;
+
+        specialinvoke $stack8.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke> = $stack8;
+
+        $stack9 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint> = $stack9;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(timeZone, "timeZone");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(locale, "locale");
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first> = first;
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last> = last;
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone> = timeZone;
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale> = locale;
+
+        $stack10 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>(timeZone, locale);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar> = $stack10;
+
+        $stack12 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack11 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack12.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack11);
+
+        $stack14 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack13 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack14.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack13);
+
+        $stack15 = virtualinvoke first.<java.lang.Object: java.lang.Class getClass()>();
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass> = $stack15;
+
+        $stack16 = virtualinvoke first.<java.lang.Object: java.lang.Class getClass()>();
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass> = $stack16;
+
+        this.<org.jfree.chart.axis.PeriodAxis: boolean minorTickMarksVisible> = 0;
+
+        $stack17 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass>;
+
+        $stack18 = staticinvoke <org.jfree.data.time.RegularTimePeriod: java.lang.Class downsize(java.lang.Class)>($stack17);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass> = $stack18;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void setAutoRange(boolean)>(1);
+
+        $stack19 = newarray (org.jfree.chart.axis.PeriodAxisLabelInfo)[2];
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo> = $stack19;
+
+        $stack20 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack20.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("MMM", locale);
+
+        virtualinvoke $stack20.<java.text.SimpleDateFormat: void setTimeZone(java.util.TimeZone)>(timeZone);
+
+        $stack22 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack21 = new org.jfree.chart.axis.PeriodAxisLabelInfo;
+
+        specialinvoke $stack21.<org.jfree.chart.axis.PeriodAxisLabelInfo: void <init>(java.lang.Class,java.text.DateFormat)>(class "Lorg/jfree/data/time/Month;", $stack20);
+
+        $stack22[0] = $stack21;
+
+        $stack24 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack24.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("yyyy", locale);
+
+        virtualinvoke $stack24.<java.text.SimpleDateFormat: void setTimeZone(java.util.TimeZone)>(timeZone);
+
+        $stack26 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack25 = new org.jfree.chart.axis.PeriodAxisLabelInfo;
+
+        specialinvoke $stack25.<org.jfree.chart.axis.PeriodAxisLabelInfo: void <init>(java.lang.Class,java.text.DateFormat)>(class "Lorg/jfree/data/time/Year;", $stack24);
+
+        $stack26[1] = $stack25;
+
+        return;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod getFirst()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.data.time.RegularTimePeriod $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        return $stack1;
+    }
+
+    public void setFirst(org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.RegularTimePeriod first, $stack3;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.Calendar $stack2;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        first := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(first, "first");
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first> = first;
+
+        $stack3 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack3.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack2);
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.data.time.RegularTimePeriod getLast()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.data.time.RegularTimePeriod $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        return $stack1;
+    }
+
+    public void setLast(org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.RegularTimePeriod last, $stack3;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.Calendar $stack2;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        last := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(last, "last");
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last> = last;
+
+        $stack3 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack3.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack2);
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.util.TimeZone getTimeZone()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.TimeZone $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        return $stack1;
+    }
+
+    public void setTimeZone(java.util.TimeZone)
+    {
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.Locale $stack2;
+        java.util.Calendar $stack3, $stack4, $stack6;
+        org.jfree.data.time.RegularTimePeriod $stack5, $stack7;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(zone, "zone");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone> = zone;
+
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack3 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>(zone, $stack2);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar> = $stack3;
+
+        $stack5 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack4 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack5.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack4);
+
+        $stack7 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack6 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke $stack7.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack6);
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.util.Locale getLocale()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.Locale $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        return $stack1;
+    }
+
+    public java.lang.Class getAutoRangeTimePeriodClass()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.Class $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        return $stack1;
+    }
+
+    public void setAutoRangeTimePeriodClass(java.lang.Class)
+    {
+        java.lang.Class c;
+        org.jfree.chart.axis.PeriodAxis this;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        c := @parameter0: java.lang.Class;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(c, "c");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass> = c;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.lang.Class getMajorTickTimePeriodClass()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.Class $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass>;
+
+        return $stack1;
+    }
+
+    public void setMajorTickTimePeriodClass(java.lang.Class)
+    {
+        java.lang.Class c;
+        org.jfree.chart.axis.PeriodAxis this;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        c := @parameter0: java.lang.Class;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(c, "c");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass> = c;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isMinorTickMarksVisible()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: boolean minorTickMarksVisible>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickMarksVisible(boolean)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        boolean visible;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        visible := @parameter0: boolean;
+
+        this.<org.jfree.chart.axis.PeriodAxis: boolean minorTickMarksVisible> = visible;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.lang.Class getMinorTickTimePeriodClass()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.lang.Class $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickTimePeriodClass(java.lang.Class)
+    {
+        java.lang.Class c;
+        org.jfree.chart.axis.PeriodAxis this;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        c := @parameter0: java.lang.Class;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(c, "c");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass> = c;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Stroke getMinorTickMarkStroke()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickMarkStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.axis.PeriodAxis this;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getMinorTickMarkPaint()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickMarkPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.axis.PeriodAxis this;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public float getMinorTickMarkInsideLength()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        float $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkInsideLength>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickMarkInsideLength(float)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        float length;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        length := @parameter0: float;
+
+        this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkInsideLength> = length;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public float getMinorTickMarkOutsideLength()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        float $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        return $stack1;
+    }
+
+    public void setMinorTickMarkOutsideLength(float)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        float length;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        length := @parameter0: float;
+
+        this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength> = length;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.PeriodAxisLabelInfo[] getLabelInfo()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        return $stack1;
+    }
+
+    public void setLabelInfo(org.jfree.chart.axis.PeriodAxisLabelInfo[])
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] info;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        info := @parameter0: org.jfree.chart.axis.PeriodAxisLabelInfo[];
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo> = info;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void setRange(org.jfree.data.Range, boolean, boolean)
+    {
+        org.jfree.data.Range range, $stack22;
+        double $stack8, $stack10, $stack26, $stack28, $stack29;
+        long upper, lower, $stack24, $stack27;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.util.Date $stack12, $stack17;
+        java.lang.Class $stack13, $stack18;
+        java.util.Locale $stack14, $stack19;
+        java.util.TimeZone $stack15, $stack20;
+        org.jfree.data.time.RegularTimePeriod $stack16, $stack21, $stack23, $stack25;
+        boolean turnOffAutoRange, notify;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        range := @parameter0: org.jfree.data.Range;
+
+        turnOffAutoRange := @parameter1: boolean;
+
+        notify := @parameter2: boolean;
+
+        $stack8 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        upper = staticinvoke <java.lang.Math: long round(double)>($stack8);
+
+        $stack10 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        lower = staticinvoke <java.lang.Math: long round(double)>($stack10);
+
+        $stack13 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack12 = new java.util.Date;
+
+        specialinvoke $stack12.<java.util.Date: void <init>(long)>(lower);
+
+        $stack15 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack14 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack16 = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack13, $stack12, $stack15, $stack14);
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first> = $stack16;
+
+        $stack18 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack17 = new java.util.Date;
+
+        specialinvoke $stack17.<java.util.Date: void <init>(long)>(upper);
+
+        $stack20 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack19 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack21 = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack18, $stack17, $stack20, $stack19);
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last> = $stack21;
+
+        $stack22 = new org.jfree.data.Range;
+
+        $stack23 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack24 = virtualinvoke $stack23.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        $stack26 = (double) $stack24;
+
+        $stack25 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack27 = virtualinvoke $stack25.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack28 = (double) $stack27;
+
+        $stack29 = $stack28 + 1.0;
+
+        specialinvoke $stack22.<org.jfree.data.Range: void <init>(double,double)>($stack26, $stack29);
+
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack22, turnOffAutoRange, notify);
+
+        return;
+    }
+
+    public void configure()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isAutoRange()>();
+
+        if $stack1 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void autoAdjustRange()>();
+
+     label1:
+        return;
+    }
+
+    public org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D, org.jfree.chart.plot.Plot, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.axis.AxisSpace)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        boolean $stack20, $stack24, $stack25, $stack27, $stack26;
+        double dimension, $stack29, labelWidth, $stack38, labelHeight, $stack42, $stack47, $stack48, tickLabelBandsDimension, tickMarkSpace#11;
+        byte $stack22;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.RectangleEdge edge;
+        java.awt.geom.Rectangle2D labelEnclosure, plotArea;
+        int l16, $stack46, l17;
+        float $stack28, $stack35;
+        org.jfree.chart.axis.PeriodAxisLabelInfo info;
+        java.awt.Font $stack43;
+        java.awt.FontMetrics fm;
+        org.jfree.chart.ui.RectangleInsets $stack45;
+        org.jfree.chart.axis.AxisSpace $stack60, space;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] tickMarkSpace;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plot := @parameter1: org.jfree.chart.plot.Plot;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        space := @parameter4: org.jfree.chart.axis.AxisSpace;
+
+        if space != null goto label1;
+
+        $stack60 = new org.jfree.chart.axis.AxisSpace;
+
+        specialinvoke $stack60.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+
+        space = $stack60;
+
+     label1:
+        $stack20 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isVisible()>();
+
+        if $stack20 != 0 goto label2;
+
+        return space;
+
+     label2:
+        dimension = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double getFixedDimension()>();
+
+        $stack22 = dimension cmpl 0.0;
+
+        if $stack22 <= 0 goto label3;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void ensureAtLeast(double,org.jfree.chart.ui.RectangleEdge)>(dimension, edge);
+
+     label3:
+        labelEnclosure = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.awt.geom.Rectangle2D getLabelEnclosure(java.awt.Graphics2D,org.jfree.chart.ui.RectangleEdge)>(g2, edge);
+
+        tickLabelBandsDimension = 0.0;
+
+        tickMarkSpace = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        l16 = lengthof tickMarkSpace;
+
+        l17 = 0;
+
+     label4:
+        if l17 >= l16 goto label5;
+
+        info = tickMarkSpace[l17];
+
+        $stack43 = virtualinvoke info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font getLabelFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack43);
+
+        $stack45 = virtualinvoke info.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.ui.RectangleInsets getPadding()>();
+
+        $stack46 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        $stack47 = (double) $stack46;
+
+        $stack48 = virtualinvoke $stack45.<org.jfree.chart.ui.RectangleInsets: double extendHeight(double)>($stack47);
+
+        tickLabelBandsDimension = tickLabelBandsDimension + $stack48;
+
+        l17 = l17 + 1;
+
+        goto label4;
+
+     label5:
+        $stack24 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack24 == 0 goto label6;
+
+        labelHeight = virtualinvoke labelEnclosure.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack42 = labelHeight + tickLabelBandsDimension;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack42, edge);
+
+        goto label7;
+
+     label6:
+        $stack25 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack25 == 0 goto label7;
+
+        labelWidth = virtualinvoke labelEnclosure.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack38 = labelWidth + tickLabelBandsDimension;
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>($stack38, edge);
+
+     label7:
+        tickMarkSpace#11 = 0.0;
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isTickMarksVisible()>();
+
+        if $stack26 == 0 goto label8;
+
+        $stack35 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: float getTickMarkOutsideLength()>();
+
+        tickMarkSpace#11 = (double) $stack35;
+
+     label8:
+        $stack27 = this.<org.jfree.chart.axis.PeriodAxis: boolean minorTickMarksVisible>;
+
+        if $stack27 == 0 goto label9;
+
+        $stack28 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        $stack29 = (double) $stack28;
+
+        tickMarkSpace#11 = staticinvoke <java.lang.Math: double max(double,double)>(tickMarkSpace#11, $stack29);
+
+     label9:
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.ui.RectangleEdge)>(tickMarkSpace#11, edge);
+
+        return space;
+    }
+
+    public org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D, double, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.axis.AxisState $stack10, axisState;
+        double cursor;
+        org.jfree.chart.axis.PeriodAxis this;
+        boolean $stack11, $stack12, $stack13;
+        java.text.AttributedString $stack14, $stack17;
+        java.lang.String $stack15;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D plotArea, dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack20;
+        int $stack21, band;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        cursor := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack10 = new org.jfree.chart.axis.AxisState;
+
+        specialinvoke $stack10.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+
+        axisState = $stack10;
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isAxisLineVisible()>();
+
+        if $stack11 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void drawAxisLine(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, cursor, dataArea, edge);
+
+     label1:
+        $stack12 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isTickMarksVisible()>();
+
+        if $stack12 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void drawTickMarks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, $stack10, dataArea, edge);
+
+     label2:
+        $stack13 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isTickLabelsVisible()>();
+
+        if $stack13 == 0 goto label4;
+
+        band = 0;
+
+     label3:
+        $stack20 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack21 = lengthof $stack20;
+
+        if band >= $stack21 goto label4;
+
+        axisState = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.AxisState drawTickLabels(int,java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(band, g2, axisState, dataArea, edge);
+
+        band = band + 1;
+
+        goto label3;
+
+     label4:
+        $stack14 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.text.AttributedString getAttributedLabel()>();
+
+        if $stack14 == null goto label5;
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.text.AttributedString getAttributedLabel()>();
+
+        axisState = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.AxisState drawAttributedLabel(java.text.AttributedString,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack17, g2, plotArea, dataArea, edge, axisState);
+
+        goto label6;
+
+     label5:
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.lang.String getLabel()>();
+
+        axisState = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack15, g2, plotArea, dataArea, edge, axisState);
+
+     label6:
+        return axisState;
+    }
+
+    protected void drawTickMarks(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack5, $stack6;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.AxisState state;
+        java.awt.geom.Rectangle2D dataArea;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack5 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack5 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void drawTickMarksHorizontal(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, state, dataArea, edge);
+
+        goto label2;
+
+     label1:
+        $stack6 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack6 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void drawTickMarksVertical(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, state, dataArea, edge);
+
+     label2:
+        return;
+    }
+
+    protected void drawTickMarksHorizontal(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack28;
+        org.jfree.chart.axis.AxisState state;
+        double y0, insideLength, outsideLength, $stack47, $stack48, $stack52, $stack53, $stack55, $stack60, x0, $stack84, xx0, $stack102, $stack103, $stack106, $stack107, $stack112, $stack113, $stack116, $stack117, $stack122, $stack124, $stack128, $stack130;
+        org.jfree.chart.axis.PeriodAxis this;
+        float $stack30, $stack31, $stack46, $stack51, $stack101, $stack105, $stack111, $stack115;
+        org.jfree.data.time.RegularTimePeriod $stack32, $stack39, $stack41, t, tminor;
+        java.lang.Class $stack33, $stack72;
+        java.util.Date $stack34, $stack71;
+        java.util.TimeZone $stack35, $stack73;
+        java.util.Locale $stack36, $stack74;
+        long firstOnAxis, $stack42, lastOnAxis, $stack77, t0, tt0;
+        byte $stack43, $stack78, $stack83, $stack64, $stack88;
+        org.jfree.chart.ui.RectangleEdge edge, $stack44, $stack45, $stack62, $stack63, $stack86, $stack87;
+        org.jfree.chart.axis.NumberTick $stack54;
+        java.lang.Double $stack56;
+        org.jfree.chart.ui.TextAnchor $stack57, $stack58;
+        java.awt.geom.Rectangle2D dataArea;
+        boolean $stack65;
+        java.util.Calendar $stack90, $stack67;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack94, $stack118;
+        java.awt.Stroke $stack95, $stack119;
+        java.awt.geom.Line2D$Double $stack100, $stack104, $stack110, $stack114, $stack121, $stack123, $stack127, $stack129, inside, outside;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack28 = new java.util.ArrayList;
+
+        specialinvoke $stack28.<java.util.ArrayList: void <init>()>();
+
+        y0 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+
+        $stack30 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: float getTickMarkInsideLength()>();
+
+        insideLength = (double) $stack30;
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: float getTickMarkOutsideLength()>();
+
+        outsideLength = (double) $stack31;
+
+        $stack33 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass>;
+
+        $stack32 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack34 = virtualinvoke $stack32.<org.jfree.data.time.RegularTimePeriod: java.util.Date getStart()>();
+
+        $stack35 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone getTimeZone()>();
+
+        $stack36 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        t = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack33, $stack34, $stack35, $stack36);
+
+        t0 = virtualinvoke t.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        inside = null;
+
+        outside = null;
+
+        $stack39 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod getFirst()>();
+
+        firstOnAxis = virtualinvoke $stack39.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        $stack41 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod getLast()>();
+
+        $stack42 = virtualinvoke $stack41.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        lastOnAxis = $stack42 + 1L;
+
+     label01:
+        $stack43 = t0 cmp lastOnAxis;
+
+        if $stack43 > 0 goto label10;
+
+        $stack54 = new org.jfree.chart.axis.NumberTick;
+
+        $stack55 = (double) t0;
+
+        $stack56 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack55);
+
+        $stack58 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        $stack57 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack54.<org.jfree.chart.axis.NumberTick: void <init>(java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack56, "", $stack58, $stack57, 0.0);
+
+        interfaceinvoke $stack28.<java.util.List: boolean add(java.lang.Object)>($stack54);
+
+        $stack60 = (double) t0;
+
+        x0 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack60, dataArea, edge);
+
+        $stack62 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack62 goto label02;
+
+        $stack127 = new java.awt.geom.Line2D$Double;
+
+        $stack128 = y0 + insideLength;
+
+        specialinvoke $stack127.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0, y0, x0, $stack128);
+
+        inside = $stack127;
+
+        $stack129 = new java.awt.geom.Line2D$Double;
+
+        $stack130 = y0 - outsideLength;
+
+        specialinvoke $stack129.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0, y0, x0, $stack130);
+
+        outside = $stack129;
+
+        goto label03;
+
+     label02:
+        $stack63 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack63 goto label03;
+
+        $stack121 = new java.awt.geom.Line2D$Double;
+
+        $stack122 = y0 - insideLength;
+
+        specialinvoke $stack121.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0, y0, x0, $stack122);
+
+        inside = $stack121;
+
+        $stack123 = new java.awt.geom.Line2D$Double;
+
+        $stack124 = y0 + outsideLength;
+
+        specialinvoke $stack123.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0, y0, x0, $stack124);
+
+        outside = $stack123;
+
+     label03:
+        $stack64 = t0 cmp firstOnAxis;
+
+        if $stack64 < 0 goto label04;
+
+        $stack118 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint getTickMarkPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack118);
+
+        $stack119 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke getTickMarkStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack119);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(inside);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(outside);
+
+     label04:
+        $stack65 = this.<org.jfree.chart.axis.PeriodAxis: boolean minorTickMarksVisible>;
+
+        if $stack65 == 0 goto label09;
+
+        $stack72 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass>;
+
+        $stack71 = new java.util.Date;
+
+        specialinvoke $stack71.<java.util.Date: void <init>(long)>(t0);
+
+        $stack73 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone getTimeZone()>();
+
+        $stack74 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        tminor = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack72, $stack71, $stack73, $stack74);
+
+        tt0 = virtualinvoke tminor.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+     label05:
+        $stack77 = virtualinvoke t.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack78 = tt0 cmp $stack77;
+
+        if $stack78 >= 0 goto label09;
+
+        $stack83 = tt0 cmp lastOnAxis;
+
+        if $stack83 >= 0 goto label09;
+
+        $stack84 = (double) tt0;
+
+        xx0 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack84, dataArea, edge);
+
+        $stack86 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack86 goto label06;
+
+        $stack110 = new java.awt.geom.Line2D$Double;
+
+        $stack111 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkInsideLength>;
+
+        $stack112 = (double) $stack111;
+
+        $stack113 = y0 + $stack112;
+
+        specialinvoke $stack110.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx0, y0, xx0, $stack113);
+
+        inside = $stack110;
+
+        $stack114 = new java.awt.geom.Line2D$Double;
+
+        $stack115 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        $stack116 = (double) $stack115;
+
+        $stack117 = y0 - $stack116;
+
+        specialinvoke $stack114.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx0, y0, xx0, $stack117);
+
+        outside = $stack114;
+
+        goto label07;
+
+     label06:
+        $stack87 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack87 goto label07;
+
+        $stack100 = new java.awt.geom.Line2D$Double;
+
+        $stack101 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkInsideLength>;
+
+        $stack102 = (double) $stack101;
+
+        $stack103 = y0 - $stack102;
+
+        specialinvoke $stack100.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx0, y0, xx0, $stack103);
+
+        inside = $stack100;
+
+        $stack104 = new java.awt.geom.Line2D$Double;
+
+        $stack105 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        $stack106 = (double) $stack105;
+
+        $stack107 = y0 + $stack106;
+
+        specialinvoke $stack104.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx0, y0, xx0, $stack107);
+
+        outside = $stack104;
+
+     label07:
+        $stack88 = tt0 cmp firstOnAxis;
+
+        if $stack88 < 0 goto label08;
+
+        $stack94 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack94);
+
+        $stack95 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack95);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(inside);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(outside);
+
+     label08:
+        tminor = virtualinvoke tminor.<org.jfree.data.time.RegularTimePeriod: org.jfree.data.time.RegularTimePeriod next()>();
+
+        $stack90 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke tminor.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack90);
+
+        tt0 = virtualinvoke tminor.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        goto label05;
+
+     label09:
+        t = virtualinvoke t.<org.jfree.data.time.RegularTimePeriod: org.jfree.data.time.RegularTimePeriod next()>();
+
+        $stack67 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke t.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack67);
+
+        t0 = virtualinvoke t.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        goto label01;
+
+     label10:
+        $stack44 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack44 goto label11;
+
+        $stack51 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        $stack52 = (double) $stack51;
+
+        $stack53 = staticinvoke <java.lang.Math: double max(double,double)>(outsideLength, $stack52);
+
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorUp(double)>($stack53);
+
+        goto label12;
+
+     label11:
+        $stack45 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack45 goto label12;
+
+        $stack46 = this.<org.jfree.chart.axis.PeriodAxis: float minorTickMarkOutsideLength>;
+
+        $stack47 = (double) $stack46;
+
+        $stack48 = staticinvoke <java.lang.Math: double max(double,double)>(outsideLength, $stack47);
+
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorDown(double)>($stack48);
+
+     label12:
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>($stack28);
+
+        return;
+    }
+
+    protected void drawTickMarksVertical(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.AxisState state;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        return;
+    }
+
+    protected org.jfree.chart.axis.AxisState drawTickLabels(int, java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.PeriodAxis this;
+        int band, $stack99, periods, $stack121, $stack127, $stack234, $stack284, bb#222;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack45, $stack100, $stack118, $stack124, $stack147, $stack156, $stack159, $stack164, $stack231, $stack281, $stack55, $stack58, $stack61, $stack67, $stack73;
+        org.jfree.chart.axis.PeriodAxisLabelInfo $stack46, $stack102, $stack119, $stack125, $stack148, $stack157, $stack160, $stack165, $stack232, $stack282, $stack56, $stack59, $stack63, $stack69, $stack74;
+        java.awt.Font $stack47, $stack57;
+        java.awt.FontMetrics fm, $stack170, $stack190, $stack83, $stack85;
+        org.jfree.chart.ui.RectangleEdge edge, $stack49, $stack50, $stack108, $stack112, $stack113;
+        org.jfree.chart.axis.AxisState state;
+        long axisMin, axisMax, $stack96, $stack97, length, $stack98, $stack130, $stack134, first, last, $stack153, mid, $stack179, $stack200, $stack78, $stack81, ww, lastXX, $stack109, bb#217;
+        org.jfree.data.time.RegularTimePeriod p1, p2, $stack51, $stack53, p;
+        java.text.DateFormat df;
+        java.lang.String label1, label2, label;
+        java.awt.geom.Rectangle2D b1, b2, dataArea, b, bb;
+        double w, $stack106, $stack107, $stack122, $stack123, $stack128, $stack129, $stack131, $stack132, $stack154, $stack155, $stack172, $stack173, $stack174, $stack175, $stack176, $stack180, $stack181, $stack182, $stack183, $stack184, $stack185, $stack187, $stack192, $stack193, $stack194, $stack195, $stack196, $stack201, $stack202, $stack203, $stack204, $stack205, $stack206, $stack208, $stack235, $stack285, delta1, $stack87, $stack88, $stack90, $stack91, $stack92, $stack93, x#229;
+        java.util.Date $stack101, $stack133, $stack62, $stack68, $stack77, $stack80;
+        java.util.Locale $stack103, $stack64, $stack70;
+        java.util.TimeZone $stack104, $stack65, $stack71, $stack76;
+        float y, mid2d, $stack163, $stack188, $stack189, $stack209, $stack210, yDelta, x, xstart;
+        org.jfree.chart.ui.RectangleInsets $stack120, $stack126, $stack233, $stack283;
+        byte $stack138, $stack140, $stack177, $stack186, $stack197, $stack207, $stack110, $stack139;
+        java.util.Calendar $stack141;
+        boolean $stack149, $stack95;
+        java.awt.Stroke $stack158;
+        java.awt.Paint $stack161, $stack166, $stack60;
+        java.awt.geom.Line2D$Float $stack162;
+        org.jfree.chart.ui.TextAnchor anchor;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        band := @parameter0: int;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        state := @parameter2: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        delta1 = 0.0;
+
+        $stack45 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack46 = $stack45[band];
+
+        $stack47 = virtualinvoke $stack46.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font getLabelFont()>();
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack47);
+
+        $stack49 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack49 goto label01;
+
+        $stack281 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack282 = $stack281[band];
+
+        $stack283 = virtualinvoke $stack282.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.ui.RectangleInsets getPadding()>();
+
+        $stack284 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        $stack285 = (double) $stack284;
+
+        delta1 = virtualinvoke $stack283.<org.jfree.chart.ui.RectangleInsets: double calculateTopOutset(double)>($stack285);
+
+        goto label02;
+
+     label01:
+        $stack50 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack50 goto label02;
+
+        $stack231 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack232 = $stack231[band];
+
+        $stack233 = virtualinvoke $stack232.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.ui.RectangleInsets getPadding()>();
+
+        $stack234 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        $stack235 = (double) $stack234;
+
+        delta1 = virtualinvoke $stack233.<org.jfree.chart.ui.RectangleInsets: double calculateBottomOutset(double)>($stack235);
+
+     label02:
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void moveCursor(double,org.jfree.chart.ui.RectangleEdge)>(delta1, edge);
+
+        $stack51 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        axisMin = virtualinvoke $stack51.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        $stack53 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        axisMax = virtualinvoke $stack53.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack55 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack56 = $stack55[band];
+
+        $stack57 = virtualinvoke $stack56.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font getLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack57);
+
+        $stack58 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack59 = $stack58[band];
+
+        $stack60 = virtualinvoke $stack59.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack60);
+
+        $stack61 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack63 = $stack61[band];
+
+        $stack62 = new java.util.Date;
+
+        specialinvoke $stack62.<java.util.Date: void <init>(long)>(axisMin);
+
+        $stack65 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack64 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        p1 = virtualinvoke $stack63.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.data.time.RegularTimePeriod createInstance(java.util.Date,java.util.TimeZone,java.util.Locale)>($stack62, $stack65, $stack64);
+
+        $stack67 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack69 = $stack67[band];
+
+        $stack68 = new java.util.Date;
+
+        specialinvoke $stack68.<java.util.Date: void <init>(long)>(axisMax);
+
+        $stack71 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack70 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        p2 = virtualinvoke $stack69.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.data.time.RegularTimePeriod createInstance(java.util.Date,java.util.TimeZone,java.util.Locale)>($stack68, $stack71, $stack70);
+
+        $stack73 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack74 = $stack73[band];
+
+        df = virtualinvoke $stack74.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat getDateFormat()>();
+
+        $stack76 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        virtualinvoke df.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>($stack76);
+
+        $stack77 = new java.util.Date;
+
+        $stack78 = virtualinvoke p1.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond()>();
+
+        specialinvoke $stack77.<java.util.Date: void <init>(long)>($stack78);
+
+        label1 = virtualinvoke df.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack77);
+
+        $stack80 = new java.util.Date;
+
+        $stack81 = virtualinvoke p2.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond()>();
+
+        specialinvoke $stack80.<java.util.Date: void <init>(long)>($stack81);
+
+        label2 = virtualinvoke df.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack80);
+
+        $stack83 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        b1 = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(label1, g2, $stack83);
+
+        $stack85 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        b2 = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(label2, g2, $stack85);
+
+        $stack87 = virtualinvoke b1.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack88 = virtualinvoke b2.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        w = staticinvoke <java.lang.Math: double max(double,double)>($stack87, $stack88);
+
+        $stack90 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack91 = $stack90 + w;
+
+        $stack92 = $stack91 + 5.0;
+
+        $stack93 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack92, dataArea, edge);
+
+        ww = staticinvoke <java.lang.Math: long round(double)>($stack93);
+
+        $stack95 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isInverted()>();
+
+        if $stack95 == 0 goto label03;
+
+        ww = axisMax - ww;
+
+        goto label04;
+
+     label03:
+        ww = ww - axisMin;
+
+     label04:
+        $stack96 = virtualinvoke p1.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack97 = virtualinvoke p1.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        length = $stack96 - $stack97;
+
+        $stack98 = ww / length;
+
+        $stack99 = (int) $stack98;
+
+        periods = $stack99 + 1;
+
+        $stack100 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack102 = $stack100[band];
+
+        $stack101 = new java.util.Date;
+
+        specialinvoke $stack101.<java.util.Date: void <init>(long)>(axisMin);
+
+        $stack104 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack103 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        p = virtualinvoke $stack102.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.data.time.RegularTimePeriod createInstance(java.util.Date,java.util.TimeZone,java.util.Locale)>($stack101, $stack104, $stack103);
+
+        b = null;
+
+        lastXX = 0L;
+
+        $stack106 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+
+        y = (float) $stack106;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        $stack107 = virtualinvoke b1.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        yDelta = (float) $stack107;
+
+        $stack108 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack108 goto label05;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        yDelta = neg yDelta;
+
+     label05:
+        $stack109 = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        $stack110 = $stack109 cmp axisMax;
+
+        if $stack110 > 0 goto label14;
+
+        $stack130 = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond()>();
+
+        $stack131 = (double) $stack130;
+
+        $stack132 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack131, dataArea, edge);
+
+        x = (float) $stack132;
+
+        $stack133 = new java.util.Date;
+
+        $stack134 = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond()>();
+
+        specialinvoke $stack133.<java.util.Date: void <init>(long)>($stack134);
+
+        label = virtualinvoke df.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack133);
+
+        first = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        last = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        $stack138 = last cmp axisMax;
+
+        if $stack138 <= 0 goto label07;
+
+        $stack190 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bb = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(label, g2, $stack190);
+
+        $stack192 = (double) x;
+
+        $stack193 = virtualinvoke bb.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack194 = $stack193 / 2.0;
+
+        $stack195 = $stack192 + $stack194;
+
+        $stack196 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack197 = $stack195 cmpl $stack196;
+
+        if $stack197 <= 0 goto label07;
+
+        $stack200 = staticinvoke <java.lang.Math: long max(long,long)>(first, axisMin);
+
+        $stack201 = (double) $stack200;
+
+        $stack202 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack201, dataArea, edge);
+
+        xstart = (float) $stack202;
+
+        $stack203 = virtualinvoke bb.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack204 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack205 = (double) xstart;
+
+        $stack206 = $stack204 - $stack205;
+
+        $stack207 = $stack203 cmpg $stack206;
+
+        if $stack207 >= 0 goto label06;
+
+        $stack208 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack209 = (float) $stack208;
+
+        $stack210 = $stack209 + xstart;
+
+        x = $stack210 / 2.0F;
+
+        goto label07;
+
+     label06:
+        label = null;
+
+     label07:
+        $stack139 = first cmp axisMin;
+
+        if $stack139 >= 0 goto label09;
+
+        $stack170 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bb = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(label, g2, $stack170);
+
+        $stack172 = (double) x;
+
+        $stack173 = virtualinvoke bb.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack174 = $stack173 / 2.0;
+
+        $stack175 = $stack172 - $stack174;
+
+        $stack176 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack177 = $stack175 cmpg $stack176;
+
+        if $stack177 >= 0 goto label09;
+
+        $stack179 = staticinvoke <java.lang.Math: long min(long,long)>(last, axisMax);
+
+        $stack180 = (double) $stack179;
+
+        $stack181 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack180, dataArea, edge);
+
+        xstart = (float) $stack181;
+
+        $stack182 = virtualinvoke bb.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack183 = (double) xstart;
+
+        $stack184 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack185 = $stack183 - $stack184;
+
+        $stack186 = $stack182 cmpg $stack185;
+
+        if $stack186 >= 0 goto label08;
+
+        $stack187 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+
+        $stack188 = (float) $stack187;
+
+        $stack189 = xstart + $stack188;
+
+        x = $stack189 / 2.0F;
+
+        goto label09;
+
+     label08:
+        label = null;
+
+     label09:
+        if label == null goto label10;
+
+        $stack164 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack165 = $stack164[band];
+
+        $stack166 = virtualinvoke $stack165.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint getLabelPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack166);
+
+        b = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.ui.TextAnchor)>(label, g2, x, y, anchor);
+
+     label10:
+        $stack140 = lastXX cmp 0L;
+
+        if $stack140 <= 0 goto label11;
+
+        $stack147 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack148 = $stack147[band];
+
+        $stack149 = virtualinvoke $stack148.<org.jfree.chart.axis.PeriodAxisLabelInfo: boolean getDrawDividers()>();
+
+        if $stack149 == 0 goto label11;
+
+        bb#217 = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        $stack153 = lastXX + bb#217;
+
+        mid = $stack153 / 2L;
+
+        $stack154 = (double) mid;
+
+        $stack155 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack154, dataArea, edge);
+
+        mid2d = (float) $stack155;
+
+        $stack156 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack157 = $stack156[band];
+
+        $stack158 = virtualinvoke $stack157.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke getDividerStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack158);
+
+        $stack159 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack160 = $stack159[band];
+
+        $stack161 = virtualinvoke $stack160.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint getDividerPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack161);
+
+        $stack162 = new java.awt.geom.Line2D$Float;
+
+        $stack163 = y + yDelta;
+
+        specialinvoke $stack162.<java.awt.geom.Line2D$Float: void <init>(float,float,float,float)>(mid2d, y, mid2d, $stack163);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack162);
+
+     label11:
+        lastXX = last;
+
+        bb#222 = 0;
+
+     label12:
+        if bb#222 >= periods goto label13;
+
+        p = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: org.jfree.data.time.RegularTimePeriod next()>();
+
+        bb#222 = bb#222 + 1;
+
+        goto label12;
+
+     label13:
+        $stack141 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Calendar calendar>;
+
+        virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: void peg(java.util.Calendar)>($stack141);
+
+        goto label05;
+
+     label14:
+        x#229 = 0.0;
+
+        if b == null goto label16;
+
+        x#229 = virtualinvoke b.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack112 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack112 goto label15;
+
+        $stack124 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack125 = $stack124[band];
+
+        $stack126 = virtualinvoke $stack125.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.ui.RectangleInsets getPadding()>();
+
+        $stack127 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        $stack128 = (double) $stack127;
+
+        $stack129 = virtualinvoke $stack126.<org.jfree.chart.ui.RectangleInsets: double calculateBottomOutset(double)>($stack128);
+
+        x#229 = x#229 + $stack129;
+
+        goto label16;
+
+     label15:
+        $stack113 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack113 goto label16;
+
+        $stack118 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack119 = $stack118[band];
+
+        $stack120 = virtualinvoke $stack119.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.ui.RectangleInsets getPadding()>();
+
+        $stack121 = virtualinvoke fm.<java.awt.FontMetrics: int getHeight()>();
+
+        $stack122 = (double) $stack121;
+
+        $stack123 = virtualinvoke $stack120.<org.jfree.chart.ui.RectangleInsets: double calculateTopOutset(double)>($stack122);
+
+        x#229 = x#229 + $stack123;
+
+     label16:
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void moveCursor(double,org.jfree.chart.ui.RectangleEdge)>(x#229, edge);
+
+        return state;
+    }
+
+    public java.util.List refreshTicks(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.List $stack5;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.AxisState state;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack5 = <java.util.Collections: java.util.List EMPTY_LIST>;
+
+        return $stack5;
+    }
+
+    public double valueToJava2D(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.data.time.RegularTimePeriod $stack15, $stack17;
+        long $stack16, $stack18;
+        double axisMin, axisMax, value, $stack24, $stack25, $stack26, $stack27, $stack28, $stack30, $stack31, $stack32, $stack33, $stack34, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, result, minX, maxX;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack19, $stack20, $stack23, $stack37;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        value := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        result = #NaN;
+
+        $stack15 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack16 = virtualinvoke $stack15.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        axisMin = (double) $stack16;
+
+        $stack17 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack18 = virtualinvoke $stack17.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        axisMax = (double) $stack18;
+
+        $stack19 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack19 == 0 goto label3;
+
+        minX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        maxX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack37 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isInverted()>();
+
+        if $stack37 == 0 goto label1;
+
+        $stack44 = value - axisMin;
+
+        $stack43 = axisMax - axisMin;
+
+        $stack46 = $stack44 / $stack43;
+
+        $stack45 = minX - maxX;
+
+        $stack47 = $stack46 * $stack45;
+
+        result = maxX + $stack47;
+
+        goto label2;
+
+     label1:
+        $stack39 = value - axisMin;
+
+        $stack38 = axisMax - axisMin;
+
+        $stack41 = $stack39 / $stack38;
+
+        $stack40 = maxX - minX;
+
+        $stack42 = $stack41 * $stack40;
+
+        result = minX + $stack42;
+
+     label2:
+        goto label5;
+
+     label3:
+        $stack20 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack20 == 0 goto label5;
+
+        minX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        maxX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isInverted()>();
+
+        if $stack23 == 0 goto label4;
+
+        $stack31 = value - axisMin;
+
+        $stack30 = axisMax - axisMin;
+
+        $stack33 = $stack31 / $stack30;
+
+        $stack32 = maxX - minX;
+
+        $stack34 = $stack33 * $stack32;
+
+        result = minX + $stack34;
+
+        goto label5;
+
+     label4:
+        $stack25 = value - axisMin;
+
+        $stack24 = axisMax - axisMin;
+
+        $stack27 = $stack25 / $stack24;
+
+        $stack26 = maxX - minX;
+
+        $stack28 = $stack27 * $stack26;
+
+        result = maxX - $stack28;
+
+     label5:
+        return result;
+    }
+
+    public double java2DToValue(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.data.time.RegularTimePeriod $stack15, $stack17;
+        long $stack16, $stack18;
+        double axisMin, axisMax, java2DValue, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, min, max, result;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack19, $stack20, $stack21;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        java2DValue := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        min = 0.0;
+
+        max = 0.0;
+
+        $stack15 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack16 = virtualinvoke $stack15.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        axisMin = (double) $stack16;
+
+        $stack17 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack18 = virtualinvoke $stack17.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        axisMax = (double) $stack18;
+
+        $stack19 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack19 == 0 goto label1;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label2;
+
+     label1:
+        $stack20 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack20 == 0 goto label2;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+     label2:
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isInverted()>();
+
+        if $stack21 == 0 goto label3;
+
+        $stack28 = java2DValue - min;
+
+        $stack27 = max - min;
+
+        $stack30 = $stack28 / $stack27;
+
+        $stack29 = axisMax - axisMin;
+
+        $stack31 = $stack30 * $stack29;
+
+        result = axisMax - $stack31;
+
+        goto label4;
+
+     label3:
+        $stack23 = java2DValue - min;
+
+        $stack22 = max - min;
+
+        $stack25 = $stack23 / $stack22;
+
+        $stack24 = axisMax - axisMin;
+
+        $stack26 = $stack25 * $stack24;
+
+        result = axisMin + $stack26;
+
+     label4:
+        return result;
+    }
+
+    protected void autoAdjustRange()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.chart.plot.Plot plot;
+        boolean $stack9;
+        org.jfree.chart.plot.ValueAxisPlot vap;
+        double $stack11, $stack13;
+        long upper, lower;
+        java.util.Date $stack15, $stack20;
+        java.lang.Class $stack16, $stack21;
+        java.util.Locale $stack17, $stack22;
+        java.util.TimeZone $stack18, $stack23;
+        org.jfree.data.time.RegularTimePeriod $stack19, $stack24;
+        org.jfree.data.Range r;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        plot = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.plot.Plot getPlot()>();
+
+        if plot != null goto label1;
+
+        return;
+
+     label1:
+        $stack9 = plot instanceof org.jfree.chart.plot.ValueAxisPlot;
+
+        if $stack9 == 0 goto label3;
+
+        vap = (org.jfree.chart.plot.ValueAxisPlot) plot;
+
+        r = interfaceinvoke vap.<org.jfree.chart.plot.ValueAxisPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(this);
+
+        if r != null goto label2;
+
+        r = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.Range getDefaultAutoRange()>();
+
+     label2:
+        $stack11 = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+
+        upper = staticinvoke <java.lang.Math: long round(double)>($stack11);
+
+        $stack13 = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+
+        lower = staticinvoke <java.lang.Math: long round(double)>($stack13);
+
+        $stack16 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack15 = new java.util.Date;
+
+        specialinvoke $stack15.<java.util.Date: void <init>(long)>(lower);
+
+        $stack18 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack17 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack19 = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack16, $stack15, $stack18, $stack17);
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first> = $stack19;
+
+        $stack21 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack20 = new java.util.Date;
+
+        specialinvoke $stack20.<java.util.Date: void <init>(long)>(upper);
+
+        $stack23 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack22 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack24 = specialinvoke this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class,java.util.Date,java.util.TimeZone,java.util.Locale)>($stack21, $stack20, $stack23, $stack22);
+
+        this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last> = $stack24;
+
+        virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: void setRange(org.jfree.data.Range,boolean,boolean)>(r, 0, 0);
+
+     label3:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.PeriodAxis this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15, $stack18, $stack19, $stack20, $stack23, $stack26, $stack29, $stack32, $stack35, $stack36;
+        org.jfree.data.time.RegularTimePeriod $stack4, $stack5, $stack7, $stack8;
+        java.util.TimeZone $stack10, $stack11;
+        java.util.Locale $stack13, $stack14;
+        java.lang.Class $stack16, $stack17, $stack21, $stack22, $stack24, $stack25;
+        java.awt.Paint $stack27, $stack28;
+        java.awt.Stroke $stack30, $stack31;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack33, $stack34;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.axis.PeriodAxis;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.axis.PeriodAxis) obj;
+
+        $stack5 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack4 = that.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod first>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack8 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack7 = that.<org.jfree.chart.axis.PeriodAxis: org.jfree.data.time.RegularTimePeriod last>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.Object: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack11 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack10 = that.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack14 = this.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack13 = that.<org.jfree.chart.axis.PeriodAxis: java.util.Locale locale>;
+
+        $stack15 = virtualinvoke $stack14.<java.util.Locale: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack15 != 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack17 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack16 = that.<org.jfree.chart.axis.PeriodAxis: java.lang.Class autoRangeTimePeriodClass>;
+
+        $stack18 = virtualinvoke $stack17.<java.lang.Object: boolean equals(java.lang.Object)>($stack16);
+
+        if $stack18 != 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack19 = virtualinvoke this.<org.jfree.chart.axis.PeriodAxis: boolean isMinorTickMarksVisible()>();
+
+        $stack20 = virtualinvoke that.<org.jfree.chart.axis.PeriodAxis: boolean isMinorTickMarksVisible()>();
+
+        if $stack19 == $stack20 goto label08;
+
+        return 0;
+
+     label08:
+        $stack22 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass>;
+
+        $stack21 = that.<org.jfree.chart.axis.PeriodAxis: java.lang.Class majorTickTimePeriodClass>;
+
+        $stack23 = virtualinvoke $stack22.<java.lang.Object: boolean equals(java.lang.Object)>($stack21);
+
+        if $stack23 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack25 = this.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass>;
+
+        $stack24 = that.<org.jfree.chart.axis.PeriodAxis: java.lang.Class minorTickTimePeriodClass>;
+
+        $stack26 = virtualinvoke $stack25.<java.lang.Object: boolean equals(java.lang.Object)>($stack24);
+
+        if $stack26 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack28 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint>;
+
+        $stack27 = that.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint>;
+
+        $stack29 = virtualinvoke $stack28.<java.lang.Object: boolean equals(java.lang.Object)>($stack27);
+
+        if $stack29 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack31 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke>;
+
+        $stack30 = that.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke>;
+
+        $stack32 = virtualinvoke $stack31.<java.lang.Object: boolean equals(java.lang.Object)>($stack30);
+
+        if $stack32 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack34 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack33 = that.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack35 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack34, $stack33);
+
+        if $stack35 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack36 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)>(obj);
+
+        return $stack36;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.PeriodAxis this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.axis.PeriodAxis this, clone;
+        java.lang.Object $stack2, $stack4, $stack7;
+        java.util.TimeZone $stack3, $stack5;
+        org.jfree.chart.axis.PeriodAxisLabelInfo[] $stack6, $stack8, $stack9;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.axis.PeriodAxis) $stack2;
+
+        $stack3 = this.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.TimeZone: java.lang.Object clone()>();
+
+        $stack5 = (java.util.TimeZone) $stack4;
+
+        clone.<org.jfree.chart.axis.PeriodAxis: java.util.TimeZone timeZone> = $stack5;
+
+        $stack6 = this.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo>;
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack8 = (org.jfree.chart.axis.PeriodAxisLabelInfo[]) $stack7;
+
+        $stack9 = (org.jfree.chart.axis.PeriodAxisLabelInfo[]) $stack8;
+
+        clone.<org.jfree.chart.axis.PeriodAxis: org.jfree.chart.axis.PeriodAxisLabelInfo[] labelInfo> = $stack9;
+
+        return clone;
+    }
+
+    private org.jfree.data.time.RegularTimePeriod createInstance(java.lang.Class, java.util.Date, java.util.TimeZone, java.util.Locale)
+    {
+        java.lang.Class periodClass;
+        java.lang.Class[] $stack8, $stack15;
+        java.lang.Object[] $stack10, $stack17;
+        java.util.Date millisecond;
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        java.lang.Object $stack11, $stack18;
+        java.lang.Exception $stack12, $stack14;
+        org.jfree.chart.axis.PeriodAxis this;
+        org.jfree.data.time.RegularTimePeriod result;
+        java.lang.reflect.Constructor c;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        periodClass := @parameter0: java.lang.Class;
+
+        millisecond := @parameter1: java.util.Date;
+
+        zone := @parameter2: java.util.TimeZone;
+
+        locale := @parameter3: java.util.Locale;
+
+        result = null;
+
+     label1:
+        $stack8 = newarray (java.lang.Class)[3];
+
+        $stack8[0] = class "Ljava/util/Date;";
+
+        $stack8[1] = class "Ljava/util/TimeZone;";
+
+        $stack8[2] = class "Ljava/util/Locale;";
+
+        c = virtualinvoke periodClass.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack8);
+
+        $stack10 = newarray (java.lang.Object)[3];
+
+        $stack10[0] = millisecond;
+
+        $stack10[1] = zone;
+
+        $stack10[2] = locale;
+
+        $stack11 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack10);
+
+        result = (org.jfree.data.time.RegularTimePeriod) $stack11;
+
+     label2:
+        goto label7;
+
+     label3:
+        $stack14 := @caughtexception;
+
+     label4:
+        $stack15 = newarray (java.lang.Class)[1];
+
+        $stack15[0] = class "Ljava/util/Date;";
+
+        c = virtualinvoke periodClass.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack15);
+
+        $stack17 = newarray (java.lang.Object)[1];
+
+        $stack17[0] = millisecond;
+
+        $stack18 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack17);
+
+        result = (org.jfree.data.time.RegularTimePeriod) $stack18;
+
+     label5:
+        goto label7;
+
+     label6:
+        $stack12 := @caughtexception;
+
+     label7:
+        return result;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+        catch java.lang.Exception from label4 to label5 with label6;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Stroke $stack2;
+        java.awt.Paint $stack3;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.PeriodAxis this;
+        java.awt.Stroke $stack2;
+        java.awt.Paint $stack3;
+
+        this := @this: org.jfree.chart.axis.PeriodAxis;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Stroke minorTickMarkStroke> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.axis.PeriodAxis: java.awt.Paint minorTickMarkPaint> = $stack3;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.axis.PeriodAxis: long serialVersionUID> = 8353295532075872069L;
+
+        return;
+    }
+}

@@ -1,0 +1,174 @@
+final class org.jsoup.parser.Token$Comment extends org.jsoup.parser.Token
+{
+    private final java.lang.StringBuilder data;
+    private java.lang.String dataS;
+    boolean bogus;
+
+    org.jsoup.parser.Token reset()
+    {
+        org.jsoup.parser.Token$Comment this;
+        java.lang.StringBuilder $stack1;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        $stack1 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        staticinvoke <org.jsoup.parser.Token$Comment: void reset(java.lang.StringBuilder)>($stack1);
+
+        this.<org.jsoup.parser.Token$Comment: java.lang.String dataS> = null;
+
+        this.<org.jsoup.parser.Token$Comment: boolean bogus> = 0;
+
+        return this;
+    }
+
+    void <init>()
+    {
+        org.jsoup.parser.Token$Comment this;
+        java.lang.StringBuilder $stack1;
+        org.jsoup.parser.Token$TokenType $stack2;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        specialinvoke this.<org.jsoup.parser.Token: void <init>(org.jsoup.parser.Token$1)>(null);
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data> = $stack1;
+
+        this.<org.jsoup.parser.Token$Comment: boolean bogus> = 0;
+
+        $stack2 = <org.jsoup.parser.Token$TokenType: org.jsoup.parser.Token$TokenType Comment>;
+
+        this.<org.jsoup.parser.Token$Comment: org.jsoup.parser.Token$TokenType type> = $stack2;
+
+        return;
+    }
+
+    java.lang.String getData()
+    {
+        org.jsoup.parser.Token$Comment this;
+        java.lang.String $stack1, $stack3;
+        java.lang.StringBuilder $stack2;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        $stack1 = this.<org.jsoup.parser.Token$Comment: java.lang.String dataS>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = this.<org.jsoup.parser.Token$Comment: java.lang.String dataS>;
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label2:
+        return $stack3;
+    }
+
+    final org.jsoup.parser.Token$Comment append(java.lang.String)
+    {
+        org.jsoup.parser.Token$Comment this;
+        java.lang.StringBuilder $stack2, $stack4;
+        int $stack3;
+        java.lang.String append;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        append := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.parser.Token$Comment: void ensureData()>();
+
+        $stack2 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: int length()>();
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jsoup.parser.Token$Comment: java.lang.String dataS> = append;
+
+        goto label2;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(append);
+
+     label2:
+        return this;
+    }
+
+    final org.jsoup.parser.Token$Comment append(char)
+    {
+        org.jsoup.parser.Token$Comment this;
+        char append;
+        java.lang.StringBuilder $stack2;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        append := @parameter0: char;
+
+        specialinvoke this.<org.jsoup.parser.Token$Comment: void ensureData()>();
+
+        $stack2 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(append);
+
+        return this;
+    }
+
+    private void ensureData()
+    {
+        org.jsoup.parser.Token$Comment this;
+        java.lang.String $stack1, $stack2;
+        java.lang.StringBuilder $stack3;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        $stack1 = this.<org.jsoup.parser.Token$Comment: java.lang.String dataS>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = this.<org.jsoup.parser.Token$Comment: java.lang.StringBuilder data>;
+
+        $stack2 = this.<org.jsoup.parser.Token$Comment: java.lang.String dataS>;
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack2);
+
+        this.<org.jsoup.parser.Token$Comment: java.lang.String dataS> = null;
+
+     label1:
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.StringBuilder $stack1, $stack2, $stack4, $stack5;
+        org.jsoup.parser.Token$Comment this;
+        java.lang.String $stack3, $stack6;
+
+        this := @this: org.jsoup.parser.Token$Comment;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("<!--");
+
+        $stack3 = virtualinvoke this.<org.jsoup.parser.Token$Comment: java.lang.String getData()>();
+
+        $stack4 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack3);
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("-->");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack6;
+    }
+}

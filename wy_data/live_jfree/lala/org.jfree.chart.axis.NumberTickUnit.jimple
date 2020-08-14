@@ -1,0 +1,197 @@
+public class org.jfree.chart.axis.NumberTickUnit extends org.jfree.chart.axis.TickUnit implements java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.text.NumberFormat formatter;
+
+    public void <init>(double)
+    {
+        org.jfree.chart.axis.NumberTickUnit this;
+        double size;
+        java.text.NumberFormat $stack3;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        size := @parameter0: double;
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>(size, $stack3);
+
+        return;
+    }
+
+    public void <init>(double, java.text.NumberFormat)
+    {
+        org.jfree.chart.axis.NumberTickUnit this;
+        double size;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        size := @parameter0: double;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.axis.TickUnit: void <init>(double)>(size);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter> = formatter;
+
+        return;
+    }
+
+    public void <init>(double, java.text.NumberFormat, int)
+    {
+        org.jfree.chart.axis.NumberTickUnit this;
+        double size;
+        int minorTickCount;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        size := @parameter0: double;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        minorTickCount := @parameter2: int;
+
+        specialinvoke this.<org.jfree.chart.axis.TickUnit: void <init>(double,int)>(size, minorTickCount);
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter> = formatter;
+
+        return;
+    }
+
+    public java.lang.String valueToString(double)
+    {
+        org.jfree.chart.axis.NumberTickUnit this;
+        double value;
+        java.text.NumberFormat $stack3;
+        java.lang.String $stack4;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        value := @parameter0: double;
+
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+
+        $stack4 = virtualinvoke $stack3.<java.text.NumberFormat: java.lang.String format(double)>(value);
+
+        return $stack4;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.NumberTickUnit this, that;
+        boolean $stack3, $stack4, $stack7;
+        java.text.NumberFormat $stack5, $stack6;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.NumberTickUnit;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.axis.NumberTickUnit) obj;
+
+        $stack6 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+
+        $stack5 = that.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+
+        $stack7 = virtualinvoke $stack6.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.StringBuilder $stack1, $stack2, $stack5, $stack6;
+        org.jfree.chart.axis.NumberTickUnit this;
+        double $stack3;
+        java.lang.String $stack4, $stack7;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("[size=");
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>($stack3);
+
+        $stack5 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack7;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.NumberTickUnit this;
+        java.text.NumberFormat $stack3, $stack5;
+        int $stack4, result, $stack6;
+
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+
+        result = specialinvoke this.<org.jfree.chart.axis.TickUnit: int hashCode()>();
+
+        $stack4 = 29 * result;
+
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+
+        if $stack3 == null goto label1;
+
+        $stack5 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+
+        $stack6 = virtualinvoke $stack5.<java.text.NumberFormat: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        result = $stack4 + $stack6;
+
+        return result;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.axis.NumberTickUnit: long serialVersionUID> = 3849459506627654442L;
+
+        return;
+    }
+}

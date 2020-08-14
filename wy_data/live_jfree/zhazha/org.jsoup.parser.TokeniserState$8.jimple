@@ -1,0 +1,94 @@
+final enum class org.jsoup.parser.TokeniserState$8 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$8 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$8;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        char $stack3;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.TokeniserState $stack4, $stack5, $stack6, $stack8, $stack10;
+        boolean $stack7;
+        org.jsoup.parser.TokeniserState$8 this;
+
+        this := @this: org.jsoup.parser.TokeniserState$8;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        $stack3 = virtualinvoke r.<org.jsoup.parser.CharacterReader: char current()>();
+
+        lookupswitch($stack3)
+        {
+            case 33: goto label1;
+            case 47: goto label2;
+            case 63: goto label3;
+            default: goto label4;
+        };
+
+     label1:
+        $stack6 = <org.jsoup.parser.TokeniserState$8: org.jsoup.parser.TokeniserState MarkupDeclarationOpen>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack6);
+
+        goto label6;
+
+     label2:
+        $stack5 = <org.jsoup.parser.TokeniserState$8: org.jsoup.parser.TokeniserState EndTagOpen>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack5);
+
+        goto label6;
+
+     label3:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void createBogusCommentPending()>();
+
+        $stack4 = <org.jsoup.parser.TokeniserState$8: org.jsoup.parser.TokeniserState BogusComment>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack4);
+
+        goto label6;
+
+     label4:
+        $stack7 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean matchesLetter()>();
+
+        if $stack7 == 0 goto label5;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag createTagPending(boolean)>(1);
+
+        $stack10 = <org.jsoup.parser.TokeniserState$8: org.jsoup.parser.TokeniserState TagName>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack10);
+
+        goto label6;
+
+     label5:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(char)>(60);
+
+        $stack8 = <org.jsoup.parser.TokeniserState$8: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack8);
+
+     label6:
+        return;
+    }
+}

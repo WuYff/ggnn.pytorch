@@ -1,0 +1,212 @@
+public class org.jfree.chart.labels.IntervalCategoryToolTipGenerator extends org.jfree.chart.labels.StandardCategoryToolTipGenerator
+{
+    private static final long serialVersionUID;
+    public static final java.lang.String DEFAULT_TOOL_TIP_FORMAT_STRING;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        java.text.NumberFormat $stack2;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat)>("({0}, {1}) = {3} - {4}", $stack2);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        java.lang.String labelFormat;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        labelFormat := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat)>(labelFormat, formatter);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.DateFormat)
+    {
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        java.lang.String labelFormat;
+        java.text.DateFormat formatter;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        labelFormat := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.DateFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>(java.lang.String,java.text.DateFormat)>(labelFormat, formatter);
+
+        return;
+    }
+
+    protected java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset, int, int)
+    {
+        java.lang.Object[] result;
+        org.jfree.data.category.CategoryDataset dataset;
+        int row, column;
+        java.lang.Comparable $stack10, $stack13;
+        java.lang.String $stack11, $stack14, $stack26, $stack29, $stack32, $stack35, $stack38, $stack42;
+        java.lang.Number value, start, end;
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        java.text.NumberFormat $stack16, $stack21, $stack31, $stack34, $stack41;
+        java.text.DateFormat $stack17, $stack22, $stack25, $stack28, $stack37;
+        org.jfree.data.category.IntervalCategoryDataset icd;
+        boolean $stack18;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        row := @parameter1: int;
+
+        column := @parameter2: int;
+
+        result = newarray (java.lang.Object)[5];
+
+        $stack10 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: java.lang.String toString()>();
+
+        result[0] = $stack11;
+
+        $stack13 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.Object: java.lang.String toString()>();
+
+        result[1] = $stack14;
+
+        value = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+
+        $stack16 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        if $stack16 == null goto label1;
+
+        $stack41 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        $stack42 = virtualinvoke $stack41.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(value);
+
+        result[2] = $stack42;
+
+        goto label2;
+
+     label1:
+        $stack17 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.DateFormat getDateFormat()>();
+
+        if $stack17 == null goto label2;
+
+        $stack37 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.DateFormat getDateFormat()>();
+
+        $stack38 = virtualinvoke $stack37.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(value);
+
+        result[2] = $stack38;
+
+     label2:
+        $stack18 = dataset instanceof org.jfree.data.category.IntervalCategoryDataset;
+
+        if $stack18 == 0 goto label4;
+
+        icd = (org.jfree.data.category.IntervalCategoryDataset) dataset;
+
+        start = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getStartValue(int,int)>(row, column);
+
+        end = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getEndValue(int,int)>(row, column);
+
+        $stack21 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        if $stack21 == null goto label3;
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        $stack32 = virtualinvoke $stack31.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(start);
+
+        result[3] = $stack32;
+
+        $stack34 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.NumberFormat getNumberFormat()>();
+
+        $stack35 = virtualinvoke $stack34.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(end);
+
+        result[4] = $stack35;
+
+        goto label4;
+
+     label3:
+        $stack22 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.DateFormat getDateFormat()>();
+
+        if $stack22 == null goto label4;
+
+        $stack25 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.DateFormat getDateFormat()>();
+
+        $stack26 = virtualinvoke $stack25.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(start);
+
+        result[3] = $stack26;
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.text.DateFormat getDateFormat()>();
+
+        $stack29 = virtualinvoke $stack28.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(end);
+
+        result[4] = $stack29;
+
+     label4:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        boolean $stack2, $stack3;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = obj instanceof org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        if $stack2 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack3 = specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: boolean equals(java.lang.Object)>(obj);
+
+        return $stack3;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.IntervalCategoryToolTipGenerator: java.lang.String DEFAULT_TOOL_TIP_FORMAT_STRING> = "({0}, {1}) = {3} - {4}";
+
+        <org.jfree.chart.labels.IntervalCategoryToolTipGenerator: long serialVersionUID> = -3853824986520333437L;
+
+        return;
+    }
+}

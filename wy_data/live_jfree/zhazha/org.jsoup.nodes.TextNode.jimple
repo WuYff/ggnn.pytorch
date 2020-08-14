@@ -1,0 +1,510 @@
+public class org.jsoup.nodes.TextNode extends org.jsoup.nodes.LeafNode
+{
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String text;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        text := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void <init>()>();
+
+        this.<org.jsoup.nodes.TextNode: java.lang.Object value> = text;
+
+        return;
+    }
+
+    public java.lang.String nodeName()
+    {
+        org.jsoup.nodes.TextNode this;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        return "#text";
+    }
+
+    public java.lang.String text()
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String $stack1, $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String getWholeText()>();
+
+        $stack2 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String normaliseWhitespace(java.lang.String)>($stack1);
+
+        return $stack2;
+    }
+
+    public org.jsoup.nodes.TextNode text(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String text;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        text := @parameter0: java.lang.String;
+
+        virtualinvoke this.<org.jsoup.nodes.TextNode: void coreValue(java.lang.String)>(text);
+
+        return this;
+    }
+
+    public java.lang.String getWholeText()
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String coreValue()>();
+
+        return $stack1;
+    }
+
+    public boolean isBlank()
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String $stack1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String coreValue()>();
+
+        $stack2 = staticinvoke <org.jsoup.internal.StringUtil: boolean isBlank(java.lang.String)>($stack1);
+
+        return $stack2;
+    }
+
+    public org.jsoup.nodes.TextNode splitText(int)
+    {
+        org.jsoup.nodes.TextNode this, $stack11;
+        java.lang.String text, head, tail;
+        int offset, $stack7, $stack14, $stack16;
+        org.jsoup.nodes.Node $stack12, $stack13;
+        org.jsoup.nodes.Node[] $stack15;
+        boolean $stack29, $stack18;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        offset := @parameter0: int;
+
+        text = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String coreValue()>();
+
+        if offset < 0 goto label1;
+
+        $stack29 = 1;
+
+        goto label2;
+
+     label1:
+        $stack29 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack29, "Split offset must be not be negative");
+
+        $stack7 = virtualinvoke text.<java.lang.String: int length()>();
+
+        if offset >= $stack7 goto label3;
+
+        $stack18 = 1;
+
+        goto label4;
+
+     label3:
+        $stack18 = 0;
+
+     label4:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack18, "Split offset must not be greater than current text length");
+
+        head = virtualinvoke text.<java.lang.String: java.lang.String substring(int,int)>(0, offset);
+
+        tail = virtualinvoke text.<java.lang.String: java.lang.String substring(int)>(offset);
+
+        virtualinvoke this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.TextNode text(java.lang.String)>(head);
+
+        $stack11 = new org.jsoup.nodes.TextNode;
+
+        specialinvoke $stack11.<org.jsoup.nodes.TextNode: void <init>(java.lang.String)>(tail);
+
+        $stack12 = virtualinvoke this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parent()>();
+
+        if $stack12 == null goto label5;
+
+        $stack13 = virtualinvoke this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parent()>();
+
+        $stack14 = virtualinvoke this.<org.jsoup.nodes.TextNode: int siblingIndex()>();
+
+        $stack16 = $stack14 + 1;
+
+        $stack15 = newarray (org.jsoup.nodes.Node)[1];
+
+        $stack15[0] = $stack11;
+
+        virtualinvoke $stack13.<org.jsoup.nodes.Node: void addChildren(int,org.jsoup.nodes.Node[])>($stack16, $stack15);
+
+     label5:
+        return $stack11;
+    }
+
+    void outerHtmlHead(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings) throws java.io.IOException
+    {
+        org.jsoup.nodes.Document$OutputSettings out;
+        boolean prettyPrint, normaliseWhite, $stack10, $stack19, $stack27, $stack29, $stack34, $stack35, $stack23, $stack20, $stack11;
+        java.lang.Appendable accum;
+        org.jsoup.nodes.TextNode this;
+        org.jsoup.nodes.Node $stack9, $stack18, $stack28, $stack31;
+        int $stack22, $stack26, depth;
+        java.util.List $stack25;
+        org.jsoup.nodes.Element $stack32;
+        org.jsoup.parser.Tag $stack33;
+        java.lang.String $stack8;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        prettyPrint = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: boolean prettyPrint()>();
+
+        if prettyPrint == 0 goto label3;
+
+        $stack22 = virtualinvoke this.<org.jsoup.nodes.TextNode: int siblingIndex()>();
+
+        if $stack22 != 0 goto label1;
+
+        $stack28 = this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parentNode>;
+
+        $stack29 = $stack28 instanceof org.jsoup.nodes.Element;
+
+        if $stack29 == 0 goto label1;
+
+        $stack31 = this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parentNode>;
+
+        $stack32 = (org.jsoup.nodes.Element) $stack31;
+
+        $stack33 = virtualinvoke $stack32.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack34 = virtualinvoke $stack33.<org.jsoup.parser.Tag: boolean formatAsBlock()>();
+
+        if $stack34 == 0 goto label1;
+
+        $stack35 = virtualinvoke this.<org.jsoup.nodes.TextNode: boolean isBlank()>();
+
+        if $stack35 == 0 goto label2;
+
+     label1:
+        $stack23 = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: boolean outline()>();
+
+        if $stack23 == 0 goto label3;
+
+        $stack25 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.util.List siblingNodes()>();
+
+        $stack26 = interfaceinvoke $stack25.<java.util.List: int size()>();
+
+        if $stack26 <= 0 goto label3;
+
+        $stack27 = virtualinvoke this.<org.jsoup.nodes.TextNode: boolean isBlank()>();
+
+        if $stack27 != 0 goto label3;
+
+     label2:
+        virtualinvoke this.<org.jsoup.nodes.TextNode: void indent(java.lang.Appendable,int,org.jsoup.nodes.Document$OutputSettings)>(accum, depth, out);
+
+     label3:
+        if prettyPrint == 0 goto label4;
+
+        $stack18 = this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parentNode>;
+
+        $stack19 = staticinvoke <org.jsoup.nodes.Element: boolean preserveWhitespace(org.jsoup.nodes.Node)>($stack18);
+
+        if $stack19 != 0 goto label4;
+
+        $stack20 = 1;
+
+        goto label5;
+
+     label4:
+        $stack20 = 0;
+
+     label5:
+        normaliseWhite = $stack20;
+
+        if prettyPrint == 0 goto label6;
+
+        $stack9 = this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.Node parentNode>;
+
+        $stack10 = $stack9 instanceof org.jsoup.nodes.Document;
+
+        if $stack10 == 0 goto label6;
+
+        $stack11 = 1;
+
+        goto label7;
+
+     label6:
+        $stack11 = 0;
+
+     label7:
+        $stack8 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String coreValue()>();
+
+        staticinvoke <org.jsoup.nodes.Entities: void escape(java.lang.Appendable,java.lang.String,org.jsoup.nodes.Document$OutputSettings,boolean,boolean,boolean)>(accum, $stack8, out, 0, normaliseWhite, $stack11);
+
+        return;
+    }
+
+    void outerHtmlTail(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.Appendable accum;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: java.lang.String outerHtml()>();
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.TextNode clone()
+    {
+        org.jsoup.nodes.TextNode this, $stack2;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node clone()>();
+
+        $stack2 = (org.jsoup.nodes.TextNode) $stack1;
+
+        return $stack2;
+    }
+
+    public static org.jsoup.nodes.TextNode createFromEncoded(java.lang.String)
+    {
+        java.lang.String encodedText, text;
+        org.jsoup.nodes.TextNode $stack3;
+
+        encodedText := @parameter0: java.lang.String;
+
+        text = staticinvoke <org.jsoup.nodes.Entities: java.lang.String unescape(java.lang.String)>(encodedText);
+
+        $stack3 = new org.jsoup.nodes.TextNode;
+
+        specialinvoke $stack3.<org.jsoup.nodes.TextNode: void <init>(java.lang.String)>(text);
+
+        return $stack3;
+    }
+
+    static java.lang.String normaliseWhitespace(java.lang.String)
+    {
+        java.lang.String text, text#2;
+
+        text := @parameter0: java.lang.String;
+
+        text#2 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String normaliseWhitespace(java.lang.String)>(text);
+
+        return text#2;
+    }
+
+    static java.lang.String stripLeadingWhitespace(java.lang.String)
+    {
+        java.lang.String text, $stack1;
+
+        text := @parameter0: java.lang.String;
+
+        $stack1 = virtualinvoke text.<java.lang.String: java.lang.String replaceFirst(java.lang.String,java.lang.String)>("^\\s+", "");
+
+        return $stack1;
+    }
+
+    static boolean lastCharIsWhitespace(java.lang.StringBuilder)
+    {
+        java.lang.StringBuilder sb;
+        int $stack1, $stack2, $stack3;
+        char $stack4;
+        boolean $stack5;
+
+        sb := @parameter0: java.lang.StringBuilder;
+
+        $stack1 = virtualinvoke sb.<java.lang.StringBuilder: int length()>();
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = virtualinvoke sb.<java.lang.StringBuilder: int length()>();
+
+        $stack3 = $stack2 - 1;
+
+        $stack4 = virtualinvoke sb.<java.lang.StringBuilder: char charAt(int)>($stack3);
+
+        if $stack4 != 32 goto label1;
+
+        $stack5 = 1;
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        return $stack5;
+    }
+
+    public volatile org.jsoup.nodes.Node empty()
+    {
+        org.jsoup.nodes.TextNode this;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node empty()>();
+
+        return $stack1;
+    }
+
+    public volatile int childNodeSize()
+    {
+        org.jsoup.nodes.TextNode this;
+        int $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: int childNodeSize()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String baseUri()
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String baseUri()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String absUrl(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String absUrl(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node removeAttr(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String l1;
+        org.jsoup.nodes.Node $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node removeAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile boolean hasAttr(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node attr(java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String l1, l2;
+        org.jsoup.nodes.Node $stack3;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile java.lang.String attr(java.lang.String)
+    {
+        org.jsoup.nodes.TextNode this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String attr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node clone()
+    {
+        org.jsoup.nodes.TextNode this, $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.TextNode clone()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.TextNode this, $stack1;
+
+        this := @this: org.jsoup.nodes.TextNode;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.TextNode: org.jsoup.nodes.TextNode clone()>();
+
+        return $stack1;
+    }
+}

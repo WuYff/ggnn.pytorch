@@ -1,0 +1,195 @@
+public abstract class org.jsoup.select.Evaluator$CssNthEvaluator extends org.jsoup.select.Evaluator
+{
+    protected final int a;
+    protected final int b;
+
+    public void <init>(int, int)
+    {
+        org.jsoup.select.Evaluator$CssNthEvaluator this;
+        int a, b;
+
+        this := @this: org.jsoup.select.Evaluator$CssNthEvaluator;
+
+        a := @parameter0: int;
+
+        b := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a> = a;
+
+        this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b> = b;
+
+        return;
+    }
+
+    public void <init>(int)
+    {
+        org.jsoup.select.Evaluator$CssNthEvaluator this;
+        int b;
+
+        this := @this: org.jsoup.select.Evaluator$CssNthEvaluator;
+
+        b := @parameter0: int;
+
+        specialinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: void <init>(int,int)>(0, b);
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, p, root;
+        boolean $stack6, $stack19, $stack17;
+        org.jsoup.select.Evaluator$CssNthEvaluator this;
+        int pos, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack18;
+
+        this := @this: org.jsoup.select.Evaluator$CssNthEvaluator;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        p = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.nodes.Element parent()>();
+
+        if p == null goto label1;
+
+        $stack6 = p instanceof org.jsoup.nodes.Document;
+
+        if $stack6 == 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        pos = virtualinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: int calculatePosition(org.jsoup.nodes.Element,org.jsoup.nodes.Element)>(root, element);
+
+        $stack8 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        if $stack8 != 0 goto label5;
+
+        $stack18 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        if pos != $stack18 goto label3;
+
+        $stack19 = 1;
+
+        goto label4;
+
+     label3:
+        $stack19 = 0;
+
+     label4:
+        return $stack19;
+
+     label5:
+        $stack9 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        $stack11 = pos - $stack9;
+
+        $stack10 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        $stack12 = $stack11 * $stack10;
+
+        if $stack12 < 0 goto label6;
+
+        $stack13 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        $stack15 = pos - $stack13;
+
+        $stack14 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        $stack16 = $stack15 % $stack14;
+
+        if $stack16 != 0 goto label6;
+
+        $stack17 = 1;
+
+        goto label7;
+
+     label6:
+        $stack17 = 0;
+
+     label7:
+        return $stack17;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.select.Evaluator$CssNthEvaluator this;
+        int $stack1, $stack2, $stack7, $stack10, $stack18, $stack26;
+        java.lang.Object[] $stack3, $stack14, $stack22;
+        java.lang.String $stack6, $stack13, $stack17, $stack21, $stack25, $stack29;
+        java.lang.Integer $stack9, $stack12, $stack20, $stack28;
+
+        this := @this: org.jsoup.select.Evaluator$CssNthEvaluator;
+
+        $stack1 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        if $stack1 != 0 goto label1;
+
+        $stack22 = newarray (java.lang.Object)[2];
+
+        $stack25 = virtualinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: java.lang.String getPseudoClass()>();
+
+        $stack22[0] = $stack25;
+
+        $stack26 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        $stack28 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack26);
+
+        $stack22[1] = $stack28;
+
+        $stack29 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(":%s(%d)", $stack22);
+
+        return $stack29;
+
+     label1:
+        $stack2 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        if $stack2 != 0 goto label2;
+
+        $stack14 = newarray (java.lang.Object)[2];
+
+        $stack17 = virtualinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: java.lang.String getPseudoClass()>();
+
+        $stack14[0] = $stack17;
+
+        $stack18 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        $stack20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack18);
+
+        $stack14[1] = $stack20;
+
+        $stack21 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(":%s(%dn)", $stack14);
+
+        return $stack21;
+
+     label2:
+        $stack3 = newarray (java.lang.Object)[3];
+
+        $stack6 = virtualinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: java.lang.String getPseudoClass()>();
+
+        $stack3[0] = $stack6;
+
+        $stack7 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int a>;
+
+        $stack9 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack7);
+
+        $stack3[1] = $stack9;
+
+        $stack10 = this.<org.jsoup.select.Evaluator$CssNthEvaluator: int b>;
+
+        $stack12 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack10);
+
+        $stack3[2] = $stack12;
+
+        $stack13 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>(":%s(%dn%+d)", $stack3);
+
+        return $stack13;
+    }
+
+    protected abstract java.lang.String getPseudoClass();
+
+    protected abstract int calculatePosition(org.jsoup.nodes.Element, org.jsoup.nodes.Element);
+}

@@ -1,0 +1,820 @@
+public class org.jfree.chart.util.RelativeDateFormat extends java.text.DateFormat
+{
+    private long baseMillis;
+    private boolean showZeroDays;
+    private boolean showZeroHours;
+    private java.text.NumberFormat dayFormatter;
+    private java.lang.String positivePrefix;
+    private java.lang.String daySuffix;
+    private java.text.NumberFormat hourFormatter;
+    private java.lang.String hourSuffix;
+    private java.text.NumberFormat minuteFormatter;
+    private java.lang.String minuteSuffix;
+    private java.text.NumberFormat secondFormatter;
+    private java.lang.String secondSuffix;
+    private static final long MILLISECONDS_IN_ONE_HOUR;
+    private static final long MILLISECONDS_IN_ONE_DAY;
+
+    public void <init>()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        specialinvoke this.<org.jfree.chart.util.RelativeDateFormat: void <init>(long)>(0L);
+
+        return;
+    }
+
+    public void <init>(java.util.Date)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.util.Date time;
+        long $stack2;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        time := @parameter0: java.util.Date;
+
+        $stack2 = virtualinvoke time.<java.util.Date: long getTime()>();
+
+        specialinvoke this.<org.jfree.chart.util.RelativeDateFormat: void <init>(long)>($stack2);
+
+        return;
+    }
+
+    public void <init>(long)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        long baseMillis;
+        java.text.NumberFormat $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+        java.util.GregorianCalendar $stack9;
+        java.text.DecimalFormat $stack10;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        baseMillis := @parameter0: long;
+
+        specialinvoke this.<java.text.DateFormat: void <init>()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis> = baseMillis;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays> = 0;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours> = 1;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix> = "";
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter> = $stack3;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix> = "d";
+
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat hourFormatter> = $stack4;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix> = "h";
+
+        $stack5 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat minuteFormatter> = $stack5;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix> = "m";
+
+        $stack6 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter> = $stack6;
+
+        $stack7 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        virtualinvoke $stack7.<java.text.NumberFormat: void setMaximumFractionDigits(int)>(3);
+
+        $stack8 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        virtualinvoke $stack8.<java.text.NumberFormat: void setMinimumFractionDigits(int)>(3);
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix> = "s";
+
+        $stack9 = new java.util.GregorianCalendar;
+
+        specialinvoke $stack9.<java.util.GregorianCalendar: void <init>()>();
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.util.Calendar calendar> = $stack9;
+
+        $stack10 = new java.text.DecimalFormat;
+
+        specialinvoke $stack10.<java.text.DecimalFormat: void <init>(java.lang.String)>("0");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat numberFormat> = $stack10;
+
+        return;
+    }
+
+    public long getBaseMillis()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        long $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        return $stack1;
+    }
+
+    public void setBaseMillis(long)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        long baseMillis;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        baseMillis := @parameter0: long;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis> = baseMillis;
+
+        return;
+    }
+
+    public boolean getShowZeroDays()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays>;
+
+        return $stack1;
+    }
+
+    public void setShowZeroDays(boolean)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        boolean show;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        show := @parameter0: boolean;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays> = show;
+
+        return;
+    }
+
+    public boolean getShowZeroHours()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours>;
+
+        return $stack1;
+    }
+
+    public void setShowZeroHours(boolean)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        boolean show;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        show := @parameter0: boolean;
+
+        this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours> = show;
+
+        return;
+    }
+
+    public java.lang.String getPositivePrefix()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix>;
+
+        return $stack1;
+    }
+
+    public void setPositivePrefix(java.lang.String)
+    {
+        java.lang.String prefix;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        prefix := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix> = prefix;
+
+        return;
+    }
+
+    public void setDayFormatter(java.text.NumberFormat)
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter> = formatter;
+
+        return;
+    }
+
+    public java.lang.String getDaySuffix()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix>;
+
+        return $stack1;
+    }
+
+    public void setDaySuffix(java.lang.String)
+    {
+        java.lang.String suffix;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        suffix := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(suffix, "suffix");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix> = suffix;
+
+        return;
+    }
+
+    public void setHourFormatter(java.text.NumberFormat)
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat hourFormatter> = formatter;
+
+        return;
+    }
+
+    public java.lang.String getHourSuffix()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix>;
+
+        return $stack1;
+    }
+
+    public void setHourSuffix(java.lang.String)
+    {
+        java.lang.String suffix;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        suffix := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(suffix, "suffix");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix> = suffix;
+
+        return;
+    }
+
+    public void setMinuteFormatter(java.text.NumberFormat)
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat minuteFormatter> = formatter;
+
+        return;
+    }
+
+    public java.lang.String getMinuteSuffix()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix>;
+
+        return $stack1;
+    }
+
+    public void setMinuteSuffix(java.lang.String)
+    {
+        java.lang.String suffix;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        suffix := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(suffix, "suffix");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix> = suffix;
+
+        return;
+    }
+
+    public java.lang.String getSecondSuffix()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack1 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix>;
+
+        return $stack1;
+    }
+
+    public void setSecondSuffix(java.lang.String)
+    {
+        java.lang.String suffix;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        suffix := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(suffix, "suffix");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix> = suffix;
+
+        return;
+    }
+
+    public void setSecondFormatter(java.text.NumberFormat)
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.util.RelativeDateFormat this;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter> = formatter;
+
+        return;
+    }
+
+    public java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.FieldPosition)
+    {
+        java.util.Date date;
+        long currentMillis, $stack18, days, $stack20, hours, $stack21, minutes, $stack22, elapsed;
+        org.jfree.chart.util.RelativeDateFormat this;
+        byte $stack19, $stack25, $stack31;
+        double $stack23, seconds;
+        java.lang.StringBuffer toAppendTo, $stack28, $stack34, $stack39, $stack44;
+        java.text.NumberFormat $stack26, $stack32, $stack37, $stack42;
+        java.lang.String $stack27, $stack29, $stack33, $stack35, signPrefix, $stack38, $stack40, $stack43, $stack45;
+        boolean $stack47, $stack61;
+        java.text.FieldPosition fieldPosition;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        date := @parameter0: java.util.Date;
+
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+
+        fieldPosition := @parameter2: java.text.FieldPosition;
+
+        currentMillis = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack18 = this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        elapsed = currentMillis - $stack18;
+
+        $stack19 = elapsed cmp 0L;
+
+        if $stack19 >= 0 goto label1;
+
+        elapsed = elapsed * -1L;
+
+        signPrefix = "-";
+
+        goto label2;
+
+     label1:
+        signPrefix = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix>;
+
+     label2:
+        days = elapsed / 86400000L;
+
+        $stack20 = days * 86400000L;
+
+        elapsed = elapsed - $stack20;
+
+        hours = elapsed / 3600000L;
+
+        $stack21 = hours * 3600000L;
+
+        elapsed = elapsed - $stack21;
+
+        minutes = elapsed / 60000L;
+
+        $stack22 = minutes * 60000L;
+
+        elapsed = elapsed - $stack22;
+
+        $stack23 = (double) elapsed;
+
+        seconds = $stack23 / 1000.0;
+
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(signPrefix);
+
+        $stack25 = days cmp 0L;
+
+        if $stack25 != 0 goto label3;
+
+        $stack61 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays>;
+
+        if $stack61 == 0 goto label4;
+
+     label3:
+        $stack26 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter>;
+
+        $stack27 = virtualinvoke $stack26.<java.text.NumberFormat: java.lang.String format(long)>(days);
+
+        $stack28 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String getDaySuffix()>();
+
+        virtualinvoke $stack28.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack29);
+
+     label4:
+        $stack31 = hours cmp 0L;
+
+        if $stack31 != 0 goto label5;
+
+        $stack47 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours>;
+
+        if $stack47 == 0 goto label6;
+
+     label5:
+        $stack32 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat hourFormatter>;
+
+        $stack33 = virtualinvoke $stack32.<java.text.NumberFormat: java.lang.String format(long)>(hours);
+
+        $stack34 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack33);
+
+        $stack35 = virtualinvoke this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String getHourSuffix()>();
+
+        virtualinvoke $stack34.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack35);
+
+     label6:
+        $stack37 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat minuteFormatter>;
+
+        $stack38 = virtualinvoke $stack37.<java.text.NumberFormat: java.lang.String format(long)>(minutes);
+
+        $stack39 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack38);
+
+        $stack40 = virtualinvoke this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String getMinuteSuffix()>();
+
+        virtualinvoke $stack39.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack40);
+
+        $stack42 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        $stack43 = virtualinvoke $stack42.<java.text.NumberFormat: java.lang.String format(double)>(seconds);
+
+        $stack44 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack43);
+
+        $stack45 = virtualinvoke this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String getSecondSuffix()>();
+
+        virtualinvoke $stack44.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack45);
+
+        return toAppendTo;
+    }
+
+    public java.util.Date parse(java.lang.String, java.text.ParsePosition)
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        java.lang.String source;
+        java.text.ParsePosition pos;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        source := @parameter0: java.lang.String;
+
+        pos := @parameter1: java.text.ParsePosition;
+
+        return null;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.util.RelativeDateFormat this, that;
+        boolean $stack3, $stack4, $stack8, $stack9, $stack10, $stack11, $stack14, $stack17, $stack20, $stack23, $stack26, $stack29, $stack32, $stack35, $stack38;
+        long $stack5, $stack6;
+        byte $stack7;
+        java.lang.String $stack12, $stack13, $stack15, $stack16, $stack18, $stack19, $stack21, $stack22, $stack24, $stack25;
+        java.text.NumberFormat $stack27, $stack28, $stack30, $stack31, $stack33, $stack34, $stack36, $stack37;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.util.RelativeDateFormat;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        $stack4 = specialinvoke this.<java.text.DateFormat: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        that = (org.jfree.chart.util.RelativeDateFormat) obj;
+
+        $stack6 = this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        $stack5 = that.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        $stack7 = $stack6 cmp $stack5;
+
+        if $stack7 == 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack9 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays>;
+
+        $stack8 = that.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroDays>;
+
+        if $stack9 == $stack8 goto label05;
+
+        return 0;
+
+     label05:
+        $stack11 = this.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours>;
+
+        $stack10 = that.<org.jfree.chart.util.RelativeDateFormat: boolean showZeroHours>;
+
+        if $stack11 == $stack10 goto label06;
+
+        return 0;
+
+     label06:
+        $stack13 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix>;
+
+        $stack12 = that.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix>;
+
+        $stack14 = virtualinvoke $stack13.<java.lang.String: boolean equals(java.lang.Object)>($stack12);
+
+        if $stack14 != 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack16 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix>;
+
+        $stack15 = that.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix>;
+
+        $stack17 = virtualinvoke $stack16.<java.lang.String: boolean equals(java.lang.Object)>($stack15);
+
+        if $stack17 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack19 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix>;
+
+        $stack18 = that.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix>;
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: boolean equals(java.lang.Object)>($stack18);
+
+        if $stack20 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack22 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix>;
+
+        $stack21 = that.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix>;
+
+        $stack23 = virtualinvoke $stack22.<java.lang.String: boolean equals(java.lang.Object)>($stack21);
+
+        if $stack23 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack25 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix>;
+
+        $stack24 = that.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix>;
+
+        $stack26 = virtualinvoke $stack25.<java.lang.String: boolean equals(java.lang.Object)>($stack24);
+
+        if $stack26 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack28 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter>;
+
+        $stack27 = that.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter>;
+
+        $stack29 = virtualinvoke $stack28.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack27);
+
+        if $stack29 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack31 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat hourFormatter>;
+
+        $stack30 = that.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat hourFormatter>;
+
+        $stack32 = virtualinvoke $stack31.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack30);
+
+        if $stack32 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack34 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat minuteFormatter>;
+
+        $stack33 = that.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat minuteFormatter>;
+
+        $stack35 = virtualinvoke $stack34.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack33);
+
+        if $stack35 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack37 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        $stack36 = that.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        $stack38 = virtualinvoke $stack37.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack36);
+
+        if $stack38 != 0 goto label15;
+
+        return 0;
+
+     label15:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.util.RelativeDateFormat this;
+        long $stack2, $stack3, $stack4, $stack5;
+        int $stack6, $stack7, $stack9, $stack10, $stack12, $stack13, $stack15, $stack16, $stack18, $stack19, $stack21, $stack22, $stack24, $stack25, result#2;
+        java.lang.String $stack8, $stack11, $stack14, $stack17, $stack20;
+        java.text.NumberFormat $stack23;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack7 = 37 * 193;
+
+        $stack4 = this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        $stack2 = this.<org.jfree.chart.util.RelativeDateFormat: long baseMillis>;
+
+        $stack3 = $stack2 >>> 32;
+
+        $stack5 = $stack4 ^ $stack3;
+
+        $stack6 = (int) $stack5;
+
+        result#2 = $stack7 + $stack6;
+
+        $stack9 = 37 * result#2;
+
+        $stack8 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String positivePrefix>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.String: int hashCode()>();
+
+        result#2 = $stack9 + $stack10;
+
+        $stack12 = 37 * result#2;
+
+        $stack11 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String daySuffix>;
+
+        $stack13 = virtualinvoke $stack11.<java.lang.String: int hashCode()>();
+
+        result#2 = $stack12 + $stack13;
+
+        $stack15 = 37 * result#2;
+
+        $stack14 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String hourSuffix>;
+
+        $stack16 = virtualinvoke $stack14.<java.lang.String: int hashCode()>();
+
+        result#2 = $stack15 + $stack16;
+
+        $stack18 = 37 * result#2;
+
+        $stack17 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String minuteSuffix>;
+
+        $stack19 = virtualinvoke $stack17.<java.lang.String: int hashCode()>();
+
+        result#2 = $stack18 + $stack19;
+
+        $stack21 = 37 * result#2;
+
+        $stack20 = this.<org.jfree.chart.util.RelativeDateFormat: java.lang.String secondSuffix>;
+
+        $stack22 = virtualinvoke $stack20.<java.lang.String: int hashCode()>();
+
+        result#2 = $stack21 + $stack22;
+
+        $stack24 = 37 * result#2;
+
+        $stack23 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        $stack25 = virtualinvoke $stack23.<java.text.NumberFormat: int hashCode()>();
+
+        result#2 = $stack24 + $stack25;
+
+        return result#2;
+    }
+
+    public java.lang.Object clone()
+    {
+        org.jfree.chart.util.RelativeDateFormat this, clone;
+        java.lang.Object $stack2, $stack4, $stack7;
+        java.text.NumberFormat $stack3, $stack5, $stack6, $stack8;
+
+        this := @this: org.jfree.chart.util.RelativeDateFormat;
+
+        $stack2 = specialinvoke this.<java.text.DateFormat: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.util.RelativeDateFormat) $stack2;
+
+        $stack3 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter>;
+
+        $stack4 = virtualinvoke $stack3.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack5 = (java.text.NumberFormat) $stack4;
+
+        clone.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat dayFormatter> = $stack5;
+
+        $stack6 = this.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter>;
+
+        $stack7 = virtualinvoke $stack6.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack8 = (java.text.NumberFormat) $stack7;
+
+        clone.<org.jfree.chart.util.RelativeDateFormat: java.text.NumberFormat secondFormatter> = $stack8;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.util.RelativeDateFormat: long MILLISECONDS_IN_ONE_DAY> = 86400000L;
+
+        <org.jfree.chart.util.RelativeDateFormat: long MILLISECONDS_IN_ONE_HOUR> = 3600000L;
+
+        return;
+    }
+}

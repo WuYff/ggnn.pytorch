@@ -1,0 +1,358 @@
+public class org.jfree.chart.block.LineBorder extends java.lang.Object implements org.jfree.chart.block.BlockFrame, java.io.Serializable
+{
+    static final long serialVersionUID;
+    private transient java.awt.Paint paint;
+    private transient java.awt.Stroke stroke;
+    private org.jfree.chart.ui.RectangleInsets insets;
+
+    public void <init>()
+    {
+        org.jfree.chart.block.LineBorder this;
+        java.awt.BasicStroke $stack1;
+        java.awt.Color $stack2;
+        org.jfree.chart.ui.RectangleInsets $stack3;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        $stack2 = <java.awt.Color: java.awt.Color BLACK>;
+
+        $stack1 = new java.awt.BasicStroke;
+
+        specialinvoke $stack1.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        $stack3 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(1.0, 1.0, 1.0, 1.0);
+
+        specialinvoke this.<org.jfree.chart.block.LineBorder: void <init>(java.awt.Paint,java.awt.Stroke,org.jfree.chart.ui.RectangleInsets)>($stack2, $stack1, $stack3);
+
+        return;
+    }
+
+    public void <init>(java.awt.Paint, java.awt.Stroke, org.jfree.chart.ui.RectangleInsets)
+    {
+        org.jfree.chart.block.LineBorder this;
+        java.awt.Paint paint;
+        java.awt.Stroke stroke;
+        org.jfree.chart.ui.RectangleInsets insets;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        paint := @parameter0: java.awt.Paint;
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        insets := @parameter2: org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(insets, "insets");
+
+        this.<org.jfree.chart.block.LineBorder: java.awt.Paint paint> = paint;
+
+        this.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke> = stroke;
+
+        this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets> = insets;
+
+        return;
+    }
+
+    public java.awt.Paint getPaint()
+    {
+        org.jfree.chart.block.LineBorder this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        $stack1 = this.<org.jfree.chart.block.LineBorder: java.awt.Paint paint>;
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getInsets()
+    {
+        org.jfree.chart.block.LineBorder this;
+        org.jfree.chart.ui.RectangleInsets $stack1;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        $stack1 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        return $stack1;
+    }
+
+    public java.awt.Stroke getStroke()
+    {
+        org.jfree.chart.block.LineBorder this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        $stack1 = this.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke>;
+
+        return $stack1;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Rectangle2D area;
+        double w, h, t, b, l, r, x, y, $stack43, x0, $stack44, $stack45, x1, $stack46, $stack47, y0, $stack48, y1;
+        byte $stack31, $stack32, $stack56, $stack57, $stack58, $stack59;
+        org.jfree.chart.block.LineBorder this;
+        org.jfree.chart.ui.RectangleInsets $stack33, $stack35, $stack37, $stack39;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack49;
+        java.awt.Stroke $stack50;
+        java.awt.RenderingHints$Key $stack51, $stack54, $stack60;
+        java.lang.Object saved, $stack53;
+        java.awt.geom.Line2D$Double $stack55;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        w = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        h = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack31 = w cmpg 0.0;
+
+        if $stack31 <= 0 goto label1;
+
+        $stack32 = h cmpg 0.0;
+
+        if $stack32 > 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $stack33 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        t = virtualinvoke $stack33.<org.jfree.chart.ui.RectangleInsets: double calculateTopInset(double)>(h);
+
+        $stack35 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        b = virtualinvoke $stack35.<org.jfree.chart.ui.RectangleInsets: double calculateBottomInset(double)>(h);
+
+        $stack37 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        l = virtualinvoke $stack37.<org.jfree.chart.ui.RectangleInsets: double calculateLeftInset(double)>(w);
+
+        $stack39 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        r = virtualinvoke $stack39.<org.jfree.chart.ui.RectangleInsets: double calculateRightInset(double)>(w);
+
+        x = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+        $stack43 = l / 2.0;
+
+        x0 = x + $stack43;
+
+        $stack45 = x + w;
+
+        $stack44 = r / 2.0;
+
+        x1 = $stack45 - $stack44;
+
+        $stack47 = y + h;
+
+        $stack46 = b / 2.0;
+
+        y0 = $stack47 - $stack46;
+
+        $stack48 = t / 2.0;
+
+        y1 = y + $stack48;
+
+        $stack49 = virtualinvoke this.<org.jfree.chart.block.LineBorder: java.awt.Paint getPaint()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack49);
+
+        $stack50 = virtualinvoke this.<org.jfree.chart.block.LineBorder: java.awt.Stroke getStroke()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack50);
+
+        $stack51 = <java.awt.RenderingHints: java.awt.RenderingHints$Key KEY_STROKE_CONTROL>;
+
+        saved = virtualinvoke g2.<java.awt.Graphics2D: java.lang.Object getRenderingHint(java.awt.RenderingHints$Key)>($stack51);
+
+        $stack54 = <java.awt.RenderingHints: java.awt.RenderingHints$Key KEY_STROKE_CONTROL>;
+
+        $stack53 = <java.awt.RenderingHints: java.lang.Object VALUE_STROKE_NORMALIZE>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setRenderingHint(java.awt.RenderingHints$Key,java.lang.Object)>($stack54, $stack53);
+
+        $stack55 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack55.<java.awt.geom.Line2D$Double: void <init>()>();
+
+        $stack56 = t cmpl 0.0;
+
+        if $stack56 <= 0 goto label3;
+
+        virtualinvoke $stack55.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x0, y1, x1, y1);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack55);
+
+     label3:
+        $stack57 = b cmpl 0.0;
+
+        if $stack57 <= 0 goto label4;
+
+        virtualinvoke $stack55.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x0, y0, x1, y0);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack55);
+
+     label4:
+        $stack58 = l cmpl 0.0;
+
+        if $stack58 <= 0 goto label5;
+
+        virtualinvoke $stack55.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x0, y0, x0, y1);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack55);
+
+     label5:
+        $stack59 = r cmpl 0.0;
+
+        if $stack59 <= 0 goto label6;
+
+        virtualinvoke $stack55.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x1, y0, x1, y1);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack55);
+
+     label6:
+        $stack60 = <java.awt.RenderingHints: java.awt.RenderingHints$Key KEY_STROKE_CONTROL>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setRenderingHint(java.awt.RenderingHints$Key,java.lang.Object)>($stack60, saved);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.block.LineBorder this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.awt.Paint $stack4, $stack5;
+        java.awt.Stroke $stack7, $stack8;
+        org.jfree.chart.ui.RectangleInsets $stack10, $stack11;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.block.LineBorder;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.block.LineBorder) obj;
+
+        $stack5 = this.<org.jfree.chart.block.LineBorder: java.awt.Paint paint>;
+
+        $stack4 = that.<org.jfree.chart.block.LineBorder: java.awt.Paint paint>;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke>;
+
+        $stack7 = that.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        $stack10 = that.<org.jfree.chart.block.LineBorder: org.jfree.chart.ui.RectangleInsets insets>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.ui.RectangleInsets: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.block.LineBorder this;
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.block.LineBorder: java.awt.Paint paint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.block.LineBorder this;
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+
+        this := @this: org.jfree.chart.block.LineBorder;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.block.LineBorder: java.awt.Paint paint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.block.LineBorder: java.awt.Stroke stroke> = $stack3;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.block.LineBorder: long serialVersionUID> = 4630356736707233924L;
+
+        return;
+    }
+}

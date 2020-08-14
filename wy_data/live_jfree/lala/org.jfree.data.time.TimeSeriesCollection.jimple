@@ -1,0 +1,1300 @@
+public class org.jfree.data.time.TimeSeriesCollection extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.data.xy.XYDataset, org.jfree.data.xy.IntervalXYDataset, org.jfree.data.DomainInfo, org.jfree.data.xy.XYDomainInfo, org.jfree.data.xy.XYRangeInfo, java.beans.VetoableChangeListener, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List data;
+    private java.util.Calendar workingCalendar;
+    private org.jfree.data.time.TimePeriodAnchor xPosition;
+
+    public void <init>()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.TimeZone $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.data.time.TimeSeriesCollection: void <init>(org.jfree.data.time.TimeSeries,java.util.TimeZone)>(null, $stack2);
+
+        return;
+    }
+
+    public void <init>(java.util.TimeZone)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.TimeZone zone;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        specialinvoke this.<org.jfree.data.time.TimeSeriesCollection: void <init>(org.jfree.data.time.TimeSeries,java.util.TimeZone)>(null, zone);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.time.TimeSeries)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.time.TimeSeries series;
+        java.util.TimeZone $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        specialinvoke this.<org.jfree.data.time.TimeSeriesCollection: void <init>(org.jfree.data.time.TimeSeries,java.util.TimeZone)>(series, $stack2);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.time.TimeSeries, java.util.TimeZone)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.Calendar $stack3;
+        java.util.ArrayList $stack4;
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.time.TimePeriodAnchor $stack5;
+        java.util.List $stack6;
+        java.util.TimeZone zone;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+
+        zone := @parameter1: java.util.TimeZone;
+
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+
+        if zone != null goto label1;
+
+        zone = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+     label1:
+        $stack3 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+
+        this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar> = $stack3;
+
+        $stack4 = new java.util.ArrayList;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data> = $stack4;
+
+        if series == null goto label2;
+
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+     label2:
+        $stack5 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor START>;
+
+        this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition> = $stack5;
+
+        return;
+    }
+
+    public org.jfree.data.DomainOrder getDomainOrder()
+    {
+        org.jfree.data.DomainOrder $stack1;
+        org.jfree.data.time.TimeSeriesCollection this;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack1 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder ASCENDING>;
+
+        return $stack1;
+    }
+
+    public org.jfree.data.time.TimePeriodAnchor getXPosition()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.time.TimePeriodAnchor $stack1;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        return $stack1;
+    }
+
+    public void setXPosition(org.jfree.data.time.TimePeriodAnchor)
+    {
+        org.jfree.data.time.TimePeriodAnchor anchor;
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.general.DatasetChangeEvent $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        anchor := @parameter0: org.jfree.data.time.TimePeriodAnchor;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(anchor, "anchor");
+
+        this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition> = anchor;
+
+        $stack2 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.util.List getSeries()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack1, $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+
+        return $stack2;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack1 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public int indexOf(org.jfree.data.time.TimeSeries)
+    {
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int indexOf(java.lang.Object)>(series);
+
+        return $stack3;
+    }
+
+    public org.jfree.data.time.TimeSeries getSeries(int)
+    {
+        int series, $stack4, $stack5;
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack6;
+        java.lang.Object $stack7;
+        org.jfree.data.time.TimeSeries $stack8;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: int getSeriesCount()>();
+
+        $stack5 = $stack4 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(series, "series", 0, $stack5);
+
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(series);
+
+        $stack8 = (org.jfree.data.time.TimeSeries) $stack7;
+
+        return $stack8;
+    }
+
+    public org.jfree.data.time.TimeSeries getSeries(java.lang.Comparable)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6, $stack11;
+        java.lang.Object $stack7;
+        org.jfree.data.time.TimeSeries series;
+        java.lang.Comparable $stack8, $stack10, key;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack4 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label3;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.time.TimeSeries) $stack7;
+
+        $stack8 = virtualinvoke series.<org.jfree.data.time.TimeSeries: java.lang.Comparable getKey()>();
+
+        if $stack8 == null goto label2;
+
+        $stack10 = virtualinvoke series.<org.jfree.data.time.TimeSeries: java.lang.Comparable getKey()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>(key);
+
+        if $stack11 == 0 goto label2;
+
+        return series;
+
+     label2:
+        goto label1;
+
+     label3:
+        return null;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series;
+        org.jfree.data.time.TimeSeries $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(series);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.time.TimeSeries: java.lang.Comparable getKey()>();
+
+        return $stack3;
+    }
+
+    public int getSeriesIndex(java.lang.Comparable)
+    {
+        java.lang.Comparable key, $stack8;
+        org.jfree.data.time.TimeSeriesCollection this;
+        int seriesCount, i;
+        java.util.List $stack6;
+        java.lang.Object $stack7;
+        org.jfree.data.time.TimeSeries series;
+        boolean $stack9;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        key := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        seriesCount = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: int getSeriesCount()>();
+
+        i = 0;
+
+     label1:
+        if i >= seriesCount goto label3;
+
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(i);
+
+        series = (org.jfree.data.time.TimeSeries) $stack7;
+
+        $stack8 = virtualinvoke series.<org.jfree.data.time.TimeSeries: java.lang.Comparable getKey()>();
+
+        $stack9 = virtualinvoke key.<java.lang.Object: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack9 == 0 goto label2;
+
+        return i;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return -1;
+    }
+
+    public void addSeries(org.jfree.data.time.TimeSeries)
+    {
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void addVetoableChangeListener(java.beans.VetoableChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeSeries(org.jfree.data.time.TimeSeries)
+    {
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean remove(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void removeVetoableChangeListener(java.beans.VetoableChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeSeries(int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int index;
+        org.jfree.data.time.TimeSeries series;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        index := @parameter0: int;
+
+        series = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(index);
+
+        if series == null goto label1;
+
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: void removeSeries(org.jfree.data.time.TimeSeries)>(series);
+
+     label1:
+        return;
+    }
+
+    public void removeAllSeries()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack3, $stack6;
+        java.util.Iterator l1;
+        boolean $stack5;
+        java.lang.Object $stack7;
+        org.jfree.data.time.TimeSeries series;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack3 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.time.TimeSeries) $stack7;
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        virtualinvoke series.<org.jfree.data.time.TimeSeries: void removeVetoableChangeListener(java.beans.VetoableChangeListener)>(this);
+
+        goto label1;
+
+     label2:
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        interfaceinvoke $stack6.<java.util.List: void clear()>();
+
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, $stack3;
+        org.jfree.data.time.TimeSeries $stack2;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(series);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+
+        return $stack3;
+    }
+
+    public double getXValue(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.time.TimeSeries s;
+        org.jfree.data.time.RegularTimePeriod period;
+        long $stack8;
+        double $stack9;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+
+        s = (org.jfree.data.time.TimeSeries) $stack6;
+
+        period = virtualinvoke s.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(item);
+
+        $stack8 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(period);
+
+        $stack9 = (double) $stack8;
+
+        return $stack9;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.time.TimeSeries ts;
+        org.jfree.data.time.RegularTimePeriod period;
+        long $stack8;
+        java.lang.Long $stack9;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.time.TimeSeries) $stack6;
+
+        period = virtualinvoke ts.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(item);
+
+        $stack8 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(period);
+
+        $stack9 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack8);
+
+        return $stack9;
+    }
+
+    protected synchronized long getX(org.jfree.data.time.RegularTimePeriod)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.time.TimePeriodAnchor $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.data.time.RegularTimePeriod period;
+        java.util.Calendar $stack10, $stack13, $stack15;
+        long result;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        period := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        result = 0L;
+
+        $stack5 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack4 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor START>;
+
+        if $stack5 != $stack4 goto label1;
+
+        $stack15 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        result = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack15);
+
+        goto label3;
+
+     label1:
+        $stack7 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack6 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor MIDDLE>;
+
+        if $stack7 != $stack6 goto label2;
+
+        $stack13 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        result = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond(java.util.Calendar)>($stack13);
+
+        goto label3;
+
+     label2:
+        $stack9 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack8 = <org.jfree.data.time.TimePeriodAnchor: org.jfree.data.time.TimePeriodAnchor END>;
+
+        if $stack9 != $stack8 goto label3;
+
+        $stack10 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        result = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack10);
+
+     label3:
+        return result;
+    }
+
+    public synchronized java.lang.Number getStartX(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.time.TimeSeries ts;
+        org.jfree.data.time.RegularTimePeriod $stack6;
+        java.util.Calendar $stack7;
+        long $stack8;
+        java.lang.Long $stack9;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.time.TimeSeries) $stack5;
+
+        $stack6 = virtualinvoke ts.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(item);
+
+        $stack7 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack8 = virtualinvoke $stack6.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack7);
+
+        $stack9 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack8);
+
+        return $stack9;
+    }
+
+    public synchronized java.lang.Number getEndX(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.time.TimeSeries ts;
+        org.jfree.data.time.RegularTimePeriod $stack6;
+        java.util.Calendar $stack7;
+        long $stack8;
+        java.lang.Long $stack9;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.time.TimeSeries) $stack5;
+
+        $stack6 = virtualinvoke ts.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(item);
+
+        $stack7 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack8 = virtualinvoke $stack6.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack7);
+
+        $stack9 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack8);
+
+        return $stack9;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.time.TimeSeries ts;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+
+        ts = (org.jfree.data.time.TimeSeries) $stack5;
+
+        $stack6 = virtualinvoke ts.<org.jfree.data.time.TimeSeries: java.lang.Number getValue(int)>(item);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getStartY(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getEndY(int, int)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public int[] getSurroundingItems(int, long)
+    {
+        int[] $stack10;
+        org.jfree.data.time.TimeSeriesCollection this;
+        int series, $stack12, i;
+        org.jfree.data.time.TimeSeries timeSeries;
+        java.lang.Number x;
+        long m, milliseconds;
+        byte $stack15, $stack16;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        series := @parameter0: int;
+
+        milliseconds := @parameter1: long;
+
+        $stack10 = newarray (int)[2];
+
+        $stack10[0] = -1;
+
+        $stack10[1] = -1;
+
+        timeSeries = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(series);
+
+        i = 0;
+
+     label1:
+        $stack12 = virtualinvoke timeSeries.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+
+        if i >= $stack12 goto label4;
+
+        x = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: java.lang.Number getX(int,int)>(series, i);
+
+        m = virtualinvoke x.<java.lang.Number: long longValue()>();
+
+        $stack15 = m cmp milliseconds;
+
+        if $stack15 > 0 goto label2;
+
+        $stack10[0] = i;
+
+     label2:
+        $stack16 = m cmp milliseconds;
+
+        if $stack16 < 0 goto label3;
+
+        $stack10[1] = i;
+
+        goto label4;
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        return $stack10;
+    }
+
+    public double getDomainLowerBound(boolean)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        boolean includeInterval;
+        org.jfree.data.Range r;
+        double result;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        r = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+
+        if r == null goto label1;
+
+        result = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+
+     label1:
+        return result;
+    }
+
+    public double getDomainUpperBound(boolean)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        boolean includeInterval;
+        org.jfree.data.Range r;
+        double result;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        r = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+
+        if r == null goto label1;
+
+        result = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.data.Range getDomainBounds(boolean)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack9;
+        java.util.Iterator l3;
+        boolean $stack11, includeInterval;
+        java.lang.Object $stack12;
+        org.jfree.data.time.TimeSeries series;
+        int count, $stack16;
+        org.jfree.data.time.RegularTimePeriod start, end;
+        org.jfree.data.Range $stack18, $stack26, result, temp;
+        java.util.Calendar $stack19, $stack21;
+        long $stack20, $stack23, $stack27, $stack29;
+        double $stack22, $stack24, $stack28, $stack30;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = null;
+
+        $stack9 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        l3 = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label5;
+
+        $stack12 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.time.TimeSeries) $stack12;
+
+        count = virtualinvoke series.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+
+        if count <= 0 goto label4;
+
+        start = virtualinvoke series.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(0);
+
+        $stack16 = count - 1;
+
+        end = virtualinvoke series.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>($stack16);
+
+        if includeInterval != 0 goto label2;
+
+        $stack26 = new org.jfree.data.Range;
+
+        $stack27 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(start);
+
+        $stack28 = (double) $stack27;
+
+        $stack29 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(end);
+
+        $stack30 = (double) $stack29;
+
+        specialinvoke $stack26.<org.jfree.data.Range: void <init>(double,double)>($stack28, $stack30);
+
+        temp = $stack26;
+
+        goto label3;
+
+     label2:
+        $stack18 = new org.jfree.data.Range;
+
+        $stack19 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack20 = virtualinvoke start.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack19);
+
+        $stack22 = (double) $stack20;
+
+        $stack21 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack23 = virtualinvoke end.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack21);
+
+        $stack24 = (double) $stack23;
+
+        specialinvoke $stack18.<org.jfree.data.Range: void <init>(double,double)>($stack22, $stack24);
+
+        temp = $stack18;
+
+     label3:
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, temp);
+
+     label4:
+        goto label1;
+
+     label5:
+        return result;
+    }
+
+    public org.jfree.data.Range getDomainBounds(java.util.List, boolean)
+    {
+        java.util.List visibleSeriesKeys;
+        java.util.Iterator iterator;
+        boolean $stack12, includeInterval;
+        java.lang.Object $stack13;
+        java.lang.Comparable seriesKey;
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.time.TimeSeries series;
+        int count, $stack18;
+        org.jfree.data.time.RegularTimePeriod start, end;
+        org.jfree.data.Range $stack20, $stack28, result, temp;
+        java.util.Calendar $stack21, $stack23;
+        long $stack22, $stack25, $stack29, $stack31;
+        double $stack24, $stack26, $stack30, $stack32;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        visibleSeriesKeys := @parameter0: java.util.List;
+
+        includeInterval := @parameter1: boolean;
+
+        result = null;
+
+        iterator = interfaceinvoke visibleSeriesKeys.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack12 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack12 == 0 goto label5;
+
+        $stack13 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        seriesKey = (java.lang.Comparable) $stack13;
+
+        series = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(java.lang.Comparable)>(seriesKey);
+
+        count = virtualinvoke series.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+
+        if count <= 0 goto label4;
+
+        start = virtualinvoke series.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(0);
+
+        $stack18 = count - 1;
+
+        end = virtualinvoke series.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>($stack18);
+
+        if includeInterval != 0 goto label2;
+
+        $stack28 = new org.jfree.data.Range;
+
+        $stack29 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(start);
+
+        $stack30 = (double) $stack29;
+
+        $stack31 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: long getX(org.jfree.data.time.RegularTimePeriod)>(end);
+
+        $stack32 = (double) $stack31;
+
+        specialinvoke $stack28.<org.jfree.data.Range: void <init>(double,double)>($stack30, $stack32);
+
+        temp = $stack28;
+
+        goto label3;
+
+     label2:
+        $stack20 = new org.jfree.data.Range;
+
+        $stack21 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack22 = virtualinvoke start.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond(java.util.Calendar)>($stack21);
+
+        $stack24 = (double) $stack22;
+
+        $stack23 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack25 = virtualinvoke end.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond(java.util.Calendar)>($stack23);
+
+        $stack26 = (double) $stack25;
+
+        specialinvoke $stack20.<org.jfree.data.Range: void <init>(double,double)>($stack24, $stack26);
+
+        temp = $stack20;
+
+     label3:
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, temp);
+
+     label4:
+        goto label1;
+
+     label5:
+        return result;
+    }
+
+    public org.jfree.data.Range getRangeBounds(boolean)
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack6;
+        java.util.Iterator l3;
+        boolean $stack8, includeInterval;
+        java.lang.Object $stack9;
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.Range $stack10, result;
+        double $stack11, $stack12;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        includeInterval := @parameter0: boolean;
+
+        result = null;
+
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        l3 = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label2;
+
+        $stack9 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.time.TimeSeries) $stack9;
+
+        $stack10 = new org.jfree.data.Range;
+
+        $stack11 = virtualinvoke series.<org.jfree.data.time.TimeSeries: double getMinY()>();
+
+        $stack12 = virtualinvoke series.<org.jfree.data.time.TimeSeries: double getMaxY()>();
+
+        specialinvoke $stack10.<org.jfree.data.Range: void <init>(double,double)>($stack11, $stack12);
+
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combineIgnoringNaN(org.jfree.data.Range,org.jfree.data.Range)>(result, $stack10);
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    public org.jfree.data.Range getRangeBounds(java.util.List, org.jfree.data.Range, boolean)
+    {
+        java.util.List visibleSeriesKeys;
+        java.util.Iterator iterator;
+        boolean $stack10, includeInterval;
+        java.lang.Object $stack11;
+        java.lang.Comparable seriesKey;
+        org.jfree.data.time.TimeSeriesCollection this;
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.Range xRange, r, result;
+        java.util.Calendar $stack13;
+        org.jfree.data.time.TimePeriodAnchor $stack14;
+        java.util.TimeZone $stack15;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        visibleSeriesKeys := @parameter0: java.util.List;
+
+        xRange := @parameter1: org.jfree.data.Range;
+
+        includeInterval := @parameter2: boolean;
+
+        result = null;
+
+        iterator = interfaceinvoke visibleSeriesKeys.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label2;
+
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        seriesKey = (java.lang.Comparable) $stack11;
+
+        series = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(java.lang.Comparable)>(seriesKey);
+
+        $stack14 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack13 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack15 = virtualinvoke $stack13.<java.util.Calendar: java.util.TimeZone getTimeZone()>();
+
+        r = virtualinvoke series.<org.jfree.data.time.TimeSeries: org.jfree.data.Range findValueRange(org.jfree.data.Range,org.jfree.data.time.TimePeriodAnchor,java.util.TimeZone)>(xRange, $stack14, $stack15);
+
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combineIgnoringNaN(org.jfree.data.Range,org.jfree.data.Range)>(result, r);
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    public void vetoableChange(java.beans.PropertyChangeEvent) throws java.beans.PropertyVetoException
+    {
+        java.beans.PropertyChangeEvent e;
+        java.lang.String $stack4, $stack5;
+        boolean $stack6;
+        java.lang.Object $stack7, $stack10;
+        org.jfree.data.general.Series s;
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.lang.Comparable $stack8, key;
+        int $stack9, $stack11;
+        java.beans.PropertyVetoException $stack12;
+        java.lang.IllegalStateException $stack13;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        e := @parameter0: java.beans.PropertyChangeEvent;
+
+        $stack4 = "Key";
+
+        $stack5 = virtualinvoke e.<java.beans.PropertyChangeEvent: java.lang.String getPropertyName()>();
+
+        $stack6 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 != 0 goto label1;
+
+        return;
+
+     label1:
+        $stack7 = virtualinvoke e.<java.beans.PropertyChangeEvent: java.lang.Object getSource()>();
+
+        s = (org.jfree.data.general.Series) $stack7;
+
+        $stack8 = virtualinvoke s.<org.jfree.data.general.Series: java.lang.Comparable getKey()>();
+
+        $stack9 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: int getSeriesIndex(java.lang.Comparable)>($stack8);
+
+        if $stack9 != -1 goto label2;
+
+        $stack13 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack13.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Receiving events from a series that does not belong to this collection.");
+
+        throw $stack13;
+
+     label2:
+        $stack10 = virtualinvoke e.<java.beans.PropertyChangeEvent: java.lang.Object getNewValue()>();
+
+        key = (java.lang.Comparable) $stack10;
+
+        $stack11 = virtualinvoke this.<org.jfree.data.time.TimeSeriesCollection: int getSeriesIndex(java.lang.Comparable)>(key);
+
+        if $stack11 < 0 goto label3;
+
+        $stack12 = new java.beans.PropertyVetoException;
+
+        specialinvoke $stack12.<java.beans.PropertyVetoException: void <init>(java.lang.String,java.beans.PropertyChangeEvent)>("Duplicate key2", e);
+
+        throw $stack12;
+
+     label3:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.time.TimeSeriesCollection this, that;
+        boolean $stack3, $stack8;
+        org.jfree.data.time.TimePeriodAnchor $stack4, $stack5;
+        java.util.List $stack6, $stack7;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.time.TimeSeriesCollection;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.time.TimeSeriesCollection) obj;
+
+        $stack5 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack4 = that.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack6 = that.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack8 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack7, $stack6);
+
+        if $stack8 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.time.TimeSeriesCollection this;
+        java.util.List $stack2;
+        java.util.Calendar $stack4, $stack12;
+        int $stack5, $stack7, result, $stack13, $stack9;
+        org.jfree.data.time.TimePeriodAnchor $stack6, $stack8;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack2 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        result = interfaceinvoke $stack2.<java.util.List: int hashCode()>();
+
+        $stack5 = 29 * result;
+
+        $stack4 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        if $stack4 == null goto label1;
+
+        $stack12 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack13 = virtualinvoke $stack12.<java.util.Calendar: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack13 = 0;
+
+     label2:
+        result = $stack5 + $stack13;
+
+        $stack7 = 29 * result;
+
+        $stack6 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        if $stack6 == null goto label3;
+
+        $stack8 = this.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimePeriodAnchor xPosition>;
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.data.time.TimePeriodAnchor: int hashCode()>();
+
+        goto label4;
+
+     label3:
+        $stack9 = 0;
+
+     label4:
+        result = $stack7 + $stack9;
+
+        return result;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.time.TimeSeriesCollection this, clone;
+        java.lang.Object $stack2, $stack6;
+        java.util.List $stack3, $stack4;
+        java.util.Calendar $stack5, $stack7;
+
+        this := @this: org.jfree.data.time.TimeSeriesCollection;
+
+        $stack2 = specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.time.TimeSeriesCollection) $stack2;
+
+        $stack3 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.List data>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack3);
+
+        clone.<org.jfree.data.time.TimeSeriesCollection: java.util.List data> = $stack4;
+
+        $stack5 = this.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.Calendar: java.lang.Object clone()>();
+
+        $stack7 = (java.util.Calendar) $stack6;
+
+        clone.<org.jfree.data.time.TimeSeriesCollection: java.util.Calendar workingCalendar> = $stack7;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.time.TimeSeriesCollection: long serialVersionUID> = 834149929022371137L;
+
+        return;
+    }
+}

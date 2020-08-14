@@ -1,0 +1,203 @@
+public class org.jfree.chart.util.DirectionalGradientPaintTransformer extends java.lang.Object implements org.jfree.chart.ui.GradientPaintTransformer
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.util.DirectionalGradientPaintTransformer this;
+
+        this := @this: org.jfree.chart.util.DirectionalGradientPaintTransformer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.awt.GradientPaint transform(java.awt.GradientPaint, java.awt.Shape)
+    {
+        java.awt.GradientPaint paint, $stack38;
+        java.awt.geom.Point2D $stack21, $stack23, $stack25, $stack27;
+        double px1, py1, px2, py2, $stack30, $stack31, $stack32, $stack33;
+        java.awt.Shape target;
+        java.awt.Rectangle bounds;
+        float bx, by, bw, bh, $stack36, $stack37, $stack42, $stack69, $stack71, $stack79, $stack80, rx1, ry1, $stack81, rx2, ry2, $stack72, $stack70, $stack43;
+        byte $stack34, $stack58, $stack64, $stack65, $stack75, $stack67;
+        boolean $stack35, $stack66, $stack68, $stack78, $stack41;
+        org.jfree.chart.util.DirectionalGradientPaintTransformer this;
+        java.awt.Color $stack39, $stack40;
+
+        this := @this: org.jfree.chart.util.DirectionalGradientPaintTransformer;
+
+        paint := @parameter0: java.awt.GradientPaint;
+
+        target := @parameter1: java.awt.Shape;
+
+        $stack21 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+
+        px1 = virtualinvoke $stack21.<java.awt.geom.Point2D: double getX()>();
+
+        $stack23 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+
+        py1 = virtualinvoke $stack23.<java.awt.geom.Point2D: double getY()>();
+
+        $stack25 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+
+        px2 = virtualinvoke $stack25.<java.awt.geom.Point2D: double getX()>();
+
+        $stack27 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+
+        py2 = virtualinvoke $stack27.<java.awt.geom.Point2D: double getY()>();
+
+        bounds = interfaceinvoke target.<java.awt.Shape: java.awt.Rectangle getBounds()>();
+
+        $stack30 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getX()>();
+
+        bx = (float) $stack30;
+
+        $stack31 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getY()>();
+
+        by = (float) $stack31;
+
+        $stack32 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        bw = (float) $stack32;
+
+        $stack33 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        bh = (float) $stack33;
+
+        $stack34 = px1 cmpl 0.0;
+
+        if $stack34 != 0 goto label10;
+
+        $stack58 = py1 cmpl 0.0;
+
+        if $stack58 != 0 goto label10;
+
+        rx1 = bx;
+
+        ry1 = by;
+
+        $stack64 = px2 cmpl 0.0;
+
+        if $stack64 == 0 goto label03;
+
+        $stack75 = py2 cmpl 0.0;
+
+        if $stack75 == 0 goto label03;
+
+        $stack78 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        if $stack78 == 0 goto label01;
+
+        $stack80 = bw + bh;
+
+        $stack81 = $stack80 / 4.0F;
+
+        goto label02;
+
+     label01:
+        $stack79 = bw + bh;
+
+        $stack81 = $stack79 / 2.0F;
+
+     label02:
+        rx2 = bx + $stack81;
+
+        ry2 = by + $stack81;
+
+        goto label13;
+
+     label03:
+        $stack65 = px2 cmpl 0.0;
+
+        if $stack65 != 0 goto label04;
+
+        $stack72 = bx;
+
+        goto label06;
+
+     label04:
+        $stack66 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        if $stack66 == 0 goto label05;
+
+        $stack71 = bw / 2.0F;
+
+        $stack72 = bx + $stack71;
+
+        goto label06;
+
+     label05:
+        $stack72 = bx + bw;
+
+     label06:
+        rx2 = $stack72;
+
+        $stack67 = py2 cmpl 0.0;
+
+        if $stack67 != 0 goto label07;
+
+        $stack70 = by;
+
+        goto label09;
+
+     label07:
+        $stack68 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        if $stack68 == 0 goto label08;
+
+        $stack69 = bh / 2.0F;
+
+        $stack70 = by + $stack69;
+
+        goto label09;
+
+     label08:
+        $stack70 = by + bh;
+
+     label09:
+        ry2 = $stack70;
+
+        goto label13;
+
+     label10:
+        rx1 = bx;
+
+        ry1 = by + bh;
+
+        $stack35 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        if $stack35 == 0 goto label11;
+
+        $stack42 = bw + bh;
+
+        $stack43 = $stack42 / 4.0F;
+
+        goto label12;
+
+     label11:
+        $stack36 = bw + bh;
+
+        $stack43 = $stack36 / 2.0F;
+
+     label12:
+        rx2 = bx + $stack43;
+
+        $stack37 = by + bh;
+
+        ry2 = $stack37 - $stack43;
+
+     label13:
+        $stack38 = new java.awt.GradientPaint;
+
+        $stack39 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+
+        $stack40 = virtualinvoke paint.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+
+        $stack41 = virtualinvoke paint.<java.awt.GradientPaint: boolean isCyclic()>();
+
+        specialinvoke $stack38.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color,boolean)>(rx1, ry1, $stack39, rx2, ry2, $stack40, $stack41);
+
+        return $stack38;
+    }
+}

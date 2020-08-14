@@ -1,0 +1,1196 @@
+public class org.jfree.data.xy.DefaultTableXYDataset extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.data.xy.TableXYDataset, org.jfree.data.xy.IntervalXYDataset, org.jfree.data.DomainInfo, org.jfree.chart.util.PublicCloneable
+{
+    private java.util.List data;
+    private java.util.HashSet xPoints;
+    private boolean propagateEvents;
+    private boolean autoPrune;
+    private org.jfree.data.xy.IntervalXYDelegate intervalDelegate;
+
+    public void <init>()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        specialinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void <init>(boolean)>(0);
+
+        return;
+    }
+
+    public void <init>(boolean)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean autoPrune;
+        java.util.ArrayList $stack2;
+        java.util.HashSet $stack3;
+        org.jfree.data.xy.IntervalXYDelegate $stack4, $stack5;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        autoPrune := @parameter0: boolean;
+
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data> = null;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints> = null;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = 1;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune> = 0;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune> = autoPrune;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data> = $stack2;
+
+        $stack3 = new java.util.HashSet;
+
+        specialinvoke $stack3.<java.util.HashSet: void <init>()>();
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints> = $stack3;
+
+        $stack4 = new org.jfree.data.xy.IntervalXYDelegate;
+
+        specialinvoke $stack4.<org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset,boolean)>(this, 0);
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate> = $stack4;
+
+        $stack5 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>($stack5);
+
+        return;
+    }
+
+    public boolean isAutoPrune()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean $stack1;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        return $stack1;
+    }
+
+    public void addSeries(org.jfree.data.xy.XYSeries)
+    {
+        org.jfree.data.xy.XYSeries series;
+        boolean $stack2;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack3;
+        java.lang.IllegalArgumentException $stack5;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: org.jfree.data.xy.XYSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = virtualinvoke series.<org.jfree.data.xy.XYSeries: boolean getAllowDuplicateXValues()>();
+
+        if $stack2 == 0 goto label1;
+
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Cannot accept XYSeries that allow duplicate values. Use XYSeries(seriesName, <sort>, false) constructor.");
+
+        throw $stack5;
+
+     label1:
+        specialinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void updateXPoints(org.jfree.data.xy.XYSeries)>(series);
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        interfaceinvoke $stack3.<java.util.List: boolean add(java.lang.Object)>(series);
+
+        virtualinvoke series.<org.jfree.data.xy.XYSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    private void updateXPoints(org.jfree.data.xy.XYSeries)
+    {
+        org.jfree.data.xy.XYSeries series, dataSeries;
+        java.util.HashSet $stack9, $stack11, $stack19, $stack23;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean savedState, $stack13, $stack15, $stack20, $stack29;
+        int $stack10, seriesCount, itemNo, seriesNo;
+        java.lang.Object $stack14, $stack28;
+        java.util.List $stack25, $stack27;
+        java.lang.Number xValue;
+        java.util.Iterator itemNo#4;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: org.jfree.data.xy.XYSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack9 = new java.util.HashSet;
+
+        specialinvoke $stack9.<java.util.HashSet: void <init>()>();
+
+        savedState = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = 0;
+
+        itemNo = 0;
+
+     label1:
+        $stack10 = virtualinvoke series.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+
+        if itemNo >= $stack10 goto label5;
+
+        xValue = virtualinvoke series.<org.jfree.data.xy.XYSeries: java.lang.Number getX(int)>(itemNo);
+
+        virtualinvoke $stack9.<java.util.HashSet: boolean add(java.lang.Object)>(xValue);
+
+        $stack19 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        $stack20 = virtualinvoke $stack19.<java.util.HashSet: boolean contains(java.lang.Object)>(xValue);
+
+        if $stack20 != 0 goto label4;
+
+        $stack23 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        virtualinvoke $stack23.<java.util.HashSet: boolean add(java.lang.Object)>(xValue);
+
+        $stack25 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        seriesCount = interfaceinvoke $stack25.<java.util.List: int size()>();
+
+        seriesNo = 0;
+
+     label2:
+        if seriesNo >= seriesCount goto label4;
+
+        $stack27 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack28 = interfaceinvoke $stack27.<java.util.List: java.lang.Object get(int)>(seriesNo);
+
+        dataSeries = (org.jfree.data.xy.XYSeries) $stack28;
+
+        $stack29 = virtualinvoke dataSeries.<org.jfree.data.xy.XYSeries: boolean equals(java.lang.Object)>(series);
+
+        if $stack29 != 0 goto label3;
+
+        virtualinvoke dataSeries.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number)>(xValue, null);
+
+     label3:
+        seriesNo = seriesNo + 1;
+
+        goto label2;
+
+     label4:
+        itemNo = itemNo + 1;
+
+        goto label1;
+
+     label5:
+        $stack11 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        itemNo#4 = virtualinvoke $stack11.<java.util.HashSet: java.util.Iterator iterator()>();
+
+     label6:
+        $stack13 = interfaceinvoke itemNo#4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label8;
+
+        $stack14 = interfaceinvoke itemNo#4.<java.util.Iterator: java.lang.Object next()>();
+
+        xValue = (java.lang.Number) $stack14;
+
+        $stack15 = virtualinvoke $stack9.<java.util.HashSet: boolean contains(java.lang.Object)>(xValue);
+
+        if $stack15 != 0 goto label7;
+
+        virtualinvoke series.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number)>(xValue, null);
+
+     label7:
+        goto label6;
+
+     label8:
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = savedState;
+
+        return;
+    }
+
+    public void updateXPoints()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack2, $stack7;
+        int $stack3, s;
+        boolean $stack4;
+        java.lang.Object $stack8;
+        org.jfree.data.xy.XYSeries $stack9;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = 0;
+
+        s = 0;
+
+     label1:
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int size()>();
+
+        if s >= $stack3 goto label2;
+
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(s);
+
+        $stack9 = (org.jfree.data.xy.XYSeries) $stack8;
+
+        specialinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void updateXPoints(org.jfree.data.xy.XYSeries)>($stack9);
+
+        s = s + 1;
+
+        goto label1;
+
+     label2:
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        if $stack4 == 0 goto label3;
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void prune()>();
+
+     label3:
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = 1;
+
+        return;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public int getItemCount()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.HashSet $stack1, $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        if $stack1 != null goto label1;
+
+        return 0;
+
+     label1:
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.HashSet: int size()>();
+
+        return $stack3;
+    }
+
+    public org.jfree.data.xy.XYSeries getSeries(int)
+    {
+        int series, $stack5, $stack6;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack2, $stack7;
+        java.lang.Object $stack8;
+        org.jfree.data.xy.XYSeries $stack9;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack2.<java.util.List: int size()>();
+
+        $stack6 = $stack5 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(series, "series", 0, $stack6);
+
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(series);
+
+        $stack9 = (org.jfree.data.xy.XYSeries) $stack8;
+
+        return $stack9;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series;
+        org.jfree.data.xy.XYSeries $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.XYSeries getSeries(int)>(series);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYSeries: java.lang.Comparable getKey()>();
+
+        return $stack3;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, $stack3;
+        org.jfree.data.xy.XYSeries $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.XYSeries getSeries(int)>(series);
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+
+        return $stack3;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, item;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.XYSeries s;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+
+        s = (org.jfree.data.xy.XYSeries) $stack5;
+
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYSeries: java.lang.Number getX(int)>(item);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getStartX(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, item;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getStartX(int,int)>(series, item);
+
+        return $stack4;
+    }
+
+    public java.lang.Number getEndX(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, item;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getEndX(int,int)>(series, item);
+
+        return $stack4;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, index;
+        java.util.List $stack4;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.XYSeries s;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        index := @parameter1: int;
+
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+
+        s = (org.jfree.data.xy.XYSeries) $stack5;
+
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYSeries: java.lang.Number getY(int)>(index);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getStartY(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getEndY(int, int)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: java.lang.Number getY(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public void removeAllSeries()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack3, $stack6;
+        java.util.Iterator l1;
+        boolean $stack5;
+        java.util.HashSet $stack7;
+        java.lang.Object $stack8;
+        org.jfree.data.xy.XYSeries series;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack8 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.xy.XYSeries) $stack8;
+
+        virtualinvoke series.<org.jfree.data.xy.XYSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        goto label1;
+
+     label2:
+        $stack6 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        interfaceinvoke $stack6.<java.util.List: void clear()>();
+
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        virtualinvoke $stack7.<java.util.HashSet: void clear()>();
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeSeries(org.jfree.data.xy.XYSeries)
+    {
+        org.jfree.data.xy.XYSeries series;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack2, $stack4, $stack6;
+        boolean $stack3, $stack7;
+        java.util.HashSet $stack8;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: org.jfree.data.xy.XYSeries;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(series, "series");
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean contains(java.lang.Object)>(series);
+
+        if $stack3 == 0 goto label2;
+
+        virtualinvoke series.<org.jfree.data.xy.XYSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        interfaceinvoke $stack4.<java.util.List: boolean remove(java.lang.Object)>(series);
+
+        $stack6 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: boolean isEmpty()>();
+
+        if $stack7 == 0 goto label1;
+
+        $stack8 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        virtualinvoke $stack8.<java.util.HashSet: void clear()>();
+
+     label1:
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+     label2:
+        return;
+    }
+
+    public void removeSeries(int)
+    {
+        int series, $stack6, $stack7;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack3, $stack8, $stack10, $stack12;
+        java.lang.Object $stack9;
+        org.jfree.data.xy.XYSeries s;
+        boolean $stack13, $stack14;
+        java.util.HashSet $stack16;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        series := @parameter0: int;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack6 = interfaceinvoke $stack3.<java.util.List: int size()>();
+
+        $stack7 = $stack6 - 1;
+
+        staticinvoke <org.jfree.chart.util.Args: void requireInRange(int,java.lang.String,int,int)>(series, "series", 0, $stack7);
+
+        $stack8 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(series);
+
+        s = (org.jfree.data.xy.XYSeries) $stack9;
+
+        virtualinvoke s.<org.jfree.data.xy.XYSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+
+        $stack10 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        interfaceinvoke $stack10.<java.util.List: java.lang.Object remove(int)>(series);
+
+        $stack12 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack13 = interfaceinvoke $stack12.<java.util.List: boolean isEmpty()>();
+
+        if $stack13 == 0 goto label1;
+
+        $stack16 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        virtualinvoke $stack16.<java.util.HashSet: void clear()>();
+
+        goto label2;
+
+     label1:
+        $stack14 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        if $stack14 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void prune()>();
+
+     label2:
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeAllValuesForX(java.lang.Number)
+    {
+        java.lang.Number x;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean savedState;
+        java.util.List $stack5, $stack9;
+        int $stack6, s;
+        java.util.HashSet $stack7;
+        java.lang.Object $stack10;
+        org.jfree.data.xy.XYSeries series;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        x := @parameter0: java.lang.Number;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(x, "x");
+
+        savedState = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = 0;
+
+        s = 0;
+
+     label1:
+        $stack5 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+
+        if s >= $stack6 goto label2;
+
+        $stack9 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(s);
+
+        series = (org.jfree.data.xy.XYSeries) $stack10;
+
+        virtualinvoke series.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem remove(java.lang.Number)>(x);
+
+        s = s + 1;
+
+        goto label1;
+
+     label2:
+        this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents> = savedState;
+
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        virtualinvoke $stack7.<java.util.HashSet: boolean remove(java.lang.Object)>(x);
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    protected boolean canPrune(java.lang.Number)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack4, $stack6;
+        int $stack5, $stack8, s;
+        java.lang.Object $stack7;
+        org.jfree.data.xy.XYSeries series;
+        java.lang.Number x, $stack9;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        x := @parameter0: java.lang.Number;
+
+        s = 0;
+
+     label1:
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: int size()>();
+
+        if s >= $stack5 goto label3;
+
+        $stack6 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(s);
+
+        series = (org.jfree.data.xy.XYSeries) $stack7;
+
+        $stack8 = virtualinvoke series.<org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)>(x);
+
+        $stack9 = virtualinvoke series.<org.jfree.data.xy.XYSeries: java.lang.Number getY(int)>($stack8);
+
+        if $stack9 == null goto label2;
+
+        return 0;
+
+     label2:
+        s = s + 1;
+
+        goto label1;
+
+     label3:
+        return 1;
+    }
+
+    public void prune()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.HashSet $stack4, hs;
+        java.lang.Object $stack5, $stack8;
+        java.util.Iterator iterator;
+        boolean $stack7, $stack9;
+        java.lang.Number x;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack4 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        $stack5 = virtualinvoke $stack4.<java.util.HashSet: java.lang.Object clone()>();
+
+        hs = (java.util.HashSet) $stack5;
+
+        iterator = virtualinvoke hs.<java.util.HashSet: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label3;
+
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        x = (java.lang.Number) $stack8;
+
+        $stack9 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: boolean canPrune(java.lang.Number)>(x);
+
+        if $stack9 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void removeAllValuesForX(java.lang.Number)>(x);
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public void seriesChanged(org.jfree.data.general.SeriesChangeEvent)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean $stack2;
+        org.jfree.data.general.SeriesChangeEvent event;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        event := @parameter0: org.jfree.data.general.SeriesChangeEvent;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        if $stack2 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void updateXPoints()>();
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+     label1:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.xy.DefaultTableXYDataset this, that;
+        boolean $stack3, $stack4, $stack5, $stack6, $stack7, $stack10, $stack13;
+        org.jfree.data.xy.IntervalXYDelegate $stack8, $stack9;
+        java.util.List $stack11, $stack12;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.xy.DefaultTableXYDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.xy.DefaultTableXYDataset) obj;
+
+        $stack5 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        $stack4 = that.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        $stack6 = that.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack8 = that.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack10 = virtualinvoke $stack9.<org.jfree.data.xy.IntervalXYDelegate: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack11 = that.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack13 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+
+        if $stack13 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        java.util.List $stack2, $stack23;
+        java.util.HashSet $stack3, $stack17;
+        int $stack4, $stack6, $stack8, $stack24, result, $stack18;
+        boolean $stack5, $stack7;
+        byte $stack12, $stack9;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        if $stack2 == null goto label1;
+
+        $stack23 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack24 = interfaceinvoke $stack23.<java.util.List: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack24 = 0;
+
+     label2:
+        $stack4 = 29 * $stack24;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        if $stack3 == null goto label3;
+
+        $stack17 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.HashSet xPoints>;
+
+        $stack18 = virtualinvoke $stack17.<java.util.HashSet: int hashCode()>();
+
+        goto label4;
+
+     label3:
+        $stack18 = 0;
+
+     label4:
+        result = $stack4 + $stack18;
+
+        $stack6 = 29 * result;
+
+        $stack5 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean propagateEvents>;
+
+        if $stack5 == 0 goto label5;
+
+        $stack12 = 1;
+
+        goto label6;
+
+     label5:
+        $stack12 = 0;
+
+     label6:
+        result = $stack6 + $stack12;
+
+        $stack8 = 29 * result;
+
+        $stack7 = this.<org.jfree.data.xy.DefaultTableXYDataset: boolean autoPrune>;
+
+        if $stack7 == 0 goto label7;
+
+        $stack9 = 1;
+
+        goto label8;
+
+     label7:
+        $stack9 = 0;
+
+     label8:
+        result = $stack8 + $stack9;
+
+        return result;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this, clone;
+        java.lang.Object $stack5, $stack19, $stack21;
+        java.util.List $stack6, $stack9, $stack20;
+        int seriesCount;
+        java.util.ArrayList $stack8;
+        java.util.Iterator l3;
+        boolean $stack11, $stack16;
+        org.jfree.data.xy.IntervalXYDelegate $stack12, $stack13, $stack15, $stack17;
+        double $stack14, $stack18;
+        org.jfree.data.xy.XYSeries series;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack5 = specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.xy.DefaultTableXYDataset) $stack5;
+
+        $stack6 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        seriesCount = interfaceinvoke $stack6.<java.util.List: int size()>();
+
+        $stack8 = new java.util.ArrayList;
+
+        specialinvoke $stack8.<java.util.ArrayList: void <init>(int)>(seriesCount);
+
+        clone.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data> = $stack8;
+
+        $stack9 = this.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        l3 = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack19 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        series = (org.jfree.data.xy.XYSeries) $stack19;
+
+        $stack20 = clone.<org.jfree.data.xy.DefaultTableXYDataset: java.util.List data>;
+
+        $stack21 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>(series);
+
+        interfaceinvoke $stack20.<java.util.List: boolean add(java.lang.Object)>($stack21);
+
+        goto label1;
+
+     label2:
+        $stack12 = new org.jfree.data.xy.IntervalXYDelegate;
+
+        specialinvoke $stack12.<org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset)>(clone);
+
+        clone.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate> = $stack12;
+
+        $stack13 = clone.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack14 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: double getIntervalWidth()>();
+
+        virtualinvoke $stack13.<org.jfree.data.xy.IntervalXYDelegate: void setFixedIntervalWidth(double)>($stack14);
+
+        $stack15 = clone.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack16 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: boolean isAutoWidth()>();
+
+        virtualinvoke $stack15.<org.jfree.data.xy.IntervalXYDelegate: void setAutoWidth(boolean)>($stack16);
+
+        $stack17 = clone.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack18 = virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: double getIntervalPositionFactor()>();
+
+        virtualinvoke $stack17.<org.jfree.data.xy.IntervalXYDelegate: void setIntervalPositionFactor(double)>($stack18);
+
+        virtualinvoke clone.<org.jfree.data.xy.DefaultTableXYDataset: void updateXPoints()>();
+
+        return clone;
+    }
+
+    public double getDomainLowerBound(boolean)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean includeInterval;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+        double $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: double getDomainLowerBound(boolean)>(includeInterval);
+
+        return $stack3;
+    }
+
+    public double getDomainUpperBound(boolean)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean includeInterval;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+        double $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: double getDomainUpperBound(boolean)>(includeInterval);
+
+        return $stack3;
+    }
+
+    public org.jfree.data.Range getDomainBounds(boolean)
+    {
+        boolean includeInterval;
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        org.jfree.data.Range $stack2, $stack4;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        if includeInterval == 0 goto label1;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+
+        return $stack4;
+
+     label1:
+        $stack2 = staticinvoke <org.jfree.data.general.DatasetUtils: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset,boolean)>(this, includeInterval);
+
+        return $stack2;
+    }
+
+    public double getIntervalPositionFactor()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+        double $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+
+        return $stack2;
+    }
+
+    public void setIntervalPositionFactor(double)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        double d;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        d := @parameter0: double;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: void setIntervalPositionFactor(double)>(d);
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public double getIntervalWidth()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+        double $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+
+        return $stack2;
+    }
+
+    public void setIntervalWidth(double)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        double d;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        d := @parameter0: double;
+
+        $stack3 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: void setFixedIntervalWidth(double)>(d);
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public boolean isAutoWidth()
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+        boolean $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        $stack1 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: boolean isAutoWidth()>();
+
+        return $stack2;
+    }
+
+    public void setAutoWidth(boolean)
+    {
+        org.jfree.data.xy.DefaultTableXYDataset this;
+        boolean b;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+
+        this := @this: org.jfree.data.xy.DefaultTableXYDataset;
+
+        b := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.xy.DefaultTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+
+        virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: void setAutoWidth(boolean)>(b);
+
+        virtualinvoke this.<org.jfree.data.xy.DefaultTableXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+}

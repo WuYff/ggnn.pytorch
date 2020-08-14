@@ -1,0 +1,2187 @@
+public final class org.jsoup.parser.CharacterReader extends java.lang.Object
+{
+    static final char EOF;
+    private static final int maxStringCacheLen;
+    static final int maxBufferLen;
+    static final int readAheadLimit;
+    private static final int minReadAheadLen;
+    private char[] charBuf;
+    private java.io.Reader reader;
+    private int bufLength;
+    private int bufSplitPoint;
+    private int bufPos;
+    private int readerPos;
+    private int bufMark;
+    private static final int stringCacheSize;
+    private java.lang.String[] stringCache;
+    private boolean readFully;
+
+    public void <init>(java.io.Reader, int)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String[] $stack3;
+        java.io.Reader input;
+        boolean $stack4;
+        int sz, $stack6;
+        char[] $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        input := @parameter0: java.io.Reader;
+
+        sz := @parameter1: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.parser.CharacterReader: int bufMark> = -1;
+
+        $stack3 = newarray (java.lang.String)[512];
+
+        this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache> = $stack3;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(input);
+
+        $stack4 = virtualinvoke input.<java.io.Reader: boolean markSupported()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean)>($stack4);
+
+        this.<org.jsoup.parser.CharacterReader: java.io.Reader reader> = input;
+
+        if sz <= 32768 goto label1;
+
+        $stack6 = 32768;
+
+        goto label2;
+
+     label1:
+        $stack6 = sz;
+
+     label2:
+        $stack5 = newarray (char)[$stack6];
+
+        this.<org.jsoup.parser.CharacterReader: char[] charBuf> = $stack5;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        return;
+    }
+
+    public void <init>(java.io.Reader)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.io.Reader input;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        input := @parameter0: java.io.Reader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void <init>(java.io.Reader,int)>(input, 32768);
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.io.StringReader $stack2;
+        java.lang.String input;
+        int $stack3;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        input := @parameter0: java.lang.String;
+
+        $stack2 = new java.io.StringReader;
+
+        specialinvoke $stack2.<java.io.StringReader: void <init>(java.lang.String)>(input);
+
+        $stack3 = virtualinvoke input.<java.lang.String: int length()>();
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void <init>(java.io.Reader,int)>($stack2, $stack3);
+
+        return;
+    }
+
+    public void close()
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.io.Reader $stack3, $stack4;
+        java.lang.Throwable $stack5;
+        java.io.IOException $stack6;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        if $stack3 != null goto label1;
+
+        return;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        virtualinvoke $stack4.<java.io.Reader: void close()>();
+
+     label2:
+        this.<org.jsoup.parser.CharacterReader: java.io.Reader reader> = null;
+
+        this.<org.jsoup.parser.CharacterReader: char[] charBuf> = null;
+
+        this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache> = null;
+
+        goto label5;
+
+     label3:
+        $stack6 := @caughtexception;
+
+        this.<org.jsoup.parser.CharacterReader: java.io.Reader reader> = null;
+
+        this.<org.jsoup.parser.CharacterReader: char[] charBuf> = null;
+
+        this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache> = null;
+
+        goto label5;
+
+     label4:
+        $stack5 := @caughtexception;
+
+        this.<org.jsoup.parser.CharacterReader: java.io.Reader reader> = null;
+
+        this.<org.jsoup.parser.CharacterReader: char[] charBuf> = null;
+
+        this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache> = null;
+
+        throw $stack5;
+
+     label5:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+    }
+
+    private void bufferUp()
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack7, $stack26;
+        int $stack8, $stack9, $stack10, $stack18, $stack19, $stack20, $stack21, $stack36, $stack37, thisRead, $stack46, $stack47, pos, offset, read, $stack22;
+        long $stack11, $stack16, skipped;
+        java.io.Reader $stack12, $stack14, $stack15, $stack39;
+        byte $stack17;
+        char[] $stack35, $stack38;
+        java.io.IOException $stack53;
+        org.jsoup.UncheckedIOException $stack54;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: boolean readFully>;
+
+        if $stack7 != 0 goto label01;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufSplitPoint>;
+
+        if $stack9 >= $stack8 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        if $stack10 == -1 goto label03;
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        $stack47 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack46 = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        offset = $stack47 - $stack46;
+
+        goto label04;
+
+     label03:
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        offset = 0;
+
+     label04:
+        $stack12 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        $stack11 = (long) pos;
+
+        skipped = virtualinvoke $stack12.<java.io.Reader: long skip(long)>($stack11);
+
+        $stack14 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        virtualinvoke $stack14.<java.io.Reader: void mark(int)>(32768);
+
+        read = 0;
+
+     label05:
+        if read > 1024 goto label08;
+
+        $stack39 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        $stack38 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack35 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack36 = lengthof $stack35;
+
+        $stack37 = $stack36 - read;
+
+        thisRead = virtualinvoke $stack39.<java.io.Reader: int read(char[],int,int)>($stack38, read, $stack37);
+
+        if thisRead != -1 goto label06;
+
+        this.<org.jsoup.parser.CharacterReader: boolean readFully> = 1;
+
+     label06:
+        if thisRead > 0 goto label07;
+
+        goto label08;
+
+     label07:
+        read = read + thisRead;
+
+        goto label05;
+
+     label08:
+        $stack15 = this.<org.jsoup.parser.CharacterReader: java.io.Reader reader>;
+
+        virtualinvoke $stack15.<java.io.Reader: void reset()>();
+
+        if read <= 0 goto label14;
+
+        $stack16 = (long) pos;
+
+        $stack17 = skipped cmp $stack16;
+
+        if $stack17 != 0 goto label09;
+
+        $stack26 = 1;
+
+        goto label10;
+
+     label09:
+        $stack26 = 0;
+
+     label10:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean)>($stack26);
+
+        this.<org.jsoup.parser.CharacterReader: int bufLength> = read;
+
+        $stack18 = this.<org.jsoup.parser.CharacterReader: int readerPos>;
+
+        $stack19 = $stack18 + pos;
+
+        this.<org.jsoup.parser.CharacterReader: int readerPos> = $stack19;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = offset;
+
+        $stack20 = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        if $stack20 == -1 goto label11;
+
+        this.<org.jsoup.parser.CharacterReader: int bufMark> = 0;
+
+     label11:
+        $stack21 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack21 <= 24576 goto label12;
+
+        $stack22 = 24576;
+
+        goto label13;
+
+     label12:
+        $stack22 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+     label13:
+        this.<org.jsoup.parser.CharacterReader: int bufSplitPoint> = $stack22;
+
+     label14:
+        goto label16;
+
+     label15:
+        $stack53 := @caughtexception;
+
+        $stack54 = new org.jsoup.UncheckedIOException;
+
+        specialinvoke $stack54.<org.jsoup.UncheckedIOException: void <init>(java.io.IOException)>($stack53);
+
+        throw $stack54;
+
+     label16:
+        return;
+
+        catch java.io.IOException from label04 to label14 with label15;
+    }
+
+    public int pos()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2, $stack3;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int readerPos>;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = $stack2 + $stack1;
+
+        return $stack3;
+    }
+
+    public boolean isEmpty()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack2 < $stack1 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    private boolean isEmptyNoBufferUp()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack2 < $stack1 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public char current()
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack1;
+        int $stack2;
+        char[] $stack3;
+        char $stack4;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack1 = specialinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmptyNoBufferUp()>();
+
+        if $stack1 == 0 goto label1;
+
+        $stack4 = 65535;
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack4 = $stack3[$stack2];
+
+     label2:
+        return $stack4;
+    }
+
+    char consume()
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack2;
+        int $stack3, $stack5, $stack6;
+        char[] $stack4;
+        char $stack7;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack2 = specialinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmptyNoBufferUp()>();
+
+        if $stack2 == 0 goto label1;
+
+        $stack7 = 65535;
+
+        goto label2;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack7 = $stack4[$stack3];
+
+     label2:
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack6 = $stack5 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack6;
+
+        return $stack7;
+    }
+
+    void unconsume()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2, $stack3;
+        org.jsoup.UncheckedIOException $stack4;
+        java.io.IOException $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        if $stack1 >= 1 goto label1;
+
+        $stack4 = new org.jsoup.UncheckedIOException;
+
+        $stack5 = new java.io.IOException;
+
+        specialinvoke $stack5.<java.io.IOException: void <init>(java.lang.String)>("No buffer left to unconsume");
+
+        specialinvoke $stack4.<org.jsoup.UncheckedIOException: void <init>(java.io.IOException)>($stack5);
+
+        throw $stack4;
+
+     label1:
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = $stack2 - 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack3;
+
+        return;
+    }
+
+    public void advance()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack2 = $stack1 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack2;
+
+        return;
+    }
+
+    void mark()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2, $stack3, $stack4;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = $stack2 - $stack1;
+
+        if $stack3 >= 1024 goto label1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufSplitPoint> = 0;
+
+     label1:
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack4 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        this.<org.jsoup.parser.CharacterReader: int bufMark> = $stack4;
+
+        return;
+    }
+
+    void unmark()
+    {
+        org.jsoup.parser.CharacterReader this;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        this.<org.jsoup.parser.CharacterReader: int bufMark> = -1;
+
+        return;
+    }
+
+    void rewindToMark()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2;
+        org.jsoup.UncheckedIOException $stack3;
+        java.io.IOException $stack4;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        if $stack1 != -1 goto label1;
+
+        $stack3 = new org.jsoup.UncheckedIOException;
+
+        $stack4 = new java.io.IOException;
+
+        specialinvoke $stack4.<java.io.IOException: void <init>(java.lang.String)>("Mark invalid");
+
+        specialinvoke $stack3.<org.jsoup.UncheckedIOException: void <init>(java.io.IOException)>($stack4);
+
+        throw $stack3;
+
+     label1:
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufMark>;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack2;
+
+        virtualinvoke this.<org.jsoup.parser.CharacterReader: void unmark()>();
+
+        return;
+    }
+
+    int nextIndexOf(char)
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack3, $stack8, $stack9, i;
+        char c, $stack5;
+        char[] $stack4;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        c := @parameter0: char;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        i = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if i >= $stack3 goto label3;
+
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack5 = $stack4[i];
+
+        if c != $stack5 goto label2;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack9 = i - $stack8;
+
+        return $stack9;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return -1;
+    }
+
+    int nextIndexOf(java.lang.CharSequence)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.CharSequence seq;
+        char startChar, $stack10, $stack19, $stack21, $stack37;
+        int $stack8, last, $stack16, $stack17, $stack18, $stack26, offset, i, $stack11, $stack12, $stack13, j;
+        char[] $stack9, $stack20, $stack36;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.CharSequence;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        startChar = interfaceinvoke seq.<java.lang.CharSequence: char charAt(int)>(0);
+
+        offset = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if offset >= $stack8 goto label7;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack10 = $stack9[offset];
+
+        if startChar == $stack10 goto label3;
+
+     label2:
+        offset = offset + 1;
+
+        $stack26 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if offset >= $stack26 goto label3;
+
+        $stack36 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack37 = $stack36[offset];
+
+        if startChar == $stack37 goto label3;
+
+        goto label2;
+
+     label3:
+        i = offset + 1;
+
+        $stack11 = interfaceinvoke seq.<java.lang.CharSequence: int length()>();
+
+        $stack12 = i + $stack11;
+
+        last = $stack12 - 1;
+
+        $stack13 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if offset >= $stack13 goto label6;
+
+        $stack16 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if last > $stack16 goto label6;
+
+        j = 1;
+
+     label4:
+        if i >= last goto label5;
+
+        $stack19 = interfaceinvoke seq.<java.lang.CharSequence: char charAt(int)>(j);
+
+        $stack20 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack21 = $stack20[i];
+
+        if $stack19 != $stack21 goto label5;
+
+        i = i + 1;
+
+        j = j + 1;
+
+        goto label4;
+
+     label5:
+        if i != last goto label6;
+
+        $stack17 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack18 = offset - $stack17;
+
+        return $stack18;
+
+     label6:
+        offset = offset + 1;
+
+        goto label1;
+
+     label7:
+        return -1;
+    }
+
+    public java.lang.String consumeTo(char)
+    {
+        org.jsoup.parser.CharacterReader this;
+        char c;
+        int offset, $stack6, $stack10, $stack11;
+        java.lang.String $stack5, consumed;
+        java.lang.String[] $stack7;
+        char[] $stack8;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        c := @parameter0: char;
+
+        offset = virtualinvoke this.<org.jsoup.parser.CharacterReader: int nextIndexOf(char)>(c);
+
+        if offset == -1 goto label1;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        consumed = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack8, $stack7, $stack6, offset);
+
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack11 = $stack10 + offset;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack11;
+
+        return consumed;
+
+     label1:
+        $stack5 = virtualinvoke this.<org.jsoup.parser.CharacterReader: java.lang.String consumeToEnd()>();
+
+        return $stack5;
+    }
+
+    java.lang.String consumeTo(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String seq, consumed, $stack19;
+        int offset, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack20, $stack24, $stack25, consumed;
+        java.lang.String[] $stack16, $stack21;
+        char[] $stack17, $stack22;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        offset = virtualinvoke this.<org.jsoup.parser.CharacterReader: int nextIndexOf(java.lang.CharSequence)>(seq);
+
+        if offset == -1 goto label1;
+
+        $stack22 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack21 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack20 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        consumed = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack22, $stack21, $stack20, offset);
+
+        $stack24 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack25 = $stack24 + offset;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack25;
+
+        return consumed;
+
+     label1:
+        $stack7 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack8 = $stack7 - $stack6;
+
+        $stack9 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        if $stack8 >= $stack9 goto label2;
+
+        $stack19 = virtualinvoke this.<org.jsoup.parser.CharacterReader: java.lang.String consumeToEnd()>();
+
+        return $stack19;
+
+     label2:
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack11 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack12 = $stack10 - $stack11;
+
+        consumed = $stack12 + 1;
+
+        $stack17 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack16 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack15 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack13 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack14 = consumed - $stack13;
+
+        consumed = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack17, $stack16, $stack15, $stack14);
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = consumed;
+
+        return consumed;
+    }
+
+    public transient java.lang.String consumeToAny(char[])
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, charLen, $stack8, pos, i;
+        char[] val, chars, $stack10;
+        java.lang.String[] $stack9;
+        char $stack14, $stack15;
+        java.lang.String $stack11;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        chars := @parameter0: char[];
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        charLen = lengthof chars;
+
+     label1:
+        if pos >= remaining goto label5;
+
+        i = 0;
+
+     label2:
+        if i >= charLen goto label4;
+
+        $stack15 = val[pos];
+
+        $stack14 = chars[i];
+
+        if $stack15 != $stack14 goto label3;
+
+        goto label5;
+
+     label3:
+        i = i + 1;
+
+        goto label2;
+
+     label4:
+        pos = pos + 1;
+
+        goto label1;
+
+     label5:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        if pos <= start goto label6;
+
+        $stack10 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack8 = pos - start;
+
+        $stack11 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack10, $stack9, start, $stack8);
+
+        goto label7;
+
+     label6:
+        $stack11 = "";
+
+     label7:
+        return $stack11;
+    }
+
+    transient java.lang.String consumeToAnySorted(char[])
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, $stack6, $stack7, $stack12, pos;
+        char[] val, $stack9, chars;
+        java.lang.String[] $stack8;
+        char $stack11;
+        java.lang.String $stack10;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        chars := @parameter0: char[];
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+     label1:
+        if pos >= remaining goto label3;
+
+        $stack11 = val[pos];
+
+        $stack12 = staticinvoke <java.util.Arrays: int binarySearch(char[],char)>(chars, $stack11);
+
+        if $stack12 < 0 goto label2;
+
+        goto label3;
+
+     label2:
+        pos = pos + 1;
+
+        goto label1;
+
+     label3:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        if $stack6 <= start goto label4;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack7 = pos - start;
+
+        $stack10 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack9, $stack8, start, $stack7);
+
+        goto label5;
+
+     label4:
+        $stack10 = "";
+
+     label5:
+        return $stack10;
+    }
+
+    java.lang.String consumeData()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, $stack5, pos;
+        char[] val, $stack7;
+        java.lang.String[] $stack6;
+        char $stack9;
+        java.lang.String $stack8;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+     label1:
+        if pos >= remaining goto label4;
+
+        $stack9 = val[pos];
+
+        lookupswitch($stack9)
+        {
+            case 0: goto label2;
+            case 38: goto label2;
+            case 60: goto label2;
+            default: goto label3;
+        };
+
+     label2:
+        goto label4;
+
+     label3:
+        pos = pos + 1;
+
+        goto label1;
+
+     label4:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        if pos <= start goto label5;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = pos - start;
+
+        $stack8 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack7, $stack6, start, $stack5);
+
+        goto label6;
+
+     label5:
+        $stack8 = "";
+
+     label6:
+        return $stack8;
+    }
+
+    java.lang.String consumeAttributeQuoted(boolean)
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, $stack6, pos;
+        char[] val, $stack8;
+        java.lang.String[] $stack7;
+        char $stack10;
+        boolean single;
+        java.lang.String $stack9;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        single := @parameter0: boolean;
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+     label1:
+        if pos >= remaining goto label6;
+
+        $stack10 = val[pos];
+
+        lookupswitch($stack10)
+        {
+            case 0: goto label2;
+            case 34: goto label4;
+            case 38: goto label2;
+            case 39: goto label3;
+            default: goto label5;
+        };
+
+     label2:
+        goto label6;
+
+     label3:
+        if single == 0 goto label4;
+
+        goto label6;
+
+     label4:
+        if single != 0 goto label5;
+
+        goto label6;
+
+     label5:
+        pos = pos + 1;
+
+        goto label1;
+
+     label6:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        if pos <= start goto label7;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack6 = pos - start;
+
+        $stack9 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack8, $stack7, start, $stack6);
+
+        goto label8;
+
+     label7:
+        $stack9 = "";
+
+     label8:
+        return $stack9;
+    }
+
+    java.lang.String consumeRawData()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, $stack5, pos;
+        char[] val, $stack7;
+        java.lang.String[] $stack6;
+        char $stack9;
+        java.lang.String $stack8;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+     label1:
+        if pos >= remaining goto label4;
+
+        $stack9 = val[pos];
+
+        lookupswitch($stack9)
+        {
+            case 0: goto label2;
+            case 60: goto label2;
+            default: goto label3;
+        };
+
+     label2:
+        goto label4;
+
+     label3:
+        pos = pos + 1;
+
+        goto label1;
+
+     label4:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        if pos <= start goto label5;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = pos - start;
+
+        $stack8 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack7, $stack6, start, $stack5);
+
+        goto label6;
+
+     label5:
+        $stack8 = "";
+
+     label6:
+        return $stack8;
+    }
+
+    java.lang.String consumeTagName()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, remaining, $stack5, pos;
+        char[] val, $stack7;
+        java.lang.String[] $stack6;
+        char $stack9;
+        java.lang.String $stack8;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        pos = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        start = pos;
+
+        remaining = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        val = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+     label1:
+        if pos >= remaining goto label4;
+
+        $stack9 = val[pos];
+
+        lookupswitch($stack9)
+        {
+            case 0: goto label2;
+            case 9: goto label2;
+            case 10: goto label2;
+            case 12: goto label2;
+            case 13: goto label2;
+            case 32: goto label2;
+            case 47: goto label2;
+            case 60: goto label2;
+            case 62: goto label2;
+            default: goto label3;
+        };
+
+     label2:
+        goto label4;
+
+     label3:
+        pos = pos + 1;
+
+        goto label1;
+
+     label4:
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = pos;
+
+        if pos <= start goto label5;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = pos - start;
+
+        $stack8 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack7, $stack6, start, $stack5);
+
+        goto label6;
+
+     label5:
+        $stack8 = "";
+
+     label6:
+        return $stack8;
+    }
+
+    java.lang.String consumeToEnd()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack2, $stack3, $stack4, $stack5, $stack9;
+        java.lang.String[] $stack6;
+        char[] $stack7;
+        java.lang.String data;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack4 = $stack3 - $stack2;
+
+        data = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack7, $stack6, $stack5, $stack4);
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack9;
+
+        return data;
+    }
+
+    java.lang.String consumeLetterSequence()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, $stack3, $stack4, $stack5, $stack6, $stack10, $stack18, $stack19;
+        java.lang.String[] $stack7;
+        char[] $stack8, $stack11;
+        java.lang.String $stack9;
+        char c;
+        boolean $stack12;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        start = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack4 >= $stack3 goto label5;
+
+        $stack11 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack11[$stack10];
+
+        if c < 65 goto label2;
+
+        if c <= 90 goto label4;
+
+     label2:
+        if c < 97 goto label3;
+
+        if c <= 122 goto label4;
+
+     label3:
+        $stack12 = staticinvoke <java.lang.Character: boolean isLetter(char)>(c);
+
+        if $stack12 == 0 goto label5;
+
+     label4:
+        $stack18 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack19 = $stack18 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack19;
+
+        goto label1;
+
+     label5:
+        $stack8 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack6 = $stack5 - start;
+
+        $stack9 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack8, $stack7, start, $stack6);
+
+        return $stack9;
+    }
+
+    java.lang.String consumeLetterThenDigitSequence()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, $stack3, $stack4, $stack11, $stack18, $stack19, $stack21, $stack24, $stack25, $stack6, $stack7;
+        char[] $stack12, $stack22, $stack9;
+        boolean $stack23, $stack5;
+        char c;
+        java.lang.String[] $stack8;
+        java.lang.String $stack10;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        start = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack4 >= $stack3 goto label5;
+
+        $stack22 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack21 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack22[$stack21];
+
+        if c < 65 goto label2;
+
+        if c <= 90 goto label4;
+
+     label2:
+        if c < 97 goto label3;
+
+        if c <= 122 goto label4;
+
+     label3:
+        $stack23 = staticinvoke <java.lang.Character: boolean isLetter(char)>(c);
+
+        if $stack23 == 0 goto label5;
+
+     label4:
+        $stack24 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack25 = $stack24 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack25;
+
+        goto label1;
+
+     label5:
+        $stack5 = specialinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmptyNoBufferUp()>();
+
+        if $stack5 != 0 goto label6;
+
+        $stack12 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack11 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack12[$stack11];
+
+        if c < 48 goto label6;
+
+        if c > 57 goto label6;
+
+        $stack18 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack19 = $stack18 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack19;
+
+        goto label5;
+
+     label6:
+        $stack9 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack7 = $stack6 - start;
+
+        $stack10 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack9, $stack8, start, $stack7);
+
+        return $stack10;
+    }
+
+    java.lang.String consumeHexSequence()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, $stack3, $stack4, $stack10, $stack17, $stack18, $stack5, $stack6;
+        char[] $stack11, $stack8;
+        char c;
+        java.lang.String[] $stack7;
+        java.lang.String $stack9;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        start = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack4 >= $stack3 goto label5;
+
+        $stack11 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack11[$stack10];
+
+        if c < 48 goto label2;
+
+        if c <= 57 goto label4;
+
+     label2:
+        if c < 65 goto label3;
+
+        if c <= 70 goto label4;
+
+     label3:
+        if c < 97 goto label5;
+
+        if c > 102 goto label5;
+
+     label4:
+        $stack17 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack18 = $stack17 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack18;
+
+        goto label1;
+
+     label5:
+        $stack8 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack6 = $stack5 - start;
+
+        $stack9 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack8, $stack7, start, $stack6);
+
+        return $stack9;
+    }
+
+    java.lang.String consumeDigitSequence()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, $stack3, $stack4, $stack10, $stack17, $stack18, $stack5, $stack6;
+        char[] $stack11, $stack8;
+        char c;
+        java.lang.String[] $stack7;
+        java.lang.String $stack9;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        start = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        if $stack4 >= $stack3 goto label2;
+
+        $stack11 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack10 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack11[$stack10];
+
+        if c < 48 goto label2;
+
+        if c > 57 goto label2;
+
+        $stack17 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack18 = $stack17 + 1;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack18;
+
+        goto label1;
+
+     label2:
+        $stack8 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: java.lang.String[] stringCache>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack6 = $stack5 - start;
+
+        $stack9 = staticinvoke <org.jsoup.parser.CharacterReader: java.lang.String cacheString(char[],java.lang.String[],int,int)>($stack8, $stack7, start, $stack6);
+
+        return $stack9;
+    }
+
+    boolean matches(char)
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack2, $stack6;
+        int $stack3;
+        char[] $stack4;
+        char c, $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        c := @parameter0: char;
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label1;
+
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack5 = $stack4[$stack3];
+
+        if $stack5 != c goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    boolean matches(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String seq;
+        int scanLength, $stack5, $stack6, $stack7, $stack9, $stack10, offset;
+        char $stack8, $stack12;
+        char[] $stack11;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        scanLength = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack7 = $stack6 - $stack5;
+
+        if scanLength <= $stack7 goto label1;
+
+        return 0;
+
+     label1:
+        offset = 0;
+
+     label2:
+        if offset >= scanLength goto label4;
+
+        $stack8 = virtualinvoke seq.<java.lang.String: char charAt(int)>(offset);
+
+        $stack11 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack10 = $stack9 + offset;
+
+        $stack12 = $stack11[$stack10];
+
+        if $stack8 == $stack12 goto label3;
+
+        return 0;
+
+     label3:
+        offset = offset + 1;
+
+        goto label2;
+
+     label4:
+        return 1;
+    }
+
+    boolean matchesIgnoreCase(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String seq;
+        int scanLength, $stack7, $stack8, $stack9, $stack12, $stack13, offset;
+        char $stack10, upScan, $stack15, upTarget;
+        char[] $stack14;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        scanLength = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack7 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack9 = $stack8 - $stack7;
+
+        if scanLength <= $stack9 goto label1;
+
+        return 0;
+
+     label1:
+        offset = 0;
+
+     label2:
+        if offset >= scanLength goto label4;
+
+        $stack10 = virtualinvoke seq.<java.lang.String: char charAt(int)>(offset);
+
+        upScan = staticinvoke <java.lang.Character: char toUpperCase(char)>($stack10);
+
+        $stack14 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack12 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack13 = $stack12 + offset;
+
+        $stack15 = $stack14[$stack13];
+
+        upTarget = staticinvoke <java.lang.Character: char toUpperCase(char)>($stack15);
+
+        if upScan == upTarget goto label3;
+
+        return 0;
+
+     label3:
+        offset = offset + 1;
+
+        goto label2;
+
+     label4:
+        return 1;
+    }
+
+    transient boolean matchesAny(char[])
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack7;
+        int $stack8, l4, l5;
+        char[] $stack9, seq;
+        char c, seek;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: char[];
+
+        $stack7 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack7 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack9[$stack8];
+
+        l4 = lengthof seq;
+
+        l5 = 0;
+
+     label2:
+        if l5 >= l4 goto label4;
+
+        seek = seq[l5];
+
+        if seek != c goto label3;
+
+        return 1;
+
+     label3:
+        l5 = l5 + 1;
+
+        goto label2;
+
+     label4:
+        return 0;
+    }
+
+    boolean matchesAnySorted(char[])
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack2, $stack7;
+        char[] seq, $stack4;
+        int $stack3, $stack6;
+        char $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: char[];
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label1;
+
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack5 = $stack4[$stack3];
+
+        $stack6 = staticinvoke <java.util.Arrays: int binarySearch(char[],char)>(seq, $stack5);
+
+        if $stack6 < 0 goto label1;
+
+        $stack7 = 1;
+
+        goto label2;
+
+     label1:
+        $stack7 = 0;
+
+     label2:
+        return $stack7;
+    }
+
+    boolean matchesLetter()
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack2, $stack5, $stack6;
+        int $stack3;
+        char[] $stack4;
+        char c;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack2 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack4[$stack3];
+
+        if c < 65 goto label2;
+
+        if c <= 90 goto label4;
+
+     label2:
+        if c < 97 goto label3;
+
+        if c <= 122 goto label4;
+
+     label3:
+        $stack5 = staticinvoke <java.lang.Character: boolean isLetter(char)>(c);
+
+        if $stack5 == 0 goto label5;
+
+     label4:
+        $stack6 = 1;
+
+        goto label6;
+
+     label5:
+        $stack6 = 0;
+
+     label6:
+        return $stack6;
+    }
+
+    boolean matchesDigit()
+    {
+        org.jsoup.parser.CharacterReader this;
+        boolean $stack2, $stack5;
+        int $stack3;
+        char[] $stack4;
+        char c;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack2 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        c = $stack4[$stack3];
+
+        if c < 48 goto label2;
+
+        if c > 57 goto label2;
+
+        $stack5 = 1;
+
+        goto label3;
+
+     label2:
+        $stack5 = 0;
+
+     label3:
+        return $stack5;
+    }
+
+    boolean matchConsume(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String seq;
+        boolean $stack2;
+        int $stack3, $stack4, $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.parser.CharacterReader: void bufferUp()>();
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean matches(java.lang.String)>(seq);
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack4 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack5 = $stack3 + $stack4;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack5;
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+
+    boolean matchConsumeIgnoreCase(java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        java.lang.String seq;
+        boolean $stack2;
+        int $stack3, $stack4, $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.parser.CharacterReader: boolean matchesIgnoreCase(java.lang.String)>(seq);
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack4 = virtualinvoke seq.<java.lang.String: int length()>();
+
+        $stack5 = $stack3 + $stack4;
+
+        this.<org.jsoup.parser.CharacterReader: int bufPos> = $stack5;
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+
+    boolean containsIgnoreCase(java.lang.String)
+    {
+        java.lang.String seq, loScan, hiScan;
+        java.util.Locale $stack4, $stack6;
+        org.jsoup.parser.CharacterReader this;
+        int $stack8, $stack9;
+        boolean $stack10;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        seq := @parameter0: java.lang.String;
+
+        $stack4 = <java.util.Locale: java.util.Locale ENGLISH>;
+
+        loScan = virtualinvoke seq.<java.lang.String: java.lang.String toLowerCase(java.util.Locale)>($stack4);
+
+        $stack6 = <java.util.Locale: java.util.Locale ENGLISH>;
+
+        hiScan = virtualinvoke seq.<java.lang.String: java.lang.String toUpperCase(java.util.Locale)>($stack6);
+
+        $stack8 = virtualinvoke this.<org.jsoup.parser.CharacterReader: int nextIndexOf(java.lang.CharSequence)>(loScan);
+
+        if $stack8 > -1 goto label1;
+
+        $stack9 = virtualinvoke this.<org.jsoup.parser.CharacterReader: int nextIndexOf(java.lang.CharSequence)>(hiScan);
+
+        if $stack9 <= -1 goto label2;
+
+     label1:
+        $stack10 = 1;
+
+        goto label3;
+
+     label2:
+        $stack10 = 0;
+
+     label3:
+        return $stack10;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.parser.CharacterReader this;
+        int $stack1, $stack2, $stack3, $stack5, $stack6, $stack7, $stack8;
+        java.lang.String $stack4;
+        char[] $stack9;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        $stack2 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack1 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack3 = $stack2 - $stack1;
+
+        if $stack3 >= 0 goto label1;
+
+        return "";
+
+     label1:
+        $stack4 = new java.lang.String;
+
+        $stack9 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack8 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack6 = this.<org.jsoup.parser.CharacterReader: int bufLength>;
+
+        $stack5 = this.<org.jsoup.parser.CharacterReader: int bufPos>;
+
+        $stack7 = $stack6 - $stack5;
+
+        specialinvoke $stack4.<java.lang.String: void <init>(char[],int,int)>($stack9, $stack8, $stack7);
+
+        return $stack4;
+    }
+
+    private static java.lang.String cacheString(char[], java.lang.String[], int, int)
+    {
+        int count, start, $stack12, $stack14, hash, offset, i;
+        java.lang.String[] stringCache;
+        char[] charBuf;
+        boolean $stack8;
+        java.lang.String $stack9, $stack10, $stack17, cached;
+        char $stack13;
+
+        charBuf := @parameter0: char[];
+
+        stringCache := @parameter1: java.lang.String[];
+
+        start := @parameter2: int;
+
+        count := @parameter3: int;
+
+        if count <= 12 goto label1;
+
+        $stack17 = new java.lang.String;
+
+        specialinvoke $stack17.<java.lang.String: void <init>(char[],int,int)>(charBuf, start, count);
+
+        return $stack17;
+
+     label1:
+        if count >= 1 goto label2;
+
+        return "";
+
+     label2:
+        hash = 31 * count;
+
+        offset = start;
+
+        i = 0;
+
+     label3:
+        if i >= count goto label4;
+
+        $stack14 = 31 * hash;
+
+        $stack12 = offset;
+
+        offset = offset + 1;
+
+        $stack13 = charBuf[$stack12];
+
+        hash = $stack14 + $stack13;
+
+        i = i + 1;
+
+        goto label3;
+
+     label4:
+        i = hash & 511;
+
+        cached = stringCache[i];
+
+        if cached != null goto label5;
+
+        $stack10 = new java.lang.String;
+
+        specialinvoke $stack10.<java.lang.String: void <init>(char[],int,int)>(charBuf, start, count);
+
+        cached = $stack10;
+
+        stringCache[i] = $stack10;
+
+        goto label7;
+
+     label5:
+        $stack8 = staticinvoke <org.jsoup.parser.CharacterReader: boolean rangeEquals(char[],int,int,java.lang.String)>(charBuf, start, count, cached);
+
+        if $stack8 == 0 goto label6;
+
+        return cached;
+
+     label6:
+        $stack9 = new java.lang.String;
+
+        specialinvoke $stack9.<java.lang.String: void <init>(char[],int,int)>(charBuf, start, count);
+
+        cached = $stack9;
+
+        stringCache[i] = $stack9;
+
+     label7:
+        return cached;
+    }
+
+    static boolean rangeEquals(char[], int, int, java.lang.String)
+    {
+        java.lang.String cached;
+        int $stack6, start, $stack7, $stack8, $stack9, count, i, j;
+        char[] charBuf;
+        char $stack10, $stack11;
+
+        charBuf := @parameter0: char[];
+
+        start := @parameter1: int;
+
+        count := @parameter2: int;
+
+        cached := @parameter3: java.lang.String;
+
+        $stack6 = virtualinvoke cached.<java.lang.String: int length()>();
+
+        if count != $stack6 goto label3;
+
+        i = start;
+
+        j = 0;
+
+     label1:
+        $stack7 = count;
+
+        count = count + -1;
+
+        if $stack7 == 0 goto label2;
+
+        $stack8 = i;
+
+        i = i + 1;
+
+        $stack10 = charBuf[$stack8];
+
+        $stack9 = j;
+
+        j = j + 1;
+
+        $stack11 = virtualinvoke cached.<java.lang.String: char charAt(int)>($stack9);
+
+        if $stack10 == $stack11 goto label1;
+
+        return 0;
+
+     label2:
+        return 1;
+
+     label3:
+        return 0;
+    }
+
+    boolean rangeEquals(int, int, java.lang.String)
+    {
+        org.jsoup.parser.CharacterReader this;
+        int start, count;
+        java.lang.String cached;
+        char[] $stack4;
+        boolean $stack5;
+
+        this := @this: org.jsoup.parser.CharacterReader;
+
+        start := @parameter0: int;
+
+        count := @parameter1: int;
+
+        cached := @parameter2: java.lang.String;
+
+        $stack4 = this.<org.jsoup.parser.CharacterReader: char[] charBuf>;
+
+        $stack5 = staticinvoke <org.jsoup.parser.CharacterReader: boolean rangeEquals(char[],int,int,java.lang.String)>($stack4, start, count, cached);
+
+        return $stack5;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.parser.CharacterReader: int stringCacheSize> = 512;
+
+        <org.jsoup.parser.CharacterReader: int minReadAheadLen> = 1024;
+
+        <org.jsoup.parser.CharacterReader: int readAheadLimit> = 24576;
+
+        <org.jsoup.parser.CharacterReader: int maxBufferLen> = 32768;
+
+        <org.jsoup.parser.CharacterReader: int maxStringCacheLen> = 12;
+
+        <org.jsoup.parser.CharacterReader: char EOF> = 65535;
+
+        return;
+    }
+}

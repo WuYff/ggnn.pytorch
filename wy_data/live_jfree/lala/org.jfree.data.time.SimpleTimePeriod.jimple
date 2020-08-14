@@ -1,0 +1,291 @@
+public class org.jfree.data.time.SimpleTimePeriod extends java.lang.Object implements org.jfree.data.time.TimePeriod, java.lang.Comparable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private long start;
+    private long end;
+
+    public void <init>(long, long)
+    {
+        org.jfree.data.time.SimpleTimePeriod this;
+        long start, end;
+        byte $stack5;
+        java.lang.IllegalArgumentException $stack6;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        start := @parameter0: long;
+
+        end := @parameter1: long;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack5 = start cmp end;
+
+        if $stack5 <= 0 goto label1;
+
+        $stack6 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires start <= end.");
+
+        throw $stack6;
+
+     label1:
+        this.<org.jfree.data.time.SimpleTimePeriod: long start> = start;
+
+        this.<org.jfree.data.time.SimpleTimePeriod: long end> = end;
+
+        return;
+    }
+
+    public void <init>(java.util.Date, java.util.Date)
+    {
+        org.jfree.data.time.SimpleTimePeriod this;
+        java.util.Date start, end;
+        long $stack3, $stack4;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        start := @parameter0: java.util.Date;
+
+        end := @parameter1: java.util.Date;
+
+        $stack3 = virtualinvoke start.<java.util.Date: long getTime()>();
+
+        $stack4 = virtualinvoke end.<java.util.Date: long getTime()>();
+
+        specialinvoke this.<org.jfree.data.time.SimpleTimePeriod: void <init>(long,long)>($stack3, $stack4);
+
+        return;
+    }
+
+    public java.util.Date getStart()
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.SimpleTimePeriod this;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        $stack1 = new java.util.Date;
+
+        $stack2 = this.<org.jfree.data.time.SimpleTimePeriod: long start>;
+
+        specialinvoke $stack1.<java.util.Date: void <init>(long)>($stack2);
+
+        return $stack1;
+    }
+
+    public long getStartMillis()
+    {
+        org.jfree.data.time.SimpleTimePeriod this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        $stack1 = this.<org.jfree.data.time.SimpleTimePeriod: long start>;
+
+        return $stack1;
+    }
+
+    public java.util.Date getEnd()
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.SimpleTimePeriod this;
+        long $stack2;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        $stack1 = new java.util.Date;
+
+        $stack2 = this.<org.jfree.data.time.SimpleTimePeriod: long end>;
+
+        specialinvoke $stack1.<java.util.Date: void <init>(long)>($stack2);
+
+        return $stack1;
+    }
+
+    public long getEndMillis()
+    {
+        org.jfree.data.time.SimpleTimePeriod this;
+        long $stack1;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        $stack1 = this.<org.jfree.data.time.SimpleTimePeriod: long end>;
+
+        return $stack1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.time.SimpleTimePeriod this;
+        boolean $stack3, $stack6, $stack9;
+        org.jfree.data.time.TimePeriod that;
+        java.util.Date $stack4, $stack5, $stack7, $stack8;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.time.TimePeriod;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.time.TimePeriod) obj;
+
+        $stack4 = virtualinvoke this.<org.jfree.data.time.SimpleTimePeriod: java.util.Date getStart()>();
+
+        $stack5 = interfaceinvoke that.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+
+        $stack6 = virtualinvoke $stack4.<java.util.Date: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = virtualinvoke this.<org.jfree.data.time.SimpleTimePeriod: java.util.Date getEnd()>();
+
+        $stack8 = interfaceinvoke that.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+
+        $stack9 = virtualinvoke $stack7.<java.util.Date: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.time.TimePeriod that;
+        org.jfree.data.time.SimpleTimePeriod this;
+        java.util.Date $stack15, $stack17, $stack21, $stack23;
+        long t0, t1, $stack19, $stack20, m0, t2, t3, $stack25, $stack26, m1;
+        byte $stack27, $stack28, $stack29, $stack30, $stack31, $stack32;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        obj := @parameter0: java.lang.Object;
+
+        that = (org.jfree.data.time.TimePeriod) obj;
+
+        $stack15 = virtualinvoke this.<org.jfree.data.time.SimpleTimePeriod: java.util.Date getStart()>();
+
+        t0 = virtualinvoke $stack15.<java.util.Date: long getTime()>();
+
+        $stack17 = virtualinvoke this.<org.jfree.data.time.SimpleTimePeriod: java.util.Date getEnd()>();
+
+        t1 = virtualinvoke $stack17.<java.util.Date: long getTime()>();
+
+        $stack19 = t1 - t0;
+
+        $stack20 = $stack19 / 2L;
+
+        m0 = t0 + $stack20;
+
+        $stack21 = interfaceinvoke that.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+
+        t2 = virtualinvoke $stack21.<java.util.Date: long getTime()>();
+
+        $stack23 = interfaceinvoke that.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+
+        t3 = virtualinvoke $stack23.<java.util.Date: long getTime()>();
+
+        $stack25 = t3 - t2;
+
+        $stack26 = $stack25 / 2L;
+
+        m1 = t2 + $stack26;
+
+        $stack27 = m0 cmp m1;
+
+        if $stack27 >= 0 goto label1;
+
+        return -1;
+
+     label1:
+        $stack28 = m0 cmp m1;
+
+        if $stack28 <= 0 goto label2;
+
+        return 1;
+
+     label2:
+        $stack29 = t0 cmp t2;
+
+        if $stack29 >= 0 goto label3;
+
+        return -1;
+
+     label3:
+        $stack30 = t0 cmp t2;
+
+        if $stack30 <= 0 goto label4;
+
+        return 1;
+
+     label4:
+        $stack31 = t1 cmp t3;
+
+        if $stack31 >= 0 goto label5;
+
+        return -1;
+
+     label5:
+        $stack32 = t1 cmp t3;
+
+        if $stack32 <= 0 goto label6;
+
+        return 1;
+
+     label6:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.time.SimpleTimePeriod this;
+        long $stack2, $stack5;
+        int $stack3, $stack4, $stack6, $stack7, result#2;
+
+        this := @this: org.jfree.data.time.SimpleTimePeriod;
+
+        $stack4 = 37 * 17;
+
+        $stack2 = this.<org.jfree.data.time.SimpleTimePeriod: long start>;
+
+        $stack3 = (int) $stack2;
+
+        result#2 = $stack4 + $stack3;
+
+        $stack7 = 37 * result#2;
+
+        $stack5 = this.<org.jfree.data.time.SimpleTimePeriod: long end>;
+
+        $stack6 = (int) $stack5;
+
+        result#2 = $stack7 + $stack6;
+
+        return result#2;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.time.SimpleTimePeriod: long serialVersionUID> = 8684672361131829554L;
+
+        return;
+    }
+}

@@ -1,0 +1,295 @@
+public abstract class org.jfree.data.general.AbstractDataset extends java.lang.Object implements org.jfree.data.general.Dataset, java.lang.Cloneable, java.io.Serializable, java.io.ObjectInputValidation
+{
+    private static final long serialVersionUID;
+    private org.jfree.data.general.DatasetGroup group;
+    private transient javax.swing.event.EventListenerList listenerList;
+    private boolean notify;
+
+    protected void <init>()
+    {
+        org.jfree.data.general.AbstractDataset this;
+        org.jfree.data.general.DatasetGroup $stack1;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new org.jfree.data.general.DatasetGroup;
+
+        specialinvoke $stack1.<org.jfree.data.general.DatasetGroup: void <init>()>();
+
+        this.<org.jfree.data.general.AbstractDataset: org.jfree.data.general.DatasetGroup group> = $stack1;
+
+        $stack2 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack2.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList> = $stack2;
+
+        this.<org.jfree.data.general.AbstractDataset: boolean notify> = 1;
+
+        return;
+    }
+
+    public org.jfree.data.general.DatasetGroup getGroup()
+    {
+        org.jfree.data.general.AbstractDataset this;
+        org.jfree.data.general.DatasetGroup $stack1;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        $stack1 = this.<org.jfree.data.general.AbstractDataset: org.jfree.data.general.DatasetGroup group>;
+
+        return $stack1;
+    }
+
+    public void setGroup(org.jfree.data.general.DatasetGroup)
+    {
+        org.jfree.data.general.DatasetGroup group;
+        org.jfree.data.general.AbstractDataset this;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        group := @parameter0: org.jfree.data.general.DatasetGroup;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(group, "group");
+
+        this.<org.jfree.data.general.AbstractDataset: org.jfree.data.general.DatasetGroup group> = group;
+
+        return;
+    }
+
+    public boolean getNotify()
+    {
+        org.jfree.data.general.AbstractDataset this;
+        boolean $stack1;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        $stack1 = this.<org.jfree.data.general.AbstractDataset: boolean notify>;
+
+        return $stack1;
+    }
+
+    public void setNotify(boolean)
+    {
+        org.jfree.data.general.AbstractDataset this;
+        boolean notify;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        notify := @parameter0: boolean;
+
+        this.<org.jfree.data.general.AbstractDataset: boolean notify> = notify;
+
+        if notify == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.data.general.AbstractDataset: void fireDatasetChanged()>();
+
+     label1:
+        return;
+    }
+
+    public void addChangeListener(org.jfree.data.general.DatasetChangeListener)
+    {
+        org.jfree.data.general.AbstractDataset this;
+        org.jfree.data.general.DatasetChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        listener := @parameter0: org.jfree.data.general.DatasetChangeListener;
+
+        $stack2 = this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/data/general/DatasetChangeListener;", listener);
+
+        return;
+    }
+
+    public void removeChangeListener(org.jfree.data.general.DatasetChangeListener)
+    {
+        org.jfree.data.general.AbstractDataset this;
+        org.jfree.data.general.DatasetChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        listener := @parameter0: org.jfree.data.general.DatasetChangeListener;
+
+        $stack2 = this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/data/general/DatasetChangeListener;", listener);
+
+        return;
+    }
+
+    public boolean hasListener(java.util.EventListener)
+    {
+        org.jfree.data.general.AbstractDataset this;
+        javax.swing.event.EventListenerList $stack3;
+        java.lang.Object[] $stack4;
+        java.util.List list;
+        java.util.EventListener listener;
+        boolean $stack6;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        listener := @parameter0: java.util.EventListener;
+
+        $stack3 = this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList>;
+
+        $stack4 = virtualinvoke $stack3.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        list = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack4);
+
+        $stack6 = interfaceinvoke list.<java.util.List: boolean contains(java.lang.Object)>(listener);
+
+        return $stack6;
+    }
+
+    protected void fireDatasetChanged()
+    {
+        org.jfree.data.general.AbstractDataset this;
+        boolean $stack1;
+        org.jfree.data.general.DatasetChangeEvent $stack2;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        $stack1 = this.<org.jfree.data.general.AbstractDataset: boolean notify>;
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+
+        virtualinvoke this.<org.jfree.data.general.AbstractDataset: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack2);
+
+     label1:
+        return;
+    }
+
+    protected void notifyListeners(org.jfree.data.general.DatasetChangeEvent)
+    {
+        org.jfree.data.general.AbstractDataset this;
+        javax.swing.event.EventListenerList $stack4;
+        java.lang.Object[] listeners;
+        int $stack6, $stack9, i;
+        java.lang.Object $stack7, $stack10;
+        org.jfree.data.general.DatasetChangeEvent event;
+        org.jfree.data.general.DatasetChangeListener $stack11;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+
+        $stack4 = this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList>;
+
+        listeners = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        $stack6 = lengthof listeners;
+
+        i = $stack6 - 2;
+
+     label1:
+        if i < 0 goto label3;
+
+        $stack7 = listeners[i];
+
+        if $stack7 != class "Lorg/jfree/data/general/DatasetChangeListener;" goto label2;
+
+        $stack9 = i + 1;
+
+        $stack10 = listeners[$stack9];
+
+        $stack11 = (org.jfree.data.general.DatasetChangeListener) $stack10;
+
+        interfaceinvoke $stack11.<org.jfree.data.general.DatasetChangeListener: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>(event);
+
+     label2:
+        i = i + -2;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.general.AbstractDataset this, clone;
+        java.lang.Object $stack2;
+        javax.swing.event.EventListenerList $stack3;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.general.AbstractDataset) $stack2;
+
+        $stack3 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack3.<javax.swing.event.EventListenerList: void <init>()>();
+
+        clone.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList> = $stack3;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.data.general.AbstractDataset this;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.data.general.AbstractDataset this;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack2.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.data.general.AbstractDataset: javax.swing.event.EventListenerList listenerList> = $stack2;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void registerValidation(java.io.ObjectInputValidation,int)>(this, 10);
+
+        return;
+    }
+
+    public void validateObject() throws java.io.InvalidObjectException
+    {
+        org.jfree.data.general.AbstractDataset this;
+
+        this := @this: org.jfree.data.general.AbstractDataset;
+
+        virtualinvoke this.<org.jfree.data.general.AbstractDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.general.AbstractDataset: long serialVersionUID> = 1918768939869230744L;
+
+        return;
+    }
+}

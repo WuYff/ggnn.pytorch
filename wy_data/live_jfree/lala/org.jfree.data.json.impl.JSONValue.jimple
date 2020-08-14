@@ -1,0 +1,488 @@
+public class org.jfree.data.json.impl.JSONValue extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.data.json.impl.JSONValue this;
+
+        this := @this: org.jfree.data.json.impl.JSONValue;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void writeJSONString(java.lang.Object, java.io.Writer) throws java.io.IOException
+    {
+        java.lang.Object value;
+        boolean $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack20, $stack22, $stack27, $stack29;
+        java.io.Writer out;
+        java.lang.String $stack11, $stack15, $stack17, $stack18, $stack23, $stack30, $stack33, $stack34;
+        java.util.List $stack12;
+        java.util.Map $stack13;
+        org.jfree.data.json.impl.JSONAware $stack14;
+        org.jfree.data.json.impl.JSONStreamAware $stack16;
+        java.lang.Float $stack19, $stack21;
+        java.lang.Double $stack26, $stack28;
+
+        value := @parameter0: java.lang.Object;
+
+        out := @parameter1: java.io.Writer;
+
+        if value != null goto label01;
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>("null");
+
+        return;
+
+     label01:
+        $stack2 = value instanceof java.lang.String;
+
+        if $stack2 == 0 goto label02;
+
+        virtualinvoke out.<java.io.Writer: void write(int)>(34);
+
+        $stack33 = (java.lang.String) value;
+
+        $stack34 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String escape(java.lang.String)>($stack33);
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack34);
+
+        virtualinvoke out.<java.io.Writer: void write(int)>(34);
+
+        return;
+
+     label02:
+        $stack3 = value instanceof java.lang.Double;
+
+        if $stack3 == 0 goto label06;
+
+        $stack26 = (java.lang.Double) value;
+
+        $stack27 = virtualinvoke $stack26.<java.lang.Double: boolean isInfinite()>();
+
+        if $stack27 != 0 goto label03;
+
+        $stack28 = (java.lang.Double) value;
+
+        $stack29 = virtualinvoke $stack28.<java.lang.Double: boolean isNaN()>();
+
+        if $stack29 == 0 goto label04;
+
+     label03:
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>("null");
+
+        goto label05;
+
+     label04:
+        $stack30 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack30);
+
+     label05:
+        return;
+
+     label06:
+        $stack4 = value instanceof java.lang.Float;
+
+        if $stack4 == 0 goto label10;
+
+        $stack19 = (java.lang.Float) value;
+
+        $stack20 = virtualinvoke $stack19.<java.lang.Float: boolean isInfinite()>();
+
+        if $stack20 != 0 goto label07;
+
+        $stack21 = (java.lang.Float) value;
+
+        $stack22 = virtualinvoke $stack21.<java.lang.Float: boolean isNaN()>();
+
+        if $stack22 == 0 goto label08;
+
+     label07:
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>("null");
+
+        goto label09;
+
+     label08:
+        $stack23 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack23);
+
+     label09:
+        return;
+
+     label10:
+        $stack5 = value instanceof java.lang.Number;
+
+        if $stack5 == 0 goto label11;
+
+        $stack18 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack18);
+
+        return;
+
+     label11:
+        $stack6 = value instanceof java.lang.Boolean;
+
+        if $stack6 == 0 goto label12;
+
+        $stack17 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack17);
+
+        return;
+
+     label12:
+        $stack7 = value instanceof org.jfree.data.json.impl.JSONStreamAware;
+
+        if $stack7 == 0 goto label13;
+
+        $stack16 = (org.jfree.data.json.impl.JSONStreamAware) value;
+
+        interfaceinvoke $stack16.<org.jfree.data.json.impl.JSONStreamAware: void writeJSONString(java.io.Writer)>(out);
+
+        return;
+
+     label13:
+        $stack8 = value instanceof org.jfree.data.json.impl.JSONAware;
+
+        if $stack8 == 0 goto label14;
+
+        $stack14 = (org.jfree.data.json.impl.JSONAware) value;
+
+        $stack15 = interfaceinvoke $stack14.<org.jfree.data.json.impl.JSONAware: java.lang.String toJSONString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack15);
+
+        return;
+
+     label14:
+        $stack9 = value instanceof java.util.Map;
+
+        if $stack9 == 0 goto label15;
+
+        $stack13 = (java.util.Map) value;
+
+        staticinvoke <org.jfree.data.json.impl.JSONObject: void writeJSONString(java.util.Map,java.io.Writer)>($stack13, out);
+
+        return;
+
+     label15:
+        $stack10 = value instanceof java.util.List;
+
+        if $stack10 == 0 goto label16;
+
+        $stack12 = (java.util.List) value;
+
+        staticinvoke <org.jfree.data.json.impl.JSONArray: void writeJSONString(java.util.List,java.io.Writer)>($stack12, out);
+
+        return;
+
+     label16:
+        $stack11 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>($stack11);
+
+        return;
+    }
+
+    public static java.lang.String toJSONString(java.lang.Object)
+    {
+        java.lang.Object value;
+        boolean $stack1, $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack19, $stack21, $stack25, $stack27;
+        java.lang.String $stack9, $stack11, $stack13, $stack15, $stack16, $stack17, $stack22, $stack28, $stack32, $stack33, $stack36;
+        java.util.List $stack10;
+        java.util.Map $stack12;
+        org.jfree.data.json.impl.JSONAware $stack14;
+        java.lang.Float $stack18, $stack20;
+        java.lang.Double $stack24, $stack26;
+        java.lang.StringBuilder $stack30, $stack31, $stack34, $stack35;
+
+        value := @parameter0: java.lang.Object;
+
+        if value != null goto label01;
+
+        return "null";
+
+     label01:
+        $stack1 = value instanceof java.lang.String;
+
+        if $stack1 == 0 goto label02;
+
+        $stack30 = new java.lang.StringBuilder;
+
+        specialinvoke $stack30.<java.lang.StringBuilder: void <init>()>();
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        $stack32 = (java.lang.String) value;
+
+        $stack33 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String escape(java.lang.String)>($stack32);
+
+        $stack34 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack33);
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack36;
+
+     label02:
+        $stack2 = value instanceof java.lang.Double;
+
+        if $stack2 == 0 goto label05;
+
+        $stack24 = (java.lang.Double) value;
+
+        $stack25 = virtualinvoke $stack24.<java.lang.Double: boolean isInfinite()>();
+
+        if $stack25 != 0 goto label03;
+
+        $stack26 = (java.lang.Double) value;
+
+        $stack27 = virtualinvoke $stack26.<java.lang.Double: boolean isNaN()>();
+
+        if $stack27 == 0 goto label04;
+
+     label03:
+        return "null";
+
+     label04:
+        $stack28 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack28;
+
+     label05:
+        $stack3 = value instanceof java.lang.Float;
+
+        if $stack3 == 0 goto label08;
+
+        $stack18 = (java.lang.Float) value;
+
+        $stack19 = virtualinvoke $stack18.<java.lang.Float: boolean isInfinite()>();
+
+        if $stack19 != 0 goto label06;
+
+        $stack20 = (java.lang.Float) value;
+
+        $stack21 = virtualinvoke $stack20.<java.lang.Float: boolean isNaN()>();
+
+        if $stack21 == 0 goto label07;
+
+     label06:
+        return "null";
+
+     label07:
+        $stack22 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack22;
+
+     label08:
+        $stack4 = value instanceof java.lang.Number;
+
+        if $stack4 == 0 goto label09;
+
+        $stack17 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack17;
+
+     label09:
+        $stack5 = value instanceof java.lang.Boolean;
+
+        if $stack5 == 0 goto label10;
+
+        $stack16 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack16;
+
+     label10:
+        $stack6 = value instanceof org.jfree.data.json.impl.JSONAware;
+
+        if $stack6 == 0 goto label11;
+
+        $stack14 = (org.jfree.data.json.impl.JSONAware) value;
+
+        $stack15 = interfaceinvoke $stack14.<org.jfree.data.json.impl.JSONAware: java.lang.String toJSONString()>();
+
+        return $stack15;
+
+     label11:
+        $stack7 = value instanceof java.util.Map;
+
+        if $stack7 == 0 goto label12;
+
+        $stack12 = (java.util.Map) value;
+
+        $stack13 = staticinvoke <org.jfree.data.json.impl.JSONObject: java.lang.String toJSONString(java.util.Map)>($stack12);
+
+        return $stack13;
+
+     label12:
+        $stack8 = value instanceof java.util.List;
+
+        if $stack8 == 0 goto label13;
+
+        $stack10 = (java.util.List) value;
+
+        $stack11 = staticinvoke <org.jfree.data.json.impl.JSONArray: java.lang.String toJSONString(java.util.List)>($stack10);
+
+        return $stack11;
+
+     label13:
+        $stack9 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack9;
+    }
+
+    public static java.lang.String escape(java.lang.String)
+    {
+        java.lang.String s, $stack3;
+        java.lang.StringBuffer $stack2;
+
+        s := @parameter0: java.lang.String;
+
+        if s != null goto label1;
+
+        return null;
+
+     label1:
+        $stack2 = new java.lang.StringBuffer;
+
+        specialinvoke $stack2.<java.lang.StringBuffer: void <init>()>();
+
+        staticinvoke <org.jfree.data.json.impl.JSONValue: void escape(java.lang.String,java.lang.StringBuffer)>(s, $stack2);
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.String toString()>();
+
+        return $stack3;
+    }
+
+    static void escape(java.lang.String, java.lang.StringBuffer)
+    {
+        java.lang.String s, ss, $stack26;
+        int $stack6, i, k, $stack24, $stack25;
+        char ch;
+        java.lang.StringBuffer sb;
+
+        s := @parameter0: java.lang.String;
+
+        sb := @parameter1: java.lang.StringBuffer;
+
+        i = 0;
+
+     label01:
+        $stack6 = virtualinvoke s.<java.lang.String: int length()>();
+
+        if i >= $stack6 goto label18;
+
+        ch = virtualinvoke s.<java.lang.String: char charAt(int)>(i);
+
+        lookupswitch(ch)
+        {
+            case 8: goto label04;
+            case 9: goto label08;
+            case 10: goto label06;
+            case 12: goto label05;
+            case 13: goto label07;
+            case 34: goto label02;
+            case 47: goto label09;
+            case 92: goto label03;
+            default: goto label10;
+        };
+
+     label02:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\\"");
+
+        goto label17;
+
+     label03:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\\\");
+
+        goto label17;
+
+     label04:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\b");
+
+        goto label17;
+
+     label05:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\f");
+
+        goto label17;
+
+     label06:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\n");
+
+        goto label17;
+
+     label07:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\r");
+
+        goto label17;
+
+     label08:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\t");
+
+        goto label17;
+
+     label09:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\/");
+
+        goto label17;
+
+     label10:
+        if ch < 0 goto label11;
+
+        if ch <= 31 goto label13;
+
+     label11:
+        if ch < 127 goto label12;
+
+        if ch <= 159 goto label13;
+
+     label12:
+        if ch < 8192 goto label16;
+
+        if ch > 8447 goto label16;
+
+     label13:
+        ss = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>(ch);
+
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\\u");
+
+        k = 0;
+
+     label14:
+        $stack24 = virtualinvoke ss.<java.lang.String: int length()>();
+
+        $stack25 = 4 - $stack24;
+
+        if k >= $stack25 goto label15;
+
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(48);
+
+        k = k + 1;
+
+        goto label14;
+
+     label15:
+        $stack26 = virtualinvoke ss.<java.lang.String: java.lang.String toUpperCase()>();
+
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack26);
+
+        goto label17;
+
+     label16:
+        virtualinvoke sb.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(ch);
+
+     label17:
+        i = i + 1;
+
+        goto label01;
+
+     label18:
+        return;
+    }
+}

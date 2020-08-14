@@ -1,0 +1,1298 @@
+final class org.jsoup.parser.Tokeniser extends java.lang.Object
+{
+    static final char replacementChar;
+    private static final char[] notCharRefCharsSorted;
+    static final int win1252ExtensionsStart;
+    static final int[] win1252Extensions;
+    private final org.jsoup.parser.CharacterReader reader;
+    private final org.jsoup.parser.ParseErrorList errors;
+    private org.jsoup.parser.TokeniserState state;
+    private org.jsoup.parser.Token emitPending;
+    private boolean isEmitPending;
+    private java.lang.String charsString;
+    private java.lang.StringBuilder charsBuilder;
+    java.lang.StringBuilder dataBuffer;
+    org.jsoup.parser.Token$Tag tagPending;
+    org.jsoup.parser.Token$StartTag startPending;
+    org.jsoup.parser.Token$EndTag endPending;
+    org.jsoup.parser.Token$Character charPending;
+    org.jsoup.parser.Token$Doctype doctypePending;
+    org.jsoup.parser.Token$Comment commentPending;
+    private java.lang.String lastStartTag;
+    private final int[] codepointHolder;
+    private final int[] multipointHolder;
+
+    void <init>(org.jsoup.parser.CharacterReader, org.jsoup.parser.ParseErrorList)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.TokeniserState $stack3;
+        java.lang.StringBuilder $stack4, $stack5;
+        org.jsoup.parser.Token$StartTag $stack6;
+        org.jsoup.parser.Token$EndTag $stack7;
+        org.jsoup.parser.Token$Character $stack8;
+        org.jsoup.parser.Token$Doctype $stack9;
+        org.jsoup.parser.Token$Comment $stack10;
+        int[] $stack11, $stack12;
+        org.jsoup.parser.CharacterReader reader;
+        org.jsoup.parser.ParseErrorList errors;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        reader := @parameter0: org.jsoup.parser.CharacterReader;
+
+        errors := @parameter1: org.jsoup.parser.ParseErrorList;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack3 = <org.jsoup.parser.TokeniserState: org.jsoup.parser.TokeniserState Data>;
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.TokeniserState state> = $stack3;
+
+        this.<org.jsoup.parser.Tokeniser: boolean isEmitPending> = 0;
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = null;
+
+        $stack4 = new java.lang.StringBuilder;
+
+        specialinvoke $stack4.<java.lang.StringBuilder: void <init>(int)>(1024);
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder> = $stack4;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>(int)>(1024);
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder dataBuffer> = $stack5;
+
+        $stack6 = new org.jsoup.parser.Token$StartTag;
+
+        specialinvoke $stack6.<org.jsoup.parser.Token$StartTag: void <init>()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$StartTag startPending> = $stack6;
+
+        $stack7 = new org.jsoup.parser.Token$EndTag;
+
+        specialinvoke $stack7.<org.jsoup.parser.Token$EndTag: void <init>()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$EndTag endPending> = $stack7;
+
+        $stack8 = new org.jsoup.parser.Token$Character;
+
+        specialinvoke $stack8.<org.jsoup.parser.Token$Character: void <init>()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Character charPending> = $stack8;
+
+        $stack9 = new org.jsoup.parser.Token$Doctype;
+
+        specialinvoke $stack9.<org.jsoup.parser.Token$Doctype: void <init>()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Doctype doctypePending> = $stack9;
+
+        $stack10 = new org.jsoup.parser.Token$Comment;
+
+        specialinvoke $stack10.<org.jsoup.parser.Token$Comment: void <init>()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending> = $stack10;
+
+        $stack11 = newarray (int)[1];
+
+        this.<org.jsoup.parser.Tokeniser: int[] codepointHolder> = $stack11;
+
+        $stack12 = newarray (int)[2];
+
+        this.<org.jsoup.parser.Tokeniser: int[] multipointHolder> = $stack12;
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader> = reader;
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors> = errors;
+
+        return;
+    }
+
+    org.jsoup.parser.Token read()
+    {
+        org.jsoup.parser.Tokeniser this;
+        boolean $stack3;
+        java.lang.StringBuilder cb;
+        int $stack4, $stack12;
+        java.lang.String $stack5, $stack7, str;
+        org.jsoup.parser.Token $stack6;
+        org.jsoup.parser.Token$Character $stack8, $stack14, $stack15, str#2;
+        org.jsoup.parser.CharacterReader $stack16;
+        org.jsoup.parser.TokeniserState $stack17;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Tokeniser: boolean isEmitPending>;
+
+        if $stack3 != 0 goto label2;
+
+        $stack17 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.TokeniserState state>;
+
+        $stack16 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack17.<org.jsoup.parser.TokeniserState: void read(org.jsoup.parser.Tokeniser,org.jsoup.parser.CharacterReader)>(this, $stack16);
+
+        goto label1;
+
+     label2:
+        cb = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack4 = virtualinvoke cb.<java.lang.StringBuilder: int length()>();
+
+        if $stack4 == 0 goto label3;
+
+        str = virtualinvoke cb.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack12 = virtualinvoke cb.<java.lang.StringBuilder: int length()>();
+
+        virtualinvoke cb.<java.lang.StringBuilder: java.lang.StringBuilder delete(int,int)>(0, $stack12);
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = null;
+
+        $stack14 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Character charPending>;
+
+        $stack15 = virtualinvoke $stack14.<org.jsoup.parser.Token$Character: org.jsoup.parser.Token$Character data(java.lang.String)>(str);
+
+        return $stack15;
+
+     label3:
+        $stack5 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        if $stack5 == null goto label4;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Character charPending>;
+
+        $stack7 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        str#2 = virtualinvoke $stack8.<org.jsoup.parser.Token$Character: org.jsoup.parser.Token$Character data(java.lang.String)>($stack7);
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = null;
+
+        return str#2;
+
+     label4:
+        this.<org.jsoup.parser.Tokeniser: boolean isEmitPending> = 0;
+
+        $stack6 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token emitPending>;
+
+        return $stack6;
+    }
+
+    void emit(org.jsoup.parser.Token)
+    {
+        org.jsoup.parser.Tokeniser this;
+        boolean $stack3;
+        org.jsoup.parser.Token token;
+        org.jsoup.parser.Token$TokenType $stack4, $stack5, $stack6, $stack7;
+        org.jsoup.nodes.Attributes $stack8;
+        java.lang.String $stack9;
+        org.jsoup.parser.Token$StartTag startTag;
+        org.jsoup.parser.Token$EndTag startTag#2;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        token := @parameter0: org.jsoup.parser.Token;
+
+        $stack3 = this.<org.jsoup.parser.Tokeniser: boolean isEmitPending>;
+
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean)>($stack3);
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token emitPending> = token;
+
+        this.<org.jsoup.parser.Tokeniser: boolean isEmitPending> = 1;
+
+        $stack5 = token.<org.jsoup.parser.Token: org.jsoup.parser.Token$TokenType type>;
+
+        $stack4 = <org.jsoup.parser.Token$TokenType: org.jsoup.parser.Token$TokenType StartTag>;
+
+        if $stack5 != $stack4 goto label1;
+
+        startTag = (org.jsoup.parser.Token$StartTag) token;
+
+        $stack9 = startTag.<org.jsoup.parser.Token$StartTag: java.lang.String tagName>;
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String lastStartTag> = $stack9;
+
+        goto label2;
+
+     label1:
+        $stack7 = token.<org.jsoup.parser.Token: org.jsoup.parser.Token$TokenType type>;
+
+        $stack6 = <org.jsoup.parser.Token$TokenType: org.jsoup.parser.Token$TokenType EndTag>;
+
+        if $stack7 != $stack6 goto label2;
+
+        startTag#2 = (org.jsoup.parser.Token$EndTag) token;
+
+        $stack8 = startTag#2.<org.jsoup.parser.Token$EndTag: org.jsoup.nodes.Attributes attributes>;
+
+        if $stack8 == null goto label2;
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void error(java.lang.String)>("Attributes incorrectly present on end tag");
+
+     label2:
+        return;
+    }
+
+    void emit(java.lang.String)
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack2, str, $stack7;
+        java.lang.StringBuilder $stack3, $stack5, $stack8;
+        int $stack4;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        str := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        if $stack2 != null goto label1;
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = str;
+
+        goto label3;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: int length()>();
+
+        if $stack4 != 0 goto label2;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack7 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack7);
+
+     label2:
+        $stack5 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(str);
+
+     label3:
+        return;
+    }
+
+    void emit(java.lang.StringBuilder)
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack2, $stack7, $stack12;
+        java.lang.StringBuilder $stack3, str, $stack5, $stack8;
+        int $stack4;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        str := @parameter0: java.lang.StringBuilder;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        if $stack2 != null goto label1;
+
+        $stack12 = virtualinvoke str.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = $stack12;
+
+        goto label3;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: int length()>();
+
+        if $stack4 != 0 goto label2;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack7 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack7);
+
+     label2:
+        $stack5 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.CharSequence)>(str);
+
+     label3:
+        return;
+    }
+
+    void emit(char)
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack2, $stack7, $stack12;
+        java.lang.StringBuilder $stack3, $stack5, $stack8;
+        int $stack4;
+        char c;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        c := @parameter0: char;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        if $stack2 != null goto label1;
+
+        $stack12 = staticinvoke <java.lang.String: java.lang.String valueOf(char)>(c);
+
+        this.<org.jsoup.parser.Tokeniser: java.lang.String charsString> = $stack12;
+
+        goto label3;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: int length()>();
+
+        if $stack4 != 0 goto label2;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        $stack7 = this.<org.jsoup.parser.Tokeniser: java.lang.String charsString>;
+
+        virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack7);
+
+     label2:
+        $stack5 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder charsBuilder>;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(c);
+
+     label3:
+        return;
+    }
+
+    void emit(char[])
+    {
+        org.jsoup.parser.Tokeniser this;
+        char[] chars;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        chars := @parameter0: char[];
+
+        $stack2 = staticinvoke <java.lang.String: java.lang.String valueOf(char[])>(chars);
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void emit(java.lang.String)>($stack2);
+
+        return;
+    }
+
+    void emit(int[])
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack2;
+        int[] codepoints;
+        int $stack3;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        codepoints := @parameter0: int[];
+
+        $stack2 = new java.lang.String;
+
+        $stack3 = lengthof codepoints;
+
+        specialinvoke $stack2.<java.lang.String: void <init>(int[],int,int)>(codepoints, 0, $stack3);
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void emit(java.lang.String)>($stack2);
+
+        return;
+    }
+
+    org.jsoup.parser.TokeniserState getState()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.TokeniserState $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.TokeniserState state>;
+
+        return $stack1;
+    }
+
+    void transition(org.jsoup.parser.TokeniserState)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.TokeniserState state;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        state := @parameter0: org.jsoup.parser.TokeniserState;
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.TokeniserState state> = state;
+
+        return;
+    }
+
+    void advanceTransition(org.jsoup.parser.TokeniserState)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.CharacterReader $stack2;
+        org.jsoup.parser.TokeniserState state;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        state := @parameter0: org.jsoup.parser.TokeniserState;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack2.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.TokeniserState state> = state;
+
+        return;
+    }
+
+    int[] consumeCharacterReference(java.lang.Character, boolean)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.CharacterReader $stack8, $stack11, $stack13, $stack14, $stack16, $stack18, $stack21, $stack22, $stack38, $stack41, $stack46, $stack51, $stack56, $stack58, $stack61, $stack62, $stack88, $stack89, $stack93, $stack40;
+        boolean $stack9, $stack12, $stack15, $stack20, inAttribute, $stack23, $stack39, $stack42, $stack47, $stack53, $stack63, isHexMode, numRef#29, $stack54;
+        java.lang.Character additionalAllowedCharacter;
+        char[] $stack10, $stack45;
+        int[] codeRef, $stack24, $stack30, $stack31, $stack32, $stack66, $stack74;
+        java.lang.StringBuilder $stack26, $stack27, $stack28;
+        java.lang.String $stack29, $stack59, numRef, isHexMode#28;
+        int $stack33, $stack60, $stack67, $stack68, $stack73, charval, base#41;
+        java.lang.Integer $stack64;
+        char $stack92, $stack94;
+        java.lang.NumberFormatException $stack96;
+        byte $stack83;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        additionalAllowedCharacter := @parameter0: java.lang.Character;
+
+        inAttribute := @parameter1: boolean;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack9 = virtualinvoke $stack8.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack9 == 0 goto label01;
+
+        return null;
+
+     label01:
+        if additionalAllowedCharacter == null goto label02;
+
+        $stack92 = virtualinvoke additionalAllowedCharacter.<java.lang.Character: char charValue()>();
+
+        $stack93 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack94 = virtualinvoke $stack93.<org.jsoup.parser.CharacterReader: char current()>();
+
+        if $stack92 != $stack94 goto label02;
+
+        return null;
+
+     label02:
+        $stack11 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack10 = <org.jsoup.parser.Tokeniser: char[] notCharRefCharsSorted>;
+
+        $stack12 = virtualinvoke $stack11.<org.jsoup.parser.CharacterReader: boolean matchesAnySorted(char[])>($stack10);
+
+        if $stack12 == 0 goto label03;
+
+        return null;
+
+     label03:
+        codeRef = this.<org.jsoup.parser.Tokeniser: int[] codepointHolder>;
+
+        $stack13 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack13.<org.jsoup.parser.CharacterReader: void mark()>();
+
+        $stack14 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack15 = virtualinvoke $stack14.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>("#");
+
+        if $stack15 == 0 goto label18;
+
+        $stack56 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        isHexMode = virtualinvoke $stack56.<org.jsoup.parser.CharacterReader: boolean matchConsumeIgnoreCase(java.lang.String)>("X");
+
+        if isHexMode == 0 goto label04;
+
+        $stack89 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack59 = virtualinvoke $stack89.<org.jsoup.parser.CharacterReader: java.lang.String consumeHexSequence()>();
+
+        goto label05;
+
+     label04:
+        $stack58 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack59 = virtualinvoke $stack58.<org.jsoup.parser.CharacterReader: java.lang.String consumeDigitSequence()>();
+
+     label05:
+        numRef = $stack59;
+
+        $stack60 = virtualinvoke $stack59.<java.lang.String: int length()>();
+
+        if $stack60 != 0 goto label06;
+
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("numeric reference with no numerals");
+
+        $stack88 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack88.<org.jsoup.parser.CharacterReader: void rewindToMark()>();
+
+        return null;
+
+     label06:
+        $stack61 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack61.<org.jsoup.parser.CharacterReader: void unmark()>();
+
+        $stack62 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack63 = virtualinvoke $stack62.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>(";");
+
+        if $stack63 != 0 goto label07;
+
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("missing semicolon");
+
+     label07:
+        charval = -1;
+
+     label08:
+        if isHexMode == 0 goto label09;
+
+        $stack83 = 16;
+
+        goto label10;
+
+     label09:
+        $stack83 = 10;
+
+     label10:
+        $stack64 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(java.lang.String,int)>(numRef, $stack83);
+
+        charval = virtualinvoke $stack64.<java.lang.Integer: int intValue()>();
+
+     label11:
+        goto label13;
+
+     label12:
+        $stack96 := @caughtexception;
+
+     label13:
+        if charval == -1 goto label15;
+
+        if charval < 55296 goto label14;
+
+        if charval <= 57343 goto label15;
+
+     label14:
+        if charval <= 1114111 goto label16;
+
+     label15:
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("character outside of valid range");
+
+        codeRef[0] = 65533;
+
+        return codeRef;
+
+     label16:
+        if charval < 128 goto label17;
+
+        $stack66 = <org.jsoup.parser.Tokeniser: int[] win1252Extensions>;
+
+        $stack67 = lengthof $stack66;
+
+        $stack68 = 128 + $stack67;
+
+        if charval >= $stack68 goto label17;
+
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("character is not a valid unicode code point");
+
+        $stack74 = <org.jsoup.parser.Tokeniser: int[] win1252Extensions>;
+
+        $stack73 = charval - 128;
+
+        charval = $stack74[$stack73];
+
+     label17:
+        codeRef[0] = charval;
+
+        return codeRef;
+
+     label18:
+        $stack16 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        isHexMode#28 = virtualinvoke $stack16.<org.jsoup.parser.CharacterReader: java.lang.String consumeLetterThenDigitSequence()>();
+
+        $stack18 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        numRef#29 = virtualinvoke $stack18.<org.jsoup.parser.CharacterReader: boolean matches(char)>(59);
+
+        $stack20 = staticinvoke <org.jsoup.nodes.Entities: boolean isBaseNamedEntity(java.lang.String)>(isHexMode#28);
+
+        if $stack20 != 0 goto label19;
+
+        $stack53 = staticinvoke <org.jsoup.nodes.Entities: boolean isNamedEntity(java.lang.String)>(isHexMode#28);
+
+        if $stack53 == 0 goto label20;
+
+        if numRef#29 == 0 goto label20;
+
+     label19:
+        $stack54 = 1;
+
+        goto label21;
+
+     label20:
+        $stack54 = 0;
+
+     label21:
+        if $stack54 != 0 goto label23;
+
+        $stack51 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack51.<org.jsoup.parser.CharacterReader: void rewindToMark()>();
+
+        if numRef#29 == 0 goto label22;
+
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("invalid named reference");
+
+     label22:
+        return null;
+
+     label23:
+        if inAttribute == 0 goto label25;
+
+        $stack38 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack39 = virtualinvoke $stack38.<org.jsoup.parser.CharacterReader: boolean matchesLetter()>();
+
+        if $stack39 != 0 goto label24;
+
+        $stack41 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack42 = virtualinvoke $stack41.<org.jsoup.parser.CharacterReader: boolean matchesDigit()>();
+
+        if $stack42 != 0 goto label24;
+
+        $stack46 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack45 = newarray (char)[3];
+
+        $stack45[0] = 61;
+
+        $stack45[1] = 45;
+
+        $stack45[2] = 95;
+
+        $stack47 = virtualinvoke $stack46.<org.jsoup.parser.CharacterReader: boolean matchesAny(char[])>($stack45);
+
+        if $stack47 == 0 goto label25;
+
+     label24:
+        $stack40 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack40.<org.jsoup.parser.CharacterReader: void rewindToMark()>();
+
+        return null;
+
+     label25:
+        $stack21 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack21.<org.jsoup.parser.CharacterReader: void unmark()>();
+
+        $stack22 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack23 = virtualinvoke $stack22.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>(";");
+
+        if $stack23 != 0 goto label26;
+
+        specialinvoke this.<org.jsoup.parser.Tokeniser: void characterReferenceError(java.lang.String)>("missing semicolon");
+
+     label26:
+        $stack24 = this.<org.jsoup.parser.Tokeniser: int[] multipointHolder>;
+
+        base#41 = staticinvoke <org.jsoup.nodes.Entities: int codepointsForName(java.lang.String,int[])>(isHexMode#28, $stack24);
+
+        if base#41 != 1 goto label27;
+
+        $stack32 = this.<org.jsoup.parser.Tokeniser: int[] multipointHolder>;
+
+        $stack33 = $stack32[0];
+
+        codeRef[0] = $stack33;
+
+        return codeRef;
+
+     label27:
+        if base#41 != 2 goto label28;
+
+        $stack31 = this.<org.jsoup.parser.Tokeniser: int[] multipointHolder>;
+
+        return $stack31;
+
+     label28:
+        $stack26 = new java.lang.StringBuilder;
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unexpected characters returned for ");
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(isHexMode#28);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        staticinvoke <org.jsoup.helper.Validate: void fail(java.lang.String)>($stack29);
+
+        $stack30 = this.<org.jsoup.parser.Tokeniser: int[] multipointHolder>;
+
+        return $stack30;
+
+        catch java.lang.NumberFormatException from label08 to label11 with label12;
+    }
+
+    org.jsoup.parser.Token$Tag createTagPending(boolean)
+    {
+        org.jsoup.parser.Tokeniser this;
+        boolean start;
+        org.jsoup.parser.Token$EndTag $stack2;
+        org.jsoup.parser.Token$Tag $stack4, $stack3;
+        org.jsoup.parser.Token$StartTag $stack5;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        start := @parameter0: boolean;
+
+        if start == 0 goto label1;
+
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$StartTag startPending>;
+
+        $stack3 = virtualinvoke $stack5.<org.jsoup.parser.Token$StartTag: org.jsoup.parser.Token$Tag reset()>();
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$EndTag endPending>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.Token$EndTag: org.jsoup.parser.Token$Tag reset()>();
+
+     label2:
+        this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending> = $stack3;
+
+        $stack4 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        return $stack4;
+    }
+
+    void emitTagPending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Tag $stack1, $stack2;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack1.<org.jsoup.parser.Token$Tag: void finaliseTag()>();
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void emit(org.jsoup.parser.Token)>($stack2);
+
+        return;
+    }
+
+    void createCommentPending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Comment $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending>;
+
+        virtualinvoke $stack1.<org.jsoup.parser.Token$Comment: org.jsoup.parser.Token reset()>();
+
+        return;
+    }
+
+    void emitCommentPending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Comment $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending>;
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void emit(org.jsoup.parser.Token)>($stack1);
+
+        return;
+    }
+
+    void createBogusCommentPending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Comment $stack1, $stack3;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending>;
+
+        virtualinvoke $stack1.<org.jsoup.parser.Token$Comment: org.jsoup.parser.Token reset()>();
+
+        $stack3 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending>;
+
+        $stack3.<org.jsoup.parser.Token$Comment: boolean bogus> = 1;
+
+        return;
+    }
+
+    void createDoctypePending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Doctype $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Doctype doctypePending>;
+
+        virtualinvoke $stack1.<org.jsoup.parser.Token$Doctype: org.jsoup.parser.Token reset()>();
+
+        return;
+    }
+
+    void emitDoctypePending()
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.Token$Doctype $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Doctype doctypePending>;
+
+        virtualinvoke this.<org.jsoup.parser.Tokeniser: void emit(org.jsoup.parser.Token)>($stack1);
+
+        return;
+    }
+
+    void createTempBuffer()
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.StringBuilder $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder dataBuffer>;
+
+        staticinvoke <org.jsoup.parser.Token: void reset(java.lang.StringBuilder)>($stack1);
+
+        return;
+    }
+
+    boolean isAppropriateEndTagToken()
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack1, $stack3, $stack4;
+        org.jsoup.parser.Token$Tag $stack2;
+        boolean $stack5, $stack6;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: java.lang.String lastStartTag>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.Token$Tag: java.lang.String name()>();
+
+        $stack4 = this.<org.jsoup.parser.Tokeniser: java.lang.String lastStartTag>;
+
+        $stack5 = virtualinvoke $stack3.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>($stack4);
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    java.lang.String appropriateEndTagName()
+    {
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        $stack1 = this.<org.jsoup.parser.Tokeniser: java.lang.String lastStartTag>;
+
+        return $stack1;
+    }
+
+    void error(org.jsoup.parser.TokeniserState)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.ParseErrorList $stack2, $stack6;
+        boolean $stack3;
+        org.jsoup.parser.ParseError $stack4;
+        org.jsoup.parser.CharacterReader $stack5, $stack9;
+        int $stack7;
+        java.lang.Object[] $stack8;
+        char $stack12;
+        java.lang.Character $stack13;
+        org.jsoup.parser.TokeniserState state;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        state := @parameter0: org.jsoup.parser.TokeniserState;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.ParseErrorList: boolean canAddError()>();
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack4 = new org.jsoup.parser.ParseError;
+
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack7 = virtualinvoke $stack5.<org.jsoup.parser.CharacterReader: int pos()>();
+
+        $stack8 = newarray (java.lang.Object)[2];
+
+        $stack9 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack12 = virtualinvoke $stack9.<org.jsoup.parser.CharacterReader: char current()>();
+
+        $stack13 = staticinvoke <java.lang.Character: java.lang.Character valueOf(char)>($stack12);
+
+        $stack8[0] = $stack13;
+
+        $stack8[1] = state;
+
+        specialinvoke $stack4.<org.jsoup.parser.ParseError: void <init>(int,java.lang.String,java.lang.Object[])>($stack7, "Unexpected character \'%s\' in input state [%s]", $stack8);
+
+        virtualinvoke $stack6.<org.jsoup.parser.ParseErrorList: boolean add(java.lang.Object)>($stack4);
+
+     label1:
+        return;
+    }
+
+    void eofError(org.jsoup.parser.TokeniserState)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.ParseErrorList $stack2, $stack6;
+        boolean $stack3;
+        org.jsoup.parser.ParseError $stack4;
+        org.jsoup.parser.CharacterReader $stack5;
+        int $stack7;
+        java.lang.Object[] $stack8;
+        org.jsoup.parser.TokeniserState state;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        state := @parameter0: org.jsoup.parser.TokeniserState;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.ParseErrorList: boolean canAddError()>();
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack4 = new org.jsoup.parser.ParseError;
+
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack7 = virtualinvoke $stack5.<org.jsoup.parser.CharacterReader: int pos()>();
+
+        $stack8 = newarray (java.lang.Object)[1];
+
+        $stack8[0] = state;
+
+        specialinvoke $stack4.<org.jsoup.parser.ParseError: void <init>(int,java.lang.String,java.lang.Object[])>($stack7, "Unexpectedly reached end of file (EOF) in input state [%s]", $stack8);
+
+        virtualinvoke $stack6.<org.jsoup.parser.ParseErrorList: boolean add(java.lang.Object)>($stack4);
+
+     label1:
+        return;
+    }
+
+    private void characterReferenceError(java.lang.String)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.ParseErrorList $stack2, $stack6;
+        boolean $stack3;
+        org.jsoup.parser.ParseError $stack4;
+        org.jsoup.parser.CharacterReader $stack5;
+        int $stack7;
+        java.lang.Object[] $stack8;
+        java.lang.String message;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        message := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.ParseErrorList: boolean canAddError()>();
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack4 = new org.jsoup.parser.ParseError;
+
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack7 = virtualinvoke $stack5.<org.jsoup.parser.CharacterReader: int pos()>();
+
+        $stack8 = newarray (java.lang.Object)[1];
+
+        $stack8[0] = message;
+
+        specialinvoke $stack4.<org.jsoup.parser.ParseError: void <init>(int,java.lang.String,java.lang.Object[])>($stack7, "Invalid character reference: %s", $stack8);
+
+        virtualinvoke $stack6.<org.jsoup.parser.ParseErrorList: boolean add(java.lang.Object)>($stack4);
+
+     label1:
+        return;
+    }
+
+    void error(java.lang.String)
+    {
+        org.jsoup.parser.Tokeniser this;
+        org.jsoup.parser.ParseErrorList $stack2, $stack6;
+        boolean $stack3;
+        org.jsoup.parser.ParseError $stack4;
+        org.jsoup.parser.CharacterReader $stack5;
+        int $stack7;
+        java.lang.String errorMsg;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        errorMsg := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack3 = virtualinvoke $stack2.<org.jsoup.parser.ParseErrorList: boolean canAddError()>();
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack4 = new org.jsoup.parser.ParseError;
+
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack7 = virtualinvoke $stack5.<org.jsoup.parser.CharacterReader: int pos()>();
+
+        specialinvoke $stack4.<org.jsoup.parser.ParseError: void <init>(int,java.lang.String)>($stack7, errorMsg);
+
+        virtualinvoke $stack6.<org.jsoup.parser.ParseErrorList: boolean add(java.lang.Object)>($stack4);
+
+     label1:
+        return;
+    }
+
+    boolean currentNodeInHtmlNS()
+    {
+        org.jsoup.parser.Tokeniser this;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        return 1;
+    }
+
+    java.lang.String unescapeEntities(boolean)
+    {
+        java.lang.StringBuilder builder;
+        org.jsoup.parser.Tokeniser this;
+        java.lang.String $stack7, $stack9;
+        org.jsoup.parser.CharacterReader $stack8, $stack11, $stack14, $stack5;
+        boolean $stack12, inAttribute, $stack6;
+        int[] c;
+        int $stack18, $stack19, $stack21, $stack22;
+
+        this := @this: org.jsoup.parser.Tokeniser;
+
+        inAttribute := @parameter0: boolean;
+
+        builder = staticinvoke <org.jsoup.internal.StringUtil: java.lang.StringBuilder borrowBuilder()>();
+
+     label1:
+        $stack5 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack6 = virtualinvoke $stack5.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack6 != 0 goto label5;
+
+        $stack8 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack9 = virtualinvoke $stack8.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(38);
+
+        virtualinvoke builder.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack9);
+
+        $stack11 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        $stack12 = virtualinvoke $stack11.<org.jsoup.parser.CharacterReader: boolean matches(char)>(38);
+
+        if $stack12 == 0 goto label1;
+
+        $stack14 = this.<org.jsoup.parser.Tokeniser: org.jsoup.parser.CharacterReader reader>;
+
+        virtualinvoke $stack14.<org.jsoup.parser.CharacterReader: char consume()>();
+
+        c = virtualinvoke this.<org.jsoup.parser.Tokeniser: int[] consumeCharacterReference(java.lang.Character,boolean)>(null, inAttribute);
+
+        if c == null goto label2;
+
+        $stack18 = lengthof c;
+
+        if $stack18 != 0 goto label3;
+
+     label2:
+        virtualinvoke builder.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(38);
+
+        goto label4;
+
+     label3:
+        $stack19 = c[0];
+
+        virtualinvoke builder.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>($stack19);
+
+        $stack21 = lengthof c;
+
+        if $stack21 != 2 goto label4;
+
+        $stack22 = c[1];
+
+        virtualinvoke builder.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>($stack22);
+
+     label4:
+        goto label1;
+
+     label5:
+        $stack7 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String releaseBuilder(java.lang.StringBuilder)>(builder);
+
+        return $stack7;
+    }
+
+    static void <clinit>()
+    {
+        char[] $stack0, $stack2;
+        int[] $stack1;
+
+        <org.jsoup.parser.Tokeniser: int win1252ExtensionsStart> = 128;
+
+        <org.jsoup.parser.Tokeniser: char replacementChar> = 65533;
+
+        $stack0 = newarray (char)[7];
+
+        $stack0[0] = 9;
+
+        $stack0[1] = 10;
+
+        $stack0[2] = 13;
+
+        $stack0[3] = 12;
+
+        $stack0[4] = 32;
+
+        $stack0[5] = 60;
+
+        $stack0[6] = 38;
+
+        <org.jsoup.parser.Tokeniser: char[] notCharRefCharsSorted> = $stack0;
+
+        $stack1 = newarray (int)[32];
+
+        $stack1[0] = 8364;
+
+        $stack1[1] = 129;
+
+        $stack1[2] = 8218;
+
+        $stack1[3] = 402;
+
+        $stack1[4] = 8222;
+
+        $stack1[5] = 8230;
+
+        $stack1[6] = 8224;
+
+        $stack1[7] = 8225;
+
+        $stack1[8] = 710;
+
+        $stack1[9] = 8240;
+
+        $stack1[10] = 352;
+
+        $stack1[11] = 8249;
+
+        $stack1[12] = 338;
+
+        $stack1[13] = 141;
+
+        $stack1[14] = 381;
+
+        $stack1[15] = 143;
+
+        $stack1[16] = 144;
+
+        $stack1[17] = 8216;
+
+        $stack1[18] = 8217;
+
+        $stack1[19] = 8220;
+
+        $stack1[20] = 8221;
+
+        $stack1[21] = 8226;
+
+        $stack1[22] = 8211;
+
+        $stack1[23] = 8212;
+
+        $stack1[24] = 732;
+
+        $stack1[25] = 8482;
+
+        $stack1[26] = 353;
+
+        $stack1[27] = 8250;
+
+        $stack1[28] = 339;
+
+        $stack1[29] = 157;
+
+        $stack1[30] = 382;
+
+        $stack1[31] = 376;
+
+        <org.jsoup.parser.Tokeniser: int[] win1252Extensions> = $stack1;
+
+        $stack2 = <org.jsoup.parser.Tokeniser: char[] notCharRefCharsSorted>;
+
+        staticinvoke <java.util.Arrays: void sort(char[])>($stack2);
+
+        return;
+    }
+}

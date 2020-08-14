@@ -1,0 +1,208 @@
+public class org.jfree.chart.plot.CategoryCrosshairState extends org.jfree.chart.plot.CrosshairState
+{
+    private java.lang.Comparable rowKey;
+    private java.lang.Comparable columnKey;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        specialinvoke this.<org.jfree.chart.plot.CrosshairState: void <init>()>();
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable rowKey> = null;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable columnKey> = null;
+
+        return;
+    }
+
+    public java.lang.Comparable getRowKey()
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.lang.Comparable $stack1;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        $stack1 = this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable rowKey>;
+
+        return $stack1;
+    }
+
+    public void setRowKey(java.lang.Comparable)
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.lang.Comparable key;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        key := @parameter0: java.lang.Comparable;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable rowKey> = key;
+
+        return;
+    }
+
+    public java.lang.Comparable getColumnKey()
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.lang.Comparable $stack1;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        $stack1 = this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable columnKey>;
+
+        return $stack1;
+    }
+
+    public void setColumnKey(java.lang.Comparable)
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.lang.Comparable key;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        key := @parameter0: java.lang.Comparable;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable columnKey> = key;
+
+        return;
+    }
+
+    public void updateCrosshairPoint(java.lang.Comparable, java.lang.Comparable, double, int, double, double, org.jfree.chart.plot.PlotOrientation)
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack21;
+        double transX, $stack22, $stack23, transY, $stack24, $stack25, $stack26, $stack27, $stack28, value, xx, yy, temp;
+        byte $stack29;
+        java.lang.Comparable rowKey, columnKey;
+        int datasetIndex;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        value := @parameter2: double;
+
+        datasetIndex := @parameter3: int;
+
+        transX := @parameter4: double;
+
+        transY := @parameter5: double;
+
+        orientation := @parameter6: org.jfree.chart.plot.PlotOrientation;
+
+        anchor = virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: java.awt.geom.Point2D getAnchor()>();
+
+        if anchor == null goto label2;
+
+        xx = virtualinvoke anchor.<java.awt.geom.Point2D: double getX()>();
+
+        yy = virtualinvoke anchor.<java.awt.geom.Point2D: double getY()>();
+
+        $stack21 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack21 goto label1;
+
+        temp = yy;
+
+        yy = xx;
+
+        xx = temp;
+
+     label1:
+        $stack23 = transX - xx;
+
+        $stack22 = transX - xx;
+
+        $stack27 = $stack23 * $stack22;
+
+        $stack25 = transY - yy;
+
+        $stack24 = transY - yy;
+
+        $stack26 = $stack25 * $stack24;
+
+        temp = $stack27 + $stack26;
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: double getCrosshairDistance()>();
+
+        $stack29 = temp cmpg $stack28;
+
+        if $stack29 >= 0 goto label2;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable rowKey> = rowKey;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable columnKey> = columnKey;
+
+        virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: void setCrosshairY(double)>(value);
+
+        virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: void setDatasetIndex(int)>(datasetIndex);
+
+        virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: void setCrosshairDistance(double)>(temp);
+
+     label2:
+        return;
+    }
+
+    public void updateCrosshairX(java.lang.Comparable, java.lang.Comparable, int, double, org.jfree.chart.plot.PlotOrientation)
+    {
+        org.jfree.chart.plot.CategoryCrosshairState this;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack14;
+        double transX, $stack15, d, $stack17, anchorX;
+        byte $stack18;
+        java.lang.Comparable rowKey, columnKey;
+        int datasetIndex;
+
+        this := @this: org.jfree.chart.plot.CategoryCrosshairState;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        datasetIndex := @parameter2: int;
+
+        transX := @parameter3: double;
+
+        orientation := @parameter4: org.jfree.chart.plot.PlotOrientation;
+
+        anchor = virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: java.awt.geom.Point2D getAnchor()>();
+
+        if anchor == null goto label2;
+
+        anchorX = virtualinvoke anchor.<java.awt.geom.Point2D: double getX()>();
+
+        $stack14 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack14 goto label1;
+
+        anchorX = virtualinvoke anchor.<java.awt.geom.Point2D: double getY()>();
+
+     label1:
+        $stack15 = transX - anchorX;
+
+        d = staticinvoke <java.lang.Math: double abs(double)>($stack15);
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: double getCrosshairDistance()>();
+
+        $stack18 = d cmpg $stack17;
+
+        if $stack18 >= 0 goto label2;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable rowKey> = rowKey;
+
+        this.<org.jfree.chart.plot.CategoryCrosshairState: java.lang.Comparable columnKey> = columnKey;
+
+        virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: void setDatasetIndex(int)>(datasetIndex);
+
+        virtualinvoke this.<org.jfree.chart.plot.CategoryCrosshairState: void setCrosshairDistance(double)>(d);
+
+     label2:
+        return;
+    }
+}

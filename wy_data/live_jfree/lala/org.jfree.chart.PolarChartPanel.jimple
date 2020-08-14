@@ -1,0 +1,344 @@
+public class org.jfree.chart.PolarChartPanel extends org.jfree.chart.ChartPanel
+{
+    private static final java.lang.String POLAR_ZOOM_IN_ACTION_COMMAND;
+    private static final java.lang.String POLAR_ZOOM_OUT_ACTION_COMMAND;
+    private static final java.lang.String POLAR_AUTO_RANGE_ACTION_COMMAND;
+
+    public void <init>(org.jfree.chart.JFreeChart)
+    {
+        org.jfree.chart.PolarChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        specialinvoke this.<org.jfree.chart.PolarChartPanel: void <init>(org.jfree.chart.JFreeChart,boolean)>(chart, 1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.JFreeChart, boolean)
+    {
+        org.jfree.chart.PolarChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+        boolean useBuffer;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        useBuffer := @parameter1: boolean;
+
+        specialinvoke this.<org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,boolean)>(chart, useBuffer);
+
+        specialinvoke this.<org.jfree.chart.PolarChartPanel: void checkChart(org.jfree.chart.JFreeChart)>(chart);
+
+        virtualinvoke this.<org.jfree.chart.PolarChartPanel: void setMinimumDrawWidth(int)>(200);
+
+        virtualinvoke this.<org.jfree.chart.PolarChartPanel: void setMinimumDrawHeight(int)>(200);
+
+        virtualinvoke this.<org.jfree.chart.PolarChartPanel: void setMaximumDrawWidth(int)>(2000);
+
+        virtualinvoke this.<org.jfree.chart.PolarChartPanel: void setMaximumDrawHeight(int)>(2000);
+
+        return;
+    }
+
+    public void setChart(org.jfree.chart.JFreeChart)
+    {
+        org.jfree.chart.PolarChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        specialinvoke this.<org.jfree.chart.PolarChartPanel: void checkChart(org.jfree.chart.JFreeChart)>(chart);
+
+        specialinvoke this.<org.jfree.chart.ChartPanel: void setChart(org.jfree.chart.JFreeChart)>(chart);
+
+        return;
+    }
+
+    protected javax.swing.JPopupMenu createPopupMenu(boolean, boolean, boolean, boolean)
+    {
+        org.jfree.chart.PolarChartPanel this;
+        boolean properties, save, print, zoom;
+        javax.swing.JPopupMenu result;
+        java.util.ResourceBundle $stack13, $stack16, $stack19, $stack23, $stack26, $stack29;
+        java.lang.String $stack14, $stack17, $stack20, $stack24, $stack27, $stack30;
+        javax.swing.JMenuItem $stack22, $stack25, $stack28;
+        int $stack31, zoomInIndex, zoomOutIndex, autoIndex;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        properties := @parameter0: boolean;
+
+        save := @parameter1: boolean;
+
+        print := @parameter2: boolean;
+
+        zoom := @parameter3: boolean;
+
+        result = specialinvoke this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu createPopupMenu(boolean,boolean,boolean,boolean)>(properties, save, print, zoom);
+
+        $stack13 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack14 = virtualinvoke $stack13.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_In");
+
+        zoomInIndex = specialinvoke this.<org.jfree.chart.PolarChartPanel: int getPopupMenuItem(javax.swing.JPopupMenu,java.lang.String)>(result, $stack14);
+
+        $stack16 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack17 = virtualinvoke $stack16.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_Out");
+
+        zoomOutIndex = specialinvoke this.<org.jfree.chart.PolarChartPanel: int getPopupMenuItem(javax.swing.JPopupMenu,java.lang.String)>(result, $stack17);
+
+        $stack19 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack20 = virtualinvoke $stack19.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Auto_Range");
+
+        autoIndex = specialinvoke this.<org.jfree.chart.PolarChartPanel: int getPopupMenuItem(javax.swing.JPopupMenu,java.lang.String)>(result, $stack20);
+
+        if zoom == 0 goto label7;
+
+        $stack22 = new javax.swing.JMenuItem;
+
+        $stack23 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack24 = virtualinvoke $stack23.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_In");
+
+        specialinvoke $stack22.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack24);
+
+        virtualinvoke $stack22.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("Polar Zoom In");
+
+        virtualinvoke $stack22.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack25 = new javax.swing.JMenuItem;
+
+        $stack26 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack27 = virtualinvoke $stack26.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_Out");
+
+        specialinvoke $stack25.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack27);
+
+        virtualinvoke $stack25.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("Polar Zoom Out");
+
+        virtualinvoke $stack25.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack28 = new javax.swing.JMenuItem;
+
+        $stack29 = <org.jfree.chart.PolarChartPanel: java.util.ResourceBundle localizationResources>;
+
+        $stack30 = virtualinvoke $stack29.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Auto_Range");
+
+        specialinvoke $stack28.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack30);
+
+        virtualinvoke $stack28.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("Polar Auto Range");
+
+        virtualinvoke $stack28.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        if zoomInIndex == -1 goto label1;
+
+        virtualinvoke result.<javax.swing.JPopupMenu: void remove(int)>(zoomInIndex);
+
+        goto label2;
+
+     label1:
+        $stack31 = virtualinvoke result.<javax.swing.JPopupMenu: int getComponentCount()>();
+
+        zoomInIndex = $stack31 - 1;
+
+     label2:
+        virtualinvoke result.<javax.swing.JPopupMenu: java.awt.Component add(java.awt.Component,int)>($stack22, zoomInIndex);
+
+        if zoomOutIndex == -1 goto label3;
+
+        virtualinvoke result.<javax.swing.JPopupMenu: void remove(int)>(zoomOutIndex);
+
+        goto label4;
+
+     label3:
+        zoomOutIndex = zoomInIndex + 1;
+
+     label4:
+        virtualinvoke result.<javax.swing.JPopupMenu: java.awt.Component add(java.awt.Component,int)>($stack25, zoomOutIndex);
+
+        if autoIndex == -1 goto label5;
+
+        virtualinvoke result.<javax.swing.JPopupMenu: void remove(int)>(autoIndex);
+
+        goto label6;
+
+     label5:
+        autoIndex = zoomOutIndex + 1;
+
+     label6:
+        virtualinvoke result.<javax.swing.JPopupMenu: java.awt.Component add(java.awt.Component,int)>($stack28, autoIndex);
+
+     label7:
+        return result;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        java.awt.event.ActionEvent event;
+        java.lang.String command;
+        boolean $stack5, $stack6, $stack7;
+        org.jfree.chart.PolarChartPanel this;
+        org.jfree.chart.JFreeChart $stack8, $stack11, $stack13;
+        org.jfree.chart.plot.Plot $stack9, $stack12, $stack14;
+        org.jfree.chart.axis.ValueAxis $stack10;
+        org.jfree.chart.plot.PolarPlot plot;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        event := @parameter0: java.awt.event.ActionEvent;
+
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+
+        $stack5 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("Polar Zoom In");
+
+        if $stack5 == 0 goto label1;
+
+        $stack13 = virtualinvoke this.<org.jfree.chart.PolarChartPanel: org.jfree.chart.JFreeChart getChart()>();
+
+        $stack14 = virtualinvoke $stack13.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+
+        plot = (org.jfree.chart.plot.PolarPlot) $stack14;
+
+        virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: void zoom(double)>(0.5);
+
+        goto label4;
+
+     label1:
+        $stack6 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("Polar Zoom Out");
+
+        if $stack6 == 0 goto label2;
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.PolarChartPanel: org.jfree.chart.JFreeChart getChart()>();
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+
+        plot = (org.jfree.chart.plot.PolarPlot) $stack12;
+
+        virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: void zoom(double)>(2.0);
+
+        goto label4;
+
+     label2:
+        $stack7 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("Polar Auto Range");
+
+        if $stack7 == 0 goto label3;
+
+        $stack8 = virtualinvoke this.<org.jfree.chart.PolarChartPanel: org.jfree.chart.JFreeChart getChart()>();
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+
+        plot = (org.jfree.chart.plot.PolarPlot) $stack9;
+
+        $stack10 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis()>();
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean)>(1);
+
+        goto label4;
+
+     label3:
+        specialinvoke this.<org.jfree.chart.ChartPanel: void actionPerformed(java.awt.event.ActionEvent)>(event);
+
+     label4:
+        return;
+    }
+
+    private void checkChart(org.jfree.chart.JFreeChart)
+    {
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.plot.Plot plot;
+        boolean $stack4;
+        java.lang.IllegalArgumentException $stack5;
+        org.jfree.chart.PolarChartPanel this;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        plot = virtualinvoke chart.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+
+        $stack4 = plot instanceof org.jfree.chart.plot.PolarPlot;
+
+        if $stack4 != 0 goto label1;
+
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("plot is not a PolarPlot");
+
+        throw $stack5;
+
+     label1:
+        return;
+    }
+
+    private int getPopupMenuItem(javax.swing.JPopupMenu, java.lang.String)
+    {
+        javax.swing.JPopupMenu menu;
+        int $stack7, index, i;
+        java.awt.Component comp;
+        boolean $stack10, $stack14;
+        javax.swing.JMenuItem item;
+        java.lang.String text, $stack13;
+        org.jfree.chart.PolarChartPanel this;
+
+        this := @this: org.jfree.chart.PolarChartPanel;
+
+        menu := @parameter0: javax.swing.JPopupMenu;
+
+        text := @parameter1: java.lang.String;
+
+        index = -1;
+
+        i = 0;
+
+     label1:
+        if index != -1 goto label3;
+
+        $stack7 = virtualinvoke menu.<javax.swing.JPopupMenu: int getComponentCount()>();
+
+        if i >= $stack7 goto label3;
+
+        comp = virtualinvoke menu.<javax.swing.JPopupMenu: java.awt.Component getComponent(int)>(i);
+
+        $stack10 = comp instanceof javax.swing.JMenuItem;
+
+        if $stack10 == 0 goto label2;
+
+        item = (javax.swing.JMenuItem) comp;
+
+        $stack13 = virtualinvoke item.<javax.swing.JMenuItem: java.lang.String getText()>();
+
+        $stack14 = virtualinvoke text.<java.lang.String: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label2;
+
+        index = i;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return index;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.PolarChartPanel: java.lang.String POLAR_AUTO_RANGE_ACTION_COMMAND> = "Polar Auto Range";
+
+        <org.jfree.chart.PolarChartPanel: java.lang.String POLAR_ZOOM_OUT_ACTION_COMMAND> = "Polar Zoom Out";
+
+        <org.jfree.chart.PolarChartPanel: java.lang.String POLAR_ZOOM_IN_ACTION_COMMAND> = "Polar Zoom In";
+
+        return;
+    }
+}

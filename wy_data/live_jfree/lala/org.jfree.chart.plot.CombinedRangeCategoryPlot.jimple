@@ -1,0 +1,1032 @@
+public class org.jfree.chart.plot.CombinedRangeCategoryPlot extends org.jfree.chart.plot.CategoryPlot implements org.jfree.chart.event.PlotChangeListener
+{
+    private static final long serialVersionUID;
+    private java.util.List subplots;
+    private double gap;
+    private transient java.awt.geom.Rectangle2D[] subplotArea;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.axis.NumberAxis $stack1;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        $stack1 = new org.jfree.chart.axis.NumberAxis;
+
+        specialinvoke $stack1.<org.jfree.chart.axis.NumberAxis: void <init>()>();
+
+        specialinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void <init>(org.jfree.chart.axis.ValueAxis)>($stack1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        java.util.ArrayList $stack2;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        rangeAxis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        specialinvoke this.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(null, null, rangeAxis, null);
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots> = $stack2;
+
+        this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap> = 5.0;
+
+        return;
+    }
+
+    public double getGap()
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        return $stack1;
+    }
+
+    public void setGap(double)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        double gap;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        gap := @parameter0: double;
+
+        this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap> = gap;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void add(org.jfree.chart.plot.CategoryPlot)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.plot.CategoryPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.CategoryPlot;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void add(org.jfree.chart.plot.CategoryPlot,int)>(subplot, 1);
+
+        return;
+    }
+
+    public void add(org.jfree.chart.plot.CategoryPlot, int)
+    {
+        org.jfree.chart.plot.CategoryPlot subplot;
+        int weight;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.ui.RectangleInsets $stack4;
+        org.jfree.chart.plot.PlotOrientation $stack5;
+        java.util.List $stack6;
+        org.jfree.chart.axis.ValueAxis axis;
+        java.lang.IllegalArgumentException $stack10;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.CategoryPlot;
+
+        weight := @parameter1: int;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(subplot, "subplot");
+
+        if weight > 0 goto label1;
+
+        $stack10 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Require weight >= 1.");
+
+        throw $stack10;
+
+     label1:
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setParent(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setWeight(int)>(weight);
+
+        $stack4 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack4.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(0.0, 0.0, 0.0, 0.0);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setInsets(org.jfree.chart.ui.RectangleInsets)>($stack4);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setRangeAxis(org.jfree.chart.axis.ValueAxis)>(null);
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>($stack5);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void addChangeListener(org.jfree.chart.event.PlotChangeListener)>(this);
+
+        $stack6 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>(subplot);
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        if axis == null goto label2;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void remove(org.jfree.chart.plot.CategoryPlot)
+    {
+        org.jfree.chart.plot.CategoryPlot subplot;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        java.util.List $stack7, $stack9, $stack19;
+        int size, position, i;
+        org.jfree.chart.axis.ValueAxis range, range2;
+        java.lang.Object $stack20;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        subplot := @parameter0: org.jfree.chart.plot.CategoryPlot;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(subplot, "subplot");
+
+        position = -1;
+
+        $stack7 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        size = interfaceinvoke $stack7.<java.util.List: int size()>();
+
+        i = 0;
+
+     label1:
+        if position != -1 goto label3;
+
+        if i >= size goto label3;
+
+        $stack19 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack20 = interfaceinvoke $stack19.<java.util.List: java.lang.Object get(int)>(i);
+
+        if $stack20 != subplot goto label2;
+
+        position = i;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        if position == -1 goto label6;
+
+        $stack9 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        interfaceinvoke $stack9.<java.util.List: java.lang.Object remove(int)>(position);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setParent(org.jfree.chart.plot.Plot)>(null);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void removeChangeListener(org.jfree.chart.event.PlotChangeListener)>(this);
+
+        range = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        if range == null goto label4;
+
+        virtualinvoke range.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label4:
+        range2 = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis(int)>(1);
+
+        if range2 == null goto label5;
+
+        virtualinvoke range2.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label5:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void fireChangeEvent()>();
+
+     label6:
+        return;
+    }
+
+    public java.util.List getSubplots()
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        java.util.List $stack1, $stack2, $stack3, $stack4;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack4 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack3);
+
+        return $stack4;
+
+     label1:
+        $stack2 = <java.util.Collections: java.util.List EMPTY_LIST>;
+
+        return $stack2;
+    }
+
+    protected org.jfree.chart.axis.AxisSpace calculateAxisSpace(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.axis.AxisSpace $stack19, fixed, space, w#84;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack31, $stack32, $stack35, $stack36, $stack90, $stack91;
+        org.jfree.chart.axis.AxisLocation $stack23;
+        java.awt.geom.Rectangle2D plotArea, valueAxis#20, $stack38;
+        java.awt.geom.Rectangle2D[] $stack28, $stack47, $stack63, $stack37;
+        java.util.List $stack33, $stack78, $stack26;
+        java.lang.Object $stack34, $stack79;
+        org.jfree.chart.plot.CategoryPlot plot, sub;
+        java.awt.Graphics2D g2;
+        int $stack42, $stack58, $stack68, $stack74, $stack80, valueEdge#33, totalWeight, i;
+        double $stack43, $stack44, $stack45, $stack48, $stack49, $stack50, $stack59, $stack60, $stack61, $stack64, $stack65, $stack66, $stack67, $stack69, $stack70, $stack71, $stack73, $stack75, $stack76, $stack77, $stack92, $stack93, $stack94, $stack95, i#54, y, usableSize, w;
+        java.awt.geom.Rectangle2D$Double $stack46, $stack62;
+        org.jfree.chart.axis.ValueAxis valueAxis;
+        org.jfree.chart.ui.RectangleEdge valueEdge;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        $stack19 = new org.jfree.chart.axis.AxisSpace;
+
+        specialinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+
+        space = $stack19;
+
+        orientation = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        fixed = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.AxisSpace getFixedRangeAxisSpace()>();
+
+        if fixed == null goto label02;
+
+        $stack90 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack90 goto label01;
+
+        $stack94 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getLeft()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setLeft(double)>($stack94);
+
+        $stack95 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getRight()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setRight(double)>($stack95);
+
+        goto label03;
+
+     label01:
+        $stack91 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack91 goto label03;
+
+        $stack92 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getTop()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setTop(double)>($stack92);
+
+        $stack93 = virtualinvoke fixed.<org.jfree.chart.axis.AxisSpace: double getBottom()>();
+
+        virtualinvoke $stack19.<org.jfree.chart.axis.AxisSpace: void setBottom(double)>($stack93);
+
+        goto label03;
+
+     label02:
+        valueAxis = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.AxisLocation getRangeAxisLocation()>();
+
+        valueEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack23, orientation);
+
+        if valueAxis == null goto label03;
+
+        space = virtualinvoke valueAxis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, this, plotArea, valueEdge, $stack19);
+
+     label03:
+        valueAxis#20 = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: java.awt.geom.Rectangle2D shrink(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(plotArea, null);
+
+        $stack26 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        valueEdge#33 = interfaceinvoke $stack26.<java.util.List: int size()>();
+
+        totalWeight = 0;
+
+        i = 0;
+
+     label04:
+        if i >= valueEdge#33 goto label05;
+
+        $stack78 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack79 = interfaceinvoke $stack78.<java.util.List: java.lang.Object get(int)>(i);
+
+        sub = (org.jfree.chart.plot.CategoryPlot) $stack79;
+
+        $stack80 = virtualinvoke sub.<org.jfree.chart.plot.CategoryPlot: int getWeight()>();
+
+        totalWeight = totalWeight + $stack80;
+
+        i = i + 1;
+
+        goto label04;
+
+     label05:
+        $stack28 = newarray (java.awt.geom.Rectangle2D)[valueEdge#33];
+
+        this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea> = $stack28;
+
+        i#54 = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getY()>();
+
+        usableSize = 0.0;
+
+        $stack31 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack31 goto label06;
+
+        $stack73 = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack76 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        $stack74 = valueEdge#33 - 1;
+
+        $stack75 = (double) $stack74;
+
+        $stack77 = $stack76 * $stack75;
+
+        usableSize = $stack73 - $stack77;
+
+        goto label07;
+
+     label06:
+        $stack32 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack32 goto label07;
+
+        $stack67 = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack70 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        $stack68 = valueEdge#33 - 1;
+
+        $stack69 = (double) $stack68;
+
+        $stack71 = $stack70 * $stack69;
+
+        usableSize = $stack67 - $stack71;
+
+     label07:
+        i = 0;
+
+     label08:
+        if i >= valueEdge#33 goto label11;
+
+        $stack33 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack34 = interfaceinvoke $stack33.<java.util.List: java.lang.Object get(int)>(i);
+
+        plot = (org.jfree.chart.plot.CategoryPlot) $stack34;
+
+        $stack35 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack35 goto label09;
+
+        $stack58 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: int getWeight()>();
+
+        $stack59 = (double) $stack58;
+
+        $stack61 = usableSize * $stack59;
+
+        $stack60 = (double) totalWeight;
+
+        w = $stack61 / $stack60;
+
+        $stack63 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea>;
+
+        $stack62 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack64 = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        specialinvoke $stack62.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(i#54, y, w, $stack64);
+
+        $stack63[i] = $stack62;
+
+        $stack66 = i#54 + w;
+
+        $stack65 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        i#54 = $stack66 + $stack65;
+
+        goto label10;
+
+     label09:
+        $stack36 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack36 goto label10;
+
+        $stack42 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: int getWeight()>();
+
+        $stack43 = (double) $stack42;
+
+        $stack45 = usableSize * $stack43;
+
+        $stack44 = (double) totalWeight;
+
+        w = $stack45 / $stack44;
+
+        $stack47 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea>;
+
+        $stack46 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack48 = virtualinvoke valueAxis#20.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        specialinvoke $stack46.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(i#54, y, $stack48, w);
+
+        $stack47[i] = $stack46;
+
+        $stack50 = y + w;
+
+        $stack49 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        y = $stack50 + $stack49;
+
+     label10:
+        $stack37 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea>;
+
+        $stack38 = $stack37[i];
+
+        w#84 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.AxisSpace calculateDomainAxisSpace(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.axis.AxisSpace)>(g2, $stack38, null);
+
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void ensureAtLeast(org.jfree.chart.axis.AxisSpace)>(w#84);
+
+        i = i + 1;
+
+        goto label08;
+
+     label11:
+        return space;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info, $stack45, subplotInfo;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.geom.Rectangle2D area, dataArea, $stack36, $stack32;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.AxisSpace space;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.ui.RectangleEdge rangeEdge;
+        double cursor;
+        org.jfree.chart.axis.AxisState state;
+        java.util.Map $stack25;
+        java.util.List $stack29, $stack27;
+        java.lang.Object $stack30;
+        org.jfree.chart.plot.CategoryPlot plot;
+        java.awt.geom.Point2D anchor, subAnchor;
+        java.awt.geom.Rectangle2D[] $stack35, $stack31;
+        boolean $stack37;
+        org.jfree.chart.ChartRenderingInfo $stack46;
+        org.jfree.chart.plot.PlotState $stack49, parentState;
+        int i, $stack28;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        if info == null goto label1;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label1:
+        insets = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        space = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.AxisSpace calculateAxisSpace(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        dataArea = virtualinvoke space.<org.jfree.chart.axis.AxisSpace: java.awt.geom.Rectangle2D shrink(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(area, null);
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void setFixedDomainAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)>(space);
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        rangeEdge = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        cursor = staticinvoke <org.jfree.chart.ui.RectangleEdge: double coordinate(java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(dataArea, rangeEdge);
+
+        state = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, area, dataArea, rangeEdge, info);
+
+        if parentState != null goto label2;
+
+        $stack49 = new org.jfree.chart.plot.PlotState;
+
+        specialinvoke $stack49.<org.jfree.chart.plot.PlotState: void <init>()>();
+
+        parentState = $stack49;
+
+     label2:
+        $stack25 = virtualinvoke parentState.<org.jfree.chart.plot.PlotState: java.util.Map getSharedAxisStates()>();
+
+        interfaceinvoke $stack25.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(axis, state);
+
+        i = 0;
+
+     label3:
+        $stack27 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack28 = interfaceinvoke $stack27.<java.util.List: int size()>();
+
+        if i >= $stack28 goto label6;
+
+        $stack29 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack30 = interfaceinvoke $stack29.<java.util.List: java.lang.Object get(int)>(i);
+
+        plot = (org.jfree.chart.plot.CategoryPlot) $stack30;
+
+        subplotInfo = null;
+
+        if info == null goto label4;
+
+        $stack45 = new org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack46 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+
+        specialinvoke $stack45.<org.jfree.chart.plot.PlotRenderingInfo: void <init>(org.jfree.chart.ChartRenderingInfo)>($stack46);
+
+        subplotInfo = $stack45;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void addSubplotInfo(org.jfree.chart.plot.PlotRenderingInfo)>($stack45);
+
+     label4:
+        subAnchor = null;
+
+        if anchor == null goto label5;
+
+        $stack35 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea>;
+
+        $stack36 = $stack35[i];
+
+        $stack37 = virtualinvoke $stack36.<java.awt.geom.Rectangle2D: boolean contains(java.awt.geom.Point2D)>(anchor);
+
+        if $stack37 == 0 goto label5;
+
+        subAnchor = anchor;
+
+     label5:
+        $stack31 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.awt.geom.Rectangle2D[] subplotArea>;
+
+        $stack32 = $stack31[i];
+
+        virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotState,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack32, subAnchor, parentState, subplotInfo);
+
+        i = i + 1;
+
+        goto label3;
+
+     label6:
+        if info == null goto label7;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(dataArea);
+
+     label7:
+        return;
+    }
+
+    public void setOrientation(org.jfree.chart.plot.PlotOrientation)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.plot.PlotOrientation orientation;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.CategoryPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        orientation := @parameter0: org.jfree.chart.plot.PlotOrientation;
+
+        specialinvoke this.<org.jfree.chart.plot.CategoryPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>(orientation);
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack7;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>(orientation);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.util.ShadowGenerator generator;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.CategoryPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        generator := @parameter0: org.jfree.chart.util.ShadowGenerator;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void setNotify(boolean)>(0);
+
+        specialinvoke this.<org.jfree.chart.plot.CategoryPlot: void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)>(generator);
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack7;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setShadowGenerator(org.jfree.chart.util.ShadowGenerator)>(generator);
+
+        goto label1;
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void setNotify(boolean)>(1);
+
+        return;
+    }
+
+    public org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        java.util.List $stack5, $stack6;
+        java.util.Iterator l3;
+        boolean $stack8;
+        java.lang.Object $stack10;
+        org.jfree.chart.plot.CategoryPlot subplot;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.data.Range $stack11, result;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        if $stack5 == null goto label2;
+
+        $stack6 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        l3 = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label2;
+
+        $stack10 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack10;
+
+        $stack11 = virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(axis);
+
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, $stack11);
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.LegendItemCollection $stack6, more, result;
+        java.util.List $stack7, $stack9;
+        java.util.Iterator l2;
+        boolean $stack11;
+        java.lang.Object $stack12;
+        org.jfree.chart.plot.CategoryPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        result = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.LegendItemCollection getFixedLegendItems()>();
+
+        if result != null goto label2;
+
+        $stack6 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack6.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        result = $stack6;
+
+        $stack7 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        if $stack7 == null goto label2;
+
+        $stack9 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack11 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack12 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack12;
+
+        more = virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.LegendItemCollection getLegendItems()>();
+
+        virtualinvoke $stack6.<org.jfree.chart.LegendItemCollection: void addAll(org.jfree.chart.LegendItemCollection)>(more);
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    protected void setFixedDomainAxisSpaceForSubplots(org.jfree.chart.axis.AxisSpace)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        java.util.List $stack4;
+        java.util.Iterator l2;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        org.jfree.chart.plot.CategoryPlot subplot;
+        org.jfree.chart.axis.AxisSpace space;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        space := @parameter0: org.jfree.chart.axis.AxisSpace;
+
+        $stack4 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        l2 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label2;
+
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack7;
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void setFixedDomainAxisSpace(org.jfree.chart.axis.AxisSpace,boolean)>(space, 0);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void handleClick(int, int, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo info, subplotInfo;
+        java.awt.geom.Rectangle2D dataArea;
+        int x, y, $stack13, i;
+        double $stack9, $stack10;
+        boolean $stack11;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        java.util.List $stack12, $stack14;
+        java.lang.Object $stack15;
+        org.jfree.chart.plot.CategoryPlot subplot;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        x := @parameter0: int;
+
+        y := @parameter1: int;
+
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        dataArea = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+
+        $stack10 = (double) x;
+
+        $stack9 = (double) y;
+
+        $stack11 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: boolean contains(double,double)>($stack10, $stack9);
+
+        if $stack11 == 0 goto label2;
+
+        i = 0;
+
+     label1:
+        $stack12 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack13 = interfaceinvoke $stack12.<java.util.List: int size()>();
+
+        if i >= $stack13 goto label2;
+
+        $stack14 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack15 = interfaceinvoke $stack14.<java.util.List: java.lang.Object get(int)>(i);
+
+        subplot = (org.jfree.chart.plot.CategoryPlot) $stack15;
+
+        subplotInfo = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getSubplotInfo(int)>(i);
+
+        virtualinvoke subplot.<org.jfree.chart.plot.CategoryPlot: void handleClick(int,int,org.jfree.chart.plot.PlotRenderingInfo)>(x, y, subplotInfo);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void plotChanged(org.jfree.chart.event.PlotChangeEvent)
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.event.PlotChangeEvent event;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        event := @parameter0: org.jfree.chart.event.PlotChangeEvent;
+
+        virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>(event);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this, that;
+        boolean $stack3, $stack9, $stack10;
+        double $stack4, $stack5;
+        byte $stack6;
+        java.util.List $stack7, $stack8;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.plot.CombinedRangeCategoryPlot) obj;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        $stack4 = that.<org.jfree.chart.plot.CombinedRangeCategoryPlot: double gap>;
+
+        $stack6 = $stack5 cmpl $stack4;
+
+        if $stack6 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack7 = that.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack10 = specialinvoke this.<org.jfree.chart.plot.CategoryPlot: boolean equals(java.lang.Object)>(obj);
+
+        return $stack10;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this, result;
+        java.lang.Object $stack4, $stack12;
+        java.util.List $stack5, $stack6, $stack7;
+        boolean $stack9;
+        org.jfree.chart.plot.Plot child;
+        java.util.Iterator rangeAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis#2;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        $stack4 = specialinvoke this.<org.jfree.chart.plot.CategoryPlot: java.lang.Object clone()>();
+
+        result = (org.jfree.chart.plot.CombinedRangeCategoryPlot) $stack4;
+
+        $stack5 = this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.CloneUtils: java.util.List cloneList(java.util.List)>($stack5);
+
+        result.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots> = $stack6;
+
+        $stack7 = result.<org.jfree.chart.plot.CombinedRangeCategoryPlot: java.util.List subplots>;
+
+        rangeAxis = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke rangeAxis.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label2;
+
+        $stack12 = interfaceinvoke rangeAxis.<java.util.Iterator: java.lang.Object next()>();
+
+        child = (org.jfree.chart.plot.Plot) $stack12;
+
+        virtualinvoke child.<org.jfree.chart.plot.Plot: void setParent(org.jfree.chart.plot.Plot)>(result);
+
+        goto label1;
+
+     label2:
+        rangeAxis#2 = virtualinvoke result.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        if rangeAxis#2 == null goto label3;
+
+        virtualinvoke rangeAxis#2.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label3:
+        return result;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.CombinedRangeCategoryPlot this;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+
+        this := @this: org.jfree.chart.plot.CombinedRangeCategoryPlot;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        rangeAxis = virtualinvoke this.<org.jfree.chart.plot.CombinedRangeCategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        if rangeAxis == null goto label1;
+
+        virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label1:
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.plot.CombinedRangeCategoryPlot: long serialVersionUID> = 7260210007554504515L;
+
+        return;
+    }
+}

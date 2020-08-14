@@ -1,0 +1,848 @@
+public class org.jfree.data.DefaultKeyedValues extends java.lang.Object implements org.jfree.data.KeyedValues, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List keys;
+    private java.util.List values;
+    private java.util.Map indexMap;
+
+    public void <init>()
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.ArrayList $stack1, $stack2;
+        java.util.HashMap $stack3;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.DefaultKeyedValues: java.util.List keys> = $stack1;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.DefaultKeyedValues: java.util.List values> = $stack2;
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>()>();
+
+        this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap> = $stack3;
+
+        return;
+    }
+
+    public int getItemCount()
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.Map $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack1 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Map: int size()>();
+
+        return $stack2;
+    }
+
+    public java.lang.Number getValue(int)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        int item;
+        java.util.List $stack2;
+        java.lang.Object $stack3;
+        java.lang.Number $stack4;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        item := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(item);
+
+        $stack4 = (java.lang.Number) $stack3;
+
+        return $stack4;
+    }
+
+    public java.lang.Comparable getKey(int)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        int index;
+        java.util.List $stack2;
+        java.lang.Object $stack3;
+        java.lang.Comparable $stack4;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+
+        $stack4 = (java.lang.Comparable) $stack3;
+
+        return $stack4;
+    }
+
+    public int getIndex(java.lang.Comparable)
+    {
+        java.lang.Comparable key;
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.Map $stack3;
+        java.lang.Object $stack4;
+        java.lang.Integer i;
+        int $stack5;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        $stack3 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        i = (java.lang.Integer) $stack4;
+
+        if i != null goto label1;
+
+        return -1;
+
+     label1:
+        $stack5 = virtualinvoke i.<java.lang.Integer: int intValue()>();
+
+        return $stack5;
+    }
+
+    public java.util.List getKeys()
+    {
+        java.util.ArrayList $stack1;
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack1 = new java.util.ArrayList;
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>(java.util.Collection)>($stack2);
+
+        return $stack1;
+    }
+
+    public java.lang.Number getValue(java.lang.Comparable)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        int index;
+        java.lang.Number $stack4;
+        org.jfree.data.UnknownKeyException $stack5;
+        java.lang.StringBuilder $stack6, $stack7, $stack8;
+        java.lang.String $stack9;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        index = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getIndex(java.lang.Comparable)>(key);
+
+        if index >= 0 goto label1;
+
+        $stack5 = new org.jfree.data.UnknownKeyException;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Key not found: ");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(key);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack5.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack9);
+
+        throw $stack5;
+
+     label1:
+        $stack4 = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: java.lang.Number getValue(int)>(index);
+
+        return $stack4;
+    }
+
+    public void addValue(java.lang.Comparable, double)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        double value;
+        java.lang.Double $stack4;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: double;
+
+        $stack4 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(value);
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void addValue(java.lang.Comparable,java.lang.Number)>(key, $stack4);
+
+        return;
+    }
+
+    public void addValue(java.lang.Comparable, java.lang.Number)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        java.lang.Number value;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: java.lang.Number;
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void setValue(java.lang.Comparable,java.lang.Number)>(key, value);
+
+        return;
+    }
+
+    public void setValue(java.lang.Comparable, double)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        double value;
+        java.lang.Double $stack4;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: double;
+
+        $stack4 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(value);
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void setValue(java.lang.Comparable,java.lang.Number)>(key, $stack4);
+
+        return;
+    }
+
+    public void setValue(java.lang.Comparable, java.lang.Number)
+    {
+        java.lang.Comparable key;
+        org.jfree.data.DefaultKeyedValues this;
+        int keyIndex, $stack11, $stack12;
+        java.util.List $stack5, $stack7, $stack9, $stack15, $stack17;
+        java.lang.Number value;
+        java.util.Map $stack10;
+        java.lang.Integer $stack13;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: java.lang.Number;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        keyIndex = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getIndex(java.lang.Comparable)>(key);
+
+        if keyIndex < 0 goto label1;
+
+        $stack15 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack15.<java.util.List: java.lang.Object set(int,java.lang.Object)>(keyIndex, key);
+
+        $stack17 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack17.<java.util.List: java.lang.Object set(int,java.lang.Object)>(keyIndex, value);
+
+        goto label2;
+
+     label1:
+        $stack5 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>(key);
+
+        $stack7 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack7.<java.util.List: boolean add(java.lang.Object)>(value);
+
+        $stack10 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        $stack9 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack11 = interfaceinvoke $stack9.<java.util.List: int size()>();
+
+        $stack12 = $stack11 - 1;
+
+        $stack13 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack12);
+
+        interfaceinvoke $stack10.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack13);
+
+     label2:
+        return;
+    }
+
+    public void insertValue(int, java.lang.Comparable, double)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        int position;
+        java.lang.Comparable key;
+        double value;
+        java.lang.Double $stack5;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        position := @parameter0: int;
+
+        key := @parameter1: java.lang.Comparable;
+
+        value := @parameter2: double;
+
+        $stack5 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(value);
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void insertValue(int,java.lang.Comparable,java.lang.Number)>(position, key, $stack5);
+
+        return;
+    }
+
+    public void insertValue(int, java.lang.Comparable, java.lang.Number)
+    {
+        int position, $stack6, pos;
+        java.lang.IllegalArgumentException $stack5;
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        java.util.List $stack8, $stack9, $stack10, $stack12, $stack21, $stack23;
+        java.lang.Number value;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        position := @parameter0: int;
+
+        key := @parameter1: java.lang.Comparable;
+
+        value := @parameter2: java.lang.Number;
+
+        if position < 0 goto label1;
+
+        $stack6 = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getItemCount()>();
+
+        if position <= $stack6 goto label2;
+
+     label1:
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("\'position\' out of bounds.");
+
+        throw $stack5;
+
+     label2:
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        pos = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getIndex(java.lang.Comparable)>(key);
+
+        if pos != position goto label3;
+
+        $stack21 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack21.<java.util.List: java.lang.Object set(int,java.lang.Object)>(pos, key);
+
+        $stack23 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack23.<java.util.List: java.lang.Object set(int,java.lang.Object)>(pos, value);
+
+        goto label5;
+
+     label3:
+        if pos < 0 goto label4;
+
+        $stack10 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack10.<java.util.List: java.lang.Object remove(int)>(pos);
+
+        $stack12 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack12.<java.util.List: java.lang.Object remove(int)>(pos);
+
+     label4:
+        $stack8 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack8.<java.util.List: void add(int,java.lang.Object)>(position, key);
+
+        $stack9 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack9.<java.util.List: void add(int,java.lang.Object)>(position, value);
+
+        specialinvoke this.<org.jfree.data.DefaultKeyedValues: void rebuildIndex()>();
+
+     label5:
+        return;
+    }
+
+    private void rebuildIndex()
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.Map $stack3, $stack8;
+        java.util.List $stack4, $stack6;
+        int $stack5, i;
+        java.lang.Object $stack7;
+        java.lang.Comparable key;
+        java.lang.Integer $stack9;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack3 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        interfaceinvoke $stack3.<java.util.Map: void clear()>();
+
+        i = 0;
+
+     label1:
+        $stack4 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: int size()>();
+
+        if i >= $stack5 goto label2;
+
+        $stack6 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(i);
+
+        key = (java.lang.Comparable) $stack7;
+
+        $stack8 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        $stack9 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i);
+
+        interfaceinvoke $stack8.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack9);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void removeValue(int)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        int index;
+        java.util.List $stack2, $stack4;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack2.<java.util.List: java.lang.Object remove(int)>(index);
+
+        $stack4 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack4.<java.util.List: java.lang.Object remove(int)>(index);
+
+        specialinvoke this.<org.jfree.data.DefaultKeyedValues: void rebuildIndex()>();
+
+        return;
+    }
+
+    public void removeValue(java.lang.Comparable)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.lang.Comparable key;
+        int index;
+        org.jfree.data.UnknownKeyException $stack4;
+        java.lang.StringBuilder $stack5, $stack6, $stack7, $stack8;
+        java.lang.String $stack9;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        key := @parameter0: java.lang.Comparable;
+
+        index = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getIndex(java.lang.Comparable)>(key);
+
+        if index >= 0 goto label1;
+
+        $stack4 = new org.jfree.data.UnknownKeyException;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("The key (");
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(key);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(") is not recognised.");
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack4.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack9);
+
+        throw $stack4;
+
+     label1:
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void removeValue(int)>(index);
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.List $stack1, $stack2;
+        java.util.Map $stack3;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack1 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        interfaceinvoke $stack1.<java.util.List: void clear()>();
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        interfaceinvoke $stack2.<java.util.List: void clear()>();
+
+        $stack3 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        interfaceinvoke $stack3.<java.util.Map: void clear()>();
+
+        return;
+    }
+
+    public void sortByKeys(org.jfree.chart.util.SortOrder)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.List $stack7, $stack17, $stack19;
+        int size, $stack11, i;
+        org.jfree.data.DefaultKeyedValue[] data;
+        org.jfree.data.KeyedValueComparator $stack9;
+        org.jfree.chart.util.SortOrder order;
+        org.jfree.data.KeyedValueComparatorType $stack10;
+        org.jfree.data.DefaultKeyedValue value, $stack16;
+        java.lang.Comparable $stack12, $stack20;
+        java.lang.Number $stack13, $stack22;
+        java.lang.Object $stack18, $stack21;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        order := @parameter0: org.jfree.chart.util.SortOrder;
+
+        $stack7 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        size = interfaceinvoke $stack7.<java.util.List: int size()>();
+
+        data = newarray (org.jfree.data.DefaultKeyedValue)[size];
+
+        i = 0;
+
+     label1:
+        if i >= size goto label2;
+
+        $stack16 = new org.jfree.data.DefaultKeyedValue;
+
+        $stack17 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack18 = interfaceinvoke $stack17.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack20 = (java.lang.Comparable) $stack18;
+
+        $stack19 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        $stack21 = interfaceinvoke $stack19.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack22 = (java.lang.Number) $stack21;
+
+        specialinvoke $stack16.<org.jfree.data.DefaultKeyedValue: void <init>(java.lang.Comparable,java.lang.Number)>($stack20, $stack22);
+
+        data[i] = $stack16;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack9 = new org.jfree.data.KeyedValueComparator;
+
+        $stack10 = <org.jfree.data.KeyedValueComparatorType: org.jfree.data.KeyedValueComparatorType BY_KEY>;
+
+        specialinvoke $stack9.<org.jfree.data.KeyedValueComparator: void <init>(org.jfree.data.KeyedValueComparatorType,org.jfree.chart.util.SortOrder)>($stack10, order);
+
+        staticinvoke <java.util.Arrays: void sort(java.lang.Object[],java.util.Comparator)>(data, $stack9);
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void clear()>();
+
+        i = 0;
+
+     label3:
+        $stack11 = lengthof data;
+
+        if i >= $stack11 goto label4;
+
+        value = data[i];
+
+        $stack12 = virtualinvoke value.<org.jfree.data.DefaultKeyedValue: java.lang.Comparable getKey()>();
+
+        $stack13 = virtualinvoke value.<org.jfree.data.DefaultKeyedValue: java.lang.Number getValue()>();
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void addValue(java.lang.Comparable,java.lang.Number)>($stack12, $stack13);
+
+        i = i + 1;
+
+        goto label3;
+
+     label4:
+        return;
+    }
+
+    public void sortByValues(org.jfree.chart.util.SortOrder)
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.List $stack7, $stack17, $stack19;
+        int size, $stack11, i;
+        org.jfree.data.DefaultKeyedValue[] data;
+        org.jfree.data.KeyedValueComparator $stack9;
+        org.jfree.chart.util.SortOrder order;
+        org.jfree.data.KeyedValueComparatorType $stack10;
+        org.jfree.data.DefaultKeyedValue value, $stack16;
+        java.lang.Comparable $stack12, $stack20;
+        java.lang.Number $stack13, $stack22;
+        java.lang.Object $stack18, $stack21;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        order := @parameter0: org.jfree.chart.util.SortOrder;
+
+        $stack7 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        size = interfaceinvoke $stack7.<java.util.List: int size()>();
+
+        data = newarray (org.jfree.data.DefaultKeyedValue)[size];
+
+        i = 0;
+
+     label1:
+        if i >= size goto label2;
+
+        $stack16 = new org.jfree.data.DefaultKeyedValue;
+
+        $stack17 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack18 = interfaceinvoke $stack17.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack20 = (java.lang.Comparable) $stack18;
+
+        $stack19 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        $stack21 = interfaceinvoke $stack19.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack22 = (java.lang.Number) $stack21;
+
+        specialinvoke $stack16.<org.jfree.data.DefaultKeyedValue: void <init>(java.lang.Comparable,java.lang.Number)>($stack20, $stack22);
+
+        data[i] = $stack16;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack9 = new org.jfree.data.KeyedValueComparator;
+
+        $stack10 = <org.jfree.data.KeyedValueComparatorType: org.jfree.data.KeyedValueComparatorType BY_VALUE>;
+
+        specialinvoke $stack9.<org.jfree.data.KeyedValueComparator: void <init>(org.jfree.data.KeyedValueComparatorType,org.jfree.chart.util.SortOrder)>($stack10, order);
+
+        staticinvoke <java.util.Arrays: void sort(java.lang.Object[],java.util.Comparator)>(data, $stack9);
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void clear()>();
+
+        i = 0;
+
+     label3:
+        $stack11 = lengthof data;
+
+        if i >= $stack11 goto label4;
+
+        value = data[i];
+
+        $stack12 = virtualinvoke value.<org.jfree.data.DefaultKeyedValue: java.lang.Comparable getKey()>();
+
+        $stack13 = virtualinvoke value.<org.jfree.data.DefaultKeyedValue: java.lang.Number getValue()>();
+
+        virtualinvoke this.<org.jfree.data.DefaultKeyedValues: void addValue(java.lang.Comparable,java.lang.Number)>($stack12, $stack13);
+
+        i = i + 1;
+
+        goto label3;
+
+     label4:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.DefaultKeyedValues this;
+        boolean $stack9, $stack14, $stack17;
+        org.jfree.data.KeyedValues that;
+        int count, $stack11, i;
+        java.lang.Comparable k1, k2;
+        java.lang.Number v1, v2;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack9 = obj instanceof org.jfree.data.KeyedValues;
+
+        if $stack9 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.KeyedValues) obj;
+
+        count = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: int getItemCount()>();
+
+        $stack11 = interfaceinvoke that.<org.jfree.data.KeyedValues: int getItemCount()>();
+
+        if count == $stack11 goto label3;
+
+        return 0;
+
+     label3:
+        i = 0;
+
+     label4:
+        if i >= count goto label8;
+
+        k1 = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: java.lang.Comparable getKey(int)>(i);
+
+        k2 = interfaceinvoke that.<org.jfree.data.KeyedValues: java.lang.Comparable getKey(int)>(i);
+
+        $stack14 = virtualinvoke k1.<java.lang.Object: boolean equals(java.lang.Object)>(k2);
+
+        if $stack14 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        v1 = virtualinvoke this.<org.jfree.data.DefaultKeyedValues: java.lang.Number getValue(int)>(i);
+
+        v2 = interfaceinvoke that.<org.jfree.data.KeyedValues: java.lang.Number getValue(int)>(i);
+
+        if v1 != null goto label6;
+
+        if v2 == null goto label7;
+
+        return 0;
+
+     label6:
+        $stack17 = virtualinvoke v1.<java.lang.Object: boolean equals(java.lang.Object)>(v2);
+
+        if $stack17 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        i = i + 1;
+
+        goto label4;
+
+     label8:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.DefaultKeyedValues this;
+        java.util.List $stack1, $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack1 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.DefaultKeyedValues this, clone;
+        java.lang.Object $stack2;
+        java.util.ArrayList $stack3, $stack5;
+        java.util.List $stack4, $stack6;
+        java.util.HashMap $stack7;
+        java.util.Map $stack8;
+
+        this := @this: org.jfree.data.DefaultKeyedValues;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.DefaultKeyedValues) $stack2;
+
+        $stack3 = new java.util.ArrayList;
+
+        $stack4 = this.<org.jfree.data.DefaultKeyedValues: java.util.List keys>;
+
+        specialinvoke $stack3.<java.util.ArrayList: void <init>(java.util.Collection)>($stack4);
+
+        clone.<org.jfree.data.DefaultKeyedValues: java.util.List keys> = $stack3;
+
+        $stack5 = new java.util.ArrayList;
+
+        $stack6 = this.<org.jfree.data.DefaultKeyedValues: java.util.List values>;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>(java.util.Collection)>($stack6);
+
+        clone.<org.jfree.data.DefaultKeyedValues: java.util.List values> = $stack5;
+
+        $stack7 = new java.util.HashMap;
+
+        $stack8 = this.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap>;
+
+        specialinvoke $stack7.<java.util.HashMap: void <init>(java.util.Map)>($stack8);
+
+        clone.<org.jfree.data.DefaultKeyedValues: java.util.Map indexMap> = $stack7;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.DefaultKeyedValues: long serialVersionUID> = 8468154364608194797L;
+
+        return;
+    }
+}

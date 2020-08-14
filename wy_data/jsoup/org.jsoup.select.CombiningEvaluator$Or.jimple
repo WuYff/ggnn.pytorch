@@ -1,0 +1,148 @@
+final class org.jsoup.select.CombiningEvaluator$Or extends org.jsoup.select.CombiningEvaluator
+{
+
+    void <init>(java.util.Collection)
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+        int $stack2;
+        java.util.Collection evaluators;
+        java.util.ArrayList $stack3, $stack6;
+        org.jsoup.select.CombiningEvaluator$And $stack5;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        evaluators := @parameter0: java.util.Collection;
+
+        specialinvoke this.<org.jsoup.select.CombiningEvaluator: void <init>()>();
+
+        $stack2 = this.<org.jsoup.select.CombiningEvaluator$Or: int num>;
+
+        if $stack2 <= 1 goto label1;
+
+        $stack6 = this.<org.jsoup.select.CombiningEvaluator$Or: java.util.ArrayList evaluators>;
+
+        $stack5 = new org.jsoup.select.CombiningEvaluator$And;
+
+        specialinvoke $stack5.<org.jsoup.select.CombiningEvaluator$And: void <init>(java.util.Collection)>(evaluators);
+
+        virtualinvoke $stack6.<java.util.ArrayList: boolean add(java.lang.Object)>($stack5);
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.select.CombiningEvaluator$Or: java.util.ArrayList evaluators>;
+
+        virtualinvoke $stack3.<java.util.ArrayList: boolean addAll(java.util.Collection)>(evaluators);
+
+     label2:
+        virtualinvoke this.<org.jsoup.select.CombiningEvaluator$Or: void updateNumEvaluators()>();
+
+        return;
+    }
+
+    transient void <init>(org.jsoup.select.Evaluator[])
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+        org.jsoup.select.Evaluator[] evaluators;
+        java.util.List $stack2;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        evaluators := @parameter0: org.jsoup.select.Evaluator[];
+
+        $stack2 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>(evaluators);
+
+        specialinvoke this.<org.jsoup.select.CombiningEvaluator$Or: void <init>(java.util.Collection)>($stack2);
+
+        return;
+    }
+
+    void <init>()
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        specialinvoke this.<org.jsoup.select.CombiningEvaluator: void <init>()>();
+
+        return;
+    }
+
+    public void add(org.jsoup.select.Evaluator)
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+        org.jsoup.select.Evaluator e;
+        java.util.ArrayList $stack2;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        e := @parameter0: org.jsoup.select.Evaluator;
+
+        $stack2 = this.<org.jsoup.select.CombiningEvaluator$Or: java.util.ArrayList evaluators>;
+
+        virtualinvoke $stack2.<java.util.ArrayList: boolean add(java.lang.Object)>(e);
+
+        virtualinvoke this.<org.jsoup.select.CombiningEvaluator$Or: void updateNumEvaluators()>();
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+        int $stack5, i;
+        java.util.ArrayList $stack6;
+        java.lang.Object $stack7;
+        org.jsoup.select.Evaluator s;
+        org.jsoup.nodes.Element root, node;
+        boolean $stack8;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        node := @parameter1: org.jsoup.nodes.Element;
+
+        i = 0;
+
+     label1:
+        $stack5 = this.<org.jsoup.select.CombiningEvaluator$Or: int num>;
+
+        if i >= $stack5 goto label3;
+
+        $stack6 = this.<org.jsoup.select.CombiningEvaluator$Or: java.util.ArrayList evaluators>;
+
+        $stack7 = virtualinvoke $stack6.<java.util.ArrayList: java.lang.Object get(int)>(i);
+
+        s = (org.jsoup.select.Evaluator) $stack7;
+
+        $stack8 = virtualinvoke s.<org.jsoup.select.Evaluator: boolean matches(org.jsoup.nodes.Element,org.jsoup.nodes.Element)>(root, node);
+
+        if $stack8 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.select.CombiningEvaluator$Or this;
+        java.util.ArrayList $stack1;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.select.CombiningEvaluator$Or;
+
+        $stack1 = this.<org.jsoup.select.CombiningEvaluator$Or: java.util.ArrayList evaluators>;
+
+        $stack2 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String join(java.util.Collection,java.lang.String)>($stack1, ", ");
+
+        return $stack2;
+    }
+}

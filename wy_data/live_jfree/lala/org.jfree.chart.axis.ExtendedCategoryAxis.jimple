@@ -1,0 +1,360 @@
+public class org.jfree.chart.axis.ExtendedCategoryAxis extends org.jfree.chart.axis.CategoryAxis
+{
+    static final long serialVersionUID;
+    private java.util.Map sublabels;
+    private java.awt.Font sublabelFont;
+    private transient java.awt.Paint sublabelPaint;
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.lang.String label;
+        java.util.HashMap $stack2;
+        java.awt.Font $stack3;
+        java.awt.Color $stack4;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        label := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(label);
+
+        $stack2 = new java.util.HashMap;
+
+        specialinvoke $stack2.<java.util.HashMap: void <init>()>();
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels> = $stack2;
+
+        $stack3 = new java.awt.Font;
+
+        specialinvoke $stack3.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 0, 10);
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont> = $stack3;
+
+        $stack4 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint> = $stack4;
+
+        return;
+    }
+
+    public java.awt.Font getSubLabelFont()
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont>;
+
+        return $stack1;
+    }
+
+    public void setSubLabelFont(java.awt.Font)
+    {
+        java.awt.Font font;
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont> = font;
+
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+
+        virtualinvoke this.<org.jfree.chart.axis.ExtendedCategoryAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Paint getSubLabelPaint()
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        return $stack1;
+    }
+
+    public void setSubLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+
+        virtualinvoke this.<org.jfree.chart.axis.ExtendedCategoryAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public void addSubLabel(java.lang.Comparable, java.lang.String)
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.lang.Comparable category;
+        java.lang.String label;
+        java.util.Map $stack3;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        category := @parameter0: java.lang.Comparable;
+
+        label := @parameter1: java.lang.String;
+
+        $stack3 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels>;
+
+        interfaceinvoke $stack3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(category, label);
+
+        return;
+    }
+
+    protected org.jfree.chart.text.TextBlock createLabel(java.lang.Comparable, float, org.jfree.chart.ui.RectangleEdge, java.awt.Graphics2D)
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.lang.Comparable category;
+        float width;
+        org.jfree.chart.ui.RectangleEdge edge, $stack11, $stack16, $stack17, $stack26;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.text.TextBlock label;
+        java.util.Map $stack9;
+        java.lang.Object $stack10;
+        java.lang.String s, $stack23;
+        org.jfree.chart.text.TextLine $stack12, line;
+        java.awt.Paint $stack13, $stack24;
+        java.awt.Font $stack14, $stack25;
+        org.jfree.chart.text.TextFragment $stack19;
+        java.lang.StringBuilder $stack20, $stack21, $stack22;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        category := @parameter0: java.lang.Comparable;
+
+        width := @parameter1: float;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        g2 := @parameter3: java.awt.Graphics2D;
+
+        label = specialinvoke this.<org.jfree.chart.axis.CategoryAxis: org.jfree.chart.text.TextBlock createLabel(java.lang.Comparable,float,org.jfree.chart.ui.RectangleEdge,java.awt.Graphics2D)>(category, width, edge, g2);
+
+        $stack9 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.Map: java.lang.Object get(java.lang.Object)>(category);
+
+        s = (java.lang.String) $stack10;
+
+        if s == null goto label4;
+
+        $stack11 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge == $stack11 goto label1;
+
+        $stack16 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        if edge != $stack16 goto label2;
+
+     label1:
+        $stack12 = new org.jfree.chart.text.TextLine;
+
+        $stack14 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont>;
+
+        $stack13 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        specialinvoke $stack12.<org.jfree.chart.text.TextLine: void <init>(java.lang.String,java.awt.Font,java.awt.Paint)>(s, $stack14, $stack13);
+
+        virtualinvoke label.<org.jfree.chart.text.TextBlock: void addLine(org.jfree.chart.text.TextLine)>($stack12);
+
+        goto label4;
+
+     label2:
+        $stack17 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge == $stack17 goto label3;
+
+        $stack26 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if edge != $stack26 goto label4;
+
+     label3:
+        line = virtualinvoke label.<org.jfree.chart.text.TextBlock: org.jfree.chart.text.TextLine getLastLine()>();
+
+        if line == null goto label4;
+
+        $stack19 = new org.jfree.chart.text.TextFragment;
+
+        $stack20 = new java.lang.StringBuilder;
+
+        specialinvoke $stack20.<java.lang.StringBuilder: void <init>()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("  ");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(s);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack25 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont>;
+
+        $stack24 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        specialinvoke $stack19.<org.jfree.chart.text.TextFragment: void <init>(java.lang.String,java.awt.Font,java.awt.Paint)>($stack23, $stack25, $stack24);
+
+        virtualinvoke line.<org.jfree.chart.text.TextLine: void addFragment(org.jfree.chart.text.TextFragment)>($stack19);
+
+     label4:
+        return label;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.ExtendedCategoryAxis this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack13;
+        java.awt.Font $stack4, $stack5;
+        java.awt.Paint $stack7, $stack8;
+        java.util.Map $stack10, $stack11;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.axis.ExtendedCategoryAxis) obj;
+
+        $stack5 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont>;
+
+        $stack4 = that.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Font sublabelFont>;
+
+        $stack6 = virtualinvoke $stack5.<java.awt.Font: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        $stack7 = that.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels>;
+
+        $stack10 = that.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack13 = specialinvoke this.<org.jfree.chart.axis.CategoryAxis: boolean equals(java.lang.Object)>(obj);
+
+        return $stack13;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.axis.ExtendedCategoryAxis this, clone;
+        java.lang.Object $stack2;
+        java.util.HashMap $stack3;
+        java.util.Map $stack4;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.axis.CategoryAxis: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.axis.ExtendedCategoryAxis) $stack2;
+
+        $stack3 = new java.util.HashMap;
+
+        $stack4 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels>;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>(java.util.Map)>($stack4);
+
+        clone.<org.jfree.chart.axis.ExtendedCategoryAxis: java.util.Map sublabels> = $stack3;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.ExtendedCategoryAxis this;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.axis.ExtendedCategoryAxis;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.axis.ExtendedCategoryAxis: java.awt.Paint sublabelPaint> = $stack2;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.axis.ExtendedCategoryAxis: long serialVersionUID> = -3004429093959826567L;
+
+        return;
+    }
+}

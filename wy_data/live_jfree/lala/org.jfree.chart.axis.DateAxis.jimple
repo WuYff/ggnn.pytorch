@@ -1,0 +1,3585 @@
+public class org.jfree.chart.axis.DateAxis extends org.jfree.chart.axis.ValueAxis implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    public static final org.jfree.data.time.DateRange DEFAULT_DATE_RANGE;
+    public static final double DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS;
+    public static final java.util.Date DEFAULT_ANCHOR_DATE;
+    private org.jfree.chart.axis.DateTickUnit tickUnit;
+    private java.text.DateFormat dateFormatOverride;
+    private org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition;
+    private static final org.jfree.chart.axis.Timeline DEFAULT_TIMELINE;
+    private java.util.TimeZone timeZone;
+    private java.util.Locale locale;
+    private org.jfree.chart.axis.Timeline timeline;
+
+    public void <init>()
+    {
+        org.jfree.chart.axis.DateAxis this;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        specialinvoke this.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.lang.String label;
+        java.util.TimeZone $stack2;
+        java.util.Locale $stack3;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        label := @parameter0: java.lang.String;
+
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        specialinvoke this.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String,java.util.TimeZone,java.util.Locale)>(label, $stack2, $stack3);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.util.TimeZone, java.util.Locale)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.lang.String label;
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        org.jfree.chart.axis.TickUnitSource $stack4;
+        org.jfree.chart.axis.DateTickMarkPosition $stack5;
+        org.jfree.chart.axis.DateTickUnit $stack6;
+        java.text.SimpleDateFormat $stack7;
+        org.jfree.chart.axis.DateTickUnitType $stack8;
+        org.jfree.data.time.DateRange $stack10;
+        org.jfree.chart.axis.Timeline $stack11;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        label := @parameter0: java.lang.String;
+
+        zone := @parameter1: java.util.TimeZone;
+
+        locale := @parameter2: java.util.Locale;
+
+        $stack4 = staticinvoke <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits(java.util.TimeZone,java.util.Locale)>(zone, locale);
+
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void <init>(java.lang.String,org.jfree.chart.axis.TickUnitSource)>(label, $stack4);
+
+        $stack5 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition> = $stack5;
+
+        $stack6 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack8 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack7 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack7.<java.text.SimpleDateFormat: void <init>()>();
+
+        specialinvoke $stack6.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack8, 1, $stack7);
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit> = $stack6;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setAutoRangeMinimumSize(double)>(2.0);
+
+        $stack10 = <org.jfree.chart.axis.DateAxis: org.jfree.data.time.DateRange DEFAULT_DATE_RANGE>;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack10, 0, 0);
+
+        this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride> = null;
+
+        this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone> = zone;
+
+        this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale> = locale;
+
+        $stack11 = <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline DEFAULT_TIMELINE>;
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline> = $stack11;
+
+        return;
+    }
+
+    public java.util.TimeZone getTimeZone()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.TimeZone $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        return $stack1;
+    }
+
+    public void setTimeZone(java.util.TimeZone)
+    {
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Locale $stack2;
+        org.jfree.chart.axis.TickUnitSource $stack3;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(zone, "zone");
+
+        this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone> = zone;
+
+        $stack2 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        $stack3 = staticinvoke <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits(java.util.TimeZone,java.util.Locale)>(zone, $stack2);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setStandardTickUnits(org.jfree.chart.axis.TickUnitSource)>($stack3);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.util.Locale getLocale()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Locale $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        return $stack1;
+    }
+
+    public void setLocale(java.util.Locale)
+    {
+        java.util.Locale locale, $stack2;
+        org.jfree.chart.axis.DateAxis this;
+        java.util.TimeZone $stack3;
+        org.jfree.chart.axis.TickUnitSource $stack4;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        locale := @parameter0: java.util.Locale;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(locale, "locale");
+
+        this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale> = locale;
+
+        $stack3 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack2 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        $stack4 = staticinvoke <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits(java.util.TimeZone,java.util.Locale)>($stack3, $stack2);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setStandardTickUnits(org.jfree.chart.axis.TickUnitSource)>($stack4);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.Timeline getTimeline()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.Timeline $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        return $stack1;
+    }
+
+    public void setTimeline(org.jfree.chart.axis.Timeline)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.Timeline timeline, $stack2;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        timeline := @parameter0: org.jfree.chart.axis.Timeline;
+
+        $stack2 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        if $stack2 == timeline goto label1;
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline> = timeline;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public org.jfree.chart.axis.DateTickUnit getTickUnit()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.DateTickUnit $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit>;
+
+        return $stack1;
+    }
+
+    public void setTickUnit(org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.DateTickUnit unit;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.DateTickUnit;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setTickUnit(org.jfree.chart.axis.DateTickUnit,boolean,boolean)>(unit, 1, 1);
+
+        return;
+    }
+
+    public void setTickUnit(org.jfree.chart.axis.DateTickUnit, boolean, boolean)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.DateTickUnit unit;
+        boolean turnOffAutoSelection, notify;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.DateTickUnit;
+
+        notify := @parameter1: boolean;
+
+        turnOffAutoSelection := @parameter2: boolean;
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit> = unit;
+
+        if turnOffAutoSelection == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setAutoTickUnitSelection(boolean,boolean)>(0, 0);
+
+     label1:
+        if notify == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+     label2:
+        return;
+    }
+
+    public java.text.DateFormat getDateFormatOverride()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.text.DateFormat $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride>;
+
+        return $stack1;
+    }
+
+    public void setDateFormatOverride(java.text.DateFormat)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.text.DateFormat formatter;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        formatter := @parameter0: java.text.DateFormat;
+
+        this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride> = formatter;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void setRange(org.jfree.data.Range)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.Range range;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        range := @parameter0: org.jfree.data.Range;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range,boolean,boolean)>(range, 1, 1);
+
+        return;
+    }
+
+    public void setRange(org.jfree.data.Range, boolean, boolean)
+    {
+        boolean $stack4, turnOffAutoRange, notify;
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.time.DateRange $stack5;
+        org.jfree.data.Range range;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        range := @parameter0: org.jfree.data.Range;
+
+        turnOffAutoRange := @parameter1: boolean;
+
+        notify := @parameter2: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(range, "range");
+
+        $stack4 = range instanceof org.jfree.data.time.DateRange;
+
+        if $stack4 != 0 goto label1;
+
+        $stack5 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack5.<org.jfree.data.time.DateRange: void <init>(org.jfree.data.Range)>(range);
+
+        range = $stack5;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range,boolean,boolean)>(range, turnOffAutoRange, notify);
+
+        return;
+    }
+
+    public void setRange(java.util.Date, java.util.Date)
+    {
+        java.util.Date lower, upper;
+        long $stack3, $stack4;
+        byte $stack5;
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.time.DateRange $stack6;
+        java.lang.IllegalArgumentException $stack7;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        lower := @parameter0: java.util.Date;
+
+        upper := @parameter1: java.util.Date;
+
+        $stack3 = virtualinvoke lower.<java.util.Date: long getTime()>();
+
+        $stack4 = virtualinvoke upper.<java.util.Date: long getTime()>();
+
+        $stack5 = $stack3 cmp $stack4;
+
+        if $stack5 < 0 goto label1;
+
+        $stack7 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'lower\' < \'upper\'.");
+
+        throw $stack7;
+
+     label1:
+        $stack6 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack6.<org.jfree.data.time.DateRange: void <init>(java.util.Date,java.util.Date)>(lower, upper);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range)>($stack6);
+
+        return;
+    }
+
+    public void setRange(double, double)
+    {
+        double lower, upper;
+        byte $stack5;
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.time.DateRange $stack6;
+        java.lang.IllegalArgumentException $stack7;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        lower := @parameter0: double;
+
+        upper := @parameter1: double;
+
+        $stack5 = lower cmpl upper;
+
+        if $stack5 < 0 goto label1;
+
+        $stack7 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'lower\' < \'upper\'.");
+
+        throw $stack7;
+
+     label1:
+        $stack6 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack6.<org.jfree.data.time.DateRange: void <init>(double,double)>(lower, upper);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range)>($stack6);
+
+        return;
+    }
+
+    public java.util.Date getMinimumDate()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.Range range;
+        boolean $stack5;
+        java.util.Date $stack6, result;
+        double $stack7;
+        long $stack8;
+        org.jfree.data.time.DateRange r;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack5 = range instanceof org.jfree.data.time.DateRange;
+
+        if $stack5 == 0 goto label1;
+
+        r = (org.jfree.data.time.DateRange) range;
+
+        result = virtualinvoke r.<org.jfree.data.time.DateRange: java.util.Date getLowerDate()>();
+
+        goto label2;
+
+     label1:
+        $stack6 = new java.util.Date;
+
+        $stack7 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack8 = (long) $stack7;
+
+        specialinvoke $stack6.<java.util.Date: void <init>(long)>($stack8);
+
+        result = $stack6;
+
+     label2:
+        return result;
+    }
+
+    public void setMinimumDate(java.util.Date)
+    {
+        java.util.Date date, oldMin, $stack17, maxDate;
+        org.jfree.chart.axis.DateAxis this;
+        long maxMillis, newMinMillis, $stack16, length, $stack18;
+        byte $stack13;
+        org.jfree.data.time.DateRange $stack14;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        date := @parameter0: java.util.Date;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(date, "date");
+
+        maxDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMaximumDate()>();
+
+        maxMillis = virtualinvoke maxDate.<java.util.Date: long getTime()>();
+
+        newMinMillis = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack13 = maxMillis cmp newMinMillis;
+
+        if $stack13 > 0 goto label1;
+
+        oldMin = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMinimumDate()>();
+
+        $stack16 = virtualinvoke oldMin.<java.util.Date: long getTime()>();
+
+        length = maxMillis - $stack16;
+
+        $stack17 = new java.util.Date;
+
+        $stack18 = newMinMillis + length;
+
+        specialinvoke $stack17.<java.util.Date: void <init>(long)>($stack18);
+
+        maxDate = $stack17;
+
+     label1:
+        $stack14 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack14.<org.jfree.data.time.DateRange: void <init>(java.util.Date,java.util.Date)>(date, maxDate);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack14, 1, 0);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.util.Date getMaximumDate()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.Range range;
+        boolean $stack5;
+        java.util.Date $stack6, result;
+        double $stack7;
+        long $stack8;
+        org.jfree.data.time.DateRange r;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack5 = range instanceof org.jfree.data.time.DateRange;
+
+        if $stack5 == 0 goto label1;
+
+        r = (org.jfree.data.time.DateRange) range;
+
+        result = virtualinvoke r.<org.jfree.data.time.DateRange: java.util.Date getUpperDate()>();
+
+        goto label2;
+
+     label1:
+        $stack6 = new java.util.Date;
+
+        $stack7 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack8 = (long) $stack7;
+
+        specialinvoke $stack6.<java.util.Date: void <init>(long)>($stack8);
+
+        result = $stack6;
+
+     label2:
+        return result;
+    }
+
+    public void setMaximumDate(java.util.Date)
+    {
+        java.util.Date maximumDate, oldMax, $stack17, minDate;
+        org.jfree.chart.axis.DateAxis this;
+        long minMillis, newMaxMillis, $stack16, length, $stack18;
+        byte $stack13;
+        org.jfree.data.time.DateRange $stack14;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        maximumDate := @parameter0: java.util.Date;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(maximumDate, "maximumDate");
+
+        minDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMinimumDate()>();
+
+        minMillis = virtualinvoke minDate.<java.util.Date: long getTime()>();
+
+        newMaxMillis = virtualinvoke maximumDate.<java.util.Date: long getTime()>();
+
+        $stack13 = minMillis cmp newMaxMillis;
+
+        if $stack13 < 0 goto label1;
+
+        oldMax = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMaximumDate()>();
+
+        $stack16 = virtualinvoke oldMax.<java.util.Date: long getTime()>();
+
+        length = $stack16 - minMillis;
+
+        $stack17 = new java.util.Date;
+
+        $stack18 = newMaxMillis - length;
+
+        specialinvoke $stack17.<java.util.Date: void <init>(long)>($stack18);
+
+        minDate = $stack17;
+
+     label1:
+        $stack14 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack14.<org.jfree.data.time.DateRange: void <init>(java.util.Date,java.util.Date)>(minDate, maximumDate);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack14, 1, 0);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.DateTickMarkPosition getTickMarkPosition()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.DateTickMarkPosition $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        return $stack1;
+    }
+
+    public void setTickMarkPosition(org.jfree.chart.axis.DateTickMarkPosition)
+    {
+        org.jfree.chart.axis.DateTickMarkPosition position;
+        org.jfree.chart.axis.DateAxis this;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        position := @parameter0: org.jfree.chart.axis.DateTickMarkPosition;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(position, "position");
+
+        this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition> = position;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void configure()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isAutoRange()>();
+
+        if $stack1 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void autoAdjustRange()>();
+
+     label1:
+        return;
+    }
+
+    public boolean isHiddenValue(long)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Date $stack3;
+        long millis;
+        org.jfree.chart.axis.Timeline $stack4;
+        boolean $stack5, $stack6;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        millis := @parameter0: long;
+
+        $stack4 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack3 = new java.util.Date;
+
+        specialinvoke $stack3.<java.util.Date: void <init>(long)>(millis);
+
+        $stack5 = interfaceinvoke $stack4.<org.jfree.chart.axis.Timeline: boolean containsDomainValue(java.util.Date)>($stack3);
+
+        if $stack5 != 0 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    public double valueToJava2D(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        long $stack16, $stack18, $stack21, $stack22, $stack24, $stack25;
+        org.jfree.chart.axis.Timeline $stack17, $stack20, $stack23;
+        org.jfree.data.Range $stack19;
+        org.jfree.data.time.DateRange range;
+        double axisMin, axisMax, $stack31, $stack32, $stack33, $stack34, $stack35, $stack37, $stack38, $stack39, $stack40, $stack41, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, value, value#2, result, minX, maxX;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack26, $stack27, $stack30, $stack44;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        value := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack17 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack16 = (long) value;
+
+        $stack18 = interfaceinvoke $stack17.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack16);
+
+        value#2 = (double) $stack18;
+
+        $stack19 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        range = (org.jfree.data.time.DateRange) $stack19;
+
+        $stack20 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack21 = virtualinvoke range.<org.jfree.data.time.DateRange: long getLowerMillis()>();
+
+        $stack22 = interfaceinvoke $stack20.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack21);
+
+        axisMin = (double) $stack22;
+
+        $stack23 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack24 = virtualinvoke range.<org.jfree.data.time.DateRange: long getUpperMillis()>();
+
+        $stack25 = interfaceinvoke $stack23.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack24);
+
+        axisMax = (double) $stack25;
+
+        result = 0.0;
+
+        $stack26 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack26 == 0 goto label3;
+
+        minX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        maxX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack44 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isInverted()>();
+
+        if $stack44 == 0 goto label1;
+
+        $stack51 = value#2 - axisMin;
+
+        $stack50 = axisMax - axisMin;
+
+        $stack53 = $stack51 / $stack50;
+
+        $stack52 = minX - maxX;
+
+        $stack54 = $stack53 * $stack52;
+
+        result = maxX + $stack54;
+
+        goto label2;
+
+     label1:
+        $stack46 = value#2 - axisMin;
+
+        $stack45 = axisMax - axisMin;
+
+        $stack48 = $stack46 / $stack45;
+
+        $stack47 = maxX - minX;
+
+        $stack49 = $stack48 * $stack47;
+
+        result = minX + $stack49;
+
+     label2:
+        goto label5;
+
+     label3:
+        $stack27 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack27 == 0 goto label5;
+
+        minX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        maxX = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack30 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isInverted()>();
+
+        if $stack30 == 0 goto label4;
+
+        $stack38 = value#2 - axisMin;
+
+        $stack37 = axisMax - axisMin;
+
+        $stack40 = $stack38 / $stack37;
+
+        $stack39 = maxX - minX;
+
+        $stack41 = $stack40 * $stack39;
+
+        result = minX + $stack41;
+
+        goto label5;
+
+     label4:
+        $stack32 = value#2 - axisMin;
+
+        $stack31 = axisMax - axisMin;
+
+        $stack34 = $stack32 / $stack31;
+
+        $stack33 = maxX - minX;
+
+        $stack35 = $stack34 * $stack33;
+
+        result = maxX - $stack35;
+
+     label5:
+        return result;
+    }
+
+    public double dateToJava2D(java.util.Date, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.Date date;
+        long $stack6;
+        double value, $stack7;
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        date := @parameter0: java.util.Date;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack6 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        value = (double) $stack6;
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(value, area, edge);
+
+        return $stack7;
+    }
+
+    public double java2DToValue(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.Range $stack16;
+        org.jfree.data.time.DateRange range;
+        org.jfree.chart.axis.Timeline $stack17, $stack20, $stack32;
+        long $stack18, $stack19, $stack21, $stack22, $stack31, $stack33;
+        double axisMin, axisMax, java2DValue, $stack26, $stack27, $stack28, $stack29, $stack30, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, min, max, result;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack23, $stack24, $stack25;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        java2DValue := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack16 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        range = (org.jfree.data.time.DateRange) $stack16;
+
+        $stack17 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack18 = virtualinvoke range.<org.jfree.data.time.DateRange: long getLowerMillis()>();
+
+        $stack19 = interfaceinvoke $stack17.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack18);
+
+        axisMin = (double) $stack19;
+
+        $stack20 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack21 = virtualinvoke range.<org.jfree.data.time.DateRange: long getUpperMillis()>();
+
+        $stack22 = interfaceinvoke $stack20.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack21);
+
+        axisMax = (double) $stack22;
+
+        min = 0.0;
+
+        max = 0.0;
+
+        $stack23 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack23 == 0 goto label1;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label2;
+
+     label1:
+        $stack24 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack24 == 0 goto label2;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+     label2:
+        $stack25 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isInverted()>();
+
+        if $stack25 == 0 goto label3;
+
+        $stack36 = java2DValue - min;
+
+        $stack35 = max - min;
+
+        $stack38 = $stack36 / $stack35;
+
+        $stack37 = axisMax - axisMin;
+
+        $stack39 = $stack38 * $stack37;
+
+        result = axisMax - $stack39;
+
+        goto label4;
+
+     label3:
+        $stack27 = java2DValue - min;
+
+        $stack26 = max - min;
+
+        $stack29 = $stack27 / $stack26;
+
+        $stack28 = axisMax - axisMin;
+
+        $stack30 = $stack29 * $stack28;
+
+        result = axisMin + $stack30;
+
+     label4:
+        $stack32 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack31 = (long) result;
+
+        $stack33 = interfaceinvoke $stack32.<org.jfree.chart.axis.Timeline: long toMillisecond(long)>($stack31);
+
+        $stack34 = (double) $stack33;
+
+        return $stack34;
+    }
+
+    public java.util.Date calculateLowestVisibleTickValue(org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Date $stack2, $stack3;
+        org.jfree.chart.axis.DateTickUnit unit;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.DateTickUnit;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMinimumDate()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date nextStandardDate(java.util.Date,org.jfree.chart.axis.DateTickUnit)>($stack2, unit);
+
+        return $stack3;
+    }
+
+    public java.util.Date calculateHighestVisibleTickValue(org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Date $stack2, $stack3;
+        org.jfree.chart.axis.DateTickUnit unit;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.DateTickUnit;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMaximumDate()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date previousStandardDate(java.util.Date,org.jfree.chart.axis.DateTickUnit)>($stack2, unit);
+
+        return $stack3;
+    }
+
+    protected java.util.Date previousStandardDate(java.util.Date, org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Locale $stack19, $stack76;
+        java.util.TimeZone $stack20, $stack77, $stack83;
+        java.util.Calendar calendar, $stack84;
+        java.util.Date date, $stack75, mm, standardDate;
+        org.jfree.chart.axis.DateTickUnit unit;
+        int count, $stack23, current, $stack25, $stack55, $stack70, $stack71, $stack72, $stack101, $stack127, $stack154, $stack182, $stack208, value, years, months, days, hours, minutes, seconds, i;
+        org.jfree.chart.axis.DateTickUnitType $stack26, $stack27, $stack29, $stack30, $stack32, $stack33, $stack35, $stack36, $stack38, $stack39, $stack41, $stack42, $stack44, $stack45;
+        boolean $stack28, $stack31, $stack34, $stack37, $stack40, $stack43, $stack46;
+        org.jfree.chart.axis.DateTickMarkPosition $stack47, $stack48, $stack49, $stack50, $stack78, $stack85, $stack93, $stack94, $stack95, $stack96, $stack119, $stack120, $stack121, $stack122, $stack146, $stack147, $stack148, $stack149, $stack174, $stack175, $stack176, $stack177;
+        org.jfree.data.time.Month $stack74, mm#164;
+        long millis, $stack81, $stack205, $stack206, $stack179, $stack180, $stack151, $stack152, $stack124, $stack125, $stack98, $stack99, $stack52, $stack53;
+        byte $stack82, $stack207, $stack181, seconds#54, $stack153, minutes#91, $stack126, hours#128, $stack100, months#167, days#168, $stack54;
+        org.jfree.data.time.RegularTimePeriod $stack88;
+        short milliseconds;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        date := @parameter0: java.util.Date;
+
+        unit := @parameter1: org.jfree.chart.axis.DateTickUnit;
+
+        $stack20 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack19 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>($stack20, $stack19);
+
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(date);
+
+        count = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getMultiple()>();
+
+        $stack23 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getCalendarField()>();
+
+        current = virtualinvoke calendar.<java.util.Calendar: int get(int)>($stack23);
+
+        $stack25 = current / count;
+
+        value = count * $stack25;
+
+        $stack26 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack27 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack28 = virtualinvoke $stack26.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack27);
+
+        if $stack28 == 0 goto label02;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        months = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        days = virtualinvoke calendar.<java.util.Calendar: int get(int)>(5);
+
+        hours = virtualinvoke calendar.<java.util.Calendar: int get(int)>(11);
+
+        minutes = virtualinvoke calendar.<java.util.Calendar: int get(int)>(12);
+
+        seconds = virtualinvoke calendar.<java.util.Calendar: int get(int)>(13);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, months, days, hours, minutes, seconds);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, value);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack205 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack206 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack207 = $stack205 cmp $stack206;
+
+        if $stack207 < 0 goto label01;
+
+        $stack208 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, $stack208);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label01:
+        return mm;
+
+     label02:
+        $stack29 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack30 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack31 = virtualinvoke $stack29.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack30);
+
+        if $stack31 == 0 goto label07;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        months = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        days = virtualinvoke calendar.<java.util.Calendar: int get(int)>(5);
+
+        hours = virtualinvoke calendar.<java.util.Calendar: int get(int)>(11);
+
+        minutes = virtualinvoke calendar.<java.util.Calendar: int get(int)>(12);
+
+        $stack175 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack174 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if $stack175 != $stack174 goto label03;
+
+        milliseconds = 0;
+
+        goto label05;
+
+     label03:
+        $stack177 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack176 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if $stack177 != $stack176 goto label04;
+
+        milliseconds = 500;
+
+        goto label05;
+
+     label04:
+        milliseconds = 999;
+
+     label05:
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, milliseconds);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, months, days, hours, minutes, value);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack179 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack180 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack181 = $stack179 cmp $stack180;
+
+        if $stack181 < 0 goto label06;
+
+        $stack182 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(13, $stack182);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label06:
+        return mm;
+
+     label07:
+        $stack32 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack33 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack34 = virtualinvoke $stack32.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack33);
+
+        if $stack34 == 0 goto label12;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        months = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        days = virtualinvoke calendar.<java.util.Calendar: int get(int)>(5);
+
+        hours = virtualinvoke calendar.<java.util.Calendar: int get(int)>(11);
+
+        $stack147 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack146 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if $stack147 != $stack146 goto label08;
+
+        seconds#54 = 0;
+
+        goto label10;
+
+     label08:
+        $stack149 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack148 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if $stack149 != $stack148 goto label09;
+
+        seconds#54 = 30;
+
+        goto label10;
+
+     label09:
+        seconds#54 = 59;
+
+     label10:
+        virtualinvoke calendar.<java.util.Calendar: void clear(int)>(14);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, months, days, hours, value, seconds#54);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack151 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack152 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack153 = $stack151 cmp $stack152;
+
+        if $stack153 < 0 goto label11;
+
+        $stack154 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(12, $stack154);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label11:
+        return mm;
+
+     label12:
+        $stack35 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack36 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack37 = virtualinvoke $stack35.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack36);
+
+        if $stack37 == 0 goto label17;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        months = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        days = virtualinvoke calendar.<java.util.Calendar: int get(int)>(5);
+
+        $stack120 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack119 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if $stack120 != $stack119 goto label13;
+
+        minutes#91 = 0;
+
+        seconds#54 = 0;
+
+        goto label15;
+
+     label13:
+        $stack122 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack121 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if $stack122 != $stack121 goto label14;
+
+        minutes#91 = 30;
+
+        seconds#54 = 0;
+
+        goto label15;
+
+     label14:
+        minutes#91 = 59;
+
+        seconds#54 = 59;
+
+     label15:
+        virtualinvoke calendar.<java.util.Calendar: void clear(int)>(14);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, months, days, value, minutes#91, seconds#54);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack124 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack125 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack126 = $stack124 cmp $stack125;
+
+        if $stack126 < 0 goto label16;
+
+        $stack127 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(11, $stack127);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label16:
+        return mm;
+
+     label17:
+        $stack38 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack39 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack40 = virtualinvoke $stack38.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack39);
+
+        if $stack40 == 0 goto label22;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        months = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+
+        $stack94 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack93 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if $stack94 != $stack93 goto label18;
+
+        hours#128 = 0;
+
+        goto label20;
+
+     label18:
+        $stack96 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack95 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if $stack96 != $stack95 goto label19;
+
+        hours#128 = 12;
+
+        goto label20;
+
+     label19:
+        hours#128 = 23;
+
+     label20:
+        virtualinvoke calendar.<java.util.Calendar: void clear(int)>(14);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, months, value, hours#128, 0, 0);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack98 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack99 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack100 = $stack98 cmp $stack99;
+
+        if $stack100 < 0 goto label21;
+
+        $stack101 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(5, $stack101);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label21:
+        return mm;
+
+     label22:
+        $stack41 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack42 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack43 = virtualinvoke $stack41.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack42);
+
+        if $stack43 == 0 goto label26;
+
+        $stack70 = current + 1;
+
+        $stack71 = $stack70 / count;
+
+        $stack72 = count * $stack71;
+
+        value = $stack72 - 1;
+
+        years = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+
+        virtualinvoke calendar.<java.util.Calendar: void clear(int)>(14);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(years, value, 1, 0, 0, 0);
+
+        $stack74 = new org.jfree.data.time.Month;
+
+        $stack75 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack77 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack76 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        specialinvoke $stack74.<org.jfree.data.time.Month: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>($stack75, $stack77, $stack76);
+
+        mm#164 = $stack74;
+
+        $stack78 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        standardDate = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateDateForPosition(org.jfree.data.time.RegularTimePeriod,org.jfree.chart.axis.DateTickMarkPosition)>($stack74, $stack78);
+
+        millis = virtualinvoke standardDate.<java.util.Date: long getTime()>();
+
+        $stack81 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack82 = millis cmp $stack81;
+
+        if $stack82 < 0 goto label25;
+
+        i = 0;
+
+     label23:
+        if i >= count goto label24;
+
+        $stack88 = virtualinvoke mm#164.<org.jfree.data.time.Month: org.jfree.data.time.RegularTimePeriod previous()>();
+
+        mm#164 = (org.jfree.data.time.Month) $stack88;
+
+        i = i + 1;
+
+        goto label23;
+
+     label24:
+        $stack83 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack84 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>($stack83);
+
+        virtualinvoke mm#164.<org.jfree.data.time.Month: void peg(java.util.Calendar)>($stack84);
+
+        $stack85 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        standardDate = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateDateForPosition(org.jfree.data.time.RegularTimePeriod,org.jfree.chart.axis.DateTickMarkPosition)>(mm#164, $stack85);
+
+     label25:
+        return standardDate;
+
+     label26:
+        $stack44 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack45 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack46 = virtualinvoke $stack44.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack45);
+
+        if $stack46 == 0 goto label31;
+
+        $stack48 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack47 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if $stack48 != $stack47 goto label27;
+
+        months#167 = 0;
+
+        days#168 = 1;
+
+        goto label29;
+
+     label27:
+        $stack50 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack49 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if $stack50 != $stack49 goto label28;
+
+        months#167 = 6;
+
+        days#168 = 1;
+
+        goto label29;
+
+     label28:
+        months#167 = 11;
+
+        days#168 = 31;
+
+     label29:
+        virtualinvoke calendar.<java.util.Calendar: void clear(int)>(14);
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(value, months#167, days#168, 0, 0, 0);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        $stack52 = virtualinvoke mm.<java.util.Date: long getTime()>();
+
+        $stack53 = virtualinvoke date.<java.util.Date: long getTime()>();
+
+        $stack54 = $stack52 cmp $stack53;
+
+        if $stack54 < 0 goto label30;
+
+        $stack55 = value - count;
+
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(1, $stack55);
+
+        mm = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+     label30:
+        return mm;
+
+     label31:
+        return null;
+    }
+
+    private java.util.Date calculateDateForPosition(org.jfree.data.time.RegularTimePeriod, org.jfree.chart.axis.DateTickMarkPosition)
+    {
+        org.jfree.data.time.RegularTimePeriod period;
+        org.jfree.chart.axis.DateTickMarkPosition position, $stack4, $stack5, $stack6;
+        java.util.Date $stack7, $stack10, $stack12, result;
+        long $stack8, $stack11, $stack13;
+        org.jfree.chart.axis.DateAxis this;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        period := @parameter0: org.jfree.data.time.RegularTimePeriod;
+
+        position := @parameter1: org.jfree.chart.axis.DateTickMarkPosition;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(period, "period");
+
+        result = null;
+
+        $stack4 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition START>;
+
+        if position != $stack4 goto label1;
+
+        $stack12 = new java.util.Date;
+
+        $stack13 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getFirstMillisecond()>();
+
+        specialinvoke $stack12.<java.util.Date: void <init>(long)>($stack13);
+
+        result = $stack12;
+
+        goto label3;
+
+     label1:
+        $stack5 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition MIDDLE>;
+
+        if position != $stack5 goto label2;
+
+        $stack10 = new java.util.Date;
+
+        $stack11 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getMiddleMillisecond()>();
+
+        specialinvoke $stack10.<java.util.Date: void <init>(long)>($stack11);
+
+        result = $stack10;
+
+        goto label3;
+
+     label2:
+        $stack6 = <org.jfree.chart.axis.DateTickMarkPosition: org.jfree.chart.axis.DateTickMarkPosition END>;
+
+        if position != $stack6 goto label3;
+
+        $stack7 = new java.util.Date;
+
+        $stack8 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getLastMillisecond()>();
+
+        specialinvoke $stack7.<java.util.Date: void <init>(long)>($stack8);
+
+        result = $stack7;
+
+     label3:
+        return result;
+    }
+
+    protected java.util.Date nextStandardDate(java.util.Date, org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.util.Date date, previous, $stack11;
+        org.jfree.chart.axis.DateTickUnit unit;
+        java.util.Locale $stack6;
+        java.util.TimeZone $stack7;
+        java.util.Calendar calendar;
+        int $stack9, $stack10;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        date := @parameter0: java.util.Date;
+
+        unit := @parameter1: org.jfree.chart.axis.DateTickUnit;
+
+        previous = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date previousStandardDate(java.util.Date,org.jfree.chart.axis.DateTickUnit)>(date, unit);
+
+        $stack7 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack6 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>($stack7, $stack6);
+
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(previous);
+
+        $stack9 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getCalendarField()>();
+
+        $stack10 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getMultiple()>();
+
+        virtualinvoke calendar.<java.util.Calendar: void add(int,int)>($stack9, $stack10);
+
+        $stack11 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+
+        return $stack11;
+    }
+
+    public static org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits()
+    {
+        java.util.TimeZone $stack0;
+        java.util.Locale $stack1;
+        org.jfree.chart.axis.TickUnitSource $stack2;
+
+        $stack0 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+
+        $stack1 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits(java.util.TimeZone,java.util.Locale)>($stack0, $stack1);
+
+        return $stack2;
+    }
+
+    public static org.jfree.chart.axis.TickUnitSource createStandardDateTickUnits(java.util.TimeZone, java.util.Locale)
+    {
+        java.util.TimeZone zone;
+        java.util.Locale locale;
+        org.jfree.chart.axis.TickUnits $stack10;
+        java.text.SimpleDateFormat $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17;
+        org.jfree.chart.axis.DateTickUnit $stack18, $stack20, $stack23, $stack26, $stack29, $stack32, $stack35, $stack38, $stack41, $stack44, $stack47, $stack50, $stack53, $stack56, $stack59, $stack62, $stack65, $stack68, $stack71, $stack74, $stack77, $stack80, $stack83, $stack86, $stack89, $stack92, $stack95, $stack98, $stack101, $stack104, $stack107, $stack110, $stack113, $stack116, $stack119, $stack122, $stack125, $stack128, $stack131, $stack134;
+        org.jfree.chart.axis.DateTickUnitType $stack19, $stack21, $stack22, $stack24, $stack25, $stack27, $stack28, $stack30, $stack31, $stack33, $stack34, $stack36, $stack37, $stack39, $stack40, $stack42, $stack43, $stack45, $stack46, $stack48, $stack49, $stack51, $stack52, $stack54, $stack55, $stack57, $stack58, $stack60, $stack61, $stack63, $stack64, $stack66, $stack67, $stack69, $stack70, $stack72, $stack73, $stack75, $stack76, $stack78, $stack79, $stack81, $stack82, $stack84, $stack85, $stack87, $stack88, $stack90, $stack91, $stack93, $stack94, $stack96, $stack97, $stack99, $stack100, $stack102, $stack103, $stack105, $stack106, $stack108, $stack109, $stack111, $stack112, $stack114, $stack115, $stack117, $stack118, $stack120, $stack121, $stack123, $stack124, $stack126, $stack127, $stack129, $stack130, $stack132, $stack133, $stack135, $stack136;
+
+        zone := @parameter0: java.util.TimeZone;
+
+        locale := @parameter1: java.util.Locale;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(zone, "zone");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(locale, "locale");
+
+        $stack10 = new org.jfree.chart.axis.TickUnits;
+
+        specialinvoke $stack10.<org.jfree.chart.axis.TickUnits: void <init>()>();
+
+        $stack11 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack11.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("HH:mm:ss.SSS", locale);
+
+        $stack12 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack12.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("HH:mm:ss", locale);
+
+        $stack13 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack13.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("HH:mm", locale);
+
+        $stack14 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack14.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("d-MMM, HH:mm", locale);
+
+        $stack15 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack15.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("d-MMM", locale);
+
+        $stack16 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack16.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("MMM-yyyy", locale);
+
+        $stack17 = new java.text.SimpleDateFormat;
+
+        specialinvoke $stack17.<java.text.SimpleDateFormat: void <init>(java.lang.String,java.util.Locale)>("yyyy", locale);
+
+        virtualinvoke $stack11.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack12.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack13.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack14.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack15.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack16.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        virtualinvoke $stack17.<java.text.DateFormat: void setTimeZone(java.util.TimeZone)>(zone);
+
+        $stack18 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack19 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack18.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack19, 1, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack18);
+
+        $stack20 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack22 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack21 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack20.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack22, 5, $stack21, 1, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack20);
+
+        $stack23 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack25 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack24 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack23.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack25, 10, $stack24, 1, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack23);
+
+        $stack26 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack28 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack27 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack26.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack28, 25, $stack27, 5, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack26);
+
+        $stack29 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack31 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack30 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack29.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack31, 50, $stack30, 10, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack29);
+
+        $stack32 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack34 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack33 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack32.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack34, 100, $stack33, 10, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack32);
+
+        $stack35 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack37 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack36 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack35.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack37, 250, $stack36, 10, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack35);
+
+        $stack38 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack40 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        $stack39 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack38.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack40, 500, $stack39, 50, $stack11);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack38);
+
+        $stack41 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack43 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack42 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MILLISECOND>;
+
+        specialinvoke $stack41.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack43, 1, $stack42, 50, $stack12);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack41);
+
+        $stack44 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack46 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack45 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        specialinvoke $stack44.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack46, 5, $stack45, 1, $stack12);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack44);
+
+        $stack47 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack49 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack48 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        specialinvoke $stack47.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack49, 10, $stack48, 1, $stack12);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack47);
+
+        $stack50 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack52 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        $stack51 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        specialinvoke $stack50.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack52, 30, $stack51, 5, $stack12);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack50);
+
+        $stack53 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack55 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack54 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        specialinvoke $stack53.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack55, 1, $stack54, 5, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack53);
+
+        $stack56 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack58 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack57 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType SECOND>;
+
+        specialinvoke $stack56.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack58, 2, $stack57, 10, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack56);
+
+        $stack59 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack61 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack60 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack59.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack61, 5, $stack60, 1, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack59);
+
+        $stack62 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack64 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack63 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack62.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack64, 10, $stack63, 1, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack62);
+
+        $stack65 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack67 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack66 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack65.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack67, 15, $stack66, 5, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack65);
+
+        $stack68 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack70 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack69 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack68.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack70, 20, $stack69, 5, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack68);
+
+        $stack71 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack73 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        $stack72 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack71.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack73, 30, $stack72, 5, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack71);
+
+        $stack74 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack76 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack75 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack74.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack76, 1, $stack75, 5, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack74);
+
+        $stack77 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack79 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack78 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack77.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack79, 2, $stack78, 10, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack77);
+
+        $stack80 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack82 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack81 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MINUTE>;
+
+        specialinvoke $stack80.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack82, 4, $stack81, 30, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack80);
+
+        $stack83 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack85 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack84 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        specialinvoke $stack83.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack85, 6, $stack84, 1, $stack13);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack83);
+
+        $stack86 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack88 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        $stack87 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        specialinvoke $stack86.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack88, 12, $stack87, 1, $stack14);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack86);
+
+        $stack89 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack91 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack90 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        specialinvoke $stack89.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack91, 1, $stack90, 1, $stack15);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack89);
+
+        $stack92 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack94 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack93 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType HOUR>;
+
+        specialinvoke $stack92.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack94, 2, $stack93, 1, $stack15);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack92);
+
+        $stack95 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack97 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack96 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        specialinvoke $stack95.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack97, 7, $stack96, 1, $stack15);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack95);
+
+        $stack98 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack100 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        $stack99 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        specialinvoke $stack98.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack100, 15, $stack99, 1, $stack15);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack98);
+
+        $stack101 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack103 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack102 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        specialinvoke $stack101.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack103, 1, $stack102, 1, $stack16);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack101);
+
+        $stack104 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack106 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack105 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType DAY>;
+
+        specialinvoke $stack104.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack106, 2, $stack105, 1, $stack16);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack104);
+
+        $stack107 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack109 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack108 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        specialinvoke $stack107.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack109, 3, $stack108, 1, $stack16);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack107);
+
+        $stack110 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack112 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack111 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        specialinvoke $stack110.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack112, 4, $stack111, 1, $stack16);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack110);
+
+        $stack113 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack115 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack114 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        specialinvoke $stack113.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack115, 6, $stack114, 1, $stack16);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack113);
+
+        $stack116 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack118 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack117 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        specialinvoke $stack116.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack118, 1, $stack117, 1, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack116);
+
+        $stack119 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack121 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack120 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        specialinvoke $stack119.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack121, 2, $stack120, 3, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack119);
+
+        $stack122 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack124 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack123 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        specialinvoke $stack122.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack124, 5, $stack123, 1, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack122);
+
+        $stack125 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack127 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack126 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        specialinvoke $stack125.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack127, 10, $stack126, 1, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack125);
+
+        $stack128 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack130 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack129 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        specialinvoke $stack128.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack130, 25, $stack129, 5, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack128);
+
+        $stack131 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack133 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack132 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        specialinvoke $stack131.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack133, 50, $stack132, 10, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack131);
+
+        $stack134 = new org.jfree.chart.axis.DateTickUnit;
+
+        $stack136 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack135 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        specialinvoke $stack134.<org.jfree.chart.axis.DateTickUnit: void <init>(org.jfree.chart.axis.DateTickUnitType,int,org.jfree.chart.axis.DateTickUnitType,int,java.text.DateFormat)>($stack136, 100, $stack135, 20, $stack17);
+
+        virtualinvoke $stack10.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack134);
+
+        return $stack10;
+    }
+
+    protected void autoAdjustRange()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.plot.Plot plot;
+        boolean $stack17;
+        org.jfree.chart.plot.ValueAxisPlot vap;
+        org.jfree.chart.axis.Timeline $stack19, $stack26, $stack40, $stack42;
+        double $stack20, $stack23, $stack24, $stack27, $stack31, $stack32, $stack34, $stack35, $stack37, $stack38, $stack47, $stack48, range;
+        long $stack21, fixedAutoRange, $stack28, $stack30, minRange, $stack36, $stack39, $stack49, expand, upper, lower;
+        byte $stack25, $stack33;
+        org.jfree.data.time.DateRange $stack68, $stack44;
+        org.jfree.data.Range r;
+        java.util.Date $stack45, $stack46;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        plot = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.plot.Plot getPlot()>();
+
+        if plot != null goto label1;
+
+        return;
+
+     label1:
+        $stack17 = plot instanceof org.jfree.chart.plot.ValueAxisPlot;
+
+        if $stack17 == 0 goto label6;
+
+        vap = (org.jfree.chart.plot.ValueAxisPlot) plot;
+
+        r = interfaceinvoke vap.<org.jfree.chart.plot.ValueAxisPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(this);
+
+        if r != null goto label2;
+
+        $stack68 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack68.<org.jfree.data.time.DateRange: void <init>()>();
+
+        r = $stack68;
+
+     label2:
+        $stack19 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack20 = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack21 = (long) $stack20;
+
+        upper = interfaceinvoke $stack19.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack21);
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double getFixedAutoRange()>();
+
+        fixedAutoRange = (long) $stack23;
+
+        $stack24 = (double) fixedAutoRange;
+
+        $stack25 = $stack24 cmpl 0.0;
+
+        if $stack25 <= 0 goto label3;
+
+        lower = upper - fixedAutoRange;
+
+        goto label5;
+
+     label3:
+        $stack26 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack27 = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack28 = (long) $stack27;
+
+        lower = interfaceinvoke $stack26.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack28);
+
+        $stack30 = upper - lower;
+
+        range = (double) $stack30;
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double getAutoRangeMinimumSize()>();
+
+        minRange = (long) $stack31;
+
+        $stack32 = (double) minRange;
+
+        $stack33 = range cmpg $stack32;
+
+        if $stack33 >= 0 goto label4;
+
+        $stack47 = (double) minRange;
+
+        $stack48 = $stack47 - range;
+
+        $stack49 = (long) $stack48;
+
+        expand = $stack49 / 2L;
+
+        upper = upper + expand;
+
+        lower = lower - expand;
+
+     label4:
+        $stack34 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double getUpperMargin()>();
+
+        $stack35 = range * $stack34;
+
+        $stack36 = (long) $stack35;
+
+        upper = upper + $stack36;
+
+        $stack37 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double getLowerMargin()>();
+
+        $stack38 = range * $stack37;
+
+        $stack39 = (long) $stack38;
+
+        lower = lower - $stack39;
+
+     label5:
+        $stack40 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        upper = interfaceinvoke $stack40.<org.jfree.chart.axis.Timeline: long toMillisecond(long)>(upper);
+
+        $stack42 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        lower = interfaceinvoke $stack42.<org.jfree.chart.axis.Timeline: long toMillisecond(long)>(lower);
+
+        $stack44 = new org.jfree.data.time.DateRange;
+
+        $stack45 = new java.util.Date;
+
+        specialinvoke $stack45.<java.util.Date: void <init>(long)>(lower);
+
+        $stack46 = new java.util.Date;
+
+        specialinvoke $stack46.<java.util.Date: void <init>(long)>(upper);
+
+        specialinvoke $stack44.<org.jfree.data.time.DateRange: void <init>(java.util.Date,java.util.Date)>($stack45, $stack46);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack44, 0, 0);
+
+     label6:
+        return;
+    }
+
+    protected void selectAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack4, $stack5;
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack4 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack4 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void selectHorizontalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+        goto label2;
+
+     label1:
+        $stack5 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack5 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void selectVerticalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label2:
+        return;
+    }
+
+    protected void selectHorizontalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        double zero, $stack27, x1, $stack29, unit1Width, $stack31, $stack32, guess, $stack34, x2, $stack36, unit2Width, tickLabelWidth;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.DateTickUnit $stack22, $stack25, unit2;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        org.jfree.chart.axis.TickUnit unit1, $stack33, $stack40;
+        byte $stack39;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        zero = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(0.0, dataArea, edge);
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit getTickUnit()>();
+
+        tickLabelWidth = specialinvoke this.<org.jfree.chart.axis.DateAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.DateTickUnit)>(g2, $stack22);
+
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        $stack25 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit getTickUnit()>();
+
+        unit1 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)>($stack25);
+
+        $stack27 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        x1 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack27, dataArea, edge);
+
+        $stack29 = x1 - zero;
+
+        unit1Width = staticinvoke <java.lang.Math: double abs(double)>($stack29);
+
+        $stack31 = tickLabelWidth / unit1Width;
+
+        $stack32 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        guess = $stack31 * $stack32;
+
+        $stack33 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(guess);
+
+        unit2 = (org.jfree.chart.axis.DateTickUnit) $stack33;
+
+        $stack34 = virtualinvoke unit2.<org.jfree.chart.axis.DateTickUnit: double getSize()>();
+
+        x2 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack34, dataArea, edge);
+
+        $stack36 = x2 - zero;
+
+        unit2Width = staticinvoke <java.lang.Math: double abs(double)>($stack36);
+
+        tickLabelWidth = specialinvoke this.<org.jfree.chart.axis.DateAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.DateTickUnit)>(g2, unit2);
+
+        $stack39 = tickLabelWidth cmpl unit2Width;
+
+        if $stack39 <= 0 goto label1;
+
+        $stack40 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(unit2);
+
+        unit2 = (org.jfree.chart.axis.DateTickUnit) $stack40;
+
+     label1:
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setTickUnit(org.jfree.chart.axis.DateTickUnit,boolean,boolean)>(unit2, 0, 0);
+
+        return;
+    }
+
+    protected void selectVerticalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        double zero, $stack29, estimate1, labelHeight1, $stack32, y1, $stack34, candidate1UnitHeight, $stack36, $stack37, estimate2, labelHeight2, $stack40, y2, $stack42, unit2Height;
+        org.jfree.data.Range $stack28;
+        org.jfree.chart.axis.TickUnit $stack30, $stack38, $stack45;
+        org.jfree.chart.axis.DateTickUnit candidate1, candidate2, finalUnit;
+        java.awt.Graphics2D g2;
+        byte $stack44;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        zero = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(0.0, dataArea, edge);
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack29 = virtualinvoke $stack28.<org.jfree.data.Range: double getLength()>();
+
+        estimate1 = $stack29 / 10.0;
+
+        $stack30 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(estimate1);
+
+        candidate1 = (org.jfree.chart.axis.DateTickUnit) $stack30;
+
+        labelHeight1 = specialinvoke this.<org.jfree.chart.axis.DateAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D,org.jfree.chart.axis.DateTickUnit)>(g2, candidate1);
+
+        $stack32 = virtualinvoke candidate1.<org.jfree.chart.axis.DateTickUnit: double getSize()>();
+
+        y1 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack32, dataArea, edge);
+
+        $stack34 = y1 - zero;
+
+        candidate1UnitHeight = staticinvoke <java.lang.Math: double abs(double)>($stack34);
+
+        $stack36 = labelHeight1 / candidate1UnitHeight;
+
+        $stack37 = virtualinvoke candidate1.<org.jfree.chart.axis.DateTickUnit: double getSize()>();
+
+        estimate2 = $stack36 * $stack37;
+
+        $stack38 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(estimate2);
+
+        candidate2 = (org.jfree.chart.axis.DateTickUnit) $stack38;
+
+        labelHeight2 = specialinvoke this.<org.jfree.chart.axis.DateAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D,org.jfree.chart.axis.DateTickUnit)>(g2, candidate2);
+
+        $stack40 = virtualinvoke candidate2.<org.jfree.chart.axis.DateTickUnit: double getSize()>();
+
+        y2 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack40, dataArea, edge);
+
+        $stack42 = y2 - zero;
+
+        unit2Height = staticinvoke <java.lang.Math: double abs(double)>($stack42);
+
+        $stack44 = labelHeight2 cmpg unit2Height;
+
+        if $stack44 >= 0 goto label1;
+
+        finalUnit = candidate2;
+
+        goto label2;
+
+     label1:
+        $stack45 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(candidate2);
+
+        finalUnit = (org.jfree.chart.axis.DateTickUnit) $stack45;
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setTickUnit(org.jfree.chart.axis.DateTickUnit,boolean,boolean)>(finalUnit, 0, 0);
+
+        return;
+    }
+
+    private double estimateMaximumTickLabelWidth(java.awt.Graphics2D, org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.ui.RectangleInsets tickLabelInsets;
+        double $stack21, $stack22, w1, w2, $stack36, $stack53, result;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.font.LineMetrics lm;
+        boolean $stack26;
+        org.jfree.data.Range $stack27;
+        org.jfree.data.time.DateRange range;
+        java.util.Date lower, upper;
+        java.text.DateFormat formatter;
+        org.jfree.chart.axis.DateTickUnit unit;
+        java.awt.FontMetrics fm;
+        int $stack34, $stack35;
+        float $stack52;
+        java.lang.String lowerStr, upperStr;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        unit := @parameter1: org.jfree.chart.axis.DateTickUnit;
+
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        $stack21 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getLeft()>();
+
+        $stack22 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getRight()>();
+
+        result = $stack21 + $stack22;
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.awt.Font getTickLabelFont()>();
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        lm = virtualinvoke tickLabelFont.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("ABCxyz", frc);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isVerticalTickLabels()>();
+
+        if $stack26 == 0 goto label1;
+
+        $stack52 = virtualinvoke lm.<java.awt.font.LineMetrics: float getHeight()>();
+
+        $stack53 = (double) $stack52;
+
+        result = result + $stack53;
+
+        goto label4;
+
+     label1:
+        $stack27 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        range = (org.jfree.data.time.DateRange) $stack27;
+
+        lower = virtualinvoke range.<org.jfree.data.time.DateRange: java.util.Date getLowerDate()>();
+
+        upper = virtualinvoke range.<org.jfree.data.time.DateRange: java.util.Date getUpperDate()>();
+
+        formatter = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat getDateFormatOverride()>();
+
+        if formatter == null goto label2;
+
+        lowerStr = virtualinvoke formatter.<java.text.DateFormat: java.lang.String format(java.util.Date)>(lower);
+
+        upperStr = virtualinvoke formatter.<java.text.DateFormat: java.lang.String format(java.util.Date)>(upper);
+
+        goto label3;
+
+     label2:
+        lowerStr = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(lower);
+
+        upperStr = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(upper);
+
+     label3:
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(tickLabelFont);
+
+        $stack34 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(lowerStr);
+
+        w1 = (double) $stack34;
+
+        $stack35 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(upperStr);
+
+        w2 = (double) $stack35;
+
+        $stack36 = staticinvoke <java.lang.Math: double max(double,double)>(w1, w2);
+
+        result = result + $stack36;
+
+     label4:
+        return result;
+    }
+
+    private double estimateMaximumTickLabelHeight(java.awt.Graphics2D, org.jfree.chart.axis.DateTickUnit)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.ui.RectangleInsets tickLabelInsets;
+        double $stack21, $stack22, w1, w2, $stack36, $stack53, result;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.font.LineMetrics lm;
+        boolean $stack26;
+        org.jfree.data.Range $stack27;
+        org.jfree.data.time.DateRange range;
+        java.util.Date lower, upper;
+        java.text.DateFormat formatter;
+        org.jfree.chart.axis.DateTickUnit unit;
+        java.awt.FontMetrics fm;
+        int $stack34, $stack35;
+        float $stack52;
+        java.lang.String lowerStr, upperStr;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        unit := @parameter1: org.jfree.chart.axis.DateTickUnit;
+
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        $stack21 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getTop()>();
+
+        $stack22 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getBottom()>();
+
+        result = $stack21 + $stack22;
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.awt.Font getTickLabelFont()>();
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        lm = virtualinvoke tickLabelFont.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("ABCxyz", frc);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isVerticalTickLabels()>();
+
+        if $stack26 != 0 goto label1;
+
+        $stack52 = virtualinvoke lm.<java.awt.font.LineMetrics: float getHeight()>();
+
+        $stack53 = (double) $stack52;
+
+        result = result + $stack53;
+
+        goto label4;
+
+     label1:
+        $stack27 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        range = (org.jfree.data.time.DateRange) $stack27;
+
+        lower = virtualinvoke range.<org.jfree.data.time.DateRange: java.util.Date getLowerDate()>();
+
+        upper = virtualinvoke range.<org.jfree.data.time.DateRange: java.util.Date getUpperDate()>();
+
+        formatter = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat getDateFormatOverride()>();
+
+        if formatter == null goto label2;
+
+        lowerStr = virtualinvoke formatter.<java.text.DateFormat: java.lang.String format(java.util.Date)>(lower);
+
+        upperStr = virtualinvoke formatter.<java.text.DateFormat: java.lang.String format(java.util.Date)>(upper);
+
+        goto label3;
+
+     label2:
+        lowerStr = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(lower);
+
+        upperStr = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(upper);
+
+     label3:
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(tickLabelFont);
+
+        $stack34 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(lowerStr);
+
+        w1 = (double) $stack34;
+
+        $stack35 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(upperStr);
+
+        w2 = (double) $stack35;
+
+        $stack36 = staticinvoke <java.lang.Math: double max(double,double)>(w1, w2);
+
+        result = result + $stack36;
+
+     label4:
+        return result;
+    }
+
+    public java.util.List refreshTicks(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack6, $stack7;
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.AxisState state;
+        java.util.List result;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        result = null;
+
+        $stack6 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack6 == 0 goto label1;
+
+        result = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.List refreshTicksHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+        goto label2;
+
+     label1:
+        $stack7 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack7 == 0 goto label2;
+
+        result = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.List refreshTicksVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label2:
+        return result;
+    }
+
+    private java.util.Date correctTickDateForPosition(java.util.Date, org.jfree.chart.axis.DateTickUnit, org.jfree.chart.axis.DateTickMarkPosition)
+    {
+        java.util.Date time, result;
+        org.jfree.chart.axis.DateTickUnit unit;
+        org.jfree.chart.axis.DateTickUnitType $stack5, $stack6, $stack8, $stack9;
+        boolean $stack7, $stack10;
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.data.time.Year $stack11;
+        java.util.Locale $stack12, $stack17;
+        java.util.TimeZone $stack13, $stack18;
+        org.jfree.chart.axis.DateTickMarkPosition position;
+        org.jfree.data.time.Month $stack16;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        time := @parameter0: java.util.Date;
+
+        unit := @parameter1: org.jfree.chart.axis.DateTickUnit;
+
+        position := @parameter2: org.jfree.chart.axis.DateTickMarkPosition;
+
+        result = time;
+
+        $stack5 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack6 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType MONTH>;
+
+        $stack7 = virtualinvoke $stack5.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack6);
+
+        if $stack7 == 0 goto label1;
+
+        $stack16 = new org.jfree.data.time.Month;
+
+        $stack18 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack17 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        specialinvoke $stack16.<org.jfree.data.time.Month: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>(time, $stack18, $stack17);
+
+        result = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateDateForPosition(org.jfree.data.time.RegularTimePeriod,org.jfree.chart.axis.DateTickMarkPosition)>($stack16, position);
+
+        goto label2;
+
+     label1:
+        $stack8 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: org.jfree.chart.axis.DateTickUnitType getUnitType()>();
+
+        $stack9 = <org.jfree.chart.axis.DateTickUnitType: org.jfree.chart.axis.DateTickUnitType YEAR>;
+
+        $stack10 = virtualinvoke $stack8.<org.jfree.chart.axis.DateTickUnitType: boolean equals(java.lang.Object)>($stack9);
+
+        if $stack10 == 0 goto label2;
+
+        $stack11 = new org.jfree.data.time.Year;
+
+        $stack13 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack12 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        specialinvoke $stack11.<org.jfree.data.time.Year: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>(time, $stack13, $stack12);
+
+        result = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateDateForPosition(org.jfree.data.time.RegularTimePeriod,org.jfree.chart.axis.DateTickMarkPosition)>($stack11, position);
+
+     label2:
+        return result;
+    }
+
+    protected java.util.List refreshTicksHorizontal(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack29;
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        boolean $stack31, $stack42, $stack50, $stack65, $stack68, $stack102, $stack103, hasRolled, $stack35;
+        org.jfree.chart.axis.DateTickUnit unit, $stack48;
+        java.util.Date upperDate, $stack38, $stack70, $stack105, tickDate;
+        long lowestTickTime, $stack39, distance, $stack41, currentTickTime, nextTickTime, $stack58, $stack59, $stack60, $stack61, $stack62, minorTickTime, $stack93, $stack94, $stack95, $stack96;
+        java.util.TimeZone $stack37, $stack43, $stack55;
+        org.jfree.chart.ui.RectangleEdge edge, $stack51, $stack89;
+        org.jfree.data.Range $stack63, $stack100;
+        double $stack64, $stack101, angle;
+        org.jfree.chart.axis.DateTick $stack69, $stack104, $stack52;
+        org.jfree.chart.axis.TickType $stack71, $stack106;
+        org.jfree.chart.ui.TextAnchor $stack72, $stack73, $stack107, $stack108, anchor, rotationAnchor;
+        byte $stack97;
+        org.jfree.chart.axis.DateTickMarkPosition $stack112;
+        java.awt.geom.Rectangle2D dataArea;
+        int minorTickSpaces, minorTick;
+        java.text.DateFormat minorTickTime;
+        java.lang.String minorTick#17;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack29 = new java.util.ArrayList;
+
+        specialinvoke $stack29.<java.util.ArrayList: void <init>()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label01;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label01:
+        unit = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit getTickUnit()>();
+
+        tickDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateLowestVisibleTickValue(org.jfree.chart.axis.DateTickUnit)>(unit);
+
+        upperDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMaximumDate()>();
+
+        hasRolled = 0;
+
+     label02:
+        $stack35 = virtualinvoke tickDate.<java.util.Date: boolean before(java.util.Date)>(upperDate);
+
+        if $stack35 == 0 goto label19;
+
+        if hasRolled != 0 goto label03;
+
+        $stack112 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        tickDate = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date correctTickDateForPosition(java.util.Date,org.jfree.chart.axis.DateTickUnit,org.jfree.chart.axis.DateTickMarkPosition)>(tickDate, unit, $stack112);
+
+     label03:
+        lowestTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack37 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack38 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date addToDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack37);
+
+        $stack39 = virtualinvoke $stack38.<java.util.Date: long getTime()>();
+
+        distance = $stack39 - lowestTickTime;
+
+        minorTickSpaces = virtualinvoke this.<org.jfree.chart.axis.DateAxis: int getMinorTickCount()>();
+
+        if minorTickSpaces > 0 goto label04;
+
+        minorTickSpaces = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getMinorTickCount()>();
+
+     label04:
+        minorTick = 1;
+
+     label05:
+        if minorTick >= minorTickSpaces goto label07;
+
+        $stack93 = (long) minorTick;
+
+        $stack95 = distance * $stack93;
+
+        $stack94 = (long) minorTickSpaces;
+
+        $stack96 = $stack95 / $stack94;
+
+        minorTickTime = lowestTickTime - $stack96;
+
+        $stack97 = minorTickTime cmp 0L;
+
+        if $stack97 <= 0 goto label06;
+
+        $stack100 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack101 = (double) minorTickTime;
+
+        $stack102 = virtualinvoke $stack100.<org.jfree.data.Range: boolean contains(double)>($stack101);
+
+        if $stack102 == 0 goto label06;
+
+        $stack103 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>(minorTickTime);
+
+        if $stack103 != 0 goto label06;
+
+        $stack104 = new org.jfree.chart.axis.DateTick;
+
+        $stack106 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        $stack105 = new java.util.Date;
+
+        specialinvoke $stack105.<java.util.Date: void <init>(long)>(minorTickTime);
+
+        $stack108 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        $stack107 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack104.<org.jfree.chart.axis.DateTick: void <init>(org.jfree.chart.axis.TickType,java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack106, $stack105, "", $stack108, $stack107, 0.0);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack104);
+
+     label06:
+        minorTick = minorTick + 1;
+
+        goto label05;
+
+     label07:
+        $stack41 = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack42 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>($stack41);
+
+        if $stack42 != 0 goto label17;
+
+        minorTickTime = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat getDateFormatOverride()>();
+
+        if minorTickTime == null goto label08;
+
+        minorTick#17 = virtualinvoke minorTickTime.<java.text.DateFormat: java.lang.String format(java.util.Date)>(tickDate);
+
+        goto label09;
+
+     label08:
+        $stack48 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit>;
+
+        minorTick#17 = virtualinvoke $stack48.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(tickDate);
+
+     label09:
+        angle = 0.0;
+
+        $stack50 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isVerticalTickLabels()>();
+
+        if $stack50 == 0 goto label11;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        $stack89 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack89 goto label10;
+
+        angle = 1.5707963267948966;
+
+        goto label13;
+
+     label10:
+        angle = -1.5707963267948966;
+
+        goto label13;
+
+     label11:
+        $stack51 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack51 goto label12;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        goto label13;
+
+     label12:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+     label13:
+        $stack52 = new org.jfree.chart.axis.DateTick;
+
+        specialinvoke $stack52.<org.jfree.chart.axis.DateTick: void <init>(java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>(tickDate, minorTick#17, anchor, rotationAnchor, angle);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack52);
+
+        hasRolled = 0;
+
+        currentTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack55 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        tickDate = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date addToDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack55);
+
+        nextTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        minorTick = 1;
+
+     label14:
+        if minorTick >= minorTickSpaces goto label16;
+
+        $stack59 = nextTickTime - currentTickTime;
+
+        $stack58 = (long) minorTick;
+
+        $stack61 = $stack59 * $stack58;
+
+        $stack60 = (long) minorTickSpaces;
+
+        $stack62 = $stack61 / $stack60;
+
+        minorTickTime = currentTickTime + $stack62;
+
+        $stack63 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack64 = (double) minorTickTime;
+
+        $stack65 = virtualinvoke $stack63.<org.jfree.data.Range: boolean contains(double)>($stack64);
+
+        if $stack65 == 0 goto label15;
+
+        $stack68 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>(minorTickTime);
+
+        if $stack68 != 0 goto label15;
+
+        $stack69 = new org.jfree.chart.axis.DateTick;
+
+        $stack71 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        $stack70 = new java.util.Date;
+
+        specialinvoke $stack70.<java.util.Date: void <init>(long)>(minorTickTime);
+
+        $stack73 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        $stack72 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack69.<org.jfree.chart.axis.DateTick: void <init>(org.jfree.chart.axis.TickType,java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack71, $stack70, "", $stack73, $stack72, 0.0);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack69);
+
+     label15:
+        minorTick = minorTick + 1;
+
+        goto label14;
+
+     label16:
+        goto label18;
+
+     label17:
+        $stack43 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        tickDate = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date rollDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack43);
+
+        hasRolled = 1;
+
+     label18:
+        goto label02;
+
+     label19:
+        return $stack29;
+    }
+
+    protected java.util.List refreshTicksVertical(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack29;
+        org.jfree.chart.axis.DateAxis this;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        boolean $stack31, $stack42, $stack50, $stack65, $stack68, $stack102, $stack103, hasRolled, $stack35;
+        org.jfree.chart.axis.DateTickUnit unit, $stack48;
+        java.util.Date upperDate, $stack38, $stack70, $stack105, tickDate;
+        long lowestTickTime, $stack39, distance, $stack41, currentTickTime, nextTickTime, $stack58, $stack59, $stack60, $stack61, $stack62, minorTickTime, $stack93, $stack94, $stack95, $stack96;
+        java.util.TimeZone $stack37, $stack43, $stack55;
+        org.jfree.chart.ui.RectangleEdge edge, $stack51, $stack89;
+        org.jfree.data.Range $stack63, $stack100;
+        double $stack64, $stack101, angle;
+        org.jfree.chart.axis.DateTick $stack69, $stack104, $stack52;
+        org.jfree.chart.axis.TickType $stack71, $stack106;
+        org.jfree.chart.ui.TextAnchor $stack72, $stack73, $stack107, $stack108, anchor, rotationAnchor;
+        byte $stack97;
+        org.jfree.chart.axis.DateTickMarkPosition $stack112;
+        java.awt.geom.Rectangle2D dataArea;
+        int minorTickSpaces, minorTick;
+        java.text.DateFormat minorTickTime;
+        java.lang.String minorTick#17;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack29 = new java.util.ArrayList;
+
+        specialinvoke $stack29.<java.util.ArrayList: void <init>()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label01;
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label01:
+        unit = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit getTickUnit()>();
+
+        tickDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date calculateLowestVisibleTickValue(org.jfree.chart.axis.DateTickUnit)>(unit);
+
+        upperDate = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date getMaximumDate()>();
+
+        hasRolled = 0;
+
+     label02:
+        $stack35 = virtualinvoke tickDate.<java.util.Date: boolean before(java.util.Date)>(upperDate);
+
+        if $stack35 == 0 goto label19;
+
+        if hasRolled != 0 goto label03;
+
+        $stack112 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        tickDate = specialinvoke this.<org.jfree.chart.axis.DateAxis: java.util.Date correctTickDateForPosition(java.util.Date,org.jfree.chart.axis.DateTickUnit,org.jfree.chart.axis.DateTickMarkPosition)>(tickDate, unit, $stack112);
+
+     label03:
+        lowestTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack37 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack38 = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date addToDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack37);
+
+        $stack39 = virtualinvoke $stack38.<java.util.Date: long getTime()>();
+
+        distance = $stack39 - lowestTickTime;
+
+        minorTickSpaces = virtualinvoke this.<org.jfree.chart.axis.DateAxis: int getMinorTickCount()>();
+
+        if minorTickSpaces > 0 goto label04;
+
+        minorTickSpaces = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: int getMinorTickCount()>();
+
+     label04:
+        minorTick = 1;
+
+     label05:
+        if minorTick >= minorTickSpaces goto label07;
+
+        $stack93 = (long) minorTick;
+
+        $stack95 = distance * $stack93;
+
+        $stack94 = (long) minorTickSpaces;
+
+        $stack96 = $stack95 / $stack94;
+
+        minorTickTime = lowestTickTime - $stack96;
+
+        $stack97 = minorTickTime cmp 0L;
+
+        if $stack97 <= 0 goto label06;
+
+        $stack100 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack101 = (double) minorTickTime;
+
+        $stack102 = virtualinvoke $stack100.<org.jfree.data.Range: boolean contains(double)>($stack101);
+
+        if $stack102 == 0 goto label06;
+
+        $stack103 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>(minorTickTime);
+
+        if $stack103 != 0 goto label06;
+
+        $stack104 = new org.jfree.chart.axis.DateTick;
+
+        $stack106 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        $stack105 = new java.util.Date;
+
+        specialinvoke $stack105.<java.util.Date: void <init>(long)>(minorTickTime);
+
+        $stack108 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        $stack107 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack104.<org.jfree.chart.axis.DateTick: void <init>(org.jfree.chart.axis.TickType,java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack106, $stack105, "", $stack108, $stack107, 0.0);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack104);
+
+     label06:
+        minorTick = minorTick + 1;
+
+        goto label05;
+
+     label07:
+        $stack41 = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack42 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>($stack41);
+
+        if $stack42 != 0 goto label17;
+
+        minorTickTime = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat getDateFormatOverride()>();
+
+        if minorTickTime == null goto label08;
+
+        minorTick#17 = virtualinvoke minorTickTime.<java.text.DateFormat: java.lang.String format(java.util.Date)>(tickDate);
+
+        goto label09;
+
+     label08:
+        $stack48 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit>;
+
+        minorTick#17 = virtualinvoke $stack48.<org.jfree.chart.axis.DateTickUnit: java.lang.String dateToString(java.util.Date)>(tickDate);
+
+     label09:
+        angle = 0.0;
+
+        $stack50 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isVerticalTickLabels()>();
+
+        if $stack50 == 0 goto label11;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        $stack89 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack89 goto label10;
+
+        angle = -1.5707963267948966;
+
+        goto label13;
+
+     label10:
+        angle = 1.5707963267948966;
+
+        goto label13;
+
+     label11:
+        $stack51 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        if edge != $stack51 goto label12;
+
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        goto label13;
+
+     label12:
+        anchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_LEFT>;
+
+        rotationAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_LEFT>;
+
+     label13:
+        $stack52 = new org.jfree.chart.axis.DateTick;
+
+        specialinvoke $stack52.<org.jfree.chart.axis.DateTick: void <init>(java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>(tickDate, minorTick#17, anchor, rotationAnchor, angle);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack52);
+
+        hasRolled = 0;
+
+        currentTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        $stack55 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        tickDate = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date addToDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack55);
+
+        nextTickTime = virtualinvoke tickDate.<java.util.Date: long getTime()>();
+
+        minorTick = 1;
+
+     label14:
+        if minorTick >= minorTickSpaces goto label16;
+
+        $stack59 = nextTickTime - currentTickTime;
+
+        $stack58 = (long) minorTick;
+
+        $stack61 = $stack59 * $stack58;
+
+        $stack60 = (long) minorTickSpaces;
+
+        $stack62 = $stack61 / $stack60;
+
+        minorTickTime = currentTickTime + $stack62;
+
+        $stack63 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack64 = (double) minorTickTime;
+
+        $stack65 = virtualinvoke $stack63.<org.jfree.data.Range: boolean contains(double)>($stack64);
+
+        if $stack65 == 0 goto label15;
+
+        $stack68 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isHiddenValue(long)>(minorTickTime);
+
+        if $stack68 != 0 goto label15;
+
+        $stack69 = new org.jfree.chart.axis.DateTick;
+
+        $stack71 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        $stack70 = new java.util.Date;
+
+        specialinvoke $stack70.<java.util.Date: void <init>(long)>(minorTickTime);
+
+        $stack73 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        $stack72 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack69.<org.jfree.chart.axis.DateTick: void <init>(org.jfree.chart.axis.TickType,java.util.Date,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack71, $stack70, "", $stack73, $stack72, 0.0);
+
+        interfaceinvoke $stack29.<java.util.List: boolean add(java.lang.Object)>($stack69);
+
+     label15:
+        minorTick = minorTick + 1;
+
+        goto label14;
+
+     label16:
+        goto label18;
+
+     label17:
+        $stack43 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        tickDate = virtualinvoke unit.<org.jfree.chart.axis.DateTickUnit: java.util.Date rollDate(java.util.Date,java.util.TimeZone)>(tickDate, $stack43);
+
+        hasRolled = 1;
+
+     label18:
+        goto label02;
+
+     label19:
+        return $stack29;
+    }
+
+    public org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D, double, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        boolean $stack10;
+        java.awt.Graphics2D g2;
+        double cursor;
+        java.awt.geom.Rectangle2D plotArea, dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        java.text.AttributedString $stack12, $stack15;
+        java.lang.String $stack13;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.axis.AxisState $stack24, state;
+        java.util.List ticks;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        cursor := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack10 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isVisible()>();
+
+        if $stack10 != 0 goto label1;
+
+        $stack24 = new org.jfree.chart.axis.AxisState;
+
+        specialinvoke $stack24.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+
+        ticks = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, $stack24, dataArea, edge);
+
+        virtualinvoke $stack24.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>(ticks);
+
+        return $stack24;
+
+     label1:
+        state = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, cursor, plotArea, dataArea, edge);
+
+        $stack12 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.AttributedString getAttributedLabel()>();
+
+        if $stack12 == null goto label2;
+
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.text.AttributedString getAttributedLabel()>();
+
+        state = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.AxisState drawAttributedLabel(java.text.AttributedString,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack15, g2, plotArea, dataArea, edge, state);
+
+        goto label3;
+
+     label2:
+        $stack13 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: java.lang.String getLabel()>();
+
+        state = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack13, g2, plotArea, dataArea, edge, state);
+
+     label3:
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void createAndAddEntity(double,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(cursor, state, dataArea, edge, plotState);
+
+        return state;
+    }
+
+    public void zoomRange(double, double)
+    {
+        org.jfree.chart.axis.DateAxis this;
+        org.jfree.chart.axis.Timeline $stack16, $stack21, $stack33, $stack35;
+        org.jfree.data.Range $stack17, $stack22;
+        double $stack18, start, $stack23, end, length, lowerPercent, $stack27, $stack28, upperPercent, $stack29, $stack30, $stack36, $stack38, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50;
+        long $stack19, $stack20, $stack24, $stack25, $stack34, $stack37, adjStart, adjEnd;
+        boolean $stack26;
+        byte $stack31;
+        org.jfree.data.time.DateRange $stack32;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        $stack16 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack18 = virtualinvoke $stack17.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack19 = (long) $stack18;
+
+        $stack20 = interfaceinvoke $stack16.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack19);
+
+        start = (double) $stack20;
+
+        $stack21 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: org.jfree.data.Range getRange()>();
+
+        $stack23 = virtualinvoke $stack22.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack24 = (long) $stack23;
+
+        $stack25 = interfaceinvoke $stack21.<org.jfree.chart.axis.Timeline: long toTimelineValue(long)>($stack24);
+
+        end = (double) $stack25;
+
+        length = end - start;
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.DateAxis: boolean isInverted()>();
+
+        if $stack26 == 0 goto label1;
+
+        $stack45 = 1.0 - upperPercent;
+
+        $stack46 = length * $stack45;
+
+        $stack47 = start + $stack46;
+
+        adjStart = (long) $stack47;
+
+        $stack48 = 1.0 - lowerPercent;
+
+        $stack49 = length * $stack48;
+
+        $stack50 = start + $stack49;
+
+        adjEnd = (long) $stack50;
+
+        goto label2;
+
+     label1:
+        $stack27 = length * lowerPercent;
+
+        $stack28 = start + $stack27;
+
+        adjStart = (long) $stack28;
+
+        $stack29 = length * upperPercent;
+
+        $stack30 = start + $stack29;
+
+        adjEnd = (long) $stack30;
+
+     label2:
+        $stack31 = adjEnd cmp adjStart;
+
+        if $stack31 > 0 goto label3;
+
+        adjEnd = adjStart + 1L;
+
+     label3:
+        $stack32 = new org.jfree.data.time.DateRange;
+
+        $stack33 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack34 = interfaceinvoke $stack33.<org.jfree.chart.axis.Timeline: long toMillisecond(long)>(adjStart);
+
+        $stack36 = (double) $stack34;
+
+        $stack35 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack37 = interfaceinvoke $stack35.<org.jfree.chart.axis.Timeline: long toMillisecond(long)>(adjEnd);
+
+        $stack38 = (double) $stack37;
+
+        specialinvoke $stack32.<org.jfree.data.time.DateRange: void <init>(double,double)>($stack36, $stack38);
+
+        virtualinvoke this.<org.jfree.chart.axis.DateAxis: void setRange(org.jfree.data.Range)>($stack32);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.DateAxis this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15, $stack18, $stack21, $stack22;
+        java.util.TimeZone $stack4, $stack5;
+        java.util.Locale $stack7, $stack8;
+        org.jfree.chart.axis.DateTickUnit $stack10, $stack11;
+        java.text.DateFormat $stack13, $stack14;
+        org.jfree.chart.axis.DateTickMarkPosition $stack16, $stack17;
+        org.jfree.chart.axis.Timeline $stack19, $stack20;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.DateAxis;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.axis.DateAxis) obj;
+
+        $stack5 = this.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack4 = that.<org.jfree.chart.axis.DateAxis: java.util.TimeZone timeZone>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        $stack7 = that.<org.jfree.chart.axis.DateAxis: java.util.Locale locale>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit>;
+
+        $stack10 = that.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickUnit tickUnit>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack14 = this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride>;
+
+        $stack13 = that.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride>;
+
+        $stack15 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack14, $stack13);
+
+        if $stack15 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack17 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack16 = that.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.DateTickMarkPosition tickMarkPosition>;
+
+        $stack18 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack17, $stack16);
+
+        if $stack18 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack20 = this.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack19 = that.<org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline timeline>;
+
+        $stack21 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack20, $stack19);
+
+        if $stack21 != 0 goto label8;
+
+        return 0;
+
+     label8:
+        $stack22 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)>(obj);
+
+        return $stack22;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.DateAxis this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.axis.DateAxis this, clone;
+        java.lang.Object $stack2, $stack5;
+        java.text.DateFormat $stack3, $stack4, $stack6;
+
+        this := @this: org.jfree.chart.axis.DateAxis;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.axis.DateAxis) $stack2;
+
+        $stack3 = this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride>;
+
+        if $stack3 == null goto label1;
+
+        $stack4 = this.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride>;
+
+        $stack5 = virtualinvoke $stack4.<java.text.DateFormat: java.lang.Object clone()>();
+
+        $stack6 = (java.text.DateFormat) $stack5;
+
+        clone.<org.jfree.chart.axis.DateAxis: java.text.DateFormat dateFormatOverride> = $stack6;
+
+     label1:
+        return clone;
+    }
+
+    static void <clinit>()
+    {
+        org.jfree.data.time.DateRange $stack0;
+        java.util.Date $stack1;
+        org.jfree.chart.axis.DateAxis$DefaultTimeline $stack2;
+
+        <org.jfree.chart.axis.DateAxis: double DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS> = 2.0;
+
+        <org.jfree.chart.axis.DateAxis: long serialVersionUID> = -1013460999649007604L;
+
+        $stack0 = new org.jfree.data.time.DateRange;
+
+        specialinvoke $stack0.<org.jfree.data.time.DateRange: void <init>()>();
+
+        <org.jfree.chart.axis.DateAxis: org.jfree.data.time.DateRange DEFAULT_DATE_RANGE> = $stack0;
+
+        $stack1 = new java.util.Date;
+
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+
+        <org.jfree.chart.axis.DateAxis: java.util.Date DEFAULT_ANCHOR_DATE> = $stack1;
+
+        $stack2 = new org.jfree.chart.axis.DateAxis$DefaultTimeline;
+
+        specialinvoke $stack2.<org.jfree.chart.axis.DateAxis$DefaultTimeline: void <init>(org.jfree.chart.axis.DateAxis$1)>(null);
+
+        <org.jfree.chart.axis.DateAxis: org.jfree.chart.axis.Timeline DEFAULT_TIMELINE> = $stack2;
+
+        return;
+    }
+}

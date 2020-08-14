@@ -1,0 +1,2014 @@
+public class org.jfree.chart.axis.LogAxis extends org.jfree.chart.axis.ValueAxis
+{
+    private double base;
+    private double baseLog;
+    private java.lang.String baseSymbol;
+    private java.text.Format baseFormatter;
+    private double smallestValue;
+    private org.jfree.chart.axis.NumberTickUnit tickUnit;
+    private java.text.NumberFormat numberFormatOverride;
+
+    public void <init>()
+    {
+        org.jfree.chart.axis.LogAxis this;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        specialinvoke this.<org.jfree.chart.axis.LogAxis: void <init>(java.lang.String)>(null);
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.lang.String label;
+        org.jfree.chart.axis.NumberTickUnitSource $stack2;
+        double $stack3;
+        java.text.DecimalFormat $stack4, $stack7;
+        org.jfree.data.Range $stack5;
+        org.jfree.chart.axis.NumberTickUnit $stack6;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        label := @parameter0: java.lang.String;
+
+        $stack2 = new org.jfree.chart.axis.NumberTickUnitSource;
+
+        specialinvoke $stack2.<org.jfree.chart.axis.NumberTickUnitSource: void <init>()>();
+
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void <init>(java.lang.String,org.jfree.chart.axis.TickUnitSource)>(label, $stack2);
+
+        this.<org.jfree.chart.axis.LogAxis: double base> = 10.0;
+
+        $stack3 = staticinvoke <java.lang.Math: double log(double)>(10.0);
+
+        this.<org.jfree.chart.axis.LogAxis: double baseLog> = $stack3;
+
+        this.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol> = null;
+
+        $stack4 = new java.text.DecimalFormat;
+
+        specialinvoke $stack4.<java.text.DecimalFormat: void <init>(java.lang.String)>("0");
+
+        this.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter> = $stack4;
+
+        this.<org.jfree.chart.axis.LogAxis: double smallestValue> = 1.0E-100;
+
+        $stack5 = new org.jfree.data.Range;
+
+        specialinvoke $stack5.<org.jfree.data.Range: void <init>(double,double)>(0.01, 1.0);
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setDefaultAutoRange(org.jfree.data.Range)>($stack5);
+
+        $stack6 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack7 = new java.text.DecimalFormat;
+
+        specialinvoke $stack7.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.#");
+
+        specialinvoke $stack6.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0, $stack7, 10);
+
+        this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = $stack6;
+
+        return;
+    }
+
+    public double getBase()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        return $stack1;
+    }
+
+    public void setBase(double)
+    {
+        double base, $stack4;
+        byte $stack3;
+        org.jfree.chart.axis.LogAxis this;
+        java.lang.IllegalArgumentException $stack5;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        base := @parameter0: double;
+
+        $stack3 = base cmpg 1.0;
+
+        if $stack3 > 0 goto label1;
+
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'base\' > 1.0.");
+
+        throw $stack5;
+
+     label1:
+        this.<org.jfree.chart.axis.LogAxis: double base> = base;
+
+        $stack4 = staticinvoke <java.lang.Math: double log(double)>(base);
+
+        this.<org.jfree.chart.axis.LogAxis: double baseLog> = $stack4;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.lang.String getBaseSymbol()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol>;
+
+        return $stack1;
+    }
+
+    public void setBaseSymbol(java.lang.String)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.lang.String symbol;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        symbol := @parameter0: java.lang.String;
+
+        this.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol> = symbol;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.text.Format getBaseFormatter()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.text.Format $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter>;
+
+        return $stack1;
+    }
+
+    public void setBaseFormatter(java.text.Format)
+    {
+        java.text.Format formatter;
+        org.jfree.chart.axis.LogAxis this;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        formatter := @parameter0: java.text.Format;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter> = formatter;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getSmallestValue()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        return $stack1;
+    }
+
+    public void setSmallestValue(double)
+    {
+        double value;
+        byte $stack3;
+        org.jfree.chart.axis.LogAxis this;
+        java.lang.IllegalArgumentException $stack4;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        value := @parameter0: double;
+
+        $stack3 = value cmpg 0.0;
+
+        if $stack3 > 0 goto label1;
+
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'value\' > 0.0.");
+
+        throw $stack4;
+
+     label1:
+        this.<org.jfree.chart.axis.LogAxis: double smallestValue> = value;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.axis.NumberTickUnit getTickUnit()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        return $stack1;
+    }
+
+    public void setTickUnit(org.jfree.chart.axis.NumberTickUnit)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.chart.axis.NumberTickUnit unit;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.NumberTickUnit;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>(unit, 1, 1);
+
+        return;
+    }
+
+    public void setTickUnit(org.jfree.chart.axis.NumberTickUnit, boolean, boolean)
+    {
+        org.jfree.chart.axis.NumberTickUnit unit;
+        org.jfree.chart.axis.LogAxis this;
+        boolean turnOffAutoSelect, notify;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        unit := @parameter0: org.jfree.chart.axis.NumberTickUnit;
+
+        notify := @parameter1: boolean;
+
+        turnOffAutoSelect := @parameter2: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(unit, "unit");
+
+        this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = unit;
+
+        if turnOffAutoSelect == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setAutoTickUnitSelection(boolean,boolean)>(0, 0);
+
+     label1:
+        if notify == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+     label2:
+        return;
+    }
+
+    public java.text.NumberFormat getNumberFormatOverride()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.text.NumberFormat $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        return $stack1;
+    }
+
+    public void setNumberFormatOverride(java.text.NumberFormat)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.text.NumberFormat formatter;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        formatter := @parameter0: java.text.NumberFormat;
+
+        this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride> = formatter;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double calculateLog(double)
+    {
+        double value, $stack3, $stack4, $stack5;
+        org.jfree.chart.axis.LogAxis this;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        value := @parameter0: double;
+
+        $stack3 = staticinvoke <java.lang.Math: double log(double)>(value);
+
+        $stack4 = this.<org.jfree.chart.axis.LogAxis: double baseLog>;
+
+        $stack5 = $stack3 / $stack4;
+
+        return $stack5;
+    }
+
+    public double calculateValue(double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double log, $stack3, $stack4;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        log := @parameter0: double;
+
+        $stack3 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack4 = staticinvoke <java.lang.Math: double pow(double,double)>($stack3, log);
+
+        return $stack4;
+    }
+
+    private double calculateValueNoINF(double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double log, result;
+        boolean $stack6;
+        byte $stack7;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        log := @parameter0: double;
+
+        result = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValue(double)>(log);
+
+        $stack6 = staticinvoke <java.lang.Double: boolean isInfinite(double)>(result);
+
+        if $stack6 == 0 goto label1;
+
+        result = 1.7976931348623157E308;
+
+     label1:
+        $stack7 = result cmpg 0.0;
+
+        if $stack7 > 0 goto label2;
+
+        result = 4.9E-324;
+
+     label2:
+        return result;
+    }
+
+    public double java2DToValue(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double $stack17, $stack18, $stack19, axisMin, $stack21, axisMax, java2DValue, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, min, max, log;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack23, $stack24, $stack25;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        java2DValue := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack17 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        $stack18 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack19 = staticinvoke <java.lang.Math: double max(double,double)>($stack17, $stack18);
+
+        axisMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack19);
+
+        $stack21 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        axisMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack21);
+
+        min = 0.0;
+
+        max = 0.0;
+
+        $stack23 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack23 == 0 goto label1;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label2;
+
+     label1:
+        $stack24 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack24 == 0 goto label2;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+
+     label2:
+        $stack25 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isInverted()>();
+
+        if $stack25 == 0 goto label3;
+
+        $stack33 = java2DValue - min;
+
+        $stack32 = max - min;
+
+        $stack35 = $stack33 / $stack32;
+
+        $stack34 = axisMax - axisMin;
+
+        $stack36 = $stack35 * $stack34;
+
+        log = axisMax - $stack36;
+
+        goto label4;
+
+     label3:
+        $stack27 = java2DValue - min;
+
+        $stack26 = max - min;
+
+        $stack29 = $stack27 / $stack26;
+
+        $stack28 = axisMax - axisMin;
+
+        $stack30 = $stack29 * $stack28;
+
+        log = axisMin + $stack30;
+
+     label4:
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValue(double)>(log);
+
+        return $stack31;
+    }
+
+    public double valueToJava2D(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double $stack15, axisMin, $stack17, axisMax, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, value, value#2, min, max;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack20, $stack21, $stack22;
+        java.awt.geom.Rectangle2D area;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        value := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack15 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        axisMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack15);
+
+        $stack17 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        axisMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack17);
+
+        value#2 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(value);
+
+        min = 0.0;
+
+        max = 0.0;
+
+        $stack20 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack20 == 0 goto label1;
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        goto label2;
+
+     label1:
+        $stack21 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack21 == 0 goto label2;
+
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+     label2:
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isInverted()>();
+
+        if $stack22 == 0 goto label3;
+
+        $stack30 = value#2 - axisMin;
+
+        $stack29 = axisMax - axisMin;
+
+        $stack32 = $stack30 / $stack29;
+
+        $stack31 = max - min;
+
+        $stack33 = $stack32 * $stack31;
+
+        $stack34 = max - $stack33;
+
+        return $stack34;
+
+     label3:
+        $stack24 = value#2 - axisMin;
+
+        $stack23 = axisMax - axisMin;
+
+        $stack26 = $stack24 / $stack23;
+
+        $stack25 = max - min;
+
+        $stack27 = $stack26 * $stack25;
+
+        $stack28 = min + $stack27;
+
+        return $stack28;
+    }
+
+    public void configure()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isAutoRange()>();
+
+        if $stack1 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void autoAdjustRange()>();
+
+     label1:
+        return;
+    }
+
+    protected void autoAdjustRange()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.chart.plot.Plot plot;
+        boolean $stack21;
+        org.jfree.chart.plot.ValueAxisPlot vap;
+        double $stack24, $stack25, range, fixedAutoRange, minRange, logRange, $stack33, $stack34, $stack35, $stack36, $stack40, $stack65, $stack66, upper, lower, expand, logLower;
+        byte $stack28, $stack30;
+        org.jfree.data.Range r, $stack39;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        plot = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.plot.Plot getPlot()>();
+
+        if plot != null goto label1;
+
+        return;
+
+     label1:
+        $stack21 = plot instanceof org.jfree.chart.plot.ValueAxisPlot;
+
+        if $stack21 == 0 goto label6;
+
+        vap = (org.jfree.chart.plot.ValueAxisPlot) plot;
+
+        r = interfaceinvoke vap.<org.jfree.chart.plot.ValueAxisPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(this);
+
+        if r != null goto label2;
+
+        r = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getDefaultAutoRange()>();
+
+     label2:
+        upper = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+
+        $stack24 = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack25 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        lower = staticinvoke <java.lang.Math: double max(double,double)>($stack24, $stack25);
+
+        range = upper - lower;
+
+        fixedAutoRange = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getFixedAutoRange()>();
+
+        $stack28 = fixedAutoRange cmpl 0.0;
+
+        if $stack28 <= 0 goto label3;
+
+        $stack66 = upper - fixedAutoRange;
+
+        $stack65 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        lower = staticinvoke <java.lang.Math: double max(double,double)>($stack66, $stack65);
+
+        goto label5;
+
+     label3:
+        minRange = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getAutoRangeMinimumSize()>();
+
+        $stack30 = range cmpg minRange;
+
+        if $stack30 >= 0 goto label4;
+
+        $stack40 = minRange - range;
+
+        expand = $stack40 / 2.0;
+
+        upper = upper + expand;
+
+        lower = lower - expand;
+
+     label4:
+        expand = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(upper);
+
+        logLower = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(lower);
+
+        logRange = expand - logLower;
+
+        $stack33 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getUpperMargin()>();
+
+        $stack34 = $stack33 * logRange;
+
+        expand = expand + $stack34;
+
+        $stack35 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getLowerMargin()>();
+
+        $stack36 = $stack35 * logRange;
+
+        logLower = logLower - $stack36;
+
+        upper = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(expand);
+
+        lower = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(logLower);
+
+     label5:
+        $stack39 = new org.jfree.data.Range;
+
+        specialinvoke $stack39.<org.jfree.data.Range: void <init>(double,double)>(lower, upper);
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack39, 0, 0);
+
+     label6:
+        return;
+    }
+
+    public org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D, double, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        boolean $stack10;
+        java.awt.Graphics2D g2;
+        double cursor;
+        java.awt.geom.Rectangle2D plotArea, dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        java.text.AttributedString $stack12, $stack15;
+        java.lang.String $stack13;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.axis.AxisState $stack24, state;
+        java.util.List ticks;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        cursor := @parameter1: double;
+
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        edge := @parameter4: org.jfree.chart.ui.RectangleEdge;
+
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack10 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isVisible()>();
+
+        if $stack10 != 0 goto label1;
+
+        $stack24 = new org.jfree.chart.axis.AxisState;
+
+        specialinvoke $stack24.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+
+        ticks = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, $stack24, dataArea, edge);
+
+        virtualinvoke $stack24.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>(ticks);
+
+        return $stack24;
+
+     label1:
+        state = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, cursor, plotArea, dataArea, edge);
+
+        $stack12 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString getAttributedLabel()>();
+
+        if $stack12 == null goto label2;
+
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString getAttributedLabel()>();
+
+        state = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.AxisState drawAttributedLabel(java.text.AttributedString,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack15, g2, plotArea, dataArea, edge, state);
+
+        goto label3;
+
+     label2:
+        $stack13 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.lang.String getLabel()>();
+
+        state = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.axis.AxisState)>($stack13, g2, plotArea, dataArea, edge, state);
+
+     label3:
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void createAndAddEntity(double,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(cursor, state, dataArea, edge, plotState);
+
+        return state;
+    }
+
+    public java.util.List refreshTicks(java.awt.Graphics2D, org.jfree.chart.axis.AxisState, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        java.util.ArrayList $stack6;
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack7, $stack8;
+        org.jfree.chart.axis.LogAxis this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.AxisState state;
+        java.util.List result;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        edge := @parameter3: org.jfree.chart.ui.RectangleEdge;
+
+        $stack6 = new java.util.ArrayList;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+
+        result = $stack6;
+
+        $stack7 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack7 == 0 goto label1;
+
+        result = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.util.List refreshTicksHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+        goto label2;
+
+     label1:
+        $stack8 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack8 == 0 goto label2;
+
+        result = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.util.List refreshTicksVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label2:
+        return result;
+    }
+
+    protected java.util.List refreshTicksHorizontal(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range, $stack36;
+        java.util.ArrayList $stack28;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.RectangleEdge edge, $stack30;
+        boolean $stack31, hasTicks, $stack49, $stack63, $stack77, $stack78;
+        org.jfree.chart.axis.NumberTickUnit $stack32, $stack34, $stack43, $stack50, $stack55;
+        int minorTickCount, i;
+        double unit, $stack37, $stack38, $stack39, index, start, $stack41, end, $stack44, v, $stack51, $stack52, $stack53, next, $stack56, $stack58, $stack59, $stack60, $stack61, $stack62, minorV, current;
+        byte $stack45, $stack46;
+        org.jfree.chart.axis.LogTick $stack66, $stack69;
+        org.jfree.chart.axis.TickType $stack67, $stack70;
+        java.text.AttributedString $stack71;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.TextAnchor textAnchor;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack28 = new java.util.ArrayList;
+
+        specialinvoke $stack28.<java.util.ArrayList: void <init>()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack30 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        if edge != $stack30 goto label01;
+
+        textAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        goto label02;
+
+     label01:
+        textAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+     label02:
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label03;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label03:
+        $stack32 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        minorTickCount = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: int getMinorTickCount()>();
+
+        $stack34 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        unit = virtualinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack37 = virtualinvoke $stack36.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack38 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack37);
+
+        $stack39 = $stack38 / unit;
+
+        index = staticinvoke <java.lang.Math: double ceil(double)>($stack39);
+
+        start = index * unit;
+
+        $stack41 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getUpperBound()>();
+
+        end = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack41);
+
+        current = start;
+
+        $stack43 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack44 = virtualinvoke $stack43.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack45 = $stack44 cmpl 0.0;
+
+        if $stack45 <= 0 goto label04;
+
+        $stack77 = staticinvoke <java.lang.Double: boolean isInfinite(double)>(start);
+
+        if $stack77 != 0 goto label04;
+
+        $stack78 = 1;
+
+        goto label05;
+
+     label04:
+        $stack78 = 0;
+
+     label05:
+        hasTicks = $stack78;
+
+     label06:
+        if hasTicks == 0 goto label11;
+
+        $stack46 = current cmpg end;
+
+        if $stack46 > 0 goto label11;
+
+        v = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(current);
+
+        $stack49 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(v);
+
+        if $stack49 == 0 goto label07;
+
+        $stack69 = new org.jfree.chart.axis.LogTick;
+
+        $stack70 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MAJOR>;
+
+        $stack71 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString createTickLabel(double)>(v);
+
+        specialinvoke $stack69.<org.jfree.chart.axis.LogTick: void <init>(org.jfree.chart.axis.TickType,double,java.text.AttributedString,org.jfree.chart.ui.TextAnchor)>($stack70, v, $stack71, textAnchor);
+
+        interfaceinvoke $stack28.<java.util.List: boolean add(java.lang.Object)>($stack69);
+
+     label07:
+        $stack51 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack50 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack52 = virtualinvoke $stack50.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack53 = current + $stack52;
+
+        next = staticinvoke <java.lang.Math: double pow(double,double)>($stack51, $stack53);
+
+        i = 1;
+
+     label08:
+        if i >= minorTickCount goto label10;
+
+        $stack61 = (double) i;
+
+        $stack59 = next - v;
+
+        $stack58 = (double) minorTickCount;
+
+        $stack60 = $stack59 / $stack58;
+
+        $stack62 = $stack61 * $stack60;
+
+        minorV = v + $stack62;
+
+        $stack63 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(minorV);
+
+        if $stack63 == 0 goto label09;
+
+        $stack66 = new org.jfree.chart.axis.LogTick;
+
+        $stack67 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        specialinvoke $stack66.<org.jfree.chart.axis.LogTick: void <init>(org.jfree.chart.axis.TickType,double,java.text.AttributedString,org.jfree.chart.ui.TextAnchor)>($stack67, minorV, null, textAnchor);
+
+        interfaceinvoke $stack28.<java.util.List: boolean add(java.lang.Object)>($stack66);
+
+     label09:
+        i = i + 1;
+
+        goto label08;
+
+     label10:
+        $stack55 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack56 = virtualinvoke $stack55.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        current = current + $stack56;
+
+        goto label06;
+
+     label11:
+        return $stack28;
+    }
+
+    protected java.util.List refreshTicksVertical(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range, $stack36;
+        java.util.ArrayList $stack28;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.RectangleEdge edge, $stack30;
+        boolean $stack31, hasTicks, $stack49, $stack63, $stack77, $stack78;
+        org.jfree.chart.axis.NumberTickUnit $stack32, $stack34, $stack43, $stack50, $stack55;
+        int minorTickCount, i;
+        double unit, $stack37, $stack38, $stack39, index, start, $stack41, end, $stack44, v, $stack51, $stack52, $stack53, next, $stack56, $stack58, $stack59, $stack60, $stack61, $stack62, minorV, current;
+        byte $stack45, $stack46;
+        org.jfree.chart.axis.LogTick $stack66, $stack69;
+        org.jfree.chart.axis.TickType $stack67, $stack70;
+        java.text.AttributedString $stack71;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.TextAnchor textAnchor;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack28 = new java.util.ArrayList;
+
+        specialinvoke $stack28.<java.util.ArrayList: void <init>()>();
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.awt.Font getTickLabelFont()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+
+        $stack30 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        if edge != $stack30 goto label01;
+
+        textAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_LEFT>;
+
+        goto label02;
+
+     label01:
+        textAnchor = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+     label02:
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isAutoTickUnitSelection()>();
+
+        if $stack31 == 0 goto label03;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label03:
+        $stack32 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        minorTickCount = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: int getMinorTickCount()>();
+
+        $stack34 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        unit = virtualinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack37 = virtualinvoke $stack36.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack38 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack37);
+
+        $stack39 = $stack38 / unit;
+
+        index = staticinvoke <java.lang.Math: double ceil(double)>($stack39);
+
+        start = index * unit;
+
+        $stack41 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double getUpperBound()>();
+
+        end = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack41);
+
+        current = start;
+
+        $stack43 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack44 = virtualinvoke $stack43.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack45 = $stack44 cmpl 0.0;
+
+        if $stack45 <= 0 goto label04;
+
+        $stack77 = staticinvoke <java.lang.Double: boolean isInfinite(double)>(start);
+
+        if $stack77 != 0 goto label04;
+
+        $stack78 = 1;
+
+        goto label05;
+
+     label04:
+        $stack78 = 0;
+
+     label05:
+        hasTicks = $stack78;
+
+     label06:
+        if hasTicks == 0 goto label11;
+
+        $stack46 = current cmpg end;
+
+        if $stack46 > 0 goto label11;
+
+        v = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(current);
+
+        $stack49 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(v);
+
+        if $stack49 == 0 goto label07;
+
+        $stack69 = new org.jfree.chart.axis.LogTick;
+
+        $stack70 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MAJOR>;
+
+        $stack71 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString createTickLabel(double)>(v);
+
+        specialinvoke $stack69.<org.jfree.chart.axis.LogTick: void <init>(org.jfree.chart.axis.TickType,double,java.text.AttributedString,org.jfree.chart.ui.TextAnchor)>($stack70, v, $stack71, textAnchor);
+
+        interfaceinvoke $stack28.<java.util.List: boolean add(java.lang.Object)>($stack69);
+
+     label07:
+        $stack51 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack50 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack52 = virtualinvoke $stack50.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        $stack53 = current + $stack52;
+
+        next = staticinvoke <java.lang.Math: double pow(double,double)>($stack51, $stack53);
+
+        i = 1;
+
+     label08:
+        if i >= minorTickCount goto label10;
+
+        $stack61 = (double) i;
+
+        $stack59 = next - v;
+
+        $stack58 = (double) minorTickCount;
+
+        $stack60 = $stack59 / $stack58;
+
+        $stack62 = $stack61 * $stack60;
+
+        minorV = v + $stack62;
+
+        $stack63 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(minorV);
+
+        if $stack63 == 0 goto label09;
+
+        $stack66 = new org.jfree.chart.axis.LogTick;
+
+        $stack67 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+
+        specialinvoke $stack66.<org.jfree.chart.axis.LogTick: void <init>(org.jfree.chart.axis.TickType,double,java.text.AttributedString,org.jfree.chart.ui.TextAnchor)>($stack67, minorV, null, textAnchor);
+
+        interfaceinvoke $stack28.<java.util.List: boolean add(java.lang.Object)>($stack66);
+
+     label09:
+        i = i + 1;
+
+        goto label08;
+
+     label10:
+        $stack55 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack56 = virtualinvoke $stack55.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        current = current + $stack56;
+
+        goto label06;
+
+     label11:
+        return $stack28;
+    }
+
+    protected void selectAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.ui.RectangleEdge edge;
+        boolean $stack4, $stack5;
+        org.jfree.chart.axis.LogAxis this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack4 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack4 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void selectHorizontalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+        goto label2;
+
+     label1:
+        $stack5 = staticinvoke <org.jfree.chart.ui.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.ui.RectangleEdge)>(edge);
+
+        if $stack5 == 0 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void selectVerticalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(g2, dataArea, edge);
+
+     label2:
+        return;
+    }
+
+    protected void selectHorizontalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double $stack20, $stack21, $stack22, logAxisMin, $stack24, logAxisMax, $stack26, size, tickLabelWidth, $stack32, candidateWidth;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        org.jfree.chart.axis.NumberTickUnit $stack29, $stack30;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        byte $stack34;
+        boolean $stack35, $stack37, found;
+        org.jfree.chart.axis.TickUnit candidate, prevCandidate;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack20 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        $stack21 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack22 = staticinvoke <java.lang.Math: double max(double,double)>($stack20, $stack21);
+
+        logAxisMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack22);
+
+        $stack24 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        logAxisMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack24);
+
+        $stack26 = logAxisMax - logAxisMin;
+
+        size = $stack26 / 50.0;
+
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        candidate = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(size);
+
+        prevCandidate = candidate;
+
+        found = 0;
+
+     label1:
+        if found != 0 goto label5;
+
+        $stack30 = (org.jfree.chart.axis.NumberTickUnit) candidate;
+
+        this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = $stack30;
+
+        tickLabelWidth = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)>(g2, candidate);
+
+        $stack32 = virtualinvoke candidate.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        candidateWidth = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double exponentLengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack32, dataArea, edge);
+
+        $stack34 = tickLabelWidth cmpg candidateWidth;
+
+        if $stack34 >= 0 goto label2;
+
+        found = 1;
+
+        goto label4;
+
+     label2:
+        $stack35 = staticinvoke <java.lang.Double: boolean isNaN(double)>(candidateWidth);
+
+        if $stack35 == 0 goto label3;
+
+        candidate = prevCandidate;
+
+        found = 1;
+
+        goto label4;
+
+     label3:
+        prevCandidate = candidate;
+
+        candidate = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(candidate);
+
+        $stack37 = virtualinvoke candidate.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(prevCandidate);
+
+        if $stack37 == 0 goto label4;
+
+        found = 1;
+
+     label4:
+        goto label1;
+
+     label5:
+        $stack29 = (org.jfree.chart.axis.NumberTickUnit) candidate;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>($stack29, 0, 0);
+
+        return;
+    }
+
+    public double exponentLengthToJava2D(double, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double $stack9, one, length, $stack11, $stack12, l, $stack14, $stack15;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.ui.RectangleEdge edge;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        length := @parameter0: double;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        $stack9 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(1.0);
+
+        one = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack9, area, edge);
+
+        $stack11 = length + 1.0;
+
+        $stack12 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>($stack11);
+
+        l = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack12, area, edge);
+
+        $stack14 = l - one;
+
+        $stack15 = staticinvoke <java.lang.Math: double abs(double)>($stack14);
+
+        return $stack15;
+    }
+
+    protected void selectVerticalAutoTickUnit(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.ui.RectangleEdge)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double $stack20, $stack21, $stack22, logAxisMin, $stack24, logAxisMax, $stack26, size, tickLabelHeight, $stack32, candidateHeight;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        org.jfree.chart.axis.NumberTickUnit $stack29, $stack30;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.ui.RectangleEdge edge;
+        byte $stack34;
+        boolean $stack35, $stack37, found;
+        org.jfree.chart.axis.TickUnit candidate, prevCandidate;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        edge := @parameter2: org.jfree.chart.ui.RectangleEdge;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack20 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        $stack21 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        $stack22 = staticinvoke <java.lang.Math: double max(double,double)>($stack20, $stack21);
+
+        logAxisMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack22);
+
+        $stack24 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        logAxisMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack24);
+
+        $stack26 = logAxisMax - logAxisMin;
+
+        size = $stack26 / 50.0;
+
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+
+        candidate = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(size);
+
+        prevCandidate = candidate;
+
+        found = 0;
+
+     label1:
+        if found != 0 goto label5;
+
+        $stack30 = (org.jfree.chart.axis.NumberTickUnit) candidate;
+
+        this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = $stack30;
+
+        tickLabelHeight = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D)>(g2);
+
+        $stack32 = virtualinvoke candidate.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        candidateHeight = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double exponentLengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack32, dataArea, edge);
+
+        $stack34 = tickLabelHeight cmpg candidateHeight;
+
+        if $stack34 >= 0 goto label2;
+
+        found = 1;
+
+        goto label4;
+
+     label2:
+        $stack35 = staticinvoke <java.lang.Double: boolean isNaN(double)>(candidateHeight);
+
+        if $stack35 == 0 goto label3;
+
+        candidate = prevCandidate;
+
+        found = 1;
+
+        goto label4;
+
+     label3:
+        prevCandidate = candidate;
+
+        candidate = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(candidate);
+
+        $stack37 = virtualinvoke candidate.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(prevCandidate);
+
+        if $stack37 == 0 goto label4;
+
+        found = 1;
+
+     label4:
+        goto label1;
+
+     label5:
+        $stack29 = (org.jfree.chart.axis.NumberTickUnit) candidate;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>($stack29, 0, 0);
+
+        return;
+    }
+
+    protected java.text.AttributedString createTickLabel(double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        java.text.NumberFormat $stack8, $stack51;
+        double value, logy, $stack31;
+        org.jfree.chart.axis.NumberTickUnit $stack10;
+        java.lang.String exponentStr, $stack16, $stack23, $stack52, baseStr;
+        java.text.AttributedString $stack12, $stack50;
+        java.lang.StringBuilder $stack13, $stack14, $stack15, $stack19, $stack21, $stack22;
+        java.awt.Font $stack17;
+        java.util.Map $stack18;
+        int $stack24, $stack27, $stack28, $stack29, $stack30;
+        java.awt.font.TextAttribute $stack25;
+        java.lang.Integer $stack26;
+        java.text.Format $stack32;
+        java.lang.Double $stack33;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        value := @parameter0: double;
+
+        $stack8 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        if $stack8 == null goto label1;
+
+        $stack50 = new java.text.AttributedString;
+
+        $stack51 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        $stack52 = virtualinvoke $stack51.<java.text.NumberFormat: java.lang.String format(double)>(value);
+
+        specialinvoke $stack50.<java.text.AttributedString: void <init>(java.lang.String)>($stack52);
+
+        return $stack50;
+
+     label1:
+        baseStr = this.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol>;
+
+        if baseStr != null goto label2;
+
+        $stack32 = this.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter>;
+
+        $stack31 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack33 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack31);
+
+        baseStr = virtualinvoke $stack32.<java.text.Format: java.lang.String format(java.lang.Object)>($stack33);
+
+     label2:
+        logy = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(value);
+
+        $stack10 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        exponentStr = virtualinvoke $stack10.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>(logy);
+
+        $stack12 = new java.text.AttributedString;
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(baseStr);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(exponentStr);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack12.<java.text.AttributedString: void <init>(java.lang.String)>($stack16);
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.awt.Font getTickLabelFont()>();
+
+        $stack18 = virtualinvoke $stack17.<java.awt.Font: java.util.Map getAttributes()>();
+
+        $stack19 = new java.lang.StringBuilder;
+
+        specialinvoke $stack19.<java.lang.StringBuilder: void <init>()>();
+
+        $stack21 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(baseStr);
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(exponentStr);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack24 = virtualinvoke $stack23.<java.lang.String: int length()>();
+
+        virtualinvoke $stack12.<java.text.AttributedString: void addAttributes(java.util.Map,int,int)>($stack18, 0, $stack24);
+
+        $stack25 = <java.awt.font.TextAttribute: java.awt.font.TextAttribute SUPERSCRIPT>;
+
+        $stack26 = <java.awt.font.TextAttribute: java.lang.Integer SUPERSCRIPT_SUPER>;
+
+        $stack27 = virtualinvoke baseStr.<java.lang.String: int length()>();
+
+        $stack28 = virtualinvoke baseStr.<java.lang.String: int length()>();
+
+        $stack29 = virtualinvoke exponentStr.<java.lang.String: int length()>();
+
+        $stack30 = $stack28 + $stack29;
+
+        virtualinvoke $stack12.<java.text.AttributedString: void addAttribute(java.text.AttributedCharacterIterator$Attribute,java.lang.Object,int,int)>($stack25, $stack26, $stack27, $stack30);
+
+        return $stack12;
+    }
+
+    protected double estimateMaximumTickLabelHeight(java.awt.Graphics2D)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.chart.ui.RectangleInsets tickLabelInsets;
+        double $stack8, $stack9, $stack14, result;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.font.LineMetrics $stack12;
+        float $stack13;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        $stack8 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getTop()>();
+
+        $stack9 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getBottom()>();
+
+        result = $stack8 + $stack9;
+
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.awt.Font getTickLabelFont()>();
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        $stack12 = virtualinvoke tickLabelFont.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("123", frc);
+
+        $stack13 = virtualinvoke $stack12.<java.awt.font.LineMetrics: float getHeight()>();
+
+        $stack14 = (double) $stack13;
+
+        result = result + $stack14;
+
+        return result;
+    }
+
+    protected double estimateMaximumTickLabelWidth(java.awt.Graphics2D, org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.chart.ui.RectangleInsets tickLabelInsets;
+        double $stack18, $stack19, upper, w1, w2, $stack30, $stack35, result, lm#6;
+        boolean $stack20;
+        java.text.AttributedString lowerStr, upperStr;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D $stack26, $stack28;
+        java.awt.Font $stack32;
+        float $stack34;
+        org.jfree.chart.axis.TickUnit unit;
+        java.awt.font.FontRenderContext frc;
+        java.awt.font.LineMetrics lm;
+        org.jfree.data.Range frc#5;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        unit := @parameter1: org.jfree.chart.axis.TickUnit;
+
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.ui.RectangleInsets getTickLabelInsets()>();
+
+        $stack18 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getLeft()>();
+
+        $stack19 = virtualinvoke tickLabelInsets.<org.jfree.chart.ui.RectangleInsets: double getRight()>();
+
+        result = $stack18 + $stack19;
+
+        $stack20 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isVerticalTickLabels()>();
+
+        if $stack20 == 0 goto label1;
+
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.awt.Font getTickLabelFont()>();
+
+        lm = virtualinvoke $stack32.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("0", frc);
+
+        $stack34 = virtualinvoke lm.<java.awt.font.LineMetrics: float getHeight()>();
+
+        $stack35 = (double) $stack34;
+
+        result = result + $stack35;
+
+        goto label2;
+
+     label1:
+        frc#5 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        lm#6 = virtualinvoke frc#5.<org.jfree.data.Range: double getLowerBound()>();
+
+        upper = virtualinvoke frc#5.<org.jfree.data.Range: double getUpperBound()>();
+
+        lowerStr = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString createTickLabel(double)>(lm#6);
+
+        upperStr = virtualinvoke this.<org.jfree.chart.axis.LogAxis: java.text.AttributedString createTickLabel(double)>(upper);
+
+        $stack26 = staticinvoke <org.jfree.chart.util.AttrStringUtils: java.awt.geom.Rectangle2D getTextBounds(java.text.AttributedString,java.awt.Graphics2D)>(lowerStr, g2);
+
+        w1 = virtualinvoke $stack26.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack28 = staticinvoke <org.jfree.chart.util.AttrStringUtils: java.awt.geom.Rectangle2D getTextBounds(java.text.AttributedString,java.awt.Graphics2D)>(upperStr, g2);
+
+        w2 = virtualinvoke $stack28.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack30 = staticinvoke <java.lang.Math: double max(double,double)>(w1, w2);
+
+        result = result + $stack30;
+
+     label2:
+        return result;
+    }
+
+    public void zoomRange(double, double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range, $stack29, $stack36, adjusted;
+        double start, end, log1, log2, length, lowerPercent, $stack27, upperPercent, $stack28, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack37, $stack38, logA, logB;
+        boolean $stack26;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        start = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        end = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        log1 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(start);
+
+        log2 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(end);
+
+        length = log2 - log1;
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: boolean isInverted()>();
+
+        if $stack26 == 0 goto label1;
+
+        $stack32 = 1.0 - upperPercent;
+
+        $stack33 = length * $stack32;
+
+        logA = log1 + $stack33;
+
+        $stack34 = 1.0 - lowerPercent;
+
+        $stack35 = length * $stack34;
+
+        logB = log1 + $stack35;
+
+        $stack36 = new org.jfree.data.Range;
+
+        $stack37 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(logA);
+
+        $stack38 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(logB);
+
+        specialinvoke $stack36.<org.jfree.data.Range: void <init>(double,double)>($stack37, $stack38);
+
+        adjusted = $stack36;
+
+        goto label2;
+
+     label1:
+        $stack27 = length * lowerPercent;
+
+        logA = log1 + $stack27;
+
+        $stack28 = length * upperPercent;
+
+        logB = log1 + $stack28;
+
+        $stack29 = new org.jfree.data.Range;
+
+        $stack30 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(logA);
+
+        $stack31 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(logB);
+
+        specialinvoke $stack29.<org.jfree.data.Range: void <init>(double,double)>($stack30, $stack31);
+
+        adjusted = $stack29;
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setRange(org.jfree.data.Range)>(adjusted);
+
+        return;
+    }
+
+    public void pan(double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double lower, upper, length, percent, adj, $stack21, $stack22, log1, log2;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        percent := @parameter0: double;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        lower = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        upper = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        log1 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(lower);
+
+        log2 = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(upper);
+
+        length = log2 - log1;
+
+        adj = length * percent;
+
+        log1 = log1 + adj;
+
+        log2 = log2 + adj;
+
+        $stack21 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(log1);
+
+        $stack22 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>(log2);
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setRange(double,double)>($stack21, $stack22);
+
+        return;
+    }
+
+    public void resizeRange(double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range;
+        double $stack11, logMin, $stack13, logMax, $stack15, $stack16, centralValue, percent;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        percent := @parameter0: double;
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack11 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        logMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack11);
+
+        $stack13 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        logMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack13);
+
+        $stack15 = logMin + logMax;
+
+        $stack16 = $stack15 / 2.0;
+
+        centralValue = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>($stack16);
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void resizeRange(double,double)>(percent, centralValue);
+
+        return;
+    }
+
+    public void resizeRange(double, double)
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double percent, anchorValue;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        percent := @parameter0: double;
+
+        anchorValue := @parameter1: double;
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void resizeRange2(double,double)>(percent, anchorValue);
+
+        return;
+    }
+
+    public void resizeRange2(double, double)
+    {
+        double percent, anchorValue, logAnchorValue, $stack22, logAxisMin, $stack24, logAxisMax, $stack26, left, $stack27, right, $stack28, upperBound, $stack31, $stack32;
+        byte $stack19;
+        org.jfree.chart.axis.LogAxis this;
+        org.jfree.data.Range range, $stack30;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        percent := @parameter0: double;
+
+        anchorValue := @parameter1: double;
+
+        $stack19 = percent cmpl 0.0;
+
+        if $stack19 <= 0 goto label1;
+
+        logAnchorValue = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>(anchorValue);
+
+        range = virtualinvoke this.<org.jfree.chart.axis.LogAxis: org.jfree.data.Range getRange()>();
+
+        $stack22 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+
+        logAxisMin = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack22);
+
+        $stack24 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+
+        logAxisMax = virtualinvoke this.<org.jfree.chart.axis.LogAxis: double calculateLog(double)>($stack24);
+
+        $stack26 = logAnchorValue - logAxisMin;
+
+        left = percent * $stack26;
+
+        $stack27 = logAxisMax - logAnchorValue;
+
+        right = percent * $stack27;
+
+        $stack28 = logAnchorValue + right;
+
+        upperBound = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>($stack28);
+
+        $stack30 = new org.jfree.data.Range;
+
+        $stack31 = logAnchorValue - left;
+
+        $stack32 = specialinvoke this.<org.jfree.chart.axis.LogAxis: double calculateValueNoINF(double)>($stack31);
+
+        specialinvoke $stack30.<org.jfree.data.Range: void <init>(double,double)>($stack32, upperBound);
+
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setRange(org.jfree.data.Range)>($stack30);
+
+        goto label2;
+
+     label1:
+        virtualinvoke this.<org.jfree.chart.axis.LogAxis: void setAutoRange(boolean)>(1);
+
+     label2:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.axis.LogAxis this, that;
+        boolean $stack3, $stack9, $stack12, $stack18, $stack19;
+        double $stack4, $stack5, $stack13, $stack14;
+        byte $stack6, $stack15;
+        java.lang.String $stack7, $stack8;
+        java.text.Format $stack10, $stack11;
+        java.text.NumberFormat $stack16, $stack17;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.LogAxis;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.axis.LogAxis) obj;
+
+        $stack5 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack4 = that.<org.jfree.chart.axis.LogAxis: double base>;
+
+        $stack6 = $stack5 cmpl $stack4;
+
+        if $stack6 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol>;
+
+        $stack7 = that.<org.jfree.chart.axis.LogAxis: java.lang.String baseSymbol>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter>;
+
+        $stack10 = that.<org.jfree.chart.axis.LogAxis: java.text.Format baseFormatter>;
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack14 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        $stack13 = that.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        $stack15 = $stack14 cmpl $stack13;
+
+        if $stack15 == 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack17 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        $stack16 = that.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        $stack18 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack17, $stack16);
+
+        if $stack18 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack19 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)>(obj);
+
+        return $stack19;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.axis.LogAxis this;
+        double $stack4, $stack10;
+        long $stack6, $stack7, $stack12, $stack13, temp;
+        int $stack8, $stack9, $stack14, $stack15, $stack18, $stack19, $stack21, $stack22, result#3;
+        java.text.NumberFormat $stack16, $stack20;
+        org.jfree.chart.axis.NumberTickUnit $stack17;
+
+        this := @this: org.jfree.chart.axis.LogAxis;
+
+        $stack4 = this.<org.jfree.chart.axis.LogAxis: double base>;
+
+        temp = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack4);
+
+        $stack9 = 37 * 193;
+
+        $stack6 = temp >>> 32;
+
+        $stack7 = temp ^ $stack6;
+
+        $stack8 = (int) $stack7;
+
+        result#3 = $stack9 + $stack8;
+
+        $stack10 = this.<org.jfree.chart.axis.LogAxis: double smallestValue>;
+
+        temp = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack10);
+
+        $stack15 = 37 * result#3;
+
+        $stack12 = temp >>> 32;
+
+        $stack13 = temp ^ $stack12;
+
+        $stack14 = (int) $stack13;
+
+        result#3 = $stack15 + $stack14;
+
+        $stack16 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        if $stack16 == null goto label1;
+
+        $stack21 = 37 * result#3;
+
+        $stack20 = this.<org.jfree.chart.axis.LogAxis: java.text.NumberFormat numberFormatOverride>;
+
+        $stack22 = virtualinvoke $stack20.<java.text.NumberFormat: int hashCode()>();
+
+        result#3 = $stack21 + $stack22;
+
+     label1:
+        $stack18 = 37 * result#3;
+
+        $stack17 = this.<org.jfree.chart.axis.LogAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+
+        $stack19 = virtualinvoke $stack17.<org.jfree.chart.axis.NumberTickUnit: int hashCode()>();
+
+        result#3 = $stack18 + $stack19;
+
+        return result#3;
+    }
+}

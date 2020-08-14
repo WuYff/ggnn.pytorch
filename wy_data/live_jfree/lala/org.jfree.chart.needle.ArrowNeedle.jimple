@@ -1,0 +1,257 @@
+public class org.jfree.chart.needle.ArrowNeedle extends org.jfree.chart.needle.MeterNeedle implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private boolean isArrowAtTop;
+
+    public void <init>(boolean)
+    {
+        org.jfree.chart.needle.ArrowNeedle this;
+        boolean isArrowAtTop;
+
+        this := @this: org.jfree.chart.needle.ArrowNeedle;
+
+        isArrowAtTop := @parameter0: boolean;
+
+        specialinvoke this.<org.jfree.chart.needle.MeterNeedle: void <init>()>();
+
+        this.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop> = 1;
+
+        this.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop> = isArrowAtTop;
+
+        return;
+    }
+
+    protected void drawNeedle(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, double)
+    {
+        java.awt.geom.Line2D$Float $stack12;
+        java.awt.geom.Rectangle2D plotArea;
+        double $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, angle, $stack49, $stack50;
+        float x, maxY, $stack28, $stack30, $stack31, $stack33, $stack34, $stack56, minY;
+        java.awt.geom.GeneralPath $stack23;
+        org.jfree.chart.needle.ArrowNeedle this;
+        boolean $stack24;
+        int $stack26, $stack27, $stack29, $stack32, $stack54, $stack55;
+        java.awt.geom.Point2D rotate;
+        java.awt.Graphics2D g2;
+        byte $stack35, $stack42;
+        java.awt.geom.AffineTransform $stack40, $stack48, $stack51;
+        java.awt.Shape d;
+
+        this := @this: org.jfree.chart.needle.ArrowNeedle;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        rotate := @parameter2: java.awt.geom.Point2D;
+
+        angle := @parameter3: double;
+
+        $stack12 = new java.awt.geom.Line2D$Float;
+
+        specialinvoke $stack12.<java.awt.geom.Line2D$Float: void <init>()>();
+
+        $stack13 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack14 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack15 = $stack14 / 2.0;
+
+        $stack16 = $stack13 + $stack15;
+
+        x = (float) $stack16;
+
+        $stack17 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        minY = (float) $stack17;
+
+        $stack18 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        maxY = (float) $stack18;
+
+        $stack22 = (double) x;
+
+        $stack21 = (double) minY;
+
+        $stack20 = (double) x;
+
+        $stack19 = (double) maxY;
+
+        virtualinvoke $stack12.<java.awt.geom.Line2D: void setLine(double,double,double,double)>($stack22, $stack21, $stack20, $stack19);
+
+        $stack23 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack23.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack24 = this.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop>;
+
+        if $stack24 == 0 goto label1;
+
+        virtualinvoke $stack23.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x, minY);
+
+        $stack54 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: int getSize()>();
+
+        $stack55 = 4 * $stack54;
+
+        $stack56 = (float) $stack55;
+
+        minY = minY + $stack56;
+
+        goto label2;
+
+     label1:
+        virtualinvoke $stack23.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x, maxY);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: int getSize()>();
+
+        $stack27 = 4 * $stack26;
+
+        $stack28 = (float) $stack27;
+
+        minY = maxY - $stack28;
+
+     label2:
+        $stack29 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: int getSize()>();
+
+        $stack30 = (float) $stack29;
+
+        $stack31 = x + $stack30;
+
+        virtualinvoke $stack23.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack31, minY);
+
+        $stack32 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: int getSize()>();
+
+        $stack33 = (float) $stack32;
+
+        $stack34 = x - $stack33;
+
+        virtualinvoke $stack23.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack34, minY);
+
+        virtualinvoke $stack23.<java.awt.geom.GeneralPath: void closePath()>();
+
+        if rotate == null goto label3;
+
+        $stack42 = angle cmpl 0.0;
+
+        if $stack42 == 0 goto label3;
+
+        $stack48 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: java.awt.geom.AffineTransform getTransform()>();
+
+        $stack49 = virtualinvoke rotate.<java.awt.geom.Point2D: double getX()>();
+
+        $stack50 = virtualinvoke rotate.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack48.<java.awt.geom.AffineTransform: void setToRotation(double,double,double)>(angle, $stack49, $stack50);
+
+        $stack51 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: java.awt.geom.AffineTransform getTransform()>();
+
+        d = virtualinvoke $stack51.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>($stack12);
+
+        goto label4;
+
+     label3:
+        d = $stack12;
+
+     label4:
+        virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: void defaultDisplay(java.awt.Graphics2D,java.awt.Shape)>(g2, d);
+
+        if rotate == null goto label5;
+
+        $stack35 = angle cmpl 0.0;
+
+        if $stack35 == 0 goto label5;
+
+        $stack40 = virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: java.awt.geom.AffineTransform getTransform()>();
+
+        d = virtualinvoke $stack40.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>($stack23);
+
+        goto label6;
+
+     label5:
+        d = $stack23;
+
+     label6:
+        virtualinvoke this.<org.jfree.chart.needle.ArrowNeedle: void defaultDisplay(java.awt.Graphics2D,java.awt.Shape)>(g2, d);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.needle.ArrowNeedle this, that;
+        boolean $stack3, $stack4, $stack5, $stack6;
+
+        this := @this: org.jfree.chart.needle.ArrowNeedle;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.needle.ArrowNeedle;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.needle.ArrowNeedle) obj;
+
+        $stack6 = this.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop>;
+
+        $stack5 = that.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop>;
+
+        if $stack6 == $stack5 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.needle.ArrowNeedle this;
+        boolean $stack3;
+        int result;
+
+        this := @this: org.jfree.chart.needle.ArrowNeedle;
+
+        result = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: int hashCode()>();
+
+        $stack3 = this.<org.jfree.chart.needle.ArrowNeedle: boolean isArrowAtTop>;
+
+        result = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,boolean)>(result, $stack3);
+
+        return result;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.needle.ArrowNeedle this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.needle.ArrowNeedle;
+
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.needle.ArrowNeedle: long serialVersionUID> = -5334056511213782357L;
+
+        return;
+    }
+}

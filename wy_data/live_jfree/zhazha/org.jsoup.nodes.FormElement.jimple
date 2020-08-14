@@ -1,0 +1,350 @@
+public class org.jsoup.nodes.FormElement extends org.jsoup.nodes.Element
+{
+    private final org.jsoup.select.Elements elements;
+
+    public void <init>(org.jsoup.parser.Tag, java.lang.String, org.jsoup.nodes.Attributes)
+    {
+        org.jsoup.nodes.FormElement this;
+        org.jsoup.parser.Tag tag;
+        java.lang.String baseUri;
+        org.jsoup.nodes.Attributes attributes;
+        org.jsoup.select.Elements $stack4;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        tag := @parameter0: org.jsoup.parser.Tag;
+
+        baseUri := @parameter1: java.lang.String;
+
+        attributes := @parameter2: org.jsoup.nodes.Attributes;
+
+        specialinvoke this.<org.jsoup.nodes.Element: void <init>(org.jsoup.parser.Tag,java.lang.String,org.jsoup.nodes.Attributes)>(tag, baseUri, attributes);
+
+        $stack4 = new org.jsoup.select.Elements;
+
+        specialinvoke $stack4.<org.jsoup.select.Elements: void <init>()>();
+
+        this.<org.jsoup.nodes.FormElement: org.jsoup.select.Elements elements> = $stack4;
+
+        return;
+    }
+
+    public org.jsoup.select.Elements elements()
+    {
+        org.jsoup.nodes.FormElement this;
+        org.jsoup.select.Elements $stack1;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack1 = this.<org.jsoup.nodes.FormElement: org.jsoup.select.Elements elements>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.FormElement addElement(org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.FormElement this;
+        org.jsoup.nodes.Element element;
+        org.jsoup.select.Elements $stack2;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        element := @parameter0: org.jsoup.nodes.Element;
+
+        $stack2 = this.<org.jsoup.nodes.FormElement: org.jsoup.select.Elements elements>;
+
+        virtualinvoke $stack2.<org.jsoup.select.Elements: boolean add(java.lang.Object)>(element);
+
+        return this;
+    }
+
+    protected void removeChild(org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.FormElement this;
+        org.jsoup.nodes.Node out;
+        org.jsoup.select.Elements $stack2;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        out := @parameter0: org.jsoup.nodes.Node;
+
+        specialinvoke this.<org.jsoup.nodes.Element: void removeChild(org.jsoup.nodes.Node)>(out);
+
+        $stack2 = this.<org.jsoup.nodes.FormElement: org.jsoup.select.Elements elements>;
+
+        virtualinvoke $stack2.<org.jsoup.select.Elements: boolean remove(java.lang.Object)>(out);
+
+        return;
+    }
+
+    public org.jsoup.Connection submit()
+    {
+        org.jsoup.nodes.FormElement this;
+        boolean $stack3, $stack7;
+        java.lang.String action, $stack5, $stack6, $stack4;
+        org.jsoup.Connection $stack8, $stack10, $stack11;
+        java.util.List $stack9;
+        org.jsoup.Connection$Method $stack12;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack3 = virtualinvoke this.<org.jsoup.nodes.FormElement: boolean hasAttr(java.lang.String)>("action");
+
+        if $stack3 == 0 goto label1;
+
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.FormElement: java.lang.String absUrl(java.lang.String)>("action");
+
+        goto label2;
+
+     label1:
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.FormElement: java.lang.String baseUri()>();
+
+     label2:
+        action = $stack4;
+
+        staticinvoke <org.jsoup.helper.Validate: void notEmpty(java.lang.String,java.lang.String)>($stack4, "Could not determine a form action URL for submit. Ensure you set a base URI when parsing.");
+
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.FormElement: java.lang.String attr(java.lang.String)>("method");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String toUpperCase()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.String: boolean equals(java.lang.Object)>("POST");
+
+        if $stack7 == 0 goto label3;
+
+        $stack12 = <org.jsoup.Connection$Method: org.jsoup.Connection$Method POST>;
+
+        goto label4;
+
+     label3:
+        $stack12 = <org.jsoup.Connection$Method: org.jsoup.Connection$Method GET>;
+
+     label4:
+        $stack8 = staticinvoke <org.jsoup.Jsoup: org.jsoup.Connection connect(java.lang.String)>(action);
+
+        $stack9 = virtualinvoke this.<org.jsoup.nodes.FormElement: java.util.List formData()>();
+
+        $stack10 = interfaceinvoke $stack8.<org.jsoup.Connection: org.jsoup.Connection data(java.util.Collection)>($stack9);
+
+        $stack11 = interfaceinvoke $stack10.<org.jsoup.Connection: org.jsoup.Connection method(org.jsoup.Connection$Method)>($stack12);
+
+        return $stack11;
+    }
+
+    public java.util.List formData()
+    {
+        java.util.ArrayList $stack10;
+        org.jsoup.nodes.FormElement this;
+        org.jsoup.select.Elements $stack11, $stack47, options;
+        java.util.Iterator l2, option;
+        java.lang.Object $stack14, $stack52;
+        org.jsoup.nodes.Element el, option;
+        org.jsoup.parser.Tag $stack15;
+        boolean $stack16, $stack17, $stack21, $stack24, $stack26, $stack27, $stack38, $stack46, $stack13, set;
+        java.lang.String name, type, $stack22, $stack23, $stack25, $stack29, $stack37, $stack39, $stack49, $stack53, $stack33;
+        int $stack19, $stack30;
+        org.jsoup.helper.HttpConnection$KeyVal $stack31, $stack40, $stack50, $stack54;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack10 = new java.util.ArrayList;
+
+        specialinvoke $stack10.<java.util.ArrayList: void <init>()>();
+
+        $stack11 = this.<org.jsoup.nodes.FormElement: org.jsoup.select.Elements elements>;
+
+        l2 = virtualinvoke $stack11.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label01:
+        $stack13 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label15;
+
+        $stack14 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack14;
+
+        $stack15 = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack16 = virtualinvoke $stack15.<org.jsoup.parser.Tag: boolean isFormSubmittable()>();
+
+        if $stack16 != 0 goto label02;
+
+        goto label01;
+
+     label02:
+        $stack17 = virtualinvoke el.<org.jsoup.nodes.Element: boolean hasAttr(java.lang.String)>("disabled");
+
+        if $stack17 == 0 goto label03;
+
+        goto label01;
+
+     label03:
+        name = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("name");
+
+        $stack19 = virtualinvoke name.<java.lang.String: int length()>();
+
+        if $stack19 != 0 goto label04;
+
+        goto label01;
+
+     label04:
+        type = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String attr(java.lang.String)>("type");
+
+        $stack21 = virtualinvoke type.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("button");
+
+        if $stack21 == 0 goto label05;
+
+        goto label01;
+
+     label05:
+        $stack22 = "select";
+
+        $stack23 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String normalName()>();
+
+        $stack24 = virtualinvoke $stack22.<java.lang.String: boolean equals(java.lang.Object)>($stack23);
+
+        if $stack24 == 0 goto label09;
+
+        options = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.select.Elements select(java.lang.String)>("option[selected]");
+
+        set = 0;
+
+        option = virtualinvoke options.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label06:
+        $stack46 = interfaceinvoke option.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack46 == 0 goto label07;
+
+        $stack52 = interfaceinvoke option.<java.util.Iterator: java.lang.Object next()>();
+
+        option = (org.jsoup.nodes.Element) $stack52;
+
+        $stack53 = virtualinvoke option.<org.jsoup.nodes.Element: java.lang.String val()>();
+
+        $stack54 = staticinvoke <org.jsoup.helper.HttpConnection$KeyVal: org.jsoup.helper.HttpConnection$KeyVal create(java.lang.String,java.lang.String)>(name, $stack53);
+
+        virtualinvoke $stack10.<java.util.ArrayList: boolean add(java.lang.Object)>($stack54);
+
+        set = 1;
+
+        goto label06;
+
+     label07:
+        if set != 0 goto label08;
+
+        $stack47 = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.select.Elements select(java.lang.String)>("option");
+
+        option = virtualinvoke $stack47.<org.jsoup.select.Elements: org.jsoup.nodes.Element first()>();
+
+        if option == null goto label08;
+
+        $stack49 = virtualinvoke option.<org.jsoup.nodes.Element: java.lang.String val()>();
+
+        $stack50 = staticinvoke <org.jsoup.helper.HttpConnection$KeyVal: org.jsoup.helper.HttpConnection$KeyVal create(java.lang.String,java.lang.String)>(name, $stack49);
+
+        virtualinvoke $stack10.<java.util.ArrayList: boolean add(java.lang.Object)>($stack50);
+
+     label08:
+        goto label14;
+
+     label09:
+        $stack25 = "checkbox";
+
+        $stack26 = virtualinvoke $stack25.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>(type);
+
+        if $stack26 != 0 goto label10;
+
+        $stack37 = "radio";
+
+        $stack38 = virtualinvoke $stack37.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>(type);
+
+        if $stack38 == 0 goto label13;
+
+     label10:
+        $stack27 = virtualinvoke el.<org.jsoup.nodes.Element: boolean hasAttr(java.lang.String)>("checked");
+
+        if $stack27 == 0 goto label14;
+
+        $stack29 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String val()>();
+
+        $stack30 = virtualinvoke $stack29.<java.lang.String: int length()>();
+
+        if $stack30 <= 0 goto label11;
+
+        $stack33 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String val()>();
+
+        goto label12;
+
+     label11:
+        $stack33 = "on";
+
+     label12:
+        $stack31 = staticinvoke <org.jsoup.helper.HttpConnection$KeyVal: org.jsoup.helper.HttpConnection$KeyVal create(java.lang.String,java.lang.String)>(name, $stack33);
+
+        virtualinvoke $stack10.<java.util.ArrayList: boolean add(java.lang.Object)>($stack31);
+
+        goto label14;
+
+     label13:
+        $stack39 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String val()>();
+
+        $stack40 = staticinvoke <org.jsoup.helper.HttpConnection$KeyVal: org.jsoup.helper.HttpConnection$KeyVal create(java.lang.String,java.lang.String)>(name, $stack39);
+
+        virtualinvoke $stack10.<java.util.ArrayList: boolean add(java.lang.Object)>($stack40);
+
+     label14:
+        goto label01;
+
+     label15:
+        return $stack10;
+    }
+
+    public org.jsoup.nodes.FormElement clone()
+    {
+        org.jsoup.nodes.FormElement this, $stack2;
+        org.jsoup.nodes.Element $stack1;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.Element: org.jsoup.nodes.Element clone()>();
+
+        $stack2 = (org.jsoup.nodes.FormElement) $stack1;
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Element clone()
+    {
+        org.jsoup.nodes.FormElement this, $stack1;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.FormElement: org.jsoup.nodes.FormElement clone()>();
+
+        return $stack1;
+    }
+
+    public volatile org.jsoup.nodes.Node clone()
+    {
+        org.jsoup.nodes.FormElement this, $stack1;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.FormElement: org.jsoup.nodes.FormElement clone()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.FormElement this, $stack1;
+
+        this := @this: org.jsoup.nodes.FormElement;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.FormElement: org.jsoup.nodes.FormElement clone()>();
+
+        return $stack1;
+    }
+}

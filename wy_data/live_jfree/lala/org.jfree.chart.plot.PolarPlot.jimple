@@ -1,0 +1,3586 @@
+public class org.jfree.chart.plot.PolarPlot extends org.jfree.chart.plot.Plot implements org.jfree.chart.plot.ValueAxisPlot, org.jfree.chart.plot.Zoomable, org.jfree.chart.event.RendererChangeListener, java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private static final int DEFAULT_MARGIN;
+    private static final double ANNOTATION_MARGIN;
+    public static final double DEFAULT_ANGLE_TICK_UNIT_SIZE;
+    public static final double DEFAULT_ANGLE_OFFSET;
+    public static final java.awt.Stroke DEFAULT_GRIDLINE_STROKE;
+    public static final java.awt.Paint DEFAULT_GRIDLINE_PAINT;
+    protected static java.util.ResourceBundle localizationResources;
+    private java.util.List angleTicks;
+    private org.jfree.chart.util.ObjectList axes;
+    private org.jfree.chart.util.ObjectList axisLocations;
+    private org.jfree.chart.util.ObjectList datasets;
+    private org.jfree.chart.util.ObjectList renderers;
+    private org.jfree.chart.axis.TickUnit angleTickUnit;
+    private double angleOffset;
+    private boolean counterClockwise;
+    private boolean angleLabelsVisible;
+    private java.awt.Font angleLabelFont;
+    private transient java.awt.Paint angleLabelPaint;
+    private boolean angleGridlinesVisible;
+    private transient java.awt.Stroke angleGridlineStroke;
+    private transient java.awt.Paint angleGridlinePaint;
+    private boolean radiusGridlinesVisible;
+    private transient java.awt.Stroke radiusGridlineStroke;
+    private transient java.awt.Paint radiusGridlinePaint;
+    private boolean radiusMinorGridlinesVisible;
+    private java.util.List cornerTextItems;
+    private int margin;
+    private org.jfree.chart.LegendItemCollection fixedLegendItems;
+    private java.util.Map datasetToAxesMap;
+
+    public void <init>()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        specialinvoke this.<org.jfree.chart.plot.PolarPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.PolarItemRenderer)>(null, null, null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.xy.XYDataset, org.jfree.chart.axis.ValueAxis, org.jfree.chart.renderer.PolarItemRenderer)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Font $stack4;
+        java.awt.Color $stack5;
+        java.util.ArrayList $stack6;
+        org.jfree.chart.util.ObjectList $stack7, $stack8, $stack10, $stack12, $stack13, $stack15, $stack17, $stack19, $stack21, $stack23, $stack25, $stack27, $stack29, $stack30, $stack31;
+        org.jfree.data.xy.XYDataset dataset;
+        org.jfree.chart.axis.NumberTickUnit $stack9;
+        java.util.TreeMap $stack11;
+        org.jfree.chart.axis.ValueAxis radiusAxis;
+        org.jfree.chart.plot.PolarAxisLocation $stack14, $stack16, $stack18, $stack20, $stack22, $stack24, $stack26, $stack28;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        java.awt.Stroke $stack32, $stack34;
+        java.awt.Paint $stack33, $stack35;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        radiusAxis := @parameter1: org.jfree.chart.axis.ValueAxis;
+
+        renderer := @parameter2: org.jfree.chart.renderer.PolarItemRenderer;
+
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible> = 1;
+
+        $stack4 = new java.awt.Font;
+
+        specialinvoke $stack4.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 0, 12);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Font angleLabelFont> = $stack4;
+
+        $stack5 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint> = $stack5;
+
+        $stack6 = new java.util.ArrayList;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems> = $stack6;
+
+        $stack7 = new org.jfree.chart.util.ObjectList;
+
+        specialinvoke $stack7.<org.jfree.chart.util.ObjectList: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets> = $stack7;
+
+        $stack8 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        virtualinvoke $stack8.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(0, dataset);
+
+        if dataset == null goto label1;
+
+        interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        $stack9 = new org.jfree.chart.axis.NumberTickUnit;
+
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTickUnit: void <init>(double)>(45.0);
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit> = $stack9;
+
+        $stack10 = new org.jfree.chart.util.ObjectList;
+
+        specialinvoke $stack10.<org.jfree.chart.util.ObjectList: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes> = $stack10;
+
+        $stack11 = new java.util.TreeMap;
+
+        specialinvoke $stack11.<java.util.TreeMap: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: java.util.Map datasetToAxesMap> = $stack11;
+
+        $stack12 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        virtualinvoke $stack12.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(0, radiusAxis);
+
+        if radiusAxis == null goto label2;
+
+        virtualinvoke radiusAxis.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke radiusAxis.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+     label2:
+        $stack13 = new org.jfree.chart.util.ObjectList;
+
+        specialinvoke $stack13.<org.jfree.chart.util.ObjectList: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations> = $stack13;
+
+        $stack15 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack14 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation EAST_ABOVE>;
+
+        virtualinvoke $stack15.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(0, $stack14);
+
+        $stack17 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack16 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation NORTH_LEFT>;
+
+        virtualinvoke $stack17.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(1, $stack16);
+
+        $stack19 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack18 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation WEST_BELOW>;
+
+        virtualinvoke $stack19.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(2, $stack18);
+
+        $stack21 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack20 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation SOUTH_RIGHT>;
+
+        virtualinvoke $stack21.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(3, $stack20);
+
+        $stack23 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack22 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation EAST_BELOW>;
+
+        virtualinvoke $stack23.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(4, $stack22);
+
+        $stack25 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack24 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation NORTH_RIGHT>;
+
+        virtualinvoke $stack25.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(5, $stack24);
+
+        $stack27 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack26 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation WEST_ABOVE>;
+
+        virtualinvoke $stack27.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(6, $stack26);
+
+        $stack29 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack28 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation SOUTH_LEFT>;
+
+        virtualinvoke $stack29.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(7, $stack28);
+
+        $stack30 = new org.jfree.chart.util.ObjectList;
+
+        specialinvoke $stack30.<org.jfree.chart.util.ObjectList: void <init>()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers> = $stack30;
+
+        $stack31 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        virtualinvoke $stack31.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(0, renderer);
+
+        if renderer == null goto label3;
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void setPlot(org.jfree.chart.plot.PolarPlot)>(this);
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label3:
+        this.<org.jfree.chart.plot.PolarPlot: double angleOffset> = -90.0;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise> = 0;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible> = 1;
+
+        $stack32 = <org.jfree.chart.plot.PolarPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE>;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke> = $stack32;
+
+        $stack33 = <org.jfree.chart.plot.PolarPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT>;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint> = $stack33;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible> = 1;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean radiusMinorGridlinesVisible> = 1;
+
+        $stack34 = <org.jfree.chart.plot.PolarPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE>;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke> = $stack34;
+
+        $stack35 = <org.jfree.chart.plot.PolarPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT>;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint> = $stack35;
+
+        this.<org.jfree.chart.plot.PolarPlot: int margin> = 20;
+
+        return;
+    }
+
+    public java.lang.String getPlotType()
+    {
+        java.util.ResourceBundle $stack1;
+        java.lang.String $stack2;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = <org.jfree.chart.plot.PolarPlot: java.util.ResourceBundle localizationResources>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Polar_Plot");
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.axis.ValueAxis getAxis()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.axis.ValueAxis $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(0);
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.axis.ValueAxis getAxis(int)
+    {
+        int index, $stack4;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        java.lang.Object $stack6;
+        org.jfree.chart.axis.ValueAxis result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        result = null;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if index >= $stack4 goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+
+        result = (org.jfree.chart.axis.ValueAxis) $stack6;
+
+     label1:
+        return result;
+    }
+
+    public void setAxis(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.axis.ValueAxis axis;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setAxis(int,org.jfree.chart.axis.ValueAxis)>(0, axis);
+
+        return;
+    }
+
+    public void setAxis(int, org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.axis.ValueAxis axis;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        axis := @parameter1: org.jfree.chart.axis.ValueAxis;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setAxis(int,org.jfree.chart.axis.ValueAxis,boolean)>(index, axis, 1);
+
+        return;
+    }
+
+    public void setAxis(int, org.jfree.chart.axis.ValueAxis, boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.axis.ValueAxis existing, axis;
+        org.jfree.chart.util.ObjectList $stack6;
+        boolean notify;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        axis := @parameter1: org.jfree.chart.axis.ValueAxis;
+
+        notify := @parameter2: boolean;
+
+        existing = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(index);
+
+        if existing == null goto label1;
+
+        virtualinvoke existing.<org.jfree.chart.axis.ValueAxis: void removeChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+     label1:
+        if axis == null goto label2;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+
+     label2:
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, axis);
+
+        if axis == null goto label3;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+     label3:
+        if notify == 0 goto label4;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label4:
+        return;
+    }
+
+    public org.jfree.chart.plot.PolarAxisLocation getAxisLocation()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.plot.PolarAxisLocation $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.plot.PolarAxisLocation getAxisLocation(int)>(0);
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.plot.PolarAxisLocation getAxisLocation(int)
+    {
+        int index, $stack4;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        java.lang.Object $stack6;
+        org.jfree.chart.plot.PolarAxisLocation result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        result = null;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if index >= $stack4 goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+
+        result = (org.jfree.chart.plot.PolarAxisLocation) $stack6;
+
+     label1:
+        return result;
+    }
+
+    public void setAxisLocation(org.jfree.chart.plot.PolarAxisLocation)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.plot.PolarAxisLocation location;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        location := @parameter0: org.jfree.chart.plot.PolarAxisLocation;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setAxisLocation(int,org.jfree.chart.plot.PolarAxisLocation,boolean)>(0, location, 1);
+
+        return;
+    }
+
+    public void setAxisLocation(org.jfree.chart.plot.PolarAxisLocation, boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.plot.PolarAxisLocation location;
+        boolean notify;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        location := @parameter0: org.jfree.chart.plot.PolarAxisLocation;
+
+        notify := @parameter1: boolean;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setAxisLocation(int,org.jfree.chart.plot.PolarAxisLocation,boolean)>(0, location, notify);
+
+        return;
+    }
+
+    public void setAxisLocation(int, org.jfree.chart.plot.PolarAxisLocation)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.plot.PolarAxisLocation location;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        location := @parameter1: org.jfree.chart.plot.PolarAxisLocation;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setAxisLocation(int,org.jfree.chart.plot.PolarAxisLocation,boolean)>(index, location, 1);
+
+        return;
+    }
+
+    public void setAxisLocation(int, org.jfree.chart.plot.PolarAxisLocation, boolean)
+    {
+        org.jfree.chart.plot.PolarAxisLocation location;
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.util.ObjectList $stack4;
+        boolean notify;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        location := @parameter1: org.jfree.chart.plot.PolarAxisLocation;
+
+        notify := @parameter2: boolean;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(location, "location");
+
+        $stack4 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, location);
+
+        if notify == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public int getAxisCount()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.util.ObjectList: int size()>();
+
+        return $stack2;
+    }
+
+    public org.jfree.data.xy.XYDataset getDataset()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.data.xy.XYDataset $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(0);
+
+        return $stack1;
+    }
+
+    public org.jfree.data.xy.XYDataset getDataset(int)
+    {
+        int index, $stack4;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.xy.XYDataset result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        result = null;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if index >= $stack4 goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+
+        result = (org.jfree.data.xy.XYDataset) $stack6;
+
+     label1:
+        return result;
+    }
+
+    public void setDataset(org.jfree.data.xy.XYDataset)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.data.xy.XYDataset dataset;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setDataset(int,org.jfree.data.xy.XYDataset)>(0, dataset);
+
+        return;
+    }
+
+    public void setDataset(int, org.jfree.data.xy.XYDataset)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.data.xy.XYDataset existing, dataset;
+        org.jfree.chart.util.ObjectList $stack6;
+        org.jfree.data.general.DatasetChangeEvent $stack7;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        dataset := @parameter1: org.jfree.data.xy.XYDataset;
+
+        existing = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(index);
+
+        if existing == null goto label1;
+
+        interfaceinvoke existing.<org.jfree.data.xy.XYDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label1:
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, dataset);
+
+        if dataset == null goto label2;
+
+        interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label2:
+        $stack7 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack7.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack7);
+
+        return;
+    }
+
+    public int getDatasetCount()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.util.ObjectList: int size()>();
+
+        return $stack2;
+    }
+
+    public int indexOf(org.jfree.data.xy.XYDataset)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack4, $stack6;
+        int $stack5, result, i;
+        org.jfree.data.xy.XYDataset dataset;
+        java.lang.Object $stack7;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        result = -1;
+
+        i = 0;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack5 = virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack5 goto label3;
+
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        if dataset != $stack7 goto label2;
+
+        result = i;
+
+        goto label3;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return result;
+    }
+
+    public org.jfree.chart.renderer.PolarItemRenderer getRenderer()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.renderer.PolarItemRenderer $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.renderer.PolarItemRenderer getRenderer(int)>(0);
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.renderer.PolarItemRenderer getRenderer(int)
+    {
+        int index, $stack4;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        java.lang.Object $stack6;
+        org.jfree.chart.renderer.PolarItemRenderer result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        result = null;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if index >= $stack4 goto label1;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+
+        result = (org.jfree.chart.renderer.PolarItemRenderer) $stack6;
+
+     label1:
+        return result;
+    }
+
+    public void setRenderer(org.jfree.chart.renderer.PolarItemRenderer)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        renderer := @parameter0: org.jfree.chart.renderer.PolarItemRenderer;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setRenderer(int,org.jfree.chart.renderer.PolarItemRenderer)>(0, renderer);
+
+        return;
+    }
+
+    public void setRenderer(int, org.jfree.chart.renderer.PolarItemRenderer)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        renderer := @parameter1: org.jfree.chart.renderer.PolarItemRenderer;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void setRenderer(int,org.jfree.chart.renderer.PolarItemRenderer,boolean)>(index, renderer, 1);
+
+        return;
+    }
+
+    public void setRenderer(int, org.jfree.chart.renderer.PolarItemRenderer, boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index;
+        org.jfree.chart.renderer.PolarItemRenderer existing, renderer;
+        org.jfree.chart.util.ObjectList $stack6;
+        boolean notify;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        renderer := @parameter1: org.jfree.chart.renderer.PolarItemRenderer;
+
+        notify := @parameter2: boolean;
+
+        existing = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.renderer.PolarItemRenderer getRenderer(int)>(index);
+
+        if existing == null goto label1;
+
+        interfaceinvoke existing.<org.jfree.chart.renderer.PolarItemRenderer: void removeChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label1:
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, renderer);
+
+        if renderer == null goto label2;
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void setPlot(org.jfree.chart.plot.PolarPlot)>(this);
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label2:
+        if notify == 0 goto label3;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label3:
+        return;
+    }
+
+    public org.jfree.chart.axis.TickUnit getAngleTickUnit()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.axis.TickUnit $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit>;
+
+        return $stack1;
+    }
+
+    public void setAngleTickUnit(org.jfree.chart.axis.TickUnit)
+    {
+        org.jfree.chart.axis.TickUnit unit;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(unit, "unit");
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit> = unit;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public double getAngleOffset()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: double angleOffset>;
+
+        return $stack1;
+    }
+
+    public void setAngleOffset(double)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double offset;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        offset := @parameter0: double;
+
+        this.<org.jfree.chart.plot.PolarPlot: double angleOffset> = offset;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isCounterClockwise()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        return $stack1;
+    }
+
+    public void setCounterClockwise(boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean counterClockwise;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        counterClockwise := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise> = counterClockwise;
+
+        return;
+    }
+
+    public boolean isAngleLabelsVisible()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible>;
+
+        return $stack1;
+    }
+
+    public void setAngleLabelsVisible(boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean visible, $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        visible := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible>;
+
+        if $stack2 == visible goto label1;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible> = visible;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Font getAngleLabelFont()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Font angleLabelFont>;
+
+        return $stack1;
+    }
+
+    public void setAngleLabelFont(java.awt.Font)
+    {
+        java.awt.Font font;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Font angleLabelFont> = font;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getAngleLabelPaint()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint>;
+
+        return $stack1;
+    }
+
+    public void setAngleLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isAngleGridlinesVisible()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible>;
+
+        return $stack1;
+    }
+
+    public void setAngleGridlinesVisible(boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean visible, $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        visible := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible>;
+
+        if $stack2 == visible goto label1;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible> = visible;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Stroke getAngleGridlineStroke()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setAngleGridlineStroke(java.awt.Stroke)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke stroke;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getAngleGridlinePaint()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setAngleGridlinePaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isRadiusGridlinesVisible()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible>;
+
+        return $stack1;
+    }
+
+    public void setRadiusGridlinesVisible(boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean visible, $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        visible := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible>;
+
+        if $stack2 == visible goto label1;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible> = visible;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public java.awt.Stroke getRadiusGridlineStroke()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setRadiusGridlineStroke(java.awt.Stroke)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke stroke;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke> = stroke;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getRadiusGridlinePaint()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setRadiusGridlinePaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Paint paint;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean isRadiusMinorGridlinesVisible()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: boolean radiusMinorGridlinesVisible>;
+
+        return $stack1;
+    }
+
+    public void setRadiusMinorGridlinesVisible(boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean flag;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.plot.PolarPlot: boolean radiusMinorGridlinesVisible> = flag;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public int getMargin()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        return $stack1;
+    }
+
+    public void setMargin(int)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int margin;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        margin := @parameter0: int;
+
+        this.<org.jfree.chart.plot.PolarPlot: int margin> = margin;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getFixedLegendItems()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.LegendItemCollection $stack1;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems>;
+
+        return $stack1;
+    }
+
+    public void setFixedLegendItems(org.jfree.chart.LegendItemCollection)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.LegendItemCollection items;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        items := @parameter0: org.jfree.chart.LegendItemCollection;
+
+        this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems> = items;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void addCornerTextItem(java.lang.String)
+    {
+        java.lang.String text;
+        org.jfree.chart.plot.PolarPlot this;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        text := @parameter0: java.lang.String;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(text, "text");
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(text);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void removeCornerTextItem(java.lang.String)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.lang.String text;
+        java.util.List $stack3;
+        boolean removed;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        text := @parameter0: java.lang.String;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        removed = interfaceinvoke $stack3.<java.util.List: boolean remove(java.lang.Object)>(text);
+
+        if removed == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    public void clearCornerTextItems()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.util.List $stack1, $stack3;
+        int $stack2;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        if $stack2 <= 0 goto label1;
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        interfaceinvoke $stack3.<java.util.List: void clear()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+     label1:
+        return;
+    }
+
+    protected java.util.List refreshAngleTicks()
+    {
+        java.util.ArrayList $stack6;
+        byte $stack7;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.ui.TextAnchor ta, $stack13;
+        org.jfree.chart.axis.NumberTick $stack9;
+        java.lang.Double $stack10;
+        org.jfree.chart.axis.TickUnit $stack11, $stack15;
+        java.lang.String $stack12;
+        double $stack16, currentTickVal;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack6 = new java.util.ArrayList;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+
+        currentTickVal = 0.0;
+
+     label1:
+        $stack7 = currentTickVal cmpg 360.0;
+
+        if $stack7 >= 0 goto label2;
+
+        ta = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.ui.TextAnchor calculateTextAnchor(double)>(currentTickVal);
+
+        $stack9 = new org.jfree.chart.axis.NumberTick;
+
+        $stack10 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(currentTickVal);
+
+        $stack11 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.axis.TickUnit: java.lang.String valueToString(double)>(currentTickVal);
+
+        $stack13 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTick: void <init>(java.lang.Number,java.lang.String,org.jfree.chart.ui.TextAnchor,org.jfree.chart.ui.TextAnchor,double)>($stack10, $stack12, ta, $stack13, 0.0);
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack9);
+
+        $stack15 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit>;
+
+        $stack16 = virtualinvoke $stack15.<org.jfree.chart.axis.TickUnit: double getSize()>();
+
+        currentTickVal = currentTickVal + $stack16;
+
+        goto label1;
+
+     label2:
+        return $stack6;
+    }
+
+    protected org.jfree.chart.ui.TextAnchor calculateTextAnchor(double)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        byte $stack8, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack24, $stack27, $stack30, $stack33, $stack37;
+        boolean $stack9, $stack13;
+        double angleDegrees, $stack10, $stack11, $stack12, offset, normalizedAngle;
+        org.jfree.chart.ui.TextAnchor ta;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        angleDegrees := @parameter0: double;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        offset = this.<org.jfree.chart.plot.PolarPlot: double angleOffset>;
+
+     label01:
+        $stack8 = offset cmpg 0.0;
+
+        if $stack8 >= 0 goto label02;
+
+        offset = offset + 360.0;
+
+        goto label01;
+
+     label02:
+        $stack9 = this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        if $stack9 == 0 goto label03;
+
+        $stack37 = -1;
+
+        goto label04;
+
+     label03:
+        $stack37 = 1;
+
+     label04:
+        $stack10 = (double) $stack37;
+
+        $stack11 = $stack10 * angleDegrees;
+
+        $stack12 = $stack11 + offset;
+
+        normalizedAngle = $stack12 % 360.0;
+
+     label05:
+        $stack13 = this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        if $stack13 == 0 goto label06;
+
+        $stack33 = normalizedAngle cmpg 0.0;
+
+        if $stack33 >= 0 goto label06;
+
+        normalizedAngle = normalizedAngle + 360.0;
+
+        goto label05;
+
+     label06:
+        $stack14 = normalizedAngle cmpl 0.0;
+
+        if $stack14 != 0 goto label07;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_LEFT>;
+
+        goto label14;
+
+     label07:
+        $stack15 = normalizedAngle cmpl 0.0;
+
+        if $stack15 <= 0 goto label08;
+
+        $stack30 = normalizedAngle cmpg 90.0;
+
+        if $stack30 >= 0 goto label08;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_LEFT>;
+
+        goto label14;
+
+     label08:
+        $stack16 = normalizedAngle cmpl 90.0;
+
+        if $stack16 != 0 goto label09;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_CENTER>;
+
+        goto label14;
+
+     label09:
+        $stack17 = normalizedAngle cmpl 90.0;
+
+        if $stack17 <= 0 goto label10;
+
+        $stack27 = normalizedAngle cmpg 180.0;
+
+        if $stack27 >= 0 goto label10;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor TOP_RIGHT>;
+
+        goto label14;
+
+     label10:
+        $stack18 = normalizedAngle cmpl 180.0;
+
+        if $stack18 != 0 goto label11;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER_RIGHT>;
+
+        goto label14;
+
+     label11:
+        $stack19 = normalizedAngle cmpl 180.0;
+
+        if $stack19 <= 0 goto label12;
+
+        $stack24 = normalizedAngle cmpg 270.0;
+
+        if $stack24 >= 0 goto label12;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_RIGHT>;
+
+        goto label14;
+
+     label12:
+        $stack20 = normalizedAngle cmpl 270.0;
+
+        if $stack20 != 0 goto label13;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_CENTER>;
+
+        goto label14;
+
+     label13:
+        $stack21 = normalizedAngle cmpl 270.0;
+
+        if $stack21 <= 0 goto label14;
+
+        $stack22 = normalizedAngle cmpg 360.0;
+
+        if $stack22 >= 0 goto label14;
+
+        ta = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor BOTTOM_LEFT>;
+
+     label14:
+        return ta;
+    }
+
+    public void mapDatasetToAxis(int, int)
+    {
+        java.util.ArrayList $stack4;
+        int axisIndex, index;
+        java.lang.Integer $stack5;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        axisIndex := @parameter1: int;
+
+        $stack4 = new java.util.ArrayList;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>(int)>(1);
+
+        $stack5 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(axisIndex);
+
+        interfaceinvoke $stack4.<java.util.List: boolean add(java.lang.Object)>($stack5);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void mapDatasetToAxes(int,java.util.List)>(index, $stack4);
+
+        return;
+    }
+
+    public void mapDatasetToAxes(int, java.util.List)
+    {
+        int index;
+        org.jfree.chart.plot.PolarPlot this;
+        java.util.List axisIndices;
+        java.lang.Integer key;
+        java.util.ArrayList $stack5;
+        java.util.Map $stack6;
+        org.jfree.data.general.DatasetChangeEvent $stack8;
+        org.jfree.data.xy.XYDataset $stack9;
+        java.lang.IllegalArgumentException $stack10;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        axisIndices := @parameter1: java.util.List;
+
+        if index >= 0 goto label1;
+
+        $stack10 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'index\' >= 0.");
+
+        throw $stack10;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.plot.PolarPlot: void checkAxisIndices(java.util.List)>(axisIndices);
+
+        key = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(index);
+
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: java.util.Map datasetToAxesMap>;
+
+        $stack5 = new java.util.ArrayList;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>(java.util.Collection)>(axisIndices);
+
+        interfaceinvoke $stack6.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack5);
+
+        $stack8 = new org.jfree.data.general.DatasetChangeEvent;
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(index);
+
+        specialinvoke $stack8.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, $stack9);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack8);
+
+        return;
+    }
+
+    private void checkAxisIndices(java.util.List)
+    {
+        java.util.List indices;
+        int count, i;
+        java.util.HashSet $stack7;
+        java.lang.Object item;
+        boolean $stack9, $stack10;
+        java.lang.IllegalArgumentException $stack14, $stack15, $stack16;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        indices := @parameter0: java.util.List;
+
+        if indices != null goto label1;
+
+        return;
+
+     label1:
+        count = interfaceinvoke indices.<java.util.List: int size()>();
+
+        if count != 0 goto label2;
+
+        $stack16 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack16.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Empty list not permitted.");
+
+        throw $stack16;
+
+     label2:
+        $stack7 = new java.util.HashSet;
+
+        specialinvoke $stack7.<java.util.HashSet: void <init>()>();
+
+        i = 0;
+
+     label3:
+        if i >= count goto label6;
+
+        item = interfaceinvoke indices.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack9 = item instanceof java.lang.Integer;
+
+        if $stack9 != 0 goto label4;
+
+        $stack15 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack15.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Indices must be Integer instances.");
+
+        throw $stack15;
+
+     label4:
+        $stack10 = virtualinvoke $stack7.<java.util.HashSet: boolean contains(java.lang.Object)>(item);
+
+        if $stack10 == 0 goto label5;
+
+        $stack14 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack14.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Indices must be unique.");
+
+        throw $stack14;
+
+     label5:
+        virtualinvoke $stack7.<java.util.HashSet: boolean add(java.lang.Object)>(item);
+
+        i = i + 1;
+
+        goto label3;
+
+     label6:
+        return;
+    }
+
+    public org.jfree.chart.axis.ValueAxis getAxisForDataset(int)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int index, $stack10;
+        java.util.Map $stack5;
+        java.lang.Integer $stack6, axisIndex;
+        java.lang.Object $stack7, $stack9;
+        java.util.List axisIndices;
+        org.jfree.chart.axis.ValueAxis valueAxis;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        index := @parameter0: int;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: java.util.Map datasetToAxesMap>;
+
+        $stack6 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(index);
+
+        $stack7 = interfaceinvoke $stack5.<java.util.Map: java.lang.Object get(java.lang.Object)>($stack6);
+
+        axisIndices = (java.util.List) $stack7;
+
+        if axisIndices == null goto label1;
+
+        $stack9 = interfaceinvoke axisIndices.<java.util.List: java.lang.Object get(int)>(0);
+
+        axisIndex = (java.lang.Integer) $stack9;
+
+        $stack10 = virtualinvoke axisIndex.<java.lang.Integer: int intValue()>();
+
+        valueAxis = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>($stack10);
+
+        goto label2;
+
+     label1:
+        valueAxis = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(0);
+
+     label2:
+        return valueAxis;
+    }
+
+    public int getAxisIndex(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.PolarPlot this, p;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.util.ObjectList $stack5;
+        org.jfree.chart.plot.Plot parent;
+        boolean $stack8;
+        int result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        result = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: int indexOf(java.lang.Object)>(axis);
+
+        if result >= 0 goto label1;
+
+        parent = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.plot.Plot getParent()>();
+
+        $stack8 = parent instanceof org.jfree.chart.plot.PolarPlot;
+
+        if $stack8 == 0 goto label1;
+
+        p = (org.jfree.chart.plot.PolarPlot) parent;
+
+        result = virtualinvoke p.<org.jfree.chart.plot.PolarPlot: int getAxisIndex(org.jfree.chart.axis.ValueAxis)>(axis);
+
+     label1:
+        return result;
+    }
+
+    public int getIndexOf(org.jfree.chart.renderer.PolarItemRenderer)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        org.jfree.chart.util.ObjectList $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        renderer := @parameter0: org.jfree.chart.renderer.PolarItemRenderer;
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ObjectList: int indexOf(java.lang.Object)>(renderer);
+
+        return $stack3;
+    }
+
+    public void draw(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, org.jfree.chart.plot.PlotState, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        java.awt.geom.Rectangle2D area;
+        double $stack16, $stack18;
+        byte $stack17, $stack19;
+        boolean b1, $stack50, $stack48;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.ui.RectangleInsets insets;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.util.ObjectList $stack21, $stack34;
+        int axisCount, i;
+        float $stack26;
+        java.awt.AlphaComposite $stack27;
+        java.util.List $stack28, $stack29, $stack30;
+        java.lang.Object $stack35;
+        org.jfree.chart.plot.PolarAxisLocation location;
+        org.jfree.chart.axis.AxisState s, state;
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.plot.PlotState parentState;
+        org.jfree.chart.axis.ValueAxis axis;
+        java.awt.Shape i#10;
+        java.awt.Composite axis#11;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        anchor := @parameter2: java.awt.geom.Point2D;
+
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack16 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack17 = $stack16 cmpg 10.0;
+
+        if $stack17 > 0 goto label01;
+
+        $stack50 = 1;
+
+        goto label02;
+
+     label01:
+        $stack50 = 0;
+
+     label02:
+        b1 = $stack50;
+
+        $stack18 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack19 = $stack18 cmpg 10.0;
+
+        if $stack19 > 0 goto label03;
+
+        $stack48 = 1;
+
+        goto label04;
+
+     label03:
+        $stack48 = 0;
+
+     label04:
+        if b1 != 0 goto label05;
+
+        if $stack48 == 0 goto label06;
+
+     label05:
+        return;
+
+     label06:
+        if info == null goto label07;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+
+     label07:
+        insets = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        virtualinvoke insets.<org.jfree.chart.ui.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+
+        if info == null goto label08;
+
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(area);
+
+     label08:
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        $stack21 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        axisCount = virtualinvoke $stack21.<org.jfree.chart.util.ObjectList: int size()>();
+
+        state = null;
+
+        i = 0;
+
+     label09:
+        if i >= axisCount goto label11;
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(i);
+
+        if axis == null goto label10;
+
+        $stack34 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack35 = virtualinvoke $stack34.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        location = (org.jfree.chart.plot.PolarAxisLocation) $stack35;
+
+        s = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.AxisState drawAxis(org.jfree.chart.axis.ValueAxis,org.jfree.chart.plot.PolarAxisLocation,java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(axis, location, g2, area);
+
+        if i != 0 goto label10;
+
+        state = s;
+
+     label10:
+        i = i + 1;
+
+        goto label09;
+
+     label11:
+        i#10 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+
+        axis#11 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>(area);
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: float getForegroundAlpha()>();
+
+        $stack27 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack26);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>($stack27);
+
+        $stack28 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.util.List refreshAngleTicks()>();
+
+        this.<org.jfree.chart.plot.PolarPlot: java.util.List angleTicks> = $stack28;
+
+        $stack29 = this.<org.jfree.chart.plot.PolarPlot: java.util.List angleTicks>;
+
+        $stack30 = virtualinvoke state.<org.jfree.chart.axis.AxisState: java.util.List getTicks()>();
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void drawGridlines(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.util.List,java.util.List)>(g2, area, $stack29, $stack30);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void render(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo)>(g2, area, info);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(i#10);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(axis#11);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void drawCornerTextItems(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+
+        return;
+    }
+
+    protected void drawCornerTextItems(java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        java.util.List $stack18, $stack21, $stack30;
+        boolean $stack19, $stack23, $stack32;
+        java.awt.Graphics2D g2;
+        java.awt.Color $stack20;
+        java.awt.geom.Rectangle2D area, bounds;
+        double $stack24, $stack25, $stack36, $stack43, $stack45, width, height, x, y;
+        int $stack26, $stack27, $stack28, $stack29, $stack37, $stack38;
+        java.util.Iterator it;
+        java.lang.Object $stack33, $stack40;
+        java.lang.String msg;
+        java.awt.FontMetrics $stack34, fm;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        area := @parameter1: java.awt.geom.Rectangle2D;
+
+        $stack18 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        $stack19 = interfaceinvoke $stack18.<java.util.List: boolean isEmpty()>();
+
+        if $stack19 == 0 goto label1;
+
+        return;
+
+     label1:
+        $stack20 = <java.awt.Color: java.awt.Color BLACK>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setColor(java.awt.Color)>($stack20);
+
+        width = 0.0;
+
+        height = 0.0;
+
+        $stack21 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        it = interfaceinvoke $stack21.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack23 = interfaceinvoke it.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack23 == 0 goto label3;
+
+        $stack40 = interfaceinvoke it.<java.util.Iterator: java.lang.Object next()>();
+
+        msg = (java.lang.String) $stack40;
+
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(msg, g2, fm);
+
+        $stack43 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        width = staticinvoke <java.lang.Math: double max(double,double)>(width, $stack43);
+
+        $stack45 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        height = height + $stack45;
+
+        goto label2;
+
+     label3:
+        width = width + 14.0;
+
+        height = height + 7.0;
+
+        $stack24 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        x = $stack24 - width;
+
+        $stack25 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        y = $stack25 - height;
+
+        $stack29 = (int) x;
+
+        $stack28 = (int) y;
+
+        $stack27 = (int) width;
+
+        $stack26 = (int) height;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawRect(int,int,int,int)>($stack29, $stack28, $stack27, $stack26);
+
+        x = x + 7.0;
+
+        $stack30 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        it = interfaceinvoke $stack30.<java.util.List: java.util.Iterator iterator()>();
+
+     label4:
+        $stack32 = interfaceinvoke it.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack32 == 0 goto label5;
+
+        $stack33 = interfaceinvoke it.<java.util.Iterator: java.lang.Object next()>();
+
+        msg = (java.lang.String) $stack33;
+
+        $stack34 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+
+        bounds = staticinvoke <org.jfree.chart.text.TextUtils: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(msg, g2, $stack34);
+
+        $stack36 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        y = y + $stack36;
+
+        $stack38 = (int) x;
+
+        $stack37 = (int) y;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>(msg, $stack38, $stack37);
+
+        goto label4;
+
+     label5:
+        return;
+    }
+
+    protected org.jfree.chart.axis.AxisState drawAxis(org.jfree.chart.axis.ValueAxis, org.jfree.chart.plot.PolarAxisLocation, java.awt.Graphics2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Rectangle2D plotArea;
+        double centerX, centerY, $stack19, $stack20, $stack21, $stack22, $stack23, $stack25, r, x, y;
+        org.jfree.chart.plot.PolarPlot this;
+        int $stack24;
+        org.jfree.chart.plot.PolarAxisLocation location, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33;
+        java.awt.geom.Rectangle2D$Double $stack34, $stack38, $stack41, $stack44, $stack47, $stack50, $stack53, $stack56;
+        org.jfree.chart.axis.ValueAxis axis;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.RectangleEdge $stack35, $stack39, $stack42, $stack45, $stack48, $stack51, $stack54, $stack57;
+        org.jfree.chart.axis.AxisState result;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        location := @parameter1: org.jfree.chart.plot.PolarAxisLocation;
+
+        g2 := @parameter2: java.awt.Graphics2D;
+
+        plotArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        centerX = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+
+        centerY = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getCenterY()>();
+
+        $stack19 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack20 = $stack19 / 2.0;
+
+        $stack21 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack22 = $stack21 / 2.0;
+
+        $stack23 = staticinvoke <java.lang.Math: double min(double,double)>($stack20, $stack22);
+
+        $stack24 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack25 = (double) $stack24;
+
+        r = $stack23 - $stack25;
+
+        x = centerX - r;
+
+        y = centerY - r;
+
+        result = null;
+
+        $stack26 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation NORTH_RIGHT>;
+
+        if location != $stack26 goto label1;
+
+        $stack56 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack56.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, r, r);
+
+        $stack57 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerX, plotArea, $stack56, $stack57, null);
+
+        goto label8;
+
+     label1:
+        $stack27 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation NORTH_LEFT>;
+
+        if location != $stack27 goto label2;
+
+        $stack53 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack53.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(centerX, y, r, r);
+
+        $stack54 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerX, plotArea, $stack53, $stack54, null);
+
+        goto label8;
+
+     label2:
+        $stack28 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation SOUTH_LEFT>;
+
+        if location != $stack28 goto label3;
+
+        $stack50 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack50.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(centerX, centerY, r, r);
+
+        $stack51 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerX, plotArea, $stack50, $stack51, null);
+
+        goto label8;
+
+     label3:
+        $stack29 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation SOUTH_RIGHT>;
+
+        if location != $stack29 goto label4;
+
+        $stack47 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack47.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, centerY, r, r);
+
+        $stack48 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge RIGHT>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerX, plotArea, $stack47, $stack48, null);
+
+        goto label8;
+
+     label4:
+        $stack30 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation EAST_ABOVE>;
+
+        if location != $stack30 goto label5;
+
+        $stack44 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack44.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(centerX, centerY, r, r);
+
+        $stack45 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerY, plotArea, $stack44, $stack45, null);
+
+        goto label8;
+
+     label5:
+        $stack31 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation EAST_BELOW>;
+
+        if location != $stack31 goto label6;
+
+        $stack41 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack41.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(centerX, y, r, r);
+
+        $stack42 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerY, plotArea, $stack41, $stack42, null);
+
+        goto label8;
+
+     label6:
+        $stack32 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation WEST_ABOVE>;
+
+        if location != $stack32 goto label7;
+
+        $stack38 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack38.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, centerY, r, r);
+
+        $stack39 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge TOP>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerY, plotArea, $stack38, $stack39, null);
+
+        goto label8;
+
+     label7:
+        $stack33 = <org.jfree.chart.plot.PolarAxisLocation: org.jfree.chart.plot.PolarAxisLocation WEST_BELOW>;
+
+        if location != $stack33 goto label8;
+
+        $stack34 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack34.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, r, r);
+
+        $stack35 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        result = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, centerY, plotArea, $stack34, $stack35, null);
+
+     label8:
+        return result;
+    }
+
+    protected void render(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack11;
+        int datasetCount, seriesCount, i, series;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.data.xy.XYDataset dataset;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        boolean $stack15, hasData;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        hasData = 0;
+
+        $stack11 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        datasetCount = virtualinvoke $stack11.<org.jfree.chart.util.ObjectList: int size()>();
+
+        i = datasetCount - 1;
+
+     label1:
+        if i < 0 goto label6;
+
+        dataset = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(i);
+
+        if dataset != null goto label2;
+
+        goto label5;
+
+     label2:
+        renderer = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.renderer.PolarItemRenderer getRenderer(int)>(i);
+
+        if renderer != null goto label3;
+
+        goto label5;
+
+     label3:
+        $stack15 = staticinvoke <org.jfree.data.general.DatasetUtils: boolean isEmptyOrNull(org.jfree.data.xy.XYDataset)>(dataset);
+
+        if $stack15 != 0 goto label5;
+
+        hasData = 1;
+
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+
+        series = 0;
+
+     label4:
+        if series >= seriesCount goto label5;
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void drawSeries(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.PolarPlot,org.jfree.data.xy.XYDataset,int)>(g2, dataArea, info, this, dataset, series);
+
+        series = series + 1;
+
+        goto label4;
+
+     label5:
+        i = i + -1;
+
+        goto label1;
+
+     label6:
+        if hasData != 0 goto label7;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void drawNoDataMessage(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, dataArea);
+
+     label7:
+        return;
+    }
+
+    protected void drawGridlines(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.util.List, java.util.List)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        boolean $stack10, $stack11;
+        java.util.List radialTicks, ticks, angularTicks;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.axis.ValueAxis $stack15;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.Stroke gridStroke;
+        java.awt.Paint gridPaint;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        angularTicks := @parameter2: java.util.List;
+
+        radialTicks := @parameter3: java.util.List;
+
+        renderer = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.renderer.PolarItemRenderer getRenderer()>();
+
+        if renderer != null goto label1;
+
+        return;
+
+     label1:
+        $stack10 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: boolean isAngleGridlinesVisible()>();
+
+        if $stack10 == 0 goto label2;
+
+        gridStroke = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke getAngleGridlineStroke()>();
+
+        gridPaint = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getAngleGridlinePaint()>();
+
+        if gridStroke == null goto label2;
+
+        if gridPaint == null goto label2;
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void drawAngularGridLines(java.awt.Graphics2D,org.jfree.chart.plot.PolarPlot,java.util.List,java.awt.geom.Rectangle2D)>(g2, this, angularTicks, dataArea);
+
+     label2:
+        $stack11 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: boolean isRadiusGridlinesVisible()>();
+
+        if $stack11 == 0 goto label3;
+
+        gridStroke = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke getRadiusGridlineStroke()>();
+
+        gridPaint = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getRadiusGridlinePaint()>();
+
+        if gridStroke == null goto label3;
+
+        if gridPaint == null goto label3;
+
+        ticks = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: java.util.List buildRadialTicks(java.util.List)>(radialTicks);
+
+        $stack15 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis()>();
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void drawRadialGridLines(java.awt.Graphics2D,org.jfree.chart.plot.PolarPlot,org.jfree.chart.axis.ValueAxis,java.util.List,java.awt.geom.Rectangle2D)>(g2, this, $stack15, ticks, dataArea);
+
+     label3:
+        return;
+    }
+
+    protected java.util.List buildRadialTicks(java.util.List)
+    {
+        java.util.ArrayList $stack5;
+        java.util.List allTicks;
+        java.util.Iterator it;
+        boolean $stack7, $stack9, $stack14;
+        java.lang.Object $stack8;
+        org.jfree.chart.axis.ValueTick tick;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.axis.TickType $stack12, $stack13;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        allTicks := @parameter0: java.util.List;
+
+        $stack5 = new java.util.ArrayList;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>()>();
+
+        it = interfaceinvoke allTicks.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke it.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label4;
+
+        $stack8 = interfaceinvoke it.<java.util.Iterator: java.lang.Object next()>();
+
+        tick = (org.jfree.chart.axis.ValueTick) $stack8;
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: boolean isRadiusMinorGridlinesVisible()>();
+
+        if $stack9 != 0 goto label2;
+
+        $stack12 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MAJOR>;
+
+        $stack13 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: org.jfree.chart.axis.TickType getTickType()>();
+
+        $stack14 = virtualinvoke $stack12.<org.jfree.chart.axis.TickType: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label3;
+
+     label2:
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>(tick);
+
+     label3:
+        goto label1;
+
+     label4:
+        return $stack5;
+    }
+
+    public void zoom(double)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        int $stack9, axisIdx;
+        org.jfree.chart.axis.ValueAxis axis;
+        double percent, radius, scaledRadius;
+        byte $stack13;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        percent := @parameter0: double;
+
+        axisIdx = 0;
+
+     label1:
+        $stack9 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: int getAxisCount()>();
+
+        if axisIdx >= $stack9 goto label4;
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(axisIdx);
+
+        if axis == null goto label3;
+
+        $stack13 = percent cmpl 0.0;
+
+        if $stack13 <= 0 goto label2;
+
+        radius = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double getUpperBound()>();
+
+        scaledRadius = radius * percent;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void setUpperBound(double)>(scaledRadius);
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean)>(0);
+
+        goto label3;
+
+     label2:
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean)>(1);
+
+     label3:
+        axisIdx = axisIdx + 1;
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    private java.util.List getDatasetsMappedToAxis(java.lang.Integer)
+    {
+        java.lang.Integer axisIndex, $stack9;
+        java.util.ArrayList $stack5;
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack6, $stack14, $stack19;
+        int $stack7, i;
+        java.util.Map $stack8;
+        java.lang.Object $stack10, $stack15, $stack20;
+        java.util.List mappedAxes;
+        boolean $stack11, $stack18;
+        java.lang.Number $stack17;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        axisIndex := @parameter0: java.lang.Integer;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(axisIndex, "axisIndex");
+
+        $stack5 = new java.util.ArrayList;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>()>();
+
+        i = 0;
+
+     label1:
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack7 goto label4;
+
+        $stack8 = this.<org.jfree.chart.plot.PolarPlot: java.util.Map datasetToAxesMap>;
+
+        $stack9 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i);
+
+        $stack10 = interfaceinvoke $stack8.<java.util.Map: java.lang.Object get(java.lang.Object)>($stack9);
+
+        mappedAxes = (java.util.List) $stack10;
+
+        if mappedAxes != null goto label2;
+
+        $stack17 = <org.jfree.chart.plot.PolarPlot: java.lang.Number ZERO>;
+
+        $stack18 = virtualinvoke axisIndex.<java.lang.Integer: boolean equals(java.lang.Object)>($stack17);
+
+        if $stack18 == 0 goto label3;
+
+        $stack19 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack20 = virtualinvoke $stack19.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>($stack20);
+
+        goto label3;
+
+     label2:
+        $stack11 = interfaceinvoke mappedAxes.<java.util.List: boolean contains(java.lang.Object)>(axisIndex);
+
+        if $stack11 == 0 goto label3;
+
+        $stack14 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack15 = virtualinvoke $stack14.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>($stack15);
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        return $stack5;
+    }
+
+    public org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.axis.ValueAxis axis;
+        int axisIdx;
+        java.util.ArrayList $stack9;
+        java.util.Iterator iterator;
+        java.lang.Object $stack12;
+        org.jfree.data.xy.XYDataset d;
+        org.jfree.data.Range $stack14, result;
+        java.lang.Integer $stack16;
+        java.util.List mappedDatasets;
+        boolean $stack11;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+
+        result = null;
+
+        axisIdx = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: int getAxisIndex(org.jfree.chart.axis.ValueAxis)>(axis);
+
+        $stack9 = new java.util.ArrayList;
+
+        specialinvoke $stack9.<java.util.ArrayList: void <init>()>();
+
+        mappedDatasets = $stack9;
+
+        if axisIdx < 0 goto label1;
+
+        $stack16 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(axisIdx);
+
+        mappedDatasets = specialinvoke this.<org.jfree.chart.plot.PolarPlot: java.util.List getDatasetsMappedToAxis(java.lang.Integer)>($stack16);
+
+     label1:
+        iterator = interfaceinvoke mappedDatasets.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack11 == 0 goto label4;
+
+        $stack12 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        d = (org.jfree.data.xy.XYDataset) $stack12;
+
+        if d == null goto label3;
+
+        $stack14 = staticinvoke <org.jfree.data.general.DatasetUtils: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset)>(d);
+
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, $stack14);
+
+     label3:
+        goto label2;
+
+     label4:
+        return result;
+    }
+
+    public void datasetChanged(org.jfree.data.general.DatasetChangeEvent)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.util.ObjectList $stack4, $stack8;
+        int $stack5, i;
+        org.jfree.chart.plot.Plot $stack6, $stack7;
+        org.jfree.data.general.DatasetChangeEvent event;
+        java.lang.Object $stack9;
+        org.jfree.chart.axis.ValueAxis axis;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+
+        i = 0;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack5 = virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack5 goto label3;
+
+        $stack8 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        axis = (org.jfree.chart.axis.ValueAxis) $stack9;
+
+        if axis == null goto label2;
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void configure()>();
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        $stack6 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.plot.Plot getParent()>();
+
+        if $stack6 == null goto label4;
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.plot.Plot getParent()>();
+
+        virtualinvoke $stack7.<org.jfree.chart.plot.Plot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>(event);
+
+        goto label5;
+
+     label4:
+        specialinvoke this.<org.jfree.chart.plot.Plot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>(event);
+
+     label5:
+        return;
+    }
+
+    public void rendererChanged(org.jfree.chart.event.RendererChangeEvent)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.event.RendererChangeEvent event;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        event := @parameter0: org.jfree.chart.event.RendererChangeEvent;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.LegendItemCollection getLegendItems()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        org.jfree.chart.LegendItemCollection $stack9, $stack10, $stack21;
+        org.jfree.chart.util.ObjectList $stack11;
+        int count, seriesCount, datasetIndex, i;
+        org.jfree.data.xy.XYDataset dataset;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        org.jfree.chart.LegendItem item;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack9 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems>;
+
+        if $stack9 == null goto label1;
+
+        $stack21 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems>;
+
+        return $stack21;
+
+     label1:
+        $stack10 = new org.jfree.chart.LegendItemCollection;
+
+        specialinvoke $stack10.<org.jfree.chart.LegendItemCollection: void <init>()>();
+
+        $stack11 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        count = virtualinvoke $stack11.<org.jfree.chart.util.ObjectList: int size()>();
+
+        datasetIndex = 0;
+
+     label2:
+        if datasetIndex >= count goto label5;
+
+        dataset = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(datasetIndex);
+
+        renderer = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.renderer.PolarItemRenderer getRenderer(int)>(datasetIndex);
+
+        if dataset == null goto label4;
+
+        if renderer == null goto label4;
+
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+
+        i = 0;
+
+     label3:
+        if i >= seriesCount goto label4;
+
+        item = interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: org.jfree.chart.LegendItem getLegendItem(int)>(i);
+
+        virtualinvoke $stack10.<org.jfree.chart.LegendItemCollection: void add(org.jfree.chart.LegendItem)>(item);
+
+        i = i + 1;
+
+        goto label3;
+
+     label4:
+        datasetIndex = datasetIndex + 1;
+
+        goto label2;
+
+     label5:
+        return $stack10;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.PolarPlot this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15, $stack16, $stack17, $stack21, $stack22, $stack23, $stack24, $stack27, $stack30, $stack33, $stack36, $stack37, $stack38, $stack41, $stack44, $stack45, $stack46, $stack49, $stack54, $stack55;
+        org.jfree.chart.util.ObjectList $stack4, $stack5, $stack7, $stack8, $stack10, $stack11;
+        org.jfree.chart.axis.TickUnit $stack13, $stack14;
+        double $stack18, $stack19;
+        byte $stack20;
+        java.awt.Font $stack25, $stack26;
+        java.awt.Paint $stack28, $stack29, $stack34, $stack35, $stack42, $stack43;
+        java.awt.Stroke $stack31, $stack32, $stack39, $stack40;
+        java.util.List $stack47, $stack48;
+        int $stack50, $stack51;
+        org.jfree.chart.LegendItemCollection $stack52, $stack53;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.PolarPlot;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.plot.PolarPlot) obj;
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack4 = that.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack8 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack7 = that.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axisLocations>;
+
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.util.ObjectList: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack11 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack10 = that.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.util.ObjectList: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack14 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit>;
+
+        $stack13 = that.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.TickUnit angleTickUnit>;
+
+        $stack15 = virtualinvoke $stack14.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack15 != 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack17 = this.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible>;
+
+        $stack16 = that.<org.jfree.chart.plot.PolarPlot: boolean angleGridlinesVisible>;
+
+        if $stack17 == $stack16 goto label07;
+
+        return 0;
+
+     label07:
+        $stack19 = this.<org.jfree.chart.plot.PolarPlot: double angleOffset>;
+
+        $stack18 = that.<org.jfree.chart.plot.PolarPlot: double angleOffset>;
+
+        $stack20 = $stack19 cmpl $stack18;
+
+        if $stack20 == 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack22 = this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        $stack21 = that.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        if $stack22 == $stack21 goto label09;
+
+        return 0;
+
+     label09:
+        $stack24 = this.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible>;
+
+        $stack23 = that.<org.jfree.chart.plot.PolarPlot: boolean angleLabelsVisible>;
+
+        if $stack24 == $stack23 goto label10;
+
+        return 0;
+
+     label10:
+        $stack26 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Font angleLabelFont>;
+
+        $stack25 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Font angleLabelFont>;
+
+        $stack27 = virtualinvoke $stack26.<java.awt.Font: boolean equals(java.lang.Object)>($stack25);
+
+        if $stack27 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack29 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint>;
+
+        $stack28 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint>;
+
+        $stack30 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack29, $stack28);
+
+        if $stack30 != 0 goto label12;
+
+        return 0;
+
+     label12:
+        $stack32 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke>;
+
+        $stack31 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke>;
+
+        $stack33 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack32, $stack31);
+
+        if $stack33 != 0 goto label13;
+
+        return 0;
+
+     label13:
+        $stack35 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint>;
+
+        $stack34 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint>;
+
+        $stack36 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack35, $stack34);
+
+        if $stack36 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack38 = this.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible>;
+
+        $stack37 = that.<org.jfree.chart.plot.PolarPlot: boolean radiusGridlinesVisible>;
+
+        if $stack38 == $stack37 goto label15;
+
+        return 0;
+
+     label15:
+        $stack40 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke>;
+
+        $stack39 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke>;
+
+        $stack41 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack40, $stack39);
+
+        if $stack41 != 0 goto label16;
+
+        return 0;
+
+     label16:
+        $stack43 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint>;
+
+        $stack42 = that.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint>;
+
+        $stack44 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack43, $stack42);
+
+        if $stack44 != 0 goto label17;
+
+        return 0;
+
+     label17:
+        $stack46 = this.<org.jfree.chart.plot.PolarPlot: boolean radiusMinorGridlinesVisible>;
+
+        $stack45 = that.<org.jfree.chart.plot.PolarPlot: boolean radiusMinorGridlinesVisible>;
+
+        if $stack46 == $stack45 goto label18;
+
+        return 0;
+
+     label18:
+        $stack48 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        $stack47 = that.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        $stack49 = interfaceinvoke $stack48.<java.util.List: boolean equals(java.lang.Object)>($stack47);
+
+        if $stack49 != 0 goto label19;
+
+        return 0;
+
+     label19:
+        $stack51 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack50 = that.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        if $stack51 == $stack50 goto label20;
+
+        return 0;
+
+     label20:
+        $stack53 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems>;
+
+        $stack52 = that.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.LegendItemCollection fixedLegendItems>;
+
+        $stack54 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack53, $stack52);
+
+        if $stack54 != 0 goto label21;
+
+        return 0;
+
+     label21:
+        $stack55 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+
+        return $stack55;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.PolarPlot this, clone;
+        java.lang.Object $stack6, $stack8, $stack13, $stack18, $stack25, $stack29, $stack35, $stack38;
+        org.jfree.chart.util.ObjectList $stack7, $stack9, $stack10, $stack12, $stack14, $stack15, $stack17, $stack19, $stack20, $stack24, $stack30, $stack34, $stack39;
+        int $stack11, $stack16, $stack21, i;
+        java.util.ArrayList $stack22;
+        java.util.List $stack23;
+        boolean $stack26;
+        org.jfree.chart.renderer.PolarItemRenderer rc, axis#7;
+        org.jfree.chart.axis.ValueAxis axis, clonedAxis;
+        org.jfree.data.xy.XYDataset axis#5;
+        org.jfree.chart.util.PublicCloneable clonedAxis#8;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack6 = specialinvoke this.<org.jfree.chart.plot.Plot: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.plot.PolarPlot) $stack6;
+
+        $stack7 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack8 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>($stack7);
+
+        $stack9 = (org.jfree.chart.util.ObjectList) $stack8;
+
+        clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes> = $stack9;
+
+        i = 0;
+
+     label1:
+        $stack10 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack11 = virtualinvoke $stack10.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack11 goto label3;
+
+        $stack34 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack35 = virtualinvoke $stack34.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        axis = (org.jfree.chart.axis.ValueAxis) $stack35;
+
+        if axis == null goto label2;
+
+        $stack38 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+
+        clonedAxis = (org.jfree.chart.axis.ValueAxis) $stack38;
+
+        $stack39 = clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        virtualinvoke $stack39.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(i, clonedAxis);
+
+        virtualinvoke clonedAxis.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(clone);
+
+        virtualinvoke clonedAxis.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(clone);
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        $stack12 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>($stack12);
+
+        $stack14 = (org.jfree.chart.util.ObjectList) $stack13;
+
+        clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets> = $stack14;
+
+        i = 0;
+
+     label4:
+        $stack15 = clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack16 = virtualinvoke $stack15.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack16 goto label6;
+
+        axis#5 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset(int)>(i);
+
+        if axis#5 == null goto label5;
+
+        interfaceinvoke axis#5.<org.jfree.data.xy.XYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(clone);
+
+     label5:
+        i = i + 1;
+
+        goto label4;
+
+     label6:
+        $stack17 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack18 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>($stack17);
+
+        $stack19 = (org.jfree.chart.util.ObjectList) $stack18;
+
+        clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers> = $stack19;
+
+        i = 0;
+
+     label7:
+        $stack20 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack21 = virtualinvoke $stack20.<org.jfree.chart.util.ObjectList: int size()>();
+
+        if i >= $stack21 goto label9;
+
+        $stack24 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack25 = virtualinvoke $stack24.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        axis#7 = (org.jfree.chart.renderer.PolarItemRenderer) $stack25;
+
+        $stack26 = axis#7 instanceof org.jfree.chart.util.PublicCloneable;
+
+        if $stack26 == 0 goto label8;
+
+        clonedAxis#8 = (org.jfree.chart.util.PublicCloneable) axis#7;
+
+        $stack29 = interfaceinvoke clonedAxis#8.<org.jfree.chart.util.PublicCloneable: java.lang.Object clone()>();
+
+        rc = (org.jfree.chart.renderer.PolarItemRenderer) $stack29;
+
+        $stack30 = clone.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        virtualinvoke $stack30.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(i, rc);
+
+        interfaceinvoke rc.<org.jfree.chart.renderer.PolarItemRenderer: void setPlot(org.jfree.chart.plot.PolarPlot)>(clone);
+
+        interfaceinvoke rc.<org.jfree.chart.renderer.PolarItemRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)>(clone);
+
+     label8:
+        i = i + 1;
+
+        goto label7;
+
+     label9:
+        $stack22 = new java.util.ArrayList;
+
+        $stack23 = this.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems>;
+
+        specialinvoke $stack22.<java.util.ArrayList: void <init>(java.util.Collection)>($stack23);
+
+        clone.<org.jfree.chart.plot.PolarPlot: java.util.List cornerTextItems> = $stack22;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke $stack2, $stack4;
+        java.awt.Paint $stack3, $stack5, $stack6;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.PolarPlot this;
+        java.awt.Stroke $stack7, $stack9;
+        java.awt.Paint $stack8, $stack10, $stack11;
+        org.jfree.chart.util.ObjectList $stack12, $stack14, $stack16, $stack18, $stack22, $stack26;
+        int rangeAxisCount, i, axis#4, dataset#7;
+        java.lang.Object $stack19, $stack23, $stack27;
+        org.jfree.chart.renderer.PolarItemRenderer renderer;
+        org.jfree.chart.axis.Axis axis;
+        org.jfree.data.general.Dataset dataset;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke angleGridlineStroke> = $stack7;
+
+        $stack8 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleGridlinePaint> = $stack8;
+
+        $stack9 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke radiusGridlineStroke> = $stack9;
+
+        $stack10 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint radiusGridlinePaint> = $stack10;
+
+        $stack11 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.PolarPlot: java.awt.Paint angleLabelPaint> = $stack11;
+
+        $stack12 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        rangeAxisCount = virtualinvoke $stack12.<org.jfree.chart.util.ObjectList: int size()>();
+
+        i = 0;
+
+     label1:
+        if i >= rangeAxisCount goto label3;
+
+        $stack26 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList axes>;
+
+        $stack27 = virtualinvoke $stack26.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(i);
+
+        axis = (org.jfree.chart.axis.Axis) $stack27;
+
+        if axis == null goto label2;
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+
+        virtualinvoke axis.<org.jfree.chart.axis.Axis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        $stack14 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        i = virtualinvoke $stack14.<org.jfree.chart.util.ObjectList: int size()>();
+
+        axis#4 = 0;
+
+     label4:
+        if axis#4 >= i goto label6;
+
+        $stack22 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList datasets>;
+
+        $stack23 = virtualinvoke $stack22.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(axis#4);
+
+        dataset = (org.jfree.data.general.Dataset) $stack23;
+
+        if dataset == null goto label5;
+
+        interfaceinvoke dataset.<org.jfree.data.general.Dataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+
+     label5:
+        axis#4 = axis#4 + 1;
+
+        goto label4;
+
+     label6:
+        $stack16 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        axis#4 = virtualinvoke $stack16.<org.jfree.chart.util.ObjectList: int size()>();
+
+        dataset#7 = 0;
+
+     label7:
+        if dataset#7 >= axis#4 goto label9;
+
+        $stack18 = this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.util.ObjectList renderers>;
+
+        $stack19 = virtualinvoke $stack18.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(dataset#7);
+
+        renderer = (org.jfree.chart.renderer.PolarItemRenderer) $stack19;
+
+        if renderer == null goto label8;
+
+        interfaceinvoke renderer.<org.jfree.chart.renderer.PolarItemRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)>(this);
+
+     label8:
+        dataset#7 = dataset#7 + 1;
+
+        goto label7;
+
+     label9:
+        return;
+    }
+
+    public void zoomDomainAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        return;
+    }
+
+    public void zoomDomainAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D, boolean)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+        boolean useAnchor;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        useAnchor := @parameter3: boolean;
+
+        return;
+    }
+
+    public void zoomDomainAxes(double, double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double lowerPercent, upperPercent;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        state := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter3: java.awt.geom.Point2D;
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double factor;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        factor := @parameter0: double;
+
+        state := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void zoom(double)>(factor);
+
+        return;
+    }
+
+    public void zoomRangeAxes(double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D, boolean)
+    {
+        java.awt.geom.Point2D source;
+        double sourceX, factor, anchorX;
+        org.jfree.chart.plot.PolarPlot this;
+        int $stack13, axisIdx;
+        org.jfree.chart.axis.ValueAxis axis;
+        boolean useAnchor;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.geom.Rectangle2D $stack17;
+        org.jfree.chart.ui.RectangleEdge $stack18;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        factor := @parameter0: double;
+
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter2: java.awt.geom.Point2D;
+
+        useAnchor := @parameter3: boolean;
+
+        sourceX = virtualinvoke source.<java.awt.geom.Point2D: double getX()>();
+
+        axisIdx = 0;
+
+     label1:
+        $stack13 = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: int getAxisCount()>();
+
+        if axisIdx >= $stack13 goto label4;
+
+        axis = virtualinvoke this.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis(int)>(axisIdx);
+
+        if axis == null goto label3;
+
+        if useAnchor == 0 goto label2;
+
+        $stack17 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+
+        $stack18 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        anchorX = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(sourceX, $stack17, $stack18);
+
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)>(factor, anchorX);
+
+        goto label3;
+
+     label2:
+        virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+
+     label3:
+        axisIdx = axisIdx + 1;
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public void zoomRangeAxes(double, double, org.jfree.chart.plot.PlotRenderingInfo, java.awt.geom.Point2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        double upperPercent, lowerPercent, $stack7, $stack8;
+        org.jfree.chart.plot.PlotRenderingInfo state;
+        java.awt.geom.Point2D source;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        lowerPercent := @parameter0: double;
+
+        upperPercent := @parameter1: double;
+
+        state := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        source := @parameter3: java.awt.geom.Point2D;
+
+        $stack7 = upperPercent + lowerPercent;
+
+        $stack8 = $stack7 / 2.0;
+
+        virtualinvoke this.<org.jfree.chart.plot.PolarPlot: void zoom(double)>($stack8);
+
+        return;
+    }
+
+    public boolean isDomainZoomable()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        return 0;
+    }
+
+    public boolean isRangeZoomable()
+    {
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        return 1;
+    }
+
+    public org.jfree.chart.plot.PlotOrientation getOrientation()
+    {
+        org.jfree.chart.plot.PlotOrientation $stack1;
+        org.jfree.chart.plot.PolarPlot this;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        $stack1 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        return $stack1;
+    }
+
+    public java.awt.Point translateToJava2D(double, double, org.jfree.chart.axis.ValueAxis, java.awt.geom.Rectangle2D)
+    {
+        org.jfree.chart.plot.PolarPlot this;
+        boolean $stack39;
+        double $stack40, $stack41, radians, $stack43, $stack45, minx, $stack46, $stack48, maxx, $stack49, $stack51, miny, $stack52, $stack54, maxy, $stack55, halfWidth, $stack56, halfHeight, midX, midY, l, axisMin, radius, adjustedRadius, $stack62, length, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, angleDegrees;
+        java.awt.geom.Rectangle2D dataArea;
+        int $stack44, $stack47, $stack50, $stack53, ix, iy;
+        java.awt.geom.Rectangle2D$Double $stack58;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.ui.RectangleEdge $stack61;
+        float x, y;
+        java.awt.Point $stack71;
+
+        this := @this: org.jfree.chart.plot.PolarPlot;
+
+        angleDegrees := @parameter0: double;
+
+        radius := @parameter1: double;
+
+        axis := @parameter2: org.jfree.chart.axis.ValueAxis;
+
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+
+        $stack39 = this.<org.jfree.chart.plot.PolarPlot: boolean counterClockwise>;
+
+        if $stack39 == 0 goto label1;
+
+        angleDegrees = neg angleDegrees;
+
+     label1:
+        $stack40 = this.<org.jfree.chart.plot.PolarPlot: double angleOffset>;
+
+        $stack41 = angleDegrees + $stack40;
+
+        radians = staticinvoke <java.lang.Math: double toRadians(double)>($stack41);
+
+        $stack43 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack44 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack45 = (double) $stack44;
+
+        minx = $stack43 + $stack45;
+
+        $stack46 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack47 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack48 = (double) $stack47;
+
+        maxx = $stack46 - $stack48;
+
+        $stack49 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack50 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack51 = (double) $stack50;
+
+        miny = $stack49 + $stack51;
+
+        $stack52 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack53 = this.<org.jfree.chart.plot.PolarPlot: int margin>;
+
+        $stack54 = (double) $stack53;
+
+        maxy = $stack52 - $stack54;
+
+        $stack55 = maxx - minx;
+
+        halfWidth = $stack55 / 2.0;
+
+        $stack56 = maxy - miny;
+
+        halfHeight = $stack56 / 2.0;
+
+        midX = minx + halfWidth;
+
+        midY = miny + halfHeight;
+
+        l = staticinvoke <java.lang.Math: double min(double,double)>(halfWidth, halfHeight);
+
+        $stack58 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack58.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(midX, midY, l, l);
+
+        axisMin = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+
+        adjustedRadius = staticinvoke <java.lang.Math: double max(double,double)>(radius, axisMin);
+
+        $stack61 = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+        $stack62 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(adjustedRadius, $stack58, $stack61);
+
+        length = $stack62 - midX;
+
+        $stack63 = staticinvoke <java.lang.Math: double cos(double)>(radians);
+
+        $stack64 = $stack63 * length;
+
+        $stack65 = midX + $stack64;
+
+        x = (float) $stack65;
+
+        $stack66 = staticinvoke <java.lang.Math: double sin(double)>(radians);
+
+        $stack67 = $stack66 * length;
+
+        $stack68 = midY + $stack67;
+
+        y = (float) $stack68;
+
+        ix = staticinvoke <java.lang.Math: int round(float)>(x);
+
+        iy = staticinvoke <java.lang.Math: int round(float)>(y);
+
+        $stack71 = new java.awt.Point;
+
+        specialinvoke $stack71.<java.awt.Point: void <init>(int,int)>(ix, iy);
+
+        return $stack71;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.BasicStroke $stack0;
+        float[] $stack1;
+        java.awt.Color $stack2;
+        java.util.ResourceBundle $stack3;
+
+        <org.jfree.chart.plot.PolarPlot: double DEFAULT_ANGLE_OFFSET> = -90.0;
+
+        <org.jfree.chart.plot.PolarPlot: double DEFAULT_ANGLE_TICK_UNIT_SIZE> = 45.0;
+
+        <org.jfree.chart.plot.PolarPlot: double ANNOTATION_MARGIN> = 7.0;
+
+        <org.jfree.chart.plot.PolarPlot: int DEFAULT_MARGIN> = 20;
+
+        <org.jfree.chart.plot.PolarPlot: long serialVersionUID> = 3794383185924179525L;
+
+        $stack0 = new java.awt.BasicStroke;
+
+        $stack1 = newarray (float)[2];
+
+        $stack1[0] = 2.0F;
+
+        $stack1[1] = 2.0F;
+
+        specialinvoke $stack0.<java.awt.BasicStroke: void <init>(float,int,int,float,float[],float)>(0.5F, 0, 2, 0.0F, $stack1, 0.0F);
+
+        <org.jfree.chart.plot.PolarPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE> = $stack0;
+
+        $stack2 = <java.awt.Color: java.awt.Color GRAY>;
+
+        <org.jfree.chart.plot.PolarPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.plot.LocalizationBundle");
+
+        <org.jfree.chart.plot.PolarPlot: java.util.ResourceBundle localizationResources> = $stack3;
+
+        return;
+    }
+}

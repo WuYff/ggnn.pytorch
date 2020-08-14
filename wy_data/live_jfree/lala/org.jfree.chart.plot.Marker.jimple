@@ -1,0 +1,994 @@
+public abstract class org.jfree.chart.plot.Marker extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private transient java.awt.Paint paint;
+    private transient java.awt.Stroke stroke;
+    private transient java.awt.Paint outlinePaint;
+    private transient java.awt.Stroke outlineStroke;
+    private float alpha;
+    private java.lang.String label;
+    private java.awt.Font labelFont;
+    private transient java.awt.Paint labelPaint;
+    private java.awt.Color labelBackgroundColor;
+    private org.jfree.chart.ui.RectangleAnchor labelAnchor;
+    private org.jfree.chart.ui.TextAnchor labelTextAnchor;
+    private org.jfree.chart.ui.RectangleInsets labelOffset;
+    private org.jfree.chart.ui.LengthAdjustmentType labelOffsetType;
+    private transient javax.swing.event.EventListenerList listenerList;
+
+    protected void <init>()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Color $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = <java.awt.Color: java.awt.Color GRAY>;
+
+        specialinvoke this.<org.jfree.chart.plot.Marker: void <init>(java.awt.Paint)>($stack1);
+
+        return;
+    }
+
+    protected void <init>(java.awt.Paint)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint paint;
+        java.awt.BasicStroke $stack2, $stack3;
+        java.awt.Color $stack4;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        paint := @parameter0: java.awt.Paint;
+
+        $stack2 = new java.awt.BasicStroke;
+
+        specialinvoke $stack2.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        $stack4 = <java.awt.Color: java.awt.Color GRAY>;
+
+        $stack3 = new java.awt.BasicStroke;
+
+        specialinvoke $stack3.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+
+        specialinvoke this.<org.jfree.chart.plot.Marker: void <init>(java.awt.Paint,java.awt.Stroke,java.awt.Paint,java.awt.Stroke,float)>(paint, $stack2, $stack4, $stack3, 0.8F);
+
+        return;
+    }
+
+    protected void <init>(java.awt.Paint, java.awt.Stroke, java.awt.Paint, java.awt.Stroke, float)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint paint, outlinePaint;
+        java.awt.Stroke stroke, outlineStroke;
+        float alpha;
+        byte $stack6, $stack8;
+        java.lang.IllegalArgumentException $stack7;
+        java.awt.Font $stack9;
+        java.awt.Color $stack10, $stack11;
+        org.jfree.chart.ui.RectangleAnchor $stack12;
+        org.jfree.chart.ui.RectangleInsets $stack13;
+        org.jfree.chart.ui.LengthAdjustmentType $stack14;
+        org.jfree.chart.ui.TextAnchor $stack15;
+        javax.swing.event.EventListenerList $stack16;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        paint := @parameter0: java.awt.Paint;
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        outlinePaint := @parameter2: java.awt.Paint;
+
+        outlineStroke := @parameter3: java.awt.Stroke;
+
+        alpha := @parameter4: float;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.plot.Marker: java.lang.String label> = null;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        $stack6 = alpha cmpg 0.0F;
+
+        if $stack6 < 0 goto label1;
+
+        $stack8 = alpha cmpl 1.0F;
+
+        if $stack8 <= 0 goto label2;
+
+     label1:
+        $stack7 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'alpha\' value must be in the range 0.0f to 1.0f");
+
+        throw $stack7;
+
+     label2:
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint paint> = paint;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke> = stroke;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint> = outlinePaint;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke> = outlineStroke;
+
+        this.<org.jfree.chart.plot.Marker: float alpha> = alpha;
+
+        $stack9 = new java.awt.Font;
+
+        specialinvoke $stack9.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 0, 9);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Font labelFont> = $stack9;
+
+        $stack10 = <java.awt.Color: java.awt.Color BLACK>;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint> = $stack10;
+
+        $stack11 = new java.awt.Color;
+
+        specialinvoke $stack11.<java.awt.Color: void <init>(int,int,int,int)>(100, 100, 100, 100);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Color labelBackgroundColor> = $stack11;
+
+        $stack12 = <org.jfree.chart.ui.RectangleAnchor: org.jfree.chart.ui.RectangleAnchor TOP_LEFT>;
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleAnchor labelAnchor> = $stack12;
+
+        $stack13 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack13.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(3.0, 3.0, 3.0, 3.0);
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleInsets labelOffset> = $stack13;
+
+        $stack14 = <org.jfree.chart.ui.LengthAdjustmentType: org.jfree.chart.ui.LengthAdjustmentType CONTRACT>;
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.LengthAdjustmentType labelOffsetType> = $stack14;
+
+        $stack15 = <org.jfree.chart.ui.TextAnchor: org.jfree.chart.ui.TextAnchor CENTER>;
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.TextAnchor labelTextAnchor> = $stack15;
+
+        $stack16 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack16.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList> = $stack16;
+
+        return;
+    }
+
+    public java.awt.Paint getPaint()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Paint paint>;
+
+        return $stack1;
+    }
+
+    public void setPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint paint> = paint;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Stroke getStroke()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke>;
+
+        return $stack1;
+    }
+
+    public void setStroke(java.awt.Stroke)
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(stroke, "stroke");
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke> = stroke;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Paint getOutlinePaint()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint>;
+
+        return $stack1;
+    }
+
+    public void setOutlinePaint(java.awt.Paint)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint paint;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        paint := @parameter0: java.awt.Paint;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Stroke getOutlineStroke()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke>;
+
+        return $stack1;
+    }
+
+    public void setOutlineStroke(java.awt.Stroke)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Stroke stroke;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        stroke := @parameter0: java.awt.Stroke;
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke> = stroke;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public float getAlpha()
+    {
+        org.jfree.chart.plot.Marker this;
+        float $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: float alpha>;
+
+        return $stack1;
+    }
+
+    public void setAlpha(float)
+    {
+        float alpha;
+        byte $stack2, $stack4;
+        java.lang.IllegalArgumentException $stack3;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack5;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        alpha := @parameter0: float;
+
+        $stack2 = alpha cmpg 0.0F;
+
+        if $stack2 < 0 goto label1;
+
+        $stack4 = alpha cmpl 1.0F;
+
+        if $stack4 <= 0 goto label2;
+
+     label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'alpha\' value must be in the range 0.0f to 1.0f");
+
+        throw $stack3;
+
+     label2:
+        this.<org.jfree.chart.plot.Marker: float alpha> = alpha;
+
+        $stack5 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack5.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack5);
+
+        return;
+    }
+
+    public java.lang.String getLabel()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.lang.String label>;
+
+        return $stack1;
+    }
+
+    public void setLabel(java.lang.String)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.lang.String label;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        label := @parameter0: java.lang.String;
+
+        this.<org.jfree.chart.plot.Marker: java.lang.String label> = label;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Font getLabelFont()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Font $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Font labelFont>;
+
+        return $stack1;
+    }
+
+    public void setLabelFont(java.awt.Font)
+    {
+        java.awt.Font font;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        font := @parameter0: java.awt.Font;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(font, "font");
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Font labelFont> = font;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Paint getLabelPaint()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint>;
+
+        return $stack1;
+    }
+
+    public void setLabelPaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public java.awt.Color getLabelBackgroundColor()
+    {
+        org.jfree.chart.plot.Marker this;
+        java.awt.Color $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: java.awt.Color labelBackgroundColor>;
+
+        return $stack1;
+    }
+
+    public void setLabelBackgroundColor(java.awt.Color)
+    {
+        java.awt.Color color;
+        org.jfree.chart.plot.Marker this;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        color := @parameter0: java.awt.Color;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(color, "color");
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Color labelBackgroundColor> = color;
+
+        return;
+    }
+
+    public org.jfree.chart.ui.RectangleAnchor getLabelAnchor()
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.ui.RectangleAnchor $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        return $stack1;
+    }
+
+    public void setLabelAnchor(org.jfree.chart.ui.RectangleAnchor)
+    {
+        org.jfree.chart.ui.RectangleAnchor anchor;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        anchor := @parameter0: org.jfree.chart.ui.RectangleAnchor;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(anchor, "anchor");
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleAnchor labelAnchor> = anchor;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getLabelOffset()
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.ui.RectangleInsets $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleInsets labelOffset>;
+
+        return $stack1;
+    }
+
+    public void setLabelOffset(org.jfree.chart.ui.RectangleInsets)
+    {
+        org.jfree.chart.ui.RectangleInsets offset;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        offset := @parameter0: org.jfree.chart.ui.RectangleInsets;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(offset, "offset");
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleInsets labelOffset> = offset;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public org.jfree.chart.ui.LengthAdjustmentType getLabelOffsetType()
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.ui.LengthAdjustmentType $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.LengthAdjustmentType labelOffsetType>;
+
+        return $stack1;
+    }
+
+    public void setLabelOffsetType(org.jfree.chart.ui.LengthAdjustmentType)
+    {
+        org.jfree.chart.ui.LengthAdjustmentType adj;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        adj := @parameter0: org.jfree.chart.ui.LengthAdjustmentType;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(adj, "adj");
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.LengthAdjustmentType labelOffsetType> = adj;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public org.jfree.chart.ui.TextAnchor getLabelTextAnchor()
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.ui.TextAnchor $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.TextAnchor labelTextAnchor>;
+
+        return $stack1;
+    }
+
+    public void setLabelTextAnchor(org.jfree.chart.ui.TextAnchor)
+    {
+        org.jfree.chart.ui.TextAnchor anchor;
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        anchor := @parameter0: org.jfree.chart.ui.TextAnchor;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(anchor, "anchor");
+
+        this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.TextAnchor labelTextAnchor> = anchor;
+
+        $stack2 = new org.jfree.chart.event.MarkerChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.MarkerChangeEvent: void <init>(org.jfree.chart.plot.Marker)>(this);
+
+        virtualinvoke this.<org.jfree.chart.plot.Marker: void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public void addChangeListener(org.jfree.chart.event.MarkerChangeListener)
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        listener := @parameter0: org.jfree.chart.event.MarkerChangeListener;
+
+        $stack2 = this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/MarkerChangeListener;", listener);
+
+        return;
+    }
+
+    public void removeChangeListener(org.jfree.chart.event.MarkerChangeListener)
+    {
+        org.jfree.chart.plot.Marker this;
+        org.jfree.chart.event.MarkerChangeListener listener;
+        javax.swing.event.EventListenerList $stack2;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        listener := @parameter0: org.jfree.chart.event.MarkerChangeListener;
+
+        $stack2 = this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList>;
+
+        virtualinvoke $stack2.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>(class "Lorg/jfree/chart/event/MarkerChangeListener;", listener);
+
+        return;
+    }
+
+    public void notifyListeners(org.jfree.chart.event.MarkerChangeEvent)
+    {
+        org.jfree.chart.plot.Marker this;
+        javax.swing.event.EventListenerList $stack4;
+        java.lang.Object[] listeners;
+        int $stack6, $stack9, i;
+        java.lang.Object $stack7, $stack10;
+        org.jfree.chart.event.MarkerChangeEvent event;
+        org.jfree.chart.event.MarkerChangeListener $stack11;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        event := @parameter0: org.jfree.chart.event.MarkerChangeEvent;
+
+        $stack4 = this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList>;
+
+        listeners = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+
+        $stack6 = lengthof listeners;
+
+        i = $stack6 - 2;
+
+     label1:
+        if i < 0 goto label3;
+
+        $stack7 = listeners[i];
+
+        if $stack7 != class "Lorg/jfree/chart/event/MarkerChangeListener;" goto label2;
+
+        $stack9 = i + 1;
+
+        $stack10 = listeners[$stack9];
+
+        $stack11 = (org.jfree.chart.event.MarkerChangeListener) $stack10;
+
+        interfaceinvoke $stack11.<org.jfree.chart.event.MarkerChangeListener: void markerChanged(org.jfree.chart.event.MarkerChangeEvent)>(event);
+
+     label2:
+        i = i + -2;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public java.util.EventListener[] getListeners(java.lang.Class)
+    {
+        org.jfree.chart.plot.Marker this;
+        java.lang.Class listenerType;
+        javax.swing.event.EventListenerList $stack2;
+        java.util.EventListener[] $stack3;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        listenerType := @parameter0: java.lang.Class;
+
+        $stack2 = this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList>;
+
+        $stack3 = virtualinvoke $stack2.<javax.swing.event.EventListenerList: java.util.EventListener[] getListeners(java.lang.Class)>(listenerType);
+
+        return $stack3;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.plot.Marker this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15, $stack21, $stack24, $stack27, $stack30, $stack37, $stack40;
+        java.awt.Paint $stack4, $stack5, $stack10, $stack11, $stack25, $stack26;
+        java.awt.Stroke $stack7, $stack8, $stack13, $stack14;
+        float $stack16, $stack17;
+        byte $stack18;
+        java.lang.String $stack19, $stack20;
+        java.awt.Font $stack22, $stack23;
+        java.awt.Color $stack28, $stack29;
+        org.jfree.chart.ui.RectangleAnchor $stack31, $stack32;
+        org.jfree.chart.ui.TextAnchor $stack33, $stack34;
+        org.jfree.chart.ui.RectangleInsets $stack35, $stack36;
+        org.jfree.chart.ui.LengthAdjustmentType $stack38, $stack39;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.Marker;
+
+        if $stack3 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.plot.Marker) obj;
+
+        $stack5 = this.<org.jfree.chart.plot.Marker: java.awt.Paint paint>;
+
+        $stack4 = that.<org.jfree.chart.plot.Marker: java.awt.Paint paint>;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack8 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke>;
+
+        $stack7 = that.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label04;
+
+        return 0;
+
+     label04:
+        $stack11 = this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint>;
+
+        $stack10 = that.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint>;
+
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $stack14 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke>;
+
+        $stack13 = that.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke>;
+
+        $stack15 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack14, $stack13);
+
+        if $stack15 != 0 goto label06;
+
+        return 0;
+
+     label06:
+        $stack17 = this.<org.jfree.chart.plot.Marker: float alpha>;
+
+        $stack16 = that.<org.jfree.chart.plot.Marker: float alpha>;
+
+        $stack18 = $stack17 cmpl $stack16;
+
+        if $stack18 == 0 goto label07;
+
+        return 0;
+
+     label07:
+        $stack20 = this.<org.jfree.chart.plot.Marker: java.lang.String label>;
+
+        $stack19 = that.<org.jfree.chart.plot.Marker: java.lang.String label>;
+
+        $stack21 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack20, $stack19);
+
+        if $stack21 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack23 = this.<org.jfree.chart.plot.Marker: java.awt.Font labelFont>;
+
+        $stack22 = that.<org.jfree.chart.plot.Marker: java.awt.Font labelFont>;
+
+        $stack24 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack23, $stack22);
+
+        if $stack24 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        $stack26 = this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint>;
+
+        $stack25 = that.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint>;
+
+        $stack27 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack26, $stack25);
+
+        if $stack27 != 0 goto label10;
+
+        return 0;
+
+     label10:
+        $stack29 = this.<org.jfree.chart.plot.Marker: java.awt.Color labelBackgroundColor>;
+
+        $stack28 = that.<org.jfree.chart.plot.Marker: java.awt.Color labelBackgroundColor>;
+
+        $stack30 = virtualinvoke $stack29.<java.awt.Color: boolean equals(java.lang.Object)>($stack28);
+
+        if $stack30 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        $stack32 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        $stack31 = that.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleAnchor labelAnchor>;
+
+        if $stack32 == $stack31 goto label12;
+
+        return 0;
+
+     label12:
+        $stack34 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.TextAnchor labelTextAnchor>;
+
+        $stack33 = that.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.TextAnchor labelTextAnchor>;
+
+        if $stack34 == $stack33 goto label13;
+
+        return 0;
+
+     label13:
+        $stack36 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleInsets labelOffset>;
+
+        $stack35 = that.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.RectangleInsets labelOffset>;
+
+        $stack37 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack36, $stack35);
+
+        if $stack37 != 0 goto label14;
+
+        return 0;
+
+     label14:
+        $stack39 = this.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.LengthAdjustmentType labelOffsetType>;
+
+        $stack38 = that.<org.jfree.chart.plot.Marker: org.jfree.chart.ui.LengthAdjustmentType labelOffsetType>;
+
+        $stack40 = virtualinvoke $stack39.<org.jfree.chart.ui.LengthAdjustmentType: boolean equals(java.lang.Object)>($stack38);
+
+        if $stack40 != 0 goto label15;
+
+        return 0;
+
+     label15:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.plot.Marker this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint $stack2, $stack4, $stack6;
+        java.awt.Stroke $stack3, $stack5;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.plot.Marker: java.awt.Paint paint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        $stack5 = this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack5, stream);
+
+        $stack6 = this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.Marker this;
+        java.awt.Paint $stack2, $stack4, $stack6;
+        java.awt.Stroke $stack3, $stack5;
+        javax.swing.event.EventListenerList $stack7;
+
+        this := @this: org.jfree.chart.plot.Marker;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint paint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke stroke> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint outlinePaint> = $stack4;
+
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Stroke outlineStroke> = $stack5;
+
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.plot.Marker: java.awt.Paint labelPaint> = $stack6;
+
+        $stack7 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $stack7.<javax.swing.event.EventListenerList: void <init>()>();
+
+        this.<org.jfree.chart.plot.Marker: javax.swing.event.EventListenerList listenerList> = $stack7;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.plot.Marker: long serialVersionUID> = -734389651405327166L;
+
+        return;
+    }
+}

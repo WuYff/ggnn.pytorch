@@ -1,0 +1,102 @@
+final enum class org.jsoup.parser.TokeniserState$22 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$22 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$22;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        boolean $stack4;
+        char $stack5;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.TokeniserState $stack6, $stack7, $stack10;
+        org.jsoup.parser.TokeniserState$22 this;
+        char[] $stack8;
+        java.lang.String data;
+
+        this := @this: org.jsoup.parser.TokeniserState$22;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        $stack4 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack4 == 0 goto label1;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void eofError(org.jsoup.parser.TokeniserState)>(this);
+
+        $stack10 = <org.jsoup.parser.TokeniserState$22: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack10);
+
+        return;
+
+     label1:
+        $stack5 = virtualinvoke r.<org.jsoup.parser.CharacterReader: char current()>();
+
+        lookupswitch($stack5)
+        {
+            case 0: goto label4;
+            case 45: goto label2;
+            case 60: goto label3;
+            default: goto label5;
+        };
+
+     label2:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(char)>(45);
+
+        $stack7 = <org.jsoup.parser.TokeniserState$22: org.jsoup.parser.TokeniserState ScriptDataEscapedDash>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack7);
+
+        goto label6;
+
+     label3:
+        $stack6 = <org.jsoup.parser.TokeniserState$22: org.jsoup.parser.TokeniserState ScriptDataEscapedLessthanSign>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack6);
+
+        goto label6;
+
+     label4:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        virtualinvoke r.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(char)>(65533);
+
+        goto label6;
+
+     label5:
+        $stack8 = newarray (char)[3];
+
+        $stack8[0] = 45;
+
+        $stack8[1] = 60;
+
+        $stack8[2] = 0;
+
+        data = virtualinvoke r.<org.jsoup.parser.CharacterReader: java.lang.String consumeToAny(char[])>($stack8);
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(java.lang.String)>(data);
+
+     label6:
+        return;
+    }
+}

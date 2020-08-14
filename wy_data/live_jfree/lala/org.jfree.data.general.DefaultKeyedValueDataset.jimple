@@ -1,0 +1,281 @@
+public class org.jfree.data.general.DefaultKeyedValueDataset extends org.jfree.data.general.AbstractDataset implements org.jfree.data.general.KeyedValueDataset, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private org.jfree.data.KeyedValue data;
+
+    public void <init>()
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        specialinvoke this.<org.jfree.data.general.DefaultKeyedValueDataset: void <init>(org.jfree.data.KeyedValue)>(null);
+
+        return;
+    }
+
+    public void <init>(java.lang.Comparable, java.lang.Number)
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.DefaultKeyedValue $stack3;
+        java.lang.Comparable key;
+        java.lang.Number value;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: java.lang.Number;
+
+        $stack3 = new org.jfree.data.DefaultKeyedValue;
+
+        specialinvoke $stack3.<org.jfree.data.DefaultKeyedValue: void <init>(java.lang.Comparable,java.lang.Number)>(key, value);
+
+        specialinvoke this.<org.jfree.data.general.DefaultKeyedValueDataset: void <init>(org.jfree.data.KeyedValue)>($stack3);
+
+        return;
+    }
+
+    public void <init>(org.jfree.data.KeyedValue)
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.KeyedValue data;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        data := @parameter0: org.jfree.data.KeyedValue;
+
+        specialinvoke this.<org.jfree.data.general.AbstractDataset: void <init>()>();
+
+        this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data> = data;
+
+        return;
+    }
+
+    public java.lang.Comparable getKey()
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.KeyedValue $stack2, $stack3;
+        java.lang.Comparable result;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        result = null;
+
+        $stack2 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        if $stack2 == null goto label1;
+
+        $stack3 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        result = interfaceinvoke $stack3.<org.jfree.data.KeyedValue: java.lang.Comparable getKey()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getValue()
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.KeyedValue $stack2, $stack3;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        result = null;
+
+        $stack2 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        if $stack2 == null goto label1;
+
+        $stack3 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        result = interfaceinvoke $stack3.<org.jfree.data.KeyedValue: java.lang.Number getValue()>();
+
+     label1:
+        return result;
+    }
+
+    public void updateValue(java.lang.Number)
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.KeyedValue $stack2, $stack3;
+        java.lang.Comparable $stack4;
+        java.lang.Number value;
+        java.lang.RuntimeException $stack5;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        value := @parameter0: java.lang.Number;
+
+        $stack2 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        if $stack2 != null goto label1;
+
+        $stack5 = new java.lang.RuntimeException;
+
+        specialinvoke $stack5.<java.lang.RuntimeException: void <init>(java.lang.String)>("updateValue: can\'t update null.");
+
+        throw $stack5;
+
+     label1:
+        $stack3 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        $stack4 = interfaceinvoke $stack3.<org.jfree.data.KeyedValue: java.lang.Comparable getKey()>();
+
+        virtualinvoke this.<org.jfree.data.general.DefaultKeyedValueDataset: void setValue(java.lang.Comparable,java.lang.Number)>($stack4, value);
+
+        return;
+    }
+
+    public void setValue(java.lang.Comparable, java.lang.Number)
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.DefaultKeyedValue $stack3;
+        java.lang.Comparable key;
+        java.lang.Number value;
+        org.jfree.data.general.DatasetChangeEvent $stack4;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        value := @parameter1: java.lang.Number;
+
+        $stack3 = new org.jfree.data.DefaultKeyedValue;
+
+        specialinvoke $stack3.<org.jfree.data.DefaultKeyedValue: void <init>(java.lang.Comparable,java.lang.Number)>(key, value);
+
+        this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data> = $stack3;
+
+        $stack4 = new org.jfree.data.general.DatasetChangeEvent;
+
+        specialinvoke $stack4.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+
+        virtualinvoke this.<org.jfree.data.general.DefaultKeyedValueDataset: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack4);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        boolean $stack3, $stack8, $stack12;
+        org.jfree.data.general.KeyedValueDataset that;
+        org.jfree.data.KeyedValue $stack4, $stack5, $stack9;
+        java.lang.Comparable $stack6, $stack7, $stack13;
+        java.lang.Number $stack10, $stack11, $stack14;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.general.KeyedValueDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.general.KeyedValueDataset) obj;
+
+        $stack4 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        if $stack4 != null goto label5;
+
+        $stack13 = interfaceinvoke that.<org.jfree.data.general.KeyedValueDataset: java.lang.Comparable getKey()>();
+
+        if $stack13 != null goto label3;
+
+        $stack14 = interfaceinvoke that.<org.jfree.data.general.KeyedValueDataset: java.lang.Number getValue()>();
+
+        if $stack14 == null goto label4;
+
+     label3:
+        return 0;
+
+     label4:
+        return 1;
+
+     label5:
+        $stack5 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.KeyedValue: java.lang.Comparable getKey()>();
+
+        $stack7 = interfaceinvoke that.<org.jfree.data.general.KeyedValueDataset: java.lang.Comparable getKey()>();
+
+        $stack8 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack6, $stack7);
+
+        if $stack8 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack9 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.KeyedValue: java.lang.Number getValue()>();
+
+        $stack11 = interfaceinvoke that.<org.jfree.data.general.KeyedValueDataset: java.lang.Number getValue()>();
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack10, $stack11);
+
+        if $stack12 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this;
+        org.jfree.data.KeyedValue $stack1, $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        $stack1 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<org.jfree.data.general.DefaultKeyedValueDataset: org.jfree.data.KeyedValue data>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.general.DefaultKeyedValueDataset this, clone;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.data.general.DefaultKeyedValueDataset;
+
+        $stack2 = specialinvoke this.<org.jfree.data.general.AbstractDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.general.DefaultKeyedValueDataset) $stack2;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.general.DefaultKeyedValueDataset: long serialVersionUID> = -8149484339560406750L;
+
+        return;
+    }
+}

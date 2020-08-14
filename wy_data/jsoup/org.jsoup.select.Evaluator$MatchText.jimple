@@ -1,0 +1,85 @@
+public final class org.jsoup.select.Evaluator$MatchText extends org.jsoup.select.Evaluator
+{
+
+    public void <init>()
+    {
+        org.jsoup.select.Evaluator$MatchText this;
+
+        this := @this: org.jsoup.select.Evaluator$MatchText;
+
+        specialinvoke this.<org.jsoup.select.Evaluator: void <init>()>();
+
+        return;
+    }
+
+    public boolean matches(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, root;
+        boolean $stack7, $stack10;
+        java.util.List textNodes;
+        java.util.Iterator l4;
+        java.lang.Object $stack11;
+        org.jsoup.nodes.TextNode textNode;
+        org.jsoup.nodes.PseudoTextElement $stack12;
+        java.lang.String $stack13, $stack15;
+        org.jsoup.parser.Tag $stack14;
+        org.jsoup.nodes.Attributes $stack16;
+        org.jsoup.select.Evaluator$MatchText this;
+
+        this := @this: org.jsoup.select.Evaluator$MatchText;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        $stack7 = element instanceof org.jsoup.nodes.PseudoTextElement;
+
+        if $stack7 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        textNodes = virtualinvoke element.<org.jsoup.nodes.Element: java.util.List textNodes()>();
+
+        l4 = interfaceinvoke textNodes.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack10 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label3;
+
+        $stack11 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+
+        textNode = (org.jsoup.nodes.TextNode) $stack11;
+
+        $stack12 = new org.jsoup.nodes.PseudoTextElement;
+
+        $stack13 = virtualinvoke element.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack14 = staticinvoke <org.jsoup.parser.Tag: org.jsoup.parser.Tag valueOf(java.lang.String)>($stack13);
+
+        $stack15 = virtualinvoke element.<org.jsoup.nodes.Element: java.lang.String baseUri()>();
+
+        $stack16 = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.nodes.Attributes attributes()>();
+
+        specialinvoke $stack12.<org.jsoup.nodes.PseudoTextElement: void <init>(org.jsoup.parser.Tag,java.lang.String,org.jsoup.nodes.Attributes)>($stack14, $stack15, $stack16);
+
+        virtualinvoke textNode.<org.jsoup.nodes.TextNode: void replaceWith(org.jsoup.nodes.Node)>($stack12);
+
+        virtualinvoke $stack12.<org.jsoup.nodes.PseudoTextElement: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>(textNode);
+
+        goto label2;
+
+     label3:
+        return 0;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.select.Evaluator$MatchText this;
+
+        this := @this: org.jsoup.select.Evaluator$MatchText;
+
+        return ":matchText";
+    }
+}

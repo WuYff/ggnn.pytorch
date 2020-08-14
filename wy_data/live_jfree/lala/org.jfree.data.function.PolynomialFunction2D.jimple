@@ -1,0 +1,151 @@
+public class org.jfree.data.function.PolynomialFunction2D extends java.lang.Object implements org.jfree.data.function.Function2D, java.io.Serializable
+{
+    private double[] coefficients;
+
+    public void <init>(double[])
+    {
+        org.jfree.data.function.PolynomialFunction2D this;
+        double[] coefficients, $stack3, $stack4;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        coefficients := @parameter0: double[];
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(coefficients, "coefficients");
+
+        $stack2 = virtualinvoke coefficients.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack3 = (double[]) $stack2;
+
+        $stack4 = (double[]) $stack3;
+
+        this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients> = $stack4;
+
+        return;
+    }
+
+    public double[] getCoefficients()
+    {
+        org.jfree.data.function.PolynomialFunction2D this;
+        double[] $stack1, $stack3, $stack4;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        $stack1 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack3 = (double[]) $stack2;
+
+        $stack4 = (double[]) $stack3;
+
+        return $stack4;
+    }
+
+    public int getOrder()
+    {
+        org.jfree.data.function.PolynomialFunction2D this;
+        double[] $stack1;
+        int $stack2, $stack3;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        $stack1 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack2 = lengthof $stack1;
+
+        $stack3 = $stack2 - 1;
+
+        return $stack3;
+    }
+
+    public double getValue(double)
+    {
+        org.jfree.data.function.PolynomialFunction2D this;
+        double[] $stack6, $stack8;
+        int $stack7, i;
+        double x, $stack9, $stack10, $stack11, $stack12, y;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        x := @parameter0: double;
+
+        y = 0.0;
+
+        i = 0;
+
+     label1:
+        $stack6 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack7 = lengthof $stack6;
+
+        if i >= $stack7 goto label2;
+
+        $stack8 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack10 = $stack8[i];
+
+        $stack9 = (double) i;
+
+        $stack11 = staticinvoke <java.lang.Math: double pow(double,double)>(x, $stack9);
+
+        $stack12 = $stack10 * $stack11;
+
+        y = y + $stack12;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return y;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        boolean $stack3, $stack6;
+        org.jfree.data.function.PolynomialFunction2D that, this;
+        double[] $stack4, $stack5;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack3 = obj instanceof org.jfree.data.function.PolynomialFunction2D;
+
+        if $stack3 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        that = (org.jfree.data.function.PolynomialFunction2D) obj;
+
+        $stack5 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack4 = that.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack6 = staticinvoke <java.util.Arrays: boolean equals(double[],double[])>($stack5, $stack4);
+
+        return $stack6;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.function.PolynomialFunction2D this;
+        double[] $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.function.PolynomialFunction2D;
+
+        $stack1 = this.<org.jfree.data.function.PolynomialFunction2D: double[] coefficients>;
+
+        $stack2 = staticinvoke <org.jfree.chart.HashUtils: int hashCodeForDoubleArray(double[])>($stack1);
+
+        return $stack2;
+    }
+}

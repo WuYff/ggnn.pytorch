@@ -1,0 +1,1197 @@
+public class org.jfree.data.gantt.SlidingGanttCategoryDataset extends org.jfree.data.general.AbstractDataset implements org.jfree.data.gantt.GanttCategoryDataset
+{
+    private org.jfree.data.gantt.GanttCategoryDataset underlying;
+    private int firstCategoryIndex;
+    private int maximumCategoryCount;
+
+    public void <init>(org.jfree.data.gantt.GanttCategoryDataset, int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        org.jfree.data.gantt.GanttCategoryDataset underlying;
+        int firstColumn, maxColumns;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        underlying := @parameter0: org.jfree.data.gantt.GanttCategoryDataset;
+
+        firstColumn := @parameter1: int;
+
+        maxColumns := @parameter2: int;
+
+        specialinvoke this.<org.jfree.data.general.AbstractDataset: void <init>()>();
+
+        this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying> = underlying;
+
+        this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex> = firstColumn;
+
+        this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount> = maxColumns;
+
+        return;
+    }
+
+    public org.jfree.data.gantt.GanttCategoryDataset getUnderlyingDataset()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        org.jfree.data.gantt.GanttCategoryDataset $stack1;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        return $stack1;
+    }
+
+    public int getFirstCategoryIndex()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int $stack1;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        return $stack1;
+    }
+
+    public void setFirstCategoryIndex(int)
+    {
+        int first, $stack4;
+        java.lang.IllegalArgumentException $stack2;
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        org.jfree.data.gantt.GanttCategoryDataset $stack3;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        first := @parameter0: int;
+
+        if first < 0 goto label1;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack4 = interfaceinvoke $stack3.<org.jfree.data.gantt.GanttCategoryDataset: int getColumnCount()>();
+
+        if first < $stack4 goto label2;
+
+     label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Invalid index.");
+
+        throw $stack2;
+
+     label2:
+        this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex> = first;
+
+        virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public int getMaximumCategoryCount()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int $stack1;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount>;
+
+        return $stack1;
+    }
+
+    public void setMaximumCategoryCount(int)
+    {
+        int max;
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        max := @parameter0: int;
+
+        if max >= 0 goto label1;
+
+        $stack2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'max\' >= 0.");
+
+        throw $stack2;
+
+     label1:
+        this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount> = max;
+
+        virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    private int lastCategoryIndex()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int $stack1, $stack2, $stack3, $stack5, $stack6, $stack7, $stack8;
+        org.jfree.data.gantt.GanttCategoryDataset $stack4;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount>;
+
+        if $stack1 != 0 goto label1;
+
+        return -1;
+
+     label1:
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack2 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount>;
+
+        $stack5 = $stack3 + $stack2;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack6 = interfaceinvoke $stack4.<org.jfree.data.gantt.GanttCategoryDataset: int getColumnCount()>();
+
+        $stack7 = staticinvoke <java.lang.Math: int min(int,int)>($stack5, $stack6);
+
+        $stack8 = $stack7 - 1;
+
+        return $stack8;
+    }
+
+    public int getColumnIndex(java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.gantt.GanttCategoryDataset $stack3;
+        int index, $stack5, $stack6, $stack8, $stack9;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        index = interfaceinvoke $stack3.<org.jfree.data.gantt.GanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(key);
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        if index < $stack5 goto label1;
+
+        $stack6 = specialinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int lastCategoryIndex()>();
+
+        if index > $stack6 goto label1;
+
+        $stack8 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack9 = index - $stack8;
+
+        return $stack9;
+
+     label1:
+        return -1;
+    }
+
+    public java.lang.Comparable getColumnKey(int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int column, $stack2, $stack3;
+        org.jfree.data.gantt.GanttCategoryDataset $stack4;
+        java.lang.Comparable $stack5;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        column := @parameter0: int;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack2 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack3 = column + $stack2;
+
+        $stack5 = interfaceinvoke $stack4.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Comparable getColumnKey(int)>($stack3);
+
+        return $stack5;
+    }
+
+    public java.util.List getColumnKeys()
+    {
+        java.util.ArrayList $stack4;
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int last, i;
+        java.util.List $stack6;
+        org.jfree.data.gantt.GanttCategoryDataset $stack7;
+        java.lang.Comparable $stack8;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack4 = new java.util.ArrayList;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>()>();
+
+        last = specialinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int lastCategoryIndex()>();
+
+        i = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+     label1:
+        if i >= last goto label2;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack8 = interfaceinvoke $stack7.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Comparable getColumnKey(int)>(i);
+
+        interfaceinvoke $stack4.<java.util.List: boolean add(java.lang.Object)>($stack8);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack6 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack4);
+
+        return $stack6;
+    }
+
+    public int getRowIndex(java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.gantt.GanttCategoryDataset $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = interfaceinvoke $stack2.<org.jfree.data.gantt.GanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(key);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getRowKey(int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row;
+        org.jfree.data.gantt.GanttCategoryDataset $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = interfaceinvoke $stack2.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        return $stack3;
+    }
+
+    public java.util.List getRowKeys()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        org.jfree.data.gantt.GanttCategoryDataset $stack1;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack2 = interfaceinvoke $stack1.<org.jfree.data.gantt.GanttCategoryDataset: java.util.List getRowKeys()>();
+
+        return $stack2;
+    }
+
+    public java.lang.Number getValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack7, $stack8;
+        org.jfree.data.gantt.GanttCategoryDataset $stack9;
+        java.lang.Number $stack10;
+        org.jfree.data.UnknownKeyException $stack11, $stack16;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack17, $stack18, $stack19;
+        java.lang.String $stack15, $stack20;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack16 = new org.jfree.data.UnknownKeyException;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack16.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack20);
+
+        throw $stack16;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack11 = new org.jfree.data.UnknownKeyException;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack11.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack11;
+
+     label2:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack8 = c + $stack7;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getValue(int,int)>(r, $stack8);
+
+        return $stack10;
+    }
+
+    public int getColumnCount()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int last, $stack3, $stack4, $stack5, $stack6;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        last = specialinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int lastCategoryIndex()>();
+
+        if last != -1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = last - $stack3;
+
+        $stack5 = $stack4 + 1;
+
+        $stack6 = staticinvoke <java.lang.Math: int max(int,int)>($stack5, 0);
+
+        return $stack6;
+    }
+
+    public int getRowCount()
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        org.jfree.data.gantt.GanttCategoryDataset $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack2 = interfaceinvoke $stack1.<org.jfree.data.gantt.GanttCategoryDataset: int getRowCount()>();
+
+        return $stack2;
+    }
+
+    public java.lang.Number getValue(int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack3, $stack4;
+        org.jfree.data.gantt.GanttCategoryDataset $stack5;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = column + $stack3;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getValue(int,int)>(row, $stack4);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getPercentComplete(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack7, $stack8;
+        org.jfree.data.gantt.GanttCategoryDataset $stack9;
+        java.lang.Number $stack10;
+        org.jfree.data.UnknownKeyException $stack11, $stack16;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack17, $stack18, $stack19;
+        java.lang.String $stack15, $stack20;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack16 = new org.jfree.data.UnknownKeyException;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack16.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack20);
+
+        throw $stack16;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack11 = new org.jfree.data.UnknownKeyException;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack11.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack11;
+
+     label2:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack8 = c + $stack7;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int)>(r, $stack8);
+
+        return $stack10;
+    }
+
+    public java.lang.Number getPercentComplete(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack8, subinterval, $stack9;
+        org.jfree.data.gantt.GanttCategoryDataset $stack10;
+        java.lang.Number $stack11;
+        org.jfree.data.UnknownKeyException $stack12, $stack17;
+        java.lang.StringBuilder $stack13, $stack14, $stack15, $stack18, $stack19, $stack20;
+        java.lang.String $stack16, $stack21;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack17 = new org.jfree.data.UnknownKeyException;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack17.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack21);
+
+        throw $stack17;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack12 = new org.jfree.data.UnknownKeyException;
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack12.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack16);
+
+        throw $stack12;
+
+     label2:
+        $stack10 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack8 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack9 = c + $stack8;
+
+        $stack11 = interfaceinvoke $stack10.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int,int)>(r, $stack9, subinterval);
+
+        return $stack11;
+    }
+
+    public java.lang.Number getEndValue(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack8, subinterval, $stack9;
+        org.jfree.data.gantt.GanttCategoryDataset $stack10;
+        java.lang.Number $stack11;
+        org.jfree.data.UnknownKeyException $stack12, $stack17;
+        java.lang.StringBuilder $stack13, $stack14, $stack15, $stack18, $stack19, $stack20;
+        java.lang.String $stack16, $stack21;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack17 = new org.jfree.data.UnknownKeyException;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack17.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack21);
+
+        throw $stack17;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack12 = new org.jfree.data.UnknownKeyException;
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack12.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack16);
+
+        throw $stack12;
+
+     label2:
+        $stack10 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack8 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack9 = c + $stack8;
+
+        $stack11 = interfaceinvoke $stack10.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int,int)>(r, $stack9, subinterval);
+
+        return $stack11;
+    }
+
+    public java.lang.Number getEndValue(int, int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack4, subinterval, $stack5;
+        org.jfree.data.gantt.GanttCategoryDataset $stack6;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        $stack6 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack5 = column + $stack4;
+
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int,int)>(row, $stack5, subinterval);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getPercentComplete(int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int series, category, $stack3, $stack4;
+        org.jfree.data.gantt.GanttCategoryDataset $stack5;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        series := @parameter0: int;
+
+        category := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = category + $stack3;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int)>(series, $stack4);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getPercentComplete(int, int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack4, subinterval, $stack5;
+        org.jfree.data.gantt.GanttCategoryDataset $stack6;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        $stack6 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack5 = column + $stack4;
+
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int,int)>(row, $stack5, subinterval);
+
+        return $stack7;
+    }
+
+    public java.lang.Number getStartValue(java.lang.Comparable, java.lang.Comparable, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack8, subinterval, $stack9;
+        org.jfree.data.gantt.GanttCategoryDataset $stack10;
+        java.lang.Number $stack11;
+        org.jfree.data.UnknownKeyException $stack12, $stack17;
+        java.lang.StringBuilder $stack13, $stack14, $stack15, $stack18, $stack19, $stack20;
+        java.lang.String $stack16, $stack21;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        subinterval := @parameter2: int;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack17 = new org.jfree.data.UnknownKeyException;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack17.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack21);
+
+        throw $stack17;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack12 = new org.jfree.data.UnknownKeyException;
+
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack12.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack16);
+
+        throw $stack12;
+
+     label2:
+        $stack10 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack8 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack9 = c + $stack8;
+
+        $stack11 = interfaceinvoke $stack10.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int,int)>(r, $stack9, subinterval);
+
+        return $stack11;
+    }
+
+    public java.lang.Number getStartValue(int, int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack4, subinterval, $stack5;
+        org.jfree.data.gantt.GanttCategoryDataset $stack6;
+        java.lang.Number $stack7;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        subinterval := @parameter2: int;
+
+        $stack6 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack5 = column + $stack4;
+
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int,int)>(row, $stack5, subinterval);
+
+        return $stack7;
+    }
+
+    public int getSubIntervalCount(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack7, $stack8, $stack10;
+        org.jfree.data.gantt.GanttCategoryDataset $stack9;
+        org.jfree.data.UnknownKeyException $stack11, $stack16;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack17, $stack18, $stack19;
+        java.lang.String $stack15, $stack20;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack16 = new org.jfree.data.UnknownKeyException;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack16.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack20);
+
+        throw $stack16;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack11 = new org.jfree.data.UnknownKeyException;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack11.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack11;
+
+     label2:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack8 = c + $stack7;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.gantt.GanttCategoryDataset: int getSubIntervalCount(int,int)>(r, $stack8);
+
+        return $stack10;
+    }
+
+    public int getSubIntervalCount(int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack3, $stack4, $stack6;
+        org.jfree.data.gantt.GanttCategoryDataset $stack5;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = column + $stack3;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.gantt.GanttCategoryDataset: int getSubIntervalCount(int,int)>(row, $stack4);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getStartValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack7, $stack8;
+        org.jfree.data.gantt.GanttCategoryDataset $stack9;
+        java.lang.Number $stack10;
+        org.jfree.data.UnknownKeyException $stack11, $stack16;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack17, $stack18, $stack19;
+        java.lang.String $stack15, $stack20;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack16 = new org.jfree.data.UnknownKeyException;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack16.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack20);
+
+        throw $stack16;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack11 = new org.jfree.data.UnknownKeyException;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack11.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack11;
+
+     label2:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack8 = c + $stack7;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int)>(r, $stack8);
+
+        return $stack10;
+    }
+
+    public java.lang.Number getStartValue(int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int row, column, $stack3, $stack4;
+        org.jfree.data.gantt.GanttCategoryDataset $stack5;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = column + $stack3;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int)>(row, $stack4);
+
+        return $stack6;
+    }
+
+    public java.lang.Number getEndValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack7, $stack8;
+        org.jfree.data.gantt.GanttCategoryDataset $stack9;
+        java.lang.Number $stack10;
+        org.jfree.data.UnknownKeyException $stack11, $stack16;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack17, $stack18, $stack19;
+        java.lang.String $stack15, $stack20;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        if c != -1 goto label1;
+
+        $stack16 = new org.jfree.data.UnknownKeyException;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown columnKey: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(columnKey);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack16.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack20);
+
+        throw $stack16;
+
+     label1:
+        if r != -1 goto label2;
+
+        $stack11 = new org.jfree.data.UnknownKeyException;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unknown rowKey: ");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(rowKey);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack11.<org.jfree.data.UnknownKeyException: void <init>(java.lang.String)>($stack15);
+
+        throw $stack11;
+
+     label2:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack8 = c + $stack7;
+
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int)>(r, $stack8);
+
+        return $stack10;
+    }
+
+    public java.lang.Number getEndValue(int, int)
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this;
+        int series, category, $stack3, $stack4;
+        org.jfree.data.gantt.GanttCategoryDataset $stack5;
+        java.lang.Number $stack6;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        series := @parameter0: int;
+
+        category := @parameter1: int;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack3 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = category + $stack3;
+
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int)>(series, $stack4);
+
+        return $stack6;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this, that;
+        boolean $stack3, $stack10;
+        int $stack4, $stack5, $stack6, $stack7;
+        org.jfree.data.gantt.GanttCategoryDataset $stack8, $stack9;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.gantt.SlidingGanttCategoryDataset) obj;
+
+        $stack5 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        $stack4 = that.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int firstCategoryIndex>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount>;
+
+        $stack6 = that.<org.jfree.data.gantt.SlidingGanttCategoryDataset: int maximumCategoryCount>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack8 = that.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack10 = virtualinvoke $stack9.<java.lang.Object: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.gantt.SlidingGanttCategoryDataset this, clone;
+        java.lang.Object $stack3, $stack7;
+        org.jfree.data.gantt.GanttCategoryDataset $stack4, $stack6, $stack8;
+        boolean $stack5;
+        org.jfree.chart.util.PublicCloneable pc;
+
+        this := @this: org.jfree.data.gantt.SlidingGanttCategoryDataset;
+
+        $stack3 = specialinvoke this.<org.jfree.data.general.AbstractDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.gantt.SlidingGanttCategoryDataset) $stack3;
+
+        $stack4 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        $stack5 = $stack4 instanceof org.jfree.chart.util.PublicCloneable;
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = this.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying>;
+
+        pc = (org.jfree.chart.util.PublicCloneable) $stack6;
+
+        $stack7 = interfaceinvoke pc.<org.jfree.chart.util.PublicCloneable: java.lang.Object clone()>();
+
+        $stack8 = (org.jfree.data.gantt.GanttCategoryDataset) $stack7;
+
+        clone.<org.jfree.data.gantt.SlidingGanttCategoryDataset: org.jfree.data.gantt.GanttCategoryDataset underlying> = $stack8;
+
+     label1:
+        return clone;
+    }
+}

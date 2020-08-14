@@ -88,7 +88,7 @@ def data_convert(data_list: list, n_annotation_dim: int, n_nodes: int):
     n_tasks = 1
     task_data_list = []
     gid =0
-    with open('/home/yiwu/ggnn/wy/ggnn.pytorch/utils/data/validation.jsonl', 'w') as fp:
+    with open('/home/yiwu/ggnn/wy/ggnn.pytorch/utils/data/train.jsonl', 'w') as fp:
         for i in range(n_tasks):
             task_data_list.append([])
         for item in data_list:
@@ -102,11 +102,27 @@ def data_convert(data_list: list, n_annotation_dim: int, n_nodes: int):
             annotation = np.zeros([n_nodes, n_annotation_dim])
             # annotation[target[1] - 1][0] = 1  # 你需要自己定义 annotation 和  n_annotation_dim
             annotation = create_annotation_output(label_list, annotation)
+            for i in range(len(edge_list)):
+                # print("before",edge_list[i])
+                for z in [0,2]:                  
+                    edge_list[i][z] =edge_list[i][z]-1
+                # print("after",print("before",edge_list[i]))
+
             
+
+            nf = cover(annotation)  
+            
+            for i in range(len(nf)):
+                # print("before nf",nf[i])
+                nf[i][0]=nf[i][0]-1
+                # print("after nf",nf[i])
+            # print("len(nf)",len(nf))
+
             data_dict["graph"]= edge_list
-            data_dict["targets"]= cover(task_output) 
+            data_dict["targets"]= [cover(task_output)]
             data_dict["id"]=  "rdf:"+str(gid)
-            data_dict["node_features"]=  cover(annotation)  
+            data_dict["node_features"]=  nf
+            
     
             json.dump(data_dict, fp)
             fp.write('\n')
@@ -207,8 +223,8 @@ if __name__ == "__main__":
     dataroot ='/home/yiwu/ggnn/wy/ggnn.pytorch/wy_data/jfree/'
     question_id = 0
     how_many = 40
-    # train_dataset = bAbIDataset(dataroot,question_id, "t",0,40)
-    # print("len(train_dataset)",len(train_dataset))
+    train_dataset = bAbIDataset(dataroot,question_id, "t",0,40)
+    print("len(train_dataset)",len(train_dataset))
     # for i, (adj_matrix, annotation, target) in enumerate(train_dataset, 0):
         # print("annotation size",annotation.shape)
         # print("adj_matrix size",adj_matrix.shape)
@@ -222,8 +238,8 @@ if __name__ == "__main__":
     #     break
     
 
-    validation_dataset = bAbIDataset(dataroot, question_id, "v", 40,how_many)
-    print("len(validation_dataset)",len(validation_dataset))
+    # validation_dataset = bAbIDataset(dataroot, question_id, "v", 40,how_many)
+    # print("len(validation_dataset)",len(validation_dataset))
 
     # test_dataset = bAbIDataset(dataroot, question_id, "ests", 40,how_many)
     # print("len(test_dataset)",len(test_dataset))

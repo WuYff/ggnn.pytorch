@@ -1,0 +1,2211 @@
+public class org.jfree.chart.renderer.xy.XYDifferenceRenderer extends org.jfree.chart.renderer.xy.AbstractXYItemRenderer implements org.jfree.chart.renderer.xy.XYItemRenderer, org.jfree.chart.util.PublicCloneable
+{
+    private static final long serialVersionUID;
+    private transient java.awt.Paint positivePaint;
+    private transient java.awt.Paint negativePaint;
+    private boolean shapesVisible;
+    private transient java.awt.Shape legendLine;
+    private boolean roundXCoordinates;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Color $stack1, $stack2;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack2 = <java.awt.Color: java.awt.Color GREEN>;
+
+        $stack1 = <java.awt.Color: java.awt.Color RED>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void <init>(java.awt.Paint,java.awt.Paint,boolean)>($stack2, $stack1, 0);
+
+        return;
+    }
+
+    public void <init>(java.awt.Paint, java.awt.Paint, boolean)
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Paint positivePaint, negativePaint;
+        boolean shapes;
+        java.awt.geom.Line2D$Double $stack4;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        positivePaint := @parameter0: java.awt.Paint;
+
+        negativePaint := @parameter1: java.awt.Paint;
+
+        shapes := @parameter2: boolean;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(positivePaint, "positivePaint");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(negativePaint, "negativePaint");
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint> = positivePaint;
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint> = negativePaint;
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean shapesVisible> = shapes;
+
+        $stack4 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(-7.0, 0.0, 7.0, 0.0);
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine> = $stack4;
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates> = 0;
+
+        return;
+    }
+
+    public java.awt.Paint getPositivePaint()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint>;
+
+        return $stack1;
+    }
+
+    public void setPositivePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint> = paint;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Paint getNegativePaint()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint>;
+
+        return $stack1;
+    }
+
+    public void setNegativePaint(java.awt.Paint)
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        paint := @parameter0: java.awt.Paint;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paint, "paint");
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint> = paint;
+
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+
+        return;
+    }
+
+    public boolean getShapesVisible()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean shapesVisible>;
+
+        return $stack1;
+    }
+
+    public void setShapesVisible(boolean)
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean flag;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        flag := @parameter0: boolean;
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean shapesVisible> = flag;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public java.awt.Shape getLegendLine()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Shape $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine>;
+
+        return $stack1;
+    }
+
+    public void setLegendLine(java.awt.Shape)
+    {
+        java.awt.Shape line;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        line := @parameter0: java.awt.Shape;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(line, "line");
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine> = line;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public boolean getRoundXCoordinates()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        return $stack1;
+    }
+
+    public void setRoundXCoordinates(boolean)
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean round;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        round := @parameter0: boolean;
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates> = round;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.XYPlot, org.jfree.data.xy.XYDataset, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.data.xy.XYDataset data;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+
+        data := @parameter3: org.jfree.data.xy.XYDataset;
+
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+
+        state = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,org.jfree.chart.plot.PlotRenderingInfo)>(g2, dataArea, plot, data, info);
+
+        virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: void setProcessVisibleItemsOnly(boolean)>(0);
+
+        return state;
+    }
+
+    public int getPassCount()
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        return 2;
+    }
+
+    public void drawItem(java.awt.Graphics2D, org.jfree.chart.renderer.xy.XYItemRendererState, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.xy.XYDataset, int, int, org.jfree.chart.plot.CrosshairState, int)
+    {
+        int pass, series, item;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.data.xy.XYDataset dataset;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+
+        series := @parameter8: int;
+
+        item := @parameter9: int;
+
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+
+        pass := @parameter11: int;
+
+        if pass != 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void drawItemPass0(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState)>(g2, dataArea, info, plot, domainAxis, rangeAxis, dataset, series, item, crosshairState);
+
+        goto label2;
+
+     label1:
+        if pass != 1 goto label2;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void drawItemPass1(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState)>(g2, dataArea, info, plot, domainAxis, rangeAxis, dataset, series, item, crosshairState);
+
+     label2:
+        return;
+    }
+
+    protected void drawItemPass0(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.xy.XYDataset, int, int, org.jfree.chart.plot.CrosshairState)
+    {
+        int x_series, x_item, $stack88, l_minuendItemCount, $stack194, $stack195, $stack357, $stack359, $stack386, $stack388, $stack410, $stack412, $stack420, $stack422, $stack473, l_minuendItem, l_subtrahendItem, l_subtrahendItemCount#17;
+        org.jfree.data.xy.XYDataset x_dataset;
+        boolean b_impliedZeroSubtrahend, $stack89, b_vertical, $stack497, $stack516, b_minuendDone, b_minuendAdvanced, b_minuendAtIntersect, b_minuendFastForward, b_subtrahendDone, b_subtrahendAdvanced, b_subtrahendAtIntersect, b_subtrahendFastForward, b_colinear, b_fastForwardDone, b_intersect, $stack296, b_useMinuend, $stack275, $stack261, $stack255, $stack220, $stack198, $stack197, $stack116;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.util.LinkedList $stack90, $stack91, $stack92, $stack93, $stack94, $stack95;
+        java.awt.Graphics2D x_graphics;
+        java.awt.geom.Rectangle2D x_dataArea;
+        org.jfree.chart.plot.XYPlot x_plot;
+        org.jfree.chart.axis.ValueAxis x_domainAxis, x_rangeAxis;
+        byte $stack115, $stack126, $stack155, $stack163, $stack165, $stack189, $stack193, $stack213, $stack219, $stack251, $stack254, $stack260, $stack269, $stack271, $stack272, $stack274, $stack278, $stack279, $stack295, $stack298, $stack300, $stack301, $stack333, $stack336, $stack428, $stack429, $stack430, $stack437, $stack452, $stack431, $stack174, $stack190, $stack191, $stack252, $stack192, $stack114;
+        double $stack156, $stack157, $stack159, $stack160, $stack161, $stack162, $stack166, $stack167, $stack169, $stack170, $stack171, $stack172, $stack175, $stack176, $stack177, $stack178, $stack179, $stack180, l_deltaY, l_deltaX, $stack181, $stack182, $stack183, $stack184, l_numeratorA, $stack185, $stack186, $stack187, $stack188, l_numeratorB, l_slopeB, $stack245, $stack246, $stack247, $stack248, $stack443, $stack444, $stack446, $stack447, $stack448, $stack449, $stack455, $stack456, $stack458, $stack459, $stack460, $stack461, $stack471, $stack474, l_minuendMaxY, l_minuendMinY, l_subtrahendMaxY, l_subtrahendMinY, l_x1, l_y1, l_x2, l_y2, l_x3, l_y3, l_x4, l_y4, l_slope, l_denominator, b_useMinuend#141, l_xi, l_yi, $stack98, $stack100, $stack102, $stack104;
+        java.lang.Double $stack158, $stack168, $stack249, $stack250, $stack334, $stack335, $stack353, $stack354, $stack361, $stack362, $stack382, $stack383, $stack390, $stack391, $stack414, $stack415, $stack416, $stack417, $stack424, $stack425, $stack426, $stack427, $stack445, $stack457, $stack470, $stack472, $stack475, $stack476, l_minuendCurX, l_minuendNextX, l_minuendCurY, l_minuendNextY, l_subtrahendCurX, l_subtrahendNextX, l_subtrahendCurY, l_subtrahendNextY, l_slope#85, l_intersectY, $stack292, $stack290;
+        org.jfree.chart.plot.PlotRenderingInfo x_info;
+        org.jfree.chart.plot.CrosshairState x_crosshairState;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        x_graphics := @parameter0: java.awt.Graphics2D;
+
+        x_dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        x_info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        x_plot := @parameter3: org.jfree.chart.plot.XYPlot;
+
+        x_domainAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+
+        x_rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        x_dataset := @parameter6: org.jfree.data.xy.XYDataset;
+
+        x_series := @parameter7: int;
+
+        x_item := @parameter8: int;
+
+        x_crosshairState := @parameter9: org.jfree.chart.plot.CrosshairState;
+
+        if 0 != x_series goto label01;
+
+        if 0 == x_item goto label02;
+
+     label01:
+        return;
+
+     label02:
+        $stack88 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+
+        if 1 != $stack88 goto label03;
+
+        $stack516 = 1;
+
+        goto label04;
+
+     label03:
+        $stack516 = 0;
+
+     label04:
+        b_impliedZeroSubtrahend = $stack516;
+
+        $stack89 = specialinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean isEitherSeriesDegenerate(org.jfree.data.xy.XYDataset,boolean)>(x_dataset, $stack516);
+
+        if $stack89 == 0 goto label05;
+
+        return;
+
+     label05:
+        if $stack516 != 0 goto label06;
+
+        $stack497 = specialinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean areSeriesDisjoint(org.jfree.data.xy.XYDataset)>(x_dataset);
+
+        if $stack497 == 0 goto label06;
+
+        return;
+
+     label06:
+        $stack90 = new java.util.LinkedList;
+
+        specialinvoke $stack90.<java.util.LinkedList: void <init>()>();
+
+        $stack91 = new java.util.LinkedList;
+
+        specialinvoke $stack91.<java.util.LinkedList: void <init>()>();
+
+        $stack92 = new java.util.LinkedList;
+
+        specialinvoke $stack92.<java.util.LinkedList: void <init>()>();
+
+        $stack93 = new java.util.LinkedList;
+
+        specialinvoke $stack93.<java.util.LinkedList: void <init>()>();
+
+        $stack94 = new java.util.LinkedList;
+
+        specialinvoke $stack94.<java.util.LinkedList: void <init>()>();
+
+        $stack95 = new java.util.LinkedList;
+
+        specialinvoke $stack95.<java.util.LinkedList: void <init>()>();
+
+        l_minuendItem = 0;
+
+        l_minuendItemCount = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(0);
+
+        l_minuendCurX = null;
+
+        l_minuendNextX = null;
+
+        l_minuendCurY = null;
+
+        l_minuendNextY = null;
+
+        l_minuendMaxY = #-Infinity;
+
+        l_minuendMinY = #Infinity;
+
+        l_subtrahendItem = 0;
+
+        l_subtrahendCurX = null;
+
+        l_subtrahendNextX = null;
+
+        l_subtrahendCurY = null;
+
+        l_subtrahendNextY = null;
+
+        l_subtrahendMaxY = #-Infinity;
+
+        l_subtrahendMinY = #Infinity;
+
+        if b_impliedZeroSubtrahend == 0 goto label07;
+
+        l_subtrahendItem = 0;
+
+        l_subtrahendItemCount#17 = 2;
+
+        $stack470 = new java.lang.Double;
+
+        $stack471 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, 0);
+
+        specialinvoke $stack470.<java.lang.Double: void <init>(double)>($stack471);
+
+        l_subtrahendCurX = $stack470;
+
+        $stack472 = new java.lang.Double;
+
+        $stack473 = l_minuendItemCount - 1;
+
+        $stack474 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, $stack473);
+
+        specialinvoke $stack472.<java.lang.Double: void <init>(double)>($stack474);
+
+        l_subtrahendNextX = $stack472;
+
+        $stack475 = new java.lang.Double;
+
+        specialinvoke $stack475.<java.lang.Double: void <init>(double)>(0.0);
+
+        l_subtrahendCurY = $stack475;
+
+        $stack476 = new java.lang.Double;
+
+        specialinvoke $stack476.<java.lang.Double: void <init>(double)>(0.0);
+
+        l_subtrahendNextY = $stack476;
+
+        l_subtrahendMaxY = 0.0;
+
+        l_subtrahendMinY = 0.0;
+
+        virtualinvoke $stack92.<java.util.LinkedList: boolean add(java.lang.Object)>($stack470);
+
+        virtualinvoke $stack93.<java.util.LinkedList: boolean add(java.lang.Object)>($stack475);
+
+        goto label08;
+
+     label07:
+        l_subtrahendItemCount#17 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(1);
+
+     label08:
+        b_minuendDone = 0;
+
+        b_minuendAdvanced = 1;
+
+        b_minuendAtIntersect = 0;
+
+        b_minuendFastForward = 0;
+
+        b_subtrahendDone = 0;
+
+        b_subtrahendAdvanced = 1;
+
+        b_subtrahendAtIntersect = 0;
+
+        b_subtrahendFastForward = 0;
+
+        b_colinear = 0;
+
+        l_x1 = 0.0;
+
+        l_y1 = 0.0;
+
+        l_x2 = 0.0;
+
+        l_y2 = 0.0;
+
+        l_x3 = 0.0;
+
+        l_y3 = 0.0;
+
+        l_x4 = 0.0;
+
+        l_y4 = 0.0;
+
+        b_fastForwardDone = 0;
+
+     label09:
+        if b_fastForwardDone != 0 goto label16;
+
+        l_x1 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, l_minuendItem);
+
+        l_y1 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(0, l_minuendItem);
+
+        $stack410 = l_minuendItem + 1;
+
+        l_x2 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, $stack410);
+
+        $stack412 = l_minuendItem + 1;
+
+        l_y2 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(0, $stack412);
+
+        $stack414 = new java.lang.Double;
+
+        specialinvoke $stack414.<java.lang.Double: void <init>(double)>(l_x1);
+
+        l_minuendCurX = $stack414;
+
+        $stack415 = new java.lang.Double;
+
+        specialinvoke $stack415.<java.lang.Double: void <init>(double)>(l_y1);
+
+        l_minuendCurY = $stack415;
+
+        $stack416 = new java.lang.Double;
+
+        specialinvoke $stack416.<java.lang.Double: void <init>(double)>(l_x2);
+
+        l_minuendNextX = $stack416;
+
+        $stack417 = new java.lang.Double;
+
+        specialinvoke $stack417.<java.lang.Double: void <init>(double)>(l_y2);
+
+        l_minuendNextY = $stack417;
+
+        if b_impliedZeroSubtrahend == 0 goto label10;
+
+        l_x3 = virtualinvoke l_subtrahendCurX.<java.lang.Double: double doubleValue()>();
+
+        l_y3 = virtualinvoke l_subtrahendCurY.<java.lang.Double: double doubleValue()>();
+
+        l_x4 = virtualinvoke l_subtrahendNextX.<java.lang.Double: double doubleValue()>();
+
+        l_y4 = virtualinvoke l_subtrahendNextY.<java.lang.Double: double doubleValue()>();
+
+        goto label11;
+
+     label10:
+        l_x3 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, l_subtrahendItem);
+
+        l_y3 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(1, l_subtrahendItem);
+
+        $stack420 = l_subtrahendItem + 1;
+
+        l_x4 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, $stack420);
+
+        $stack422 = l_subtrahendItem + 1;
+
+        l_y4 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(1, $stack422);
+
+        $stack424 = new java.lang.Double;
+
+        specialinvoke $stack424.<java.lang.Double: void <init>(double)>(l_x3);
+
+        l_subtrahendCurX = $stack424;
+
+        $stack425 = new java.lang.Double;
+
+        specialinvoke $stack425.<java.lang.Double: void <init>(double)>(l_y3);
+
+        l_subtrahendCurY = $stack425;
+
+        $stack426 = new java.lang.Double;
+
+        specialinvoke $stack426.<java.lang.Double: void <init>(double)>(l_x4);
+
+        l_subtrahendNextX = $stack426;
+
+        $stack427 = new java.lang.Double;
+
+        specialinvoke $stack427.<java.lang.Double: void <init>(double)>(l_y4);
+
+        l_subtrahendNextY = $stack427;
+
+     label11:
+        $stack428 = l_x2 cmpg l_x3;
+
+        if $stack428 > 0 goto label12;
+
+        l_minuendItem = l_minuendItem + 1;
+
+        b_minuendFastForward = 1;
+
+        goto label09;
+
+     label12:
+        $stack429 = l_x4 cmpg l_x1;
+
+        if $stack429 > 0 goto label13;
+
+        l_subtrahendItem = l_subtrahendItem + 1;
+
+        b_subtrahendFastForward = 1;
+
+        goto label09;
+
+     label13:
+        $stack430 = l_x3 cmpg l_x1;
+
+        if $stack430 >= 0 goto label14;
+
+        $stack452 = l_x1 cmpg l_x4;
+
+        if $stack452 >= 0 goto label14;
+
+        $stack456 = l_y4 - l_y3;
+
+        $stack455 = l_x4 - l_x3;
+
+        l_slope = $stack456 / $stack455;
+
+        l_subtrahendCurX = $stack414;
+
+        $stack457 = new java.lang.Double;
+
+        $stack460 = l_slope * l_x1;
+
+        $stack458 = l_slope * l_x3;
+
+        $stack459 = l_y3 - $stack458;
+
+        $stack461 = $stack460 + $stack459;
+
+        specialinvoke $stack457.<java.lang.Double: void <init>(double)>($stack461);
+
+        l_subtrahendCurY = $stack457;
+
+        virtualinvoke $stack92.<java.util.LinkedList: boolean add(java.lang.Object)>($stack414);
+
+        virtualinvoke $stack93.<java.util.LinkedList: boolean add(java.lang.Object)>($stack457);
+
+     label14:
+        $stack431 = l_x1 cmpg l_x3;
+
+        if $stack431 >= 0 goto label15;
+
+        $stack437 = l_x3 cmpg l_x2;
+
+        if $stack437 >= 0 goto label15;
+
+        $stack444 = l_y2 - l_y1;
+
+        $stack443 = l_x2 - l_x1;
+
+        l_slope = $stack444 / $stack443;
+
+        l_minuendCurX = l_subtrahendCurX;
+
+        $stack445 = new java.lang.Double;
+
+        $stack448 = l_slope * l_x3;
+
+        $stack446 = l_slope * l_x1;
+
+        $stack447 = l_y1 - $stack446;
+
+        $stack449 = $stack448 + $stack447;
+
+        specialinvoke $stack445.<java.lang.Double: void <init>(double)>($stack449);
+
+        l_minuendCurY = $stack445;
+
+        virtualinvoke $stack90.<java.util.LinkedList: boolean add(java.lang.Object)>(l_subtrahendCurX);
+
+        virtualinvoke $stack91.<java.util.LinkedList: boolean add(java.lang.Object)>($stack445);
+
+     label15:
+        l_minuendMaxY = virtualinvoke l_minuendCurY.<java.lang.Double: double doubleValue()>();
+
+        l_minuendMinY = virtualinvoke l_minuendCurY.<java.lang.Double: double doubleValue()>();
+
+        l_subtrahendMaxY = virtualinvoke l_subtrahendCurY.<java.lang.Double: double doubleValue()>();
+
+        l_subtrahendMinY = virtualinvoke l_subtrahendCurY.<java.lang.Double: double doubleValue()>();
+
+        b_fastForwardDone = 1;
+
+        goto label09;
+
+     label16:
+        if b_minuendDone != 0 goto label53;
+
+        if b_subtrahendDone != 0 goto label53;
+
+        if b_minuendDone != 0 goto label18;
+
+        if b_minuendFastForward != 0 goto label18;
+
+        if b_minuendAdvanced == 0 goto label18;
+
+        l_x1 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, l_minuendItem);
+
+        l_y1 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(0, l_minuendItem);
+
+        $stack382 = new java.lang.Double;
+
+        specialinvoke $stack382.<java.lang.Double: void <init>(double)>(l_x1);
+
+        l_minuendCurX = $stack382;
+
+        $stack383 = new java.lang.Double;
+
+        specialinvoke $stack383.<java.lang.Double: void <init>(double)>(l_y1);
+
+        l_minuendCurY = $stack383;
+
+        if b_minuendAtIntersect != 0 goto label17;
+
+        virtualinvoke $stack90.<java.util.LinkedList: boolean add(java.lang.Object)>($stack382);
+
+        virtualinvoke $stack91.<java.util.LinkedList: boolean add(java.lang.Object)>($stack383);
+
+     label17:
+        l_minuendMaxY = staticinvoke <java.lang.Math: double max(double,double)>(l_minuendMaxY, l_y1);
+
+        l_minuendMinY = staticinvoke <java.lang.Math: double min(double,double)>(l_minuendMinY, l_y1);
+
+        $stack386 = l_minuendItem + 1;
+
+        l_x2 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, $stack386);
+
+        $stack388 = l_minuendItem + 1;
+
+        l_y2 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(0, $stack388);
+
+        $stack390 = new java.lang.Double;
+
+        specialinvoke $stack390.<java.lang.Double: void <init>(double)>(l_x2);
+
+        l_minuendNextX = $stack390;
+
+        $stack391 = new java.lang.Double;
+
+        specialinvoke $stack391.<java.lang.Double: void <init>(double)>(l_y2);
+
+        l_minuendNextY = $stack391;
+
+     label18:
+        if b_impliedZeroSubtrahend != 0 goto label20;
+
+        if b_subtrahendDone != 0 goto label20;
+
+        if b_subtrahendFastForward != 0 goto label20;
+
+        if b_subtrahendAdvanced == 0 goto label20;
+
+        l_x3 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, l_subtrahendItem);
+
+        l_y3 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(1, l_subtrahendItem);
+
+        $stack353 = new java.lang.Double;
+
+        specialinvoke $stack353.<java.lang.Double: void <init>(double)>(l_x3);
+
+        l_subtrahendCurX = $stack353;
+
+        $stack354 = new java.lang.Double;
+
+        specialinvoke $stack354.<java.lang.Double: void <init>(double)>(l_y3);
+
+        l_subtrahendCurY = $stack354;
+
+        if b_subtrahendAtIntersect != 0 goto label19;
+
+        virtualinvoke $stack92.<java.util.LinkedList: boolean add(java.lang.Object)>($stack353);
+
+        virtualinvoke $stack93.<java.util.LinkedList: boolean add(java.lang.Object)>($stack354);
+
+     label19:
+        l_subtrahendMaxY = staticinvoke <java.lang.Math: double max(double,double)>(l_subtrahendMaxY, l_y3);
+
+        l_subtrahendMinY = staticinvoke <java.lang.Math: double min(double,double)>(l_subtrahendMinY, l_y3);
+
+        $stack357 = l_subtrahendItem + 1;
+
+        l_x4 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, $stack357);
+
+        $stack359 = l_subtrahendItem + 1;
+
+        l_y4 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(1, $stack359);
+
+        $stack361 = new java.lang.Double;
+
+        specialinvoke $stack361.<java.lang.Double: void <init>(double)>(l_x4);
+
+        l_subtrahendNextX = $stack361;
+
+        $stack362 = new java.lang.Double;
+
+        specialinvoke $stack362.<java.lang.Double: void <init>(double)>(l_y4);
+
+        l_subtrahendNextY = $stack362;
+
+     label20:
+        b_minuendFastForward = 0;
+
+        b_subtrahendFastForward = 0;
+
+        l_slope#85 = null;
+
+        l_intersectY = null;
+
+        b_intersect = 0;
+
+        b_minuendAtIntersect = 0;
+
+        b_subtrahendAtIntersect = 0;
+
+        $stack174 = l_x2 cmpl l_x4;
+
+        if $stack174 != 0 goto label22;
+
+        $stack301 = l_y2 cmpl l_y4;
+
+        if $stack301 != 0 goto label22;
+
+        $stack333 = l_x1 cmpl l_x3;
+
+        if $stack333 != 0 goto label21;
+
+        $stack336 = l_y1 cmpl l_y3;
+
+        if $stack336 != 0 goto label21;
+
+        b_colinear = 1;
+
+        goto label41;
+
+     label21:
+        $stack334 = new java.lang.Double;
+
+        specialinvoke $stack334.<java.lang.Double: void <init>(double)>(l_x2);
+
+        l_slope#85 = $stack334;
+
+        $stack335 = new java.lang.Double;
+
+        specialinvoke $stack335.<java.lang.Double: void <init>(double)>(l_y2);
+
+        l_intersectY = $stack335;
+
+        b_intersect = 1;
+
+        b_minuendAtIntersect = 1;
+
+        b_subtrahendAtIntersect = 1;
+
+        goto label41;
+
+     label22:
+        $stack176 = l_y4 - l_y3;
+
+        $stack175 = l_x2 - l_x1;
+
+        $stack180 = $stack176 * $stack175;
+
+        $stack178 = l_x4 - l_x3;
+
+        $stack177 = l_y2 - l_y1;
+
+        $stack179 = $stack178 * $stack177;
+
+        l_denominator = $stack180 - $stack179;
+
+        l_deltaY = l_y1 - l_y3;
+
+        l_deltaX = l_x1 - l_x3;
+
+        $stack181 = l_x4 - l_x3;
+
+        $stack184 = $stack181 * l_deltaY;
+
+        $stack182 = l_y4 - l_y3;
+
+        $stack183 = $stack182 * l_deltaX;
+
+        l_numeratorA = $stack184 - $stack183;
+
+        $stack185 = l_x2 - l_x1;
+
+        $stack188 = $stack185 * l_deltaY;
+
+        $stack186 = l_y2 - l_y1;
+
+        $stack187 = $stack186 * l_deltaX;
+
+        l_numeratorB = $stack188 - $stack187;
+
+        $stack189 = 0.0 cmpl l_numeratorA;
+
+        if $stack189 != 0 goto label23;
+
+        $stack298 = 0.0 cmpl l_numeratorB;
+
+        if $stack298 != 0 goto label23;
+
+        $stack300 = 0.0 cmpl l_denominator;
+
+        if $stack300 != 0 goto label23;
+
+        b_colinear = 1;
+
+        goto label30;
+
+     label23:
+        if b_colinear == 0 goto label30;
+
+        virtualinvoke $stack90.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack91.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack92.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack93.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack94.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack95.<java.util.LinkedList: void clear()>();
+
+        b_colinear = 0;
+
+        $stack279 = l_x3 cmpg l_x1;
+
+        if $stack279 > 0 goto label24;
+
+        $stack295 = l_x1 cmpg l_x4;
+
+        if $stack295 > 0 goto label24;
+
+        $stack296 = 1;
+
+        goto label25;
+
+     label24:
+        $stack296 = 0;
+
+     label25:
+        b_useMinuend = $stack296;
+
+        if $stack296 == 0 goto label26;
+
+        $stack292 = l_minuendCurX;
+
+        goto label27;
+
+     label26:
+        $stack292 = l_subtrahendCurX;
+
+     label27:
+        virtualinvoke $stack94.<java.util.LinkedList: boolean add(java.lang.Object)>($stack292);
+
+        if b_useMinuend == 0 goto label28;
+
+        $stack290 = l_minuendCurY;
+
+        goto label29;
+
+     label28:
+        $stack290 = l_subtrahendCurY;
+
+     label29:
+        virtualinvoke $stack95.<java.util.LinkedList: boolean add(java.lang.Object)>($stack290);
+
+     label30:
+        b_useMinuend#141 = l_numeratorA / l_denominator;
+
+        l_slopeB = l_numeratorB / l_denominator;
+
+        $stack190 = l_x1 cmpl l_x2;
+
+        if $stack190 != 0 goto label31;
+
+        $stack274 = l_x3 cmpl l_x4;
+
+        if $stack274 != 0 goto label31;
+
+        $stack278 = l_x2 cmpl l_x4;
+
+        if $stack278 != 0 goto label31;
+
+        $stack275 = 1;
+
+        goto label32;
+
+     label31:
+        $stack275 = 0;
+
+     label32:
+        b_vertical = $stack275;
+
+        $stack191 = 0.0 cmpg b_useMinuend#141;
+
+        if $stack191 >= 0 goto label33;
+
+        $stack269 = b_useMinuend#141 cmpg 1.0;
+
+        if $stack269 > 0 goto label33;
+
+        $stack271 = 0.0 cmpg l_slopeB;
+
+        if $stack271 >= 0 goto label33;
+
+        $stack272 = l_slopeB cmpg 1.0;
+
+        if $stack272 <= 0 goto label34;
+
+     label33:
+        if b_vertical == 0 goto label41;
+
+     label34:
+        if b_vertical == 0 goto label35;
+
+        b_colinear = 0;
+
+        l_xi = l_x2;
+
+        l_yi = l_x4;
+
+        goto label36;
+
+     label35:
+        $stack245 = l_x2 - l_x1;
+
+        $stack246 = b_useMinuend#141 * $stack245;
+
+        l_xi = l_x1 + $stack246;
+
+        $stack247 = l_y2 - l_y1;
+
+        $stack248 = b_useMinuend#141 * $stack247;
+
+        l_yi = l_y1 + $stack248;
+
+     label36:
+        $stack249 = new java.lang.Double;
+
+        specialinvoke $stack249.<java.lang.Double: void <init>(double)>(l_xi);
+
+        l_slope#85 = $stack249;
+
+        $stack250 = new java.lang.Double;
+
+        specialinvoke $stack250.<java.lang.Double: void <init>(double)>(l_yi);
+
+        l_intersectY = $stack250;
+
+        b_intersect = 1;
+
+        $stack251 = l_xi cmpl l_x2;
+
+        if $stack251 != 0 goto label37;
+
+        $stack260 = l_yi cmpl l_y2;
+
+        if $stack260 != 0 goto label37;
+
+        $stack261 = 1;
+
+        goto label38;
+
+     label37:
+        $stack261 = 0;
+
+     label38:
+        b_minuendAtIntersect = $stack261;
+
+        $stack252 = l_xi cmpl l_x4;
+
+        if $stack252 != 0 goto label39;
+
+        $stack254 = l_yi cmpl l_y4;
+
+        if $stack254 != 0 goto label39;
+
+        $stack255 = 1;
+
+        goto label40;
+
+     label39:
+        $stack255 = 0;
+
+     label40:
+        b_subtrahendAtIntersect = $stack255;
+
+        l_minuendCurX = $stack249;
+
+        l_minuendCurY = $stack250;
+
+        l_subtrahendCurX = $stack249;
+
+        l_subtrahendCurY = $stack250;
+
+     label41:
+        if b_intersect == 0 goto label44;
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack90);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack91);
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean add(java.lang.Object)>(l_slope#85);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean add(java.lang.Object)>(l_intersectY);
+
+        staticinvoke <java.util.Collections: void reverse(java.util.List)>($stack92);
+
+        staticinvoke <java.util.Collections: void reverse(java.util.List)>($stack93);
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack92);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack93);
+
+        $stack213 = l_subtrahendMaxY cmpg l_minuendMaxY;
+
+        if $stack213 > 0 goto label42;
+
+        $stack219 = l_subtrahendMinY cmpg l_minuendMinY;
+
+        if $stack219 > 0 goto label42;
+
+        $stack220 = 1;
+
+        goto label43;
+
+     label42:
+        $stack220 = 0;
+
+     label43:
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void createPolygon(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,boolean,java.util.LinkedList,java.util.LinkedList)>(x_graphics, x_dataArea, x_plot, x_domainAxis, x_rangeAxis, $stack220, $stack94, $stack95);
+
+        virtualinvoke $stack90.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack91.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack92.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack93.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack94.<java.util.LinkedList: void clear()>();
+
+        virtualinvoke $stack95.<java.util.LinkedList: void clear()>();
+
+        l_denominator = virtualinvoke l_intersectY.<java.lang.Double: double doubleValue()>();
+
+        l_minuendMaxY = l_denominator;
+
+        l_subtrahendMaxY = l_denominator;
+
+        l_minuendMinY = l_denominator;
+
+        l_subtrahendMinY = l_denominator;
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean add(java.lang.Object)>(l_slope#85);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean add(java.lang.Object)>(l_intersectY);
+
+     label44:
+        $stack192 = l_x2 cmpg l_x4;
+
+        if $stack192 > 0 goto label45;
+
+        l_minuendItem = l_minuendItem + 1;
+
+        b_minuendAdvanced = 1;
+
+        goto label46;
+
+     label45:
+        b_minuendAdvanced = 0;
+
+     label46:
+        $stack193 = l_x4 cmpg l_x2;
+
+        if $stack193 > 0 goto label47;
+
+        l_subtrahendItem = l_subtrahendItem + 1;
+
+        b_subtrahendAdvanced = 1;
+
+        goto label48;
+
+     label47:
+        b_subtrahendAdvanced = 0;
+
+     label48:
+        $stack194 = l_minuendItemCount - 1;
+
+        if l_minuendItem != $stack194 goto label49;
+
+        $stack198 = 1;
+
+        goto label50;
+
+     label49:
+        $stack198 = 0;
+
+     label50:
+        b_minuendDone = $stack198;
+
+        $stack195 = l_subtrahendItemCount#17 - 1;
+
+        if l_subtrahendItem != $stack195 goto label51;
+
+        $stack197 = 1;
+
+        goto label52;
+
+     label51:
+        $stack197 = 0;
+
+     label52:
+        b_subtrahendDone = $stack197;
+
+        goto label16;
+
+     label53:
+        if b_minuendDone == 0 goto label54;
+
+        $stack163 = l_x3 cmpg l_x2;
+
+        if $stack163 >= 0 goto label54;
+
+        $stack165 = l_x2 cmpg l_x4;
+
+        if $stack165 >= 0 goto label54;
+
+        $stack167 = l_y4 - l_y3;
+
+        $stack166 = l_x4 - l_x3;
+
+        l_slope = $stack167 / $stack166;
+
+        l_subtrahendNextX = l_minuendNextX;
+
+        $stack168 = new java.lang.Double;
+
+        $stack171 = l_slope * l_x2;
+
+        $stack169 = l_slope * l_x3;
+
+        $stack170 = l_y3 - $stack169;
+
+        $stack172 = $stack171 + $stack170;
+
+        specialinvoke $stack168.<java.lang.Double: void <init>(double)>($stack172);
+
+        l_subtrahendNextY = $stack168;
+
+     label54:
+        if b_subtrahendDone == 0 goto label55;
+
+        $stack126 = l_x1 cmpg l_x4;
+
+        if $stack126 >= 0 goto label55;
+
+        $stack155 = l_x4 cmpg l_x2;
+
+        if $stack155 >= 0 goto label55;
+
+        $stack157 = l_y2 - l_y1;
+
+        $stack156 = l_x2 - l_x1;
+
+        l_slope = $stack157 / $stack156;
+
+        l_minuendNextX = l_subtrahendNextX;
+
+        $stack158 = new java.lang.Double;
+
+        $stack161 = l_slope * l_x4;
+
+        $stack159 = l_slope * l_x1;
+
+        $stack160 = l_y1 - $stack159;
+
+        $stack162 = $stack161 + $stack160;
+
+        specialinvoke $stack158.<java.lang.Double: void <init>(double)>($stack162);
+
+        l_minuendNextY = $stack158;
+
+     label55:
+        $stack98 = virtualinvoke l_minuendNextY.<java.lang.Double: double doubleValue()>();
+
+        l_minuendMaxY = staticinvoke <java.lang.Math: double max(double,double)>(l_minuendMaxY, $stack98);
+
+        $stack100 = virtualinvoke l_subtrahendNextY.<java.lang.Double: double doubleValue()>();
+
+        l_subtrahendMaxY = staticinvoke <java.lang.Math: double max(double,double)>(l_subtrahendMaxY, $stack100);
+
+        $stack102 = virtualinvoke l_minuendNextY.<java.lang.Double: double doubleValue()>();
+
+        l_minuendMinY = staticinvoke <java.lang.Math: double min(double,double)>(l_minuendMinY, $stack102);
+
+        $stack104 = virtualinvoke l_subtrahendNextY.<java.lang.Double: double doubleValue()>();
+
+        l_subtrahendMinY = staticinvoke <java.lang.Math: double min(double,double)>(l_subtrahendMinY, $stack104);
+
+        virtualinvoke $stack90.<java.util.LinkedList: boolean add(java.lang.Object)>(l_minuendNextX);
+
+        virtualinvoke $stack91.<java.util.LinkedList: boolean add(java.lang.Object)>(l_minuendNextY);
+
+        virtualinvoke $stack92.<java.util.LinkedList: boolean add(java.lang.Object)>(l_subtrahendNextX);
+
+        virtualinvoke $stack93.<java.util.LinkedList: boolean add(java.lang.Object)>(l_subtrahendNextY);
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack90);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack91);
+
+        staticinvoke <java.util.Collections: void reverse(java.util.List)>($stack92);
+
+        staticinvoke <java.util.Collections: void reverse(java.util.List)>($stack93);
+
+        virtualinvoke $stack94.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack92);
+
+        virtualinvoke $stack95.<java.util.LinkedList: boolean addAll(java.util.Collection)>($stack93);
+
+        $stack114 = l_subtrahendMaxY cmpg l_minuendMaxY;
+
+        if $stack114 > 0 goto label56;
+
+        $stack115 = l_subtrahendMinY cmpg l_minuendMinY;
+
+        if $stack115 > 0 goto label56;
+
+        $stack116 = 1;
+
+        goto label57;
+
+     label56:
+        $stack116 = 0;
+
+     label57:
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void createPolygon(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,boolean,java.util.LinkedList,java.util.LinkedList)>(x_graphics, x_dataArea, x_plot, x_domainAxis, x_rangeAxis, $stack116, $stack94, $stack95);
+
+        return;
+    }
+
+    protected void drawItemPass1(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.xy.XYDataset, int, int, org.jfree.chart.plot.CrosshairState)
+    {
+        org.jfree.chart.plot.PlotRenderingInfo x_info;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        int x_series, x_item, $stack44, $stack47, l_shape#28;
+        java.awt.Paint l_seriesPaint, $stack53, $stack116;
+        java.awt.Stroke l_seriesStroke, $stack54;
+        java.awt.Graphics2D x_graphics;
+        org.jfree.chart.plot.XYPlot x_plot;
+        org.jfree.chart.plot.PlotOrientation l_orientation, $stack50, $stack51, $stack111;
+        org.jfree.chart.ui.RectangleEdge l_domainAxisLocation, l_rangeAxisLocation;
+        org.jfree.data.xy.XYDataset x_dataset;
+        double l_x0, l_y0, l_x1, l_y1, $stack45, $stack48, $stack102, $stack103, l_tipGenerator#49, l_urlGenerator#50;
+        org.jfree.chart.axis.ValueAxis x_domainAxis, x_rangeAxis;
+        java.awt.geom.Rectangle2D x_dataArea;
+        boolean $stack41, $stack52, $stack113, $stack42, $stack79;
+        org.jfree.chart.plot.CrosshairState x_crosshairState;
+        java.awt.geom.Line2D$Double $stack55, $stack58, l_line;
+        byte $stack59;
+        org.jfree.chart.entity.XYItemEntity $stack83;
+        java.awt.geom.Rectangle2D$Double $stack101;
+        org.jfree.chart.ChartRenderingInfo $stack121;
+        java.awt.Shape l_entityArea, l_shape;
+        org.jfree.chart.entity.EntityCollection l_entities;
+        java.lang.String l_shape#9, l_url;
+        org.jfree.chart.labels.XYToolTipGenerator l_tipGenerator;
+        org.jfree.chart.urls.XYURLGenerator l_urlGenerator;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        x_graphics := @parameter0: java.awt.Graphics2D;
+
+        x_dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        x_info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+
+        x_plot := @parameter3: org.jfree.chart.plot.XYPlot;
+
+        x_domainAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+
+        x_rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        x_dataset := @parameter6: org.jfree.data.xy.XYDataset;
+
+        x_series := @parameter7: int;
+
+        x_item := @parameter8: int;
+
+        x_crosshairState := @parameter9: org.jfree.chart.plot.CrosshairState;
+
+        l_entityArea = null;
+
+        l_entities = null;
+
+        if null == x_info goto label01;
+
+        $stack121 = virtualinvoke x_info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+
+        l_entities = virtualinvoke $stack121.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+
+     label01:
+        l_seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint getItemPaint(int,int)>(x_series, x_item);
+
+        l_seriesStroke = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Stroke getItemStroke(int,int)>(x_series, x_item);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(l_seriesPaint);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(l_seriesStroke);
+
+        l_orientation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        l_domainAxisLocation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        l_rangeAxisLocation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        l_x0 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(x_series, x_item);
+
+        l_y0 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(x_series, x_item);
+
+        l_x1 = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(l_x0, x_dataArea, l_domainAxisLocation);
+
+        l_y1 = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(l_y0, x_dataArea, l_rangeAxisLocation);
+
+        $stack41 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean getShapesVisible()>();
+
+        if $stack41 == 0 goto label05;
+
+        l_shape = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape getItemShape(int,int)>(x_series, x_item);
+
+        $stack111 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if l_orientation != $stack111 goto label02;
+
+        l_shape = staticinvoke <org.jfree.chart.util.ShapeUtils: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(l_shape, l_y1, l_x1);
+
+        goto label03;
+
+     label02:
+        l_shape = staticinvoke <org.jfree.chart.util.ShapeUtils: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(l_shape, l_x1, l_y1);
+
+     label03:
+        $stack113 = interfaceinvoke l_shape.<java.awt.Shape: boolean intersects(java.awt.geom.Rectangle2D)>(x_dataArea);
+
+        if $stack113 == 0 goto label04;
+
+        $stack116 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint getItemPaint(int,int)>(x_series, x_item);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack116);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void fill(java.awt.Shape)>(l_shape);
+
+     label04:
+        l_entityArea = l_shape;
+
+     label05:
+        if null == l_entities goto label09;
+
+        if null != l_entityArea goto label06;
+
+        $stack101 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack103 = l_x1 - 2.0;
+
+        $stack102 = l_y1 - 2.0;
+
+        specialinvoke $stack101.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack103, $stack102, 4.0, 4.0);
+
+        l_entityArea = $stack101;
+
+     label06:
+        l_shape#9 = null;
+
+        l_tipGenerator = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYToolTipGenerator getToolTipGenerator(int,int)>(x_series, x_item);
+
+        if null == l_tipGenerator goto label07;
+
+        l_shape#9 = interfaceinvoke l_tipGenerator.<org.jfree.chart.labels.XYToolTipGenerator: java.lang.String generateToolTip(org.jfree.data.xy.XYDataset,int,int)>(x_dataset, x_series, x_item);
+
+     label07:
+        l_url = null;
+
+        l_urlGenerator = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.urls.XYURLGenerator getURLGenerator()>();
+
+        if null == l_urlGenerator goto label08;
+
+        l_url = interfaceinvoke l_urlGenerator.<org.jfree.chart.urls.XYURLGenerator: java.lang.String generateURL(org.jfree.data.xy.XYDataset,int,int)>(x_dataset, x_series, x_item);
+
+     label08:
+        $stack83 = new org.jfree.chart.entity.XYItemEntity;
+
+        specialinvoke $stack83.<org.jfree.chart.entity.XYItemEntity: void <init>(java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,java.lang.String,java.lang.String)>(l_entityArea, x_dataset, x_series, x_item, l_shape#9, l_url);
+
+        interfaceinvoke l_entities.<org.jfree.chart.entity.EntityCollection: void add(org.jfree.chart.entity.ChartEntity)>($stack83);
+
+     label09:
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean isItemLabelVisible(int,int)>(x_series, x_item);
+
+        if $stack42 == 0 goto label12;
+
+        $stack59 = l_y1 cmpg 0.0;
+
+        if $stack59 >= 0 goto label10;
+
+        $stack79 = 1;
+
+        goto label11;
+
+     label10:
+        $stack79 = 0;
+
+     label11:
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.xy.XYDataset,int,int,double,double,boolean)>(x_graphics, l_orientation, x_dataset, x_series, x_item, l_x1, l_y1, $stack79);
+
+     label12:
+        l_shape#28 = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: int indexOf(org.jfree.data.xy.XYDataset)>(x_dataset);
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: void updateCrosshairValues(org.jfree.chart.plot.CrosshairState,double,double,int,double,double,org.jfree.chart.plot.PlotOrientation)>(x_crosshairState, l_x0, l_y0, l_shape#28, l_x1, l_y1, l_orientation);
+
+        if 0 != x_item goto label13;
+
+        return;
+
+     label13:
+        $stack44 = x_item - 1;
+
+        $stack45 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(x_series, $stack44);
+
+        l_tipGenerator#49 = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack45, x_dataArea, l_domainAxisLocation);
+
+        $stack47 = x_item - 1;
+
+        $stack48 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(x_series, $stack47);
+
+        l_urlGenerator#50 = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack48, x_dataArea, l_rangeAxisLocation);
+
+        l_line = null;
+
+        $stack50 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if $stack50 != l_orientation goto label14;
+
+        $stack58 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack58.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(l_y1, l_x1, l_urlGenerator#50, l_tipGenerator#49);
+
+        l_line = $stack58;
+
+        goto label15;
+
+     label14:
+        $stack51 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if $stack51 != l_orientation goto label15;
+
+        $stack55 = new java.awt.geom.Line2D$Double;
+
+        specialinvoke $stack55.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(l_x1, l_y1, l_tipGenerator#49, l_urlGenerator#50);
+
+        l_line = $stack55;
+
+     label15:
+        if null == l_line goto label16;
+
+        $stack52 = virtualinvoke l_line.<java.awt.geom.Line2D: boolean intersects(java.awt.geom.Rectangle2D)>(x_dataArea);
+
+        if $stack52 == 0 goto label16;
+
+        $stack53 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint getItemPaint(int,int)>(x_series, x_item);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack53);
+
+        $stack54 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Stroke getItemStroke(int,int)>(x_series, x_item);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack54);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void draw(java.awt.Shape)>(l_line);
+
+     label16:
+        return;
+    }
+
+    private boolean isEitherSeriesDegenerate(org.jfree.data.xy.XYDataset, boolean)
+    {
+        boolean x_impliedZeroSubtrahend, $stack7, $stack5;
+        org.jfree.data.xy.XYDataset x_dataset;
+        int $stack3, $stack4, $stack6;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        x_dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        x_impliedZeroSubtrahend := @parameter1: boolean;
+
+        if x_impliedZeroSubtrahend == 0 goto label3;
+
+        $stack6 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(0);
+
+        if $stack6 >= 2 goto label1;
+
+        $stack7 = 1;
+
+        goto label2;
+
+     label1:
+        $stack7 = 0;
+
+     label2:
+        return $stack7;
+
+     label3:
+        $stack3 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(0);
+
+        if $stack3 < 2 goto label4;
+
+        $stack4 = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(1);
+
+        if $stack4 >= 2 goto label5;
+
+     label4:
+        $stack5 = 1;
+
+        goto label6;
+
+     label5:
+        $stack5 = 0;
+
+     label6:
+        return $stack5;
+    }
+
+    private boolean areSeriesDisjoint(org.jfree.data.xy.XYDataset)
+    {
+        org.jfree.data.xy.XYDataset x_dataset;
+        int l_minuendItemCount, $stack14, l_subtrahendItemCount, $stack18;
+        double l_minuendFirst, l_minuendLast, l_subtrahendFirst, l_subtrahendLast;
+        byte $stack20, $stack21;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean $stack22;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        x_dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        l_minuendItemCount = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(0);
+
+        l_minuendFirst = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, 0);
+
+        $stack14 = l_minuendItemCount - 1;
+
+        l_minuendLast = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(0, $stack14);
+
+        l_subtrahendItemCount = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(1);
+
+        l_subtrahendFirst = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, 0);
+
+        $stack18 = l_subtrahendItemCount - 1;
+
+        l_subtrahendLast = interfaceinvoke x_dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(1, $stack18);
+
+        $stack20 = l_minuendLast cmpg l_subtrahendFirst;
+
+        if $stack20 < 0 goto label1;
+
+        $stack21 = l_subtrahendLast cmpg l_minuendFirst;
+
+        if $stack21 >= 0 goto label2;
+
+     label1:
+        $stack22 = 1;
+
+        goto label3;
+
+     label2:
+        $stack22 = 0;
+
+     label3:
+        return $stack22;
+    }
+
+    private void createPolygon(java.awt.Graphics2D, java.awt.geom.Rectangle2D, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, boolean, java.util.LinkedList, java.util.LinkedList)
+    {
+        org.jfree.chart.plot.XYPlot x_plot;
+        org.jfree.chart.plot.PlotOrientation l_orientation, $stack26;
+        org.jfree.chart.ui.RectangleEdge l_domainAxisLocation, l_rangeAxisLocation;
+        java.util.LinkedList x_xValues, x_yValues;
+        java.lang.Object[] l_xValues, l_yValues;
+        java.awt.geom.GeneralPath $stack25;
+        org.jfree.chart.axis.ValueAxis x_domainAxis, x_rangeAxis;
+        java.lang.Object $stack27, $stack32, $stack45, $stack50, $stack77, $stack82, $stack91, $stack96;
+        java.lang.Double $stack28, $stack33, $stack46, $stack51, $stack78, $stack83, $stack92, $stack97;
+        double $stack29, $stack34, $stack47, $stack52, $stack79, $stack84, $stack93, $stack98, l_x, l_y;
+        java.awt.geom.Rectangle2D x_dataArea;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        boolean $stack31, $stack39, x_positive, $stack49, $stack81, $stack95;
+        float $stack36, $stack37, $stack54, $stack55, $stack86, $stack87, $stack100, $stack101;
+        java.awt.Graphics2D x_graphics;
+        int i, $stack88, $stack38;
+        java.awt.Paint $stack40;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        x_graphics := @parameter0: java.awt.Graphics2D;
+
+        x_dataArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        x_plot := @parameter2: org.jfree.chart.plot.XYPlot;
+
+        x_domainAxis := @parameter3: org.jfree.chart.axis.ValueAxis;
+
+        x_rangeAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+
+        x_positive := @parameter5: boolean;
+
+        x_xValues := @parameter6: java.util.LinkedList;
+
+        x_yValues := @parameter7: java.util.LinkedList;
+
+        l_orientation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        l_domainAxisLocation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        l_rangeAxisLocation = virtualinvoke x_plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        l_xValues = virtualinvoke x_xValues.<java.util.LinkedList: java.lang.Object[] toArray()>();
+
+        l_yValues = virtualinvoke x_yValues.<java.util.LinkedList: java.lang.Object[] toArray()>();
+
+        $stack25 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack25.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack26 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if $stack26 != l_orientation goto label05;
+
+        $stack77 = l_xValues[0];
+
+        $stack78 = (java.lang.Double) $stack77;
+
+        $stack79 = virtualinvoke $stack78.<java.lang.Double: double doubleValue()>();
+
+        l_x = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack79, x_dataArea, l_domainAxisLocation);
+
+        $stack81 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        if $stack81 == 0 goto label01;
+
+        l_x = staticinvoke <java.lang.Math: double rint(double)>(l_x);
+
+     label01:
+        $stack82 = l_yValues[0];
+
+        $stack83 = (java.lang.Double) $stack82;
+
+        $stack84 = virtualinvoke $stack83.<java.lang.Double: double doubleValue()>();
+
+        l_y = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack84, x_dataArea, l_rangeAxisLocation);
+
+        $stack87 = (float) l_x;
+
+        $stack86 = (float) l_y;
+
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack87, $stack86);
+
+        i = 1;
+
+     label02:
+        $stack88 = lengthof l_xValues;
+
+        if i >= $stack88 goto label04;
+
+        $stack91 = l_xValues[i];
+
+        $stack92 = (java.lang.Double) $stack91;
+
+        $stack93 = virtualinvoke $stack92.<java.lang.Double: double doubleValue()>();
+
+        l_x = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack93, x_dataArea, l_domainAxisLocation);
+
+        $stack95 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        if $stack95 == 0 goto label03;
+
+        l_x = staticinvoke <java.lang.Math: double rint(double)>(l_x);
+
+     label03:
+        $stack96 = l_yValues[i];
+
+        $stack97 = (java.lang.Double) $stack96;
+
+        $stack98 = virtualinvoke $stack97.<java.lang.Double: double doubleValue()>();
+
+        l_y = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack98, x_dataArea, l_rangeAxisLocation);
+
+        $stack101 = (float) l_x;
+
+        $stack100 = (float) l_y;
+
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack101, $stack100);
+
+        i = i + 1;
+
+        goto label02;
+
+     label04:
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void closePath()>();
+
+        goto label10;
+
+     label05:
+        $stack27 = l_xValues[0];
+
+        $stack28 = (java.lang.Double) $stack27;
+
+        $stack29 = virtualinvoke $stack28.<java.lang.Double: double doubleValue()>();
+
+        l_x = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack29, x_dataArea, l_domainAxisLocation);
+
+        $stack31 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        if $stack31 == 0 goto label06;
+
+        l_x = staticinvoke <java.lang.Math: double rint(double)>(l_x);
+
+     label06:
+        $stack32 = l_yValues[0];
+
+        $stack33 = (java.lang.Double) $stack32;
+
+        $stack34 = virtualinvoke $stack33.<java.lang.Double: double doubleValue()>();
+
+        l_y = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack34, x_dataArea, l_rangeAxisLocation);
+
+        $stack37 = (float) l_y;
+
+        $stack36 = (float) l_x;
+
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack37, $stack36);
+
+        i = 1;
+
+     label07:
+        $stack38 = lengthof l_xValues;
+
+        if i >= $stack38 goto label09;
+
+        $stack45 = l_xValues[i];
+
+        $stack46 = (java.lang.Double) $stack45;
+
+        $stack47 = virtualinvoke $stack46.<java.lang.Double: double doubleValue()>();
+
+        l_x = virtualinvoke x_domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack47, x_dataArea, l_domainAxisLocation);
+
+        $stack49 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        if $stack49 == 0 goto label08;
+
+        l_x = staticinvoke <java.lang.Math: double rint(double)>(l_x);
+
+     label08:
+        $stack50 = l_yValues[i];
+
+        $stack51 = (java.lang.Double) $stack50;
+
+        $stack52 = virtualinvoke $stack51.<java.lang.Double: double doubleValue()>();
+
+        l_y = virtualinvoke x_rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack52, x_dataArea, l_rangeAxisLocation);
+
+        $stack55 = (float) l_y;
+
+        $stack54 = (float) l_x;
+
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack55, $stack54);
+
+        i = i + 1;
+
+        goto label07;
+
+     label09:
+        virtualinvoke $stack25.<java.awt.geom.GeneralPath: void closePath()>();
+
+     label10:
+        $stack39 = virtualinvoke $stack25.<java.awt.geom.GeneralPath: boolean intersects(java.awt.geom.Rectangle2D)>(x_dataArea);
+
+        if $stack39 == 0 goto label13;
+
+        if x_positive == 0 goto label11;
+
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint getPositivePaint()>();
+
+        goto label12;
+
+     label11:
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint getNegativePaint()>();
+
+     label12:
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack40);
+
+        virtualinvoke x_graphics.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack25);
+
+     label13:
+        return;
+    }
+
+    public org.jfree.chart.LegendItem getLegendItem(int, int)
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        org.jfree.chart.plot.XYPlot p;
+        int datasetIndex, series;
+        org.jfree.data.xy.XYDataset dataset;
+        boolean $stack17;
+        org.jfree.chart.labels.XYSeriesLabelGenerator $stack18, $stack20, $stack21, $stack38, $stack58;
+        java.lang.String label, toolTipText, urlText;
+        java.awt.Paint paint, labelPaint;
+        java.awt.Stroke stroke;
+        java.awt.Shape line;
+        org.jfree.chart.LegendItem $stack25, result;
+        java.awt.Font $stack26;
+        java.lang.Comparable $stack28;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        datasetIndex := @parameter0: int;
+
+        series := @parameter1: int;
+
+        result = null;
+
+        p = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.plot.XYPlot getPlot()>();
+
+        if p == null goto label4;
+
+        dataset = virtualinvoke p.<org.jfree.chart.plot.XYPlot: org.jfree.data.xy.XYDataset getDataset(int)>(datasetIndex);
+
+        if dataset == null goto label4;
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean getItemVisible(int,int)>(series, 0);
+
+        if $stack17 == 0 goto label4;
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYSeriesLabelGenerator getLegendItemLabelGenerator()>();
+
+        label = interfaceinvoke $stack18.<org.jfree.chart.labels.XYSeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int)>(dataset, series);
+
+        toolTipText = null;
+
+        $stack20 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYSeriesLabelGenerator getLegendItemToolTipGenerator()>();
+
+        if $stack20 == null goto label1;
+
+        $stack58 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYSeriesLabelGenerator getLegendItemToolTipGenerator()>();
+
+        toolTipText = interfaceinvoke $stack58.<org.jfree.chart.labels.XYSeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int)>(dataset, series);
+
+     label1:
+        urlText = null;
+
+        $stack21 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYSeriesLabelGenerator getLegendItemURLGenerator()>();
+
+        if $stack21 == null goto label2;
+
+        $stack38 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: org.jfree.chart.labels.XYSeriesLabelGenerator getLegendItemURLGenerator()>();
+
+        urlText = interfaceinvoke $stack38.<org.jfree.chart.labels.XYSeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int)>(dataset, series);
+
+     label2:
+        paint = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint lookupSeriesPaint(int)>(series);
+
+        stroke = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Stroke lookupSeriesStroke(int)>(series);
+
+        line = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape getLegendLine()>();
+
+        $stack25 = new org.jfree.chart.LegendItem;
+
+        specialinvoke $stack25.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Stroke,java.awt.Paint)>(label, label, toolTipText, urlText, line, stroke, paint);
+
+        result = $stack25;
+
+        $stack26 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Font lookupLegendTextFont(int)>(series);
+
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setLabelFont(java.awt.Font)>($stack26);
+
+        labelPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint lookupLegendTextPaint(int)>(series);
+
+        if labelPaint == null goto label3;
+
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setLabelPaint(java.awt.Paint)>(labelPaint);
+
+     label3:
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>(dataset);
+
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setDatasetIndex(int)>(datasetIndex);
+
+        $stack28 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setSeriesKey(java.lang.Comparable)>($stack28);
+
+        virtualinvoke $stack25.<org.jfree.chart.LegendItem: void setSeriesIndex(int)>(series);
+
+     label4:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this, that;
+        boolean $stack3, $stack4, $stack7, $stack10, $stack11, $stack12, $stack15, $stack16, $stack17;
+        java.awt.Paint $stack5, $stack6, $stack8, $stack9;
+        java.awt.Shape $stack13, $stack14;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: boolean equals(java.lang.Object)>(obj);
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.renderer.xy.XYDifferenceRenderer) obj;
+
+        $stack6 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint>;
+
+        $stack5 = that.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint>;
+
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack6, $stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint>;
+
+        $stack8 = that.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint>;
+
+        $stack10 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean shapesVisible>;
+
+        $stack11 = that.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean shapesVisible>;
+
+        if $stack12 == $stack11 goto label6;
+
+        return 0;
+
+     label6:
+        $stack14 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine>;
+
+        $stack13 = that.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine>;
+
+        $stack15 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.Shape,java.awt.Shape)>($stack14, $stack13);
+
+        if $stack15 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack17 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        $stack16 = that.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: boolean roundXCoordinates>;
+
+        if $stack17 == $stack16 goto label8;
+
+        return 0;
+
+     label8:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this, clone;
+        java.lang.Object $stack2;
+        java.awt.Shape $stack3, $stack4;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        $stack2 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.renderer.xy.XYDifferenceRenderer) $stack2;
+
+        $stack3 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine>;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.ShapeUtils: java.awt.Shape clone(java.awt.Shape)>($stack3);
+
+        clone.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine> = $stack4;
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Paint $stack2, $stack3;
+        java.awt.Shape $stack4;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack4, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.xy.XYDifferenceRenderer this;
+        java.awt.Paint $stack2, $stack3;
+        java.awt.Shape $stack4;
+
+        this := @this: org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint positivePaint> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Paint negativePaint> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.renderer.xy.XYDifferenceRenderer: java.awt.Shape legendLine> = $stack4;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.renderer.xy.XYDifferenceRenderer: long serialVersionUID> = -8447915602375584857L;
+
+        return;
+    }
+}

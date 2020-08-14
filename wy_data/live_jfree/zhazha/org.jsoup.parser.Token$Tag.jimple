@@ -1,0 +1,528 @@
+abstract class org.jsoup.parser.Token$Tag extends org.jsoup.parser.Token
+{
+    protected java.lang.String tagName;
+    protected java.lang.String normalName;
+    private java.lang.String pendingAttributeName;
+    private java.lang.StringBuilder pendingAttributeValue;
+    private java.lang.String pendingAttributeValueS;
+    private boolean hasEmptyAttributeValue;
+    private boolean hasPendingAttributeValue;
+    boolean selfClosing;
+    org.jsoup.nodes.Attributes attributes;
+
+    void <init>()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.StringBuilder $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        specialinvoke this.<org.jsoup.parser.Token: void <init>(org.jsoup.parser.Token$1)>(null);
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue> = $stack1;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasEmptyAttributeValue> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasPendingAttributeValue> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: boolean selfClosing> = 0;
+
+        return;
+    }
+
+    org.jsoup.parser.Token$Tag reset()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.StringBuilder $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String tagName> = null;
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String normalName> = null;
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName> = null;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        staticinvoke <org.jsoup.parser.Token$Tag: void reset(java.lang.StringBuilder)>($stack1);
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS> = null;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasEmptyAttributeValue> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasPendingAttributeValue> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: boolean selfClosing> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes> = null;
+
+        return this;
+    }
+
+    final void newAttribute()
+    {
+        org.jsoup.parser.Token$Tag this;
+        org.jsoup.nodes.Attributes $stack2, $stack30, $stack21;
+        java.lang.String $stack3, $stack5, $stack6, $stack7, $stack29, value, $stack20;
+        int $stack8, $stack27;
+        boolean $stack18, $stack19;
+        java.lang.StringBuilder $stack26, $stack28, $stack4;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes>;
+
+        if $stack2 != null goto label1;
+
+        $stack30 = new org.jsoup.nodes.Attributes;
+
+        specialinvoke $stack30.<org.jsoup.nodes.Attributes: void <init>()>();
+
+        this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes> = $stack30;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        if $stack3 == null goto label7;
+
+        $stack5 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String trim()>();
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName> = $stack6;
+
+        $stack7 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        $stack8 = virtualinvoke $stack7.<java.lang.String: int length()>();
+
+        if $stack8 <= 0 goto label7;
+
+        $stack18 = this.<org.jsoup.parser.Token$Tag: boolean hasPendingAttributeValue>;
+
+        if $stack18 == 0 goto label4;
+
+        $stack26 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: int length()>();
+
+        if $stack27 <= 0 goto label2;
+
+        $stack28 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label3;
+
+     label2:
+        $stack29 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS>;
+
+     label3:
+        value = $stack29;
+
+        goto label6;
+
+     label4:
+        $stack19 = this.<org.jsoup.parser.Token$Tag: boolean hasEmptyAttributeValue>;
+
+        if $stack19 == 0 goto label5;
+
+        value = "";
+
+        goto label6;
+
+     label5:
+        value = null;
+
+     label6:
+        $stack21 = this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes>;
+
+        $stack20 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        virtualinvoke $stack21.<org.jsoup.nodes.Attributes: org.jsoup.nodes.Attributes add(java.lang.String,java.lang.String)>($stack20, value);
+
+     label7:
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName> = null;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasEmptyAttributeValue> = 0;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasPendingAttributeValue> = 0;
+
+        $stack4 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        staticinvoke <org.jsoup.parser.Token$Tag: void reset(java.lang.StringBuilder)>($stack4);
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS> = null;
+
+        return;
+    }
+
+    final void finaliseTag()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        if $stack1 == null goto label1;
+
+        virtualinvoke this.<org.jsoup.parser.Token$Tag: void newAttribute()>();
+
+     label1:
+        return;
+    }
+
+    final java.lang.String name()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack1, $stack2, $stack3;
+        int $stack4;
+        boolean $stack5;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: int length()>();
+
+        if $stack4 != 0 goto label2;
+
+     label1:
+        $stack5 = 1;
+
+        goto label3;
+
+     label2:
+        $stack5 = 0;
+
+     label3:
+        staticinvoke <org.jsoup.helper.Validate: void isFalse(boolean)>($stack5);
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        return $stack2;
+    }
+
+    final java.lang.String normalName()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: java.lang.String normalName>;
+
+        return $stack1;
+    }
+
+    final org.jsoup.parser.Token$Tag name(java.lang.String)
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String name, $stack2;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        name := @parameter0: java.lang.String;
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String tagName> = name;
+
+        $stack2 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>(name);
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String normalName> = $stack2;
+
+        return this;
+    }
+
+    final boolean isSelfClosing()
+    {
+        org.jsoup.parser.Token$Tag this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: boolean selfClosing>;
+
+        return $stack1;
+    }
+
+    final org.jsoup.nodes.Attributes getAttributes()
+    {
+        org.jsoup.parser.Token$Tag this;
+        org.jsoup.nodes.Attributes $stack1, $stack2, $stack3;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes>;
+
+        if $stack1 != null goto label1;
+
+        $stack3 = new org.jsoup.nodes.Attributes;
+
+        specialinvoke $stack3.<org.jsoup.nodes.Attributes: void <init>()>();
+
+        this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes> = $stack3;
+
+     label1:
+        $stack2 = this.<org.jsoup.parser.Token$Tag: org.jsoup.nodes.Attributes attributes>;
+
+        return $stack2;
+    }
+
+    final void appendTagName(java.lang.String)
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack2, append, $stack3, $stack5, $stack6, $stack4;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        if $stack2 != null goto label1;
+
+        $stack4 = append;
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: java.lang.String concat(java.lang.String)>(append);
+
+     label2:
+        this.<org.jsoup.parser.Token$Tag: java.lang.String tagName> = $stack4;
+
+        $stack5 = this.<org.jsoup.parser.Token$Tag: java.lang.String tagName>;
+
+        $stack6 = staticinvoke <org.jsoup.internal.Normalizer: java.lang.String lowerCase(java.lang.String)>($stack5);
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String normalName> = $stack6;
+
+        return;
+    }
+
+    final void appendTagName(char)
+    {
+        org.jsoup.parser.Token$Tag this;
+        char append;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: char;
+
+        $stack2 = staticinvoke <java.lang.String: java.lang.String valueOf(char)>(append);
+
+        virtualinvoke this.<org.jsoup.parser.Token$Tag: void appendTagName(java.lang.String)>($stack2);
+
+        return;
+    }
+
+    final void appendAttributeName(java.lang.String)
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack2, append, $stack3, $stack4;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        if $stack2 != null goto label1;
+
+        $stack4 = append;
+
+        goto label2;
+
+     label1:
+        $stack3 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName>;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.String: java.lang.String concat(java.lang.String)>(append);
+
+     label2:
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeName> = $stack4;
+
+        return;
+    }
+
+    final void appendAttributeName(char)
+    {
+        org.jsoup.parser.Token$Tag this;
+        char append;
+        java.lang.String $stack2;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: char;
+
+        $stack2 = staticinvoke <java.lang.String: java.lang.String valueOf(char)>(append);
+
+        virtualinvoke this.<org.jsoup.parser.Token$Tag: void appendAttributeName(java.lang.String)>($stack2);
+
+        return;
+    }
+
+    final void appendAttributeValue(java.lang.String)
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.StringBuilder $stack2, $stack4;
+        int $stack3;
+        java.lang.String append;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.parser.Token$Tag: void ensureAttributeValue()>();
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: int length()>();
+
+        if $stack3 != 0 goto label1;
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS> = append;
+
+        goto label2;
+
+     label1:
+        $stack4 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(append);
+
+     label2:
+        return;
+    }
+
+    final void appendAttributeValue(char)
+    {
+        org.jsoup.parser.Token$Tag this;
+        char append;
+        java.lang.StringBuilder $stack2;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: char;
+
+        specialinvoke this.<org.jsoup.parser.Token$Tag: void ensureAttributeValue()>();
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(append);
+
+        return;
+    }
+
+    final void appendAttributeValue(char[])
+    {
+        org.jsoup.parser.Token$Tag this;
+        char[] append;
+        java.lang.StringBuilder $stack2;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        append := @parameter0: char[];
+
+        specialinvoke this.<org.jsoup.parser.Token$Tag: void ensureAttributeValue()>();
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(char[])>(append);
+
+        return;
+    }
+
+    final void appendAttributeValue(int[])
+    {
+        org.jsoup.parser.Token$Tag this;
+        int[] appendCodepoints;
+        int l3, codepoint, l4;
+        java.lang.StringBuilder $stack6;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        appendCodepoints := @parameter0: int[];
+
+        specialinvoke this.<org.jsoup.parser.Token$Tag: void ensureAttributeValue()>();
+
+        l3 = lengthof appendCodepoints;
+
+        l4 = 0;
+
+     label1:
+        if l4 >= l3 goto label2;
+
+        codepoint = appendCodepoints[l4];
+
+        $stack6 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>(codepoint);
+
+        l4 = l4 + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    final void setEmptyAttributeValue()
+    {
+        org.jsoup.parser.Token$Tag this;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasEmptyAttributeValue> = 1;
+
+        return;
+    }
+
+    private void ensureAttributeValue()
+    {
+        org.jsoup.parser.Token$Tag this;
+        java.lang.String $stack1, $stack2;
+        java.lang.StringBuilder $stack3;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        this.<org.jsoup.parser.Token$Tag: boolean hasPendingAttributeValue> = 1;
+
+        $stack1 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS>;
+
+        if $stack1 == null goto label1;
+
+        $stack3 = this.<org.jsoup.parser.Token$Tag: java.lang.StringBuilder pendingAttributeValue>;
+
+        $stack2 = this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS>;
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack2);
+
+        this.<org.jsoup.parser.Token$Tag: java.lang.String pendingAttributeValueS> = null;
+
+     label1:
+        return;
+    }
+
+    volatile org.jsoup.parser.Token reset()
+    {
+        org.jsoup.parser.Token$Tag this, $stack1;
+
+        this := @this: org.jsoup.parser.Token$Tag;
+
+        $stack1 = virtualinvoke this.<org.jsoup.parser.Token$Tag: org.jsoup.parser.Token$Tag reset()>();
+
+        return $stack1;
+    }
+}

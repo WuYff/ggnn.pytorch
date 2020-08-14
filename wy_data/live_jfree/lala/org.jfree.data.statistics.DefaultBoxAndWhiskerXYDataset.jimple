@@ -1,0 +1,842 @@
+public class org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.data.statistics.BoxAndWhiskerXYDataset, org.jfree.data.RangeInfo
+{
+    private java.lang.Comparable seriesKey;
+    private java.util.List dates;
+    private java.util.List items;
+    private java.lang.Number minimumRangeValue;
+    private java.lang.Number maximumRangeValue;
+    private org.jfree.data.Range rangeBounds;
+    private double outlierCoefficient;
+    private double faroutCoefficient;
+
+    public void <init>(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.lang.Comparable seriesKey;
+        java.util.ArrayList $stack2, $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        seriesKey := @parameter0: java.lang.Comparable;
+
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double outlierCoefficient> = 1.5;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double faroutCoefficient> = 2.0;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Comparable seriesKey> = seriesKey;
+
+        $stack2 = new java.util.ArrayList;
+
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates> = $stack2;
+
+        $stack3 = new java.util.ArrayList;
+
+        specialinvoke $stack3.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items> = $stack3;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue> = null;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue> = null;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: org.jfree.data.Range rangeBounds> = null;
+
+        return;
+    }
+
+    public double getOutlierCoefficient()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        double $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double outlierCoefficient>;
+
+        return $stack1;
+    }
+
+    public void setOutlierCoefficient(double)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        double outlierCoefficient;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        outlierCoefficient := @parameter0: double;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double outlierCoefficient> = outlierCoefficient;
+
+        return;
+    }
+
+    public double getFaroutCoefficient()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        double $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double faroutCoefficient>;
+
+        return $stack1;
+    }
+
+    public void setFaroutCoefficient(double)
+    {
+        double faroutCoefficient, $stack3, $stack8;
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        byte $stack4;
+        java.lang.IllegalArgumentException $stack5;
+        java.lang.StringBuilder $stack6, $stack7, $stack9, $stack10;
+        java.lang.String $stack11;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        faroutCoefficient := @parameter0: double;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double getOutlierCoefficient()>();
+
+        $stack4 = faroutCoefficient cmpl $stack3;
+
+        if $stack4 <= 0 goto label1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double faroutCoefficient> = faroutCoefficient;
+
+        goto label2;
+
+     label1:
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Farout value must be greater than the outlier value, which is currently set at: (");
+
+        $stack8 = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: double getOutlierCoefficient()>();
+
+        $stack9 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(double)>($stack8);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack11);
+
+        throw $stack5;
+
+     label2:
+        return;
+    }
+
+    public int getSeriesCount()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        return 1;
+    }
+
+    public int getItemCount(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.util.List $stack2;
+        int $stack3, series;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int size()>();
+
+        return $stack3;
+    }
+
+    public void add(java.util.Date, org.jfree.data.statistics.BoxAndWhiskerItem)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.util.Date date;
+        java.util.List $stack3, $stack5;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number $stack7, $stack8, $stack10, $stack14, $stack16, $stack24, $stack29, $stack30, $stack32, $stack13, $stack20, $stack22;
+        double $stack9, $stack11, $stack15, $stack17, $stack21, $stack23;
+        byte $stack12, $stack18;
+        org.jfree.data.Range $stack19;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        date := @parameter0: java.util.Date;
+
+        item := @parameter1: org.jfree.data.statistics.BoxAndWhiskerItem;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        interfaceinvoke $stack3.<java.util.List: boolean add(java.lang.Object)>(date);
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>(item);
+
+        $stack7 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue>;
+
+        if $stack7 != null goto label1;
+
+        $stack32 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue> = $stack32;
+
+        goto label2;
+
+     label1:
+        $stack8 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.Number: double doubleValue()>();
+
+        $stack10 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue>;
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Number: double doubleValue()>();
+
+        $stack12 = $stack9 cmpg $stack11;
+
+        if $stack12 >= 0 goto label2;
+
+        $stack30 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue> = $stack30;
+
+     label2:
+        $stack13 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue>;
+
+        if $stack13 != null goto label3;
+
+        $stack29 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue> = $stack29;
+
+        goto label4;
+
+     label3:
+        $stack14 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+        $stack15 = virtualinvoke $stack14.<java.lang.Number: double doubleValue()>();
+
+        $stack16 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue>;
+
+        $stack17 = virtualinvoke $stack16.<java.lang.Number: double doubleValue()>();
+
+        $stack18 = $stack15 cmpl $stack17;
+
+        if $stack18 <= 0 goto label4;
+
+        $stack24 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue> = $stack24;
+
+     label4:
+        $stack19 = new org.jfree.data.Range;
+
+        $stack20 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue>;
+
+        $stack21 = virtualinvoke $stack20.<java.lang.Number: double doubleValue()>();
+
+        $stack22 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue>;
+
+        $stack23 = virtualinvoke $stack22.<java.lang.Number: double doubleValue()>();
+
+        specialinvoke $stack19.<org.jfree.data.Range: void <init>(double,double)>($stack21, $stack23);
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: org.jfree.data.Range rangeBounds> = $stack19;
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public java.lang.Comparable getSeriesKey(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.lang.Comparable $stack2;
+        int i;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        i := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Comparable seriesKey>;
+
+        return $stack2;
+    }
+
+    public org.jfree.data.statistics.BoxAndWhiskerItem getItem(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack3;
+        java.lang.Object $stack4;
+        org.jfree.data.statistics.BoxAndWhiskerItem $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(item);
+
+        $stack5 = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack4;
+
+        return $stack5;
+    }
+
+    public java.lang.Number getX(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack3;
+        java.lang.Object $stack4;
+        java.util.Date $stack5;
+        long $stack6;
+        java.lang.Long $stack7;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(item);
+
+        $stack5 = (java.util.Date) $stack4;
+
+        $stack6 = virtualinvoke $stack5.<java.util.Date: long getTime()>();
+
+        $stack7 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack6);
+
+        return $stack7;
+    }
+
+    public java.util.Date getXDate(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack3;
+        java.lang.Object $stack4;
+        java.util.Date $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(item);
+
+        $stack5 = (java.util.Date) $stack4;
+
+        return $stack5;
+    }
+
+    public java.lang.Number getY(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int series, item;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number getMeanValue(int,int)>(series, item);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getMeanValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMean()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMedianValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMedian()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ1Value(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ1()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ3Value(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ3()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMinRegularValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxRegularValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMinOutlier(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxOutlier(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.util.List getOutliers(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        int item, series;
+        java.util.List $stack5, result;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem stats;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(item);
+
+        stats = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if stats == null goto label1;
+
+        result = virtualinvoke stats.<org.jfree.data.statistics.BoxAndWhiskerItem: java.util.List getOutliers()>();
+
+     label1:
+        return result;
+    }
+
+    public double getRangeLowerBound(boolean)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.lang.Number $stack4, $stack5;
+        boolean includeInterval;
+        double result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        $stack4 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue>;
+
+        if $stack4 == null goto label1;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number minimumRangeValue>;
+
+        result = virtualinvoke $stack5.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public double getRangeUpperBound(boolean)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.lang.Number $stack4, $stack5;
+        boolean includeInterval;
+        double result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        result = #NaN;
+
+        $stack4 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue>;
+
+        if $stack4 == null goto label1;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Number maximumRangeValue>;
+
+        result = virtualinvoke $stack5.<java.lang.Number: double doubleValue()>();
+
+     label1:
+        return result;
+    }
+
+    public org.jfree.data.Range getRangeBounds(boolean)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        org.jfree.data.Range $stack2;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: org.jfree.data.Range rangeBounds>;
+
+        return $stack2;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.lang.Comparable $stack4, $stack5;
+        java.util.List $stack7, $stack8, $stack10, $stack11;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset) obj;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Comparable seriesKey>;
+
+        $stack4 = that.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Comparable seriesKey>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack7 = that.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack9 = interfaceinvoke $stack8.<java.util.List: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack10 = that.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.List: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this;
+        java.lang.Comparable $stack2;
+        int $stack3, $stack4, $stack6, $stack7, $stack9, $stack10, hash#2;
+        java.util.List $stack5, $stack8;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        $stack3 = 59 * 5;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.lang.Comparable seriesKey>;
+
+        $stack4 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack2);
+
+        hash#2 = $stack3 + $stack4;
+
+        $stack6 = 59 * hash#2;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        $stack7 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack5);
+
+        hash#2 = $stack6 + $stack7;
+
+        $stack9 = 59 * hash#2;
+
+        $stack8 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        $stack10 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack8);
+
+        hash#2 = $stack9 + $stack10;
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset this, clone;
+        java.lang.Object $stack2;
+        java.util.ArrayList $stack3, $stack5;
+        java.util.List $stack4, $stack6;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+
+        $stack2 = specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset) $stack2;
+
+        $stack3 = new java.util.ArrayList;
+
+        $stack4 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates>;
+
+        specialinvoke $stack3.<java.util.ArrayList: void <init>(java.util.Collection)>($stack4);
+
+        clone.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List dates> = $stack3;
+
+        $stack5 = new java.util.ArrayList;
+
+        $stack6 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items>;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>(java.util.Collection)>($stack6);
+
+        clone.<org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset: java.util.List items> = $stack5;
+
+        return clone;
+    }
+}

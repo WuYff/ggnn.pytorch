@@ -1,0 +1,458 @@
+public class org.jfree.chart.HashUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.HashUtils this;
+
+        this := @this: org.jfree.chart.HashUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static int hashCodeForPaint(java.awt.Paint)
+    {
+        java.awt.Paint p;
+        boolean $stack3;
+        java.awt.GradientPaint gp;
+        int $stack5, $stack7, $stack8, $stack10, $stack11, $stack13, $stack14, $stack16, result#2;
+        java.awt.Color $stack6, $stack12;
+        java.awt.geom.Point2D $stack9, $stack15;
+
+        p := @parameter0: java.awt.Paint;
+
+        if p != null goto label1;
+
+        return 0;
+
+     label1:
+        $stack3 = p instanceof java.awt.GradientPaint;
+
+        if $stack3 == 0 goto label2;
+
+        gp = (java.awt.GradientPaint) p;
+
+        $stack5 = 37 * 193;
+
+        $stack6 = virtualinvoke gp.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+
+        $stack7 = virtualinvoke $stack6.<java.awt.Color: int hashCode()>();
+
+        result#2 = $stack5 + $stack7;
+
+        $stack8 = 37 * result#2;
+
+        $stack9 = virtualinvoke gp.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+
+        $stack10 = virtualinvoke $stack9.<java.awt.geom.Point2D: int hashCode()>();
+
+        result#2 = $stack8 + $stack10;
+
+        $stack11 = 37 * result#2;
+
+        $stack12 = virtualinvoke gp.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+
+        $stack13 = virtualinvoke $stack12.<java.awt.Color: int hashCode()>();
+
+        result#2 = $stack11 + $stack13;
+
+        $stack14 = 37 * result#2;
+
+        $stack15 = virtualinvoke gp.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+
+        $stack16 = virtualinvoke $stack15.<java.awt.geom.Point2D: int hashCode()>();
+
+        result#2 = $stack14 + $stack16;
+
+        goto label3;
+
+     label2:
+        result#2 = virtualinvoke p.<java.lang.Object: int hashCode()>();
+
+     label3:
+        return result#2;
+    }
+
+    public static int hashCodeForDoubleArray(double[])
+    {
+        double[] a;
+        int $stack5, $stack10, $stack11, result, i;
+        double $stack6;
+        long temp, $stack8, $stack9;
+
+        a := @parameter0: double[];
+
+        if a != null goto label1;
+
+        return 0;
+
+     label1:
+        result = 193;
+
+        i = 0;
+
+     label2:
+        $stack5 = lengthof a;
+
+        if i >= $stack5 goto label3;
+
+        $stack6 = a[i];
+
+        temp = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack6);
+
+        $stack11 = 29 * result;
+
+        $stack8 = temp >>> 32;
+
+        $stack9 = temp ^ $stack8;
+
+        $stack10 = (int) $stack9;
+
+        result = $stack11 + $stack10;
+
+        i = i + 1;
+
+        goto label2;
+
+     label3:
+        return result;
+    }
+
+    public static int hashCode(int, boolean)
+    {
+        int pre, $stack2, $stack3;
+        boolean b;
+        byte $stack4;
+
+        pre := @parameter0: int;
+
+        b := @parameter1: boolean;
+
+        $stack2 = 37 * pre;
+
+        if b == 0 goto label1;
+
+        $stack4 = 0;
+
+        goto label2;
+
+     label1:
+        $stack4 = 1;
+
+     label2:
+        $stack3 = $stack2 + $stack4;
+
+        return $stack3;
+    }
+
+    public static int hashCode(int, int)
+    {
+        int pre, i, $stack2, $stack3;
+
+        pre := @parameter0: int;
+
+        i := @parameter1: int;
+
+        $stack2 = 37 * pre;
+
+        $stack3 = $stack2 + i;
+
+        return $stack3;
+    }
+
+    public static int hashCode(int, double)
+    {
+        double d;
+        long l, $stack6, $stack7;
+        int pre, $stack8, $stack9, $stack10;
+
+        pre := @parameter0: int;
+
+        d := @parameter1: double;
+
+        l = staticinvoke <java.lang.Double: long doubleToLongBits(double)>(d);
+
+        $stack9 = 37 * pre;
+
+        $stack6 = l >>> 32;
+
+        $stack7 = l ^ $stack6;
+
+        $stack8 = (int) $stack7;
+
+        $stack10 = $stack9 + $stack8;
+
+        return $stack10;
+    }
+
+    public static int hashCode(int, java.awt.Paint)
+    {
+        int pre, $stack2, $stack3, $stack4;
+        java.awt.Paint p;
+
+        pre := @parameter0: int;
+
+        p := @parameter1: java.awt.Paint;
+
+        $stack2 = 37 * pre;
+
+        $stack3 = staticinvoke <org.jfree.chart.HashUtils: int hashCodeForPaint(java.awt.Paint)>(p);
+
+        $stack4 = $stack2 + $stack3;
+
+        return $stack4;
+    }
+
+    public static int hashCode(int, java.awt.Stroke)
+    {
+        java.awt.Stroke s;
+        int pre, $stack3, $stack4, $stack5;
+
+        pre := @parameter0: int;
+
+        s := @parameter1: java.awt.Stroke;
+
+        if s == null goto label1;
+
+        $stack5 = virtualinvoke s.<java.lang.Object: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        $stack3 = 37 * pre;
+
+        $stack4 = $stack3 + $stack5;
+
+        return $stack4;
+    }
+
+    public static int hashCode(int, java.lang.String)
+    {
+        java.lang.String s;
+        int pre, $stack3, $stack4, $stack5;
+
+        pre := @parameter0: int;
+
+        s := @parameter1: java.lang.String;
+
+        if s == null goto label1;
+
+        $stack5 = virtualinvoke s.<java.lang.String: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        $stack3 = 37 * pre;
+
+        $stack4 = $stack3 + $stack5;
+
+        return $stack4;
+    }
+
+    public static int hashCode(int, java.lang.Comparable)
+    {
+        java.lang.Comparable c;
+        int pre, $stack3, $stack4, $stack5;
+
+        pre := @parameter0: int;
+
+        c := @parameter1: java.lang.Comparable;
+
+        if c == null goto label1;
+
+        $stack5 = virtualinvoke c.<java.lang.Object: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        $stack3 = 37 * pre;
+
+        $stack4 = $stack3 + $stack5;
+
+        return $stack4;
+    }
+
+    public static int hashCode(int, java.lang.Object)
+    {
+        java.lang.Object obj;
+        int pre, $stack3, $stack4, $stack5;
+
+        pre := @parameter0: int;
+
+        obj := @parameter1: java.lang.Object;
+
+        if obj == null goto label1;
+
+        $stack5 = virtualinvoke obj.<java.lang.Object: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        $stack3 = 37 * pre;
+
+        $stack4 = $stack3 + $stack5;
+
+        return $stack4;
+    }
+
+    public static int hashCode(int, org.jfree.chart.util.BooleanList)
+    {
+        org.jfree.chart.util.BooleanList list;
+        int size, pre, $stack13, $stack16, result#2, $stack6, $stack7;
+        java.lang.Boolean $stack8, $stack14, $stack17;
+
+        pre := @parameter0: int;
+
+        list := @parameter1: org.jfree.chart.util.BooleanList;
+
+        if list != null goto label1;
+
+        return pre;
+
+     label1:
+        size = virtualinvoke list.<org.jfree.chart.util.BooleanList: int size()>();
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,int)>(127, size);
+
+        if size <= 0 goto label2;
+
+        $stack8 = virtualinvoke list.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(0);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Comparable)>(result#2, $stack8);
+
+        if size <= 1 goto label2;
+
+        $stack13 = size - 1;
+
+        $stack14 = virtualinvoke list.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>($stack13);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Comparable)>(result#2, $stack14);
+
+        if size <= 2 goto label2;
+
+        $stack16 = size / 2;
+
+        $stack17 = virtualinvoke list.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>($stack16);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Comparable)>(result#2, $stack17);
+
+     label2:
+        $stack6 = 37 * pre;
+
+        $stack7 = $stack6 + result#2;
+
+        return $stack7;
+    }
+
+    public static int hashCode(int, org.jfree.chart.util.PaintList)
+    {
+        org.jfree.chart.util.PaintList list;
+        int size, pre, $stack13, $stack16, result#2, $stack6, $stack7;
+        java.awt.Paint $stack8, $stack14, $stack17;
+
+        pre := @parameter0: int;
+
+        list := @parameter1: org.jfree.chart.util.PaintList;
+
+        if list != null goto label1;
+
+        return pre;
+
+     label1:
+        size = virtualinvoke list.<org.jfree.chart.util.PaintList: int size()>();
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,int)>(127, size);
+
+        if size <= 0 goto label2;
+
+        $stack8 = virtualinvoke list.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(0);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(result#2, $stack8);
+
+        if size <= 1 goto label2;
+
+        $stack13 = size - 1;
+
+        $stack14 = virtualinvoke list.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>($stack13);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(result#2, $stack14);
+
+        if size <= 2 goto label2;
+
+        $stack16 = size / 2;
+
+        $stack17 = virtualinvoke list.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>($stack16);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Paint)>(result#2, $stack17);
+
+     label2:
+        $stack6 = 37 * pre;
+
+        $stack7 = $stack6 + result#2;
+
+        return $stack7;
+    }
+
+    public static int hashCode(int, org.jfree.chart.util.StrokeList)
+    {
+        org.jfree.chart.util.StrokeList list;
+        int size, pre, $stack13, $stack16, result#2, $stack6, $stack7;
+        java.awt.Stroke $stack8, $stack14, $stack17;
+
+        pre := @parameter0: int;
+
+        list := @parameter1: org.jfree.chart.util.StrokeList;
+
+        if list != null goto label1;
+
+        return pre;
+
+     label1:
+        size = virtualinvoke list.<org.jfree.chart.util.StrokeList: int size()>();
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,int)>(127, size);
+
+        if size <= 0 goto label2;
+
+        $stack8 = virtualinvoke list.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>(0);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Stroke)>(result#2, $stack8);
+
+        if size <= 1 goto label2;
+
+        $stack13 = size - 1;
+
+        $stack14 = virtualinvoke list.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>($stack13);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Stroke)>(result#2, $stack14);
+
+        if size <= 2 goto label2;
+
+        $stack16 = size / 2;
+
+        $stack17 = virtualinvoke list.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>($stack16);
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.awt.Stroke)>(result#2, $stack17);
+
+     label2:
+        $stack6 = 37 * pre;
+
+        $stack7 = $stack6 + result#2;
+
+        return $stack7;
+    }
+}

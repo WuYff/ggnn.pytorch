@@ -1,0 +1,329 @@
+public class org.jfree.chart.StrokeMap extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable
+{
+    static final long serialVersionUID;
+    private transient java.util.Map store;
+
+    public void <init>()
+    {
+        org.jfree.chart.StrokeMap this;
+        java.util.TreeMap $stack1;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.TreeMap;
+
+        specialinvoke $stack1.<java.util.TreeMap: void <init>()>();
+
+        this.<org.jfree.chart.StrokeMap: java.util.Map store> = $stack1;
+
+        return;
+    }
+
+    public java.awt.Stroke getStroke(java.lang.Comparable)
+    {
+        java.lang.Comparable key;
+        org.jfree.chart.StrokeMap this;
+        java.util.Map $stack2;
+        java.lang.Object $stack3;
+        java.awt.Stroke $stack4;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        key := @parameter0: java.lang.Comparable;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        $stack2 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        $stack4 = (java.awt.Stroke) $stack3;
+
+        return $stack4;
+    }
+
+    public boolean containsKey(java.lang.Comparable)
+    {
+        org.jfree.chart.StrokeMap this;
+        java.lang.Comparable key;
+        java.util.Map $stack2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: boolean containsKey(java.lang.Object)>(key);
+
+        return $stack3;
+    }
+
+    public void put(java.lang.Comparable, java.awt.Stroke)
+    {
+        java.lang.Comparable key;
+        org.jfree.chart.StrokeMap this;
+        java.awt.Stroke stroke;
+        java.util.Map $stack3;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        key := @parameter0: java.lang.Comparable;
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(key, "key");
+
+        $stack3 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        interfaceinvoke $stack3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, stroke);
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.jfree.chart.StrokeMap this;
+        java.util.Map $stack1;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        $stack1 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        interfaceinvoke $stack1.<java.util.Map: void clear()>();
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj, $stack17;
+        org.jfree.chart.StrokeMap this, that;
+        boolean $stack8, $stack16, $stack20;
+        java.util.Map $stack9, $stack11, $stack13;
+        int $stack10, $stack12;
+        java.util.Set keys;
+        java.util.Iterator iterator;
+        java.lang.Comparable key;
+        java.awt.Stroke s1, s2;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack8 = obj instanceof org.jfree.chart.StrokeMap;
+
+        if $stack8 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.StrokeMap) obj;
+
+        $stack9 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack10 = interfaceinvoke $stack9.<java.util.Map: int size()>();
+
+        $stack11 = that.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: int size()>();
+
+        if $stack10 == $stack12 goto label3;
+
+        return 0;
+
+     label3:
+        $stack13 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        keys = interfaceinvoke $stack13.<java.util.Map: java.util.Set keySet()>();
+
+        iterator = interfaceinvoke keys.<java.util.Set: java.util.Iterator iterator()>();
+
+     label4:
+        $stack16 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack16 == 0 goto label6;
+
+        $stack17 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.Comparable) $stack17;
+
+        s1 = virtualinvoke this.<org.jfree.chart.StrokeMap: java.awt.Stroke getStroke(java.lang.Comparable)>(key);
+
+        s2 = virtualinvoke that.<org.jfree.chart.StrokeMap: java.awt.Stroke getStroke(java.lang.Comparable)>(key);
+
+        $stack20 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>(s1, s2);
+
+        if $stack20 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        goto label4;
+
+     label6:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.StrokeMap this;
+        java.util.Map $stack2;
+        int $stack3, $stack4, hash#2;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        $stack3 = 89 * 7;
+
+        $stack2 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack4 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack2);
+
+        hash#2 = $stack3 + $stack4;
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.StrokeMap this, clone;
+        java.lang.Object $stack2;
+        java.util.TreeMap $stack3;
+        java.util.Map $stack4, $stack5;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.StrokeMap) $stack2;
+
+        $stack3 = new java.util.TreeMap;
+
+        specialinvoke $stack3.<java.util.TreeMap: void <init>()>();
+
+        clone.<org.jfree.chart.StrokeMap: java.util.Map store> = $stack3;
+
+        $stack5 = clone.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack4 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        interfaceinvoke $stack5.<java.util.Map: void putAll(java.util.Map)>($stack4);
+
+        return clone;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.StrokeMap this;
+        java.util.Map $stack5, $stack7;
+        int $stack6;
+        java.util.Set $stack8;
+        java.util.Iterator l2;
+        boolean $stack10;
+        java.lang.Object $stack11;
+        java.lang.Comparable key;
+        java.awt.Stroke stroke;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack5 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: int size()>();
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>($stack6);
+
+        $stack7 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Map: java.util.Set keySet()>();
+
+        l2 = interfaceinvoke $stack8.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label2;
+
+        $stack11 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.Comparable) $stack11;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeObject(java.lang.Object)>(key);
+
+        stroke = virtualinvoke this.<org.jfree.chart.StrokeMap: java.awt.Stroke getStroke(java.lang.Comparable)>(key);
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>(stroke, stream);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.StrokeMap this;
+        java.util.TreeMap $stack6;
+        int keyCount, i;
+        java.lang.Object $stack8;
+        java.lang.Comparable key;
+        java.awt.Stroke stroke;
+        java.util.Map $stack10;
+
+        this := @this: org.jfree.chart.StrokeMap;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack6 = new java.util.TreeMap;
+
+        specialinvoke $stack6.<java.util.TreeMap: void <init>()>();
+
+        this.<org.jfree.chart.StrokeMap: java.util.Map store> = $stack6;
+
+        keyCount = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+
+        i = 0;
+
+     label1:
+        if i >= keyCount goto label2;
+
+        $stack8 = virtualinvoke stream.<java.io.ObjectInputStream: java.lang.Object readObject()>();
+
+        key = (java.lang.Comparable) $stack8;
+
+        stroke = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        $stack10 = this.<org.jfree.chart.StrokeMap: java.util.Map store>;
+
+        interfaceinvoke $stack10.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, stroke);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.StrokeMap: long serialVersionUID> = -8148916785963525169L;
+
+        return;
+    }
+}

@@ -1,0 +1,876 @@
+public class org.jsoup.nodes.Document extends org.jsoup.nodes.Element
+{
+    private org.jsoup.nodes.Document$OutputSettings outputSettings;
+    private org.jsoup.parser.Parser parser;
+    private org.jsoup.nodes.Document$QuirksMode quirksMode;
+    private java.lang.String location;
+    private boolean updateMetaCharset;
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.parser.ParseSettings $stack2;
+        org.jsoup.parser.Tag $stack3;
+        java.lang.String baseUri;
+        org.jsoup.nodes.Document$OutputSettings $stack4;
+        org.jsoup.nodes.Document$QuirksMode $stack5;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        baseUri := @parameter0: java.lang.String;
+
+        $stack2 = <org.jsoup.parser.ParseSettings: org.jsoup.parser.ParseSettings htmlDefault>;
+
+        $stack3 = staticinvoke <org.jsoup.parser.Tag: org.jsoup.parser.Tag valueOf(java.lang.String,org.jsoup.parser.ParseSettings)>("#root", $stack2);
+
+        specialinvoke this.<org.jsoup.nodes.Element: void <init>(org.jsoup.parser.Tag,java.lang.String)>($stack3, baseUri);
+
+        $stack4 = new org.jsoup.nodes.Document$OutputSettings;
+
+        specialinvoke $stack4.<org.jsoup.nodes.Document$OutputSettings: void <init>()>();
+
+        this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings> = $stack4;
+
+        $stack5 = <org.jsoup.nodes.Document$QuirksMode: org.jsoup.nodes.Document$QuirksMode noQuirks>;
+
+        this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$QuirksMode quirksMode> = $stack5;
+
+        this.<org.jsoup.nodes.Document: boolean updateMetaCharset> = 0;
+
+        this.<org.jsoup.nodes.Document: java.lang.String location> = baseUri;
+
+        return;
+    }
+
+    public static org.jsoup.nodes.Document createShell(java.lang.String)
+    {
+        java.lang.String baseUri;
+        org.jsoup.nodes.Document $stack3;
+        org.jsoup.parser.Parser $stack4;
+        org.jsoup.nodes.Element html;
+
+        baseUri := @parameter0: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(baseUri);
+
+        $stack3 = new org.jsoup.nodes.Document;
+
+        specialinvoke $stack3.<org.jsoup.nodes.Document: void <init>(java.lang.String)>(baseUri);
+
+        $stack4 = virtualinvoke $stack3.<org.jsoup.nodes.Document: org.jsoup.parser.Parser parser()>();
+
+        $stack3.<org.jsoup.nodes.Document: org.jsoup.parser.Parser parser> = $stack4;
+
+        html = virtualinvoke $stack3.<org.jsoup.nodes.Document: org.jsoup.nodes.Element appendElement(java.lang.String)>("html");
+
+        virtualinvoke html.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendElement(java.lang.String)>("head");
+
+        virtualinvoke html.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendElement(java.lang.String)>("body");
+
+        return $stack3;
+    }
+
+    public java.lang.String location()
+    {
+        org.jsoup.nodes.Document this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: java.lang.String location>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.DocumentType documentType()
+    {
+        org.jsoup.nodes.Document this;
+        java.util.List $stack3;
+        java.util.Iterator l1;
+        boolean $stack5, $stack7, $stack8;
+        java.lang.Object $stack6;
+        org.jsoup.nodes.Node node;
+        org.jsoup.nodes.DocumentType $stack11;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack3 = this.<org.jsoup.nodes.Document: java.util.List childNodes>;
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label4;
+
+        $stack6 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+
+        node = (org.jsoup.nodes.Node) $stack6;
+
+        $stack7 = node instanceof org.jsoup.nodes.DocumentType;
+
+        if $stack7 == 0 goto label2;
+
+        $stack11 = (org.jsoup.nodes.DocumentType) node;
+
+        return $stack11;
+
+     label2:
+        $stack8 = node instanceof org.jsoup.nodes.LeafNode;
+
+        if $stack8 != 0 goto label3;
+
+        goto label4;
+
+     label3:
+        goto label1;
+
+     label4:
+        return null;
+    }
+
+    public org.jsoup.nodes.Element head()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Element $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element findFirstElementByTagName(java.lang.String,org.jsoup.nodes.Node)>("head", this);
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Element body()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Element $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element findFirstElementByTagName(java.lang.String,org.jsoup.nodes.Node)>("body", this);
+
+        return $stack1;
+    }
+
+    public java.lang.String title()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.select.Elements $stack2;
+        org.jsoup.nodes.Element titleEl;
+        java.lang.String $stack4, $stack5, $stack6;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.select.Elements getElementsByTag(java.lang.String)>("title");
+
+        titleEl = virtualinvoke $stack2.<org.jsoup.select.Elements: org.jsoup.nodes.Element first()>();
+
+        if titleEl == null goto label1;
+
+        $stack4 = virtualinvoke titleEl.<org.jsoup.nodes.Element: java.lang.String text()>();
+
+        $stack5 = staticinvoke <org.jsoup.internal.StringUtil: java.lang.String normaliseWhitespace(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: java.lang.String trim()>();
+
+        goto label2;
+
+     label1:
+        $stack6 = "";
+
+     label2:
+        return $stack6;
+    }
+
+    public void title(java.lang.String)
+    {
+        java.lang.String title;
+        org.jsoup.nodes.Document this;
+        org.jsoup.select.Elements $stack3;
+        org.jsoup.nodes.Element titleEl, $stack6, $stack7;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        title := @parameter0: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(title);
+
+        $stack3 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.select.Elements getElementsByTag(java.lang.String)>("title");
+
+        titleEl = virtualinvoke $stack3.<org.jsoup.select.Elements: org.jsoup.nodes.Element first()>();
+
+        if titleEl != null goto label1;
+
+        $stack6 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element head()>();
+
+        $stack7 = virtualinvoke $stack6.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendElement(java.lang.String)>("title");
+
+        virtualinvoke $stack7.<org.jsoup.nodes.Element: org.jsoup.nodes.Element text(java.lang.String)>(title);
+
+        goto label2;
+
+     label1:
+        virtualinvoke titleEl.<org.jsoup.nodes.Element: org.jsoup.nodes.Element text(java.lang.String)>(title);
+
+     label2:
+        return;
+    }
+
+    public org.jsoup.nodes.Element createElement(java.lang.String)
+    {
+        org.jsoup.nodes.Element $stack2;
+        java.lang.String tagName, $stack5;
+        org.jsoup.parser.ParseSettings $stack3;
+        org.jsoup.parser.Tag $stack4;
+        org.jsoup.nodes.Document this;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        tagName := @parameter0: java.lang.String;
+
+        $stack2 = new org.jsoup.nodes.Element;
+
+        $stack3 = <org.jsoup.parser.ParseSettings: org.jsoup.parser.ParseSettings preserveCase>;
+
+        $stack4 = staticinvoke <org.jsoup.parser.Tag: org.jsoup.parser.Tag valueOf(java.lang.String,org.jsoup.parser.ParseSettings)>(tagName, $stack3);
+
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.Document: java.lang.String baseUri()>();
+
+        specialinvoke $stack2.<org.jsoup.nodes.Element: void <init>(org.jsoup.parser.Tag,java.lang.String)>($stack4, $stack5);
+
+        return $stack2;
+    }
+
+    public org.jsoup.nodes.Document normalise()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Element $stack3, $stack4, $stack5, htmlEl;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        htmlEl = specialinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element findFirstElementByTagName(java.lang.String,org.jsoup.nodes.Node)>("html", this);
+
+        if htmlEl != null goto label1;
+
+        htmlEl = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element appendElement(java.lang.String)>("html");
+
+     label1:
+        $stack3 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element head()>();
+
+        if $stack3 != null goto label2;
+
+        virtualinvoke htmlEl.<org.jsoup.nodes.Element: org.jsoup.nodes.Element prependElement(java.lang.String)>("head");
+
+     label2:
+        $stack4 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element body()>();
+
+        if $stack4 != null goto label3;
+
+        virtualinvoke htmlEl.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendElement(java.lang.String)>("body");
+
+     label3:
+        $stack5 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element head()>();
+
+        specialinvoke this.<org.jsoup.nodes.Document: void normaliseTextNodes(org.jsoup.nodes.Element)>($stack5);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void normaliseTextNodes(org.jsoup.nodes.Element)>(htmlEl);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void normaliseTextNodes(org.jsoup.nodes.Element)>(this);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void normaliseStructure(java.lang.String,org.jsoup.nodes.Element)>("head", htmlEl);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void normaliseStructure(java.lang.String,org.jsoup.nodes.Element)>("body", htmlEl);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void ensureMetaCharsetElement()>();
+
+        return this;
+    }
+
+    private void normaliseTextNodes(org.jsoup.nodes.Element)
+    {
+        java.util.ArrayList $stack6;
+        org.jsoup.nodes.Element element, $stack12, $stack15;
+        java.util.List $stack7;
+        boolean $stack9, $stack19, $stack21;
+        int $stack10, i#3;
+        java.lang.Object $stack11, $stack18;
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.TextNode $stack13, tn;
+        java.util.Iterator i;
+        org.jsoup.nodes.Node node;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        element := @parameter0: org.jsoup.nodes.Element;
+
+        $stack6 = new java.util.ArrayList;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+
+        $stack7 = element.<org.jsoup.nodes.Element: java.util.List childNodes>;
+
+        i = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label3;
+
+        $stack18 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+
+        node = (org.jsoup.nodes.Node) $stack18;
+
+        $stack19 = node instanceof org.jsoup.nodes.TextNode;
+
+        if $stack19 == 0 goto label2;
+
+        tn = (org.jsoup.nodes.TextNode) node;
+
+        $stack21 = virtualinvoke tn.<org.jsoup.nodes.TextNode: boolean isBlank()>();
+
+        if $stack21 != 0 goto label2;
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>(tn);
+
+     label2:
+        goto label1;
+
+     label3:
+        $stack10 = interfaceinvoke $stack6.<java.util.List: int size()>();
+
+        i#3 = $stack10 - 1;
+
+     label4:
+        if i#3 < 0 goto label5;
+
+        $stack11 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(i#3);
+
+        node = (org.jsoup.nodes.Node) $stack11;
+
+        virtualinvoke element.<org.jsoup.nodes.Element: void removeChild(org.jsoup.nodes.Node)>(node);
+
+        $stack12 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element body()>();
+
+        $stack13 = new org.jsoup.nodes.TextNode;
+
+        specialinvoke $stack13.<org.jsoup.nodes.TextNode: void <init>(java.lang.String)>(" ");
+
+        virtualinvoke $stack12.<org.jsoup.nodes.Element: org.jsoup.nodes.Element prependChild(org.jsoup.nodes.Node)>($stack13);
+
+        $stack15 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element body()>();
+
+        virtualinvoke $stack15.<org.jsoup.nodes.Element: org.jsoup.nodes.Element prependChild(org.jsoup.nodes.Node)>(node);
+
+        i#3 = i#3 + -1;
+
+        goto label4;
+
+     label5:
+        return;
+    }
+
+    private void normaliseStructure(java.lang.String, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Document this;
+        java.lang.String tag;
+        org.jsoup.select.Elements elements;
+        org.jsoup.nodes.Element master, $stack11, htmlEl;
+        int $stack10, $stack15, i;
+        boolean $stack12, $stack17;
+        java.util.ArrayList $stack14;
+        java.lang.Object $stack20, $stack23;
+        java.util.List $stack24;
+        org.jsoup.nodes.Node dupe;
+        java.util.Iterator i#3;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        tag := @parameter0: java.lang.String;
+
+        htmlEl := @parameter1: org.jsoup.nodes.Element;
+
+        elements = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.select.Elements getElementsByTag(java.lang.String)>(tag);
+
+        master = virtualinvoke elements.<org.jsoup.select.Elements: org.jsoup.nodes.Element first()>();
+
+        $stack10 = virtualinvoke elements.<org.jsoup.select.Elements: int size()>();
+
+        if $stack10 <= 1 goto label4;
+
+        $stack14 = new java.util.ArrayList;
+
+        specialinvoke $stack14.<java.util.ArrayList: void <init>()>();
+
+        i = 1;
+
+     label1:
+        $stack15 = virtualinvoke elements.<org.jsoup.select.Elements: int size()>();
+
+        if i >= $stack15 goto label2;
+
+        $stack23 = virtualinvoke elements.<org.jsoup.select.Elements: java.lang.Object get(int)>(i);
+
+        dupe = (org.jsoup.nodes.Node) $stack23;
+
+        $stack24 = virtualinvoke dupe.<org.jsoup.nodes.Node: java.util.List ensureChildNodes()>();
+
+        interfaceinvoke $stack14.<java.util.List: boolean addAll(java.util.Collection)>($stack24);
+
+        virtualinvoke dupe.<org.jsoup.nodes.Node: void remove()>();
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        i#3 = interfaceinvoke $stack14.<java.util.List: java.util.Iterator iterator()>();
+
+     label3:
+        $stack17 = interfaceinvoke i#3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack17 == 0 goto label4;
+
+        $stack20 = interfaceinvoke i#3.<java.util.Iterator: java.lang.Object next()>();
+
+        dupe = (org.jsoup.nodes.Node) $stack20;
+
+        virtualinvoke master.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>(dupe);
+
+        goto label3;
+
+     label4:
+        $stack11 = virtualinvoke master.<org.jsoup.nodes.Element: org.jsoup.nodes.Element parent()>();
+
+        $stack12 = virtualinvoke $stack11.<org.jsoup.nodes.Element: boolean equals(java.lang.Object)>(htmlEl);
+
+        if $stack12 != 0 goto label5;
+
+        virtualinvoke htmlEl.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>(master);
+
+     label5:
+        return;
+    }
+
+    private org.jsoup.nodes.Element findFirstElementByTagName(java.lang.String, org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.Node node, $stack9;
+        java.lang.String $stack6, tag;
+        boolean $stack7;
+        int size, i;
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Element found, $stack13;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        tag := @parameter0: java.lang.String;
+
+        node := @parameter1: org.jsoup.nodes.Node;
+
+        $stack6 = virtualinvoke node.<org.jsoup.nodes.Node: java.lang.String nodeName()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.String: boolean equals(java.lang.Object)>(tag);
+
+        if $stack7 == 0 goto label1;
+
+        $stack13 = (org.jsoup.nodes.Element) node;
+
+        return $stack13;
+
+     label1:
+        size = virtualinvoke node.<org.jsoup.nodes.Node: int childNodeSize()>();
+
+        i = 0;
+
+     label2:
+        if i >= size goto label4;
+
+        $stack9 = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node childNode(int)>(i);
+
+        found = specialinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element findFirstElementByTagName(java.lang.String,org.jsoup.nodes.Node)>(tag, $stack9);
+
+        if found == null goto label3;
+
+        return found;
+
+     label3:
+        i = i + 1;
+
+        goto label2;
+
+     label4:
+        return null;
+    }
+
+    public java.lang.String outerHtml()
+    {
+        org.jsoup.nodes.Document this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.Element: java.lang.String html()>();
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Element text(java.lang.String)
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Element $stack2;
+        java.lang.String text;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        text := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element body()>();
+
+        virtualinvoke $stack2.<org.jsoup.nodes.Element: org.jsoup.nodes.Element text(java.lang.String)>(text);
+
+        return this;
+    }
+
+    public java.lang.String nodeName()
+    {
+        org.jsoup.nodes.Document this;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        return "#document";
+    }
+
+    public void charset(java.nio.charset.Charset)
+    {
+        org.jsoup.nodes.Document this;
+        java.nio.charset.Charset charset;
+        org.jsoup.nodes.Document$OutputSettings $stack2;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        charset := @parameter0: java.nio.charset.Charset;
+
+        virtualinvoke this.<org.jsoup.nodes.Document: void updateMetaCharsetElement(boolean)>(1);
+
+        $stack2 = this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings>;
+
+        virtualinvoke $stack2.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings charset(java.nio.charset.Charset)>(charset);
+
+        specialinvoke this.<org.jsoup.nodes.Document: void ensureMetaCharsetElement()>();
+
+        return;
+    }
+
+    public java.nio.charset.Charset charset()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Document$OutputSettings $stack1;
+        java.nio.charset.Charset $stack2;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings>;
+
+        $stack2 = virtualinvoke $stack1.<org.jsoup.nodes.Document$OutputSettings: java.nio.charset.Charset charset()>();
+
+        return $stack2;
+    }
+
+    public void updateMetaCharsetElement(boolean)
+    {
+        org.jsoup.nodes.Document this;
+        boolean update;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        update := @parameter0: boolean;
+
+        this.<org.jsoup.nodes.Document: boolean updateMetaCharset> = update;
+
+        return;
+    }
+
+    public boolean updateMetaCharsetElement()
+    {
+        org.jsoup.nodes.Document this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: boolean updateMetaCharset>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document clone()
+    {
+        org.jsoup.nodes.Document this, clone;
+        org.jsoup.nodes.Element $stack2;
+        org.jsoup.nodes.Document$OutputSettings $stack3, $stack4;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.Element: org.jsoup.nodes.Element clone()>();
+
+        clone = (org.jsoup.nodes.Document) $stack2;
+
+        $stack3 = this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings>;
+
+        $stack4 = virtualinvoke $stack3.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings clone()>();
+
+        clone.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings> = $stack4;
+
+        return clone;
+    }
+
+    private void ensureMetaCharsetElement()
+    {
+        org.jsoup.nodes.Document this;
+        boolean $stack5, $stack12, $stack21;
+        org.jsoup.nodes.Document$OutputSettings $stack6;
+        org.jsoup.nodes.Document$OutputSettings$Syntax syntax, $stack8, $stack9;
+        java.util.List $stack10;
+        java.lang.Object $stack11;
+        org.jsoup.nodes.XmlDeclaration $stack13, $stack22, head#10;
+        java.nio.charset.Charset $stack16, $stack25, $stack30, $stack42, $stack48;
+        java.lang.String $stack17, $stack20, $stack26, $stack31, version, $stack43, $stack49;
+        org.jsoup.select.Elements $stack35, $stack38;
+        org.jsoup.nodes.Element $stack40, metaCharset, head;
+        org.jsoup.nodes.Node metaCharset#9;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack5 = this.<org.jsoup.nodes.Document: boolean updateMetaCharset>;
+
+        if $stack5 == 0 goto label8;
+
+        $stack6 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings()>();
+
+        syntax = virtualinvoke $stack6.<org.jsoup.nodes.Document$OutputSettings: org.jsoup.nodes.Document$OutputSettings$Syntax syntax()>();
+
+        $stack8 = <org.jsoup.nodes.Document$OutputSettings$Syntax: org.jsoup.nodes.Document$OutputSettings$Syntax html>;
+
+        if syntax != $stack8 goto label3;
+
+        $stack35 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("meta[charset]");
+
+        metaCharset = virtualinvoke $stack35.<org.jsoup.select.Elements: org.jsoup.nodes.Element first()>();
+
+        if metaCharset == null goto label1;
+
+        $stack48 = virtualinvoke this.<org.jsoup.nodes.Document: java.nio.charset.Charset charset()>();
+
+        $stack49 = virtualinvoke $stack48.<java.nio.charset.Charset: java.lang.String displayName()>();
+
+        virtualinvoke metaCharset.<org.jsoup.nodes.Element: org.jsoup.nodes.Element attr(java.lang.String,java.lang.String)>("charset", $stack49);
+
+        goto label2;
+
+     label1:
+        head = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element head()>();
+
+        if head == null goto label2;
+
+        $stack40 = virtualinvoke head.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendElement(java.lang.String)>("meta");
+
+        $stack42 = virtualinvoke this.<org.jsoup.nodes.Document: java.nio.charset.Charset charset()>();
+
+        $stack43 = virtualinvoke $stack42.<java.nio.charset.Charset: java.lang.String displayName()>();
+
+        virtualinvoke $stack40.<org.jsoup.nodes.Element: org.jsoup.nodes.Element attr(java.lang.String,java.lang.String)>("charset", $stack43);
+
+     label2:
+        $stack38 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.select.Elements select(java.lang.String)>("meta[name=charset]");
+
+        virtualinvoke $stack38.<org.jsoup.select.Elements: org.jsoup.select.Elements remove()>();
+
+        goto label8;
+
+     label3:
+        $stack9 = <org.jsoup.nodes.Document$OutputSettings$Syntax: org.jsoup.nodes.Document$OutputSettings$Syntax xml>;
+
+        if syntax != $stack9 goto label8;
+
+        $stack10 = virtualinvoke this.<org.jsoup.nodes.Document: java.util.List childNodes()>();
+
+        $stack11 = interfaceinvoke $stack10.<java.util.List: java.lang.Object get(int)>(0);
+
+        metaCharset#9 = (org.jsoup.nodes.Node) $stack11;
+
+        $stack12 = metaCharset#9 instanceof org.jsoup.nodes.XmlDeclaration;
+
+        if $stack12 == 0 goto label7;
+
+        head#10 = (org.jsoup.nodes.XmlDeclaration) metaCharset#9;
+
+        $stack20 = virtualinvoke head#10.<org.jsoup.nodes.XmlDeclaration: java.lang.String name()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.String: boolean equals(java.lang.Object)>("xml");
+
+        if $stack21 == 0 goto label5;
+
+        $stack30 = virtualinvoke this.<org.jsoup.nodes.Document: java.nio.charset.Charset charset()>();
+
+        $stack31 = virtualinvoke $stack30.<java.nio.charset.Charset: java.lang.String displayName()>();
+
+        virtualinvoke head#10.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("encoding", $stack31);
+
+        version = virtualinvoke head#10.<org.jsoup.nodes.XmlDeclaration: java.lang.String attr(java.lang.String)>("version");
+
+        if version == null goto label4;
+
+        virtualinvoke head#10.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("version", "1.0");
+
+     label4:
+        goto label6;
+
+     label5:
+        $stack22 = new org.jsoup.nodes.XmlDeclaration;
+
+        specialinvoke $stack22.<org.jsoup.nodes.XmlDeclaration: void <init>(java.lang.String,boolean)>("xml", 0);
+
+        virtualinvoke $stack22.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("version", "1.0");
+
+        $stack25 = virtualinvoke this.<org.jsoup.nodes.Document: java.nio.charset.Charset charset()>();
+
+        $stack26 = virtualinvoke $stack25.<java.nio.charset.Charset: java.lang.String displayName()>();
+
+        virtualinvoke $stack22.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("encoding", $stack26);
+
+        virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element prependChild(org.jsoup.nodes.Node)>($stack22);
+
+     label6:
+        goto label8;
+
+     label7:
+        $stack13 = new org.jsoup.nodes.XmlDeclaration;
+
+        specialinvoke $stack13.<org.jsoup.nodes.XmlDeclaration: void <init>(java.lang.String,boolean)>("xml", 0);
+
+        virtualinvoke $stack13.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("version", "1.0");
+
+        $stack16 = virtualinvoke this.<org.jsoup.nodes.Document: java.nio.charset.Charset charset()>();
+
+        $stack17 = virtualinvoke $stack16.<java.nio.charset.Charset: java.lang.String displayName()>();
+
+        virtualinvoke $stack13.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>("encoding", $stack17);
+
+        virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Element prependChild(org.jsoup.nodes.Node)>($stack13);
+
+     label8:
+        return;
+    }
+
+    public org.jsoup.nodes.Document$OutputSettings outputSettings()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Document$OutputSettings $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document outputSettings(org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.Document$OutputSettings outputSettings;
+        org.jsoup.nodes.Document this;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        outputSettings := @parameter0: org.jsoup.nodes.Document$OutputSettings;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(outputSettings);
+
+        this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$OutputSettings outputSettings> = outputSettings;
+
+        return this;
+    }
+
+    public org.jsoup.nodes.Document$QuirksMode quirksMode()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Document$QuirksMode $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$QuirksMode quirksMode>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document quirksMode(org.jsoup.nodes.Document$QuirksMode)
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.nodes.Document$QuirksMode quirksMode;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        quirksMode := @parameter0: org.jsoup.nodes.Document$QuirksMode;
+
+        this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document$QuirksMode quirksMode> = quirksMode;
+
+        return this;
+    }
+
+    public org.jsoup.parser.Parser parser()
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.parser.Parser $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = this.<org.jsoup.nodes.Document: org.jsoup.parser.Parser parser>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Document parser(org.jsoup.parser.Parser)
+    {
+        org.jsoup.nodes.Document this;
+        org.jsoup.parser.Parser parser;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        parser := @parameter0: org.jsoup.parser.Parser;
+
+        this.<org.jsoup.nodes.Document: org.jsoup.parser.Parser parser> = parser;
+
+        return this;
+    }
+
+    public volatile org.jsoup.nodes.Element clone()
+    {
+        org.jsoup.nodes.Document this, $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document clone()>();
+
+        return $stack1;
+    }
+
+    public volatile org.jsoup.nodes.Node clone()
+    {
+        org.jsoup.nodes.Document this, $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document clone()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.Document this, $stack1;
+
+        this := @this: org.jsoup.nodes.Document;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Document: org.jsoup.nodes.Document clone()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,344 @@
+public class org.jfree.chart.urls.StandardCategoryURLGenerator extends java.lang.Object implements org.jfree.chart.urls.CategoryURLGenerator, java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.lang.String prefix;
+    private java.lang.String seriesParameterName;
+    private java.lang.String categoryParameterName;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName> = "series";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName> = "category";
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+        java.lang.String prefix;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName> = "series";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName> = "category";
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix> = prefix;
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+        java.lang.String prefix, seriesParameterName, categoryParameterName;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        prefix := @parameter0: java.lang.String;
+
+        seriesParameterName := @parameter1: java.lang.String;
+
+        categoryParameterName := @parameter2: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName> = "series";
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName> = "category";
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(seriesParameterName, "seriesParameterName");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(categoryParameterName, "categoryParameterName");
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix> = prefix;
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName> = seriesParameterName;
+
+        this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName> = categoryParameterName;
+
+        return;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.category.CategoryDataset, int, int)
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+        org.jfree.data.category.CategoryDataset dataset;
+        int series, category;
+        java.lang.Comparable seriesKey, categoryKey;
+        boolean $stack11, $stack47;
+        java.lang.StringBuilder $stack12, $stack13, $stack14, $stack16, $stack17, $stack19, $stack20, $stack23, $stack25, $stack26, $stack27, $stack29, $stack30, $stack33;
+        java.lang.String $stack18, $stack21, $stack22, $stack28, $stack31, $stack32, url, $stack35;
+        java.io.UnsupportedEncodingException $stack50;
+        java.lang.RuntimeException $stack51;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        series := @parameter1: int;
+
+        category := @parameter2: int;
+
+        url = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix>;
+
+        seriesKey = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(series);
+
+        categoryKey = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(category);
+
+        $stack11 = virtualinvoke url.<java.lang.String: boolean contains(java.lang.CharSequence)>("?");
+
+        if $stack11 != 0 goto label1;
+
+        $stack47 = 1;
+
+        goto label2;
+
+     label1:
+        $stack47 = 0;
+
+     label2:
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        if $stack47 == 0 goto label3;
+
+        $stack35 = "?";
+
+        goto label4;
+
+     label3:
+        $stack35 = "&amp;";
+
+     label4:
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack35);
+
+        url = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label5:
+        $stack16 = new java.lang.StringBuilder;
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack18 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack19 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack21 = virtualinvoke seriesKey.<java.lang.Object: java.lang.String toString()>();
+
+        $stack22 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack21, "UTF-8");
+
+        $stack23 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack22);
+
+        url = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack25 = new java.lang.StringBuilder;
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(url);
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("&amp;");
+
+        $stack28 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName>;
+
+        $stack29 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack31 = virtualinvoke categoryKey.<java.lang.Object: java.lang.String toString()>();
+
+        $stack32 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack31, "UTF-8");
+
+        $stack33 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack32);
+
+        url = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label6:
+        goto label8;
+
+     label7:
+        $stack50 := @caughtexception;
+
+        $stack51 = new java.lang.RuntimeException;
+
+        specialinvoke $stack51.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack50);
+
+        throw $stack51;
+
+     label8:
+        return url;
+
+        catch java.io.UnsupportedEncodingException from label5 to label6 with label7;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.urls.StandardCategoryURLGenerator this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.lang.String $stack4, $stack5, $stack7, $stack8, $stack10, $stack11;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.urls.StandardCategoryURLGenerator) obj;
+
+        $stack5 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix>;
+
+        $stack4 = that.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack7 = that.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName>;
+
+        $stack10 = that.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.urls.StandardCategoryURLGenerator this;
+        java.lang.String $stack2, $stack3, $stack5, $stack7, $stack11, $stack17;
+        int $stack4, $stack6, $stack18, result, $stack12, $stack8;
+
+        this := @this: org.jfree.chart.urls.StandardCategoryURLGenerator;
+
+        $stack2 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix>;
+
+        if $stack2 == null goto label1;
+
+        $stack17 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String prefix>;
+
+        $stack18 = virtualinvoke $stack17.<java.lang.String: int hashCode()>();
+
+        goto label2;
+
+     label1:
+        $stack18 = 0;
+
+     label2:
+        $stack4 = 29 * $stack18;
+
+        $stack3 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName>;
+
+        if $stack3 == null goto label3;
+
+        $stack11 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack12 = virtualinvoke $stack11.<java.lang.String: int hashCode()>();
+
+        goto label4;
+
+     label3:
+        $stack12 = 0;
+
+     label4:
+        result = $stack4 + $stack12;
+
+        $stack6 = 29 * result;
+
+        $stack5 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName>;
+
+        if $stack5 == null goto label5;
+
+        $stack7 = this.<org.jfree.chart.urls.StandardCategoryURLGenerator: java.lang.String categoryParameterName>;
+
+        $stack8 = virtualinvoke $stack7.<java.lang.String: int hashCode()>();
+
+        goto label6;
+
+     label5:
+        $stack8 = 0;
+
+     label6:
+        result = $stack6 + $stack8;
+
+        return result;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.StandardCategoryURLGenerator: long serialVersionUID> = 2276668053074881909L;
+
+        return;
+    }
+}

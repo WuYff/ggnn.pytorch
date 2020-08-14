@@ -1,0 +1,70 @@
+final enum class org.jsoup.parser.TokeniserState$67 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$67 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$67;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        java.lang.String data, $stack10;
+        org.jsoup.parser.Tokeniser t;
+        java.lang.StringBuilder $stack5, $stack9;
+        boolean $stack7, $stack12;
+        org.jsoup.parser.Token$CData $stack8;
+        org.jsoup.parser.TokeniserState $stack11;
+        org.jsoup.parser.TokeniserState$67 this;
+
+        this := @this: org.jsoup.parser.TokeniserState$67;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        data = virtualinvoke r.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(java.lang.String)>("]]>");
+
+        $stack5 = t.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder dataBuffer>;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(data);
+
+        $stack7 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>("]]>");
+
+        if $stack7 != 0 goto label1;
+
+        $stack12 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean isEmpty()>();
+
+        if $stack12 == 0 goto label2;
+
+     label1:
+        $stack8 = new org.jsoup.parser.Token$CData;
+
+        $stack9 = t.<org.jsoup.parser.Tokeniser: java.lang.StringBuilder dataBuffer>;
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack8.<org.jsoup.parser.Token$CData: void <init>(java.lang.String)>($stack10);
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(org.jsoup.parser.Token)>($stack8);
+
+        $stack11 = <org.jsoup.parser.TokeniserState$67: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack11);
+
+     label2:
+        return;
+    }
+}

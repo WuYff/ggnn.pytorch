@@ -1,0 +1,660 @@
+public class org.jsoup.helper.HttpConnection$Request extends org.jsoup.helper.HttpConnection$Base implements org.jsoup.Connection$Request
+{
+    private java.net.Proxy proxy;
+    private int timeoutMilliseconds;
+    private int maxBodySizeBytes;
+    private boolean followRedirects;
+    private java.util.Collection data;
+    private java.lang.String body;
+    private boolean ignoreHttpErrors;
+    private boolean ignoreContentType;
+    private org.jsoup.parser.Parser parser;
+    private boolean parserDefined;
+    private java.lang.String postDataCharset;
+    private javax.net.ssl.SSLSocketFactory sslSocketFactory;
+
+    void <init>()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.ArrayList $stack1;
+        org.jsoup.Connection$Method $stack2;
+        org.jsoup.parser.Parser $stack5;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        specialinvoke this.<org.jsoup.helper.HttpConnection$Base: void <init>(org.jsoup.helper.HttpConnection$1)>(null);
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.lang.String body> = null;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreHttpErrors> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreContentType> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean parserDefined> = 0;
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.lang.String postDataCharset> = "UTF-8";
+
+        this.<org.jsoup.helper.HttpConnection$Request: int timeoutMilliseconds> = 30000;
+
+        this.<org.jsoup.helper.HttpConnection$Request: int maxBodySizeBytes> = 2097152;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean followRedirects> = 1;
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.util.Collection data> = $stack1;
+
+        $stack2 = <org.jsoup.Connection$Method: org.jsoup.Connection$Method GET>;
+
+        this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.Connection$Method method> = $stack2;
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.Connection$Base addHeader(java.lang.String,java.lang.String)>("Accept-Encoding", "gzip");
+
+        virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.Connection$Base addHeader(java.lang.String,java.lang.String)>("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
+
+        $stack5 = staticinvoke <org.jsoup.parser.Parser: org.jsoup.parser.Parser htmlParser()>();
+
+        this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.parser.Parser parser> = $stack5;
+
+        return;
+    }
+
+    public java.net.Proxy proxy()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.net.Proxy $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: java.net.Proxy proxy>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.helper.HttpConnection$Request proxy(java.net.Proxy)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.net.Proxy proxy;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        proxy := @parameter0: java.net.Proxy;
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.net.Proxy proxy> = proxy;
+
+        return this;
+    }
+
+    public org.jsoup.helper.HttpConnection$Request proxy(java.lang.String, int)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.net.Proxy $stack3;
+        java.lang.String host;
+        int port;
+        java.net.Proxy$Type $stack4;
+        java.net.InetSocketAddress $stack5;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        host := @parameter0: java.lang.String;
+
+        port := @parameter1: int;
+
+        $stack3 = new java.net.Proxy;
+
+        $stack4 = <java.net.Proxy$Type: java.net.Proxy$Type HTTP>;
+
+        $stack5 = staticinvoke <java.net.InetSocketAddress: java.net.InetSocketAddress createUnresolved(java.lang.String,int)>(host, port);
+
+        specialinvoke $stack3.<java.net.Proxy: void <init>(java.net.Proxy$Type,java.net.SocketAddress)>($stack4, $stack5);
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.net.Proxy proxy> = $stack3;
+
+        return this;
+    }
+
+    public int timeout()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        int $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: int timeoutMilliseconds>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.helper.HttpConnection$Request timeout(int)
+    {
+        int millis;
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        millis := @parameter0: int;
+
+        if millis < 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack2, "Timeout milliseconds must be 0 (infinite) or greater");
+
+        this.<org.jsoup.helper.HttpConnection$Request: int timeoutMilliseconds> = millis;
+
+        return this;
+    }
+
+    public int maxBodySize()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        int $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: int maxBodySizeBytes>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.Connection$Request maxBodySize(int)
+    {
+        int bytes;
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        bytes := @parameter0: int;
+
+        if bytes < 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        staticinvoke <org.jsoup.helper.Validate: void isTrue(boolean,java.lang.String)>($stack2, "maxSize must be 0 (unlimited) or larger");
+
+        this.<org.jsoup.helper.HttpConnection$Request: int maxBodySizeBytes> = bytes;
+
+        return this;
+    }
+
+    public boolean followRedirects()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: boolean followRedirects>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.Connection$Request followRedirects(boolean)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean followRedirects;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        followRedirects := @parameter0: boolean;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean followRedirects> = followRedirects;
+
+        return this;
+    }
+
+    public boolean ignoreHttpErrors()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreHttpErrors>;
+
+        return $stack1;
+    }
+
+    public javax.net.ssl.SSLSocketFactory sslSocketFactory()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        javax.net.ssl.SSLSocketFactory $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: javax.net.ssl.SSLSocketFactory sslSocketFactory>;
+
+        return $stack1;
+    }
+
+    public void sslSocketFactory(javax.net.ssl.SSLSocketFactory)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        javax.net.ssl.SSLSocketFactory sslSocketFactory;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        sslSocketFactory := @parameter0: javax.net.ssl.SSLSocketFactory;
+
+        this.<org.jsoup.helper.HttpConnection$Request: javax.net.ssl.SSLSocketFactory sslSocketFactory> = sslSocketFactory;
+
+        return;
+    }
+
+    public org.jsoup.Connection$Request ignoreHttpErrors(boolean)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean ignoreHttpErrors;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        ignoreHttpErrors := @parameter0: boolean;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreHttpErrors> = ignoreHttpErrors;
+
+        return this;
+    }
+
+    public boolean ignoreContentType()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreContentType>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.Connection$Request ignoreContentType(boolean)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        boolean ignoreContentType;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        ignoreContentType := @parameter0: boolean;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean ignoreContentType> = ignoreContentType;
+
+        return this;
+    }
+
+    public org.jsoup.helper.HttpConnection$Request data(org.jsoup.Connection$KeyVal)
+    {
+        org.jsoup.Connection$KeyVal keyval;
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.Collection $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        keyval := @parameter0: org.jsoup.Connection$KeyVal;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>(keyval, "Key val must not be null");
+
+        $stack2 = this.<org.jsoup.helper.HttpConnection$Request: java.util.Collection data>;
+
+        interfaceinvoke $stack2.<java.util.Collection: boolean add(java.lang.Object)>(keyval);
+
+        return this;
+    }
+
+    public java.util.Collection data()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.Collection $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: java.util.Collection data>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.Connection$Request requestBody(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String body;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        body := @parameter0: java.lang.String;
+
+        this.<org.jsoup.helper.HttpConnection$Request: java.lang.String body> = body;
+
+        return this;
+    }
+
+    public java.lang.String requestBody()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: java.lang.String body>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.helper.HttpConnection$Request parser(org.jsoup.parser.Parser)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        org.jsoup.parser.Parser parser;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        parser := @parameter0: org.jsoup.parser.Parser;
+
+        this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.parser.Parser parser> = parser;
+
+        this.<org.jsoup.helper.HttpConnection$Request: boolean parserDefined> = 1;
+
+        return this;
+    }
+
+    public org.jsoup.parser.Parser parser()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        org.jsoup.parser.Parser $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.parser.Parser parser>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.Connection$Request postDataCharset(java.lang.String)
+    {
+        java.lang.String charset;
+        boolean $stack2;
+        org.jsoup.helper.HttpConnection$Request this;
+        java.nio.charset.IllegalCharsetNameException $stack3;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        charset := @parameter0: java.lang.String;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object,java.lang.String)>(charset, "Charset must not be null");
+
+        $stack2 = staticinvoke <java.nio.charset.Charset: boolean isSupported(java.lang.String)>(charset);
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = new java.nio.charset.IllegalCharsetNameException;
+
+        specialinvoke $stack3.<java.nio.charset.IllegalCharsetNameException: void <init>(java.lang.String)>(charset);
+
+        throw $stack3;
+
+     label1:
+        this.<org.jsoup.helper.HttpConnection$Request: java.lang.String postDataCharset> = charset;
+
+        return this;
+    }
+
+    public java.lang.String postDataCharset()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = this.<org.jsoup.helper.HttpConnection$Request: java.lang.String postDataCharset>;
+
+        return $stack1;
+    }
+
+    public volatile java.util.Map cookies()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map cookies()>();
+
+        return $stack1;
+    }
+
+    public volatile boolean hasCookie(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasCookie(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.String cookie(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.lang.String cookie(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.util.Map multiHeaders()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map multiHeaders()>();
+
+        return $stack1;
+    }
+
+    public volatile java.util.Map headers()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.util.Map $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.Map headers()>();
+
+        return $stack1;
+    }
+
+    public volatile boolean hasHeaderWithValue(java.lang.String, java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1, l2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasHeaderWithValue(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile boolean hasHeader(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: boolean hasHeader(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.util.List headers(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1;
+        java.util.List $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.util.List headers(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.String header(java.lang.String)
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.lang.String header(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.Connection$Method method()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        org.jsoup.Connection$Method $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: org.jsoup.Connection$Method method()>();
+
+        return $stack1;
+    }
+
+    public volatile java.net.URL url()
+    {
+        org.jsoup.helper.HttpConnection$Request this;
+        java.net.URL $stack1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = specialinvoke this.<org.jsoup.helper.HttpConnection$Base: java.net.URL url()>();
+
+        return $stack1;
+    }
+
+    public volatile org.jsoup.Connection$Request parser(org.jsoup.parser.Parser)
+    {
+        org.jsoup.helper.HttpConnection$Request this, $stack2;
+        org.jsoup.parser.Parser l1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: org.jsoup.parser.Parser;
+
+        $stack2 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.helper.HttpConnection$Request parser(org.jsoup.parser.Parser)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.Connection$Request data(org.jsoup.Connection$KeyVal)
+    {
+        org.jsoup.helper.HttpConnection$Request this, $stack2;
+        org.jsoup.Connection$KeyVal l1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: org.jsoup.Connection$KeyVal;
+
+        $stack2 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.helper.HttpConnection$Request data(org.jsoup.Connection$KeyVal)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.Connection$Request timeout(int)
+    {
+        org.jsoup.helper.HttpConnection$Request this, $stack2;
+        int l1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.helper.HttpConnection$Request timeout(int)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.Connection$Request proxy(java.lang.String, int)
+    {
+        org.jsoup.helper.HttpConnection$Request this, $stack3;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.helper.HttpConnection$Request proxy(java.lang.String,int)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile org.jsoup.Connection$Request proxy(java.net.Proxy)
+    {
+        org.jsoup.helper.HttpConnection$Request this, $stack2;
+        java.net.Proxy l1;
+
+        this := @this: org.jsoup.helper.HttpConnection$Request;
+
+        l1 := @parameter0: java.net.Proxy;
+
+        $stack2 = virtualinvoke this.<org.jsoup.helper.HttpConnection$Request: org.jsoup.helper.HttpConnection$Request proxy(java.net.Proxy)>(l1);
+
+        return $stack2;
+    }
+
+    static boolean access$100(org.jsoup.helper.HttpConnection$Request)
+    {
+        org.jsoup.helper.HttpConnection$Request x0;
+        boolean $stack1;
+
+        x0 := @parameter0: org.jsoup.helper.HttpConnection$Request;
+
+        $stack1 = x0.<org.jsoup.helper.HttpConnection$Request: boolean parserDefined>;
+
+        return $stack1;
+    }
+}

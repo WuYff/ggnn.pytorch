@@ -1,0 +1,83 @@
+final enum class org.jsoup.parser.TokeniserState$44 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$44 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$44;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        boolean $stack3, $stack4, $stack5;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.TokeniserState$44 this;
+        org.jsoup.parser.TokeniserState $stack6, $stack7, $stack8, $stack9;
+
+        this := @this: org.jsoup.parser.TokeniserState$44;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        $stack3 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>("--");
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void createCommentPending()>();
+
+        $stack9 = <org.jsoup.parser.TokeniserState$44: org.jsoup.parser.TokeniserState CommentStart>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack9);
+
+        goto label4;
+
+     label1:
+        $stack4 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean matchConsumeIgnoreCase(java.lang.String)>("DOCTYPE");
+
+        if $stack4 == 0 goto label2;
+
+        $stack8 = <org.jsoup.parser.TokeniserState$44: org.jsoup.parser.TokeniserState Doctype>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack8);
+
+        goto label4;
+
+     label2:
+        $stack5 = virtualinvoke r.<org.jsoup.parser.CharacterReader: boolean matchConsume(java.lang.String)>("[CDATA[");
+
+        if $stack5 == 0 goto label3;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void createTempBuffer()>();
+
+        $stack7 = <org.jsoup.parser.TokeniserState$44: org.jsoup.parser.TokeniserState CdataSection>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack7);
+
+        goto label4;
+
+     label3:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void createBogusCommentPending()>();
+
+        $stack6 = <org.jsoup.parser.TokeniserState$44: org.jsoup.parser.TokeniserState BogusComment>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void advanceTransition(org.jsoup.parser.TokeniserState)>($stack6);
+
+     label4:
+        return;
+    }
+}

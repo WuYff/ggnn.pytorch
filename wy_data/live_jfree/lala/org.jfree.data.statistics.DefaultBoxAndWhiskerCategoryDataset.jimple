@@ -1,0 +1,1339 @@
+public class org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset extends org.jfree.data.general.AbstractDataset implements org.jfree.data.statistics.BoxAndWhiskerCategoryDataset, org.jfree.data.RangeInfo, org.jfree.chart.util.PublicCloneable
+{
+    protected org.jfree.data.KeyedObjects2D data;
+    private double minimumRangeValue;
+    private int minimumRangeValueRow;
+    private int minimumRangeValueColumn;
+    private double maximumRangeValue;
+    private int maximumRangeValueRow;
+    private int maximumRangeValueColumn;
+
+    public void <init>()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        specialinvoke this.<org.jfree.data.general.AbstractDataset: void <init>()>();
+
+        $stack1 = new org.jfree.data.KeyedObjects2D;
+
+        specialinvoke $stack1.<org.jfree.data.KeyedObjects2D: void <init>()>();
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn> = -1;
+
+        return;
+    }
+
+    public void add(java.util.List, java.lang.Comparable, java.lang.Comparable)
+    {
+        java.util.List list;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        list := @parameter0: java.util.List;
+
+        rowKey := @parameter1: java.lang.Comparable;
+
+        columnKey := @parameter2: java.lang.Comparable;
+
+        item = staticinvoke <org.jfree.data.statistics.BoxAndWhiskerCalculator: org.jfree.data.statistics.BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(java.util.List)>(list);
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void add(org.jfree.data.statistics.BoxAndWhiskerItem,java.lang.Comparable,java.lang.Comparable)>(item, rowKey, columnKey);
+
+        return;
+    }
+
+    public void add(org.jfree.data.statistics.BoxAndWhiskerItem, java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack10, $stack11, $stack13;
+        int r, c, $stack15, $stack16, $stack36, $stack39;
+        java.lang.Number $stack17, $stack18, $stack29, $stack32;
+        double $stack19, $stack21, $stack25, minval, maxval, $stack23;
+        boolean $stack20, $stack24;
+        byte $stack22, $stack26;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        item := @parameter0: org.jfree.data.statistics.BoxAndWhiskerItem;
+
+        rowKey := @parameter1: java.lang.Comparable;
+
+        columnKey := @parameter2: java.lang.Comparable;
+
+        $stack10 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack10.<org.jfree.data.KeyedObjects2D: void addObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>(item, rowKey, columnKey);
+
+        $stack11 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        r = virtualinvoke $stack11.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        $stack13 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        c = virtualinvoke $stack13.<org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        $stack15 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow>;
+
+        if $stack15 != r goto label1;
+
+        $stack39 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn>;
+
+        if $stack39 == c goto label2;
+
+     label1:
+        $stack16 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow>;
+
+        if $stack16 != r goto label3;
+
+        $stack36 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn>;
+
+        if $stack36 != c goto label3;
+
+     label2:
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        goto label9;
+
+     label3:
+        minval = #NaN;
+
+        $stack17 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+        if $stack17 == null goto label4;
+
+        $stack32 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+        minval = virtualinvoke $stack32.<java.lang.Number: double doubleValue()>();
+
+     label4:
+        maxval = #NaN;
+
+        $stack18 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+        if $stack18 == null goto label5;
+
+        $stack29 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+        maxval = virtualinvoke $stack29.<java.lang.Number: double doubleValue()>();
+
+     label5:
+        $stack19 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        $stack20 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack19);
+
+        if $stack20 == 0 goto label6;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue> = maxval;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn> = c;
+
+        goto label7;
+
+     label6:
+        $stack21 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        $stack22 = maxval cmpl $stack21;
+
+        if $stack22 <= 0 goto label7;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue> = maxval;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn> = c;
+
+     label7:
+        $stack23 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        $stack24 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack23);
+
+        if $stack24 == 0 goto label8;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue> = minval;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn> = c;
+
+        goto label9;
+
+     label8:
+        $stack25 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        $stack26 = minval cmpg $stack25;
+
+        if $stack26 >= 0 goto label9;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue> = minval;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn> = c;
+
+     label9:
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void remove(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        int r, c, $stack8, $stack9, $stack10, $stack12;
+        org.jfree.data.KeyedObjects2D $stack7;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        r = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+
+        c = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+
+        $stack7 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack7.<org.jfree.data.KeyedObjects2D: void removeObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        $stack8 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow>;
+
+        if $stack8 != r goto label1;
+
+        $stack12 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn>;
+
+        if $stack12 == c goto label2;
+
+     label1:
+        $stack9 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow>;
+
+        if $stack9 != r goto label3;
+
+        $stack10 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn>;
+
+        if $stack10 != c goto label3;
+
+     label2:
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+     label3:
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeRow(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int rowIndex;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowIndex := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(int)>(rowIndex);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeRow(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(java.lang.Comparable)>(rowKey);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeColumn(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int columnIndex;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        columnIndex := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(int)>(columnIndex);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void removeColumn(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable columnKey;
+        org.jfree.data.KeyedObjects2D $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        columnKey := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(java.lang.Comparable)>(columnKey);
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: void clear()>();
+
+        specialinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void updateBounds()>();
+
+        virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: void fireDatasetChanged()>();
+
+        return;
+    }
+
+    public org.jfree.data.statistics.BoxAndWhiskerItem getItem(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack3;
+        java.lang.Object $stack4;
+        org.jfree.data.statistics.BoxAndWhiskerItem $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        $stack5 = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack4;
+
+        return $stack5;
+    }
+
+    public java.lang.Number getValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: java.lang.Number getMedianValue(int,int)>(row, column);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        java.lang.Number $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: java.lang.Number getMedianValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        return $stack3;
+    }
+
+    public java.lang.Number getMeanValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMean()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMeanValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMean()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMedianValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMedian()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMedianValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMedian()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ1Value(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ1()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ1Value(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ1()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ3Value(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ3()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getQ3Value(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getQ3()>();
+
+     label1:
+        return result;
+    }
+
+    public int getColumnIndex(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)>(key);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getColumnKey(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int column;
+        org.jfree.data.KeyedObjects2D $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        column := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getColumnKey(int)>(column);
+
+        return $stack3;
+    }
+
+    public java.util.List getColumnKeys()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()>();
+
+        return $stack2;
+    }
+
+    public int getRowIndex(java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        key := @parameter0: java.lang.Comparable;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(key);
+
+        return $stack3;
+    }
+
+    public java.lang.Comparable getRowKey(int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row;
+        org.jfree.data.KeyedObjects2D $stack2;
+        java.lang.Comparable $stack3;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getRowKey(int)>(row);
+
+        return $stack3;
+    }
+
+    public java.util.List getRowKeys()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        java.util.List $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()>();
+
+        return $stack2;
+    }
+
+    public int getRowCount()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+
+        return $stack2;
+    }
+
+    public int getColumnCount()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack1 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+
+        return $stack2;
+    }
+
+    public double getRangeLowerBound(boolean)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        double $stack2;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        return $stack2;
+    }
+
+    public double getRangeUpperBound(boolean)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        double $stack2;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        return $stack2;
+    }
+
+    public org.jfree.data.Range getRangeBounds(boolean)
+    {
+        org.jfree.data.Range $stack2;
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        double $stack3, $stack4;
+        boolean includeInterval;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        includeInterval := @parameter0: boolean;
+
+        $stack2 = new org.jfree.data.Range;
+
+        $stack4 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        specialinvoke $stack2.<org.jfree.data.Range: void <init>(double,double)>($stack4, $stack3);
+
+        return $stack2;
+    }
+
+    public java.lang.Number getMinRegularValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMinRegularValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxRegularValue(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxRegularValue(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxRegularValue()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMinOutlier(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMinOutlier(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxOutlier(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.Number getMaxOutlier(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+     label1:
+        return result;
+    }
+
+    public java.util.List getOutliers(int, int)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int row, column;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.util.List result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        row := @parameter0: int;
+
+        column := @parameter1: int;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.util.List getOutliers()>();
+
+     label1:
+        return result;
+    }
+
+    public java.util.List getOutliers(java.lang.Comparable, java.lang.Comparable)
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        java.lang.Comparable rowKey, columnKey;
+        org.jfree.data.KeyedObjects2D $stack5;
+        java.lang.Object $stack6;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.util.List result;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        rowKey := @parameter0: java.lang.Comparable;
+
+        columnKey := @parameter1: java.lang.Comparable;
+
+        result = null;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+
+        item = (org.jfree.data.statistics.BoxAndWhiskerItem) $stack6;
+
+        if item == null goto label1;
+
+        result = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.util.List getOutliers()>();
+
+     label1:
+        return result;
+    }
+
+    private void updateBounds()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        int rowCount, columnCount, r, c;
+        org.jfree.data.statistics.BoxAndWhiskerItem item;
+        java.lang.Number min, minv#12;
+        double maxv, $stack21, $stack23, $stack35, $stack37, minv;
+        boolean $stack20, $stack24, $stack32, $stack38;
+        byte $stack22, $stack36;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue> = #NaN;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow> = -1;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn> = -1;
+
+        rowCount = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int getRowCount()>();
+
+        columnCount = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int getColumnCount()>();
+
+        r = 0;
+
+     label1:
+        if r >= rowCount goto label8;
+
+        c = 0;
+
+     label2:
+        if c >= columnCount goto label7;
+
+        item = virtualinvoke this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.statistics.BoxAndWhiskerItem getItem(int,int)>(r, c);
+
+        if item == null goto label6;
+
+        min = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMinOutlier()>();
+
+        if min == null goto label4;
+
+        minv = virtualinvoke min.<java.lang.Number: double doubleValue()>();
+
+        $stack32 = staticinvoke <java.lang.Double: boolean isNaN(double)>(minv);
+
+        if $stack32 != 0 goto label4;
+
+        $stack35 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        $stack36 = minv cmpg $stack35;
+
+        if $stack36 < 0 goto label3;
+
+        $stack37 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue>;
+
+        $stack38 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack37);
+
+        if $stack38 == 0 goto label4;
+
+     label3:
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double minimumRangeValue> = minv;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int minimumRangeValueColumn> = c;
+
+     label4:
+        minv#12 = virtualinvoke item.<org.jfree.data.statistics.BoxAndWhiskerItem: java.lang.Number getMaxOutlier()>();
+
+        if minv#12 == null goto label6;
+
+        maxv = virtualinvoke minv#12.<java.lang.Number: double doubleValue()>();
+
+        $stack20 = staticinvoke <java.lang.Double: boolean isNaN(double)>(maxv);
+
+        if $stack20 != 0 goto label6;
+
+        $stack21 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        $stack22 = maxv cmpl $stack21;
+
+        if $stack22 > 0 goto label5;
+
+        $stack23 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue>;
+
+        $stack24 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack23);
+
+        if $stack24 == 0 goto label6;
+
+     label5:
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: double maximumRangeValue> = maxv;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueRow> = r;
+
+        this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: int maximumRangeValueColumn> = c;
+
+     label6:
+        c = c + 1;
+
+        goto label2;
+
+     label7:
+        r = r + 1;
+
+        goto label1;
+
+     label8:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this, dataset;
+        boolean $stack3, $stack6;
+        org.jfree.data.KeyedObjects2D $stack4, $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        if $stack3 == 0 goto label2;
+
+        dataset = (org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset) obj;
+
+        $stack5 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = dataset.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        return $stack6;
+
+     label2:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this;
+        org.jfree.data.KeyedObjects2D $stack2;
+        int $stack3, $stack4, hash#2;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack3 = 23 * 5;
+
+        $stack2 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack2);
+
+        hash#2 = $stack3 + $stack4;
+
+        return hash#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset this, clone;
+        java.lang.Object $stack2, $stack4;
+        org.jfree.data.KeyedObjects2D $stack3, $stack5;
+
+        this := @this: org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+        $stack2 = specialinvoke this.<org.jfree.data.general.AbstractDataset: java.lang.Object clone()>();
+
+        clone = (org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset) $stack2;
+
+        $stack3 = this.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.KeyedObjects2D: java.lang.Object clone()>();
+
+        $stack5 = (org.jfree.data.KeyedObjects2D) $stack4;
+
+        clone.<org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack5;
+
+        return clone;
+    }
+}

@@ -1,0 +1,61 @@
+final enum class org.jsoup.parser.TokeniserState$43 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$43 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$43;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.Token$Comment $stack4;
+        java.lang.String $stack5;
+        char next;
+        org.jsoup.parser.TokeniserState $stack8;
+        org.jsoup.parser.TokeniserState$43 this;
+
+        this := @this: org.jsoup.parser.TokeniserState$43;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        virtualinvoke r.<org.jsoup.parser.CharacterReader: void unconsume()>();
+
+        $stack4 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Comment commentPending>;
+
+        $stack5 = virtualinvoke r.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(62);
+
+        virtualinvoke $stack4.<org.jsoup.parser.Token$Comment: org.jsoup.parser.Token$Comment append(java.lang.String)>($stack5);
+
+        next = virtualinvoke r.<org.jsoup.parser.CharacterReader: char consume()>();
+
+        if next == 62 goto label1;
+
+        if next != 65535 goto label2;
+
+     label1:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emitCommentPending()>();
+
+        $stack8 = <org.jsoup.parser.TokeniserState$43: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack8);
+
+     label2:
+        return;
+    }
+}

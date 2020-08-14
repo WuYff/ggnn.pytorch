@@ -1,0 +1,119 @@
+final enum class org.jsoup.parser.HtmlTreeBuilderState$21 extends org.jsoup.parser.HtmlTreeBuilderState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.HtmlTreeBuilderState$21 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.HtmlTreeBuilderState$21;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.HtmlTreeBuilderState: void <init>(java.lang.String,int,org.jsoup.parser.HtmlTreeBuilderState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    boolean process(org.jsoup.parser.Token, org.jsoup.parser.HtmlTreeBuilder)
+    {
+        org.jsoup.parser.Token t;
+        boolean $stack4, $stack5, $stack7, $stack8, $stack9, $stack10, $stack12, $stack23;
+        org.jsoup.parser.HtmlTreeBuilder tb;
+        org.jsoup.parser.HtmlTreeBuilderState $stack6, $stack11;
+        org.jsoup.parser.HtmlTreeBuilderState$21 this;
+        org.jsoup.nodes.Element html, $stack18;
+        org.jsoup.parser.Token$Character $stack14;
+        java.util.ArrayList $stack15, $stack17;
+        org.jsoup.parser.Token$StartTag $stack21;
+        java.lang.String $stack22;
+        org.jsoup.parser.Token$Comment $stack27;
+
+        this := @this: org.jsoup.parser.HtmlTreeBuilderState$21;
+
+        t := @parameter0: org.jsoup.parser.Token;
+
+        tb := @parameter1: org.jsoup.parser.HtmlTreeBuilder;
+
+        $stack4 = virtualinvoke t.<org.jsoup.parser.Token: boolean isComment()>();
+
+        if $stack4 == 0 goto label1;
+
+        $stack27 = virtualinvoke t.<org.jsoup.parser.Token: org.jsoup.parser.Token$Comment asComment()>();
+
+        virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: void insert(org.jsoup.parser.Token$Comment)>($stack27);
+
+        goto label6;
+
+     label1:
+        $stack5 = virtualinvoke t.<org.jsoup.parser.Token: boolean isDoctype()>();
+
+        if $stack5 != 0 goto label2;
+
+        $stack8 = virtualinvoke t.<org.jsoup.parser.Token: boolean isStartTag()>();
+
+        if $stack8 == 0 goto label3;
+
+        $stack21 = virtualinvoke t.<org.jsoup.parser.Token: org.jsoup.parser.Token$StartTag asStartTag()>();
+
+        $stack22 = virtualinvoke $stack21.<org.jsoup.parser.Token$StartTag: java.lang.String normalName()>();
+
+        $stack23 = virtualinvoke $stack22.<java.lang.String: boolean equals(java.lang.Object)>("html");
+
+        if $stack23 == 0 goto label3;
+
+     label2:
+        $stack6 = <org.jsoup.parser.HtmlTreeBuilderState$21: org.jsoup.parser.HtmlTreeBuilderState InBody>;
+
+        $stack7 = virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: boolean process(org.jsoup.parser.Token,org.jsoup.parser.HtmlTreeBuilderState)>(t, $stack6);
+
+        return $stack7;
+
+     label3:
+        $stack9 = staticinvoke <org.jsoup.parser.HtmlTreeBuilderState: boolean access$100(org.jsoup.parser.Token)>(t);
+
+        if $stack9 == 0 goto label4;
+
+        html = virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: org.jsoup.nodes.Element popStackToClose(java.lang.String)>("html");
+
+        $stack14 = virtualinvoke t.<org.jsoup.parser.Token: org.jsoup.parser.Token$Character asCharacter()>();
+
+        virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: void insert(org.jsoup.parser.Token$Character)>($stack14);
+
+        $stack15 = tb.<org.jsoup.parser.HtmlTreeBuilder: java.util.ArrayList stack>;
+
+        virtualinvoke $stack15.<java.util.ArrayList: boolean add(java.lang.Object)>(html);
+
+        $stack17 = tb.<org.jsoup.parser.HtmlTreeBuilder: java.util.ArrayList stack>;
+
+        $stack18 = virtualinvoke html.<org.jsoup.nodes.Element: org.jsoup.nodes.Element selectFirst(java.lang.String)>("body");
+
+        virtualinvoke $stack17.<java.util.ArrayList: boolean add(java.lang.Object)>($stack18);
+
+        goto label6;
+
+     label4:
+        $stack10 = virtualinvoke t.<org.jsoup.parser.Token: boolean isEOF()>();
+
+        if $stack10 == 0 goto label5;
+
+        goto label6;
+
+     label5:
+        virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: void error(org.jsoup.parser.HtmlTreeBuilderState)>(this);
+
+        $stack11 = <org.jsoup.parser.HtmlTreeBuilderState$21: org.jsoup.parser.HtmlTreeBuilderState InBody>;
+
+        virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: void transition(org.jsoup.parser.HtmlTreeBuilderState)>($stack11);
+
+        $stack12 = virtualinvoke tb.<org.jsoup.parser.HtmlTreeBuilder: boolean process(org.jsoup.parser.Token)>(t);
+
+        return $stack12;
+
+     label6:
+        return 1;
+    }
+}

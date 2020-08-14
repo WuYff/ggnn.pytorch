@@ -1,0 +1,84 @@
+public class org.jsoup.select.Evaluator$IsNthOfType extends org.jsoup.select.Evaluator$CssNthEvaluator
+{
+
+    public void <init>(int, int)
+    {
+        org.jsoup.select.Evaluator$IsNthOfType this;
+        int a, b;
+
+        this := @this: org.jsoup.select.Evaluator$IsNthOfType;
+
+        a := @parameter0: int;
+
+        b := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.select.Evaluator$CssNthEvaluator: void <init>(int,int)>(a, b);
+
+        return;
+    }
+
+    protected int calculatePosition(org.jsoup.nodes.Element, org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element element, $stack7, el, root;
+        org.jsoup.select.Elements family;
+        java.util.Iterator l5;
+        boolean $stack10, $stack14;
+        java.lang.Object $stack11;
+        org.jsoup.parser.Tag $stack12, $stack13;
+        org.jsoup.select.Evaluator$IsNthOfType this;
+        int pos;
+
+        this := @this: org.jsoup.select.Evaluator$IsNthOfType;
+
+        root := @parameter0: org.jsoup.nodes.Element;
+
+        element := @parameter1: org.jsoup.nodes.Element;
+
+        pos = 0;
+
+        $stack7 = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.nodes.Element parent()>();
+
+        family = virtualinvoke $stack7.<org.jsoup.nodes.Element: org.jsoup.select.Elements children()>();
+
+        l5 = virtualinvoke family.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label4;
+
+        $stack11 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack11;
+
+        $stack12 = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack13 = virtualinvoke element.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack14 = virtualinvoke $stack12.<org.jsoup.parser.Tag: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack14 == 0 goto label2;
+
+        pos = pos + 1;
+
+     label2:
+        if el != element goto label3;
+
+        goto label4;
+
+     label3:
+        goto label1;
+
+     label4:
+        return pos;
+    }
+
+    protected java.lang.String getPseudoClass()
+    {
+        org.jsoup.select.Evaluator$IsNthOfType this;
+
+        this := @this: org.jsoup.select.Evaluator$IsNthOfType;
+
+        return "nth-of-type";
+    }
+}

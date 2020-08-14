@@ -1,0 +1,122 @@
+final enum class org.jsoup.parser.TokeniserState$39 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$39 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$39;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        java.lang.String value;
+        int $stack7;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.Token$Tag $stack8, $stack14, $stack15, $stack16, $stack17, $stack18;
+        char c;
+        org.jsoup.parser.TokeniserState$39 this;
+        org.jsoup.parser.TokeniserState $stack10, $stack11;
+        java.lang.Character $stack12;
+        int[] ref;
+
+        this := @this: org.jsoup.parser.TokeniserState$39;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        value = virtualinvoke r.<org.jsoup.parser.CharacterReader: java.lang.String consumeAttributeQuoted(boolean)>(1);
+
+        $stack7 = virtualinvoke value.<java.lang.String: int length()>();
+
+        if $stack7 <= 0 goto label1;
+
+        $stack18 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack18.<org.jsoup.parser.Token$Tag: void appendAttributeValue(java.lang.String)>(value);
+
+        goto label2;
+
+     label1:
+        $stack8 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack8.<org.jsoup.parser.Token$Tag: void setEmptyAttributeValue()>();
+
+     label2:
+        c = virtualinvoke r.<org.jsoup.parser.CharacterReader: char consume()>();
+
+        lookupswitch(c)
+        {
+            case 0: goto label6;
+            case 38: goto label4;
+            case 39: goto label3;
+            case 65535: goto label7;
+            default: goto label8;
+        };
+
+     label3:
+        $stack11 = <org.jsoup.parser.TokeniserState$39: org.jsoup.parser.TokeniserState AfterAttributeValue_quoted>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack11);
+
+        goto label9;
+
+     label4:
+        $stack12 = staticinvoke <java.lang.Character: java.lang.Character valueOf(char)>(39);
+
+        ref = virtualinvoke t.<org.jsoup.parser.Tokeniser: int[] consumeCharacterReference(java.lang.Character,boolean)>($stack12, 1);
+
+        if ref == null goto label5;
+
+        $stack15 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack15.<org.jsoup.parser.Token$Tag: void appendAttributeValue(int[])>(ref);
+
+        goto label9;
+
+     label5:
+        $stack14 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack14.<org.jsoup.parser.Token$Tag: void appendAttributeValue(char)>(38);
+
+        goto label9;
+
+     label6:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        $stack16 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack16.<org.jsoup.parser.Token$Tag: void appendAttributeValue(char)>(65533);
+
+        goto label9;
+
+     label7:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void eofError(org.jsoup.parser.TokeniserState)>(this);
+
+        $stack10 = <org.jsoup.parser.TokeniserState$39: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack10);
+
+        goto label9;
+
+     label8:
+        $stack17 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Tag tagPending>;
+
+        virtualinvoke $stack17.<org.jsoup.parser.Token$Tag: void appendAttributeValue(char)>(c);
+
+     label9:
+        return;
+    }
+}

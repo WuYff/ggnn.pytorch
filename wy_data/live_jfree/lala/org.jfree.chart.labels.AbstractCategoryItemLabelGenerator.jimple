@@ -1,0 +1,435 @@
+public abstract class org.jfree.chart.labels.AbstractCategoryItemLabelGenerator extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.lang.String labelFormat;
+    private java.lang.String nullValueString;
+    private java.text.NumberFormat numberFormat;
+    private java.text.DateFormat dateFormat;
+    private java.text.NumberFormat percentFormat;
+
+    protected void <init>(java.lang.String, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.lang.String labelFormat;
+        java.text.NumberFormat formatter, $stack3;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        labelFormat := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(labelFormat, formatter, $stack3);
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, java.text.NumberFormat, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.lang.String labelFormat;
+        java.text.NumberFormat formatter, percentFormatter;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        labelFormat := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.NumberFormat;
+
+        percentFormatter := @parameter2: java.text.NumberFormat;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(labelFormat, "labelFormat");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(percentFormatter, "percentFormatter");
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat> = labelFormat;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat> = formatter;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat percentFormat> = percentFormatter;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat> = null;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String nullValueString> = "-";
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, java.text.DateFormat)
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.lang.String labelFormat;
+        java.text.DateFormat formatter;
+        java.text.NumberFormat $stack3;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        labelFormat := @parameter0: java.lang.String;
+
+        formatter := @parameter1: java.text.DateFormat;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(labelFormat, "labelFormat");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(formatter, "formatter");
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat> = labelFormat;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat> = null;
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat percentFormat> = $stack3;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat> = formatter;
+
+        this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String nullValueString> = "-";
+
+        return;
+    }
+
+    public java.lang.String generateRowLabel(org.jfree.data.category.CategoryDataset, int)
+    {
+        org.jfree.data.category.CategoryDataset dataset;
+        int row;
+        java.lang.Comparable $stack3;
+        java.lang.String $stack4;
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        row := @parameter1: int;
+
+        $stack3 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        $stack4 = virtualinvoke $stack3.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack4;
+    }
+
+    public java.lang.String generateColumnLabel(org.jfree.data.category.CategoryDataset, int)
+    {
+        org.jfree.data.category.CategoryDataset dataset;
+        int column;
+        java.lang.Comparable $stack3;
+        java.lang.String $stack4;
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        column := @parameter1: int;
+
+        $stack3 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack4 = virtualinvoke $stack3.<java.lang.Object: java.lang.String toString()>();
+
+        return $stack4;
+    }
+
+    public java.lang.String getLabelFormat()
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat>;
+
+        return $stack1;
+    }
+
+    public java.text.NumberFormat getNumberFormat()
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.text.NumberFormat $stack1;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        return $stack1;
+    }
+
+    public java.text.DateFormat getDateFormat()
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.text.DateFormat $stack1;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        return $stack1;
+    }
+
+    protected java.lang.String generateLabelString(org.jfree.data.category.CategoryDataset, int, int)
+    {
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        int row, column;
+        java.lang.Object[] items;
+        java.lang.String $stack7, result;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        row := @parameter1: int;
+
+        column := @parameter2: int;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(dataset, "dataset");
+
+        items = virtualinvoke this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset,int,int)>(dataset, row, column);
+
+        $stack7 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat>;
+
+        result = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack7, items);
+
+        return result;
+    }
+
+    protected java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset, int, int)
+    {
+        java.lang.Object[] result;
+        org.jfree.data.category.CategoryDataset dataset;
+        int row, column;
+        java.lang.Comparable $stack11, $stack14;
+        java.lang.String $stack12, $stack15, $stack17, $stack22, $stack29, $stack32;
+        java.lang.Number value;
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        double total, $stack19, percent;
+        java.text.NumberFormat $stack20, $stack24, $stack30;
+        java.text.DateFormat $stack25, $stack27;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        row := @parameter1: int;
+
+        column := @parameter2: int;
+
+        result = newarray (java.lang.Object)[4];
+
+        $stack11 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: java.lang.String toString()>();
+
+        result[0] = $stack12;
+
+        $stack14 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(column);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.Object: java.lang.String toString()>();
+
+        result[1] = $stack15;
+
+        value = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+
+        if value == null goto label2;
+
+        $stack24 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        if $stack24 == null goto label1;
+
+        $stack30 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack32 = virtualinvoke $stack30.<java.text.NumberFormat: java.lang.String format(java.lang.Object)>(value);
+
+        result[2] = $stack32;
+
+        goto label3;
+
+     label1:
+        $stack25 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        if $stack25 == null goto label3;
+
+        $stack27 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        $stack29 = virtualinvoke $stack27.<java.text.DateFormat: java.lang.String format(java.lang.Object)>(value);
+
+        result[2] = $stack29;
+
+        goto label3;
+
+     label2:
+        $stack17 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String nullValueString>;
+
+        result[2] = $stack17;
+
+     label3:
+        if value == null goto label4;
+
+        total = staticinvoke <org.jfree.data.DataUtils: double calculateColumnTotal(org.jfree.data.Values2D,int)>(dataset, column);
+
+        $stack19 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+
+        percent = $stack19 / total;
+
+        $stack20 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat percentFormat>;
+
+        $stack22 = virtualinvoke $stack20.<java.text.NumberFormat: java.lang.String format(double)>(percent);
+
+        result[3] = $stack22;
+
+     label4:
+        return result;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this, that;
+        boolean $stack3, $stack6, $stack9, $stack12;
+        java.lang.String $stack4, $stack5;
+        java.text.DateFormat $stack7, $stack8;
+        java.text.NumberFormat $stack10, $stack11;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.labels.AbstractCategoryItemLabelGenerator) obj;
+
+        $stack5 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat>;
+
+        $stack4 = that.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        $stack7 = that.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack10 = that.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack12 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this;
+        java.lang.String $stack2, $stack4;
+        java.text.DateFormat $stack6;
+        java.text.NumberFormat $stack8, $stack10;
+        int result#2;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        $stack2 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String labelFormat>;
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.String)>(127, $stack2);
+
+        $stack4 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.lang.String nullValueString>;
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.String)>(result#2, $stack4);
+
+        $stack6 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Object)>(result#2, $stack6);
+
+        $stack8 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Object)>(result#2, $stack8);
+
+        $stack10 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat percentFormat>;
+
+        result#2 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,java.lang.Object)>(result#2, $stack10);
+
+        return result#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.labels.AbstractCategoryItemLabelGenerator this, clone;
+        java.lang.Object $stack2, $stack6, $stack10;
+        java.text.NumberFormat $stack3, $stack9, $stack11;
+        java.text.DateFormat $stack4, $stack5, $stack7;
+
+        this := @this: org.jfree.chart.labels.AbstractCategoryItemLabelGenerator;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.labels.AbstractCategoryItemLabelGenerator) $stack2;
+
+        $stack3 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        if $stack3 == null goto label1;
+
+        $stack9 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat>;
+
+        $stack10 = virtualinvoke $stack9.<java.text.NumberFormat: java.lang.Object clone()>();
+
+        $stack11 = (java.text.NumberFormat) $stack10;
+
+        clone.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.NumberFormat numberFormat> = $stack11;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        if $stack4 == null goto label2;
+
+        $stack5 = this.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat>;
+
+        $stack6 = virtualinvoke $stack5.<java.text.DateFormat: java.lang.Object clone()>();
+
+        $stack7 = (java.text.DateFormat) $stack6;
+
+        clone.<org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: java.text.DateFormat dateFormat> = $stack7;
+
+     label2:
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.AbstractCategoryItemLabelGenerator: long serialVersionUID> = -7108591260223293197L;
+
+        return;
+    }
+}

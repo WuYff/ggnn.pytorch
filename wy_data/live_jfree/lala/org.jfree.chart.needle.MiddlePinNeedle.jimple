@@ -1,0 +1,226 @@
+public class org.jfree.chart.needle.MiddlePinNeedle extends org.jfree.chart.needle.MeterNeedle implements java.lang.Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+
+    public void <init>()
+    {
+        org.jfree.chart.needle.MiddlePinNeedle this;
+
+        this := @this: org.jfree.chart.needle.MiddlePinNeedle;
+
+        specialinvoke this.<org.jfree.chart.needle.MeterNeedle: void <init>()>();
+
+        return;
+    }
+
+    protected void drawNeedle(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Point2D, double)
+    {
+        java.awt.geom.GeneralPath $stack14;
+        java.awt.geom.Rectangle2D plotArea;
+        double $stack15, $stack16, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack39, $stack40, $stack41, $stack42, angle, $stack50, $stack51;
+        int minY, maxY, $stack17, $stack18, midY, midX, $stack25, $stack26, $stack29, $stack30, $stack36, $stack37, $stack38, lenX;
+        float $stack27, $stack28, $stack31, $stack32, $stack33, $stack34;
+        java.awt.geom.Ellipse2D$Double $stack35;
+        java.awt.geom.Area $stack43, $stack44;
+        java.awt.geom.Point2D rotate;
+        org.jfree.chart.needle.MiddlePinNeedle this;
+        java.awt.Graphics2D g2;
+        byte $stack45;
+        java.awt.geom.AffineTransform $stack49, $stack52;
+
+        this := @this: org.jfree.chart.needle.MiddlePinNeedle;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+
+        rotate := @parameter2: java.awt.geom.Point2D;
+
+        angle := @parameter3: double;
+
+        $stack14 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack14.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack15 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        minY = (int) $stack15;
+
+        $stack16 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        maxY = (int) $stack16;
+
+        $stack17 = maxY - minY;
+
+        $stack18 = $stack17 / 2;
+
+        midY = $stack18 + minY;
+
+        $stack19 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack20 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack21 = $stack20 / 2.0;
+
+        $stack22 = $stack19 + $stack21;
+
+        midX = (int) $stack22;
+
+        $stack23 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack24 = $stack23 / 10.0;
+
+        lenX = (int) $stack24;
+
+        if lenX >= 2 goto label1;
+
+        lenX = 2;
+
+     label1:
+        $stack25 = midX - lenX;
+
+        $stack28 = (float) $stack25;
+
+        $stack26 = midY - lenX;
+
+        $stack27 = (float) $stack26;
+
+        virtualinvoke $stack14.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack28, $stack27);
+
+        $stack29 = midX + lenX;
+
+        $stack32 = (float) $stack29;
+
+        $stack30 = midY - lenX;
+
+        $stack31 = (float) $stack30;
+
+        virtualinvoke $stack14.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack32, $stack31);
+
+        $stack34 = (float) midX;
+
+        $stack33 = (float) minY;
+
+        virtualinvoke $stack14.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack34, $stack33);
+
+        virtualinvoke $stack14.<java.awt.geom.GeneralPath: void closePath()>();
+
+        lenX = 4 * lenX;
+
+        $stack35 = new java.awt.geom.Ellipse2D$Double;
+
+        $stack36 = lenX / 2;
+
+        $stack37 = midX - $stack36;
+
+        $stack42 = (double) $stack37;
+
+        $stack38 = midY - lenX;
+
+        $stack41 = (double) $stack38;
+
+        $stack40 = (double) lenX;
+
+        $stack39 = (double) lenX;
+
+        specialinvoke $stack35.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack42, $stack41, $stack40, $stack39);
+
+        $stack43 = new java.awt.geom.Area;
+
+        specialinvoke $stack43.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack35);
+
+        $stack44 = new java.awt.geom.Area;
+
+        specialinvoke $stack44.<java.awt.geom.Area: void <init>(java.awt.Shape)>($stack14);
+
+        virtualinvoke $stack43.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack44);
+
+        if rotate == null goto label2;
+
+        $stack45 = angle cmpl 0.0;
+
+        if $stack45 == 0 goto label2;
+
+        $stack49 = virtualinvoke this.<org.jfree.chart.needle.MiddlePinNeedle: java.awt.geom.AffineTransform getTransform()>();
+
+        $stack50 = virtualinvoke rotate.<java.awt.geom.Point2D: double getX()>();
+
+        $stack51 = virtualinvoke rotate.<java.awt.geom.Point2D: double getY()>();
+
+        virtualinvoke $stack49.<java.awt.geom.AffineTransform: void setToRotation(double,double,double)>(angle, $stack50, $stack51);
+
+        $stack52 = virtualinvoke this.<org.jfree.chart.needle.MiddlePinNeedle: java.awt.geom.AffineTransform getTransform()>();
+
+        virtualinvoke $stack43.<java.awt.geom.Area: void transform(java.awt.geom.AffineTransform)>($stack52);
+
+     label2:
+        virtualinvoke this.<org.jfree.chart.needle.MiddlePinNeedle: void defaultDisplay(java.awt.Graphics2D,java.awt.Shape)>(g2, $stack43);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object object;
+        org.jfree.chart.needle.MiddlePinNeedle this;
+        boolean $stack2, $stack3;
+
+        this := @this: org.jfree.chart.needle.MiddlePinNeedle;
+
+        object := @parameter0: java.lang.Object;
+
+        if object != null goto label1;
+
+        return 0;
+
+     label1:
+        if object != this goto label2;
+
+        return 1;
+
+     label2:
+        $stack2 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: boolean equals(java.lang.Object)>(object);
+
+        if $stack2 == 0 goto label3;
+
+        $stack3 = object instanceof org.jfree.chart.needle.MiddlePinNeedle;
+
+        if $stack3 == 0 goto label3;
+
+        return 1;
+
+     label3:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.needle.MiddlePinNeedle this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.needle.MiddlePinNeedle;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.needle.MiddlePinNeedle this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.needle.MiddlePinNeedle;
+
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.needle.MiddlePinNeedle: long serialVersionUID> = 6237073996403125310L;
+
+        return;
+    }
+}

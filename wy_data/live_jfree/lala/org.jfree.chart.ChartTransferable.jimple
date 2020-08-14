@@ -1,0 +1,328 @@
+public class org.jfree.chart.ChartTransferable extends java.lang.Object implements java.awt.datatransfer.Transferable
+{
+    final java.awt.datatransfer.DataFlavor imageFlavor;
+    private org.jfree.chart.JFreeChart chart;
+    private int width;
+    private int height;
+    private int minDrawWidth;
+    private int minDrawHeight;
+    private int maxDrawWidth;
+    private int maxDrawHeight;
+
+    public void <init>(org.jfree.chart.JFreeChart, int, int)
+    {
+        org.jfree.chart.ChartTransferable this;
+        org.jfree.chart.JFreeChart chart;
+        int width, height;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        width := @parameter1: int;
+
+        height := @parameter2: int;
+
+        specialinvoke this.<org.jfree.chart.ChartTransferable: void <init>(org.jfree.chart.JFreeChart,int,int,boolean)>(chart, width, height, 1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.JFreeChart, int, int, boolean)
+    {
+        org.jfree.chart.ChartTransferable this;
+        org.jfree.chart.JFreeChart chart;
+        int width, height;
+        boolean cloneData;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        width := @parameter1: int;
+
+        height := @parameter2: int;
+
+        cloneData := @parameter3: boolean;
+
+        specialinvoke this.<org.jfree.chart.ChartTransferable: void <init>(org.jfree.chart.JFreeChart,int,int,int,int,int,int,boolean)>(chart, width, height, 0, 0, 2147483647, 2147483647, 1);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.JFreeChart, int, int, int, int, int, int, boolean)
+    {
+        org.jfree.chart.ChartTransferable this;
+        java.awt.datatransfer.DataFlavor $stack10;
+        org.jfree.chart.JFreeChart chart, $stack12;
+        java.lang.Object $stack11;
+        int width, height, minDrawW, minDrawH, maxDrawW, maxDrawH;
+        java.lang.CloneNotSupportedException $stack13;
+        boolean cloneData;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        width := @parameter1: int;
+
+        height := @parameter2: int;
+
+        minDrawW := @parameter3: int;
+
+        minDrawH := @parameter4: int;
+
+        maxDrawW := @parameter5: int;
+
+        maxDrawH := @parameter6: int;
+
+        cloneData := @parameter7: boolean;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack10 = new java.awt.datatransfer.DataFlavor;
+
+        specialinvoke $stack10.<java.awt.datatransfer.DataFlavor: void <init>(java.lang.String,java.lang.String)>("image/x-java-image; class=java.awt.Image", "Image");
+
+        this.<org.jfree.chart.ChartTransferable: java.awt.datatransfer.DataFlavor imageFlavor> = $stack10;
+
+     label1:
+        $stack11 = virtualinvoke chart.<org.jfree.chart.JFreeChart: java.lang.Object clone()>();
+
+        $stack12 = (org.jfree.chart.JFreeChart) $stack11;
+
+        this.<org.jfree.chart.ChartTransferable: org.jfree.chart.JFreeChart chart> = $stack12;
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack13 := @caughtexception;
+
+        this.<org.jfree.chart.ChartTransferable: org.jfree.chart.JFreeChart chart> = chart;
+
+     label4:
+        this.<org.jfree.chart.ChartTransferable: int width> = width;
+
+        this.<org.jfree.chart.ChartTransferable: int height> = height;
+
+        this.<org.jfree.chart.ChartTransferable: int minDrawWidth> = minDrawW;
+
+        this.<org.jfree.chart.ChartTransferable: int minDrawHeight> = minDrawH;
+
+        this.<org.jfree.chart.ChartTransferable: int maxDrawWidth> = maxDrawW;
+
+        this.<org.jfree.chart.ChartTransferable: int maxDrawHeight> = maxDrawH;
+
+        return;
+
+        catch java.lang.CloneNotSupportedException from label1 to label2 with label3;
+    }
+
+    public java.awt.datatransfer.DataFlavor[] getTransferDataFlavors()
+    {
+        java.awt.datatransfer.DataFlavor[] $stack1;
+        org.jfree.chart.ChartTransferable this;
+        java.awt.datatransfer.DataFlavor $stack2;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        $stack1 = newarray (java.awt.datatransfer.DataFlavor)[1];
+
+        $stack2 = this.<org.jfree.chart.ChartTransferable: java.awt.datatransfer.DataFlavor imageFlavor>;
+
+        $stack1[0] = $stack2;
+
+        return $stack1;
+    }
+
+    public boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+    {
+        org.jfree.chart.ChartTransferable this;
+        java.awt.datatransfer.DataFlavor flavor, $stack2;
+        boolean $stack3;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        flavor := @parameter0: java.awt.datatransfer.DataFlavor;
+
+        $stack2 = this.<org.jfree.chart.ChartTransferable: java.awt.datatransfer.DataFlavor imageFlavor>;
+
+        $stack3 = virtualinvoke $stack2.<java.awt.datatransfer.DataFlavor: boolean equals(java.awt.datatransfer.DataFlavor)>(flavor);
+
+        return $stack3;
+    }
+
+    public java.lang.Object getTransferData(java.awt.datatransfer.DataFlavor) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException
+    {
+        org.jfree.chart.ChartTransferable this;
+        java.awt.datatransfer.DataFlavor flavor, $stack2;
+        boolean $stack3;
+        java.awt.datatransfer.UnsupportedFlavorException $stack4;
+        int $stack5, $stack6, $stack7, $stack8, $stack9, $stack10;
+        org.jfree.chart.JFreeChart $stack11;
+        java.awt.image.BufferedImage $stack12;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        flavor := @parameter0: java.awt.datatransfer.DataFlavor;
+
+        $stack2 = this.<org.jfree.chart.ChartTransferable: java.awt.datatransfer.DataFlavor imageFlavor>;
+
+        $stack3 = virtualinvoke $stack2.<java.awt.datatransfer.DataFlavor: boolean equals(java.awt.datatransfer.DataFlavor)>(flavor);
+
+        if $stack3 == 0 goto label1;
+
+        $stack11 = this.<org.jfree.chart.ChartTransferable: org.jfree.chart.JFreeChart chart>;
+
+        $stack10 = this.<org.jfree.chart.ChartTransferable: int width>;
+
+        $stack9 = this.<org.jfree.chart.ChartTransferable: int height>;
+
+        $stack8 = this.<org.jfree.chart.ChartTransferable: int minDrawWidth>;
+
+        $stack7 = this.<org.jfree.chart.ChartTransferable: int minDrawHeight>;
+
+        $stack6 = this.<org.jfree.chart.ChartTransferable: int maxDrawWidth>;
+
+        $stack5 = this.<org.jfree.chart.ChartTransferable: int maxDrawHeight>;
+
+        $stack12 = specialinvoke this.<org.jfree.chart.ChartTransferable: java.awt.image.BufferedImage createBufferedImage(org.jfree.chart.JFreeChart,int,int,int,int,int,int)>($stack11, $stack10, $stack9, $stack8, $stack7, $stack6, $stack5);
+
+        return $stack12;
+
+     label1:
+        $stack4 = new java.awt.datatransfer.UnsupportedFlavorException;
+
+        specialinvoke $stack4.<java.awt.datatransfer.UnsupportedFlavorException: void <init>(java.awt.datatransfer.DataFlavor)>(flavor);
+
+        throw $stack4;
+    }
+
+    private java.awt.image.BufferedImage createBufferedImage(org.jfree.chart.JFreeChart, int, int, int, int, int, int)
+    {
+        java.awt.image.BufferedImage $stack21;
+        int w, h, minDrawW, maxDrawW, minDrawH, maxDrawH;
+        java.awt.Graphics2D g2;
+        double $stack23, $stack25, $stack29, $stack40, $stack46, $stack47, $stack50, drawWidth, drawHeight, scaleX, scaleY, $stack27;
+        byte $stack24, $stack26, $stack30, $stack28;
+        org.jfree.chart.JFreeChart chart;
+        java.awt.geom.AffineTransform st;
+        org.jfree.chart.ChartTransferable this;
+        boolean scale;
+        java.awt.geom.Rectangle2D$Double $stack31;
+
+        this := @this: org.jfree.chart.ChartTransferable;
+
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+
+        w := @parameter1: int;
+
+        h := @parameter2: int;
+
+        minDrawW := @parameter3: int;
+
+        minDrawH := @parameter4: int;
+
+        maxDrawW := @parameter5: int;
+
+        maxDrawH := @parameter6: int;
+
+        $stack21 = new java.awt.image.BufferedImage;
+
+        specialinvoke $stack21.<java.awt.image.BufferedImage: void <init>(int,int,int)>(w, h, 2);
+
+        g2 = virtualinvoke $stack21.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+
+        scale = 0;
+
+        drawWidth = (double) w;
+
+        drawHeight = (double) h;
+
+        scaleX = 1.0;
+
+        scaleY = 1.0;
+
+        $stack23 = (double) minDrawW;
+
+        $stack24 = drawWidth cmpg $stack23;
+
+        if $stack24 >= 0 goto label1;
+
+        $stack50 = (double) minDrawW;
+
+        scaleX = drawWidth / $stack50;
+
+        drawWidth = (double) minDrawW;
+
+        scale = 1;
+
+        goto label2;
+
+     label1:
+        $stack25 = (double) maxDrawW;
+
+        $stack26 = drawWidth cmpl $stack25;
+
+        if $stack26 <= 0 goto label2;
+
+        $stack47 = (double) maxDrawW;
+
+        scaleX = drawWidth / $stack47;
+
+        drawWidth = (double) maxDrawW;
+
+        scale = 1;
+
+     label2:
+        $stack27 = (double) minDrawH;
+
+        $stack28 = drawHeight cmpg $stack27;
+
+        if $stack28 >= 0 goto label3;
+
+        $stack46 = (double) minDrawH;
+
+        scaleY = drawHeight / $stack46;
+
+        drawHeight = (double) minDrawH;
+
+        scale = 1;
+
+        goto label4;
+
+     label3:
+        $stack29 = (double) maxDrawH;
+
+        $stack30 = drawHeight cmpl $stack29;
+
+        if $stack30 <= 0 goto label4;
+
+        $stack40 = (double) maxDrawH;
+
+        scaleY = drawHeight / $stack40;
+
+        drawHeight = (double) maxDrawH;
+
+        scale = 1;
+
+     label4:
+        $stack31 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack31.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, drawWidth, drawHeight);
+
+        if scale == 0 goto label5;
+
+        st = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getScaleInstance(double,double)>(scaleX, scaleY);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>(st);
+
+     label5:
+        virtualinvoke chart.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(g2, $stack31, null, null);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+
+        return $stack21;
+    }
+}

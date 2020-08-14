@@ -1,0 +1,313 @@
+public class org.jfree.data.jdbc.JDBCPieDataset extends org.jfree.data.general.DefaultPieDataset
+{
+    static final long serialVersionUID;
+    private transient java.sql.Connection connection;
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.sql.SQLException, java.lang.ClassNotFoundException
+    {
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.lang.String driverName, url, user, password;
+        java.sql.Connection $stack6;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+        url := @parameter0: java.lang.String;
+
+        driverName := @parameter1: java.lang.String;
+
+        user := @parameter2: java.lang.String;
+
+        password := @parameter3: java.lang.String;
+
+        specialinvoke this.<org.jfree.data.general.DefaultPieDataset: void <init>()>();
+
+        staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(driverName);
+
+        $stack6 = staticinvoke <java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String,java.lang.String,java.lang.String)>(url, user, password);
+
+        this.<org.jfree.data.jdbc.JDBCPieDataset: java.sql.Connection connection> = $stack6;
+
+        return;
+    }
+
+    public void <init>(java.sql.Connection)
+    {
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.sql.Connection con;
+        java.lang.NullPointerException $stack2;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+        con := @parameter0: java.sql.Connection;
+
+        specialinvoke this.<org.jfree.data.general.DefaultPieDataset: void <init>()>();
+
+        if con != null goto label1;
+
+        $stack2 = new java.lang.NullPointerException;
+
+        specialinvoke $stack2.<java.lang.NullPointerException: void <init>(java.lang.String)>("A connection must be supplied.");
+
+        throw $stack2;
+
+     label1:
+        this.<org.jfree.data.jdbc.JDBCPieDataset: java.sql.Connection connection> = con;
+
+        return;
+    }
+
+    public void <init>(java.sql.Connection, java.lang.String) throws java.sql.SQLException
+    {
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.sql.Connection con;
+        java.lang.String query;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+        con := @parameter0: java.sql.Connection;
+
+        query := @parameter1: java.lang.String;
+
+        specialinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void <init>(java.sql.Connection)>(con);
+
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void executeQuery(java.lang.String)>(query);
+
+        return;
+    }
+
+    public void executeQuery(java.lang.String) throws java.sql.SQLException
+    {
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.lang.String query;
+        java.sql.Connection $stack2;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+        query := @parameter0: java.lang.String;
+
+        $stack2 = this.<org.jfree.data.jdbc.JDBCPieDataset: java.sql.Connection connection>;
+
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void executeQuery(java.sql.Connection,java.lang.String)>($stack2, query);
+
+        return;
+    }
+
+    public void executeQuery(java.sql.Connection, java.lang.String) throws java.sql.SQLException
+    {
+        java.sql.Connection con;
+        java.lang.String query, key;
+        int columnCount, columnType;
+        boolean $stack19;
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.sql.Timestamp date;
+        long $stack23;
+        java.io.PrintStream $stack26, $stack29, $stack31, $stack36, $stack38;
+        java.sql.SQLException $stack27;
+        java.lang.Exception $stack28, $stack30, $stack35, $stack37;
+        java.lang.Throwable $stack33;
+        java.sql.Statement statement;
+        java.sql.ResultSet resultSet;
+        java.sql.ResultSetMetaData metaData;
+        double value;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+        con := @parameter0: java.sql.Connection;
+
+        query := @parameter1: java.lang.String;
+
+        statement = null;
+
+        resultSet = null;
+
+     label01:
+        statement = interfaceinvoke con.<java.sql.Connection: java.sql.Statement createStatement()>();
+
+        resultSet = interfaceinvoke statement.<java.sql.Statement: java.sql.ResultSet executeQuery(java.lang.String)>(query);
+
+        metaData = interfaceinvoke resultSet.<java.sql.ResultSet: java.sql.ResultSetMetaData getMetaData()>();
+
+        columnCount = interfaceinvoke metaData.<java.sql.ResultSetMetaData: int getColumnCount()>();
+
+        if columnCount == 2 goto label02;
+
+        $stack27 = new java.sql.SQLException;
+
+        specialinvoke $stack27.<java.sql.SQLException: void <init>(java.lang.String)>("Invalid sql generated.  PieDataSet requires 2 columns only");
+
+        throw $stack27;
+
+     label02:
+        columnType = interfaceinvoke metaData.<java.sql.ResultSetMetaData: int getColumnType(int)>(2);
+
+     label03:
+        $stack19 = interfaceinvoke resultSet.<java.sql.ResultSet: boolean next()>();
+
+        if $stack19 == 0 goto label08;
+
+        key = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.String getString(int)>(1);
+
+        lookupswitch(columnType)
+        {
+            case -5: goto label04;
+            case 2: goto label04;
+            case 3: goto label04;
+            case 4: goto label04;
+            case 6: goto label04;
+            case 7: goto label04;
+            case 8: goto label04;
+            case 91: goto label05;
+            case 92: goto label05;
+            case 93: goto label05;
+            default: goto label06;
+        };
+
+     label04:
+        value = interfaceinvoke resultSet.<java.sql.ResultSet: double getDouble(int)>(2);
+
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void setValue(java.lang.Comparable,double)>(key, value);
+
+        goto label07;
+
+     label05:
+        date = interfaceinvoke resultSet.<java.sql.ResultSet: java.sql.Timestamp getTimestamp(int)>(2);
+
+        $stack23 = virtualinvoke date.<java.sql.Timestamp: long getTime()>();
+
+        value = (double) $stack23;
+
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void setValue(java.lang.Comparable,double)>(key, value);
+
+        goto label07;
+
+     label06:
+        $stack26 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack26.<java.io.PrintStream: void println(java.lang.String)>("JDBCPieDataset - unknown data type");
+
+     label07:
+        goto label03;
+
+     label08:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCPieDataset: void fireDatasetChanged()>();
+
+     label09:
+        if resultSet == null goto label13;
+
+     label10:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+
+     label11:
+        goto label13;
+
+     label12:
+        $stack37 := @caughtexception;
+
+        $stack38 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack38.<java.io.PrintStream: void println(java.lang.String)>("JDBCPieDataset: swallowing exception.");
+
+     label13:
+        if statement == null goto label27;
+
+     label14:
+        interfaceinvoke statement.<java.sql.Statement: void close()>();
+
+     label15:
+        goto label27;
+
+     label16:
+        $stack35 := @caughtexception;
+
+        $stack36 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack36.<java.io.PrintStream: void println(java.lang.String)>("JDBCPieDataset: swallowing exception.");
+
+        goto label27;
+
+     label17:
+        $stack33 := @caughtexception;
+
+     label18:
+        if resultSet == null goto label22;
+
+     label19:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+
+     label20:
+        goto label22;
+
+     label21:
+        $stack30 := @caughtexception;
+
+        $stack31 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack31.<java.io.PrintStream: void println(java.lang.String)>("JDBCPieDataset: swallowing exception.");
+
+     label22:
+        if statement == null goto label26;
+
+     label23:
+        interfaceinvoke statement.<java.sql.Statement: void close()>();
+
+     label24:
+        goto label26;
+
+     label25:
+        $stack28 := @caughtexception;
+
+        $stack29 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack29.<java.io.PrintStream: void println(java.lang.String)>("JDBCPieDataset: swallowing exception.");
+
+     label26:
+        throw $stack33;
+
+     label27:
+        return;
+
+        catch java.lang.Exception from label10 to label11 with label12;
+        catch java.lang.Exception from label14 to label15 with label16;
+        catch java.lang.Throwable from label01 to label09 with label17;
+        catch java.lang.Exception from label19 to label20 with label21;
+        catch java.lang.Exception from label23 to label24 with label25;
+        catch java.lang.Throwable from label17 to label18 with label17;
+    }
+
+    public void close()
+    {
+        org.jfree.data.jdbc.JDBCPieDataset this;
+        java.sql.Connection $stack2;
+        java.lang.Exception $stack3;
+        java.io.PrintStream $stack4;
+
+        this := @this: org.jfree.data.jdbc.JDBCPieDataset;
+
+     label1:
+        $stack2 = this.<org.jfree.data.jdbc.JDBCPieDataset: java.sql.Connection connection>;
+
+        interfaceinvoke $stack2.<java.sql.Connection: void close()>();
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack3 := @caughtexception;
+
+        $stack4 = <java.lang.System: java.io.PrintStream err>;
+
+        virtualinvoke $stack4.<java.io.PrintStream: void println(java.lang.String)>("JdbcXYDataset: swallowing exception.");
+
+     label4:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.jdbc.JDBCPieDataset: long serialVersionUID> = -8753216855496746108L;
+
+        return;
+    }
+}

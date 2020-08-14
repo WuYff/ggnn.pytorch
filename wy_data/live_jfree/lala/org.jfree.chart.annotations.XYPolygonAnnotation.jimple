@@ -1,0 +1,571 @@
+public class org.jfree.chart.annotations.XYPolygonAnnotation extends org.jfree.chart.annotations.AbstractXYAnnotation implements java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private double[] polygon;
+    private transient java.awt.Stroke stroke;
+    private transient java.awt.Paint outlinePaint;
+    private transient java.awt.Paint fillPaint;
+
+    public void <init>(double[])
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] polygon;
+        java.awt.BasicStroke $stack2;
+        java.awt.Color $stack3;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        polygon := @parameter0: double[];
+
+        $stack2 = new java.awt.BasicStroke;
+
+        specialinvoke $stack2.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        $stack3 = <java.awt.Color: java.awt.Color BLACK>;
+
+        specialinvoke this.<org.jfree.chart.annotations.XYPolygonAnnotation: void <init>(double[],java.awt.Stroke,java.awt.Paint)>(polygon, $stack2, $stack3);
+
+        return;
+    }
+
+    public void <init>(double[], java.awt.Stroke, java.awt.Paint)
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] polygon;
+        java.awt.Stroke stroke;
+        java.awt.Paint outlinePaint;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        polygon := @parameter0: double[];
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        outlinePaint := @parameter2: java.awt.Paint;
+
+        specialinvoke this.<org.jfree.chart.annotations.XYPolygonAnnotation: void <init>(double[],java.awt.Stroke,java.awt.Paint,java.awt.Paint)>(polygon, stroke, outlinePaint, null);
+
+        return;
+    }
+
+    public void <init>(double[], java.awt.Stroke, java.awt.Paint, java.awt.Paint)
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] polygon, $stack8, $stack9;
+        int $stack5, $stack6;
+        java.lang.Object $stack7;
+        java.awt.Stroke stroke;
+        java.awt.Paint outlinePaint, fillPaint;
+        java.lang.IllegalArgumentException $stack10;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        polygon := @parameter0: double[];
+
+        stroke := @parameter1: java.awt.Stroke;
+
+        outlinePaint := @parameter2: java.awt.Paint;
+
+        fillPaint := @parameter3: java.awt.Paint;
+
+        specialinvoke this.<org.jfree.chart.annotations.AbstractXYAnnotation: void <init>()>();
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(polygon, "polygon");
+
+        $stack5 = lengthof polygon;
+
+        $stack6 = $stack5 % 2;
+
+        if $stack6 == 0 goto label1;
+
+        $stack10 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'polygon\' array must contain an even number of items.");
+
+        throw $stack10;
+
+     label1:
+        $stack7 = virtualinvoke polygon.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack8 = (double[]) $stack7;
+
+        $stack9 = (double[]) $stack8;
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon> = $stack9;
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke> = stroke;
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint> = outlinePaint;
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint> = fillPaint;
+
+        return;
+    }
+
+    public double[] getPolygonCoordinates()
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] $stack1, $stack3, $stack4;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack3 = (double[]) $stack2;
+
+        $stack4 = (double[]) $stack3;
+
+        return $stack4;
+    }
+
+    public java.awt.Paint getFillPaint()
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        return $stack1;
+    }
+
+    public java.awt.Stroke getOutlineStroke()
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.awt.Stroke $stack1;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        return $stack1;
+    }
+
+    public java.awt.Paint getOutlinePaint()
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.awt.Paint $stack1;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack1 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        return $stack1;
+    }
+
+    public void draw(java.awt.Graphics2D, org.jfree.chart.plot.XYPlot, java.awt.geom.Rectangle2D, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, int, org.jfree.chart.plot.PlotRenderingInfo)
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] $stack17, $stack25, $stack28, $stack50, $stack53, $stack57, $stack66, $stack68, $stack72;
+        int $stack18, rendererIndex, $stack51, $stack56, $stack67, $stack71, i;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack31, $stack32;
+        org.jfree.chart.axis.AxisLocation $stack20, $stack22;
+        org.jfree.chart.ui.RectangleEdge domainEdge, rangeEdge;
+        java.awt.geom.GeneralPath $stack24;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        java.awt.geom.Rectangle2D dataArea;
+        double $stack26, $stack29, $stack54, $stack58, $stack69, $stack73, x, y;
+        java.awt.Stroke $stack34, $stack45;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        java.awt.Paint $stack37, $stack44, $stack46, $stack33;
+        java.awt.Graphics2D g2;
+        float $stack48, $stack49, $stack60, $stack61, $stack64, $stack65, $stack75, $stack76;
+        java.lang.String $stack35, $stack36;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        plot := @parameter1: org.jfree.chart.plot.XYPlot;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        domainAxis := @parameter3: org.jfree.chart.axis.ValueAxis;
+
+        rangeAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+
+        rendererIndex := @parameter5: int;
+
+        info := @parameter6: org.jfree.chart.plot.PlotRenderingInfo;
+
+        $stack17 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack18 = lengthof $stack17;
+
+        if $stack18 >= 4 goto label1;
+
+        return;
+
+     label1:
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        $stack20 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.AxisLocation getDomainAxisLocation()>();
+
+        domainEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveDomainAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack20, orientation);
+
+        $stack22 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.AxisLocation getRangeAxisLocation()>();
+
+        rangeEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack22, orientation);
+
+        $stack24 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack24.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack25 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack26 = $stack25[0];
+
+        x = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack26, dataArea, domainEdge);
+
+        $stack28 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack29 = $stack28[1];
+
+        y = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack29, dataArea, rangeEdge);
+
+        $stack31 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack31 goto label4;
+
+        $stack65 = (float) y;
+
+        $stack64 = (float) x;
+
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack65, $stack64);
+
+        i = 2;
+
+     label2:
+        $stack66 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack67 = lengthof $stack66;
+
+        if i >= $stack67 goto label3;
+
+        $stack68 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack69 = $stack68[i];
+
+        x = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack69, dataArea, domainEdge);
+
+        $stack72 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack71 = i + 1;
+
+        $stack73 = $stack72[$stack71];
+
+        y = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack73, dataArea, rangeEdge);
+
+        $stack76 = (float) y;
+
+        $stack75 = (float) x;
+
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack76, $stack75);
+
+        i = i + 2;
+
+        goto label2;
+
+     label3:
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void closePath()>();
+
+        goto label7;
+
+     label4:
+        $stack32 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack32 goto label7;
+
+        $stack49 = (float) x;
+
+        $stack48 = (float) y;
+
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack49, $stack48);
+
+        i = 2;
+
+     label5:
+        $stack50 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack51 = lengthof $stack50;
+
+        if i >= $stack51 goto label6;
+
+        $stack53 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack54 = $stack53[i];
+
+        x = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack54, dataArea, domainEdge);
+
+        $stack57 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack56 = i + 1;
+
+        $stack58 = $stack57[$stack56];
+
+        y = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack58, dataArea, rangeEdge);
+
+        $stack61 = (float) x;
+
+        $stack60 = (float) y;
+
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack61, $stack60);
+
+        i = i + 2;
+
+        goto label5;
+
+     label6:
+        virtualinvoke $stack24.<java.awt.geom.GeneralPath: void closePath()>();
+
+     label7:
+        $stack33 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        if $stack33 == null goto label8;
+
+        $stack46 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack46);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>($stack24);
+
+     label8:
+        $stack34 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        if $stack34 == null goto label9;
+
+        $stack37 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        if $stack37 == null goto label9;
+
+        $stack44 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack44);
+
+        $stack45 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack45);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>($stack24);
+
+     label9:
+        $stack35 = virtualinvoke this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.lang.String getToolTipText()>();
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.lang.String getURL()>();
+
+        virtualinvoke this.<org.jfree.chart.annotations.XYPolygonAnnotation: void addEntity(org.jfree.chart.plot.PlotRenderingInfo,java.awt.Shape,int,java.lang.String,java.lang.String)>(info, $stack24, rendererIndex, $stack35, $stack36);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.annotations.XYPolygonAnnotation this, that;
+        boolean $stack3, $stack4, $stack7, $stack10, $stack13, $stack16;
+        double[] $stack5, $stack6;
+        java.awt.Stroke $stack8, $stack9;
+        java.awt.Paint $stack11, $stack12, $stack14, $stack15;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = specialinvoke this.<org.jfree.chart.annotations.AbstractXYAnnotation: boolean equals(java.lang.Object)>(obj);
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack4 = obj instanceof org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        if $stack4 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        that = (org.jfree.chart.annotations.XYPolygonAnnotation) obj;
+
+        $stack6 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack5 = that.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack7 = staticinvoke <java.util.Arrays: boolean equals(double[],double[])>($stack6, $stack5);
+
+        if $stack7 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        $stack8 = that.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        $stack10 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+
+        if $stack10 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        $stack11 = that.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack12, $stack11);
+
+        if $stack13 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack15 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        $stack14 = that.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        $stack16 = staticinvoke <org.jfree.chart.util.PaintUtils: boolean equal(java.awt.Paint,java.awt.Paint)>($stack15, $stack14);
+
+        if $stack16 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        return 1;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        double[] $stack2;
+        int $stack3, $stack4, $stack6, $stack7, $stack9, $stack10, $stack13, $stack14, result#2;
+        java.awt.Paint $stack5, $stack8;
+        java.awt.Stroke $stack11, $stack12;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack3 = 37 * 193;
+
+        $stack2 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: double[] polygon>;
+
+        $stack4 = staticinvoke <org.jfree.chart.HashUtils: int hashCodeForDoubleArray(double[])>($stack2);
+
+        result#2 = $stack3 + $stack4;
+
+        $stack6 = 37 * result#2;
+
+        $stack5 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        $stack7 = staticinvoke <org.jfree.chart.HashUtils: int hashCodeForPaint(java.awt.Paint)>($stack5);
+
+        result#2 = $stack6 + $stack7;
+
+        $stack9 = 37 * result#2;
+
+        $stack8 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        $stack10 = staticinvoke <org.jfree.chart.HashUtils: int hashCodeForPaint(java.awt.Paint)>($stack8);
+
+        result#2 = $stack9 + $stack10;
+
+        $stack11 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        if $stack11 == null goto label1;
+
+        $stack13 = 37 * result#2;
+
+        $stack12 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        $stack14 = virtualinvoke $stack12.<java.lang.Object: int hashCode()>();
+
+        result#2 = $stack13 + $stack14;
+
+     label1:
+        return result#2;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.annotations.AbstractXYAnnotation: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.awt.Stroke $stack2;
+        java.awt.Paint $stack3, $stack4;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        stream := @parameter0: java.io.ObjectOutputStream;
+
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+
+        $stack2 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack2, stream);
+
+        $stack3 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+
+        $stack4 = this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint>;
+
+        staticinvoke <org.jfree.chart.util.SerialUtils: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.annotations.XYPolygonAnnotation this;
+        java.awt.Stroke $stack2;
+        java.awt.Paint $stack3, $stack4;
+
+        this := @this: org.jfree.chart.annotations.XYPolygonAnnotation;
+
+        stream := @parameter0: java.io.ObjectInputStream;
+
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Stroke stroke> = $stack2;
+
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint outlinePaint> = $stack3;
+
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtils: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+
+        this.<org.jfree.chart.annotations.XYPolygonAnnotation: java.awt.Paint fillPaint> = $stack4;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.annotations.XYPolygonAnnotation: long serialVersionUID> = -6984203651995900036L;
+
+        return;
+    }
+}

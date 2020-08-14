@@ -1,0 +1,270 @@
+public class org.jfree.chart.urls.CustomXYURLGenerator extends java.lang.Object implements org.jfree.chart.urls.XYURLGenerator, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.ArrayList urlSeries;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        java.util.ArrayList $stack1;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries> = $stack1;
+
+        return;
+    }
+
+    public int getListCount()
+    {
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        java.util.ArrayList $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.ArrayList: int size()>();
+
+        return $stack2;
+    }
+
+    public int getURLCount(int)
+    {
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        int list, result;
+        java.util.ArrayList $stack4;
+        java.lang.Object $stack5;
+        java.util.List urls;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        list := @parameter0: int;
+
+        result = 0;
+
+        $stack4 = this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries>;
+
+        $stack5 = virtualinvoke $stack4.<java.util.ArrayList: java.lang.Object get(int)>(list);
+
+        urls = (java.util.List) $stack5;
+
+        if urls == null goto label1;
+
+        result = interfaceinvoke urls.<java.util.List: int size()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.String getURL(int, int)
+    {
+        int series, $stack5, item, $stack9;
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        java.util.ArrayList $stack6;
+        java.lang.Object $stack7, $stack10;
+        java.util.List urls;
+        java.lang.String result;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.urls.CustomXYURLGenerator: int getListCount()>();
+
+        if series >= $stack5 goto label1;
+
+        $stack6 = this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries>;
+
+        $stack7 = virtualinvoke $stack6.<java.util.ArrayList: java.lang.Object get(int)>(series);
+
+        urls = (java.util.List) $stack7;
+
+        if urls == null goto label1;
+
+        $stack9 = interfaceinvoke urls.<java.util.List: int size()>();
+
+        if item >= $stack9 goto label1;
+
+        $stack10 = interfaceinvoke urls.<java.util.List: java.lang.Object get(int)>(item);
+
+        result = (java.lang.String) $stack10;
+
+     label1:
+        return result;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        int series, item;
+        java.lang.String $stack4;
+        org.jfree.data.xy.XYDataset dataset;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.urls.CustomXYURLGenerator: java.lang.String getURL(int,int)>(series, item);
+
+        return $stack4;
+    }
+
+    public void addURLSeries(java.util.List)
+    {
+        java.util.List urls;
+        org.jfree.chart.urls.CustomXYURLGenerator this;
+        java.util.ArrayList $stack3, $stack5, listToAdd;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        urls := @parameter0: java.util.List;
+
+        listToAdd = null;
+
+        if urls == null goto label1;
+
+        $stack5 = new java.util.ArrayList;
+
+        specialinvoke $stack5.<java.util.ArrayList: void <init>(java.util.Collection)>(urls);
+
+        listToAdd = $stack5;
+
+     label1:
+        $stack3 = this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries>;
+
+        virtualinvoke $stack3.<java.util.ArrayList: boolean add(java.lang.Object)>(listToAdd);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.urls.CustomXYURLGenerator this, that;
+        boolean $stack9, $stack20;
+        int listCount, $stack11, urlCount, $stack13, series, item;
+        java.lang.String u1, u2;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack9 = obj instanceof org.jfree.chart.urls.CustomXYURLGenerator;
+
+        if $stack9 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        that = (org.jfree.chart.urls.CustomXYURLGenerator) obj;
+
+        listCount = virtualinvoke this.<org.jfree.chart.urls.CustomXYURLGenerator: int getListCount()>();
+
+        $stack11 = virtualinvoke that.<org.jfree.chart.urls.CustomXYURLGenerator: int getListCount()>();
+
+        if listCount == $stack11 goto label03;
+
+        return 0;
+
+     label03:
+        series = 0;
+
+     label04:
+        if series >= listCount goto label10;
+
+        urlCount = virtualinvoke this.<org.jfree.chart.urls.CustomXYURLGenerator: int getURLCount(int)>(series);
+
+        $stack13 = virtualinvoke that.<org.jfree.chart.urls.CustomXYURLGenerator: int getURLCount(int)>(series);
+
+        if urlCount == $stack13 goto label05;
+
+        return 0;
+
+     label05:
+        item = 0;
+
+     label06:
+        if item >= urlCount goto label09;
+
+        u1 = virtualinvoke this.<org.jfree.chart.urls.CustomXYURLGenerator: java.lang.String getURL(int,int)>(series, item);
+
+        u2 = virtualinvoke that.<org.jfree.chart.urls.CustomXYURLGenerator: java.lang.String getURL(int,int)>(series, item);
+
+        if u1 == null goto label07;
+
+        $stack20 = virtualinvoke u1.<java.lang.String: boolean equals(java.lang.Object)>(u2);
+
+        if $stack20 != 0 goto label08;
+
+        return 0;
+
+     label07:
+        if u2 == null goto label08;
+
+        return 0;
+
+     label08:
+        item = item + 1;
+
+        goto label06;
+
+     label09:
+        series = series + 1;
+
+        goto label04;
+
+     label10:
+        return 1;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.urls.CustomXYURLGenerator this, clone;
+        java.lang.Object $stack2;
+        java.util.ArrayList $stack3, $stack4;
+
+        this := @this: org.jfree.chart.urls.CustomXYURLGenerator;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.urls.CustomXYURLGenerator) $stack2;
+
+        $stack3 = new java.util.ArrayList;
+
+        $stack4 = this.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries>;
+
+        specialinvoke $stack3.<java.util.ArrayList: void <init>(java.util.Collection)>($stack4);
+
+        clone.<org.jfree.chart.urls.CustomXYURLGenerator: java.util.ArrayList urlSeries> = $stack3;
+
+        return clone;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.CustomXYURLGenerator: long serialVersionUID> = -8565933356596551832L;
+
+        return;
+    }
+}

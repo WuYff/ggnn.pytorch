@@ -1,0 +1,322 @@
+class org.jfree.chart.editor.DefaultNumberAxisEditor extends org.jfree.chart.editor.DefaultValueAxisEditor implements java.awt.event.FocusListener
+{
+    private double manualTickUnitValue;
+    private javax.swing.JTextField manualTickUnit;
+
+    public void <init>(org.jfree.chart.axis.NumberAxis)
+    {
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        org.jfree.chart.axis.NumberAxis axis;
+        org.jfree.chart.axis.NumberTickUnit $stack2;
+        double $stack3;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        axis := @parameter0: org.jfree.chart.axis.NumberAxis;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultValueAxisEditor: void <init>(org.jfree.chart.axis.ValueAxis)>(axis);
+
+        $stack2 = virtualinvoke axis.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue> = $stack3;
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateTickUnit()>();
+
+        return;
+    }
+
+    protected javax.swing.JPanel createTickUnitPanel()
+    {
+        javax.swing.JPanel $stack3, $stack6, $stack14, $stack30;
+        org.jfree.chart.ui.LCBLayout $stack4;
+        javax.swing.border.Border $stack5;
+        javax.swing.JCheckBox $stack8, $stack12;
+        java.util.ResourceBundle $stack9, $stack17;
+        java.lang.String $stack10, $stack18, $stack22;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        boolean $stack11, $stack24, $stack32;
+        javax.swing.JLabel $stack16;
+        javax.swing.JTextField $stack20, $stack23, $stack25, $stack26, $stack27, $stack28;
+        double $stack21;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        $stack3 = new javax.swing.JPanel;
+
+        $stack4 = new org.jfree.chart.ui.LCBLayout;
+
+        specialinvoke $stack4.<org.jfree.chart.ui.LCBLayout: void <init>(int)>(3);
+
+        specialinvoke $stack3.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack4);
+
+        $stack5 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(4, 4, 4, 4);
+
+        virtualinvoke $stack3.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack5);
+
+        $stack6 = new javax.swing.JPanel;
+
+        specialinvoke $stack6.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack6);
+
+        $stack8 = new javax.swing.JCheckBox;
+
+        $stack9 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack10 = virtualinvoke $stack9.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Auto-TickUnit_Selection");
+
+        $stack11 = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean isAutoTickUnitSelection()>();
+
+        specialinvoke $stack8.<javax.swing.JCheckBox: void <init>(java.lang.String,boolean)>($stack10, $stack11);
+
+        virtualinvoke $stack8.<javax.swing.JCheckBox: void setActionCommand(java.lang.String)>("AutoTickOnOff");
+
+        virtualinvoke $stack8.<javax.swing.JCheckBox: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void setAutoTickUnitSelectionCheckBox(javax.swing.JCheckBox)>($stack8);
+
+        $stack12 = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox getAutoTickUnitSelectionCheckBox()>();
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack12);
+
+        $stack14 = new javax.swing.JPanel;
+
+        specialinvoke $stack14.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack14);
+
+        $stack16 = new javax.swing.JLabel;
+
+        $stack17 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack18 = virtualinvoke $stack17.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Manual_TickUnit_value");
+
+        specialinvoke $stack16.<javax.swing.JLabel: void <init>(java.lang.String)>($stack18);
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack16);
+
+        $stack20 = new javax.swing.JTextField;
+
+        $stack21 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue>;
+
+        $stack22 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack21);
+
+        specialinvoke $stack20.<javax.swing.JTextField: void <init>(java.lang.String)>($stack22);
+
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit> = $stack20;
+
+        $stack23 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        $stack24 = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean isAutoTickUnitSelection()>();
+
+        if $stack24 != 0 goto label1;
+
+        $stack32 = 1;
+
+        goto label2;
+
+     label1:
+        $stack32 = 0;
+
+     label2:
+        virtualinvoke $stack23.<javax.swing.JTextField: void setEnabled(boolean)>($stack32);
+
+        $stack25 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack25.<javax.swing.JTextField: void setActionCommand(java.lang.String)>("TickUnitValue");
+
+        $stack26 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack26.<javax.swing.JTextField: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack27 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack27.<javax.swing.JTextField: void addFocusListener(java.awt.event.FocusListener)>(this);
+
+        $stack28 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack28);
+
+        $stack30 = new javax.swing.JPanel;
+
+        specialinvoke $stack30.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack3.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack30);
+
+        return $stack3;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        java.awt.event.ActionEvent event;
+        java.lang.String command;
+        boolean $stack4;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        event := @parameter0: java.awt.event.ActionEvent;
+
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+
+        $stack4 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("TickUnitValue");
+
+        if $stack4 == 0 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateTickUnit()>();
+
+        goto label2;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.editor.DefaultValueAxisEditor: void actionPerformed(java.awt.event.ActionEvent)>(event);
+
+     label2:
+        return;
+    }
+
+    public void focusLost(java.awt.event.FocusEvent)
+    {
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        java.awt.event.FocusEvent event;
+        java.lang.Object $stack2;
+        javax.swing.JTextField $stack3;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        event := @parameter0: java.awt.event.FocusEvent;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultValueAxisEditor: void focusLost(java.awt.event.FocusEvent)>(event);
+
+        $stack2 = virtualinvoke event.<java.awt.event.FocusEvent: java.lang.Object getSource()>();
+
+        $stack3 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        if $stack2 != $stack3 goto label1;
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateTickUnit()>();
+
+     label1:
+        return;
+    }
+
+    public void toggleAutoTick()
+    {
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        boolean $stack1;
+        javax.swing.JTextField $stack2, $stack4, $stack6;
+        double $stack3;
+        java.lang.String $stack5;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultValueAxisEditor: void toggleAutoTick()>();
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean isAutoTickUnitSelection()>();
+
+        if $stack1 == 0 goto label1;
+
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        $stack3 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue>;
+
+        $stack5 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack3);
+
+        virtualinvoke $stack4.<javax.swing.JTextField: void setText(java.lang.String)>($stack5);
+
+        $stack6 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack6.<javax.swing.JTextField: void setEnabled(boolean)>(0);
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        virtualinvoke $stack2.<javax.swing.JTextField: void setEnabled(boolean)>(1);
+
+     label2:
+        return;
+    }
+
+    public void validateTickUnit()
+    {
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        javax.swing.JTextField $stack4, $stack9;
+        java.lang.String $stack5, $stack10;
+        byte $stack7;
+        double $stack8, newTickUnit;
+        java.lang.NumberFormatException $stack13;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+     label1:
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        $stack5 = virtualinvoke $stack4.<javax.swing.JTextField: java.lang.String getText()>();
+
+        newTickUnit = staticinvoke <java.lang.Double: double parseDouble(java.lang.String)>($stack5);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack13 := @caughtexception;
+
+        newTickUnit = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue>;
+
+     label4:
+        $stack7 = newTickUnit cmpl 0.0;
+
+        if $stack7 <= 0 goto label5;
+
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue> = newTickUnit;
+
+     label5:
+        $stack9 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField manualTickUnit>;
+
+        $stack8 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue>;
+
+        $stack10 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack8);
+
+        virtualinvoke $stack9.<javax.swing.JTextField: void setText(java.lang.String)>($stack10);
+
+        return;
+
+        catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    public void setAxisProperties(org.jfree.chart.axis.Axis)
+    {
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        org.jfree.chart.axis.Axis axis;
+        org.jfree.chart.axis.NumberAxis numberAxis;
+        boolean $stack3;
+        org.jfree.chart.axis.NumberTickUnit $stack4;
+        double $stack5;
+
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+
+        axis := @parameter0: org.jfree.chart.axis.Axis;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultValueAxisEditor: void setAxisProperties(org.jfree.chart.axis.Axis)>(axis);
+
+        numberAxis = (org.jfree.chart.axis.NumberAxis) axis;
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean isAutoTickUnitSelection()>();
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = new org.jfree.chart.axis.NumberTickUnit;
+
+        $stack5 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double manualTickUnitValue>;
+
+        specialinvoke $stack4.<org.jfree.chart.axis.NumberTickUnit: void <init>(double)>($stack5);
+
+        virtualinvoke numberAxis.<org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit)>($stack4);
+
+     label1:
+        return;
+    }
+}

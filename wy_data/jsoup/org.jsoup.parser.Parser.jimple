@@ -1,0 +1,451 @@
+public class org.jsoup.parser.Parser extends java.lang.Object
+{
+    private org.jsoup.parser.TreeBuilder treeBuilder;
+    private org.jsoup.parser.ParseErrorList errors;
+    private org.jsoup.parser.ParseSettings settings;
+
+    public void <init>(org.jsoup.parser.TreeBuilder)
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.TreeBuilder treeBuilder;
+        org.jsoup.parser.ParseSettings $stack2;
+        org.jsoup.parser.ParseErrorList $stack3;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        treeBuilder := @parameter0: org.jsoup.parser.TreeBuilder;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder> = treeBuilder;
+
+        $stack2 = virtualinvoke treeBuilder.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.ParseSettings defaultSettings()>();
+
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseSettings settings> = $stack2;
+
+        $stack3 = staticinvoke <org.jsoup.parser.ParseErrorList: org.jsoup.parser.ParseErrorList noTracking()>();
+
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList errors> = $stack3;
+
+        return;
+    }
+
+    public org.jsoup.nodes.Document parseInput(java.lang.String, java.lang.String)
+    {
+        org.jsoup.parser.Parser this;
+        java.io.StringReader $stack3;
+        java.lang.String html, baseUri;
+        org.jsoup.parser.TreeBuilder $stack4;
+        org.jsoup.nodes.Document $stack5;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        html := @parameter0: java.lang.String;
+
+        baseUri := @parameter1: java.lang.String;
+
+        $stack4 = this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder>;
+
+        $stack3 = new java.io.StringReader;
+
+        specialinvoke $stack3.<java.io.StringReader: void <init>(java.lang.String)>(html);
+
+        $stack5 = virtualinvoke $stack4.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document parse(java.io.Reader,java.lang.String,org.jsoup.parser.Parser)>($stack3, baseUri, this);
+
+        return $stack5;
+    }
+
+    public org.jsoup.nodes.Document parseInput(java.io.Reader, java.lang.String)
+    {
+        org.jsoup.parser.Parser this;
+        java.io.Reader inputHtml;
+        java.lang.String baseUri;
+        org.jsoup.parser.TreeBuilder $stack3;
+        org.jsoup.nodes.Document $stack4;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        inputHtml := @parameter0: java.io.Reader;
+
+        baseUri := @parameter1: java.lang.String;
+
+        $stack3 = this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder>;
+
+        $stack4 = virtualinvoke $stack3.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document parse(java.io.Reader,java.lang.String,org.jsoup.parser.Parser)>(inputHtml, baseUri, this);
+
+        return $stack4;
+    }
+
+    public java.util.List parseFragmentInput(java.lang.String, org.jsoup.nodes.Element, java.lang.String)
+    {
+        org.jsoup.parser.Parser this;
+        java.lang.String fragment, baseUri;
+        org.jsoup.nodes.Element context;
+        org.jsoup.parser.TreeBuilder $stack4;
+        java.util.List $stack5;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        fragment := @parameter0: java.lang.String;
+
+        context := @parameter1: org.jsoup.nodes.Element;
+
+        baseUri := @parameter2: java.lang.String;
+
+        $stack4 = this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder>;
+
+        $stack5 = virtualinvoke $stack4.<org.jsoup.parser.TreeBuilder: java.util.List parseFragment(java.lang.String,org.jsoup.nodes.Element,java.lang.String,org.jsoup.parser.Parser)>(fragment, context, baseUri, this);
+
+        return $stack5;
+    }
+
+    public org.jsoup.parser.TreeBuilder getTreeBuilder()
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.TreeBuilder $stack1;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        $stack1 = this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.parser.Parser setTreeBuilder(org.jsoup.parser.TreeBuilder)
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.TreeBuilder treeBuilder;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        treeBuilder := @parameter0: org.jsoup.parser.TreeBuilder;
+
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.TreeBuilder treeBuilder> = treeBuilder;
+
+        treeBuilder.<org.jsoup.parser.TreeBuilder: org.jsoup.parser.Parser parser> = this;
+
+        return this;
+    }
+
+    public boolean isTrackErrors()
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.ParseErrorList $stack1;
+        int $stack2;
+        boolean $stack3;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        $stack1 = this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList errors>;
+
+        $stack2 = virtualinvoke $stack1.<org.jsoup.parser.ParseErrorList: int getMaxSize()>();
+
+        if $stack2 <= 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public org.jsoup.parser.Parser setTrackErrors(int)
+    {
+        org.jsoup.parser.Parser this;
+        int maxErrors;
+        org.jsoup.parser.ParseErrorList $stack2;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        maxErrors := @parameter0: int;
+
+        if maxErrors <= 0 goto label1;
+
+        $stack2 = staticinvoke <org.jsoup.parser.ParseErrorList: org.jsoup.parser.ParseErrorList tracking(int)>(maxErrors);
+
+        goto label2;
+
+     label1:
+        $stack2 = staticinvoke <org.jsoup.parser.ParseErrorList: org.jsoup.parser.ParseErrorList noTracking()>();
+
+     label2:
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList errors> = $stack2;
+
+        return this;
+    }
+
+    public org.jsoup.parser.ParseErrorList getErrors()
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.ParseErrorList $stack1;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        $stack1 = this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList errors>;
+
+        return $stack1;
+    }
+
+    public org.jsoup.parser.Parser settings(org.jsoup.parser.ParseSettings)
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.ParseSettings settings;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        settings := @parameter0: org.jsoup.parser.ParseSettings;
+
+        this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseSettings settings> = settings;
+
+        return this;
+    }
+
+    public org.jsoup.parser.ParseSettings settings()
+    {
+        org.jsoup.parser.Parser this;
+        org.jsoup.parser.ParseSettings $stack1;
+
+        this := @this: org.jsoup.parser.Parser;
+
+        $stack1 = this.<org.jsoup.parser.Parser: org.jsoup.parser.ParseSettings settings>;
+
+        return $stack1;
+    }
+
+    public static org.jsoup.nodes.Document parse(java.lang.String, java.lang.String)
+    {
+        org.jsoup.parser.HtmlTreeBuilder $stack3;
+        java.io.StringReader $stack4;
+        java.lang.String html, baseUri;
+        org.jsoup.parser.Parser $stack5;
+        org.jsoup.nodes.Document $stack6;
+
+        html := @parameter0: java.lang.String;
+
+        baseUri := @parameter1: java.lang.String;
+
+        $stack3 = new org.jsoup.parser.HtmlTreeBuilder;
+
+        specialinvoke $stack3.<org.jsoup.parser.HtmlTreeBuilder: void <init>()>();
+
+        $stack4 = new java.io.StringReader;
+
+        specialinvoke $stack4.<java.io.StringReader: void <init>(java.lang.String)>(html);
+
+        $stack5 = new org.jsoup.parser.Parser;
+
+        specialinvoke $stack5.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack3);
+
+        $stack6 = virtualinvoke $stack3.<org.jsoup.parser.TreeBuilder: org.jsoup.nodes.Document parse(java.io.Reader,java.lang.String,org.jsoup.parser.Parser)>($stack4, baseUri, $stack5);
+
+        return $stack6;
+    }
+
+    public static java.util.List parseFragment(java.lang.String, org.jsoup.nodes.Element, java.lang.String)
+    {
+        org.jsoup.parser.HtmlTreeBuilder $stack4;
+        java.lang.String fragmentHtml, baseUri;
+        org.jsoup.nodes.Element context;
+        org.jsoup.parser.Parser $stack5;
+        java.util.List $stack6;
+
+        fragmentHtml := @parameter0: java.lang.String;
+
+        context := @parameter1: org.jsoup.nodes.Element;
+
+        baseUri := @parameter2: java.lang.String;
+
+        $stack4 = new org.jsoup.parser.HtmlTreeBuilder;
+
+        specialinvoke $stack4.<org.jsoup.parser.HtmlTreeBuilder: void <init>()>();
+
+        $stack5 = new org.jsoup.parser.Parser;
+
+        specialinvoke $stack5.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack4);
+
+        $stack6 = virtualinvoke $stack4.<org.jsoup.parser.HtmlTreeBuilder: java.util.List parseFragment(java.lang.String,org.jsoup.nodes.Element,java.lang.String,org.jsoup.parser.Parser)>(fragmentHtml, context, baseUri, $stack5);
+
+        return $stack6;
+    }
+
+    public static java.util.List parseFragment(java.lang.String, org.jsoup.nodes.Element, java.lang.String, org.jsoup.parser.ParseErrorList)
+    {
+        org.jsoup.parser.HtmlTreeBuilder $stack6;
+        org.jsoup.parser.Parser $stack7;
+        org.jsoup.parser.ParseErrorList errorList;
+        java.lang.String fragmentHtml, baseUri;
+        org.jsoup.nodes.Element context;
+        java.util.List $stack8;
+
+        fragmentHtml := @parameter0: java.lang.String;
+
+        context := @parameter1: org.jsoup.nodes.Element;
+
+        baseUri := @parameter2: java.lang.String;
+
+        errorList := @parameter3: org.jsoup.parser.ParseErrorList;
+
+        $stack6 = new org.jsoup.parser.HtmlTreeBuilder;
+
+        specialinvoke $stack6.<org.jsoup.parser.HtmlTreeBuilder: void <init>()>();
+
+        $stack7 = new org.jsoup.parser.Parser;
+
+        specialinvoke $stack7.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack6);
+
+        $stack7.<org.jsoup.parser.Parser: org.jsoup.parser.ParseErrorList errors> = errorList;
+
+        $stack8 = virtualinvoke $stack6.<org.jsoup.parser.HtmlTreeBuilder: java.util.List parseFragment(java.lang.String,org.jsoup.nodes.Element,java.lang.String,org.jsoup.parser.Parser)>(fragmentHtml, context, baseUri, $stack7);
+
+        return $stack8;
+    }
+
+    public static java.util.List parseXmlFragment(java.lang.String, java.lang.String)
+    {
+        org.jsoup.parser.XmlTreeBuilder $stack3;
+        java.lang.String fragmentXml, baseUri;
+        org.jsoup.parser.Parser $stack4;
+        java.util.List $stack5;
+
+        fragmentXml := @parameter0: java.lang.String;
+
+        baseUri := @parameter1: java.lang.String;
+
+        $stack3 = new org.jsoup.parser.XmlTreeBuilder;
+
+        specialinvoke $stack3.<org.jsoup.parser.XmlTreeBuilder: void <init>()>();
+
+        $stack4 = new org.jsoup.parser.Parser;
+
+        specialinvoke $stack4.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack3);
+
+        $stack5 = virtualinvoke $stack3.<org.jsoup.parser.XmlTreeBuilder: java.util.List parseFragment(java.lang.String,java.lang.String,org.jsoup.parser.Parser)>(fragmentXml, baseUri, $stack4);
+
+        return $stack5;
+    }
+
+    public static org.jsoup.nodes.Document parseBodyFragment(java.lang.String, java.lang.String)
+    {
+        java.lang.String baseUri, bodyHtml;
+        org.jsoup.nodes.Document doc;
+        org.jsoup.nodes.Element body;
+        java.util.List nodeList;
+        org.jsoup.nodes.Node[] $stack13, nodes;
+        java.lang.Object[] $stack14;
+        int $stack15, l7, i, l8;
+        org.jsoup.nodes.Node node, $stack19;
+
+        bodyHtml := @parameter0: java.lang.String;
+
+        baseUri := @parameter1: java.lang.String;
+
+        doc = staticinvoke <org.jsoup.nodes.Document: org.jsoup.nodes.Document createShell(java.lang.String)>(baseUri);
+
+        body = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.nodes.Element body()>();
+
+        nodeList = staticinvoke <org.jsoup.parser.Parser: java.util.List parseFragment(java.lang.String,org.jsoup.nodes.Element,java.lang.String)>(bodyHtml, body, baseUri);
+
+        $stack13 = newarray (org.jsoup.nodes.Node)[0];
+
+        $stack14 = interfaceinvoke nodeList.<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>($stack13);
+
+        nodes = (org.jsoup.nodes.Node[]) $stack14;
+
+        $stack15 = lengthof nodes;
+
+        i = $stack15 - 1;
+
+     label1:
+        if i <= 0 goto label2;
+
+        $stack19 = nodes[i];
+
+        virtualinvoke $stack19.<org.jsoup.nodes.Node: void remove()>();
+
+        i = i + -1;
+
+        goto label1;
+
+     label2:
+        l7 = lengthof nodes;
+
+        l8 = 0;
+
+     label3:
+        if l8 >= l7 goto label4;
+
+        node = nodes[l8];
+
+        virtualinvoke body.<org.jsoup.nodes.Element: org.jsoup.nodes.Element appendChild(org.jsoup.nodes.Node)>(node);
+
+        l8 = l8 + 1;
+
+        goto label3;
+
+     label4:
+        return doc;
+    }
+
+    public static java.lang.String unescapeEntities(java.lang.String, boolean)
+    {
+        org.jsoup.parser.Tokeniser $stack3;
+        org.jsoup.parser.CharacterReader $stack4;
+        java.lang.String string, $stack6;
+        org.jsoup.parser.ParseErrorList $stack5;
+        boolean inAttribute;
+
+        string := @parameter0: java.lang.String;
+
+        inAttribute := @parameter1: boolean;
+
+        $stack3 = new org.jsoup.parser.Tokeniser;
+
+        $stack4 = new org.jsoup.parser.CharacterReader;
+
+        specialinvoke $stack4.<org.jsoup.parser.CharacterReader: void <init>(java.lang.String)>(string);
+
+        $stack5 = staticinvoke <org.jsoup.parser.ParseErrorList: org.jsoup.parser.ParseErrorList noTracking()>();
+
+        specialinvoke $stack3.<org.jsoup.parser.Tokeniser: void <init>(org.jsoup.parser.CharacterReader,org.jsoup.parser.ParseErrorList)>($stack4, $stack5);
+
+        $stack6 = virtualinvoke $stack3.<org.jsoup.parser.Tokeniser: java.lang.String unescapeEntities(boolean)>(inAttribute);
+
+        return $stack6;
+    }
+
+    public static org.jsoup.parser.Parser htmlParser()
+    {
+        org.jsoup.parser.Parser $stack0;
+        org.jsoup.parser.HtmlTreeBuilder $stack1;
+
+        $stack0 = new org.jsoup.parser.Parser;
+
+        $stack1 = new org.jsoup.parser.HtmlTreeBuilder;
+
+        specialinvoke $stack1.<org.jsoup.parser.HtmlTreeBuilder: void <init>()>();
+
+        specialinvoke $stack0.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack1);
+
+        return $stack0;
+    }
+
+    public static org.jsoup.parser.Parser xmlParser()
+    {
+        org.jsoup.parser.Parser $stack0;
+        org.jsoup.parser.XmlTreeBuilder $stack1;
+
+        $stack0 = new org.jsoup.parser.Parser;
+
+        $stack1 = new org.jsoup.parser.XmlTreeBuilder;
+
+        specialinvoke $stack1.<org.jsoup.parser.XmlTreeBuilder: void <init>()>();
+
+        specialinvoke $stack0.<org.jsoup.parser.Parser: void <init>(org.jsoup.parser.TreeBuilder)>($stack1);
+
+        return $stack0;
+    }
+}

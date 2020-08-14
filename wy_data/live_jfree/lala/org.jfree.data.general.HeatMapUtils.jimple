@@ -1,0 +1,165 @@
+public abstract class org.jfree.data.general.HeatMapUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.data.general.HeatMapUtils this;
+
+        this := @this: org.jfree.data.general.HeatMapUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.jfree.data.xy.XYDataset extractRowFromHeatMapDataset(org.jfree.data.general.HeatMapDataset, int, java.lang.Comparable)
+    {
+        org.jfree.data.xy.XYSeries $stack6;
+        java.lang.Comparable seriesName;
+        org.jfree.data.general.HeatMapDataset dataset;
+        int cols, row, c;
+        org.jfree.data.xy.XYSeriesCollection $stack8;
+        double $stack9, $stack10;
+
+        dataset := @parameter0: org.jfree.data.general.HeatMapDataset;
+
+        row := @parameter1: int;
+
+        seriesName := @parameter2: java.lang.Comparable;
+
+        $stack6 = new org.jfree.data.xy.XYSeries;
+
+        specialinvoke $stack6.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable)>(seriesName);
+
+        cols = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: int getXSampleCount()>();
+
+        c = 0;
+
+     label1:
+        if c >= cols goto label2;
+
+        $stack9 = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: double getXValue(int)>(c);
+
+        $stack10 = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: double getZValue(int,int)>(c, row);
+
+        virtualinvoke $stack6.<org.jfree.data.xy.XYSeries: void add(double,double)>($stack9, $stack10);
+
+        c = c + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = new org.jfree.data.xy.XYSeriesCollection;
+
+        specialinvoke $stack8.<org.jfree.data.xy.XYSeriesCollection: void <init>(org.jfree.data.xy.XYSeries)>($stack6);
+
+        return $stack8;
+    }
+
+    public static org.jfree.data.xy.XYDataset extractColumnFromHeatMapDataset(org.jfree.data.general.HeatMapDataset, int, java.lang.Comparable)
+    {
+        org.jfree.data.xy.XYSeries $stack6;
+        java.lang.Comparable seriesName;
+        org.jfree.data.general.HeatMapDataset dataset;
+        int rows, column, r;
+        org.jfree.data.xy.XYSeriesCollection $stack8;
+        double $stack9, $stack10;
+
+        dataset := @parameter0: org.jfree.data.general.HeatMapDataset;
+
+        column := @parameter1: int;
+
+        seriesName := @parameter2: java.lang.Comparable;
+
+        $stack6 = new org.jfree.data.xy.XYSeries;
+
+        specialinvoke $stack6.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable)>(seriesName);
+
+        rows = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: int getYSampleCount()>();
+
+        r = 0;
+
+     label1:
+        if r >= rows goto label2;
+
+        $stack9 = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: double getYValue(int)>(r);
+
+        $stack10 = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: double getZValue(int,int)>(column, r);
+
+        virtualinvoke $stack6.<org.jfree.data.xy.XYSeries: void add(double,double)>($stack9, $stack10);
+
+        r = r + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = new org.jfree.data.xy.XYSeriesCollection;
+
+        specialinvoke $stack8.<org.jfree.data.xy.XYSeriesCollection: void <init>(org.jfree.data.xy.XYSeries)>($stack6);
+
+        return $stack8;
+    }
+
+    public static java.awt.image.BufferedImage createHeatMapImage(org.jfree.data.general.HeatMapDataset, org.jfree.chart.renderer.PaintScale)
+    {
+        org.jfree.data.general.HeatMapDataset dataset;
+        org.jfree.chart.renderer.PaintScale paintScale;
+        int xCount, yCount, $stack19, $stack20, xIndex, yIndex;
+        java.awt.image.BufferedImage $stack13;
+        java.awt.Graphics2D g2;
+        double z;
+        java.awt.Paint p;
+
+        dataset := @parameter0: org.jfree.data.general.HeatMapDataset;
+
+        paintScale := @parameter1: org.jfree.chart.renderer.PaintScale;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(dataset, "dataset");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(paintScale, "paintScale");
+
+        xCount = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: int getXSampleCount()>();
+
+        yCount = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: int getYSampleCount()>();
+
+        $stack13 = new java.awt.image.BufferedImage;
+
+        specialinvoke $stack13.<java.awt.image.BufferedImage: void <init>(int,int,int)>(xCount, yCount, 2);
+
+        g2 = virtualinvoke $stack13.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+
+        xIndex = 0;
+
+     label1:
+        if xIndex >= xCount goto label4;
+
+        yIndex = 0;
+
+     label2:
+        if yIndex >= yCount goto label3;
+
+        z = interfaceinvoke dataset.<org.jfree.data.general.HeatMapDataset: double getZValue(int,int)>(xIndex, yIndex);
+
+        p = interfaceinvoke paintScale.<org.jfree.chart.renderer.PaintScale: java.awt.Paint getPaint(double)>(z);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+
+        $stack19 = yCount - yIndex;
+
+        $stack20 = $stack19 - 1;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void fillRect(int,int,int,int)>(xIndex, $stack20, 1, 1);
+
+        yIndex = yIndex + 1;
+
+        goto label2;
+
+     label3:
+        xIndex = xIndex + 1;
+
+        goto label1;
+
+     label4:
+        return $stack13;
+    }
+}

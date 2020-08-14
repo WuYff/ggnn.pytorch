@@ -1,0 +1,816 @@
+public class org.jfree.chart.block.FlowArrangement extends java.lang.Object implements org.jfree.chart.block.Arrangement, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private org.jfree.chart.ui.HorizontalAlignment horizontalAlignment;
+    private org.jfree.chart.ui.VerticalAlignment verticalAlignment;
+    private double horizontalGap;
+    private double verticalGap;
+
+    public void <init>()
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.ui.VerticalAlignment $stack1;
+        org.jfree.chart.ui.HorizontalAlignment $stack2;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        $stack2 = <org.jfree.chart.ui.HorizontalAlignment: org.jfree.chart.ui.HorizontalAlignment CENTER>;
+
+        $stack1 = <org.jfree.chart.ui.VerticalAlignment: org.jfree.chart.ui.VerticalAlignment CENTER>;
+
+        specialinvoke this.<org.jfree.chart.block.FlowArrangement: void <init>(org.jfree.chart.ui.HorizontalAlignment,org.jfree.chart.ui.VerticalAlignment,double,double)>($stack2, $stack1, 2.0, 2.0);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.ui.HorizontalAlignment, org.jfree.chart.ui.VerticalAlignment, double, double)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.ui.HorizontalAlignment hAlign;
+        org.jfree.chart.ui.VerticalAlignment vAlign;
+        double hGap, vGap;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        hAlign := @parameter0: org.jfree.chart.ui.HorizontalAlignment;
+
+        vAlign := @parameter1: org.jfree.chart.ui.VerticalAlignment;
+
+        hGap := @parameter2: double;
+
+        vGap := @parameter3: double;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.HorizontalAlignment horizontalAlignment> = hAlign;
+
+        this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment> = vAlign;
+
+        this.<org.jfree.chart.block.FlowArrangement: double horizontalGap> = hGap;
+
+        this.<org.jfree.chart.block.FlowArrangement: double verticalGap> = vGap;
+
+        return;
+    }
+
+    public void add(org.jfree.chart.block.Block, java.lang.Object)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.Block block;
+        java.lang.Object key;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        block := @parameter0: org.jfree.chart.block.Block;
+
+        key := @parameter1: java.lang.Object;
+
+        return;
+    }
+
+    public org.jfree.chart.ui.Size2D arrange(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.RectangleConstraint constraint;
+        org.jfree.chart.block.LengthConstraintType w, h, $stack8, $stack9, $stack10, $stack12, $stack13, $stack14, $stack19, $stack20, $stack21, $stack25, $stack26, $stack27;
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D $stack16, $stack17, $stack18, $stack22, $stack23, $stack24, $stack29, $stack30;
+        java.lang.RuntimeException $stack28, $stack11;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        w = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getWidthConstraintType()>();
+
+        h = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getHeightConstraintType()>();
+
+        $stack8 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if w != $stack8 goto label3;
+
+        $stack25 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack25 goto label1;
+
+        $stack30 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D)>(container, g2);
+
+        return $stack30;
+
+     label1:
+        $stack26 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack26 goto label2;
+
+        $stack29 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack29;
+
+     label2:
+        $stack27 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack27 goto label9;
+
+        $stack28 = new java.lang.RuntimeException;
+
+        specialinvoke $stack28.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not implemented.");
+
+        throw $stack28;
+
+     label3:
+        $stack9 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if w != $stack9 goto label6;
+
+        $stack19 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack19 goto label4;
+
+        $stack24 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack24;
+
+     label4:
+        $stack20 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack20 goto label5;
+
+        $stack23 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack23;
+
+     label5:
+        $stack21 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack21 goto label9;
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFR(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack22;
+
+     label6:
+        $stack10 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if w != $stack10 goto label9;
+
+        $stack12 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+
+        if h != $stack12 goto label7;
+
+        $stack18 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeRN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack18;
+
+     label7:
+        $stack13 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+
+        if h != $stack13 goto label8;
+
+        $stack17 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeRF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack17;
+
+     label8:
+        $stack14 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+
+        if h != $stack14 goto label9;
+
+        $stack16 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeRR(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack16;
+
+     label9:
+        $stack11 = new java.lang.RuntimeException;
+
+        specialinvoke $stack11.<java.lang.RuntimeException: void <init>(java.lang.String)>("Unrecognised constraint type.");
+
+        throw $stack11;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeFN(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.BlockContainer container;
+        java.util.List blocks;
+        org.jfree.chart.block.RectangleConstraint constraint, $stack25;
+        double width, $stack22, $stack23, $stack27, $stack28, $stack31, $stack32, $stack34, $stack35, $stack36, $stack37, $stack38, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, x, y, maxHeight;
+        java.util.ArrayList $stack19;
+        int $stack20, i;
+        org.jfree.chart.ui.Size2D $stack21, size;
+        java.lang.Object $stack24;
+        org.jfree.chart.block.Block block;
+        java.awt.Graphics2D g2;
+        byte $stack29;
+        boolean $stack30;
+        org.jfree.chart.block.FlowArrangement this;
+        java.awt.geom.Rectangle2D$Double $stack33, $stack42, $stack51;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        blocks = virtualinvoke container.<org.jfree.chart.block.BlockContainer: java.util.List getBlocks()>();
+
+        width = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: double getWidth()>();
+
+        x = 0.0;
+
+        y = 0.0;
+
+        maxHeight = 0.0;
+
+        $stack19 = new java.util.ArrayList;
+
+        specialinvoke $stack19.<java.util.ArrayList: void <init>()>();
+
+        i = 0;
+
+     label1:
+        $stack20 = interfaceinvoke blocks.<java.util.List: int size()>();
+
+        if i >= $stack20 goto label5;
+
+        $stack24 = interfaceinvoke blocks.<java.util.List: java.lang.Object get(int)>(i);
+
+        block = (org.jfree.chart.block.Block) $stack24;
+
+        $stack25 = <org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint NONE>;
+
+        size = interfaceinvoke block.<org.jfree.chart.block.Block: org.jfree.chart.ui.Size2D arrange(java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(g2, $stack25);
+
+        $stack27 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack28 = x + $stack27;
+
+        $stack29 = $stack28 cmpg width;
+
+        if $stack29 > 0 goto label2;
+
+        interfaceinvoke $stack19.<java.util.List: boolean add(java.lang.Object)>(block);
+
+        $stack51 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack53 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack52 = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        specialinvoke $stack51.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, $stack53, $stack52);
+
+        interfaceinvoke block.<org.jfree.chart.block.Block: void setBounds(java.awt.geom.Rectangle2D)>($stack51);
+
+        $stack54 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack56 = x + $stack54;
+
+        $stack55 = this.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        x = $stack56 + $stack55;
+
+        $stack57 = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        maxHeight = staticinvoke <java.lang.Math: double max(double,double)>(maxHeight, $stack57);
+
+        goto label4;
+
+     label2:
+        $stack30 = interfaceinvoke $stack19.<java.util.List: boolean isEmpty()>();
+
+        if $stack30 == 0 goto label3;
+
+        $stack42 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack44 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack43 = width - x;
+
+        $stack45 = staticinvoke <java.lang.Math: double min(double,double)>($stack44, $stack43);
+
+        $stack46 = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        specialinvoke $stack42.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, $stack45, $stack46);
+
+        interfaceinvoke block.<org.jfree.chart.block.Block: void setBounds(java.awt.geom.Rectangle2D)>($stack42);
+
+        x = 0.0;
+
+        $stack47 = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        $stack49 = y + $stack47;
+
+        $stack48 = this.<org.jfree.chart.block.FlowArrangement: double verticalGap>;
+
+        y = $stack49 + $stack48;
+
+        goto label4;
+
+     label3:
+        interfaceinvoke $stack19.<java.util.List: void clear()>();
+
+        $stack32 = y + maxHeight;
+
+        $stack31 = this.<org.jfree.chart.block.FlowArrangement: double verticalGap>;
+
+        y = $stack32 + $stack31;
+
+        maxHeight = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        $stack33 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack34 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack35 = staticinvoke <java.lang.Math: double min(double,double)>($stack34, width);
+
+        $stack36 = size.<org.jfree.chart.ui.Size2D: double height>;
+
+        specialinvoke $stack33.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, y, $stack35, $stack36);
+
+        interfaceinvoke block.<org.jfree.chart.block.Block: void setBounds(java.awt.geom.Rectangle2D)>($stack33);
+
+        $stack38 = size.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack37 = this.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        x = $stack38 + $stack37;
+
+        interfaceinvoke $stack19.<java.util.List: boolean add(java.lang.Object)>(block);
+
+     label4:
+        i = i + 1;
+
+        goto label1;
+
+     label5:
+        $stack21 = new org.jfree.chart.ui.Size2D;
+
+        $stack22 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: double getWidth()>();
+
+        $stack23 = y + maxHeight;
+
+        specialinvoke $stack21.<org.jfree.chart.ui.Size2D: void <init>(double,double)>($stack22, $stack23);
+
+        return $stack21;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeFR(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.block.RectangleConstraint constraint, c;
+        org.jfree.chart.ui.Size2D s, $stack14;
+        org.jfree.data.Range $stack7, $stack10;
+        double $stack8, $stack11, $stack12;
+        boolean $stack9;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        s = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        $stack7 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getHeightRange()>();
+
+        $stack8 = s.<org.jfree.chart.ui.Size2D: double height>;
+
+        $stack9 = virtualinvoke $stack7.<org.jfree.data.Range: boolean contains(double)>($stack8);
+
+        if $stack9 == 0 goto label1;
+
+        return s;
+
+     label1:
+        $stack10 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getHeightRange()>();
+
+        $stack11 = virtualinvoke s.<org.jfree.chart.ui.Size2D: double getHeight()>();
+
+        $stack12 = virtualinvoke $stack10.<org.jfree.data.Range: double constrain(double)>($stack11);
+
+        c = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint toFixedHeight(double)>($stack12);
+
+        $stack14 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, c);
+
+        return $stack14;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeFF(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.block.RectangleConstraint constraint;
+        org.jfree.chart.ui.Size2D $stack4;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        return $stack4;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeRR(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D s1, $stack13;
+        org.jfree.chart.block.RectangleConstraint constraint, c;
+        org.jfree.data.Range $stack7, $stack10;
+        double $stack8, $stack11;
+        boolean $stack9;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        s1 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D)>(container, g2);
+
+        $stack7 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack8 = s1.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack9 = virtualinvoke $stack7.<org.jfree.data.Range: boolean contains(double)>($stack8);
+
+        if $stack9 == 0 goto label1;
+
+        return s1;
+
+     label1:
+        $stack10 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack11 = virtualinvoke $stack10.<org.jfree.data.Range: double getUpperBound()>();
+
+        c = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint toFixedWidth(double)>($stack11);
+
+        $stack13 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFR(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, c);
+
+        return $stack13;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeRF(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.block.RectangleConstraint constraint, c;
+        org.jfree.chart.ui.Size2D s, $stack14;
+        org.jfree.data.Range $stack7, $stack10;
+        double $stack8, $stack11, $stack12;
+        boolean $stack9;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        s = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, constraint);
+
+        $stack7 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack8 = s.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack9 = virtualinvoke $stack7.<org.jfree.data.Range: boolean contains(double)>($stack8);
+
+        if $stack9 == 0 goto label1;
+
+        return s;
+
+     label1:
+        $stack10 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack11 = virtualinvoke s.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        $stack12 = virtualinvoke $stack10.<org.jfree.data.Range: double constrain(double)>($stack11);
+
+        c = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint toFixedWidth(double)>($stack12);
+
+        $stack14 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFF(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, c);
+
+        return $stack14;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeRN(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D s1, $stack13;
+        org.jfree.chart.block.RectangleConstraint constraint, c;
+        org.jfree.data.Range $stack7, $stack10;
+        double $stack8, $stack11;
+        boolean $stack9;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        s1 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D)>(container, g2);
+
+        $stack7 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack8 = s1.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack9 = virtualinvoke $stack7.<org.jfree.data.Range: boolean contains(double)>($stack8);
+
+        if $stack9 == 0 goto label1;
+
+        return s1;
+
+     label1:
+        $stack10 = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+
+        $stack11 = virtualinvoke $stack10.<org.jfree.data.Range: double getUpperBound()>();
+
+        c = virtualinvoke constraint.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint toFixedWidth(double)>($stack11);
+
+        $stack13 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeFN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(container, g2, c);
+
+        return $stack13;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeNN(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D)
+    {
+        org.jfree.chart.block.BlockContainer container;
+        java.util.List blocks;
+        int blockCount, $stack17, $stack18, $stack23, $stack30, i;
+        org.jfree.chart.ui.Size2D[] sizes;
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.ui.VerticalAlignment $stack19, $stack20, $stack24, $stack25, $stack26, $stack27;
+        double $stack31, $stack32, $stack33, $stack39, $stack41, $stack46, $stack47, $stack49, $stack50, $stack51, x, width, maxHeight;
+        java.lang.Object $stack35;
+        org.jfree.chart.block.Block block;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.block.RectangleConstraint $stack36;
+        org.jfree.chart.ui.Size2D $stack37, $stack38, $stack40, $stack44, $stack45, $stack48, $stack16;
+        java.awt.geom.Rectangle2D$Double $stack43;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        x = 0.0;
+
+        width = 0.0;
+
+        maxHeight = 0.0;
+
+        blocks = virtualinvoke container.<org.jfree.chart.block.BlockContainer: java.util.List getBlocks()>();
+
+        blockCount = interfaceinvoke blocks.<java.util.List: int size()>();
+
+        if blockCount <= 0 goto label7;
+
+        $stack17 = interfaceinvoke blocks.<java.util.List: int size()>();
+
+        sizes = newarray (org.jfree.chart.ui.Size2D)[$stack17];
+
+        i = 0;
+
+     label1:
+        $stack18 = interfaceinvoke blocks.<java.util.List: int size()>();
+
+        if i >= $stack18 goto label2;
+
+        $stack35 = interfaceinvoke blocks.<java.util.List: java.lang.Object get(int)>(i);
+
+        block = (org.jfree.chart.block.Block) $stack35;
+
+        $stack36 = <org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.RectangleConstraint NONE>;
+
+        $stack37 = interfaceinvoke block.<org.jfree.chart.block.Block: org.jfree.chart.ui.Size2D arrange(java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)>(g2, $stack36);
+
+        sizes[i] = $stack37;
+
+        $stack38 = sizes[i];
+
+        $stack39 = virtualinvoke $stack38.<org.jfree.chart.ui.Size2D: double getWidth()>();
+
+        width = width + $stack39;
+
+        $stack40 = sizes[i];
+
+        $stack41 = $stack40.<org.jfree.chart.ui.Size2D: double height>;
+
+        maxHeight = staticinvoke <java.lang.Math: double max(double,double)>($stack41, maxHeight);
+
+        $stack43 = new java.awt.geom.Rectangle2D$Double;
+
+        $stack44 = sizes[i];
+
+        $stack47 = $stack44.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack45 = sizes[i];
+
+        $stack46 = $stack45.<org.jfree.chart.ui.Size2D: double height>;
+
+        specialinvoke $stack43.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, 0.0, $stack47, $stack46);
+
+        interfaceinvoke block.<org.jfree.chart.block.Block: void setBounds(java.awt.geom.Rectangle2D)>($stack43);
+
+        $stack48 = sizes[i];
+
+        $stack49 = $stack48.<org.jfree.chart.ui.Size2D: double width>;
+
+        $stack51 = x + $stack49;
+
+        $stack50 = this.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        x = $stack51 + $stack50;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        if blockCount <= 1 goto label3;
+
+        $stack32 = this.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        $stack30 = blockCount - 1;
+
+        $stack31 = (double) $stack30;
+
+        $stack33 = $stack32 * $stack31;
+
+        width = width + $stack33;
+
+     label3:
+        $stack20 = this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment>;
+
+        $stack19 = <org.jfree.chart.ui.VerticalAlignment: org.jfree.chart.ui.VerticalAlignment TOP>;
+
+        if $stack20 == $stack19 goto label7;
+
+        i = 0;
+
+     label4:
+        $stack23 = interfaceinvoke blocks.<java.util.List: int size()>();
+
+        if i >= $stack23 goto label7;
+
+        $stack25 = this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment>;
+
+        $stack24 = <org.jfree.chart.ui.VerticalAlignment: org.jfree.chart.ui.VerticalAlignment CENTER>;
+
+        if $stack25 != $stack24 goto label5;
+
+        goto label6;
+
+     label5:
+        $stack27 = this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment>;
+
+        $stack26 = <org.jfree.chart.ui.VerticalAlignment: org.jfree.chart.ui.VerticalAlignment BOTTOM>;
+
+        if $stack27 != $stack26 goto label6;
+
+     label6:
+        i = i + 1;
+
+        goto label4;
+
+     label7:
+        $stack16 = new org.jfree.chart.ui.Size2D;
+
+        specialinvoke $stack16.<org.jfree.chart.ui.Size2D: void <init>(double,double)>(width, maxHeight);
+
+        return $stack16;
+    }
+
+    protected org.jfree.chart.ui.Size2D arrangeNF(org.jfree.chart.block.BlockContainer, java.awt.Graphics2D, org.jfree.chart.block.RectangleConstraint)
+    {
+        org.jfree.chart.block.FlowArrangement this;
+        org.jfree.chart.block.BlockContainer container;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.ui.Size2D $stack4;
+        org.jfree.chart.block.RectangleConstraint constraint;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        container := @parameter0: org.jfree.chart.block.BlockContainer;
+
+        g2 := @parameter1: java.awt.Graphics2D;
+
+        constraint := @parameter2: org.jfree.chart.block.RectangleConstraint;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.Size2D arrangeNN(org.jfree.chart.block.BlockContainer,java.awt.Graphics2D)>(container, g2);
+
+        return $stack4;
+    }
+
+    public void clear()
+    {
+        org.jfree.chart.block.FlowArrangement this;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.block.FlowArrangement this, that;
+        boolean $stack3;
+        org.jfree.chart.ui.HorizontalAlignment $stack4, $stack5;
+        org.jfree.chart.ui.VerticalAlignment $stack6, $stack7;
+        double $stack8, $stack9, $stack11, $stack12;
+        byte $stack10, $stack13;
+
+        this := @this: org.jfree.chart.block.FlowArrangement;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.block.FlowArrangement;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.block.FlowArrangement) obj;
+
+        $stack5 = this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.HorizontalAlignment horizontalAlignment>;
+
+        $stack4 = that.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.HorizontalAlignment horizontalAlignment>;
+
+        if $stack5 == $stack4 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = this.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment>;
+
+        $stack6 = that.<org.jfree.chart.block.FlowArrangement: org.jfree.chart.ui.VerticalAlignment verticalAlignment>;
+
+        if $stack7 == $stack6 goto label4;
+
+        return 0;
+
+     label4:
+        $stack9 = this.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        $stack8 = that.<org.jfree.chart.block.FlowArrangement: double horizontalGap>;
+
+        $stack10 = $stack9 cmpl $stack8;
+
+        if $stack10 == 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack12 = this.<org.jfree.chart.block.FlowArrangement: double verticalGap>;
+
+        $stack11 = that.<org.jfree.chart.block.FlowArrangement: double verticalGap>;
+
+        $stack13 = $stack12 cmpl $stack11;
+
+        if $stack13 == 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.block.FlowArrangement: long serialVersionUID> = 4543632485478613800L;
+
+        return;
+    }
+}

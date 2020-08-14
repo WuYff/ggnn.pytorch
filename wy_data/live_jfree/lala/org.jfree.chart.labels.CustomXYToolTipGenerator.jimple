@@ -1,0 +1,272 @@
+public class org.jfree.chart.labels.CustomXYToolTipGenerator extends java.lang.Object implements org.jfree.chart.labels.XYToolTipGenerator, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.util.List toolTipSeries;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        java.util.ArrayList $stack1;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries> = $stack1;
+
+        return;
+    }
+
+    public int getListCount()
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        java.util.List $stack1;
+        int $stack2;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        $stack1 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+
+        return $stack2;
+    }
+
+    public int getToolTipCount(int)
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        int list, result;
+        java.util.List $stack4, tooltips;
+        java.lang.Object $stack5;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        list := @parameter0: int;
+
+        result = 0;
+
+        $stack4 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(list);
+
+        tooltips = (java.util.List) $stack5;
+
+        if tooltips == null goto label1;
+
+        result = interfaceinvoke tooltips.<java.util.List: int size()>();
+
+     label1:
+        return result;
+    }
+
+    public java.lang.String getToolTipText(int, int)
+    {
+        int series, $stack5, item, $stack9;
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        java.util.List $stack6, tooltips;
+        java.lang.Object $stack7, $stack10;
+        java.lang.String result;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        series := @parameter0: int;
+
+        item := @parameter1: int;
+
+        result = null;
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.labels.CustomXYToolTipGenerator: int getListCount()>();
+
+        if series >= $stack5 goto label1;
+
+        $stack6 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(series);
+
+        tooltips = (java.util.List) $stack7;
+
+        if tooltips == null goto label1;
+
+        $stack9 = interfaceinvoke tooltips.<java.util.List: int size()>();
+
+        if item >= $stack9 goto label1;
+
+        $stack10 = interfaceinvoke tooltips.<java.util.List: java.lang.Object get(int)>(item);
+
+        result = (java.lang.String) $stack10;
+
+     label1:
+        return result;
+    }
+
+    public void addToolTipSeries(java.util.List)
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        java.util.List toolTips, $stack2;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        toolTips := @parameter0: java.util.List;
+
+        $stack2 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(toolTips);
+
+        return;
+    }
+
+    public java.lang.String generateToolTip(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this;
+        int series, item;
+        java.lang.String $stack4;
+        org.jfree.data.xy.XYDataset data;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        data := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.lang.String getToolTipText(int,int)>(series, item);
+
+        return $stack4;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.labels.CustomXYToolTipGenerator this, clone;
+        java.lang.Object $stack2;
+        java.util.List $stack3, $stack5;
+        java.util.ArrayList $stack4;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+
+        clone = (org.jfree.chart.labels.CustomXYToolTipGenerator) $stack2;
+
+        $stack3 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        if $stack3 == null goto label1;
+
+        $stack4 = new java.util.ArrayList;
+
+        $stack5 = this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries>;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>(java.util.Collection)>($stack5);
+
+        clone.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.util.List toolTipSeries> = $stack4;
+
+     label1:
+        return clone;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.CustomXYToolTipGenerator this, generator;
+        boolean $stack8, $stack19, result, $stack20, $stack18;
+        int $stack9, $stack10, series, item;
+        java.lang.String t1, t2;
+
+        this := @this: org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label01;
+
+        return 1;
+
+     label01:
+        $stack8 = obj instanceof org.jfree.chart.labels.CustomXYToolTipGenerator;
+
+        if $stack8 == 0 goto label12;
+
+        generator = (org.jfree.chart.labels.CustomXYToolTipGenerator) obj;
+
+        result = 1;
+
+        series = 0;
+
+     label02:
+        $stack9 = virtualinvoke this.<org.jfree.chart.labels.CustomXYToolTipGenerator: int getListCount()>();
+
+        if series >= $stack9 goto label11;
+
+        item = 0;
+
+     label03:
+        $stack10 = virtualinvoke this.<org.jfree.chart.labels.CustomXYToolTipGenerator: int getToolTipCount(int)>(series);
+
+        if item >= $stack10 goto label10;
+
+        t1 = virtualinvoke this.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.lang.String getToolTipText(int,int)>(series, item);
+
+        t2 = virtualinvoke generator.<org.jfree.chart.labels.CustomXYToolTipGenerator: java.lang.String getToolTipText(int,int)>(series, item);
+
+        if t1 == null goto label06;
+
+        if result == 0 goto label04;
+
+        $stack19 = virtualinvoke t1.<java.lang.String: boolean equals(java.lang.Object)>(t2);
+
+        if $stack19 == 0 goto label04;
+
+        $stack20 = 1;
+
+        goto label05;
+
+     label04:
+        $stack20 = 0;
+
+     label05:
+        result = $stack20;
+
+        goto label09;
+
+     label06:
+        if result == 0 goto label07;
+
+        if t2 != null goto label07;
+
+        $stack18 = 1;
+
+        goto label08;
+
+     label07:
+        $stack18 = 0;
+
+     label08:
+        result = $stack18;
+
+     label09:
+        item = item + 1;
+
+        goto label03;
+
+     label10:
+        series = series + 1;
+
+        goto label02;
+
+     label11:
+        return result;
+
+     label12:
+        return 0;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.CustomXYToolTipGenerator: long serialVersionUID> = 8636030004670141362L;
+
+        return;
+    }
+}

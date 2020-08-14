@@ -1,0 +1,389 @@
+public class org.jsoup.helper.W3CDom$W3CBuilder extends java.lang.Object implements org.jsoup.select.NodeVisitor
+{
+    private static final java.lang.String xmlnsKey;
+    private static final java.lang.String xmlnsPrefix;
+    private final org.w3c.dom.Document doc;
+    private final java.util.Stack namespacesStack;
+    private org.w3c.dom.Element dest;
+
+    public void <init>(org.w3c.dom.Document)
+    {
+        org.jsoup.helper.W3CDom$W3CBuilder this;
+        java.util.Stack $stack2, $stack4;
+        org.w3c.dom.Document doc;
+        java.util.HashMap $stack3;
+
+        this := @this: org.jsoup.helper.W3CDom$W3CBuilder;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack2 = new java.util.Stack;
+
+        specialinvoke $stack2.<java.util.Stack: void <init>()>();
+
+        this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack> = $stack2;
+
+        this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc> = doc;
+
+        $stack4 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>()>();
+
+        virtualinvoke $stack4.<java.util.Stack: java.lang.Object push(java.lang.Object)>($stack3);
+
+        return;
+    }
+
+    public void head(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.helper.W3CDom$W3CBuilder this;
+        java.util.HashMap $stack8, $stack36;
+        java.util.Stack $stack9, $stack10, $stack34;
+        java.lang.Object $stack11, $stack35, $stack37;
+        java.util.Map $stack12;
+        org.jsoup.nodes.Node source;
+        boolean $stack14, $stack15, $stack16, $stack17, $stack48;
+        org.w3c.dom.Document $stack18, $stack23, $stack28, $stack39, $stack44, $stack56;
+        java.lang.String $stack19, $stack24, $stack29, namespace, tagName, prefix;
+        org.w3c.dom.Element $stack21, $stack26, $stack31, el, $stack42, $stack40, $stack41;
+        int depth;
+        org.jsoup.nodes.Element sourceEl;
+        org.jsoup.nodes.TextNode sourceEl#14;
+        org.w3c.dom.Text prefix#15;
+        org.jsoup.nodes.Comment sourceEl#16;
+        org.w3c.dom.Comment prefix#17;
+        org.jsoup.nodes.DataNode sourceEl#18;
+
+        this := @this: org.jsoup.helper.W3CDom$W3CBuilder;
+
+        source := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        $stack10 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        $stack8 = new java.util.HashMap;
+
+        $stack9 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        $stack11 = virtualinvoke $stack9.<java.util.Stack: java.lang.Object peek()>();
+
+        $stack12 = (java.util.Map) $stack11;
+
+        specialinvoke $stack8.<java.util.HashMap: void <init>(java.util.Map)>($stack12);
+
+        virtualinvoke $stack10.<java.util.Stack: java.lang.Object push(java.lang.Object)>($stack8);
+
+        $stack14 = source instanceof org.jsoup.nodes.Element;
+
+        if $stack14 == 0 goto label5;
+
+        sourceEl = (org.jsoup.nodes.Element) source;
+
+        prefix = specialinvoke this.<org.jsoup.helper.W3CDom$W3CBuilder: java.lang.String updateNamespaces(org.jsoup.nodes.Element)>(sourceEl);
+
+        $stack34 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        $stack35 = virtualinvoke $stack34.<java.util.Stack: java.lang.Object peek()>();
+
+        $stack36 = (java.util.HashMap) $stack35;
+
+        $stack37 = virtualinvoke $stack36.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(prefix);
+
+        namespace = (java.lang.String) $stack37;
+
+        tagName = virtualinvoke sourceEl.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        if namespace != null goto label1;
+
+        $stack48 = virtualinvoke tagName.<java.lang.String: boolean contains(java.lang.CharSequence)>(":");
+
+        if $stack48 == 0 goto label1;
+
+        $stack56 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        $stack40 = interfaceinvoke $stack56.<org.w3c.dom.Document: org.w3c.dom.Element createElementNS(java.lang.String,java.lang.String)>("", tagName);
+
+        goto label2;
+
+     label1:
+        $stack39 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        $stack40 = interfaceinvoke $stack39.<org.w3c.dom.Document: org.w3c.dom.Element createElementNS(java.lang.String,java.lang.String)>(namespace, tagName);
+
+     label2:
+        el = $stack40;
+
+        specialinvoke this.<org.jsoup.helper.W3CDom$W3CBuilder: void copyAttributes(org.jsoup.nodes.Node,org.w3c.dom.Element)>(sourceEl, $stack40);
+
+        $stack41 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        if $stack41 != null goto label3;
+
+        $stack44 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        interfaceinvoke $stack44.<org.w3c.dom.Document: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>($stack40);
+
+        goto label4;
+
+     label3:
+        $stack42 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        interfaceinvoke $stack42.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>($stack40);
+
+     label4:
+        this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest> = el;
+
+        goto label8;
+
+     label5:
+        $stack15 = source instanceof org.jsoup.nodes.TextNode;
+
+        if $stack15 == 0 goto label6;
+
+        sourceEl#14 = (org.jsoup.nodes.TextNode) source;
+
+        $stack28 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        $stack29 = virtualinvoke sourceEl#14.<org.jsoup.nodes.TextNode: java.lang.String getWholeText()>();
+
+        prefix#15 = interfaceinvoke $stack28.<org.w3c.dom.Document: org.w3c.dom.Text createTextNode(java.lang.String)>($stack29);
+
+        $stack31 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        interfaceinvoke $stack31.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(prefix#15);
+
+        goto label8;
+
+     label6:
+        $stack16 = source instanceof org.jsoup.nodes.Comment;
+
+        if $stack16 == 0 goto label7;
+
+        sourceEl#16 = (org.jsoup.nodes.Comment) source;
+
+        $stack23 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        $stack24 = virtualinvoke sourceEl#16.<org.jsoup.nodes.Comment: java.lang.String getData()>();
+
+        prefix#17 = interfaceinvoke $stack23.<org.w3c.dom.Document: org.w3c.dom.Comment createComment(java.lang.String)>($stack24);
+
+        $stack26 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        interfaceinvoke $stack26.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(prefix#17);
+
+        goto label8;
+
+     label7:
+        $stack17 = source instanceof org.jsoup.nodes.DataNode;
+
+        if $stack17 == 0 goto label8;
+
+        sourceEl#18 = (org.jsoup.nodes.DataNode) source;
+
+        $stack18 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Document doc>;
+
+        $stack19 = virtualinvoke sourceEl#18.<org.jsoup.nodes.DataNode: java.lang.String getWholeData()>();
+
+        prefix#15 = interfaceinvoke $stack18.<org.w3c.dom.Document: org.w3c.dom.Text createTextNode(java.lang.String)>($stack19);
+
+        $stack21 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        interfaceinvoke $stack21.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(prefix#15);
+
+     label8:
+        return;
+    }
+
+    public void tail(org.jsoup.nodes.Node, int)
+    {
+        org.jsoup.nodes.Node source;
+        boolean $stack3, $stack8;
+        org.jsoup.helper.W3CDom$W3CBuilder this;
+        org.w3c.dom.Element $stack6, $stack10, $stack12;
+        org.w3c.dom.Node $stack7, $stack11;
+        int depth;
+        java.util.Stack $stack4;
+
+        this := @this: org.jsoup.helper.W3CDom$W3CBuilder;
+
+        source := @parameter0: org.jsoup.nodes.Node;
+
+        depth := @parameter1: int;
+
+        $stack3 = source instanceof org.jsoup.nodes.Element;
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        $stack7 = interfaceinvoke $stack6.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        $stack8 = $stack7 instanceof org.w3c.dom.Element;
+
+        if $stack8 == 0 goto label1;
+
+        $stack10 = this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest>;
+
+        $stack11 = interfaceinvoke $stack10.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        $stack12 = (org.w3c.dom.Element) $stack11;
+
+        this.<org.jsoup.helper.W3CDom$W3CBuilder: org.w3c.dom.Element dest> = $stack12;
+
+     label1:
+        $stack4 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        virtualinvoke $stack4.<java.util.Stack: java.lang.Object pop()>();
+
+        return;
+    }
+
+    private void copyAttributes(org.jsoup.nodes.Node, org.w3c.dom.Element)
+    {
+        org.jsoup.nodes.Node source;
+        org.jsoup.nodes.Attributes $stack6;
+        java.util.Iterator l3;
+        boolean $stack8, $stack12;
+        java.lang.Object $stack9;
+        org.jsoup.nodes.Attribute attribute;
+        java.lang.String $stack10, key, $stack14;
+        org.w3c.dom.Element el;
+        org.jsoup.helper.W3CDom$W3CBuilder this;
+
+        this := @this: org.jsoup.helper.W3CDom$W3CBuilder;
+
+        source := @parameter0: org.jsoup.nodes.Node;
+
+        el := @parameter1: org.w3c.dom.Element;
+
+        $stack6 = virtualinvoke source.<org.jsoup.nodes.Node: org.jsoup.nodes.Attributes attributes()>();
+
+        l3 = virtualinvoke $stack6.<org.jsoup.nodes.Attributes: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label3;
+
+        $stack9 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+
+        attribute = (org.jsoup.nodes.Attribute) $stack9;
+
+        $stack10 = virtualinvoke attribute.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        key = virtualinvoke $stack10.<java.lang.String: java.lang.String replaceAll(java.lang.String,java.lang.String)>("[^-a-zA-Z0-9_:.]", "");
+
+        $stack12 = virtualinvoke key.<java.lang.String: boolean matches(java.lang.String)>("[a-zA-Z_:][-a-zA-Z0-9_:.]*");
+
+        if $stack12 == 0 goto label2;
+
+        $stack14 = virtualinvoke attribute.<org.jsoup.nodes.Attribute: java.lang.String getValue()>();
+
+        interfaceinvoke el.<org.w3c.dom.Element: void setAttribute(java.lang.String,java.lang.String)>(key, $stack14);
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    private java.lang.String updateNamespaces(org.jsoup.nodes.Element)
+    {
+        org.jsoup.nodes.Element el;
+        org.jsoup.nodes.Attributes attributes;
+        java.lang.String $stack10, $stack12, key, $stack19, $stack25, prefix, $stack13;
+        java.lang.Object $stack14, $stack23;
+        org.jsoup.nodes.Attribute attr;
+        boolean $stack16, $stack17, $stack9;
+        int $stack20, pos#7;
+        org.jsoup.helper.W3CDom$W3CBuilder this;
+        java.util.Stack $stack22;
+        java.util.HashMap $stack24;
+        java.util.Iterator pos;
+
+        this := @this: org.jsoup.helper.W3CDom$W3CBuilder;
+
+        el := @parameter0: org.jsoup.nodes.Element;
+
+        attributes = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.nodes.Attributes attributes()>();
+
+        pos = virtualinvoke attributes.<org.jsoup.nodes.Attributes: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke pos.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label4;
+
+        $stack14 = interfaceinvoke pos.<java.util.Iterator: java.lang.Object next()>();
+
+        attr = (org.jsoup.nodes.Attribute) $stack14;
+
+        key = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getKey()>();
+
+        $stack16 = virtualinvoke key.<java.lang.String: boolean equals(java.lang.Object)>("xmlns");
+
+        if $stack16 == 0 goto label2;
+
+        prefix = "";
+
+        goto label3;
+
+     label2:
+        $stack17 = virtualinvoke key.<java.lang.String: boolean startsWith(java.lang.String)>("xmlns:");
+
+        if $stack17 == 0 goto label1;
+
+        $stack19 = "xmlns:";
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: int length()>();
+
+        prefix = virtualinvoke key.<java.lang.String: java.lang.String substring(int)>($stack20);
+
+     label3:
+        $stack22 = this.<org.jsoup.helper.W3CDom$W3CBuilder: java.util.Stack namespacesStack>;
+
+        $stack23 = virtualinvoke $stack22.<java.util.Stack: java.lang.Object peek()>();
+
+        $stack24 = (java.util.HashMap) $stack23;
+
+        $stack25 = virtualinvoke attr.<org.jsoup.nodes.Attribute: java.lang.String getValue()>();
+
+        virtualinvoke $stack24.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(prefix, $stack25);
+
+        goto label1;
+
+     label4:
+        $stack10 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        pos#7 = virtualinvoke $stack10.<java.lang.String: int indexOf(java.lang.String)>(":");
+
+        if pos#7 <= 0 goto label5;
+
+        $stack12 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.String: java.lang.String substring(int,int)>(0, pos#7);
+
+        goto label6;
+
+     label5:
+        $stack13 = "";
+
+     label6:
+        return $stack13;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jsoup.helper.W3CDom$W3CBuilder: java.lang.String xmlnsPrefix> = "xmlns:";
+
+        <org.jsoup.helper.W3CDom$W3CBuilder: java.lang.String xmlnsKey> = "xmlns";
+
+        return;
+    }
+}

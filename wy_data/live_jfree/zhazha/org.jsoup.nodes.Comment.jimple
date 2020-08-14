@@ -1,0 +1,409 @@
+public class org.jsoup.nodes.Comment extends org.jsoup.nodes.LeafNode
+{
+
+    public void <init>(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String data;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        data := @parameter0: java.lang.String;
+
+        specialinvoke this.<org.jsoup.nodes.LeafNode: void <init>()>();
+
+        this.<org.jsoup.nodes.Comment: java.lang.Object value> = data;
+
+        return;
+    }
+
+    public java.lang.String nodeName()
+    {
+        org.jsoup.nodes.Comment this;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        return "#comment";
+    }
+
+    public java.lang.String getData()
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String coreValue()>();
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Comment setData(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String data;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        data := @parameter0: java.lang.String;
+
+        virtualinvoke this.<org.jsoup.nodes.Comment: void coreValue(java.lang.String)>(data);
+
+        return this;
+    }
+
+    void outerHtmlHead(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings) throws java.io.IOException
+    {
+        org.jsoup.nodes.Document$OutputSettings out;
+        boolean $stack4, $stack16, $stack21, $stack10;
+        java.lang.Appendable accum, $stack5, $stack7;
+        org.jsoup.nodes.Comment this;
+        int $stack9, depth;
+        org.jsoup.nodes.Node $stack15, $stack18;
+        org.jsoup.nodes.Element $stack19;
+        org.jsoup.parser.Tag $stack20;
+        java.lang.String $stack6;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        $stack4 = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: boolean prettyPrint()>();
+
+        if $stack4 == 0 goto label3;
+
+        $stack9 = virtualinvoke this.<org.jsoup.nodes.Comment: int siblingIndex()>();
+
+        if $stack9 != 0 goto label1;
+
+        $stack15 = this.<org.jsoup.nodes.Comment: org.jsoup.nodes.Node parentNode>;
+
+        $stack16 = $stack15 instanceof org.jsoup.nodes.Element;
+
+        if $stack16 == 0 goto label1;
+
+        $stack18 = this.<org.jsoup.nodes.Comment: org.jsoup.nodes.Node parentNode>;
+
+        $stack19 = (org.jsoup.nodes.Element) $stack18;
+
+        $stack20 = virtualinvoke $stack19.<org.jsoup.nodes.Element: org.jsoup.parser.Tag tag()>();
+
+        $stack21 = virtualinvoke $stack20.<org.jsoup.parser.Tag: boolean formatAsBlock()>();
+
+        if $stack21 != 0 goto label2;
+
+     label1:
+        $stack10 = virtualinvoke out.<org.jsoup.nodes.Document$OutputSettings: boolean outline()>();
+
+        if $stack10 == 0 goto label3;
+
+     label2:
+        virtualinvoke this.<org.jsoup.nodes.Comment: void indent(java.lang.Appendable,int,org.jsoup.nodes.Document$OutputSettings)>(accum, depth, out);
+
+     label3:
+        $stack5 = interfaceinvoke accum.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("<!--");
+
+        $stack6 = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String getData()>();
+
+        $stack7 = interfaceinvoke $stack5.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($stack6);
+
+        interfaceinvoke $stack7.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>("-->");
+
+        return;
+    }
+
+    void outerHtmlTail(java.lang.Appendable, int, org.jsoup.nodes.Document$OutputSettings)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.Appendable accum;
+        int depth;
+        org.jsoup.nodes.Document$OutputSettings out;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        accum := @parameter0: java.lang.Appendable;
+
+        depth := @parameter1: int;
+
+        out := @parameter2: org.jsoup.nodes.Document$OutputSettings;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String outerHtml()>();
+
+        return $stack1;
+    }
+
+    public org.jsoup.nodes.Comment clone()
+    {
+        org.jsoup.nodes.Comment this, $stack2;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node clone()>();
+
+        $stack2 = (org.jsoup.nodes.Comment) $stack1;
+
+        return $stack2;
+    }
+
+    public boolean isXmlDeclaration()
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String data;
+        int $stack3;
+        boolean $stack4, $stack6, $stack5;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        data = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String getData()>();
+
+        $stack3 = virtualinvoke data.<java.lang.String: int length()>();
+
+        if $stack3 <= 1 goto label2;
+
+        $stack4 = virtualinvoke data.<java.lang.String: boolean startsWith(java.lang.String)>("!");
+
+        if $stack4 != 0 goto label1;
+
+        $stack6 = virtualinvoke data.<java.lang.String: boolean startsWith(java.lang.String)>("?");
+
+        if $stack6 == 0 goto label2;
+
+     label1:
+        $stack5 = 1;
+
+        goto label3;
+
+     label2:
+        $stack5 = 0;
+
+     label3:
+        return $stack5;
+    }
+
+    public org.jsoup.nodes.XmlDeclaration asXmlDeclaration()
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String data, $stack11, $stack14, $stack15, $stack24, $stack25;
+        java.lang.StringBuilder $stack6, $stack7, $stack12, $stack13;
+        int $stack9, $stack10, $stack19;
+        org.jsoup.parser.Parser $stack16, $stack22;
+        org.jsoup.nodes.Document doc;
+        org.jsoup.select.Elements $stack18;
+        org.jsoup.nodes.Element el;
+        org.jsoup.nodes.XmlDeclaration $stack21, decl;
+        org.jsoup.parser.ParseSettings $stack23;
+        boolean $stack26;
+        org.jsoup.nodes.Attributes $stack27, $stack28;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        data = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String getData()>();
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("<");
+
+        $stack9 = virtualinvoke data.<java.lang.String: int length()>();
+
+        $stack10 = $stack9 - 1;
+
+        $stack11 = virtualinvoke data.<java.lang.String: java.lang.String substring(int,int)>(1, $stack10);
+
+        $stack12 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(">");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack15 = virtualinvoke this.<org.jsoup.nodes.Comment: java.lang.String baseUri()>();
+
+        $stack16 = staticinvoke <org.jsoup.parser.Parser: org.jsoup.parser.Parser xmlParser()>();
+
+        doc = staticinvoke <org.jsoup.Jsoup: org.jsoup.nodes.Document parse(java.lang.String,java.lang.String,org.jsoup.parser.Parser)>($stack14, $stack15, $stack16);
+
+        decl = null;
+
+        $stack18 = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.select.Elements children()>();
+
+        $stack19 = virtualinvoke $stack18.<org.jsoup.select.Elements: int size()>();
+
+        if $stack19 <= 0 goto label1;
+
+        el = virtualinvoke doc.<org.jsoup.nodes.Document: org.jsoup.nodes.Element child(int)>(0);
+
+        $stack21 = new org.jsoup.nodes.XmlDeclaration;
+
+        $stack22 = staticinvoke <org.jsoup.nodes.NodeUtils: org.jsoup.parser.Parser parser(org.jsoup.nodes.Node)>(doc);
+
+        $stack23 = virtualinvoke $stack22.<org.jsoup.parser.Parser: org.jsoup.parser.ParseSettings settings()>();
+
+        $stack24 = virtualinvoke el.<org.jsoup.nodes.Element: java.lang.String tagName()>();
+
+        $stack25 = virtualinvoke $stack23.<org.jsoup.parser.ParseSettings: java.lang.String normalizeTag(java.lang.String)>($stack24);
+
+        $stack26 = virtualinvoke data.<java.lang.String: boolean startsWith(java.lang.String)>("!");
+
+        specialinvoke $stack21.<org.jsoup.nodes.XmlDeclaration: void <init>(java.lang.String,boolean)>($stack25, $stack26);
+
+        decl = $stack21;
+
+        $stack27 = virtualinvoke $stack21.<org.jsoup.nodes.XmlDeclaration: org.jsoup.nodes.Attributes attributes()>();
+
+        $stack28 = virtualinvoke el.<org.jsoup.nodes.Element: org.jsoup.nodes.Attributes attributes()>();
+
+        virtualinvoke $stack27.<org.jsoup.nodes.Attributes: void addAll(org.jsoup.nodes.Attributes)>($stack28);
+
+     label1:
+        return decl;
+    }
+
+    public volatile org.jsoup.nodes.Node empty()
+    {
+        org.jsoup.nodes.Comment this;
+        org.jsoup.nodes.Node $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node empty()>();
+
+        return $stack1;
+    }
+
+    public volatile int childNodeSize()
+    {
+        org.jsoup.nodes.Comment this;
+        int $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: int childNodeSize()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String baseUri()
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String baseUri()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.String absUrl(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String absUrl(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node removeAttr(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String l1;
+        org.jsoup.nodes.Node $stack2;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node removeAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile boolean hasAttr(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String l1;
+        boolean $stack2;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: boolean hasAttr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node attr(java.lang.String, java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String l1, l2;
+        org.jsoup.nodes.Node $stack3;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = specialinvoke this.<org.jsoup.nodes.LeafNode: org.jsoup.nodes.Node attr(java.lang.String,java.lang.String)>(l1, l2);
+
+        return $stack3;
+    }
+
+    public volatile java.lang.String attr(java.lang.String)
+    {
+        org.jsoup.nodes.Comment this;
+        java.lang.String l1, $stack2;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = specialinvoke this.<org.jsoup.nodes.LeafNode: java.lang.String attr(java.lang.String)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile org.jsoup.nodes.Node clone()
+    {
+        org.jsoup.nodes.Comment this, $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Comment: org.jsoup.nodes.Comment clone()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jsoup.nodes.Comment this, $stack1;
+
+        this := @this: org.jsoup.nodes.Comment;
+
+        $stack1 = virtualinvoke this.<org.jsoup.nodes.Comment: org.jsoup.nodes.Comment clone()>();
+
+        return $stack1;
+    }
+}

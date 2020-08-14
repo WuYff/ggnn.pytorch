@@ -27,7 +27,7 @@ parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--verbal', action='store_true', help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--criterion', type=int, default=1)
-parser.add_argument('--choice_steps', type=int, default=1)
+parser.add_argument('--choice_steps', type=int, default=2)
 parser.add_argument('--how_many', type=int, default=40)
 
 opt = parser.parse_args()

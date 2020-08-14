@@ -1,0 +1,183 @@
+public class org.jfree.data.json.impl.JSONArray extends java.util.ArrayList implements java.util.List, org.jfree.data.json.impl.JSONAware, org.jfree.data.json.impl.JSONStreamAware
+{
+    private static final long serialVersionUID;
+
+    public void <init>()
+    {
+        org.jfree.data.json.impl.JSONArray this;
+
+        this := @this: org.jfree.data.json.impl.JSONArray;
+
+        specialinvoke this.<java.util.ArrayList: void <init>()>();
+
+        return;
+    }
+
+    public static void writeJSONString(java.util.List, java.io.Writer) throws java.io.IOException
+    {
+        java.util.List list;
+        java.util.Iterator iter;
+        java.io.Writer out;
+        java.lang.Object value;
+        boolean first, $stack6;
+
+        list := @parameter0: java.util.List;
+
+        out := @parameter1: java.io.Writer;
+
+        if list != null goto label1;
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>("null");
+
+        return;
+
+     label1:
+        first = 1;
+
+        iter = interfaceinvoke list.<java.util.List: java.util.Iterator iterator()>();
+
+        virtualinvoke out.<java.io.Writer: void write(int)>(91);
+
+     label2:
+        $stack6 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label6;
+
+        if first == 0 goto label3;
+
+        first = 0;
+
+        goto label4;
+
+     label3:
+        virtualinvoke out.<java.io.Writer: void write(int)>(44);
+
+     label4:
+        value = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+
+        if value != null goto label5;
+
+        virtualinvoke out.<java.io.Writer: void write(java.lang.String)>("null");
+
+        goto label2;
+
+     label5:
+        staticinvoke <org.jfree.data.json.impl.JSONValue: void writeJSONString(java.lang.Object,java.io.Writer)>(value, out);
+
+        goto label2;
+
+     label6:
+        virtualinvoke out.<java.io.Writer: void write(int)>(93);
+
+        return;
+    }
+
+    public void writeJSONString(java.io.Writer) throws java.io.IOException
+    {
+        org.jfree.data.json.impl.JSONArray this;
+        java.io.Writer out;
+
+        this := @this: org.jfree.data.json.impl.JSONArray;
+
+        out := @parameter0: java.io.Writer;
+
+        staticinvoke <org.jfree.data.json.impl.JSONArray: void writeJSONString(java.util.List,java.io.Writer)>(this, out);
+
+        return;
+    }
+
+    public static java.lang.String toJSONString(java.util.List)
+    {
+        java.util.List list;
+        java.lang.StringBuilder $stack5;
+        java.util.Iterator iter;
+        java.lang.String $stack10, $stack13;
+        java.lang.Object value;
+        boolean first, $stack8;
+
+        list := @parameter0: java.util.List;
+
+        if list != null goto label1;
+
+        return "null";
+
+     label1:
+        first = 1;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        iter = interfaceinvoke list.<java.util.List: java.util.Iterator iterator()>();
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(91);
+
+     label2:
+        $stack8 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label6;
+
+        if first == 0 goto label3;
+
+        first = 0;
+
+        goto label4;
+
+     label3:
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(44);
+
+     label4:
+        value = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+
+        if value != null goto label5;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("null");
+
+        goto label2;
+
+     label5:
+        $stack13 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>(value);
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack13);
+
+        goto label2;
+
+     label6:
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(93);
+
+        $stack10 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack10;
+    }
+
+    public java.lang.String toJSONString()
+    {
+        org.jfree.data.json.impl.JSONArray this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.data.json.impl.JSONArray;
+
+        $stack1 = staticinvoke <org.jfree.data.json.impl.JSONArray: java.lang.String toJSONString(java.util.List)>(this);
+
+        return $stack1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.jfree.data.json.impl.JSONArray this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.data.json.impl.JSONArray;
+
+        $stack1 = virtualinvoke this.<org.jfree.data.json.impl.JSONArray: java.lang.String toJSONString()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.data.json.impl.JSONArray: long serialVersionUID> = 3957988303675231981L;
+
+        return;
+    }
+}

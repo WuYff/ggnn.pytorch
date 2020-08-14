@@ -1,0 +1,472 @@
+public class org.jfree.chart.renderer.xy.XYStepRenderer extends org.jfree.chart.renderer.xy.XYLineAndShapeRenderer implements org.jfree.chart.renderer.xy.XYItemRenderer, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private double stepPoint;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void <init>(org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)>(null, null);
+
+        return;
+    }
+
+    public void <init>(org.jfree.chart.labels.XYToolTipGenerator, org.jfree.chart.urls.XYURLGenerator)
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+        org.jfree.chart.labels.XYToolTipGenerator toolTipGenerator;
+        org.jfree.chart.urls.XYURLGenerator urlGenerator;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        toolTipGenerator := @parameter0: org.jfree.chart.labels.XYToolTipGenerator;
+
+        urlGenerator := @parameter1: org.jfree.chart.urls.XYURLGenerator;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>()>();
+
+        this.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint> = 1.0;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void setDefaultToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>(toolTipGenerator);
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void setURLGenerator(org.jfree.chart.urls.XYURLGenerator)>(urlGenerator);
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void setDefaultShapesVisible(boolean)>(0);
+
+        return;
+    }
+
+    public double getStepPoint()
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        $stack1 = this.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint>;
+
+        return $stack1;
+    }
+
+    public void setStepPoint(double)
+    {
+        double stepPoint;
+        byte $stack3, $stack5;
+        java.lang.IllegalArgumentException $stack4;
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        stepPoint := @parameter0: double;
+
+        $stack3 = stepPoint cmpg 0.0;
+
+        if $stack3 < 0 goto label1;
+
+        $stack5 = stepPoint cmpl 1.0;
+
+        if $stack5 <= 0 goto label2;
+
+     label1:
+        $stack4 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires stepPoint in [0.0;1.0]");
+
+        throw $stack4;
+
+     label2:
+        this.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint> = stepPoint;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void fireChangeEvent()>();
+
+        return;
+    }
+
+    public void drawItem(java.awt.Graphics2D, org.jfree.chart.renderer.xy.XYItemRendererState, java.awt.geom.Rectangle2D, org.jfree.chart.plot.PlotRenderingInfo, org.jfree.chart.plot.XYPlot, org.jfree.chart.axis.ValueAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.xy.XYDataset, int, int, org.jfree.chart.plot.CrosshairState, int)
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+        int series, item, pass, $stack63, $stack65, transXs#19;
+        boolean $stack36, $stack45, $stack47, $stack68, $stack57;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack48, $stack70, $stack71, $stack74;
+        java.awt.Paint seriesPaint;
+        java.awt.Stroke seriesStroke;
+        java.awt.Graphics2D g2;
+        org.jfree.data.xy.XYDataset dataset;
+        double x1, y1, transX1, transY1, $stack55, $stack56, transX0, $stack76, $stack77, $stack78, $stack96, $stack97, $stack98, $stack46, x0, y0, $stack69, transXs;
+        org.jfree.chart.ui.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        java.awt.geom.Rectangle2D dataArea;
+        byte $stack49, $stack75, $stack95;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.entity.EntityCollection entities;
+        java.awt.geom.Line2D $stack79, $stack80, $stack81, $stack94, $stack99, $stack100, $stack101, $stack102;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+
+        series := @parameter8: int;
+
+        item := @parameter9: int;
+
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+
+        pass := @parameter11: int;
+
+        $stack36 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: boolean getItemVisible(int,int)>(series, item);
+
+        if $stack36 != 0 goto label01;
+
+        return;
+
+     label01:
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: java.awt.Paint getItemPaint(int,int)>(series, item);
+
+        seriesStroke = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: java.awt.Stroke getItemStroke(int,int)>(series, item);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(seriesStroke);
+
+        x1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+
+        y1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getDomainAxisEdge()>();
+
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        transX1 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(x1, dataArea, xAxisLocation);
+
+        $stack45 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y1);
+
+        if $stack45 == 0 goto label02;
+
+        $stack46 = #NaN;
+
+        goto label03;
+
+     label02:
+        $stack46 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(y1, dataArea, yAxisLocation);
+
+     label03:
+        transY1 = $stack46;
+
+        if pass != 0 goto label11;
+
+        if item <= 0 goto label11;
+
+        $stack63 = item - 1;
+
+        x0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, $stack63);
+
+        $stack65 = item - 1;
+
+        y0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, $stack65);
+
+        transX0 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(x0, dataArea, xAxisLocation);
+
+        $stack68 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y0);
+
+        if $stack68 == 0 goto label04;
+
+        $stack69 = #NaN;
+
+        goto label05;
+
+     label04:
+        $stack69 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>(y0, dataArea, yAxisLocation);
+
+     label05:
+        $stack70 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack70 goto label07;
+
+        $stack95 = $stack69 cmpl transY1;
+
+        if $stack95 != 0 goto label06;
+
+        $stack102 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack102, $stack69, transX0, transY1, transX1, dataArea);
+
+        goto label09;
+
+     label06:
+        $stack96 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: double getStepPoint()>();
+
+        $stack97 = transX1 - transX0;
+
+        $stack98 = $stack96 * $stack97;
+
+        transXs = transX0 + $stack98;
+
+        $stack99 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack99, $stack69, transX0, $stack69, transXs, dataArea);
+
+        $stack100 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack100, $stack69, transXs, transY1, transXs, dataArea);
+
+        $stack101 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack101, transY1, transXs, transY1, transX1, dataArea);
+
+        goto label09;
+
+     label07:
+        $stack71 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        if orientation != $stack71 goto label09;
+
+        $stack75 = $stack69 cmpl transY1;
+
+        if $stack75 != 0 goto label08;
+
+        $stack94 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack94, transX0, $stack69, transX1, transY1, dataArea);
+
+        goto label09;
+
+     label08:
+        $stack76 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: double getStepPoint()>();
+
+        $stack77 = transX1 - transX0;
+
+        $stack78 = $stack76 * $stack77;
+
+        transXs = transX0 + $stack78;
+
+        $stack79 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack79, transX0, $stack69, transXs, $stack69, dataArea);
+
+        $stack80 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack80, transXs, $stack69, transXs, transY1, dataArea);
+
+        $stack81 = state.<org.jfree.chart.renderer.xy.XYItemRendererState: java.awt.geom.Line2D workingLine>;
+
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawLine(java.awt.Graphics2D,java.awt.geom.Line2D,double,double,double,double,java.awt.geom.Rectangle2D)>(g2, $stack81, transXs, transY1, transX1, transY1, dataArea);
+
+     label09:
+        transXs#19 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: int indexOf(org.jfree.data.xy.XYDataset)>(dataset);
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void updateCrosshairValues(org.jfree.chart.plot.CrosshairState,double,double,int,double,double,org.jfree.chart.plot.PlotOrientation)>(crosshairState, x1, y1, transXs#19, transX1, transY1, orientation);
+
+        entities = virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+
+        if entities == null goto label11;
+
+        $stack74 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack74 goto label10;
+
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,double,double)>(entities, null, dataset, series, item, transY1, transX1);
+
+        goto label11;
+
+     label10:
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,double,double)>(entities, null, dataset, series, item, transX1, transY1);
+
+     label11:
+        if pass != 1 goto label15;
+
+        $stack47 = virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: boolean isItemLabelVisible(int,int)>(series, item);
+
+        if $stack47 == 0 goto label15;
+
+        x0 = transX1;
+
+        y0 = transY1;
+
+        $stack48 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack48 goto label12;
+
+        x0 = transY1;
+
+        y0 = transX1;
+
+     label12:
+        $stack55 = x0;
+
+        $stack56 = y0;
+
+        $stack49 = y1 cmpg 0.0;
+
+        if $stack49 >= 0 goto label13;
+
+        $stack57 = 1;
+
+        goto label14;
+
+     label13:
+        $stack57 = 0;
+
+     label14:
+        virtualinvoke this.<org.jfree.chart.renderer.xy.XYStepRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.xy.XYDataset,int,int,double,double,boolean)>(g2, orientation, dataset, series, item, $stack55, $stack56, $stack57);
+
+     label15:
+        return;
+    }
+
+    private void drawLine(java.awt.Graphics2D, java.awt.geom.Line2D, double, double, double, double, java.awt.geom.Rectangle2D)
+    {
+        double x0, x1, y0, y1;
+        boolean $stack13, $stack14, $stack15, $stack16, visible;
+        java.awt.geom.Line2D line;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        line := @parameter1: java.awt.geom.Line2D;
+
+        x0 := @parameter2: double;
+
+        y0 := @parameter3: double;
+
+        x1 := @parameter4: double;
+
+        y1 := @parameter5: double;
+
+        dataArea := @parameter6: java.awt.geom.Rectangle2D;
+
+        $stack13 = staticinvoke <java.lang.Double: boolean isNaN(double)>(x0);
+
+        if $stack13 != 0 goto label1;
+
+        $stack14 = staticinvoke <java.lang.Double: boolean isNaN(double)>(x1);
+
+        if $stack14 != 0 goto label1;
+
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y0);
+
+        if $stack15 != 0 goto label1;
+
+        $stack16 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y1);
+
+        if $stack16 == 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        virtualinvoke line.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(x0, y0, x1, y1);
+
+        visible = staticinvoke <org.jfree.chart.util.LineUtils: boolean clipLine(java.awt.geom.Line2D,java.awt.geom.Rectangle2D)>(line, dataArea);
+
+        if visible == 0 goto label3;
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(line);
+
+     label3:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.XYStepRenderer this, that;
+        boolean $stack3, $stack7;
+        double $stack4, $stack5;
+        byte $stack6;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.renderer.xy.XYStepRenderer) obj;
+
+        $stack5 = this.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint>;
+
+        $stack4 = that.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint>;
+
+        $stack6 = $stack5 cmpl $stack4;
+
+        if $stack6 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: boolean equals(java.lang.Object)>(obj);
+
+        return $stack7;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+        int $stack1, $stack3;
+        double $stack2;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: int hashCode()>();
+
+        $stack2 = this.<org.jfree.chart.renderer.xy.XYStepRenderer: double stepPoint>;
+
+        $stack3 = staticinvoke <org.jfree.chart.HashUtils: int hashCode(int,double)>($stack1, $stack2);
+
+        return $stack3;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.renderer.xy.XYStepRenderer this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.renderer.xy.XYStepRenderer;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.renderer.xy.XYStepRenderer: long serialVersionUID> = -8918141928884796108L;
+
+        return;
+    }
+}

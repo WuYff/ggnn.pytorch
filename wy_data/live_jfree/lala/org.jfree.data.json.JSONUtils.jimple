@@ -1,0 +1,316 @@
+public class org.jfree.data.json.JSONUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.data.json.JSONUtils this;
+
+        this := @this: org.jfree.data.json.JSONUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.String writeKeyedValues(org.jfree.data.KeyedValues)
+    {
+        org.jfree.data.KeyedValues data;
+        java.io.StringWriter $stack3;
+        java.lang.String $stack4;
+        java.io.IOException $stack5;
+        java.lang.RuntimeException $stack6;
+
+        data := @parameter0: org.jfree.data.KeyedValues;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data, "data");
+
+        $stack3 = new java.io.StringWriter;
+
+        specialinvoke $stack3.<java.io.StringWriter: void <init>()>();
+
+     label1:
+        staticinvoke <org.jfree.data.json.JSONUtils: void writeKeyedValues(org.jfree.data.KeyedValues,java.io.Writer)>(data, $stack3);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $stack6 = new java.lang.RuntimeException;
+
+        specialinvoke $stack6.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack5);
+
+        throw $stack6;
+
+     label4:
+        $stack4 = virtualinvoke $stack3.<java.io.StringWriter: java.lang.String toString()>();
+
+        return $stack4;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public static void writeKeyedValues(org.jfree.data.KeyedValues, java.io.Writer) throws java.io.IOException
+    {
+        org.jfree.data.KeyedValues data;
+        java.io.Writer writer;
+        java.util.List $stack5;
+        java.util.Iterator iterator;
+        boolean $stack7, first;
+        java.lang.Object $stack8;
+        java.lang.Comparable key;
+        java.lang.String $stack9, $stack10, $stack12;
+        java.lang.Number $stack11;
+
+        data := @parameter0: org.jfree.data.KeyedValues;
+
+        writer := @parameter1: java.io.Writer;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data, "data");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(writer, "writer");
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("[");
+
+        first = 1;
+
+        $stack5 = interfaceinvoke data.<org.jfree.data.KeyedValues: java.util.List getKeys()>();
+
+        iterator = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label4;
+
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+
+        key = (java.lang.Comparable) $stack8;
+
+        if first != 0 goto label2;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", ");
+
+        goto label3;
+
+     label2:
+        first = 0;
+
+     label3:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("[");
+
+        $stack9 = virtualinvoke key.<java.lang.Object: java.lang.String toString()>();
+
+        $stack10 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>($stack9);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>($stack10);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", ");
+
+        $stack11 = interfaceinvoke data.<org.jfree.data.KeyedValues: java.lang.Number getValue(java.lang.Comparable)>(key);
+
+        $stack12 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>($stack11);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>($stack12);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("]");
+
+        goto label1;
+
+     label4:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("]");
+
+        return;
+    }
+
+    public static java.lang.String writeKeyedValues2D(org.jfree.data.KeyedValues2D)
+    {
+        org.jfree.data.KeyedValues2D data;
+        java.io.StringWriter $stack3;
+        java.lang.String $stack4;
+        java.io.IOException $stack5;
+        java.lang.RuntimeException $stack6;
+
+        data := @parameter0: org.jfree.data.KeyedValues2D;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data, "data");
+
+        $stack3 = new java.io.StringWriter;
+
+        specialinvoke $stack3.<java.io.StringWriter: void <init>()>();
+
+     label1:
+        staticinvoke <org.jfree.data.json.JSONUtils: void writeKeyedValues2D(org.jfree.data.KeyedValues2D,java.io.Writer)>(data, $stack3);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $stack6 = new java.lang.RuntimeException;
+
+        specialinvoke $stack6.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack5);
+
+        throw $stack6;
+
+     label4:
+        $stack4 = virtualinvoke $stack3.<java.io.StringWriter: java.lang.String toString()>();
+
+        return $stack4;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public static void writeKeyedValues2D(org.jfree.data.KeyedValues2D, java.io.Writer) throws java.io.IOException
+    {
+        org.jfree.data.KeyedValues2D data;
+        java.io.Writer writer;
+        java.util.List columnKeys, rowKeys;
+        boolean $stack12, $stack13, $stack15, $stack39, first, first#7, $stack22;
+        java.lang.Object $stack18, $stack24, $stack41;
+        java.lang.String $stack19, $stack20, $stack26, $stack42, $stack43;
+        java.util.Iterator l8, l5;
+        java.lang.Comparable columnKey, columnKey;
+        java.lang.Number $stack25;
+
+        data := @parameter0: org.jfree.data.KeyedValues2D;
+
+        writer := @parameter1: java.io.Writer;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(data, "data");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(writer, "writer");
+
+        columnKeys = interfaceinvoke data.<org.jfree.data.KeyedValues2D: java.util.List getColumnKeys()>();
+
+        rowKeys = interfaceinvoke data.<org.jfree.data.KeyedValues2D: java.util.List getRowKeys()>();
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("{");
+
+        $stack12 = interfaceinvoke columnKeys.<java.util.List: boolean isEmpty()>();
+
+        if $stack12 != 0 goto label05;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("\"columnKeys\": [");
+
+        first = 1;
+
+        l5 = interfaceinvoke columnKeys.<java.util.List: java.util.Iterator iterator()>();
+
+     label01:
+        $stack39 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack39 == 0 goto label04;
+
+        $stack41 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        columnKey = (java.lang.Comparable) $stack41;
+
+        if first != 0 goto label02;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", ");
+
+        goto label03;
+
+     label02:
+        first = 0;
+
+     label03:
+        $stack42 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        $stack43 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>($stack42);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>($stack43);
+
+        goto label01;
+
+     label04:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("]");
+
+     label05:
+        $stack13 = interfaceinvoke rowKeys.<java.util.List: boolean isEmpty()>();
+
+        if $stack13 != 0 goto label14;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", \"rows\": [");
+
+        first = 1;
+
+        l5 = interfaceinvoke rowKeys.<java.util.List: java.util.Iterator iterator()>();
+
+     label06:
+        $stack15 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack15 == 0 goto label13;
+
+        $stack18 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+
+        columnKey = (java.lang.Comparable) $stack18;
+
+        if first != 0 goto label07;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", [");
+
+        goto label08;
+
+     label07:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("[");
+
+        first = 0;
+
+     label08:
+        $stack19 = virtualinvoke columnKey.<java.lang.Object: java.lang.String toString()>();
+
+        $stack20 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>($stack19);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>($stack20);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", [");
+
+        first#7 = 1;
+
+        l8 = interfaceinvoke columnKeys.<java.util.List: java.util.Iterator iterator()>();
+
+     label09:
+        $stack22 = interfaceinvoke l8.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack22 == 0 goto label12;
+
+        $stack24 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+
+        columnKey = (java.lang.Comparable) $stack24;
+
+        if first#7 != 0 goto label10;
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>(", ");
+
+        goto label11;
+
+     label10:
+        first#7 = 0;
+
+     label11:
+        $stack25 = interfaceinvoke data.<org.jfree.data.KeyedValues2D: java.lang.Number getValue(java.lang.Comparable,java.lang.Comparable)>(columnKey, columnKey);
+
+        $stack26 = staticinvoke <org.jfree.data.json.impl.JSONValue: java.lang.String toJSONString(java.lang.Object)>($stack25);
+
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>($stack26);
+
+        goto label09;
+
+     label12:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("]]");
+
+        goto label06;
+
+     label13:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("]");
+
+     label14:
+        virtualinvoke writer.<java.io.Writer: void write(java.lang.String)>("}");
+
+        return;
+    }
+}

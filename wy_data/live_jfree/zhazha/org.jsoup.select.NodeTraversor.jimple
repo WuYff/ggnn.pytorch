@@ -1,0 +1,280 @@
+public class org.jsoup.select.NodeTraversor extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jsoup.select.NodeTraversor this;
+
+        this := @this: org.jsoup.select.NodeTraversor;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void traverse(org.jsoup.select.NodeVisitor, org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.Node root, $stack5, node;
+        org.jsoup.select.NodeVisitor visitor;
+        int $stack4, depth;
+
+        visitor := @parameter0: org.jsoup.select.NodeVisitor;
+
+        root := @parameter1: org.jsoup.nodes.Node;
+
+        node = root;
+
+        depth = 0;
+
+     label1:
+        if node == null goto label5;
+
+        interfaceinvoke visitor.<org.jsoup.select.NodeVisitor: void head(org.jsoup.nodes.Node,int)>(node, depth);
+
+        $stack4 = virtualinvoke node.<org.jsoup.nodes.Node: int childNodeSize()>();
+
+        if $stack4 <= 0 goto label2;
+
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node childNode(int)>(0);
+
+        depth = depth + 1;
+
+        goto label1;
+
+     label2:
+        $stack5 = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node nextSibling()>();
+
+        if $stack5 != null goto label3;
+
+        if depth <= 0 goto label3;
+
+        interfaceinvoke visitor.<org.jsoup.select.NodeVisitor: void tail(org.jsoup.nodes.Node,int)>(node, depth);
+
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node parentNode()>();
+
+        depth = depth + -1;
+
+        goto label2;
+
+     label3:
+        interfaceinvoke visitor.<org.jsoup.select.NodeVisitor: void tail(org.jsoup.nodes.Node,int)>(node, depth);
+
+        if node != root goto label4;
+
+        goto label5;
+
+     label4:
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node nextSibling()>();
+
+        goto label1;
+
+     label5:
+        return;
+    }
+
+    public static void traverse(org.jsoup.select.NodeVisitor, org.jsoup.select.Elements)
+    {
+        org.jsoup.select.NodeVisitor visitor;
+        org.jsoup.select.Elements elements;
+        java.util.Iterator l2;
+        boolean $stack5;
+        java.lang.Object $stack6;
+        org.jsoup.nodes.Element el;
+
+        visitor := @parameter0: org.jsoup.select.NodeVisitor;
+
+        elements := @parameter1: org.jsoup.select.Elements;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(visitor);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(elements);
+
+        l2 = virtualinvoke elements.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label2;
+
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack6;
+
+        staticinvoke <org.jsoup.select.NodeTraversor: void traverse(org.jsoup.select.NodeVisitor,org.jsoup.nodes.Node)>(visitor, el);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public static org.jsoup.select.NodeFilter$FilterResult filter(org.jsoup.select.NodeFilter, org.jsoup.nodes.Node)
+    {
+        org.jsoup.nodes.Node root, node, $stack10, prev;
+        org.jsoup.select.NodeFilter$FilterResult $stack6, $stack8, $stack9, $stack11, $stack13, $stack15, $stack17, $stack25, $stack27, $stack29, $stack32, result;
+        org.jsoup.select.NodeFilter filter;
+        int $stack40, depth;
+
+        filter := @parameter0: org.jsoup.select.NodeFilter;
+
+        root := @parameter1: org.jsoup.nodes.Node;
+
+        node = root;
+
+        depth = 0;
+
+     label01:
+        if node == null goto label12;
+
+        result = interfaceinvoke filter.<org.jsoup.select.NodeFilter: org.jsoup.select.NodeFilter$FilterResult head(org.jsoup.nodes.Node,int)>(node, depth);
+
+        $stack8 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult STOP>;
+
+        if result != $stack8 goto label02;
+
+        return result;
+
+     label02:
+        $stack9 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult CONTINUE>;
+
+        if result != $stack9 goto label03;
+
+        $stack40 = virtualinvoke node.<org.jsoup.nodes.Node: int childNodeSize()>();
+
+        if $stack40 <= 0 goto label03;
+
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node childNode(int)>(0);
+
+        depth = depth + 1;
+
+        goto label01;
+
+     label03:
+        $stack10 = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node nextSibling()>();
+
+        if $stack10 != null goto label07;
+
+        if depth <= 0 goto label07;
+
+        $stack25 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult CONTINUE>;
+
+        if result == $stack25 goto label04;
+
+        $stack32 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult SKIP_CHILDREN>;
+
+        if result != $stack32 goto label05;
+
+     label04:
+        result = interfaceinvoke filter.<org.jsoup.select.NodeFilter: org.jsoup.select.NodeFilter$FilterResult tail(org.jsoup.nodes.Node,int)>(node, depth);
+
+        $stack27 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult STOP>;
+
+        if result != $stack27 goto label05;
+
+        return result;
+
+     label05:
+        prev = node;
+
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node parentNode()>();
+
+        depth = depth + -1;
+
+        $stack29 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult REMOVE>;
+
+        if result != $stack29 goto label06;
+
+        virtualinvoke prev.<org.jsoup.nodes.Node: void remove()>();
+
+     label06:
+        result = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult CONTINUE>;
+
+        goto label03;
+
+     label07:
+        $stack11 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult CONTINUE>;
+
+        if result == $stack11 goto label08;
+
+        $stack17 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult SKIP_CHILDREN>;
+
+        if result != $stack17 goto label09;
+
+     label08:
+        result = interfaceinvoke filter.<org.jsoup.select.NodeFilter: org.jsoup.select.NodeFilter$FilterResult tail(org.jsoup.nodes.Node,int)>(node, depth);
+
+        $stack13 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult STOP>;
+
+        if result != $stack13 goto label09;
+
+        return result;
+
+     label09:
+        if node != root goto label10;
+
+        return result;
+
+     label10:
+        prev = node;
+
+        node = virtualinvoke node.<org.jsoup.nodes.Node: org.jsoup.nodes.Node nextSibling()>();
+
+        $stack15 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult REMOVE>;
+
+        if result != $stack15 goto label11;
+
+        virtualinvoke prev.<org.jsoup.nodes.Node: void remove()>();
+
+     label11:
+        goto label01;
+
+     label12:
+        $stack6 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult CONTINUE>;
+
+        return $stack6;
+    }
+
+    public static void filter(org.jsoup.select.NodeFilter, org.jsoup.select.Elements)
+    {
+        org.jsoup.select.NodeFilter filter;
+        org.jsoup.select.Elements elements;
+        java.util.Iterator l2;
+        boolean $stack5;
+        java.lang.Object $stack6;
+        org.jsoup.nodes.Element el;
+        org.jsoup.select.NodeFilter$FilterResult $stack7, $stack8;
+
+        filter := @parameter0: org.jsoup.select.NodeFilter;
+
+        elements := @parameter1: org.jsoup.select.Elements;
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(filter);
+
+        staticinvoke <org.jsoup.helper.Validate: void notNull(java.lang.Object)>(elements);
+
+        l2 = virtualinvoke elements.<org.jsoup.select.Elements: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label3;
+
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        el = (org.jsoup.nodes.Element) $stack6;
+
+        $stack7 = staticinvoke <org.jsoup.select.NodeTraversor: org.jsoup.select.NodeFilter$FilterResult filter(org.jsoup.select.NodeFilter,org.jsoup.nodes.Node)>(filter, el);
+
+        $stack8 = <org.jsoup.select.NodeFilter$FilterResult: org.jsoup.select.NodeFilter$FilterResult STOP>;
+
+        if $stack7 != $stack8 goto label2;
+
+        goto label3;
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+}

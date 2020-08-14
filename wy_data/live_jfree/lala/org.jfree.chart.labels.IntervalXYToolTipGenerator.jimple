@@ -1,0 +1,409 @@
+public class org.jfree.chart.labels.IntervalXYToolTipGenerator extends org.jfree.chart.labels.AbstractXYItemLabelGenerator implements org.jfree.chart.labels.XYToolTipGenerator, java.lang.Cloneable, org.jfree.chart.util.PublicCloneable, java.io.Serializable
+{
+    public static final java.lang.String DEFAULT_TOOL_TIP_FORMAT;
+
+    public void <init>()
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.text.NumberFormat $stack2, $stack3;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+
+        specialinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>("{0}: ({1} - {2}), ({5} - {6})", $stack2, $stack3);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.NumberFormat xFormat, yFormat;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.NumberFormat;
+
+        yFormat := @parameter2: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(formatString, xFormat, yFormat);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.DateFormat, java.text.NumberFormat)
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.DateFormat xFormat;
+        java.text.NumberFormat yFormat;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.DateFormat;
+
+        yFormat := @parameter2: java.text.NumberFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.DateFormat,java.text.NumberFormat)>(formatString, xFormat, yFormat);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.NumberFormat, java.text.DateFormat)
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.NumberFormat xFormat;
+        java.text.DateFormat yFormat;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.NumberFormat;
+
+        yFormat := @parameter2: java.text.DateFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.DateFormat)>(formatString, xFormat, yFormat);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.text.DateFormat, java.text.DateFormat)
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.lang.String formatString;
+        java.text.DateFormat xFormat, yFormat;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        formatString := @parameter0: java.lang.String;
+
+        xFormat := @parameter1: java.text.DateFormat;
+
+        yFormat := @parameter2: java.text.DateFormat;
+
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.DateFormat,java.text.DateFormat)>(formatString, xFormat, yFormat);
+
+        return;
+    }
+
+    protected java.lang.Object[] createItemArray(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        boolean $stack21, $stack37, $stack40, $stack43;
+        java.lang.Object[] result;
+        int series, item;
+        java.lang.Comparable $stack23;
+        java.lang.String $stack24, $stack30, $stack32, $stack34, $stack39, $stack42, $stack45, $stack49, $stack54, $stack58, $stack63, $stack67, $stack72, $stack76, $stack80, $stack84;
+        double x, y, xs, xe, ys, ye;
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.text.DateFormat xdf, ydf;
+        java.util.Date $stack46, $stack55, $stack64, $stack73, $stack77, $stack81;
+        long $stack47, $stack56, $stack65, $stack74, $stack78, $stack82;
+        java.lang.Number $stack52, $stack61, $stack69;
+        org.jfree.data.xy.IntervalXYDataset intervalDataset;
+        java.text.NumberFormat xnf;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        intervalDataset = null;
+
+        $stack21 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+
+        if $stack21 == 0 goto label01;
+
+        intervalDataset = (org.jfree.data.xy.IntervalXYDataset) dataset;
+
+     label01:
+        result = newarray (java.lang.Object)[7];
+
+        $stack23 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+
+        $stack24 = virtualinvoke $stack23.<java.lang.Object: java.lang.String toString()>();
+
+        result[0] = $stack24;
+
+        x = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+
+        xs = x;
+
+        xe = x;
+
+        y = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+
+        ys = y;
+
+        ye = y;
+
+        if intervalDataset == null goto label02;
+
+        xs = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getStartXValue(int,int)>(series, item);
+
+        xe = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getEndXValue(int,int)>(series, item);
+
+        ys = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getStartYValue(int,int)>(series, item);
+
+        ye = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getEndYValue(int,int)>(series, item);
+
+     label02:
+        xdf = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.text.DateFormat getXDateFormat()>();
+
+        if xdf == null goto label03;
+
+        $stack73 = new java.util.Date;
+
+        $stack74 = (long) x;
+
+        specialinvoke $stack73.<java.util.Date: void <init>(long)>($stack74);
+
+        $stack76 = virtualinvoke xdf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack73);
+
+        result[1] = $stack76;
+
+        $stack77 = new java.util.Date;
+
+        $stack78 = (long) xs;
+
+        specialinvoke $stack77.<java.util.Date: void <init>(long)>($stack78);
+
+        $stack80 = virtualinvoke xdf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack77);
+
+        result[2] = $stack80;
+
+        $stack81 = new java.util.Date;
+
+        $stack82 = (long) xe;
+
+        specialinvoke $stack81.<java.util.Date: void <init>(long)>($stack82);
+
+        $stack84 = virtualinvoke xdf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack81);
+
+        result[3] = $stack84;
+
+        goto label04;
+
+     label03:
+        xnf = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.text.NumberFormat getXFormat()>();
+
+        $stack30 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(x);
+
+        result[1] = $stack30;
+
+        $stack32 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(xs);
+
+        result[2] = $stack32;
+
+        $stack34 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(xe);
+
+        result[3] = $stack34;
+
+     label04:
+        xnf = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.text.NumberFormat getYFormat()>();
+
+        ydf = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.text.DateFormat getYDateFormat()>();
+
+        $stack37 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y);
+
+        if $stack37 == 0 goto label05;
+
+        $stack69 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Number getY(int,int)>(series, item);
+
+        if $stack69 != null goto label05;
+
+        $stack72 = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.lang.String getNullYString()>();
+
+        result[4] = $stack72;
+
+        goto label07;
+
+     label05:
+        if ydf == null goto label06;
+
+        $stack64 = new java.util.Date;
+
+        $stack65 = (long) y;
+
+        specialinvoke $stack64.<java.util.Date: void <init>(long)>($stack65);
+
+        $stack67 = virtualinvoke ydf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack64);
+
+        result[4] = $stack67;
+
+        goto label07;
+
+     label06:
+        $stack39 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(y);
+
+        result[4] = $stack39;
+
+     label07:
+        $stack40 = staticinvoke <java.lang.Double: boolean isNaN(double)>(ys);
+
+        if $stack40 == 0 goto label08;
+
+        if intervalDataset == null goto label08;
+
+        $stack61 = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getStartY(int,int)>(series, item);
+
+        if $stack61 != null goto label08;
+
+        $stack63 = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.lang.String getNullYString()>();
+
+        result[5] = $stack63;
+
+        goto label10;
+
+     label08:
+        if ydf == null goto label09;
+
+        $stack55 = new java.util.Date;
+
+        $stack56 = (long) ys;
+
+        specialinvoke $stack55.<java.util.Date: void <init>(long)>($stack56);
+
+        $stack58 = virtualinvoke ydf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack55);
+
+        result[5] = $stack58;
+
+        goto label10;
+
+     label09:
+        $stack42 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(ys);
+
+        result[5] = $stack42;
+
+     label10:
+        $stack43 = staticinvoke <java.lang.Double: boolean isNaN(double)>(ye);
+
+        if $stack43 == 0 goto label11;
+
+        if intervalDataset == null goto label11;
+
+        $stack52 = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getEndY(int,int)>(series, item);
+
+        if $stack52 != null goto label11;
+
+        $stack54 = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.lang.String getNullYString()>();
+
+        result[6] = $stack54;
+
+        goto label13;
+
+     label11:
+        if ydf == null goto label12;
+
+        $stack46 = new java.util.Date;
+
+        $stack47 = (long) ye;
+
+        specialinvoke $stack46.<java.util.Date: void <init>(long)>($stack47);
+
+        $stack49 = virtualinvoke ydf.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack46);
+
+        result[6] = $stack49;
+
+        goto label13;
+
+     label12:
+        $stack45 = virtualinvoke xnf.<java.text.NumberFormat: java.lang.String format(double)>(ye);
+
+        result[6] = $stack45;
+
+     label13:
+        return result;
+    }
+
+    public java.lang.String generateToolTip(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+        int series, item;
+        java.lang.String $stack4;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.labels.IntervalXYToolTipGenerator: java.lang.String generateLabelString(org.jfree.data.xy.XYDataset,int,int)>(dataset, series, item);
+
+        return $stack4;
+    }
+
+    public java.lang.Object clone() throws java.lang.CloneNotSupportedException
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        java.lang.Object $stack1;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.Object clone()>();
+
+        return $stack1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        boolean $stack2, $stack3;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = obj instanceof org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        if $stack2 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack3 = specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: boolean equals(java.lang.Object)>(obj);
+
+        return $stack3;
+    }
+
+    public int hashCode()
+    {
+        org.jfree.chart.labels.IntervalXYToolTipGenerator this;
+        int $stack1;
+
+        this := @this: org.jfree.chart.labels.IntervalXYToolTipGenerator;
+
+        $stack1 = specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: int hashCode()>();
+
+        return $stack1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.labels.IntervalXYToolTipGenerator: java.lang.String DEFAULT_TOOL_TIP_FORMAT> = "{0}: ({1} - {2}), ({5} - {6})";
+
+        return;
+    }
+}

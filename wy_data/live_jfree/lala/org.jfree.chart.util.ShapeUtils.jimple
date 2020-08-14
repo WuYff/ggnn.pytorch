@@ -1,0 +1,1264 @@
+public class org.jfree.chart.util.ShapeUtils extends java.lang.Object
+{
+    private static final float SQRT2;
+
+    private void <init>()
+    {
+        org.jfree.chart.util.ShapeUtils this;
+
+        this := @this: org.jfree.chart.util.ShapeUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.awt.Shape clone(java.awt.Shape)
+    {
+        java.awt.Shape shape, $stack4;
+        boolean $stack2;
+        java.lang.Object $stack3;
+        java.lang.CloneNotSupportedException $stack5;
+
+        shape := @parameter0: java.awt.Shape;
+
+        $stack2 = shape instanceof java.lang.Cloneable;
+
+        if $stack2 == 0 goto label4;
+
+     label1:
+        $stack3 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>(shape);
+
+        $stack4 = (java.awt.Shape) $stack3;
+
+     label2:
+        return $stack4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+     label4:
+        return null;
+
+        catch java.lang.CloneNotSupportedException from label1 to label2 with label3;
+    }
+
+    public static boolean equal(java.awt.Shape, java.awt.Shape)
+    {
+        java.awt.Shape s1, s2;
+        boolean $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack13, $stack14, $stack18, $stack19, $stack23, $stack24, $stack28, $stack29, $stack33;
+        java.awt.geom.GeneralPath $stack11, $stack12;
+        java.awt.Polygon $stack16, $stack17;
+        java.awt.geom.Arc2D $stack21, $stack22;
+        java.awt.geom.Ellipse2D $stack26, $stack27;
+        java.awt.geom.Line2D $stack31, $stack32;
+
+        s1 := @parameter0: java.awt.Shape;
+
+        s2 := @parameter1: java.awt.Shape;
+
+        $stack2 = s1 instanceof java.awt.geom.Line2D;
+
+        if $stack2 == 0 goto label1;
+
+        $stack29 = s2 instanceof java.awt.geom.Line2D;
+
+        if $stack29 == 0 goto label1;
+
+        $stack32 = (java.awt.geom.Line2D) s1;
+
+        $stack31 = (java.awt.geom.Line2D) s2;
+
+        $stack33 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.geom.Line2D,java.awt.geom.Line2D)>($stack32, $stack31);
+
+        return $stack33;
+
+     label1:
+        $stack3 = s1 instanceof java.awt.geom.Ellipse2D;
+
+        if $stack3 == 0 goto label2;
+
+        $stack24 = s2 instanceof java.awt.geom.Ellipse2D;
+
+        if $stack24 == 0 goto label2;
+
+        $stack27 = (java.awt.geom.Ellipse2D) s1;
+
+        $stack26 = (java.awt.geom.Ellipse2D) s2;
+
+        $stack28 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.geom.Ellipse2D,java.awt.geom.Ellipse2D)>($stack27, $stack26);
+
+        return $stack28;
+
+     label2:
+        $stack4 = s1 instanceof java.awt.geom.Arc2D;
+
+        if $stack4 == 0 goto label3;
+
+        $stack19 = s2 instanceof java.awt.geom.Arc2D;
+
+        if $stack19 == 0 goto label3;
+
+        $stack22 = (java.awt.geom.Arc2D) s1;
+
+        $stack21 = (java.awt.geom.Arc2D) s2;
+
+        $stack23 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.geom.Arc2D,java.awt.geom.Arc2D)>($stack22, $stack21);
+
+        return $stack23;
+
+     label3:
+        $stack5 = s1 instanceof java.awt.Polygon;
+
+        if $stack5 == 0 goto label4;
+
+        $stack14 = s2 instanceof java.awt.Polygon;
+
+        if $stack14 == 0 goto label4;
+
+        $stack17 = (java.awt.Polygon) s1;
+
+        $stack16 = (java.awt.Polygon) s2;
+
+        $stack18 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.Polygon,java.awt.Polygon)>($stack17, $stack16);
+
+        return $stack18;
+
+     label4:
+        $stack6 = s1 instanceof java.awt.geom.GeneralPath;
+
+        if $stack6 == 0 goto label5;
+
+        $stack8 = s2 instanceof java.awt.geom.GeneralPath;
+
+        if $stack8 == 0 goto label5;
+
+        $stack12 = (java.awt.geom.GeneralPath) s1;
+
+        $stack11 = (java.awt.geom.GeneralPath) s2;
+
+        $stack13 = staticinvoke <org.jfree.chart.util.ShapeUtils: boolean equal(java.awt.geom.GeneralPath,java.awt.geom.GeneralPath)>($stack12, $stack11);
+
+        return $stack13;
+
+     label5:
+        $stack7 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>(s1, s2);
+
+        return $stack7;
+    }
+
+    public static boolean equal(java.awt.geom.Line2D, java.awt.geom.Line2D)
+    {
+        java.awt.geom.Line2D l1, l2;
+        java.awt.geom.Point2D $stack2, $stack3, $stack5, $stack6;
+        boolean $stack4, $stack7, $stack8;
+
+        l1 := @parameter0: java.awt.geom.Line2D;
+
+        l2 := @parameter1: java.awt.geom.Line2D;
+
+        if l1 != null goto label3;
+
+        if l2 != null goto label1;
+
+        $stack8 = 1;
+
+        goto label2;
+
+     label1:
+        $stack8 = 0;
+
+     label2:
+        return $stack8;
+
+     label3:
+        if l2 != null goto label4;
+
+        return 0;
+
+     label4:
+        $stack2 = virtualinvoke l1.<java.awt.geom.Line2D: java.awt.geom.Point2D getP1()>();
+
+        $stack3 = virtualinvoke l2.<java.awt.geom.Line2D: java.awt.geom.Point2D getP1()>();
+
+        $stack4 = virtualinvoke $stack2.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack5 = virtualinvoke l1.<java.awt.geom.Line2D: java.awt.geom.Point2D getP2()>();
+
+        $stack6 = virtualinvoke l2.<java.awt.geom.Line2D: java.awt.geom.Point2D getP2()>();
+
+        $stack7 = virtualinvoke $stack5.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>($stack6);
+
+        if $stack7 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public static boolean equal(java.awt.geom.Ellipse2D, java.awt.geom.Ellipse2D)
+    {
+        java.awt.geom.Ellipse2D e1, e2;
+        java.awt.geom.Rectangle2D $stack2, $stack3;
+        boolean $stack4, $stack5;
+
+        e1 := @parameter0: java.awt.geom.Ellipse2D;
+
+        e2 := @parameter1: java.awt.geom.Ellipse2D;
+
+        if e1 != null goto label3;
+
+        if e2 != null goto label1;
+
+        $stack5 = 1;
+
+        goto label2;
+
+     label1:
+        $stack5 = 0;
+
+     label2:
+        return $stack5;
+
+     label3:
+        if e2 != null goto label4;
+
+        return 0;
+
+     label4:
+        $stack2 = virtualinvoke e1.<java.awt.geom.Ellipse2D: java.awt.geom.Rectangle2D getFrame()>();
+
+        $stack3 = virtualinvoke e2.<java.awt.geom.Ellipse2D: java.awt.geom.Rectangle2D getFrame()>();
+
+        $stack4 = virtualinvoke $stack2.<java.awt.geom.Rectangle2D: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        return 1;
+    }
+
+    public static boolean equal(java.awt.geom.Arc2D, java.awt.geom.Arc2D)
+    {
+        java.awt.geom.Arc2D a1, a2;
+        java.awt.geom.Rectangle2D $stack2, $stack3;
+        boolean $stack4, $stack13;
+        double $stack5, $stack6, $stack8, $stack9;
+        byte $stack7, $stack10;
+        int $stack11, $stack12;
+
+        a1 := @parameter0: java.awt.geom.Arc2D;
+
+        a2 := @parameter1: java.awt.geom.Arc2D;
+
+        if a1 != null goto label3;
+
+        if a2 != null goto label1;
+
+        $stack13 = 1;
+
+        goto label2;
+
+     label1:
+        $stack13 = 0;
+
+     label2:
+        return $stack13;
+
+     label3:
+        if a2 != null goto label4;
+
+        return 0;
+
+     label4:
+        $stack2 = virtualinvoke a1.<java.awt.geom.Arc2D: java.awt.geom.Rectangle2D getFrame()>();
+
+        $stack3 = virtualinvoke a2.<java.awt.geom.Arc2D: java.awt.geom.Rectangle2D getFrame()>();
+
+        $stack4 = virtualinvoke $stack2.<java.awt.geom.Rectangle2D: boolean equals(java.lang.Object)>($stack3);
+
+        if $stack4 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack5 = virtualinvoke a1.<java.awt.geom.Arc2D: double getAngleStart()>();
+
+        $stack6 = virtualinvoke a2.<java.awt.geom.Arc2D: double getAngleStart()>();
+
+        $stack7 = $stack5 cmpl $stack6;
+
+        if $stack7 == 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack8 = virtualinvoke a1.<java.awt.geom.Arc2D: double getAngleExtent()>();
+
+        $stack9 = virtualinvoke a2.<java.awt.geom.Arc2D: double getAngleExtent()>();
+
+        $stack10 = $stack8 cmpl $stack9;
+
+        if $stack10 == 0 goto label7;
+
+        return 0;
+
+     label7:
+        $stack11 = virtualinvoke a1.<java.awt.geom.Arc2D: int getArcType()>();
+
+        $stack12 = virtualinvoke a2.<java.awt.geom.Arc2D: int getArcType()>();
+
+        if $stack11 == $stack12 goto label8;
+
+        return 0;
+
+     label8:
+        return 1;
+    }
+
+    public static boolean equal(java.awt.Polygon, java.awt.Polygon)
+    {
+        java.awt.Polygon p1, p2;
+        int $stack2, $stack3;
+        int[] $stack4, $stack5, $stack7, $stack8;
+        boolean $stack6, $stack9, $stack10;
+
+        p1 := @parameter0: java.awt.Polygon;
+
+        p2 := @parameter1: java.awt.Polygon;
+
+        if p1 != null goto label3;
+
+        if p2 != null goto label1;
+
+        $stack10 = 1;
+
+        goto label2;
+
+     label1:
+        $stack10 = 0;
+
+     label2:
+        return $stack10;
+
+     label3:
+        if p2 != null goto label4;
+
+        return 0;
+
+     label4:
+        $stack3 = p1.<java.awt.Polygon: int npoints>;
+
+        $stack2 = p2.<java.awt.Polygon: int npoints>;
+
+        if $stack3 == $stack2 goto label5;
+
+        return 0;
+
+     label5:
+        $stack5 = p1.<java.awt.Polygon: int[] xpoints>;
+
+        $stack4 = p2.<java.awt.Polygon: int[] xpoints>;
+
+        $stack6 = staticinvoke <java.util.Arrays: boolean equals(int[],int[])>($stack5, $stack4);
+
+        if $stack6 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        $stack8 = p1.<java.awt.Polygon: int[] ypoints>;
+
+        $stack7 = p2.<java.awt.Polygon: int[] ypoints>;
+
+        $stack9 = staticinvoke <java.util.Arrays: boolean equals(int[],int[])>($stack8, $stack7);
+
+        if $stack9 != 0 goto label7;
+
+        return 0;
+
+     label7:
+        return 1;
+    }
+
+    public static boolean equal(java.awt.geom.GeneralPath, java.awt.geom.GeneralPath)
+    {
+        java.awt.geom.GeneralPath p1, p2;
+        int $stack9, $stack10, seg1, seg2;
+        java.awt.geom.PathIterator iterator1, iterator2;
+        double[] d1, d2;
+        boolean $stack13, $stack14, $stack15, $stack18, $stack19, $stack21, $stack23, $stack25, $stack24, done, $stack22;
+
+        p1 := @parameter0: java.awt.geom.GeneralPath;
+
+        p2 := @parameter1: java.awt.geom.GeneralPath;
+
+        if p1 != null goto label03;
+
+        if p2 != null goto label01;
+
+        $stack25 = 1;
+
+        goto label02;
+
+     label01:
+        $stack25 = 0;
+
+     label02:
+        return $stack25;
+
+     label03:
+        if p2 != null goto label04;
+
+        return 0;
+
+     label04:
+        $stack9 = virtualinvoke p1.<java.awt.geom.GeneralPath: int getWindingRule()>();
+
+        $stack10 = virtualinvoke p2.<java.awt.geom.GeneralPath: int getWindingRule()>();
+
+        if $stack9 == $stack10 goto label05;
+
+        return 0;
+
+     label05:
+        iterator1 = virtualinvoke p1.<java.awt.geom.GeneralPath: java.awt.geom.PathIterator getPathIterator(java.awt.geom.AffineTransform)>(null);
+
+        iterator2 = virtualinvoke p2.<java.awt.geom.GeneralPath: java.awt.geom.PathIterator getPathIterator(java.awt.geom.AffineTransform)>(null);
+
+        d1 = newarray (double)[6];
+
+        d2 = newarray (double)[6];
+
+        $stack13 = interfaceinvoke iterator1.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        if $stack13 == 0 goto label06;
+
+        $stack23 = interfaceinvoke iterator2.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        if $stack23 == 0 goto label06;
+
+        $stack24 = 1;
+
+        goto label07;
+
+     label06:
+        $stack24 = 0;
+
+     label07:
+        done = $stack24;
+
+     label08:
+        if done != 0 goto label14;
+
+        $stack14 = interfaceinvoke iterator1.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        $stack15 = interfaceinvoke iterator2.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        if $stack14 == $stack15 goto label09;
+
+        return 0;
+
+     label09:
+        seg1 = interfaceinvoke iterator1.<java.awt.geom.PathIterator: int currentSegment(double[])>(d1);
+
+        seg2 = interfaceinvoke iterator2.<java.awt.geom.PathIterator: int currentSegment(double[])>(d2);
+
+        if seg1 == seg2 goto label10;
+
+        return 0;
+
+     label10:
+        $stack18 = staticinvoke <java.util.Arrays: boolean equals(double[],double[])>(d1, d2);
+
+        if $stack18 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        interfaceinvoke iterator1.<java.awt.geom.PathIterator: void next()>();
+
+        interfaceinvoke iterator2.<java.awt.geom.PathIterator: void next()>();
+
+        $stack19 = interfaceinvoke iterator1.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        if $stack19 == 0 goto label12;
+
+        $stack21 = interfaceinvoke iterator2.<java.awt.geom.PathIterator: boolean isDone()>();
+
+        if $stack21 == 0 goto label12;
+
+        $stack22 = 1;
+
+        goto label13;
+
+     label12:
+        $stack22 = 0;
+
+     label13:
+        done = $stack22;
+
+        goto label08;
+
+     label14:
+        return 1;
+    }
+
+    public static java.awt.Shape createTranslatedShape(java.awt.Shape, double, double)
+    {
+        java.awt.Shape shape, $stack7;
+        double transX, transY;
+        java.awt.geom.AffineTransform transform;
+        java.lang.IllegalArgumentException $stack8;
+
+        shape := @parameter0: java.awt.Shape;
+
+        transX := @parameter1: double;
+
+        transY := @parameter2: double;
+
+        if shape != null goto label1;
+
+        $stack8 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'shape\' argument.");
+
+        throw $stack8;
+
+     label1:
+        transform = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getTranslateInstance(double,double)>(transX, transY);
+
+        $stack7 = virtualinvoke transform.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(shape);
+
+        return $stack7;
+    }
+
+    public static java.awt.Shape createTranslatedShape(java.awt.Shape, org.jfree.chart.ui.RectangleAnchor, double, double)
+    {
+        java.awt.Shape shape, $stack15;
+        org.jfree.chart.ui.RectangleAnchor anchor;
+        java.awt.geom.Rectangle2D $stack8;
+        java.awt.geom.Point2D anchorPoint;
+        double locationX, $stack10, locationY, $stack11, $stack12, $stack13;
+        java.awt.geom.AffineTransform transform;
+        java.lang.IllegalArgumentException $stack16, $stack17;
+
+        shape := @parameter0: java.awt.Shape;
+
+        anchor := @parameter1: org.jfree.chart.ui.RectangleAnchor;
+
+        locationX := @parameter2: double;
+
+        locationY := @parameter3: double;
+
+        if shape != null goto label1;
+
+        $stack17 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack17.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'shape\' argument.");
+
+        throw $stack17;
+
+     label1:
+        if anchor != null goto label2;
+
+        $stack16 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack16.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'anchor\' argument.");
+
+        throw $stack16;
+
+     label2:
+        $stack8 = interfaceinvoke shape.<java.awt.Shape: java.awt.geom.Rectangle2D getBounds2D()>();
+
+        anchorPoint = virtualinvoke anchor.<org.jfree.chart.ui.RectangleAnchor: java.awt.geom.Point2D getAnchorPoint(java.awt.geom.Rectangle2D)>($stack8);
+
+        $stack10 = virtualinvoke anchorPoint.<java.awt.geom.Point2D: double getX()>();
+
+        $stack11 = locationX - $stack10;
+
+        $stack12 = virtualinvoke anchorPoint.<java.awt.geom.Point2D: double getY()>();
+
+        $stack13 = locationY - $stack12;
+
+        transform = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getTranslateInstance(double,double)>($stack11, $stack13);
+
+        $stack15 = virtualinvoke transform.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(shape);
+
+        return $stack15;
+    }
+
+    public static java.awt.Shape rotateShape(java.awt.Shape, double, float, float)
+    {
+        java.awt.Shape base, result;
+        double angle, $stack7, $stack8;
+        float x, y;
+        java.awt.geom.AffineTransform rotate;
+
+        base := @parameter0: java.awt.Shape;
+
+        angle := @parameter1: double;
+
+        x := @parameter2: float;
+
+        y := @parameter3: float;
+
+        if base != null goto label1;
+
+        return null;
+
+     label1:
+        $stack8 = (double) x;
+
+        $stack7 = (double) y;
+
+        rotate = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getRotateInstance(double,double,double)>(angle, $stack8, $stack7);
+
+        result = virtualinvoke rotate.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(base);
+
+        return result;
+    }
+
+    public static void drawRotatedShape(java.awt.Graphics2D, java.awt.Shape, double, float, float)
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.AffineTransform saved, rotate;
+        double angle, $stack9, $stack10;
+        float x, y;
+        java.awt.Shape shape;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        shape := @parameter1: java.awt.Shape;
+
+        angle := @parameter2: double;
+
+        x := @parameter3: float;
+
+        y := @parameter4: float;
+
+        saved = virtualinvoke g2.<java.awt.Graphics2D: java.awt.geom.AffineTransform getTransform()>();
+
+        $stack10 = (double) x;
+
+        $stack9 = (double) y;
+
+        rotate = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getRotateInstance(double,double,double)>(angle, $stack10, $stack9);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>(rotate);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(shape);
+
+        virtualinvoke g2.<java.awt.Graphics2D: void setTransform(java.awt.geom.AffineTransform)>(saved);
+
+        return;
+    }
+
+    public static java.awt.Shape createDiagonalCross(float, float)
+    {
+        java.awt.geom.GeneralPath $stack3;
+        float l, t, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37;
+
+        l := @parameter0: float;
+
+        t := @parameter1: float;
+
+        $stack3 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack3.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack4 = neg l;
+
+        $stack7 = $stack4 - t;
+
+        $stack5 = neg l;
+
+        $stack6 = $stack5 + t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack7, $stack6);
+
+        $stack8 = neg l;
+
+        $stack11 = $stack8 + t;
+
+        $stack9 = neg l;
+
+        $stack10 = $stack9 - t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack11, $stack10);
+
+        $stack13 = neg t;
+
+        $stack12 = <org.jfree.chart.util.ShapeUtils: float SQRT2>;
+
+        $stack14 = $stack13 * $stack12;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(0.0F, $stack14);
+
+        $stack17 = l - t;
+
+        $stack15 = neg l;
+
+        $stack16 = $stack15 - t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack17, $stack16);
+
+        $stack20 = l + t;
+
+        $stack18 = neg l;
+
+        $stack19 = $stack18 + t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack20, $stack19);
+
+        $stack21 = <org.jfree.chart.util.ShapeUtils: float SQRT2>;
+
+        $stack22 = t * $stack21;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack22, 0.0F);
+
+        $stack24 = l + t;
+
+        $stack23 = l - t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack24, $stack23);
+
+        $stack26 = l - t;
+
+        $stack25 = l + t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack26, $stack25);
+
+        $stack27 = <org.jfree.chart.util.ShapeUtils: float SQRT2>;
+
+        $stack28 = t * $stack27;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(0.0F, $stack28);
+
+        $stack29 = neg l;
+
+        $stack31 = $stack29 + t;
+
+        $stack30 = l + t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack31, $stack30);
+
+        $stack32 = neg l;
+
+        $stack34 = $stack32 - t;
+
+        $stack33 = l - t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack34, $stack33);
+
+        $stack36 = neg t;
+
+        $stack35 = <org.jfree.chart.util.ShapeUtils: float SQRT2>;
+
+        $stack37 = $stack36 * $stack35;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack37, 0.0F);
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void closePath()>();
+
+        return $stack3;
+    }
+
+    public static java.awt.Shape createRegularCross(float, float)
+    {
+        java.awt.geom.GeneralPath $stack3;
+        float l, t, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15;
+
+        l := @parameter0: float;
+
+        t := @parameter1: float;
+
+        $stack3 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack3.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack4 = neg l;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack4, t);
+
+        $stack5 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack5, t);
+
+        $stack6 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack6, l);
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, l);
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, t);
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(l, t);
+
+        $stack7 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(l, $stack7);
+
+        $stack8 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, $stack8);
+
+        $stack9 = neg l;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>(t, $stack9);
+
+        $stack11 = neg t;
+
+        $stack10 = neg l;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack11, $stack10);
+
+        $stack13 = neg t;
+
+        $stack12 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack13, $stack12);
+
+        $stack15 = neg l;
+
+        $stack14 = neg t;
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack15, $stack14);
+
+        virtualinvoke $stack3.<java.awt.geom.GeneralPath: void closePath()>();
+
+        return $stack3;
+    }
+
+    public static java.awt.Shape createDiamond(float)
+    {
+        java.awt.geom.GeneralPath $stack2;
+        float s, $stack3, $stack4;
+
+        s := @parameter0: float;
+
+        $stack2 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack2.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack3 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void moveTo(float,float)>(0.0F, $stack3);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>(s, 0.0F);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>(0.0F, s);
+
+        $stack4 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack4, 0.0F);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void closePath()>();
+
+        return $stack2;
+    }
+
+    public static java.awt.Shape createUpTriangle(float)
+    {
+        java.awt.geom.GeneralPath $stack2;
+        float s, $stack3, $stack4;
+
+        s := @parameter0: float;
+
+        $stack2 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack2.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack3 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void moveTo(float,float)>(0.0F, $stack3);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>(s, s);
+
+        $stack4 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack4, s);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void closePath()>();
+
+        return $stack2;
+    }
+
+    public static java.awt.Shape createDownTriangle(float)
+    {
+        java.awt.geom.GeneralPath $stack2;
+        float s, $stack3, $stack4, $stack5;
+
+        s := @parameter0: float;
+
+        $stack2 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack2.<java.awt.geom.GeneralPath: void <init>()>();
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void moveTo(float,float)>(0.0F, s);
+
+        $stack3 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>(s, $stack3);
+
+        $stack5 = neg s;
+
+        $stack4 = neg s;
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack5, $stack4);
+
+        virtualinvoke $stack2.<java.awt.geom.GeneralPath: void closePath()>();
+
+        return $stack2;
+    }
+
+    public static java.awt.Shape createLineRegion(java.awt.geom.Line2D, float)
+    {
+        java.awt.geom.GeneralPath $stack11;
+        java.awt.geom.Line2D line;
+        double $stack12, $stack13, $stack14, $stack15, $stack17, $stack30, theta, $stack32, $stack34;
+        float x1, x2, y1, y2, $stack16, width, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack33, dx, $stack35, dy, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43;
+        byte $stack18;
+
+        line := @parameter0: java.awt.geom.Line2D;
+
+        width := @parameter1: float;
+
+        $stack11 = new java.awt.geom.GeneralPath;
+
+        specialinvoke $stack11.<java.awt.geom.GeneralPath: void <init>()>();
+
+        $stack12 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+
+        x1 = (float) $stack12;
+
+        $stack13 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+
+        x2 = (float) $stack13;
+
+        $stack14 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+
+        y1 = (float) $stack14;
+
+        $stack15 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+
+        y2 = (float) $stack15;
+
+        $stack16 = x2 - x1;
+
+        $stack17 = (double) $stack16;
+
+        $stack18 = $stack17 cmpl 0.0;
+
+        if $stack18 == 0 goto label1;
+
+        $stack28 = y2 - y1;
+
+        $stack27 = x2 - x1;
+
+        $stack29 = $stack28 / $stack27;
+
+        $stack30 = (double) $stack29;
+
+        theta = staticinvoke <java.lang.Math: double atan(double)>($stack30);
+
+        $stack32 = staticinvoke <java.lang.Math: double sin(double)>(theta);
+
+        $stack33 = (float) $stack32;
+
+        dx = $stack33 * width;
+
+        $stack34 = staticinvoke <java.lang.Math: double cos(double)>(theta);
+
+        $stack35 = (float) $stack34;
+
+        dy = $stack35 * width;
+
+        $stack37 = x1 - dx;
+
+        $stack36 = y1 + dy;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack37, $stack36);
+
+        $stack39 = x1 + dx;
+
+        $stack38 = y1 - dy;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack39, $stack38);
+
+        $stack41 = x2 + dx;
+
+        $stack40 = y2 - dy;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack41, $stack40);
+
+        $stack43 = x2 - dx;
+
+        $stack42 = y2 + dy;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack43, $stack42);
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void closePath()>();
+
+        goto label2;
+
+     label1:
+        $stack19 = width / 2.0F;
+
+        $stack20 = x1 - $stack19;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack20, y1);
+
+        $stack21 = width / 2.0F;
+
+        $stack22 = x1 + $stack21;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack22, y1);
+
+        $stack23 = width / 2.0F;
+
+        $stack24 = x2 + $stack23;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack24, y2);
+
+        $stack25 = width / 2.0F;
+
+        $stack26 = x2 - $stack25;
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack26, y2);
+
+        virtualinvoke $stack11.<java.awt.geom.GeneralPath: void closePath()>();
+
+     label2:
+        return $stack11;
+    }
+
+    public static java.awt.geom.Point2D getPointInRectangle(double, double, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Rectangle2D area;
+        double $stack5, $stack6, $stack7, $stack9, $stack10, $stack11, x, y, x#3, y#4;
+        java.awt.geom.Point2D$Double $stack13;
+
+        x := @parameter0: double;
+
+        y := @parameter1: double;
+
+        area := @parameter2: java.awt.geom.Rectangle2D;
+
+        $stack5 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack6 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack7 = staticinvoke <java.lang.Math: double min(double,double)>(x, $stack6);
+
+        x#3 = staticinvoke <java.lang.Math: double max(double,double)>($stack5, $stack7);
+
+        $stack9 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack10 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack11 = staticinvoke <java.lang.Math: double min(double,double)>(y, $stack10);
+
+        y#4 = staticinvoke <java.lang.Math: double max(double,double)>($stack9, $stack11);
+
+        $stack13 = new java.awt.geom.Point2D$Double;
+
+        specialinvoke $stack13.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x#3, y#4);
+
+        return $stack13;
+    }
+
+    public static boolean contains(java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Rectangle2D rect1, rect2;
+        double x0, y0, x, y, w, h, $stack23, $stack24, $stack25, $stack27, $stack28, $stack29;
+        byte $stack20, $stack21, $stack26, $stack30;
+        boolean $stack22;
+
+        rect1 := @parameter0: java.awt.geom.Rectangle2D;
+
+        rect2 := @parameter1: java.awt.geom.Rectangle2D;
+
+        x0 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y0 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getY()>();
+
+        x = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getY()>();
+
+        w = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        h = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack20 = x cmpl x0;
+
+        if $stack20 < 0 goto label1;
+
+        $stack21 = y cmpl y0;
+
+        if $stack21 < 0 goto label1;
+
+        $stack23 = x + w;
+
+        $stack24 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack25 = x0 + $stack24;
+
+        $stack26 = $stack23 cmpg $stack25;
+
+        if $stack26 > 0 goto label1;
+
+        $stack27 = y + h;
+
+        $stack28 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack29 = y0 + $stack28;
+
+        $stack30 = $stack27 cmpg $stack29;
+
+        if $stack30 > 0 goto label1;
+
+        $stack22 = 1;
+
+        goto label2;
+
+     label1:
+        $stack22 = 0;
+
+     label2:
+        return $stack22;
+    }
+
+    public static boolean intersects(java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D)
+    {
+        java.awt.geom.Rectangle2D rect1, rect2;
+        double x0, y0, x, width, y, height, $stack20, $stack22, $stack25, $stack26, $stack28, $stack29;
+        byte $stack21, $stack23, $stack27, $stack30;
+        boolean $stack24;
+
+        rect1 := @parameter0: java.awt.geom.Rectangle2D;
+
+        rect2 := @parameter1: java.awt.geom.Rectangle2D;
+
+        x0 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getX()>();
+
+        y0 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getY()>();
+
+        x = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getX()>();
+
+        width = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        y = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getY()>();
+
+        height = virtualinvoke rect2.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack20 = x + width;
+
+        $stack21 = $stack20 cmpl x0;
+
+        if $stack21 < 0 goto label1;
+
+        $stack22 = y + height;
+
+        $stack23 = $stack22 cmpl y0;
+
+        if $stack23 < 0 goto label1;
+
+        $stack25 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getWidth()>();
+
+        $stack26 = x0 + $stack25;
+
+        $stack27 = x cmpg $stack26;
+
+        if $stack27 > 0 goto label1;
+
+        $stack28 = virtualinvoke rect1.<java.awt.geom.Rectangle2D: double getHeight()>();
+
+        $stack29 = y0 + $stack28;
+
+        $stack30 = y cmpg $stack29;
+
+        if $stack30 > 0 goto label1;
+
+        $stack24 = 1;
+
+        goto label2;
+
+     label1:
+        $stack24 = 0;
+
+     label2:
+        return $stack24;
+    }
+
+    public static boolean isPointInRect(java.awt.geom.Rectangle2D, double, double)
+    {
+        double x, $stack5, $stack7, y, $stack10, $stack12;
+        java.awt.geom.Rectangle2D rect;
+        byte $stack6, $stack8, $stack11, $stack13;
+        boolean $stack9;
+
+        rect := @parameter0: java.awt.geom.Rectangle2D;
+
+        x := @parameter1: double;
+
+        y := @parameter2: double;
+
+        $stack5 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMinX()>();
+
+        $stack6 = x cmpl $stack5;
+
+        if $stack6 < 0 goto label1;
+
+        $stack7 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMaxX()>();
+
+        $stack8 = x cmpg $stack7;
+
+        if $stack8 > 0 goto label1;
+
+        $stack10 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMinY()>();
+
+        $stack11 = y cmpl $stack10;
+
+        if $stack11 < 0 goto label1;
+
+        $stack12 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getMaxY()>();
+
+        $stack13 = y cmpg $stack12;
+
+        if $stack13 > 0 goto label1;
+
+        $stack9 = 1;
+
+        goto label2;
+
+     label1:
+        $stack9 = 0;
+
+     label2:
+        return $stack9;
+    }
+
+    static void <clinit>()
+    {
+        double $stack0;
+        float $stack1;
+
+        $stack0 = staticinvoke <java.lang.Math: double pow(double,double)>(2.0, 0.5);
+
+        $stack1 = (float) $stack0;
+
+        <org.jfree.chart.util.ShapeUtils: float SQRT2> = $stack1;
+
+        return;
+    }
+}

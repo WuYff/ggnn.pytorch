@@ -1,0 +1,712 @@
+public class org.jfree.chart.ui.LCBLayout extends java.lang.Object implements java.awt.LayoutManager, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private static final int COLUMNS;
+    private int[] colWidth;
+    private int[] rowHeight;
+    private int labelGap;
+    private int buttonGap;
+    private int vGap;
+
+    public void <init>(int)
+    {
+        org.jfree.chart.ui.LCBLayout this;
+        int[] $stack2, $stack3;
+        int maxrows;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        maxrows := @parameter0: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<org.jfree.chart.ui.LCBLayout: int labelGap> = 10;
+
+        this.<org.jfree.chart.ui.LCBLayout: int buttonGap> = 6;
+
+        this.<org.jfree.chart.ui.LCBLayout: int vGap> = 2;
+
+        $stack2 = newarray (int)[3];
+
+        this.<org.jfree.chart.ui.LCBLayout: int[] colWidth> = $stack2;
+
+        $stack3 = newarray (int)[maxrows];
+
+        this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight> = $stack3;
+
+        return;
+    }
+
+    public java.awt.Dimension preferredLayoutSize(java.awt.Container)
+    {
+        java.awt.Container parent;
+        java.lang.Object $stack11;
+        java.awt.Insets insets;
+        int ncomponents, nrows, $stack14, $stack15, $stack17, $stack18, $stack20, $stack21, $stack22, $stack23, $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack44, $stack49, $stack50, $stack54, $stack55, $stack57, $stack58, $stack61, $stack63, c, r;
+        org.jfree.chart.ui.LCBLayout this;
+        int[] $stack16, $stack19, $stack24, $stack43, $stack53, $stack56, $stack62, $stack64;
+        java.awt.Dimension $stack27, d;
+        java.awt.Component component;
+        java.lang.Throwable $stack68;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        parent := @parameter0: java.awt.Container;
+
+        $stack11 = virtualinvoke parent.<java.awt.Container: java.lang.Object getTreeLock()>();
+
+        entermonitor $stack11;
+
+     label01:
+        insets = virtualinvoke parent.<java.awt.Container: java.awt.Insets getInsets()>();
+
+        ncomponents = virtualinvoke parent.<java.awt.Container: int getComponentCount()>();
+
+        nrows = ncomponents / 3;
+
+        c = 0;
+
+     label02:
+        if c >= 3 goto label07;
+
+        r = 0;
+
+     label03:
+        if r >= nrows goto label06;
+
+        $stack49 = r * 3;
+
+        $stack50 = $stack49 + c;
+
+        component = virtualinvoke parent.<java.awt.Container: java.awt.Component getComponent(int)>($stack50);
+
+        d = virtualinvoke component.<java.awt.Component: java.awt.Dimension getPreferredSize()>();
+
+        $stack53 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack55 = $stack53[c];
+
+        $stack54 = d.<java.awt.Dimension: int width>;
+
+        if $stack55 >= $stack54 goto label04;
+
+        $stack64 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack63 = d.<java.awt.Dimension: int width>;
+
+        $stack64[c] = $stack63;
+
+     label04:
+        $stack56 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack58 = $stack56[r];
+
+        $stack57 = d.<java.awt.Dimension: int height>;
+
+        if $stack58 >= $stack57 goto label05;
+
+        $stack62 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack61 = d.<java.awt.Dimension: int height>;
+
+        $stack62[r] = $stack61;
+
+     label05:
+        r = r + 1;
+
+        goto label03;
+
+     label06:
+        c = c + 1;
+
+        goto label02;
+
+     label07:
+        $stack15 = this.<org.jfree.chart.ui.LCBLayout: int vGap>;
+
+        $stack14 = nrows - 1;
+
+        c = $stack15 * $stack14;
+
+        r = 0;
+
+     label08:
+        if r >= nrows goto label09;
+
+        $stack43 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack44 = $stack43[r];
+
+        c = c + $stack44;
+
+        r = r + 1;
+
+        goto label08;
+
+     label09:
+        $stack16 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack18 = $stack16[0];
+
+        $stack17 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        $stack21 = $stack18 + $stack17;
+
+        $stack19 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack20 = $stack19[1];
+
+        $stack23 = $stack21 + $stack20;
+
+        $stack22 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        $stack26 = $stack23 + $stack22;
+
+        $stack24 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack25 = $stack24[2];
+
+        r = $stack26 + $stack25;
+
+        $stack27 = new java.awt.Dimension;
+
+        $stack29 = insets.<java.awt.Insets: int left>;
+
+        $stack28 = insets.<java.awt.Insets: int right>;
+
+        $stack30 = $stack29 + $stack28;
+
+        $stack32 = $stack30 + r;
+
+        $stack31 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        $stack34 = $stack32 + $stack31;
+
+        $stack33 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        $stack41 = $stack34 + $stack33;
+
+        $stack36 = insets.<java.awt.Insets: int top>;
+
+        $stack35 = insets.<java.awt.Insets: int bottom>;
+
+        $stack37 = $stack36 + $stack35;
+
+        $stack39 = $stack37 + c;
+
+        $stack38 = this.<org.jfree.chart.ui.LCBLayout: int vGap>;
+
+        $stack40 = $stack39 + $stack38;
+
+        specialinvoke $stack27.<java.awt.Dimension: void <init>(int,int)>($stack41, $stack40);
+
+        exitmonitor $stack11;
+
+     label10:
+        return $stack27;
+
+     label11:
+        $stack68 := @caughtexception;
+
+        exitmonitor $stack11;
+
+     label12:
+        throw $stack68;
+
+        catch java.lang.Throwable from label01 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+    }
+
+    public java.awt.Dimension minimumLayoutSize(java.awt.Container)
+    {
+        java.awt.Container parent;
+        java.lang.Object $stack11;
+        java.awt.Insets insets;
+        int ncomponents, nrows, $stack14, $stack15, $stack17, $stack18, $stack20, $stack21, $stack22, $stack23, $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack44, $stack49, $stack50, $stack54, $stack55, $stack57, $stack58, $stack61, $stack63, c, r;
+        org.jfree.chart.ui.LCBLayout this;
+        int[] $stack16, $stack19, $stack24, $stack43, $stack53, $stack56, $stack62, $stack64;
+        java.awt.Dimension $stack27, d;
+        java.awt.Component component;
+        java.lang.Throwable $stack68;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        parent := @parameter0: java.awt.Container;
+
+        $stack11 = virtualinvoke parent.<java.awt.Container: java.lang.Object getTreeLock()>();
+
+        entermonitor $stack11;
+
+     label01:
+        insets = virtualinvoke parent.<java.awt.Container: java.awt.Insets getInsets()>();
+
+        ncomponents = virtualinvoke parent.<java.awt.Container: int getComponentCount()>();
+
+        nrows = ncomponents / 3;
+
+        c = 0;
+
+     label02:
+        if c >= 3 goto label07;
+
+        r = 0;
+
+     label03:
+        if r >= nrows goto label06;
+
+        $stack49 = r * 3;
+
+        $stack50 = $stack49 + c;
+
+        component = virtualinvoke parent.<java.awt.Container: java.awt.Component getComponent(int)>($stack50);
+
+        d = virtualinvoke component.<java.awt.Component: java.awt.Dimension getMinimumSize()>();
+
+        $stack53 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack55 = $stack53[c];
+
+        $stack54 = d.<java.awt.Dimension: int width>;
+
+        if $stack55 >= $stack54 goto label04;
+
+        $stack64 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack63 = d.<java.awt.Dimension: int width>;
+
+        $stack64[c] = $stack63;
+
+     label04:
+        $stack56 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack58 = $stack56[r];
+
+        $stack57 = d.<java.awt.Dimension: int height>;
+
+        if $stack58 >= $stack57 goto label05;
+
+        $stack62 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack61 = d.<java.awt.Dimension: int height>;
+
+        $stack62[r] = $stack61;
+
+     label05:
+        r = r + 1;
+
+        goto label03;
+
+     label06:
+        c = c + 1;
+
+        goto label02;
+
+     label07:
+        $stack15 = this.<org.jfree.chart.ui.LCBLayout: int vGap>;
+
+        $stack14 = nrows - 1;
+
+        c = $stack15 * $stack14;
+
+        r = 0;
+
+     label08:
+        if r >= nrows goto label09;
+
+        $stack43 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack44 = $stack43[r];
+
+        c = c + $stack44;
+
+        r = r + 1;
+
+        goto label08;
+
+     label09:
+        $stack16 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack18 = $stack16[0];
+
+        $stack17 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        $stack21 = $stack18 + $stack17;
+
+        $stack19 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack20 = $stack19[1];
+
+        $stack23 = $stack21 + $stack20;
+
+        $stack22 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        $stack26 = $stack23 + $stack22;
+
+        $stack24 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack25 = $stack24[2];
+
+        r = $stack26 + $stack25;
+
+        $stack27 = new java.awt.Dimension;
+
+        $stack29 = insets.<java.awt.Insets: int left>;
+
+        $stack28 = insets.<java.awt.Insets: int right>;
+
+        $stack30 = $stack29 + $stack28;
+
+        $stack32 = $stack30 + r;
+
+        $stack31 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        $stack34 = $stack32 + $stack31;
+
+        $stack33 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        $stack41 = $stack34 + $stack33;
+
+        $stack36 = insets.<java.awt.Insets: int top>;
+
+        $stack35 = insets.<java.awt.Insets: int bottom>;
+
+        $stack37 = $stack36 + $stack35;
+
+        $stack39 = $stack37 + c;
+
+        $stack38 = this.<org.jfree.chart.ui.LCBLayout: int vGap>;
+
+        $stack40 = $stack39 + $stack38;
+
+        specialinvoke $stack27.<java.awt.Dimension: void <init>(int,int)>($stack41, $stack40);
+
+        exitmonitor $stack11;
+
+     label10:
+        return $stack27;
+
+     label11:
+        $stack68 := @caughtexception;
+
+        exitmonitor $stack11;
+
+     label12:
+        throw $stack68;
+
+        catch java.lang.Throwable from label01 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+    }
+
+    public void layoutContainer(java.awt.Container)
+    {
+        java.awt.Container parent;
+        java.lang.Object $stack19;
+        java.awt.Insets insets;
+        int ncomponents, nrows, $stack26, $stack27, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack40, $stack41, $stack42, $stack46, $stack49, $stack50, $stack53, i, $stack55, $stack56, $stack57, h, $stack63, $stack64, adjust, $stack67, $stack68, $stack75, $stack80, $stack81, $stack85, $stack86, $stack88, $stack89, $stack92, $stack94, c, r, component, d, y;
+        org.jfree.chart.ui.LCBLayout this;
+        int[] $stack24, $stack25, $stack28, $stack39, $stack43, $stack45, $stack54, $stack62, $stack66, $stack74, $stack84, $stack87, $stack93, $stack95;
+        java.awt.Component component, $stack65;
+        java.awt.Dimension d;
+        java.lang.Throwable $stack99;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        parent := @parameter0: java.awt.Container;
+
+        $stack19 = virtualinvoke parent.<java.awt.Container: java.lang.Object getTreeLock()>();
+
+        entermonitor $stack19;
+
+     label01:
+        insets = virtualinvoke parent.<java.awt.Container: java.awt.Insets getInsets()>();
+
+        ncomponents = virtualinvoke parent.<java.awt.Container: int getComponentCount()>();
+
+        nrows = ncomponents / 3;
+
+        c = 0;
+
+     label02:
+        if c >= 3 goto label07;
+
+        r = 0;
+
+     label03:
+        if r >= nrows goto label06;
+
+        $stack80 = r * 3;
+
+        $stack81 = $stack80 + c;
+
+        component = virtualinvoke parent.<java.awt.Container: java.awt.Component getComponent(int)>($stack81);
+
+        d = virtualinvoke component.<java.awt.Component: java.awt.Dimension getPreferredSize()>();
+
+        $stack84 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack86 = $stack84[c];
+
+        $stack85 = d.<java.awt.Dimension: int width>;
+
+        if $stack86 >= $stack85 goto label04;
+
+        $stack95 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack94 = d.<java.awt.Dimension: int width>;
+
+        $stack95[c] = $stack94;
+
+     label04:
+        $stack87 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack89 = $stack87[r];
+
+        $stack88 = d.<java.awt.Dimension: int height>;
+
+        if $stack89 >= $stack88 goto label05;
+
+        $stack93 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack92 = d.<java.awt.Dimension: int height>;
+
+        $stack93[r] = $stack92;
+
+     label05:
+        r = r + 1;
+
+        goto label03;
+
+     label06:
+        c = c + 1;
+
+        goto label02;
+
+     label07:
+        r = 0;
+
+     label08:
+        if r >= nrows goto label09;
+
+        $stack74 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack75 = $stack74[r];
+
+        r = r + 1;
+
+        goto label08;
+
+     label09:
+        $stack24 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack27 = $stack24[0];
+
+        $stack25 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack26 = $stack25[1];
+
+        $stack30 = $stack27 + $stack26;
+
+        $stack28 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack29 = $stack28[2];
+
+        r = $stack30 + $stack29;
+
+        $stack31 = virtualinvoke parent.<java.awt.Container: int getWidth()>();
+
+        $stack32 = insets.<java.awt.Insets: int left>;
+
+        $stack34 = $stack31 - $stack32;
+
+        $stack33 = insets.<java.awt.Insets: int right>;
+
+        $stack36 = $stack34 - $stack33;
+
+        $stack35 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        $stack38 = $stack36 - $stack35;
+
+        $stack37 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        component = $stack38 - $stack37;
+
+        $stack43 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack39 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack41 = $stack39[1];
+
+        $stack40 = component - r;
+
+        $stack42 = $stack41 + $stack40;
+
+        $stack43[1] = $stack42;
+
+        d = insets.<java.awt.Insets: int left>;
+
+        c = 0;
+
+     label10:
+        if c >= 3 goto label16;
+
+        y = insets.<java.awt.Insets: int top>;
+
+        r = 0;
+
+     label11:
+        if r >= nrows goto label13;
+
+        $stack53 = r * 3;
+
+        i = $stack53 + c;
+
+        if i >= ncomponents goto label12;
+
+        component = virtualinvoke parent.<java.awt.Container: java.awt.Component getComponent(int)>(i);
+
+        d = virtualinvoke component.<java.awt.Component: java.awt.Dimension getPreferredSize()>();
+
+        h = d.<java.awt.Dimension: int height>;
+
+        $stack62 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack63 = $stack62[r];
+
+        $stack64 = $stack63 - h;
+
+        adjust = $stack64 / 2;
+
+        $stack65 = virtualinvoke parent.<java.awt.Container: java.awt.Component getComponent(int)>(i);
+
+        $stack68 = y + adjust;
+
+        $stack66 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack67 = $stack66[c];
+
+        virtualinvoke $stack65.<java.awt.Component: void setBounds(int,int,int,int)>(d, $stack68, $stack67, h);
+
+     label12:
+        $stack54 = this.<org.jfree.chart.ui.LCBLayout: int[] rowHeight>;
+
+        $stack55 = $stack54[r];
+
+        $stack57 = y + $stack55;
+
+        $stack56 = this.<org.jfree.chart.ui.LCBLayout: int vGap>;
+
+        y = $stack57 + $stack56;
+
+        r = r + 1;
+
+        goto label11;
+
+     label13:
+        $stack45 = this.<org.jfree.chart.ui.LCBLayout: int[] colWidth>;
+
+        $stack46 = $stack45[c];
+
+        d = d + $stack46;
+
+        if c != 0 goto label14;
+
+        $stack50 = this.<org.jfree.chart.ui.LCBLayout: int labelGap>;
+
+        d = d + $stack50;
+
+     label14:
+        if c != 1 goto label15;
+
+        $stack49 = this.<org.jfree.chart.ui.LCBLayout: int buttonGap>;
+
+        d = d + $stack49;
+
+     label15:
+        c = c + 1;
+
+        goto label10;
+
+     label16:
+        exitmonitor $stack19;
+
+     label17:
+        goto label20;
+
+     label18:
+        $stack99 := @caughtexception;
+
+        exitmonitor $stack19;
+
+     label19:
+        throw $stack99;
+
+     label20:
+        return;
+
+        catch java.lang.Throwable from label01 to label17 with label18;
+        catch java.lang.Throwable from label18 to label19 with label18;
+    }
+
+    public void addLayoutComponent(java.awt.Component)
+    {
+        org.jfree.chart.ui.LCBLayout this;
+        java.awt.Component comp;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        comp := @parameter0: java.awt.Component;
+
+        return;
+    }
+
+    public void removeLayoutComponent(java.awt.Component)
+    {
+        org.jfree.chart.ui.LCBLayout this;
+        java.awt.Component comp;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        comp := @parameter0: java.awt.Component;
+
+        return;
+    }
+
+    public void addLayoutComponent(java.lang.String, java.awt.Component)
+    {
+        org.jfree.chart.ui.LCBLayout this;
+        java.lang.String name;
+        java.awt.Component comp;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        name := @parameter0: java.lang.String;
+
+        comp := @parameter1: java.awt.Component;
+
+        return;
+    }
+
+    public void removeLayoutComponent(java.lang.String, java.awt.Component)
+    {
+        org.jfree.chart.ui.LCBLayout this;
+        java.lang.String name;
+        java.awt.Component comp;
+
+        this := @this: org.jfree.chart.ui.LCBLayout;
+
+        name := @parameter0: java.lang.String;
+
+        comp := @parameter1: java.awt.Component;
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.ui.LCBLayout: int COLUMNS> = 3;
+
+        <org.jfree.chart.ui.LCBLayout: long serialVersionUID> = -2531780832406163833L;
+
+        return;
+    }
+}

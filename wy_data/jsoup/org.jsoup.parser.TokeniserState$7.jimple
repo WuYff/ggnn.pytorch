@@ -1,0 +1,71 @@
+final enum class org.jsoup.parser.TokeniserState$7 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$7 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$7;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        char $stack4;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.Token$EOF $stack5;
+        org.jsoup.parser.TokeniserState$7 this;
+        java.lang.String data;
+
+        this := @this: org.jsoup.parser.TokeniserState$7;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        $stack4 = virtualinvoke r.<org.jsoup.parser.CharacterReader: char current()>();
+
+        lookupswitch($stack4)
+        {
+            case 0: goto label1;
+            case 65535: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        virtualinvoke r.<org.jsoup.parser.CharacterReader: void advance()>();
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(char)>(65533);
+
+        goto label4;
+
+     label2:
+        $stack5 = new org.jsoup.parser.Token$EOF;
+
+        specialinvoke $stack5.<org.jsoup.parser.Token$EOF: void <init>()>();
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(org.jsoup.parser.Token)>($stack5);
+
+        goto label4;
+
+     label3:
+        data = virtualinvoke r.<org.jsoup.parser.CharacterReader: java.lang.String consumeTo(char)>(0);
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emit(java.lang.String)>(data);
+
+     label4:
+        return;
+    }
+}

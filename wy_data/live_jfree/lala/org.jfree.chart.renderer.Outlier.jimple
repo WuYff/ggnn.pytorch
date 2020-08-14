@@ -1,0 +1,329 @@
+public class org.jfree.chart.renderer.Outlier extends java.lang.Object implements java.lang.Comparable
+{
+    private java.awt.geom.Point2D point;
+    private double radius;
+
+    public void <init>(double, double, double)
+    {
+        org.jfree.chart.renderer.Outlier this;
+        java.awt.geom.Point2D$Double $stack7;
+        double xCoord, radius, yCoord, $stack8, $stack9;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        xCoord := @parameter0: double;
+
+        yCoord := @parameter1: double;
+
+        radius := @parameter2: double;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack7 = new java.awt.geom.Point2D$Double;
+
+        $stack9 = xCoord - radius;
+
+        $stack8 = yCoord - radius;
+
+        specialinvoke $stack7.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack9, $stack8);
+
+        this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D point> = $stack7;
+
+        this.<org.jfree.chart.renderer.Outlier: double radius> = radius;
+
+        return;
+    }
+
+    public java.awt.geom.Point2D getPoint()
+    {
+        org.jfree.chart.renderer.Outlier this;
+        java.awt.geom.Point2D $stack1;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        $stack1 = this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D point>;
+
+        return $stack1;
+    }
+
+    public void setPoint(java.awt.geom.Point2D)
+    {
+        org.jfree.chart.renderer.Outlier this;
+        java.awt.geom.Point2D point;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        point := @parameter0: java.awt.geom.Point2D;
+
+        this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D point> = point;
+
+        return;
+    }
+
+    public double getX()
+    {
+        org.jfree.chart.renderer.Outlier this;
+        java.awt.geom.Point2D $stack1;
+        double $stack2;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+
+        $stack2 = virtualinvoke $stack1.<java.awt.geom.Point2D: double getX()>();
+
+        return $stack2;
+    }
+
+    public double getY()
+    {
+        org.jfree.chart.renderer.Outlier this;
+        java.awt.geom.Point2D $stack1;
+        double $stack2;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        $stack1 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+
+        $stack2 = virtualinvoke $stack1.<java.awt.geom.Point2D: double getY()>();
+
+        return $stack2;
+    }
+
+    public double getRadius()
+    {
+        org.jfree.chart.renderer.Outlier this;
+        double $stack1;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        $stack1 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        return $stack1;
+    }
+
+    public void setRadius(double)
+    {
+        org.jfree.chart.renderer.Outlier this;
+        double radius;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        radius := @parameter0: double;
+
+        this.<org.jfree.chart.renderer.Outlier: double radius> = radius;
+
+        return;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        java.lang.Object o;
+        org.jfree.chart.renderer.Outlier outlier, this;
+        java.awt.geom.Point2D p1, p2;
+        boolean $stack7;
+        double $stack8, $stack9, $stack11, $stack12;
+        byte $stack10, $stack13;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        o := @parameter0: java.lang.Object;
+
+        outlier = (org.jfree.chart.renderer.Outlier) o;
+
+        p1 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+
+        p2 = virtualinvoke outlier.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+
+        $stack7 = virtualinvoke p1.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>(p2);
+
+        if $stack7 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        $stack8 = virtualinvoke p1.<java.awt.geom.Point2D: double getX()>();
+
+        $stack9 = virtualinvoke p2.<java.awt.geom.Point2D: double getX()>();
+
+        $stack10 = $stack8 cmpg $stack9;
+
+        if $stack10 < 0 goto label2;
+
+        $stack11 = virtualinvoke p1.<java.awt.geom.Point2D: double getY()>();
+
+        $stack12 = virtualinvoke p2.<java.awt.geom.Point2D: double getY()>();
+
+        $stack13 = $stack11 cmpg $stack12;
+
+        if $stack13 >= 0 goto label3;
+
+     label2:
+        return -1;
+
+     label3:
+        return 1;
+    }
+
+    public boolean overlaps(org.jfree.chart.renderer.Outlier)
+    {
+        org.jfree.chart.renderer.Outlier other, this;
+        double $stack2, $stack3, $stack4, $stack5, $stack6, $stack8, $stack9, $stack10, $stack11, $stack12, $stack15, $stack16, $stack17, $stack18, $stack19, $stack21, $stack22, $stack23, $stack24, $stack25;
+        byte $stack7, $stack13, $stack20, $stack26;
+        boolean $stack14;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        other := @parameter0: org.jfree.chart.renderer.Outlier;
+
+        $stack2 = virtualinvoke other.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        $stack4 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack5 = $stack4 * 1.1;
+
+        $stack6 = $stack3 - $stack5;
+
+        $stack7 = $stack2 cmpl $stack6;
+
+        if $stack7 < 0 goto label1;
+
+        $stack8 = virtualinvoke other.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        $stack9 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        $stack10 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack11 = $stack10 * 1.1;
+
+        $stack12 = $stack9 + $stack11;
+
+        $stack13 = $stack8 cmpg $stack12;
+
+        if $stack13 > 0 goto label1;
+
+        $stack15 = virtualinvoke other.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        $stack16 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        $stack17 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack18 = $stack17 * 1.1;
+
+        $stack19 = $stack16 - $stack18;
+
+        $stack20 = $stack15 cmpl $stack19;
+
+        if $stack20 < 0 goto label1;
+
+        $stack21 = virtualinvoke other.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        $stack22 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        $stack23 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack24 = $stack23 * 1.1;
+
+        $stack25 = $stack22 + $stack24;
+
+        $stack26 = $stack21 cmpg $stack25;
+
+        if $stack26 > 0 goto label1;
+
+        $stack14 = 1;
+
+        goto label2;
+
+     label1:
+        $stack14 = 0;
+
+     label2:
+        return $stack14;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.renderer.Outlier this, that;
+        boolean $stack3, $stack6;
+        java.awt.geom.Point2D $stack4, $stack5;
+        double $stack7, $stack8;
+        byte $stack9;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.Outlier;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.renderer.Outlier) obj;
+
+        $stack5 = this.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D point>;
+
+        $stack4 = that.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D point>;
+
+        $stack6 = virtualinvoke $stack5.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack7 = that.<org.jfree.chart.renderer.Outlier: double radius>;
+
+        $stack9 = $stack8 cmpl $stack7;
+
+        if $stack9 == 0 goto label4;
+
+        return 0;
+
+     label4:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.StringBuilder $stack1, $stack2, $stack4, $stack5, $stack7, $stack8;
+        org.jfree.chart.renderer.Outlier this;
+        double $stack3, $stack6;
+        java.lang.String $stack9;
+
+        this := @this: org.jfree.chart.renderer.Outlier;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("{");
+
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getX()>();
+
+        $stack4 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(double)>($stack3);
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(",");
+
+        $stack6 = virtualinvoke this.<org.jfree.chart.renderer.Outlier: double getY()>();
+
+        $stack7 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(double)>($stack6);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("}");
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack9;
+    }
+}

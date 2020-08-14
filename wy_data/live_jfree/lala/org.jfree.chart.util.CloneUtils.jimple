@@ -1,0 +1,224 @@
+public class org.jfree.chart.util.CloneUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.util.CloneUtils this;
+
+        this := @this: org.jfree.chart.util.CloneUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.Object clone(java.lang.Object) throws java.lang.CloneNotSupportedException
+    {
+        java.lang.Object object, $stack10, $stack11;
+        boolean $stack2, $stack7;
+        java.lang.Class $stack3;
+        java.lang.Class[] $stack4;
+        int $stack6;
+        java.lang.CloneNotSupportedException $stack8, $stack13, $stack15, $stack17;
+        java.lang.Object[] $stack9;
+        java.lang.reflect.InvocationTargetException $stack12;
+        java.lang.IllegalAccessException $stack14;
+        java.lang.NoSuchMethodException $stack16;
+        org.jfree.chart.util.PublicCloneable pc;
+        java.lang.reflect.Method pc#2;
+
+        object := @parameter0: java.lang.Object;
+
+        if object != null goto label1;
+
+        return null;
+
+     label1:
+        $stack2 = object instanceof org.jfree.chart.util.PublicCloneable;
+
+        if $stack2 == 0 goto label2;
+
+        pc = (org.jfree.chart.util.PublicCloneable) object;
+
+        $stack11 = interfaceinvoke pc.<org.jfree.chart.util.PublicCloneable: java.lang.Object clone()>();
+
+        return $stack11;
+
+     label2:
+        $stack3 = virtualinvoke object.<java.lang.Object: java.lang.Class getClass()>();
+
+        $stack4 = (java.lang.Class[]) null;
+
+        pc#2 = virtualinvoke $stack3.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("clone", $stack4);
+
+        $stack6 = virtualinvoke pc#2.<java.lang.reflect.Method: int getModifiers()>();
+
+        $stack7 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack6);
+
+        if $stack7 == 0 goto label4;
+
+        $stack9 = (java.lang.Object[]) null;
+
+        $stack10 = virtualinvoke pc#2.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(object, $stack9);
+
+     label3:
+        return $stack10;
+
+     label4:
+        goto label8;
+
+     label5:
+        $stack16 := @caughtexception;
+
+        $stack17 = new java.lang.CloneNotSupportedException;
+
+        specialinvoke $stack17.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Object without clone() method is impossible.");
+
+        throw $stack17;
+
+     label6:
+        $stack14 := @caughtexception;
+
+        $stack15 = new java.lang.CloneNotSupportedException;
+
+        specialinvoke $stack15.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Object.clone(): unable to call method.");
+
+        throw $stack15;
+
+     label7:
+        $stack12 := @caughtexception;
+
+        $stack13 = new java.lang.CloneNotSupportedException;
+
+        specialinvoke $stack13.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Object without clone() method is impossible.");
+
+        throw $stack13;
+
+     label8:
+        $stack8 = new java.lang.CloneNotSupportedException;
+
+        specialinvoke $stack8.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Failed to clone.");
+
+        throw $stack8;
+
+        catch java.lang.NoSuchMethodException from label2 to label3 with label5;
+        catch java.lang.IllegalAccessException from label2 to label3 with label6;
+        catch java.lang.reflect.InvocationTargetException from label2 to label3 with label7;
+    }
+
+    public static java.util.List cloneList(java.util.List)
+    {
+        java.util.List source;
+        java.util.ArrayList $stack6;
+        java.util.Iterator l2;
+        boolean $stack8;
+        java.lang.Object obj, $stack10;
+        java.lang.CloneNotSupportedException $stack13;
+        java.lang.RuntimeException $stack14;
+
+        source := @parameter0: java.util.List;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(source, "source");
+
+        $stack6 = new java.util.ArrayList;
+
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+
+        l2 = interfaceinvoke source.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label6;
+
+        obj = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+     label2:
+        $stack10 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>(obj);
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack10);
+
+     label3:
+        goto label5;
+
+     label4:
+        $stack13 := @caughtexception;
+
+        $stack14 = new java.lang.RuntimeException;
+
+        specialinvoke $stack14.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack13);
+
+        throw $stack14;
+
+     label5:
+        goto label1;
+
+     label6:
+        return $stack6;
+
+        catch java.lang.CloneNotSupportedException from label2 to label3 with label4;
+    }
+
+    public static java.util.Map cloneMapValues(java.util.Map)
+    {
+        java.util.Map source;
+        java.util.HashMap $stack7;
+        java.util.Set $stack8;
+        java.util.Iterator l2;
+        boolean $stack10;
+        java.lang.Object key, value, $stack15;
+        java.lang.CloneNotSupportedException $stack17;
+        java.lang.RuntimeException $stack18;
+
+        source := @parameter0: java.util.Map;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(source, "source");
+
+        $stack7 = new java.util.HashMap;
+
+        specialinvoke $stack7.<java.util.HashMap: void <init>()>();
+
+        $stack8 = interfaceinvoke source.<java.util.Map: java.util.Set keySet()>();
+
+        l2 = interfaceinvoke $stack8.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label7;
+
+        key = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+
+        value = interfaceinvoke source.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        if value == null goto label5;
+
+     label2:
+        $stack15 = staticinvoke <org.jfree.chart.util.CloneUtils: java.lang.Object clone(java.lang.Object)>(value);
+
+        interfaceinvoke $stack7.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack15);
+
+     label3:
+        goto label6;
+
+     label4:
+        $stack17 := @caughtexception;
+
+        $stack18 = new java.lang.RuntimeException;
+
+        specialinvoke $stack18.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack17);
+
+        throw $stack18;
+
+     label5:
+        interfaceinvoke $stack7.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, null);
+
+     label6:
+        goto label1;
+
+     label7:
+        return $stack7;
+
+        catch java.lang.CloneNotSupportedException from label2 to label3 with label4;
+    }
+}

@@ -104,7 +104,6 @@ class GGNN(nn.Module):
         self.out = nn.Sequential(
             nn.Linear(self.state_dim + self.annotation_dim, self.state_dim),
             nn.Tanh(),
-            #nn.Linear(self.state_dim, 1) !!!!!!!!
             nn.Linear(self.state_dim, self.state_dim),
             nn.Tanh()
         )
@@ -118,7 +117,6 @@ class GGNN(nn.Module):
                 m.bias.data.fill_(0)
 
     def forward(self, prop_state, annotation, A):
-        print("model two self.n_steps",self.n_steps)
         for i_step in range(self.n_steps):
             in_states = []
             out_states = []
@@ -126,10 +124,8 @@ class GGNN(nn.Module):
             for i in range(self.n_edge_types):
                 in_states.append(self.in_fcs[i](prop_state))
                 out_states.append(self.out_fcs[i](prop_state))
-            # print(">in_states ",len(in_states))
-            # print(">out_states ",len(out_states))
+            
             in_states = torch.stack(in_states).transpose(0, 1).contiguous()
-            # print("]in_states ",in_states.shape)
             in_states = in_states.view(-1, self.n_node*self.n_edge_types, self.state_dim)
             # print("+in_states ",in_states.shape)
             out_states = torch.stack(out_states).transpose(0, 1).contiguous()
@@ -140,16 +136,8 @@ class GGNN(nn.Module):
             prop_state = self.propogator(in_states, out_states, prop_state, A)
             # print("+prop_state ",prop_state.shape)
 
-        # print(">prop_state ",prop_state.shape)
-        # print(">annotation ",annotation.shape)
-        # print("join_state = torch.cat((prop_state, annotation), 2)")
         join_state = torch.cat((prop_state, annotation), 2)
-        # print(">>join_state ",join_state.shape)
         output = self.out(join_state)
-        # print(">>>output",output.shape) #[batch, v, state_dim]
-        # output = output.sum(2) !!!!!!!!!
-        # m0 = nn.Softmax(dim=2)
-        # output = m0(output)
         output = output.reshape(-1, self.n_node*self.state_dim )
 
         return output

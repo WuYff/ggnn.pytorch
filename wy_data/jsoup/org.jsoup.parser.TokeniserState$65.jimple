@@ -1,0 +1,87 @@
+final enum class org.jsoup.parser.TokeniserState$65 extends org.jsoup.parser.TokeniserState
+{
+
+    void <init>(java.lang.String, int)
+    {
+        org.jsoup.parser.TokeniserState$65 this;
+        java.lang.String l1;
+        int l2;
+
+        this := @this: org.jsoup.parser.TokeniserState$65;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: int;
+
+        specialinvoke this.<org.jsoup.parser.TokeniserState: void <init>(java.lang.String,int,org.jsoup.parser.TokeniserState$1)>(l1, l2, null);
+
+        return;
+    }
+
+    void read(org.jsoup.parser.Tokeniser, org.jsoup.parser.CharacterReader)
+    {
+        org.jsoup.parser.CharacterReader r;
+        char c;
+        org.jsoup.parser.Tokeniser t;
+        org.jsoup.parser.TokeniserState$65 this;
+        org.jsoup.parser.Token$Doctype $stack5;
+        org.jsoup.parser.TokeniserState $stack6, $stack7, $stack8;
+
+        this := @this: org.jsoup.parser.TokeniserState$65;
+
+        t := @parameter0: org.jsoup.parser.Tokeniser;
+
+        r := @parameter1: org.jsoup.parser.CharacterReader;
+
+        c = virtualinvoke r.<org.jsoup.parser.CharacterReader: char consume()>();
+
+        lookupswitch(c)
+        {
+            case 9: goto label1;
+            case 10: goto label1;
+            case 12: goto label1;
+            case 13: goto label1;
+            case 32: goto label1;
+            case 62: goto label2;
+            case 65535: goto label3;
+            default: goto label4;
+        };
+
+     label1:
+        goto label5;
+
+     label2:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emitDoctypePending()>();
+
+        $stack7 = <org.jsoup.parser.TokeniserState$65: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack7);
+
+        goto label5;
+
+     label3:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void eofError(org.jsoup.parser.TokeniserState)>(this);
+
+        $stack5 = t.<org.jsoup.parser.Tokeniser: org.jsoup.parser.Token$Doctype doctypePending>;
+
+        $stack5.<org.jsoup.parser.Token$Doctype: boolean forceQuirks> = 1;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void emitDoctypePending()>();
+
+        $stack6 = <org.jsoup.parser.TokeniserState$65: org.jsoup.parser.TokeniserState Data>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack6);
+
+        goto label5;
+
+     label4:
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void error(org.jsoup.parser.TokeniserState)>(this);
+
+        $stack8 = <org.jsoup.parser.TokeniserState$65: org.jsoup.parser.TokeniserState BogusDoctype>;
+
+        virtualinvoke t.<org.jsoup.parser.Tokeniser: void transition(org.jsoup.parser.TokeniserState)>($stack8);
+
+     label5:
+        return;
+    }
+}

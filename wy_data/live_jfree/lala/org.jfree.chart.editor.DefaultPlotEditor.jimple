@@ -1,0 +1,1296 @@
+class org.jfree.chart.editor.DefaultPlotEditor extends javax.swing.JPanel implements java.awt.event.ActionListener
+{
+    private static final java.lang.String[] orientationNames;
+    private static final int ORIENTATION_VERTICAL;
+    private static final int ORIENTATION_HORIZONTAL;
+    private org.jfree.chart.ui.PaintSample backgroundPaintSample;
+    private org.jfree.chart.ui.StrokeSample outlineStrokeSample;
+    private org.jfree.chart.ui.PaintSample outlinePaintSample;
+    private org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel;
+    private org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel;
+    private org.jfree.chart.ui.StrokeSample[] availableStrokeSamples;
+    private org.jfree.chart.ui.RectangleInsets plotInsets;
+    private org.jfree.chart.plot.PlotOrientation plotOrientation;
+    private javax.swing.JComboBox orientationCombo;
+    private java.lang.Boolean drawLines;
+    private javax.swing.JCheckBox drawLinesCheckBox;
+    private java.lang.Boolean drawShapes;
+    private javax.swing.JCheckBox drawShapesCheckBox;
+    protected static java.util.ResourceBundle localizationResources;
+
+    public void <init>(org.jfree.chart.plot.Plot)
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.plot.Plot plot;
+        javax.swing.JPanel panel;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        plot := @parameter0: org.jfree.chart.plot.Plot;
+
+        specialinvoke this.<javax.swing.JPanel: void <init>()>();
+
+        panel = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JPanel createPlotPanel(org.jfree.chart.plot.Plot)>(plot);
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: java.awt.Component add(java.awt.Component)>(panel);
+
+        return;
+    }
+
+    protected javax.swing.JPanel createPlotPanel(org.jfree.chart.plot.Plot)
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.ui.RectangleInsets $stack8;
+        org.jfree.chart.ui.PaintSample $stack9, $stack13, $stack72, $stack82;
+        java.awt.Paint $stack10, $stack14;
+        org.jfree.chart.ui.StrokeSample $stack11, $stack21, $stack24, $stack28, $stack32, $stack62;
+        java.awt.Stroke $stack12;
+        boolean $stack15, $stack16, $stack18, $stack103, $stack136, $stack176, $stack233, $stack235, $stack239, $stack240, $stack242, $stack17, isVertical;
+        java.lang.Boolean $stack87, $stack101, $stack134, $stack234, $stack236, $stack241, $stack243, $stack86;
+        javax.swing.JPanel $stack88, $stack106, $stack139, $stack156, $stack36, $stack47, $stack52;
+        java.awt.BorderLayout $stack89, $stack19, $stack37, $stack48;
+        javax.swing.border.Border $stack90, $stack38, $stack54;
+        java.util.ResourceBundle $stack92, $stack97, $stack130, $stack148, $stack42, $stack49, $stack56, $stack60, $stack66, $stack70, $stack76, $stack80;
+        java.lang.String $stack93, $stack98, $stack131, $stack149, $stack40, $stack43, $stack45, $stack50, $stack57, $stack61, $stack67, $stack71, $stack77, $stack81;
+        javax.swing.JLabel $stack96, $stack129, $stack147, $stack55, $stack65, $stack75;
+        javax.swing.JCheckBox $stack100, $stack102, $stack104, $stack105, $stack108, $stack133, $stack135, $stack137, $stack138, $stack141;
+        org.jfree.chart.plot.PlotOrientation $stack144, $stack145, $stack245, $stack248, $stack85;
+        javax.swing.JComboBox $stack151, $stack153, $stack154, $stack155, $stack158;
+        java.lang.String[] $stack152;
+        org.jfree.chart.plot.XYPlot $stack174, $stack244;
+        org.jfree.chart.plot.CategoryPlot $stack237, $stack247;
+        org.jfree.chart.renderer.category.CategoryItemRenderer renderer;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer r;
+        org.jfree.chart.renderer.xy.XYItemRenderer renderer#7;
+        org.jfree.chart.renderer.xy.StandardXYItemRenderer r#8;
+        org.jfree.chart.ui.StrokeSample[] $stack20, $stack22, $stack26, $stack30, $stack34;
+        java.awt.BasicStroke $stack25, $stack29, $stack33;
+        java.lang.StringBuilder $stack39, $stack41, $stack44;
+        javax.swing.border.TitledBorder $stack46, $stack51;
+        org.jfree.chart.ui.LCBLayout $stack53;
+        javax.swing.JButton $stack59, $stack69, $stack79;
+        byte $stack161;
+        javax.swing.JTabbedPane index#406;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        plot := @parameter0: org.jfree.chart.plot.Plot;
+
+        $stack8 = virtualinvoke plot.<org.jfree.chart.plot.Plot: org.jfree.chart.ui.RectangleInsets getInsets()>();
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.RectangleInsets plotInsets> = $stack8;
+
+        $stack9 = new org.jfree.chart.ui.PaintSample;
+
+        $stack10 = virtualinvoke plot.<org.jfree.chart.plot.Plot: java.awt.Paint getBackgroundPaint()>();
+
+        specialinvoke $stack9.<org.jfree.chart.ui.PaintSample: void <init>(java.awt.Paint)>($stack10);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample backgroundPaintSample> = $stack9;
+
+        $stack11 = new org.jfree.chart.ui.StrokeSample;
+
+        $stack12 = virtualinvoke plot.<org.jfree.chart.plot.Plot: java.awt.Stroke getOutlineStroke()>();
+
+        specialinvoke $stack11.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>($stack12);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample outlineStrokeSample> = $stack11;
+
+        $stack13 = new org.jfree.chart.ui.PaintSample;
+
+        $stack14 = virtualinvoke plot.<org.jfree.chart.plot.Plot: java.awt.Paint getOutlinePaint()>();
+
+        specialinvoke $stack13.<org.jfree.chart.ui.PaintSample: void <init>(java.awt.Paint)>($stack14);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample outlinePaintSample> = $stack13;
+
+        $stack15 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack15 == 0 goto label01;
+
+        $stack247 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        $stack248 = virtualinvoke $stack247.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation> = $stack248;
+
+        goto label02;
+
+     label01:
+        $stack16 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack16 == 0 goto label02;
+
+        $stack244 = (org.jfree.chart.plot.XYPlot) plot;
+
+        $stack245 = virtualinvoke $stack244.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation> = $stack245;
+
+     label02:
+        $stack17 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack17 == 0 goto label04;
+
+        $stack237 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        renderer = virtualinvoke $stack237.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.renderer.category.CategoryItemRenderer getRenderer()>();
+
+        $stack239 = renderer instanceof org.jfree.chart.renderer.category.LineAndShapeRenderer;
+
+        if $stack239 == 0 goto label03;
+
+        r = (org.jfree.chart.renderer.category.LineAndShapeRenderer) renderer;
+
+        $stack240 = virtualinvoke r.<org.jfree.chart.renderer.category.LineAndShapeRenderer: boolean getDefaultLinesVisible()>();
+
+        $stack241 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack240);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines> = $stack241;
+
+        $stack242 = virtualinvoke r.<org.jfree.chart.renderer.category.LineAndShapeRenderer: boolean getDefaultShapesVisible()>();
+
+        $stack243 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack242);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes> = $stack243;
+
+     label03:
+        goto label05;
+
+     label04:
+        $stack18 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack18 == 0 goto label05;
+
+        $stack174 = (org.jfree.chart.plot.XYPlot) plot;
+
+        renderer#7 = virtualinvoke $stack174.<org.jfree.chart.plot.XYPlot: org.jfree.chart.renderer.xy.XYItemRenderer getRenderer()>();
+
+        $stack176 = renderer#7 instanceof org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+
+        if $stack176 == 0 goto label05;
+
+        r#8 = (org.jfree.chart.renderer.xy.StandardXYItemRenderer) renderer#7;
+
+        $stack233 = virtualinvoke r#8.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: boolean getPlotLines()>();
+
+        $stack234 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack233);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines> = $stack234;
+
+        $stack235 = virtualinvoke r#8.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: boolean getBaseShapesVisible()>();
+
+        $stack236 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack235);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes> = $stack236;
+
+     label05:
+        $stack19 = new java.awt.BorderLayout;
+
+        specialinvoke $stack19.<java.awt.BorderLayout: void <init>()>();
+
+        virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void setLayout(java.awt.LayoutManager)>($stack19);
+
+        $stack20 = newarray (org.jfree.chart.ui.StrokeSample)[4];
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples> = $stack20;
+
+        $stack22 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+
+        $stack21 = new org.jfree.chart.ui.StrokeSample;
+
+        specialinvoke $stack21.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>(null);
+
+        $stack22[0] = $stack21;
+
+        $stack26 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+
+        $stack24 = new org.jfree.chart.ui.StrokeSample;
+
+        $stack25 = new java.awt.BasicStroke;
+
+        specialinvoke $stack25.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+
+        specialinvoke $stack24.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>($stack25);
+
+        $stack26[1] = $stack24;
+
+        $stack30 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+
+        $stack28 = new org.jfree.chart.ui.StrokeSample;
+
+        $stack29 = new java.awt.BasicStroke;
+
+        specialinvoke $stack29.<java.awt.BasicStroke: void <init>(float)>(2.0F);
+
+        specialinvoke $stack28.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>($stack29);
+
+        $stack30[2] = $stack28;
+
+        $stack34 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+
+        $stack32 = new org.jfree.chart.ui.StrokeSample;
+
+        $stack33 = new java.awt.BasicStroke;
+
+        specialinvoke $stack33.<java.awt.BasicStroke: void <init>(float)>(3.0F);
+
+        specialinvoke $stack32.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>($stack33);
+
+        $stack34[3] = $stack32;
+
+        $stack36 = new javax.swing.JPanel;
+
+        $stack37 = new java.awt.BorderLayout;
+
+        specialinvoke $stack37.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack36.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack37);
+
+        $stack38 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+
+        $stack39 = new java.lang.StringBuilder;
+
+        specialinvoke $stack39.<java.lang.StringBuilder: void <init>()>();
+
+        $stack40 = virtualinvoke plot.<org.jfree.chart.plot.Plot: java.lang.String getPlotType()>();
+
+        $stack41 = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack40);
+
+        $stack42 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack43 = virtualinvoke $stack42.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>(":");
+
+        $stack44 = virtualinvoke $stack41.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack43);
+
+        $stack45 = virtualinvoke $stack44.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack46 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack38, $stack45);
+
+        virtualinvoke $stack36.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack46);
+
+        $stack47 = new javax.swing.JPanel;
+
+        $stack48 = new java.awt.BorderLayout;
+
+        specialinvoke $stack48.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack47.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack48);
+
+        $stack49 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack50 = virtualinvoke $stack49.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("General");
+
+        $stack51 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(java.lang.String)>($stack50);
+
+        virtualinvoke $stack47.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack51);
+
+        $stack52 = new javax.swing.JPanel;
+
+        $stack53 = new org.jfree.chart.ui.LCBLayout;
+
+        specialinvoke $stack53.<org.jfree.chart.ui.LCBLayout: void <init>(int)>(7);
+
+        specialinvoke $stack52.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack53);
+
+        $stack54 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(0, 5, 0, 5);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack54);
+
+        $stack55 = new javax.swing.JLabel;
+
+        $stack56 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack57 = virtualinvoke $stack56.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Outline_stroke");
+
+        specialinvoke $stack55.<javax.swing.JLabel: void <init>(java.lang.String)>($stack57);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack55);
+
+        $stack59 = new javax.swing.JButton;
+
+        $stack60 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack61 = virtualinvoke $stack60.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack59.<javax.swing.JButton: void <init>(java.lang.String)>($stack61);
+
+        virtualinvoke $stack59.<javax.swing.JButton: void setActionCommand(java.lang.String)>("OutlineStroke");
+
+        virtualinvoke $stack59.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack62 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample outlineStrokeSample>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack62);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack59);
+
+        $stack65 = new javax.swing.JLabel;
+
+        $stack66 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack67 = virtualinvoke $stack66.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Outline_Paint");
+
+        specialinvoke $stack65.<javax.swing.JLabel: void <init>(java.lang.String)>($stack67);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack65);
+
+        $stack69 = new javax.swing.JButton;
+
+        $stack70 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack71 = virtualinvoke $stack70.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack69.<javax.swing.JButton: void <init>(java.lang.String)>($stack71);
+
+        virtualinvoke $stack69.<javax.swing.JButton: void setActionCommand(java.lang.String)>("OutlinePaint");
+
+        virtualinvoke $stack69.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack72 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample outlinePaintSample>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack72);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack69);
+
+        $stack75 = new javax.swing.JLabel;
+
+        $stack76 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack77 = virtualinvoke $stack76.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Background_paint");
+
+        specialinvoke $stack75.<javax.swing.JLabel: void <init>(java.lang.String)>($stack77);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack75);
+
+        $stack79 = new javax.swing.JButton;
+
+        $stack80 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack81 = virtualinvoke $stack80.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Select...");
+
+        specialinvoke $stack79.<javax.swing.JButton: void <init>(java.lang.String)>($stack81);
+
+        virtualinvoke $stack79.<javax.swing.JButton: void setActionCommand(java.lang.String)>("BackgroundPaint");
+
+        virtualinvoke $stack79.<javax.swing.JButton: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack82 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample backgroundPaintSample>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack82);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack79);
+
+        $stack85 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation>;
+
+        if $stack85 == null goto label08;
+
+        $stack145 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation>;
+
+        $stack144 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        isVertical = virtualinvoke $stack145.<org.jfree.chart.plot.PlotOrientation: boolean equals(java.lang.Object)>($stack144);
+
+        if isVertical == 0 goto label06;
+
+        $stack161 = 0;
+
+        goto label07;
+
+     label06:
+        $stack161 = 1;
+
+     label07:
+        $stack147 = new javax.swing.JLabel;
+
+        $stack148 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack149 = virtualinvoke $stack148.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Orientation");
+
+        specialinvoke $stack147.<javax.swing.JLabel: void <init>(java.lang.String)>($stack149);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack147);
+
+        $stack151 = new javax.swing.JComboBox;
+
+        $stack152 = <org.jfree.chart.editor.DefaultPlotEditor: java.lang.String[] orientationNames>;
+
+        specialinvoke $stack151.<javax.swing.JComboBox: void <init>(java.lang.Object[])>($stack152);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo> = $stack151;
+
+        $stack153 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo>;
+
+        virtualinvoke $stack153.<javax.swing.JComboBox: void setSelectedIndex(int)>($stack161);
+
+        $stack154 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo>;
+
+        virtualinvoke $stack154.<javax.swing.JComboBox: void setActionCommand(java.lang.String)>("Orientation");
+
+        $stack155 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo>;
+
+        virtualinvoke $stack155.<javax.swing.JComboBox: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack156 = new javax.swing.JPanel;
+
+        specialinvoke $stack156.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack156);
+
+        $stack158 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack158);
+
+     label08:
+        $stack86 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines>;
+
+        if $stack86 == null goto label09;
+
+        $stack129 = new javax.swing.JLabel;
+
+        $stack130 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack131 = virtualinvoke $stack130.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Draw_lines");
+
+        specialinvoke $stack129.<javax.swing.JLabel: void <init>(java.lang.String)>($stack131);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack129);
+
+        $stack133 = new javax.swing.JCheckBox;
+
+        specialinvoke $stack133.<javax.swing.JCheckBox: void <init>()>();
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox> = $stack133;
+
+        $stack135 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox>;
+
+        $stack134 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines>;
+
+        $stack136 = virtualinvoke $stack134.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack135.<javax.swing.JCheckBox: void setSelected(boolean)>($stack136);
+
+        $stack137 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox>;
+
+        virtualinvoke $stack137.<javax.swing.JCheckBox: void setActionCommand(java.lang.String)>("DrawLines");
+
+        $stack138 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox>;
+
+        virtualinvoke $stack138.<javax.swing.JCheckBox: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack139 = new javax.swing.JPanel;
+
+        specialinvoke $stack139.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack139);
+
+        $stack141 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack141);
+
+     label09:
+        $stack87 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes>;
+
+        if $stack87 == null goto label10;
+
+        $stack96 = new javax.swing.JLabel;
+
+        $stack97 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack98 = virtualinvoke $stack97.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Draw_shapes");
+
+        specialinvoke $stack96.<javax.swing.JLabel: void <init>(java.lang.String)>($stack98);
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack96);
+
+        $stack100 = new javax.swing.JCheckBox;
+
+        specialinvoke $stack100.<javax.swing.JCheckBox: void <init>()>();
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox> = $stack100;
+
+        $stack102 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox>;
+
+        $stack101 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes>;
+
+        $stack103 = virtualinvoke $stack101.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack102.<javax.swing.JCheckBox: void setSelected(boolean)>($stack103);
+
+        $stack104 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox>;
+
+        virtualinvoke $stack104.<javax.swing.JCheckBox: void setActionCommand(java.lang.String)>("DrawShapes");
+
+        $stack105 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox>;
+
+        virtualinvoke $stack105.<javax.swing.JCheckBox: void addActionListener(java.awt.event.ActionListener)>(this);
+
+        $stack106 = new javax.swing.JPanel;
+
+        specialinvoke $stack106.<javax.swing.JPanel: void <init>()>();
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack106);
+
+        $stack108 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox>;
+
+        virtualinvoke $stack52.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>($stack108);
+
+     label10:
+        virtualinvoke $stack47.<javax.swing.JPanel: void add(java.awt.Component,java.lang.Object)>($stack52, "North");
+
+        $stack88 = new javax.swing.JPanel;
+
+        $stack89 = new java.awt.BorderLayout;
+
+        specialinvoke $stack89.<java.awt.BorderLayout: void <init>()>();
+
+        specialinvoke $stack88.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack89);
+
+        $stack90 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(2, 2, 2, 2);
+
+        virtualinvoke $stack88.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack90);
+
+        virtualinvoke $stack88.<javax.swing.JPanel: void add(java.awt.Component,java.lang.Object)>($stack47, "North");
+
+        index#406 = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JTabbedPane createPlotTabs(org.jfree.chart.plot.Plot)>(plot);
+
+        $stack92 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack93 = virtualinvoke $stack92.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Appearance");
+
+        virtualinvoke index#406.<javax.swing.JTabbedPane: java.awt.Component add(java.lang.String,java.awt.Component)>($stack93, $stack88);
+
+        virtualinvoke $stack36.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(index#406);
+
+        return $stack36;
+    }
+
+    protected javax.swing.JTabbedPane createPlotTabs(org.jfree.chart.plot.Plot)
+    {
+        javax.swing.JTabbedPane $stack5;
+        javax.swing.border.Border $stack6, $stack17, $stack33;
+        org.jfree.chart.plot.Plot plot;
+        boolean $stack7, $stack8, $stack11, $stack12, $stack13;
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.editor.DefaultAxisEditor $stack16, $stack20, $stack32, $stack36, $stack9, $stack10, $stack14, $stack15;
+        java.util.ResourceBundle $stack18, $stack34;
+        java.lang.String $stack19, $stack35;
+        org.jfree.chart.plot.PolarPlot $stack23;
+        org.jfree.chart.plot.XYPlot $stack28, $stack40;
+        org.jfree.chart.plot.CategoryPlot $stack30, $stack45;
+        org.jfree.chart.axis.Axis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        plot := @parameter0: org.jfree.chart.plot.Plot;
+
+        $stack5 = new javax.swing.JTabbedPane;
+
+        specialinvoke $stack5.<javax.swing.JTabbedPane: void <init>()>();
+
+        $stack6 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(0, 5, 0, 5);
+
+        virtualinvoke $stack5.<javax.swing.JTabbedPane: void setBorder(javax.swing.border.Border)>($stack6);
+
+        domainAxis = null;
+
+        $stack7 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack7 == 0 goto label1;
+
+        $stack45 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        domainAxis = virtualinvoke $stack45.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.CategoryAxis getDomainAxis()>();
+
+        goto label2;
+
+     label1:
+        $stack8 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack8 == 0 goto label2;
+
+        $stack40 = (org.jfree.chart.plot.XYPlot) plot;
+
+        domainAxis = virtualinvoke $stack40.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+     label2:
+        $stack9 = staticinvoke <org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.editor.DefaultAxisEditor getInstance(org.jfree.chart.axis.Axis)>(domainAxis);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel> = $stack9;
+
+        $stack10 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        if $stack10 == null goto label3;
+
+        $stack32 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        $stack33 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(2, 2, 2, 2);
+
+        virtualinvoke $stack32.<org.jfree.chart.editor.DefaultAxisEditor: void setBorder(javax.swing.border.Border)>($stack33);
+
+        $stack34 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack35 = virtualinvoke $stack34.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Domain_Axis");
+
+        $stack36 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        virtualinvoke $stack5.<javax.swing.JTabbedPane: java.awt.Component add(java.lang.String,java.awt.Component)>($stack35, $stack36);
+
+     label3:
+        rangeAxis = null;
+
+        $stack11 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack11 == 0 goto label4;
+
+        $stack30 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        rangeAxis = virtualinvoke $stack30.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        goto label6;
+
+     label4:
+        $stack12 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack12 == 0 goto label5;
+
+        $stack28 = (org.jfree.chart.plot.XYPlot) plot;
+
+        rangeAxis = virtualinvoke $stack28.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        goto label6;
+
+     label5:
+        $stack13 = plot instanceof org.jfree.chart.plot.PolarPlot;
+
+        if $stack13 == 0 goto label6;
+
+        $stack23 = (org.jfree.chart.plot.PolarPlot) plot;
+
+        rangeAxis = virtualinvoke $stack23.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis()>();
+
+     label6:
+        $stack14 = staticinvoke <org.jfree.chart.editor.DefaultAxisEditor: org.jfree.chart.editor.DefaultAxisEditor getInstance(org.jfree.chart.axis.Axis)>(rangeAxis);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel> = $stack14;
+
+        $stack15 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        if $stack15 == null goto label7;
+
+        $stack16 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        $stack17 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(2, 2, 2, 2);
+
+        virtualinvoke $stack16.<org.jfree.chart.editor.DefaultAxisEditor: void setBorder(javax.swing.border.Border)>($stack17);
+
+        $stack18 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack19 = virtualinvoke $stack18.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Range_Axis");
+
+        $stack20 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        virtualinvoke $stack5.<javax.swing.JTabbedPane: java.awt.Component add(java.lang.String,java.awt.Component)>($stack19, $stack20);
+
+     label7:
+        return $stack5;
+    }
+
+    public org.jfree.chart.ui.RectangleInsets getPlotInsets()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.ui.RectangleInsets $stack1, $stack2, $stack3;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.RectangleInsets plotInsets>;
+
+        if $stack1 != null goto label1;
+
+        $stack3 = new org.jfree.chart.ui.RectangleInsets;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.RectangleInsets: void <init>(double,double,double,double)>(0.0, 0.0, 0.0, 0.0);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.RectangleInsets plotInsets> = $stack3;
+
+     label1:
+        $stack2 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.RectangleInsets plotInsets>;
+
+        return $stack2;
+    }
+
+    public java.awt.Paint getBackgroundPaint()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.ui.PaintSample $stack1;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample backgroundPaintSample>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.ui.PaintSample: java.awt.Paint getPaint()>();
+
+        return $stack2;
+    }
+
+    public java.awt.Stroke getOutlineStroke()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.ui.StrokeSample $stack1;
+        java.awt.Stroke $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample outlineStrokeSample>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.ui.StrokeSample: java.awt.Stroke getStroke()>();
+
+        return $stack2;
+    }
+
+    public java.awt.Paint getOutlinePaint()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.ui.PaintSample $stack1;
+        java.awt.Paint $stack2;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample outlinePaintSample>;
+
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.ui.PaintSample: java.awt.Paint getPaint()>();
+
+        return $stack2;
+    }
+
+    public org.jfree.chart.editor.DefaultAxisEditor getDomainAxisPropertyEditPanel()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.editor.DefaultAxisEditor $stack1;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        return $stack1;
+    }
+
+    public org.jfree.chart.editor.DefaultAxisEditor getRangeAxisPropertyEditPanel()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.editor.DefaultAxisEditor $stack1;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        return $stack1;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        java.awt.event.ActionEvent event;
+        java.lang.String command;
+        boolean $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.chart.editor.DefaultPlotEditor this;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        event := @parameter0: java.awt.event.ActionEvent;
+
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+
+        $stack4 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("BackgroundPaint");
+
+        if $stack4 == 0 goto label1;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptBackgroundPaintSelection()>();
+
+        goto label6;
+
+     label1:
+        $stack5 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("OutlineStroke");
+
+        if $stack5 == 0 goto label2;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptOutlineStrokeSelection()>();
+
+        goto label6;
+
+     label2:
+        $stack6 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("OutlinePaint");
+
+        if $stack6 == 0 goto label3;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptOutlinePaintSelection()>();
+
+        goto label6;
+
+     label3:
+        $stack7 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("Orientation");
+
+        if $stack7 == 0 goto label4;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptOrientationSelection()>();
+
+        goto label6;
+
+     label4:
+        $stack8 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("DrawLines");
+
+        if $stack8 == 0 goto label5;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptDrawLinesSelection()>();
+
+        goto label6;
+
+     label5:
+        $stack9 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("DrawShapes");
+
+        if $stack9 == 0 goto label6;
+
+        specialinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: void attemptDrawShapesSelection()>();
+
+     label6:
+        return;
+    }
+
+    private void attemptBackgroundPaintSelection()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        java.util.ResourceBundle $stack2;
+        java.lang.String $stack3;
+        java.awt.Color $stack4, c;
+        org.jfree.chart.ui.PaintSample $stack6;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack2 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Background_Color");
+
+        $stack4 = <java.awt.Color: java.awt.Color BLUE>;
+
+        c = staticinvoke <javax.swing.JColorChooser: java.awt.Color showDialog(java.awt.Component,java.lang.String,java.awt.Color)>(this, $stack3, $stack4);
+
+        if c == null goto label1;
+
+        $stack6 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample backgroundPaintSample>;
+
+        virtualinvoke $stack6.<org.jfree.chart.ui.PaintSample: void setPaint(java.awt.Paint)>(c);
+
+     label1:
+        return;
+    }
+
+    private void attemptOutlineStrokeSelection()
+    {
+        org.jfree.chart.ui.StrokeChooserPanel $stack3;
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        org.jfree.chart.ui.StrokeSample[] $stack4;
+        org.jfree.chart.ui.StrokeSample $stack5, $stack9;
+        java.util.ResourceBundle $stack6;
+        java.lang.String $stack7;
+        int result;
+        java.awt.Stroke $stack10;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack3 = new org.jfree.chart.ui.StrokeChooserPanel;
+
+        $stack5 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample outlineStrokeSample>;
+
+        $stack4 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+
+        specialinvoke $stack3.<org.jfree.chart.ui.StrokeChooserPanel: void <init>(org.jfree.chart.ui.StrokeSample,org.jfree.chart.ui.StrokeSample[])>($stack5, $stack4);
+
+        $stack6 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack7 = virtualinvoke $stack6.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Stroke_Selection");
+
+        result = staticinvoke <javax.swing.JOptionPane: int showConfirmDialog(java.awt.Component,java.lang.Object,java.lang.String,int,int)>(this, $stack3, $stack7, 2, -1);
+
+        if result != 0 goto label1;
+
+        $stack9 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.StrokeSample outlineStrokeSample>;
+
+        $stack10 = virtualinvoke $stack3.<org.jfree.chart.ui.StrokeChooserPanel: java.awt.Stroke getSelectedStroke()>();
+
+        virtualinvoke $stack9.<org.jfree.chart.ui.StrokeSample: void setStroke(java.awt.Stroke)>($stack10);
+
+     label1:
+        return;
+    }
+
+    private void attemptOutlinePaintSelection()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        java.util.ResourceBundle $stack2;
+        java.lang.String $stack3;
+        java.awt.Color $stack4, c;
+        org.jfree.chart.ui.PaintSample $stack6;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack2 = <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Outline_Color");
+
+        $stack4 = <java.awt.Color: java.awt.Color BLUE>;
+
+        c = staticinvoke <javax.swing.JColorChooser: java.awt.Color showDialog(java.awt.Component,java.lang.String,java.awt.Color)>(this, $stack3, $stack4);
+
+        if c == null goto label1;
+
+        $stack6 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.PaintSample outlinePaintSample>;
+
+        virtualinvoke $stack6.<org.jfree.chart.ui.PaintSample: void setPaint(java.awt.Paint)>(c);
+
+     label1:
+        return;
+    }
+
+    private void attemptOrientationSelection()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        javax.swing.JComboBox $stack2;
+        int index;
+        org.jfree.chart.plot.PlotOrientation $stack4, $stack5;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack2 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JComboBox orientationCombo>;
+
+        index = virtualinvoke $stack2.<javax.swing.JComboBox: int getSelectedIndex()>();
+
+        if index != 0 goto label1;
+
+        $stack5 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation> = $stack5;
+
+        goto label2;
+
+     label1:
+        $stack4 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation> = $stack4;
+
+     label2:
+        return;
+    }
+
+    private void attemptDrawLinesSelection()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        javax.swing.JCheckBox $stack1;
+        boolean $stack2;
+        java.lang.Boolean $stack3;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawLinesCheckBox>;
+
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+
+        $stack3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack2);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines> = $stack3;
+
+        return;
+    }
+
+    private void attemptDrawShapesSelection()
+    {
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        javax.swing.JCheckBox $stack1;
+        boolean $stack2;
+        java.lang.Boolean $stack3;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        $stack1 = this.<org.jfree.chart.editor.DefaultPlotEditor: javax.swing.JCheckBox drawShapesCheckBox>;
+
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+
+        $stack3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack2);
+
+        this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes> = $stack3;
+
+        return;
+    }
+
+    public void updatePlotProperties(org.jfree.chart.plot.Plot)
+    {
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.editor.DefaultPlotEditor this;
+        java.awt.Paint $stack4, $stack6;
+        java.awt.Stroke $stack5;
+        org.jfree.chart.ui.RectangleInsets $stack7;
+        org.jfree.chart.editor.DefaultAxisEditor $stack8, $stack47, $stack55, $stack9;
+        boolean $stack13, $stack14, $stack16, $stack19, $stack21, $stack24, $stack25, $stack26, $stack29, $stack32, $stack34, $stack37, $stack38, $stack39, $stack43, $stack44, $stack45, $stack52, $stack53;
+        java.lang.Boolean $stack17, $stack22, $stack30, $stack35, $stack11, $stack12;
+        org.jfree.chart.renderer.xy.StandardXYItemRenderer $stack18, $stack31;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer $stack23, $stack36;
+        org.jfree.chart.plot.PlotOrientation $stack41, $stack42, $stack10;
+        org.jfree.chart.axis.Axis domainAxis;
+        org.jfree.chart.plot.CategoryPlot p, domainAxis#21;
+        org.jfree.chart.plot.XYPlot p#3, domainAxis#22;
+        org.jfree.chart.axis.ValueAxis domainAxis#10;
+        org.jfree.chart.plot.PolarPlot p#13;
+        org.jfree.chart.renderer.category.CategoryItemRenderer p#30;
+        org.jfree.chart.renderer.xy.XYItemRenderer p#32;
+
+        this := @this: org.jfree.chart.editor.DefaultPlotEditor;
+
+        plot := @parameter0: org.jfree.chart.plot.Plot;
+
+        $stack4 = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: java.awt.Paint getOutlinePaint()>();
+
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setOutlinePaint(java.awt.Paint)>($stack4);
+
+        $stack5 = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: java.awt.Stroke getOutlineStroke()>();
+
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setOutlineStroke(java.awt.Stroke)>($stack5);
+
+        $stack6 = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: java.awt.Paint getBackgroundPaint()>();
+
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setBackgroundPaint(java.awt.Paint)>($stack6);
+
+        $stack7 = virtualinvoke this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.ui.RectangleInsets getPlotInsets()>();
+
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setInsets(org.jfree.chart.ui.RectangleInsets)>($stack7);
+
+        $stack8 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        if $stack8 == null goto label03;
+
+        domainAxis = null;
+
+        $stack52 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack52 == 0 goto label01;
+
+        p = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        domainAxis = virtualinvoke p.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.CategoryAxis getDomainAxis()>();
+
+        goto label02;
+
+     label01:
+        $stack53 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack53 == 0 goto label02;
+
+        p#3 = (org.jfree.chart.plot.XYPlot) plot;
+
+        domainAxis = virtualinvoke p#3.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+
+     label02:
+        if domainAxis == null goto label03;
+
+        $stack55 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor domainAxisPropertyPanel>;
+
+        virtualinvoke $stack55.<org.jfree.chart.editor.DefaultAxisEditor: void setAxisProperties(org.jfree.chart.axis.Axis)>(domainAxis);
+
+     label03:
+        $stack9 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        if $stack9 == null goto label07;
+
+        domainAxis#10 = null;
+
+        $stack43 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack43 == 0 goto label04;
+
+        p = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        domainAxis#10 = virtualinvoke p.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        goto label06;
+
+     label04:
+        $stack44 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack44 == 0 goto label05;
+
+        p#3 = (org.jfree.chart.plot.XYPlot) plot;
+
+        domainAxis#10 = virtualinvoke p#3.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()>();
+
+        goto label06;
+
+     label05:
+        $stack45 = plot instanceof org.jfree.chart.plot.PolarPlot;
+
+        if $stack45 == 0 goto label06;
+
+        p#13 = (org.jfree.chart.plot.PolarPlot) plot;
+
+        domainAxis#10 = virtualinvoke p#13.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis()>();
+
+     label06:
+        if domainAxis#10 == null goto label07;
+
+        $stack47 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.editor.DefaultAxisEditor rangeAxisPropertyPanel>;
+
+        virtualinvoke $stack47.<org.jfree.chart.editor.DefaultAxisEditor: void setAxisProperties(org.jfree.chart.axis.Axis)>(domainAxis#10);
+
+     label07:
+        $stack10 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation>;
+
+        if $stack10 == null goto label09;
+
+        $stack38 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack38 == 0 goto label08;
+
+        domainAxis#21 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        $stack42 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation>;
+
+        virtualinvoke domainAxis#21.<org.jfree.chart.plot.CategoryPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>($stack42);
+
+        goto label09;
+
+     label08:
+        $stack39 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack39 == 0 goto label09;
+
+        domainAxis#22 = (org.jfree.chart.plot.XYPlot) plot;
+
+        $stack41 = this.<org.jfree.chart.editor.DefaultPlotEditor: org.jfree.chart.plot.PlotOrientation plotOrientation>;
+
+        virtualinvoke domainAxis#22.<org.jfree.chart.plot.XYPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>($stack41);
+
+     label09:
+        $stack11 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines>;
+
+        if $stack11 == null goto label12;
+
+        $stack25 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack25 == 0 goto label11;
+
+        domainAxis#21 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        p#30 = virtualinvoke domainAxis#21.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.renderer.category.CategoryItemRenderer getRenderer()>();
+
+        $stack34 = p#30 instanceof org.jfree.chart.renderer.category.LineAndShapeRenderer;
+
+        if $stack34 == 0 goto label10;
+
+        $stack36 = (org.jfree.chart.renderer.category.LineAndShapeRenderer) p#30;
+
+        $stack35 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines>;
+
+        $stack37 = virtualinvoke $stack35.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack36.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void setDefaultLinesVisible(boolean)>($stack37);
+
+     label10:
+        goto label12;
+
+     label11:
+        $stack26 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack26 == 0 goto label12;
+
+        domainAxis#22 = (org.jfree.chart.plot.XYPlot) plot;
+
+        p#32 = virtualinvoke domainAxis#22.<org.jfree.chart.plot.XYPlot: org.jfree.chart.renderer.xy.XYItemRenderer getRenderer()>();
+
+        $stack29 = p#32 instanceof org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+
+        if $stack29 == 0 goto label12;
+
+        $stack31 = (org.jfree.chart.renderer.xy.StandardXYItemRenderer) p#32;
+
+        $stack30 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawLines>;
+
+        $stack32 = virtualinvoke $stack30.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack31.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void setPlotLines(boolean)>($stack32);
+
+     label12:
+        $stack12 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes>;
+
+        if $stack12 == null goto label15;
+
+        $stack13 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+
+        if $stack13 == 0 goto label14;
+
+        domainAxis#21 = (org.jfree.chart.plot.CategoryPlot) plot;
+
+        p#30 = virtualinvoke domainAxis#21.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.renderer.category.CategoryItemRenderer getRenderer()>();
+
+        $stack21 = p#30 instanceof org.jfree.chart.renderer.category.LineAndShapeRenderer;
+
+        if $stack21 == 0 goto label13;
+
+        $stack23 = (org.jfree.chart.renderer.category.LineAndShapeRenderer) p#30;
+
+        $stack22 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes>;
+
+        $stack24 = virtualinvoke $stack22.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack23.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void setDefaultShapesVisible(boolean)>($stack24);
+
+     label13:
+        goto label15;
+
+     label14:
+        $stack14 = plot instanceof org.jfree.chart.plot.XYPlot;
+
+        if $stack14 == 0 goto label15;
+
+        domainAxis#22 = (org.jfree.chart.plot.XYPlot) plot;
+
+        p#32 = virtualinvoke domainAxis#22.<org.jfree.chart.plot.XYPlot: org.jfree.chart.renderer.xy.XYItemRenderer getRenderer()>();
+
+        $stack16 = p#32 instanceof org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+
+        if $stack16 == 0 goto label15;
+
+        $stack18 = (org.jfree.chart.renderer.xy.StandardXYItemRenderer) p#32;
+
+        $stack17 = this.<org.jfree.chart.editor.DefaultPlotEditor: java.lang.Boolean drawShapes>;
+
+        $stack19 = virtualinvoke $stack17.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack18.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void setBaseShapesVisible(boolean)>($stack19);
+
+     label15:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $stack0;
+        java.util.ResourceBundle $stack1;
+
+        <org.jfree.chart.editor.DefaultPlotEditor: int ORIENTATION_HORIZONTAL> = 1;
+
+        <org.jfree.chart.editor.DefaultPlotEditor: int ORIENTATION_VERTICAL> = 0;
+
+        $stack0 = newarray (java.lang.String)[2];
+
+        $stack0[0] = "Vertical";
+
+        $stack0[1] = "Horizontal";
+
+        <org.jfree.chart.editor.DefaultPlotEditor: java.lang.String[] orientationNames> = $stack0;
+
+        $stack1 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.editor.LocalizationBundle");
+
+        <org.jfree.chart.editor.DefaultPlotEditor: java.util.ResourceBundle localizationResources> = $stack1;
+
+        return;
+    }
+}

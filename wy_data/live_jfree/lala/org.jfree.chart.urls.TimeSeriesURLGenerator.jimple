@@ -1,0 +1,386 @@
+public class org.jfree.chart.urls.TimeSeriesURLGenerator extends java.lang.Object implements org.jfree.chart.urls.XYURLGenerator, java.io.Serializable
+{
+    private static final long serialVersionUID;
+    private java.text.DateFormat dateFormat;
+    private java.lang.String prefix;
+    private java.lang.String seriesParameterName;
+    private java.lang.String itemParameterName;
+
+    public void <init>()
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.text.DateFormat $stack1;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = staticinvoke <java.text.DateFormat: java.text.DateFormat getInstance()>();
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat> = $stack1;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName> = "series";
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName> = "item";
+
+        return;
+    }
+
+    public void <init>(java.text.DateFormat, java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.text.DateFormat $stack5, dateFormat, $stack7;
+        java.lang.String prefix, seriesParameterName, itemParameterName;
+        java.lang.Object $stack6;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        dateFormat := @parameter0: java.text.DateFormat;
+
+        prefix := @parameter1: java.lang.String;
+
+        seriesParameterName := @parameter2: java.lang.String;
+
+        itemParameterName := @parameter3: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack5 = staticinvoke <java.text.DateFormat: java.text.DateFormat getInstance()>();
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat> = $stack5;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix> = "index.html";
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName> = "series";
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName> = "item";
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(dateFormat, "dateFormat");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(prefix, "prefix");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(seriesParameterName, "seriesParameterName");
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(itemParameterName, "itemParameterName");
+
+        $stack6 = virtualinvoke dateFormat.<java.text.DateFormat: java.lang.Object clone()>();
+
+        $stack7 = (java.text.DateFormat) $stack6;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat> = $stack7;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix> = prefix;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName> = seriesParameterName;
+
+        this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName> = itemParameterName;
+
+        return;
+    }
+
+    public java.text.DateFormat getDateFormat()
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.text.DateFormat $stack1, $stack3;
+        java.lang.Object $stack2;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat>;
+
+        $stack2 = virtualinvoke $stack1.<java.text.DateFormat: java.lang.Object clone()>();
+
+        $stack3 = (java.text.DateFormat) $stack2;
+
+        return $stack3;
+    }
+
+    public java.lang.String getPrefix()
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix>;
+
+        return $stack1;
+    }
+
+    public java.lang.String getSeriesParameterName()
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName>;
+
+        return $stack1;
+    }
+
+    public java.lang.String getItemParameterName()
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        java.lang.String $stack1;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        $stack1 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName>;
+
+        return $stack1;
+    }
+
+    public java.lang.String generateURL(org.jfree.data.xy.XYDataset, int, int)
+    {
+        org.jfree.chart.urls.TimeSeriesURLGenerator this;
+        boolean $stack11, $stack62, firstParameter;
+        org.jfree.data.xy.XYDataset dataset;
+        int series, item;
+        java.lang.Comparable seriesKey;
+        double $stack13;
+        java.util.Date $stack14;
+        java.text.DateFormat $stack15;
+        java.lang.String xValue, $stack23, $stack26, $stack41, $stack44, $stack45, result, $stack56, $stack29;
+        java.lang.StringBuilder $stack17, $stack18, $stack19, $stack21, $stack22, $stack24, $stack25, $stack27, $stack35, $stack36, $stack37, $stack39, $stack40, $stack42, $stack43, $stack46;
+        java.io.UnsupportedEncodingException $stack66, $stack68;
+        java.lang.RuntimeException $stack67, $stack69;
+        long ex;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        item := @parameter2: int;
+
+        result = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix>;
+
+        $stack11 = virtualinvoke result.<java.lang.String: boolean contains(java.lang.CharSequence)>("?");
+
+        if $stack11 != 0 goto label01;
+
+        $stack62 = 1;
+
+        goto label02;
+
+     label01:
+        $stack62 = 0;
+
+     label02:
+        firstParameter = $stack62;
+
+        seriesKey = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+
+        if seriesKey == null goto label09;
+
+        $stack35 = new java.lang.StringBuilder;
+
+        specialinvoke $stack35.<java.lang.StringBuilder: void <init>()>();
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(result);
+
+        if $stack62 == 0 goto label03;
+
+        $stack56 = "?";
+
+        goto label04;
+
+     label03:
+        $stack56 = "&amp;";
+
+     label04:
+        $stack37 = virtualinvoke $stack36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack56);
+
+        result = virtualinvoke $stack37.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label05:
+        $stack39 = new java.lang.StringBuilder;
+
+        specialinvoke $stack39.<java.lang.StringBuilder: void <init>()>();
+
+        $stack40 = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(result);
+
+        $stack41 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack42 = virtualinvoke $stack40.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack41);
+
+        $stack43 = virtualinvoke $stack42.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack44 = virtualinvoke seriesKey.<java.lang.Object: java.lang.String toString()>();
+
+        $stack45 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>($stack44, "UTF-8");
+
+        $stack46 = virtualinvoke $stack43.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack45);
+
+        result = virtualinvoke $stack46.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label06:
+        goto label08;
+
+     label07:
+        $stack68 := @caughtexception;
+
+        $stack69 = new java.lang.RuntimeException;
+
+        specialinvoke $stack69.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack68);
+
+        throw $stack69;
+
+     label08:
+        firstParameter = 0;
+
+     label09:
+        $stack13 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+
+        ex = (long) $stack13;
+
+        $stack15 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat>;
+
+        $stack14 = new java.util.Date;
+
+        specialinvoke $stack14.<java.util.Date: void <init>(long)>(ex);
+
+        xValue = virtualinvoke $stack15.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack14);
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(result);
+
+        if firstParameter == 0 goto label10;
+
+        $stack29 = "?";
+
+        goto label11;
+
+     label10:
+        $stack29 = "&amp;";
+
+     label11:
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack29);
+
+        result = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label12:
+        $stack21 = new java.lang.StringBuilder;
+
+        specialinvoke $stack21.<java.lang.StringBuilder: void <init>()>();
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(result);
+
+        $stack23 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName>;
+
+        $stack24 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack23);
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack26 = staticinvoke <java.net.URLEncoder: java.lang.String encode(java.lang.String,java.lang.String)>(xValue, "UTF-8");
+
+        $stack27 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack26);
+
+        result = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label13:
+        goto label15;
+
+     label14:
+        $stack66 := @caughtexception;
+
+        $stack67 = new java.lang.RuntimeException;
+
+        specialinvoke $stack67.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack66);
+
+        throw $stack67;
+
+     label15:
+        return result;
+
+        catch java.io.UnsupportedEncodingException from label05 to label06 with label07;
+        catch java.io.UnsupportedEncodingException from label12 to label13 with label14;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.urls.TimeSeriesURLGenerator this, that;
+        boolean $stack3, $stack6, $stack9, $stack12, $stack15;
+        java.text.DateFormat $stack4, $stack5;
+        java.lang.String $stack7, $stack8, $stack10, $stack11, $stack13, $stack14;
+
+        this := @this: org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = obj instanceof org.jfree.chart.urls.TimeSeriesURLGenerator;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (org.jfree.chart.urls.TimeSeriesURLGenerator) obj;
+
+        $stack5 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat>;
+
+        $stack4 = that.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.text.DateFormat dateFormat>;
+
+        $stack6 = virtualinvoke $stack5.<java.text.DateFormat: boolean equals(java.lang.Object)>($stack4);
+
+        if $stack6 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        $stack8 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName>;
+
+        $stack7 = that.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String itemParameterName>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: boolean equals(java.lang.Object)>($stack7);
+
+        if $stack9 != 0 goto label4;
+
+        return 0;
+
+     label4:
+        $stack11 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix>;
+
+        $stack10 = that.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String prefix>;
+
+        $stack12 = virtualinvoke $stack11.<java.lang.String: boolean equals(java.lang.Object)>($stack10);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack14 = this.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack13 = that.<org.jfree.chart.urls.TimeSeriesURLGenerator: java.lang.String seriesParameterName>;
+
+        $stack15 = virtualinvoke $stack14.<java.lang.String: boolean equals(java.lang.Object)>($stack13);
+
+        if $stack15 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        return 1;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.urls.TimeSeriesURLGenerator: long serialVersionUID> = -9122773175671182445L;
+
+        return;
+    }
+}

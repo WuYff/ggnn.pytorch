@@ -1,0 +1,306 @@
+public class org.jfree.chart.renderer.category.IntervalBarRenderer extends org.jfree.chart.renderer.category.BarRenderer
+{
+    private static final long serialVersionUID;
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.category.IntervalBarRenderer this;
+
+        this := @this: org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        specialinvoke this.<org.jfree.chart.renderer.category.BarRenderer: void <init>()>();
+
+        return;
+    }
+
+    public org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset)
+    {
+        org.jfree.chart.renderer.category.IntervalBarRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.Range $stack2;
+
+        this := @this: org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+
+        $stack2 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset,boolean)>(dataset, 1);
+
+        return $stack2;
+    }
+
+    public void drawItem(java.awt.Graphics2D, org.jfree.chart.renderer.category.CategoryItemRendererState, java.awt.geom.Rectangle2D, org.jfree.chart.plot.CategoryPlot, org.jfree.chart.axis.CategoryAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.category.CategoryDataset, int, int, int)
+    {
+        org.jfree.data.category.CategoryDataset dataset;
+        boolean $stack12;
+        org.jfree.chart.renderer.category.IntervalBarRenderer this;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        int row, column, pass;
+        org.jfree.data.category.IntervalCategoryDataset d;
+
+        this := @this: org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+
+        row := @parameter7: int;
+
+        column := @parameter8: int;
+
+        pass := @parameter9: int;
+
+        $stack12 = dataset instanceof org.jfree.data.category.IntervalCategoryDataset;
+
+        if $stack12 == 0 goto label1;
+
+        d = (org.jfree.data.category.IntervalCategoryDataset) dataset;
+
+        virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void drawInterval(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.IntervalCategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, d, row, column);
+
+        goto label2;
+
+     label1:
+        specialinvoke this.<org.jfree.chart.renderer.category.BarRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, dataset, row, column, pass);
+
+     label2:
+        return;
+    }
+
+    protected void drawInterval(java.awt.Graphics2D, org.jfree.chart.renderer.category.CategoryItemRendererState, java.awt.geom.Rectangle2D, org.jfree.chart.plot.CategoryPlot, org.jfree.chart.axis.CategoryAxis, org.jfree.chart.axis.ValueAxis, org.jfree.data.category.IntervalCategoryDataset, int, int)
+    {
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        int row, visibleRow, column;
+        org.jfree.chart.plot.CategoryPlot plot, $stack73, $stack81;
+        org.jfree.chart.plot.PlotOrientation orientation, $stack45;
+        org.jfree.chart.ui.RectangleEdge rangeAxisLocation, barBase;
+        org.jfree.data.category.IntervalCategoryDataset dataset;
+        java.lang.Number value0, value1;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        double $stack36, $stack39, $stack43, $stack84, rectX, rectY, java2dValue0, java2dValue1, temp, rectHeight;
+        java.awt.geom.Rectangle2D dataArea;
+        byte $stack41;
+        boolean $stack46, $stack50, $stack52, $stack55, $stack49;
+        org.jfree.chart.renderer.category.IntervalBarRenderer this;
+        org.jfree.chart.renderer.category.BarPainter painter, $stack51;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.labels.CategoryItemLabelGenerator generator;
+        org.jfree.chart.entity.EntityCollection entities;
+        java.lang.Comparable $stack70, $stack71;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        java.awt.geom.Rectangle2D$Double $stack47;
+
+        this := @this: org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        g2 := @parameter0: java.awt.Graphics2D;
+
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+
+        dataset := @parameter6: org.jfree.data.category.IntervalCategoryDataset;
+
+        row := @parameter7: int;
+
+        column := @parameter8: int;
+
+        visibleRow = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: int getVisibleSeriesIndex(int)>(row);
+
+        if visibleRow >= 0 goto label01;
+
+        return;
+
+     label01:
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+
+        rectX = 0.0;
+
+        rectY = 0.0;
+
+        rangeAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.ui.RectangleEdge getRangeAxisEdge()>();
+
+        value0 = interfaceinvoke dataset.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getEndValue(int,int)>(row, column);
+
+        if value0 != null goto label02;
+
+        return;
+
+     label02:
+        $stack36 = virtualinvoke value0.<java.lang.Number: double doubleValue()>();
+
+        java2dValue0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack36, dataArea, rangeAxisLocation);
+
+        value1 = interfaceinvoke dataset.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getStartValue(int,int)>(row, column);
+
+        if value1 != null goto label03;
+
+        return;
+
+     label03:
+        $stack39 = virtualinvoke value1.<java.lang.Number: double doubleValue()>();
+
+        java2dValue1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.ui.RectangleEdge)>($stack39, dataArea, rangeAxisLocation);
+
+        $stack41 = java2dValue1 cmpg java2dValue0;
+
+        if $stack41 >= 0 goto label04;
+
+        temp = java2dValue1;
+
+        java2dValue1 = java2dValue0;
+
+        java2dValue0 = temp;
+
+     label04:
+        temp = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+
+        $stack43 = java2dValue1 - java2dValue0;
+
+        rectHeight = staticinvoke <java.lang.Math: double abs(double)>($stack43);
+
+        barBase = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        $stack45 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+
+        if orientation != $stack45 goto label05;
+
+        rectX = java2dValue0;
+
+        $stack81 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.chart.plot.CategoryPlot getPlot()>();
+
+        rectY = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)>($stack81, orientation, dataArea, domainAxis, state, visibleRow, column);
+
+        rectHeight = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+
+        $stack84 = java2dValue1 - java2dValue0;
+
+        temp = staticinvoke <java.lang.Math: double abs(double)>($stack84);
+
+        barBase = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge LEFT>;
+
+        goto label06;
+
+     label05:
+        $stack46 = virtualinvoke orientation.<org.jfree.chart.plot.PlotOrientation: boolean isVertical()>();
+
+        if $stack46 == 0 goto label06;
+
+        $stack73 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.chart.plot.CategoryPlot getPlot()>();
+
+        rectX = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)>($stack73, orientation, dataArea, domainAxis, state, visibleRow, column);
+
+        rectY = java2dValue0;
+
+        barBase = <org.jfree.chart.ui.RectangleEdge: org.jfree.chart.ui.RectangleEdge BOTTOM>;
+
+     label06:
+        $stack47 = new java.awt.geom.Rectangle2D$Double;
+
+        specialinvoke $stack47.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(rectX, rectY, temp, rectHeight);
+
+        painter = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.chart.renderer.category.BarPainter getBarPainter()>();
+
+        $stack49 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: boolean getElementHinting()>();
+
+        if $stack49 == 0 goto label07;
+
+        $stack70 = interfaceinvoke dataset.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+
+        $stack71 = interfaceinvoke dataset.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Comparable getColumnKey(int)>(column);
+
+        virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void beginElementGroup(java.awt.Graphics2D,java.lang.Comparable,java.lang.Comparable)>(g2, $stack70, $stack71);
+
+     label07:
+        $stack50 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: boolean getShadowsVisible()>();
+
+        if $stack50 == 0 goto label08;
+
+        interfaceinvoke painter.<org.jfree.chart.renderer.category.BarPainter: void paintBarShadow(java.awt.Graphics2D,org.jfree.chart.renderer.category.BarRenderer,int,int,java.awt.geom.RectangularShape,org.jfree.chart.ui.RectangleEdge,boolean)>(g2, this, row, column, $stack47, barBase, 0);
+
+     label08:
+        $stack51 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.chart.renderer.category.BarPainter getBarPainter()>();
+
+        interfaceinvoke $stack51.<org.jfree.chart.renderer.category.BarPainter: void paintBar(java.awt.Graphics2D,org.jfree.chart.renderer.category.BarRenderer,int,int,java.awt.geom.RectangularShape,org.jfree.chart.ui.RectangleEdge)>(g2, this, row, column, $stack47, barBase);
+
+        $stack52 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: boolean getElementHinting()>();
+
+        if $stack52 == 0 goto label09;
+
+        virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void endElementGroup(java.awt.Graphics2D)>(g2);
+
+     label09:
+        generator = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: org.jfree.chart.labels.CategoryItemLabelGenerator getItemLabelGenerator(int,int)>(row, column);
+
+        if generator == null goto label10;
+
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: boolean isItemLabelVisible(int,int)>(row, column);
+
+        if $stack55 == 0 goto label10;
+
+        virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.data.category.CategoryDataset,int,int,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.labels.CategoryItemLabelGenerator,java.awt.geom.Rectangle2D,boolean)>(g2, dataset, row, column, plot, generator, $stack47, 0);
+
+     label10:
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+
+        if entities == null goto label11;
+
+        virtualinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, $stack47);
+
+     label11:
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.IntervalBarRenderer this;
+        boolean $stack2, $stack3;
+
+        this := @this: org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        obj := @parameter0: java.lang.Object;
+
+        if obj != this goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = obj instanceof org.jfree.chart.renderer.category.IntervalBarRenderer;
+
+        if $stack2 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack3 = specialinvoke this.<org.jfree.chart.renderer.category.BarRenderer: boolean equals(java.lang.Object)>(obj);
+
+        return $stack3;
+    }
+
+    public static void <clinit>()
+    {
+        <org.jfree.chart.renderer.category.IntervalBarRenderer: long serialVersionUID> = -5068857361615528725L;
+
+        return;
+    }
+}

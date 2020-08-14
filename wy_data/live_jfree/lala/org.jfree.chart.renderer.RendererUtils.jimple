@@ -1,0 +1,408 @@
+public class org.jfree.chart.renderer.RendererUtils extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.jfree.chart.renderer.RendererUtils this;
+
+        this := @this: org.jfree.chart.renderer.RendererUtils;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static int findLiveItemsLowerBound(org.jfree.data.xy.XYDataset, int, double, double)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        double xLow, xHigh, lowValue, highValue, midV, high#14;
+        byte $stack16, $stack26, $stack35, $stack37, $stack41, $stack46, $stack48, $stack52;
+        int series, itemCount, $stack23, $stack24, $stack25, $stack38, $stack39, $stack49, $stack50, low, high, mid;
+        org.jfree.data.DomainOrder $stack18, $stack19, $stack20, $stack21;
+        java.lang.IllegalArgumentException $stack56;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        xLow := @parameter2: double;
+
+        xHigh := @parameter3: double;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(dataset, "dataset");
+
+        $stack16 = xLow cmpl xHigh;
+
+        if $stack16 < 0 goto label01;
+
+        $stack56 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack56.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires xLow < xHigh.");
+
+        throw $stack56;
+
+     label01:
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+
+        if itemCount > 1 goto label02;
+
+        return 0;
+
+     label02:
+        $stack18 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+
+        $stack19 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder ASCENDING>;
+
+        if $stack18 != $stack19 goto label08;
+
+        low = 0;
+
+        high = itemCount - 1;
+
+        lowValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+
+        $stack46 = lowValue cmpl xLow;
+
+        if $stack46 < 0 goto label03;
+
+        return 0;
+
+     label03:
+        highValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high);
+
+        $stack48 = highValue cmpg xLow;
+
+        if $stack48 >= 0 goto label04;
+
+        return high;
+
+     label04:
+        $stack49 = high - low;
+
+        if $stack49 <= 1 goto label07;
+
+        $stack50 = low + high;
+
+        mid = $stack50 / 2;
+
+        midV = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid);
+
+        $stack52 = midV cmpl xLow;
+
+        if $stack52 < 0 goto label05;
+
+        high = mid;
+
+        goto label06;
+
+     label05:
+        low = mid;
+
+     label06:
+        goto label04;
+
+     label07:
+        return high;
+
+     label08:
+        $stack20 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+
+        $stack21 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder DESCENDING>;
+
+        if $stack20 != $stack21 goto label14;
+
+        low = 0;
+
+        high = itemCount - 1;
+
+        lowValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+
+        $stack35 = lowValue cmpg xHigh;
+
+        if $stack35 > 0 goto label09;
+
+        return 0;
+
+     label09:
+        highValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high);
+
+        $stack37 = highValue cmpl xHigh;
+
+        if $stack37 <= 0 goto label10;
+
+        return high;
+
+     label10:
+        $stack38 = high - low;
+
+        if $stack38 <= 1 goto label13;
+
+        $stack39 = low + high;
+
+        mid = $stack39 / 2;
+
+        midV = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid);
+
+        $stack41 = midV cmpl xHigh;
+
+        if $stack41 <= 0 goto label11;
+
+        low = mid;
+
+        goto label12;
+
+     label11:
+        high = mid;
+
+     label12:
+        goto label10;
+
+     label13:
+        return high;
+
+     label14:
+        low = 0;
+
+        high#14 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+
+     label15:
+        if low >= itemCount goto label16;
+
+        $stack26 = high#14 cmpg xLow;
+
+        if $stack26 >= 0 goto label16;
+
+        low = low + 1;
+
+        if low >= itemCount goto label15;
+
+        high#14 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, low);
+
+        goto label15;
+
+     label16:
+        $stack23 = staticinvoke <java.lang.Math: int max(int,int)>(0, low);
+
+        $stack24 = itemCount - 1;
+
+        $stack25 = staticinvoke <java.lang.Math: int min(int,int)>($stack23, $stack24);
+
+        return $stack25;
+    }
+
+    public static int findLiveItemsUpperBound(org.jfree.data.xy.XYDataset, int, double, double)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        double xLow, xHigh, lowValue, highValue, midV, high#11;
+        byte $stack16, $stack24, $stack31, $stack33, $stack36, $stack46, $stack48, $stack52;
+        int series, itemCount, $stack23, $stack29, $stack34, $stack37, $stack49, $stack50, $stack53, low, high, mid, lowValue;
+        org.jfree.data.DomainOrder $stack18, $stack19, $stack20, $stack21;
+        java.lang.IllegalArgumentException $stack61;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        xLow := @parameter2: double;
+
+        xHigh := @parameter3: double;
+
+        staticinvoke <org.jfree.chart.util.Args: void nullNotPermitted(java.lang.Object,java.lang.String)>(dataset, "dataset");
+
+        $stack16 = xLow cmpl xHigh;
+
+        if $stack16 < 0 goto label01;
+
+        $stack61 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack61.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires xLow < xHigh.");
+
+        throw $stack61;
+
+     label01:
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+
+        if itemCount > 1 goto label02;
+
+        return 0;
+
+     label02:
+        $stack18 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+
+        $stack19 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder ASCENDING>;
+
+        if $stack18 != $stack19 goto label09;
+
+        low = 0;
+
+        high = itemCount - 1;
+
+        lowValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+
+        $stack46 = lowValue cmpl xHigh;
+
+        if $stack46 <= 0 goto label03;
+
+        return 0;
+
+     label03:
+        highValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high);
+
+        $stack48 = highValue cmpg xHigh;
+
+        if $stack48 > 0 goto label04;
+
+        return high;
+
+     label04:
+        $stack49 = 0 + high;
+
+        mid = $stack49 / 2;
+
+     label05:
+        $stack50 = high - low;
+
+        if $stack50 <= 1 goto label08;
+
+        midV = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid);
+
+        $stack52 = midV cmpg xHigh;
+
+        if $stack52 > 0 goto label06;
+
+        low = mid;
+
+        goto label07;
+
+     label06:
+        high = mid;
+
+     label07:
+        $stack53 = low + high;
+
+        mid = $stack53 / 2;
+
+        goto label05;
+
+     label08:
+        return mid;
+
+     label09:
+        $stack20 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+
+        $stack21 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder DESCENDING>;
+
+        if $stack20 != $stack21 goto label15;
+
+        low = 0;
+
+        high = itemCount - 1;
+
+        $stack29 = 0 + high;
+
+        lowValue = $stack29 / 2;
+
+        lowValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+
+        $stack31 = lowValue cmpg xLow;
+
+        if $stack31 >= 0 goto label10;
+
+        return 0;
+
+     label10:
+        highValue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high);
+
+        $stack33 = highValue cmpl xLow;
+
+        if $stack33 < 0 goto label11;
+
+        return high;
+
+     label11:
+        $stack34 = high - low;
+
+        if $stack34 <= 1 goto label14;
+
+        midV = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, lowValue);
+
+        $stack36 = midV cmpl xLow;
+
+        if $stack36 < 0 goto label12;
+
+        low = lowValue;
+
+        goto label13;
+
+     label12:
+        high = lowValue;
+
+     label13:
+        $stack37 = low + high;
+
+        lowValue = $stack37 / 2;
+
+        goto label11;
+
+     label14:
+        return lowValue;
+
+     label15:
+        low = itemCount - 1;
+
+        high#11 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, low);
+
+     label16:
+        if low < 0 goto label17;
+
+        $stack24 = high#11 cmpl xHigh;
+
+        if $stack24 <= 0 goto label17;
+
+        low = low + -1;
+
+        if low < 0 goto label16;
+
+        high#11 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, low);
+
+        goto label16;
+
+     label17:
+        $stack23 = staticinvoke <java.lang.Math: int max(int,int)>(low, 0);
+
+        return $stack23;
+    }
+
+    public static int[] findLiveItems(org.jfree.data.xy.XYDataset, int, double, double)
+    {
+        org.jfree.data.xy.XYDataset dataset;
+        int series, i1, i0;
+        double xLow, xHigh;
+        int[] $stack10;
+
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+
+        series := @parameter1: int;
+
+        xLow := @parameter2: double;
+
+        xHigh := @parameter3: double;
+
+        i0 = staticinvoke <org.jfree.chart.renderer.RendererUtils: int findLiveItemsLowerBound(org.jfree.data.xy.XYDataset,int,double,double)>(dataset, series, xLow, xHigh);
+
+        i1 = staticinvoke <org.jfree.chart.renderer.RendererUtils: int findLiveItemsUpperBound(org.jfree.data.xy.XYDataset,int,double,double)>(dataset, series, xLow, xHigh);
+
+        if i0 <= i1 goto label1;
+
+        i0 = i1;
+
+     label1:
+        $stack10 = newarray (int)[2];
+
+        $stack10[0] = i0;
+
+        $stack10[1] = i1;
+
+        return $stack10;
+    }
+}
